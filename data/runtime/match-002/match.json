@@ -12,166 +12,166 @@
     {
       "id": "blue",
       "name": "Harbor City",
-      "color": "#3b8cfa"
+      "color": "#3b82f6"
     },
     {
       "id": "amber",
       "name": "Alder Rovers",
-      "color": "#f4b84b"
+      "color": "#f59e0b"
     }
   ],
   "players": [
     {
       "id": "blue-01",
       "team_id": "blue",
-      "name": "Harbor 1",
+      "name": "Milo Vale",
       "number": 1,
       "role": "keeper"
     },
     {
       "id": "blue-02",
       "team_id": "blue",
-      "name": "Harbor 2",
+      "name": "Eli Reed",
       "number": 2,
       "role": "outfield"
     },
     {
       "id": "blue-03",
       "team_id": "blue",
-      "name": "Harbor 3",
+      "name": "Nico Silva",
       "number": 3,
       "role": "outfield"
     },
     {
       "id": "blue-04",
       "team_id": "blue",
-      "name": "Harbor 4",
+      "name": "Luca Mora",
       "number": 4,
       "role": "outfield"
     },
     {
       "id": "blue-05",
       "team_id": "blue",
-      "name": "Harbor 5",
+      "name": "Noah Blake",
       "number": 5,
       "role": "outfield"
     },
     {
       "id": "blue-06",
       "team_id": "blue",
-      "name": "Harbor 6",
+      "name": "Rafi Cruz",
       "number": 6,
       "role": "outfield"
     },
     {
       "id": "blue-07",
       "team_id": "blue",
-      "name": "Harbor 7",
+      "name": "Leo Dale",
       "number": 7,
       "role": "outfield"
     },
     {
       "id": "blue-08",
       "team_id": "blue",
-      "name": "Harbor 8",
+      "name": "Theo Vega",
       "number": 8,
       "role": "outfield"
     },
     {
       "id": "blue-09",
       "team_id": "blue",
-      "name": "Harbor 9",
+      "name": "Ivo Solis",
       "number": 9,
       "role": "outfield"
     },
     {
       "id": "blue-10",
       "team_id": "blue",
-      "name": "Harbor 10",
+      "name": "Sami Rios",
       "number": 10,
       "role": "outfield"
     },
     {
       "id": "blue-11",
       "team_id": "blue",
-      "name": "Harbor 11",
+      "name": "Alex Lane",
       "number": 11,
       "role": "outfield"
     },
     {
       "id": "amber-01",
       "team_id": "amber",
-      "name": "Alder 1",
+      "name": "Milo Mora",
       "number": 1,
       "role": "keeper"
     },
     {
       "id": "amber-02",
       "team_id": "amber",
-      "name": "Alder 2",
+      "name": "Eli Blake",
       "number": 2,
       "role": "outfield"
     },
     {
       "id": "amber-03",
       "team_id": "amber",
-      "name": "Alder 3",
+      "name": "Nico Cruz",
       "number": 3,
       "role": "outfield"
     },
     {
       "id": "amber-04",
       "team_id": "amber",
-      "name": "Alder 4",
+      "name": "Luca Dale",
       "number": 4,
       "role": "outfield"
     },
     {
       "id": "amber-05",
       "team_id": "amber",
-      "name": "Alder 5",
+      "name": "Noah Vega",
       "number": 5,
       "role": "outfield"
     },
     {
       "id": "amber-06",
       "team_id": "amber",
-      "name": "Alder 6",
+      "name": "Rafi Solis",
       "number": 6,
       "role": "outfield"
     },
     {
       "id": "amber-07",
       "team_id": "amber",
-      "name": "Alder 7",
+      "name": "Leo Rios",
       "number": 7,
       "role": "outfield"
     },
     {
       "id": "amber-08",
       "team_id": "amber",
-      "name": "Alder 8",
+      "name": "Theo Lane",
       "number": 8,
       "role": "outfield"
     },
     {
       "id": "amber-09",
       "team_id": "amber",
-      "name": "Alder 9",
+      "name": "Ivo Vale",
       "number": 9,
       "role": "outfield"
     },
     {
       "id": "amber-10",
       "team_id": "amber",
-      "name": "Alder 10",
+      "name": "Sami Reed",
       "number": 10,
       "role": "outfield"
     },
     {
       "id": "amber-11",
       "team_id": "amber",
-      "name": "Alder 11",
+      "name": "Alex Silva",
       "number": 11,
       "role": "outfield"
     }

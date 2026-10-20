@@ -1,0 +1,23 @@
+[
+  {
+    "match_id": "match-001",
+    "sha256": "ebf8a0d849a26950210c7214ed8dd5095f27dc9f111726d64767b3f300386186",
+    "seed": 101,
+    "generator": "simulator/generate.py",
+    "source": "original fictional simulation"
+  },
+  {
+    "match_id": "match-002",
+    "sha256": "b93a98c145d6750c704960ed5bee01aed3a3cb2311d9f280f4b9c610a7a5e0a5",
+    "seed": 202,
+    "generator": "simulator/generate.py",
+    "source": "original fictional simulation"
+  },
+  {
+    "match_id": "match-003",
+    "sha256": "8063ab1dc632c6701b074b1694b523a087ef48a4a5e8da68e2c6d83e013125a5",
+    "seed": 303,
+    "generator": "simulator/generate.py",
+    "source": "original fictional simulation"
+  }
+]

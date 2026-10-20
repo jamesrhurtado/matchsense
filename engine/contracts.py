@@ -145,11 +145,17 @@ class AudienceVariant(Strict):
     factual_check_status:Literal['valid']
 class ReviewDecision(Strict):
     status:Literal['supported','revised']
-    mode:Literal['deterministic_template']
+    mode:Literal['deterministic_template','foundry','template_fallback']
     reason:str
     proposed_text:str|None
     revised_text:str
     cycles:int=Field(ge=0,le=1)
+class ModelUsage(Strict):
+    calls:int=Field(ge=0)
+    input_tokens:int=Field(ge=0)
+    output_tokens:int=Field(ge=0)
+    total_tokens:int=Field(ge=0)
+    usage_complete:bool
 class PublicationPackage(Strict):
     schema_version:Literal['1.0.0']
     id:str
@@ -164,7 +170,8 @@ class PublicationPackage(Strict):
     expires_at_ms:NonNegative
     trace:list[dict]
     workflow_ms:float=Field(ge=0)
-    mode:Literal['local deterministic template']
+    mode:Literal['local deterministic template','Microsoft Agent Framework + Azure OpenAI','template fallback']
+    model_usage:ModelUsage|None=None
     package_hash:str
     @model_validator(mode='after')
     def consistent_references(self):

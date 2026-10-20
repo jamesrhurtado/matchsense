@@ -95,7 +95,9 @@ def snapshot_data(sid,is_producer=False):
         latest=repo.latest_package(sid)
         revision=latest['revision'] if latest else 0
         audit=repo.audit(sid)
-        return {'session_id':sid,'match_id':s['match_id'],'clock_ms':at,'duration_ms':60000,'running':s['running'] and at<60000,'speed':s['speed'],'synthetic':True,'score':meta['initial_state']['score'],'teams':meta['teams'],'players':meta['players'],**view,'story':safe_story(current,status),'story_status':status if is_producer or published else 'waiting','overlay':next(v['text'] for v in published['variants'] if v['id']=='en_simple_general') if published and status=='approved' else None,'mode':'local deterministic template','cursor':len(audit)*1000000+s['control_revision']*100000+at,'generation':s['generation']}
+        visible_story=safe_story(current,status)
+        if visible_story and is_producer:visible_story['package_hash']=current['package_hash']
+        return {'session_id':sid,'match_id':s['match_id'],'clock_ms':at,'duration_ms':60000,'running':s['running'] and at<60000,'speed':s['speed'],'synthetic':True,'score':meta['initial_state']['score'],'teams':meta['teams'],'players':meta['players'],**view,'story':visible_story,'story_status':status if is_producer or published else 'waiting','overlay':next(v['text'] for v in published['variants'] if v['id']=='en_simple_general') if published and status=='approved' else None,'mode':'local deterministic template','cursor':len(audit)*1000000+s['control_revision']*100000+at,'generation':s['generation']}
 
 def authorized_package(sid,story_id,token=None):
     s=get_session(sid);at=clock(s); p=materialize(s,at)

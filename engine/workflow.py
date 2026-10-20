@@ -2,6 +2,8 @@
 from __future__ import annotations
 from dataclasses import dataclass
 from time import perf_counter
+import re
+from engine.contracts import PublicationPackage
 from engine.core import CONFIG, available, digest, metric
 
 class ToolError(ValueError): pass
@@ -58,6 +60,22 @@ def render_variants(m,meta):
             variants.append({'id':f'{key}_{focus or "general"}','language':language,'detail':detail,'focus':focus,'text':text+note,'claim_ids':['c-pressure','c-bypass','c-retain','c-progress'],'factual_check_status':'valid'})
     return variants
 
+def validate_variants(variants,m,meta):
+    """Structural/reference/numeric validation; free-form semantics are not claimed."""
+    permitted_focus={None}|{p['id'] for p in meta['players']}|{t['id'] for t in meta['teams']}
+    required={(language,detail,focus) for language in ['en','es'] for detail in ['simple','detail'] for focus in permitted_focus}
+    actual={(v['language'],v['detail'],v['focus']) for v in variants}
+    if actual!=required or len(actual)!=len(variants):raise ValueError('variant_set_incomplete')
+    names=[p['name'] for p in meta['players']]+[t['name'] for t in meta['teams']]
+    for v in variants:
+        text=v['text']
+        for name in names:text=text.replace(name,'ENTITY')
+        numbers=[float(n) for n in re.findall(r'\d+(?:\.\d+)?',text)]
+        expected=[float(m['bypassed_count'])] if v['detail']=='simple' else [float(m['pressure_opponents_max']),float(m['pressure_radius_m']),2.,float(m['bypassed_count']),float(m['retention_window_ms']//1000),float(f"{m['progression_m']:.1f}")]
+        if numbers!=expected:raise ValueError('variant_numeric_mismatch')
+    return variants
+
+
 def run_workflow(tools,revision=1,proposed_text=None):
     started=perf_counter(); trace=[]
     m=tools.compute_pass_metrics()
@@ -66,7 +84,7 @@ def run_workflow(tools,revision=1,proposed_text=None):
     # Independent recomputation is allowed to narrow an edited proposal; there is one revision cycle.
     independently_checked=metric(tools.messages,tools.cutoff_ms,tools.metadata)
     if not independently_checked or independently_checked['evidence_revision']!=m['evidence_revision']:return None
-    variants=render_variants(m,tools.metadata)
+    variants=validate_variants(render_variants(m,tools.metadata),m,tools.metadata)
     base=next(v['text'] for v in variants if v['id']=='en_simple_general')
     review={'status':'supported','mode':'deterministic_template','reason':'All values recomputed from delivered observations. No sustained-control or intent claim is supported.','proposed_text':proposed_text,'revised_text':base,'cycles':0}
     if proposed_text is not None and proposed_text.strip()!=base:
@@ -77,6 +95,7 @@ def run_workflow(tools,revision=1,proposed_text=None):
     trace.append({'role':'Audience Editor','action':'render_and_validate_variants','status':'valid','variants':len(variants),'elapsed_ms':round((perf_counter()-started)*1000,3)})
     title='The pass before the moment'
     claims=[{'id':name,'type':'derived','value':value,'unit':unit,'evidence_revision':m['evidence_revision'],'source_message_ids':m['source_message_ids']} for name,value,unit in [('c-pressure',m['pressure_opponents_max'],'players'),('c-bypass',m['bypassed_count'],'players'),('c-retain',m['retention_window_ms']//1000,'s'),('c-progress',m['progression_m'],'m')]]
-    package={'id':'story-pass-1','revision':revision,'title':title,'claims':claims,'metrics':m,'variants':variants,'review':review,'evidence_revision':m['evidence_revision'],'eligible_from_ms':m['available_from_ms'],'expires_at_ms':m['available_from_ms']+CONFIG['overlay_ttl_ms'],'trace':trace,'workflow_ms':round((perf_counter()-started)*1000,3),'mode':'local deterministic template'}
+    package={'schema_version':'1.0.0','id':'story-pass-1','revision':revision,'title':title,'claims':claims,'metrics':m,'variants':variants,'review':review,'evidence_revision':m['evidence_revision'],'eligible_from_ms':m['available_from_ms'],'expires_at_ms':m['retention_confirmed_at_ms']+CONFIG['overlay_ttl_ms'],'trace':trace,'workflow_ms':round((perf_counter()-started)*1000,3),'mode':'local deterministic template'}
     package['package_hash']=digest(package)
+    PublicationPackage.model_validate(package)
     return package

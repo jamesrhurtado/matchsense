@@ -1,0 +1,259 @@
+{
+  "$defs": {
+    "InitialState": {
+      "additionalProperties": false,
+      "properties": {
+        "period": {
+          "title": "Period",
+          "type": "integer"
+        },
+        "period_elapsed_ms": {
+          "minimum": 0,
+          "title": "Period Elapsed Ms",
+          "type": "integer"
+        },
+        "score": {
+          "additionalProperties": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "title": "Score",
+          "type": "object"
+        },
+        "active_player_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Active Player Ids",
+          "type": "array"
+        },
+        "ball_status": {
+          "title": "Ball Status",
+          "type": "string"
+        },
+        "possession_team_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Possession Team Id"
+        }
+      },
+      "required": [
+        "period",
+        "period_elapsed_ms",
+        "score",
+        "active_player_ids",
+        "ball_status",
+        "possession_team_id"
+      ],
+      "title": "InitialState",
+      "type": "object"
+    },
+    "Period": {
+      "additionalProperties": false,
+      "properties": {
+        "period": {
+          "minimum": 1,
+          "title": "Period",
+          "type": "integer"
+        },
+        "timeline_offset_ms": {
+          "minimum": 0,
+          "title": "Timeline Offset Ms",
+          "type": "integer"
+        },
+        "attack_direction": {
+          "additionalProperties": {
+            "enum": [
+              "right",
+              "left"
+            ],
+            "type": "string"
+          },
+          "title": "Attack Direction",
+          "type": "object"
+        }
+      },
+      "required": [
+        "period",
+        "timeline_offset_ms",
+        "attack_direction"
+      ],
+      "title": "Period",
+      "type": "object"
+    },
+    "Pitch": {
+      "additionalProperties": false,
+      "properties": {
+        "length_m": {
+          "const": 105,
+          "title": "Length M",
+          "type": "integer"
+        },
+        "width_m": {
+          "const": 68,
+          "title": "Width M",
+          "type": "integer"
+        },
+        "convention": {
+          "const": "x right, y down",
+          "title": "Convention",
+          "type": "string"
+        }
+      },
+      "required": [
+        "length_m",
+        "width_m",
+        "convention"
+      ],
+      "title": "Pitch",
+      "type": "object"
+    },
+    "Player": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "team_id": {
+          "title": "Team Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "number": {
+          "maximum": 99,
+          "minimum": 1,
+          "title": "Number",
+          "type": "integer"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "team_id",
+        "name",
+        "number",
+        "role"
+      ],
+      "title": "Player",
+      "type": "object"
+    },
+    "Team": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "color": {
+          "title": "Color",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "color"
+      ],
+      "title": "Team",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "match_id": {
+      "title": "Match Id",
+      "type": "string"
+    },
+    "synthetic": {
+      "const": true,
+      "title": "Synthetic",
+      "type": "boolean"
+    },
+    "scope": {
+      "enum": [
+        "segment",
+        "full_match"
+      ],
+      "title": "Scope",
+      "type": "string"
+    },
+    "pitch": {
+      "$ref": "#/$defs/Pitch"
+    },
+    "teams": {
+      "items": {
+        "$ref": "#/$defs/Team"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Teams",
+      "type": "array"
+    },
+    "players": {
+      "items": {
+        "$ref": "#/$defs/Player"
+      },
+      "title": "Players",
+      "type": "array"
+    },
+    "periods": {
+      "items": {
+        "$ref": "#/$defs/Period"
+      },
+      "title": "Periods",
+      "type": "array"
+    },
+    "initial_state": {
+      "$ref": "#/$defs/InitialState"
+    },
+    "tracking_hz": {
+      "exclusiveMinimum": 0,
+      "maximum": 100,
+      "title": "Tracking Hz",
+      "type": "number"
+    },
+    "provenance_id": {
+      "title": "Provenance Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "match_id",
+    "synthetic",
+    "scope",
+    "pitch",
+    "teams",
+    "players",
+    "periods",
+    "initial_state",
+    "tracking_hz",
+    "provenance_id"
+  ],
+  "title": "MatchMetadata",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://why-now.local/schemas/match-1.0.0.json"
+}

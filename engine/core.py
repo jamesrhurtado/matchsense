@@ -13,7 +13,12 @@ CONFIG={'version':'pressure-escape-v1','pressure_radius_m':6,'pressure_window_ms
 def load_match(match_id):
     if match_id not in {'match-001','match-002','match-003'}: raise ValueError('unknown_match')
     root=ROOT/'data/runtime'/match_id
-    return json.loads((root/'match.json').read_text()),[json.loads(x) for x in (root/'stream.jsonl').read_text().splitlines()]
+    metadata=json.loads((root/'match.json').read_text())
+    messages=[json.loads(x) for x in (root/'stream.jsonl').read_text().splitlines()]
+    from engine.contracts import MatchMetadata, OBSERVATION
+    MatchMetadata.model_validate(metadata)
+    for message in messages: OBSERVATION.validate_python(message)
+    return metadata,messages
 
 def digest(value): return hashlib.sha256(json.dumps(value,sort_keys=True,separators=(',',':')).encode()).hexdigest()
 

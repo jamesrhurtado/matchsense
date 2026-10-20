@@ -1,0 +1,279 @@
+{
+  "$defs": {
+    "AudienceVariant": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "language": {
+          "enum": [
+            "en",
+            "es"
+          ],
+          "title": "Language",
+          "type": "string"
+        },
+        "detail": {
+          "enum": [
+            "simple",
+            "detail"
+          ],
+          "title": "Detail",
+          "type": "string"
+        },
+        "focus": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Focus"
+        },
+        "text": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "claim_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Claim Ids",
+          "type": "array"
+        },
+        "factual_check_status": {
+          "const": "valid",
+          "title": "Factual Check Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "language",
+        "detail",
+        "focus",
+        "text",
+        "claim_ids",
+        "factual_check_status"
+      ],
+      "title": "AudienceVariant",
+      "type": "object"
+    },
+    "Claim": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "enum": [
+            "c-pressure",
+            "c-bypass",
+            "c-retain",
+            "c-progress"
+          ],
+          "title": "Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "derived",
+          "title": "Type",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        },
+        "unit": {
+          "enum": [
+            "players",
+            "s",
+            "m"
+          ],
+          "title": "Unit",
+          "type": "string"
+        },
+        "evidence_revision": {
+          "title": "Evidence Revision",
+          "type": "string"
+        },
+        "source_message_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Message Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "value",
+        "unit",
+        "evidence_revision",
+        "source_message_ids"
+      ],
+      "title": "Claim",
+      "type": "object"
+    },
+    "ReviewDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "supported",
+            "revised"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "mode": {
+          "const": "deterministic_template",
+          "title": "Mode",
+          "type": "string"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        },
+        "proposed_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Proposed Text"
+        },
+        "revised_text": {
+          "title": "Revised Text",
+          "type": "string"
+        },
+        "cycles": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Cycles",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "status",
+        "mode",
+        "reason",
+        "proposed_text",
+        "revised_text",
+        "cycles"
+      ],
+      "title": "ReviewDecision",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "revision": {
+      "minimum": 1,
+      "title": "Revision",
+      "type": "integer"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    },
+    "claims": {
+      "items": {
+        "$ref": "#/$defs/Claim"
+      },
+      "minItems": 1,
+      "title": "Claims",
+      "type": "array"
+    },
+    "metrics": {
+      "additionalProperties": true,
+      "title": "Metrics",
+      "type": "object"
+    },
+    "variants": {
+      "items": {
+        "$ref": "#/$defs/AudienceVariant"
+      },
+      "title": "Variants",
+      "type": "array"
+    },
+    "review": {
+      "$ref": "#/$defs/ReviewDecision"
+    },
+    "evidence_revision": {
+      "title": "Evidence Revision",
+      "type": "string"
+    },
+    "eligible_from_ms": {
+      "minimum": 0,
+      "title": "Eligible From Ms",
+      "type": "integer"
+    },
+    "expires_at_ms": {
+      "minimum": 0,
+      "title": "Expires At Ms",
+      "type": "integer"
+    },
+    "trace": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Trace",
+      "type": "array"
+    },
+    "workflow_ms": {
+      "minimum": 0,
+      "title": "Workflow Ms",
+      "type": "number"
+    },
+    "mode": {
+      "const": "local deterministic template",
+      "title": "Mode",
+      "type": "string"
+    },
+    "package_hash": {
+      "title": "Package Hash",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "revision",
+    "title",
+    "claims",
+    "metrics",
+    "variants",
+    "review",
+    "evidence_revision",
+    "eligible_from_ms",
+    "expires_at_ms",
+    "trace",
+    "workflow_ms",
+    "mode",
+    "package_hash"
+  ],
+  "title": "PublicationPackage",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://why-now.local/schemas/publication-1.0.0.json"
+}

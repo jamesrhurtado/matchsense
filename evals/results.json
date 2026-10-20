@@ -1,0 +1,297 @@
+{
+  "mode": "deterministic local templates",
+  "metric_version": "pressure-escape-v1",
+  "scenario_matching_tolerance_ms": 100,
+  "latency_scope": "metric calculation plus local template workflow, one warm process, excludes replay/network/human time",
+  "median_processing_ms": 1.972,
+  "max_processing_ms": 3.842,
+  "model_calls": 0,
+  "model_cost_usd": 0,
+  "summary": {
+    "development": {
+      "segments": 6,
+      "parent_configurations": 2,
+      "true_positive": 2,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "alert_coverage": 0.3333333333333333,
+      "false_alerts_per_simulated_minute": 0.0,
+      "naive_false_positive": 2
+    },
+    "validation": {
+      "segments": 6,
+      "parent_configurations": 2,
+      "true_positive": 2,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "alert_coverage": 0.3333333333333333,
+      "false_alerts_per_simulated_minute": 0.0,
+      "naive_false_positive": 2
+    },
+    "held_out": {
+      "segments": 12,
+      "parent_configurations": 4,
+      "true_positive": 4,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "alert_coverage": 0.3333333333333333,
+      "false_alerts_per_simulated_minute": 0.0,
+      "naive_false_positive": 4
+    }
+  },
+  "rows": [
+    {
+      "split": "development",
+      "parent_configuration": "development-1",
+      "family": "escape",
+      "seed": 7001,
+      "expected": true,
+      "detected": true,
+      "naive_forward_pass_baseline": true,
+      "variants_validated": 100
+    },
+    {
+      "split": "development",
+      "parent_configuration": "development-1",
+      "family": "ordinary",
+      "seed": 7002,
+      "expected": false,
+      "detected": false,
+      "naive_forward_pass_baseline": true,
+      "variants_validated": 0
+    },
+    {
+      "split": "development",
+      "parent_configuration": "development-1",
+      "family": "failed",
+      "seed": 7003,
+      "expected": false,
+      "detected": false,
+      "naive_forward_pass_baseline": false,
+      "variants_validated": 0
+    },
+    {
+      "split": "development",
+      "parent_configuration": "development-2",
+      "family": "escape",
+      "seed": 7004,
+      "expected": true,
+      "detected": true,
+      "naive_forward_pass_baseline": true,
+      "variants_validated": 100
+    },
+    {
+      "split": "development",
+      "parent_configuration": "development-2",
+      "family": "ordinary",
+      "seed": 7005,
+      "expected": false,
+      "detected": false,
+      "naive_forward_pass_baseline": true,
+      "variants_validated": 0
+    },
+    {
+      "split": "development",
+      "parent_configuration": "development-2",
+      "family": "failed",
+      "seed": 7006,
+      "expected": false,
+      "detected": false,
+      "naive_forward_pass_baseline": false,
+      "variants_validated": 0
+    },
+    {
+      "split": "validation",
+      "parent_configuration": "validation-1",
+      "family": "escape",
+      "seed": 7007,
+      "expected": true,
+      "detected": true,
+      "naive_forward_pass_baseline": true,
+      "variants_validated": 100
+    },
+    {
+      "split": "validation",
+      "parent_configuration": "validation-1",
+      "family": "ordinary",
+      "seed": 7008,
+      "expected": false,
+      "detected": false,
+      "naive_forward_pass_baseline": true,
+      "variants_validated": 0
+    },
+    {
+      "split": "validation",
+      "parent_configuration": "validation-1",
+      "family": "failed",
+      "seed": 7009,
+      "expected": false,
+      "detected": false,
+      "naive_forward_pass_baseline": false,
+      "variants_validated": 0
+    },
+    {
+      "split": "validation",
+      "parent_configuration": "validation-2",
+      "family": "escape",
+      "seed": 7010,
+      "expected": true,
+      "detected": true,
+      "naive_forward_pass_baseline": true,
+      "variants_validated": 100
+    },
+    {
+      "split": "validation",
+      "parent_configuration": "validation-2",
+      "family": "ordinary",
+      "seed": 7011,
+      "expected": false,
+      "detected": false,
+      "naive_forward_pass_baseline": true,
+      "variants_validated": 0
+    },
+    {
+      "split": "validation",
+      "parent_configuration": "validation-2",
+      "family": "failed",
+      "seed": 7012,
+      "expected": false,
+      "detected": false,
+      "naive_forward_pass_baseline": false,
+      "variants_validated": 0
+    },
+    {
+      "split": "held_out",
+      "parent_configuration": "held_out-1",
+      "family": "escape",
+      "seed": 7013,
+      "expected": true,
+      "detected": true,
+      "naive_forward_pass_baseline": true,
+      "variants_validated": 100
+    },
+    {
+      "split": "held_out",
+      "parent_configuration": "held_out-1",
+      "family": "ordinary",
+      "seed": 7014,
+      "expected": false,
+      "detected": false,
+      "naive_forward_pass_baseline": true,
+      "variants_validated": 0
+    },
+    {
+      "split": "held_out",
+      "parent_configuration": "held_out-1",
+      "family": "failed",
+      "seed": 7015,
+      "expected": false,
+      "detected": false,
+      "naive_forward_pass_baseline": false,
+      "variants_validated": 0
+    },
+    {
+      "split": "held_out",
+      "parent_configuration": "held_out-2",
+      "family": "escape",
+      "seed": 7016,
+      "expected": true,
+      "detected": true,
+      "naive_forward_pass_baseline": true,
+      "variants_validated": 100
+    },
+    {
+      "split": "held_out",
+      "parent_configuration": "held_out-2",
+      "family": "ordinary",
+      "seed": 7017,
+      "expected": false,
+      "detected": false,
+      "naive_forward_pass_baseline": true,
+      "variants_validated": 0
+    },
+    {
+      "split": "held_out",
+      "parent_configuration": "held_out-2",
+      "family": "failed",
+      "seed": 7018,
+      "expected": false,
+      "detected": false,
+      "naive_forward_pass_baseline": false,
+      "variants_validated": 0
+    },
+    {
+      "split": "held_out",
+      "parent_configuration": "held_out-3",
+      "family": "escape",
+      "seed": 7019,
+      "expected": true,
+      "detected": true,
+      "naive_forward_pass_baseline": true,
+      "variants_validated": 100
+    },
+    {
+      "split": "held_out",
+      "parent_configuration": "held_out-3",
+      "family": "ordinary",
+      "seed": 7020,
+      "expected": false,
+      "detected": false,
+      "naive_forward_pass_baseline": true,
+      "variants_validated": 0
+    },
+    {
+      "split": "held_out",
+      "parent_configuration": "held_out-3",
+      "family": "failed",
+      "seed": 7021,
+      "expected": false,
+      "detected": false,
+      "naive_forward_pass_baseline": false,
+      "variants_validated": 0
+    },
+    {
+      "split": "held_out",
+      "parent_configuration": "held_out-4",
+      "family": "escape",
+      "seed": 7022,
+      "expected": true,
+      "detected": true,
+      "naive_forward_pass_baseline": true,
+      "variants_validated": 100
+    },
+    {
+      "split": "held_out",
+      "parent_configuration": "held_out-4",
+      "family": "ordinary",
+      "seed": 7023,
+      "expected": false,
+      "detected": false,
+      "naive_forward_pass_baseline": true,
+      "variants_validated": 0
+    },
+    {
+      "split": "held_out",
+      "parent_configuration": "held_out-4",
+      "family": "failed",
+      "seed": 7024,
+      "expected": false,
+      "detected": false,
+      "naive_forward_pass_baseline": false,
+      "variants_validated": 0
+    }
+  ],
+  "limitations": [
+    "Small, constructed synthetic test, not a measure of professional football accuracy.",
+    "Thresholds are heuristic. Every parent still uses the same simulator mechanics.",
+    "Model-backed workflow and fair single-agent comparison were not run.",
+    "Variant generation is restricted to deterministic approved phrases; no free-form semantic quality claim is made.",
+    "No human comprehension or editorial timing study was conducted."
+  ]
+}

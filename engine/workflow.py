@@ -56,7 +56,7 @@ def render_variants(m,meta):
                 else:
                     player=next(p for p in meta['players'] if p['id']==focus)
                     if focus==m['passer_id']:note=f' {player["name"]} made the pass.' if language=='en' else f' {player["name"]} dio el pase.'
-                    elif focus==m['receiver_id']:note=f' {player["name"]} received the pass and kept possession.' if language=='en' else f' {player["name"]} recibió el pase y conservó la posesión.'
+                    elif focus==m['receiver_id']:note=f' {player["name"]} received the pass; {team} retained possession.' if language=='en' else f' {player["name"]} recibió el pase; {team} conservó la posesión.'
                     else:note=' No direct contribution by this player is verified in this sequence.' if language=='en' else ' No hay una contribución directa verificada de este jugador en la secuencia.'
             variants.append({'id':f'{key}_{focus or "general"}','language':language,'detail':detail,'focus':focus,'text':text+note,'claim_ids':['c-pressure','c-bypass','c-retain','c-progress'],'factual_check_status':'valid'})
     return variants

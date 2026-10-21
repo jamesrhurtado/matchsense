@@ -14,4 +14,6 @@ Eligibility compares the original measured continuation distance with the 5 m ga
 
 Every evidence object includes source message IDs, evidence content hash, metric definition version, source cutoff, windows, units, coverage and limitations. Source revisions replace old IDs only after their own availability time. Exact retransmissions are deduplicated. Raw operands remain inspectable; rendered positions are not added to the evidence stream.
 
+Player reception and team retention are separate claims. A recorded receiver may pass onward during the confirmation interval. Focused explanations therefore credit the player with receiving the pass and the team with retaining possession; they do not imply continuous individual control. Nearby-opponent counts establish proximity only, and longitudinal bypass establishes geometry only.
+
 No probability of importance, confidence percentage, player intent, causal tactical story, real-match accuracy or sustained match-control claim is derived. The MVP investigates each delivered pass independently and retains separate story identities and approvals. The shared overlay uses the newest live approved moment; professional editorial ranking and cooldown across a complete match remain future work.

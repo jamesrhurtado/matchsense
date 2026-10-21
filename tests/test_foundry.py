@@ -253,3 +253,24 @@ def test_identical_reviewer_text_does_not_claim_a_revision():
     p = run_foundry_workflow(t, provider=provider)
     assert p['review']['status'] == 'supported'
     assert p['review']['cycles'] == 0
+
+
+def test_opportunity_wording_in_spanish_requires_repair_before_publication():
+    t=tools();invalid=editor(t)
+    invalid['variants'][3]['text']='Analizar esta secuencia revela cómo un pase puede crear oportunidades.'
+    provider=FakeProvider([decision(),decision('supported'),invalid,editor(t),decision('supported')])
+    package=run_foundry_workflow(t,provider=provider)
+    assert package['mode']=='Microsoft Agent Framework + Azure OpenAI'
+    assert package['model_usage']['calls']==5
+    assert provider.calls[3][2]['repair_required']=='unsupported_semantic_category'
+    assert 'oportunidades' not in package['variants'][0]['text']
+    assert all('oportunidades' not in v['text'] for v in package['variants'])
+
+
+def test_repeated_unsupported_chances_are_an_explicit_fallback():
+    t=tools();invalid=editor(t)
+    invalid['variants'][0]['text']='See how this passage creates opportunities.'
+    provider=FakeProvider([decision(),decision('supported'),invalid,invalid])
+    package=run_foundry_workflow(t,provider=provider)
+    assert package['mode']=='template fallback'
+    assert package['trace'][-1]['reason']=='unsupported_semantic_category'

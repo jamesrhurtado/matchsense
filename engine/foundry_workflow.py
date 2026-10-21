@@ -313,7 +313,7 @@ class Runner:
             'required_audiences': ['en/simple', 'en/detail', 'es/simple', 'es/detail'],
             'composition': 'The application appends verified measurements, team names and limitations after your introduction.',
         }
-        editor_instruction = ' Act as Audience Editor. Return exactly en/simple,en/detail,es/simple,es/detail. Each text must be a brief NUMBER-FREE introduction, exactly one short sentence of at most 25 words. Explain the value of looking at this passage using the reviewed meaning. Simple introductions address casual fans; detailed introductions explain why checking the evidence matters. The application appends authoritative measurements and the required qualifications, so NEVER reproduce metrics, numerical quantities, timestamps, coordinates, player names or factual counts. Do not write any number as digits OR words in either language. Do not claim a goal, key pass, assist, shot, chance, intent, defensive line break, match control or causation. No shot is evidenced. Do not include [measurement] placeholders. Write natural audience language.'
+        editor_instruction = ' Act as Audience Editor. Return exactly en/simple,en/detail,es/simple,es/detail. Each text must be a brief NUMBER-FREE introduction, exactly one short sentence of at most 25 words. Explain the value of looking at this passage using the reviewed meaning. Simple introductions address casual fans; detailed introductions explain why checking the evidence matters. The application appends authoritative measurements and the required qualifications, so NEVER reproduce metrics, numerical quantities, timestamps, coordinates, player names or factual counts. Do not write any number as digits OR words in either language. Do not claim a goal, key pass, assist, shot, chance, opportunity, intent, defensive line break, match control or causation. Do not imply creating chances or opportunities (ocasiones or oportunidades). Focus on inspecting the pass and its evidence. No shot is evidenced. Do not include [measurement] placeholders. Write natural audience language.'
         for attempt in range(2):
             edit = await self.call('Audience Editor', editor_instruction, editor_context, EditorDecision, max_tokens=900)
             try:
@@ -328,8 +328,9 @@ class Runner:
                     'Correct the invalid introductions, not the facts paragraph. '
                     'Remove ALL numerical quantities, including spelled words such as '
                     'two and dos. Write between players / entre jugadores without '
-                    'counting them. Remove names and unsupported shot/goal/tactical '
-                    'claims. Each introduction must be a single sentence of at most '
+                    'counting them. Remove names and unsupported shot/goal/chance/opportunity '
+                    'or tactical claims, including ocasiones and oportunidades. '
+                    'Focus on inspecting the pass and its evidence. Each introduction must be a single sentence of at most '
                     '25 words. The application supplies every measured fact.'
                 )
         # Generated audience prose gets a final semantic review, independently of
@@ -371,7 +372,7 @@ def expand_and_validate(edit, metrics, metadata):
             raise ValueError('audience_introduction_placeholder')
         if any(name in text for name in player_names):
             raise ValueError('unexpected_entity')
-        if re.search(r'\b(goal|scored|key pass|pase clave|assist\w*|asistencia|shot|disparo|chance|ocasión|dominat\w*|guarantee\w*|probabilit\w*|intent\w*|domini\w*|marcó|anotó)\b', text, re.I):
+        if re.search(r'\b(goals?|gol(?:es)?|scor(?:ed|ing)|key pass(?:es)?|pases? claves?|assist\w*|asistencias?|shots?|disparos?|chances?|ocasi[oó]n(?:es)?|opportunit(?:y|ies)|oportunidad(?:es)?|dominat\w*|guarantee\w*|probabilit\w*|probabilidad(?:es)?|intent\w*|intenci[oó]n(?:es)?|domini\w*|marcó|anotó)\b', text, re.I):
             raise ValueError('unsupported_semantic_category')
     canonical = render_variants(metrics, metadata)
     variants = [{**v, 'text': bases[(v['language'], v['detail'])] + ' ' + v['text']}

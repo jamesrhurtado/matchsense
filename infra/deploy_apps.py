@@ -17,6 +17,8 @@ def deploy():
     registry=S['registry']+'.azurecr.io'
     api_env={
       'WHY_NOW_ENVIRONMENT':'azure','WHY_NOW_AZURE_ENVIRONMENT':'production','WHY_NOW_MODEL_MODE':'foundry',
+      'WHY_NOW_NARRATIVE_VERSION':os.getenv('WHY_NOW_NARRATIVE_VERSION','2'),
+      'WHY_NOW_RELEASE_COMMIT':os.getenv('WHY_NOW_RELEASE_COMMIT','unknown'),
       'AZURE_CLIENT_ID':S['identity_client_id'],'AZURE_OPENAI_ENDPOINT':'https://'+S['foundry']+'.openai.azure.com/',
       'FOUNDRY_MODEL_DEPLOYMENT':S['model'],'FOUNDRY_PROJECT_ENDPOINT':'https://'+S['foundry']+'.services.ai.azure.com/api/projects/'+S['project'],
       'WHY_NOW_COSMOS_ENDPOINT':'https://'+S['cosmos']+'.documents.azure.com:443/','WHY_NOW_COSMOS_DATABASE':'whynow',

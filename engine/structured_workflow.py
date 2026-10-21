@@ -137,7 +137,7 @@ async def _execute(tools, baseline, revision, proposed_text, strategy, provider,
                     review_context['independent_evidence'] = [runner.evidence(r,reviewer_role) for r in critic.evidence_requests]
                     critic = await runner.call(reviewer_role, reviewer_instruction + ' Final supported, revise or reject now.',
                                                review_context,CriticDecision,max_tokens=1100)
-                runner.trace.append({'role':'Claim Reviewer','action':'claim_verdicts','status':critic.action,
+                runner.trace.append({'role':reviewer_role,'action':'self_review_verdicts' if strategy=='single' else 'claim_verdicts','status':critic.action,
                                      'verdicts':[v.model_dump() for v in critic.verdicts],
                                      'reason':critic.reason,'elapsed_ms':runner.elapsed()})
                 if critic.action == 'reject':

@@ -81,3 +81,25 @@ def test_numeric_canonical_hash_survives_v2_roundtrip():
     assert digest({k:v for k,v in p.items() if k!='package_hash'}) == p['package_hash']
     p['claims'][0]['input_cutoff_ms']=0
     with pytest.raises(ValidationError,match='claim_source_mismatch'):PublicationPackage.model_validate(p)
+
+
+def test_corrected_endpoint_changes_geometry_only_after_delivery():
+    p,meta,rows=package()
+    old=next(r for r in rows if r['kind']=='event' and r['payload']['type']=='pass_resolved')
+    correction=deepcopy(old)
+    correction.update(message_id='corrected-endpoint',supersedes_message_id=old['message_id'],
+                      revision=2,sequence_no=9999,available_at_ms=26000)
+    correction['payload']['details']['end_position']['x_m']+=.1
+    before=build_structured_package(EvidenceTools(meta,rows+[correction],25000))
+    after=build_structured_package(EvidenceTools(meta,rows+[correction],27000))
+    assert before['evidence_revision']==p['evidence_revision']
+    assert after['evidence_revision']!=before['evidence_revision']
+    assert after['metrics']['forward_pass_m']==pytest.approx(before['metrics']['forward_pass_m']+.1)
+    assert 'corrected-endpoint' in after['claims'][0]['source_message_ids']
+
+
+@pytest.mark.parametrize('field,bad',[('subject_name','Invented Player'),('window_start_ms',1),('qualification','A guaranteed goal.')])
+def test_names_windows_and_qualifications_cannot_be_rebound(field,bad):
+    p,_,_=package()
+    next(c for c in p['claims'] if c['id']=='c-retain')[field]=bad
+    with pytest.raises(ValidationError,match='claim_scope_mismatch'):PublicationPackage.model_validate(p)

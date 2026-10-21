@@ -46,6 +46,14 @@ def workflow(tools,**kwargs):
     if outcome is None:
         outcome=create_outcome(store,session_id,f'story-{tools.pass_id or (measured or {}).get("pass_id","unknown")}',
             (measured or {}).get('evidence_revision','unavailable'),kwargs.get('revision',1),tools.cutoff_ms,runtime_mode())
+    outcome={**outcome,'evidence_observed_at':outcome['scheduled_at'],
+             'implementation':{'schema_version':'2.0.0' if STRUCTURED else '1.0.0',
+                               'prompt_version':'director-critic-v2' if STRUCTURED else 'legacy-v1',
+                               'renderer_version':'claim-blocks-v2' if STRUCTURED else 'canonical-v1',
+                               'metric_version':'pressure-escape-v1',
+                               'model_deployment':os.getenv('FOUNDRY_MODEL_DEPLOYMENT') if FOUNDRY else None,
+                               'model_version':os.getenv('FOUNDRY_MODEL_VERSION') if FOUNDRY else None,
+                               'release_commit':os.getenv('WHY_NOW_RELEASE_COMMIT','unknown')}}
     outcome=start_outcome(store,outcome)
     last={}
     def observe(event):

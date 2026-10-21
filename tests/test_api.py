@@ -130,3 +130,25 @@ def test_recap_is_bounded_by_available_time(client):
     assert early['moments']==[]
     future=client.post(f'/api/replay-sessions/{sid}/recaps',json={'through_ms':60000}).json()
     assert future['through_ms']==25000
+
+
+def test_correction_hides_approval_while_ai_review_is_pending(client,monkeypatch):
+    from concurrent.futures import Future
+    sid=create(client);at(sid,25000)
+    old=evidence(client,sid)
+    assert decision(client,sid,package=old).status_code==200
+    meta,rows=main.load_match('match-001')
+    changed=deepcopy(rows)
+    source=next(m for m in changed if m['kind']=='tracking_frame' and m['timeline_ms']==18000)
+    source['payload']['ball']['z_m']=.01
+    assert main.metric(changed,25000,meta)['evidence_revision']!=old['evidence_revision']
+    class Pending:
+        def submit(self,*args,**kwargs):return Future()
+    monkeypatch.setattr(main,'FOUNDRY',True)
+    monkeypatch.setattr(main,'WORKERS',Pending())
+    monkeypatch.setattr(main,'JOBS',{})
+    monkeypatch.setattr(main,'inputs',lambda session,cutoff:(meta,changed))
+    public=client.get(f'/api/replay-sessions/{sid}/snapshot').json()
+    assert public['story'] is None and public['overlay'] is None
+    assert public['workflow_pending'] is True
+    assert decision(client,sid,package=old).status_code==404

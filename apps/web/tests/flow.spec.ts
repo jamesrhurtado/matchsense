@@ -8,7 +8,7 @@ test('producer evidence → wording review → approval → viewer preferences �
  await expect(page.getByRole('button',{name:'Show why',exact:true})).toBeVisible({timeout:10000});await page.getByRole('button',{name:'Pause',exact:true}).click();
  await page.getByRole('button',{name:'Show why',exact:true}).click();await expect(page.getByRole('heading',{name:'Follow the escape.'})).toBeVisible();
  await page.getByRole('button',{name:'Play evidence replay',exact:true}).click();await page.waitForTimeout(300);await page.getByRole('button',{name:'Pause evidence replay',exact:true}).click();
- await page.getByRole('button',{name:'Propose an edit'}).click();await page.getByLabel('Propose wording for local review').fill('Harbor City now controls the match.');await page.getByRole('button',{name:'Submit for review'}).click();
+ await page.getByRole('button',{name:'Propose an edit'}).click();await page.getByLabel('Propose wording for evidence review').fill('Harbor City now controls the match.');await page.getByRole('button',{name:'Submit for review'}).click();
  await expect(page.getByText('Producer edit reviewed')).toBeVisible();
  await page.getByRole('button',{name:'Approve',exact:true}).click();await expect(page.getByText('On air · revision 2')).toBeVisible();
  const before=await page.locator('#live').innerText();
@@ -34,4 +34,26 @@ test('viewer stream delivers resync and state updates through the web proxy',asy
   try{const response=await fetch(`/api/replay-sessions/${sessionId}/stream`,{signal:abort.signal});const reader=response.body!.getReader();const decoder=new TextDecoder();while(!text.includes('event: state_update')){const {value,done}=await reader.read();if(done)break;text+=decoder.decode(value,{stream:true});}await reader.cancel();return text;}finally{clearTimeout(timeout);abort.abort();}
  },sid);
  expect(result).toContain('event: resync');expect(result).toContain('event: state_update');
+});
+
+
+test('web proxy preserves authorization errors and rejects oversized bodies', async({request}) => {
+ const unauthorized=await request.post('/api/replay-sessions',{data:{match_id:'match-001'}});
+ expect(unauthorized.status()).toBe(401);
+ const oversized=await request.post('/api/replay-sessions',{headers:{'Content-Type':'application/json'},data:'x'.repeat(65537)});
+ expect(oversized.status()).toBe(413);
+ expect((await oversized.json()).detail.code).toBe('request_too_large');
+});
+
+test('pending AI review remains visible while replay continues',async({page})=>{
+ await page.route('**/api/replay-sessions/pending-demo/snapshot',route=>route.fulfill({json:{
+  session_id:'pending-demo',clock_ms:23000,duration_ms:60000,running:true,speed:1,
+  mode:'Azure model workflow',workflow_pending:true,story:null,story_status:'waiting',
+  overlay:null,delivered_count:2300,frame:null,teams:[],players:[],cursor:23000,
+ }}));
+ await page.goto('/studio/pending-demo');
+ await expect(page.getByRole('status')).toContainText('AI review in progress');
+ await expect(page.getByRole('status')).toContainText('Azure model workflow');
+ await expect(page.getByRole('button',{name:'Pause',exact:true})).toBeEnabled();
+ await expect(page.getByRole('button',{name:'Approve',exact:true})).toHaveCount(0);
 });

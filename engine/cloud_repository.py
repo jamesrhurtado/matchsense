@@ -49,6 +49,49 @@ class CosmosRepository:
     def save_session(self, session):
         self.sessions.upsert_item({'id': 'session', 'session_id': session['id'], 'type': 'session', 'data': session})
 
+    def save_workflow_outcome(self, sid, outcome):
+        from engine.outcomes import validate_outcome
+        item = 'run:' + outcome['run_id']
+        previous = self._read(self.stories, item, sid)
+        validate_outcome(sid, outcome, previous['data'] if previous else None)
+        if previous and previous['data'] == outcome:
+            return
+        doc = self._doc(sid, item, 'workflow_outcome', outcome)
+        doc['kind'] = 'workflow_outcome'
+        operation = ('replace', (item, doc), {'if_match_etag': previous['_etag']}) if previous else ('create', (doc,))
+        try:
+            self._batch(sid, [operation])
+        except RepositoryConflict:
+            # Simultaneous identical writes are harmless; divergent writes must
+            # not overwrite a completion or erase another process's attempts.
+            current = self._read(self.stories, item, sid)
+            if current and current['data'] == outcome:
+                return
+            raise RepositoryConflict('workflow_outcome_conflict')
+
+    def workflow_outcomes(self, sid):
+        outcomes = [d['data'] for d in self.stories.query_items(
+            query='SELECT c.data FROM c WHERE c.type = "workflow_outcome"', partition_key=sid)]
+        return sorted(outcomes, key=lambda o: (o['scheduled_at'], o['run_id']))
+
+    def interrupt_workflow_outcomes(self):
+        from engine.outcomes import ACTIVE_STATES, interrupted_outcome
+        count = 0
+        documents = self.stories.query_items(
+            query='SELECT c.session_id, c.data FROM c WHERE c.type = "workflow_outcome"',
+            enable_cross_partition_query=True)
+        for doc in documents:
+            outcome = doc['data']
+            if outcome['state'] in ACTIVE_STATES:
+                try:
+                    self.save_workflow_outcome(doc['session_id'], interrupted_outcome(outcome))
+                    count += 1
+                except RepositoryConflict:
+                    current = self._read(self.stories, 'run:' + outcome['run_id'], doc['session_id'])
+                    if not current or current['data']['state'] in ACTIVE_STATES:
+                        raise
+        return count
+
     def list_sessions(self):
         return [d['data'] for d in self.sessions.query_items(
             query='SELECT c.data FROM c WHERE c.type = "session"', enable_cross_partition_query=True)]

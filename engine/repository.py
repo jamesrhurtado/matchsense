@@ -18,6 +18,7 @@ class Repository:
         CREATE TABLE IF NOT EXISTS editorial(session_id TEXT PRIMARY KEY, revision INTEGER, status TEXT, at_ms INTEGER, package_hash TEXT);
         CREATE TABLE IF NOT EXISTS operations(session_id TEXT, operation_id TEXT, request_hash TEXT, data TEXT, PRIMARY KEY(session_id,operation_id));
         CREATE TABLE IF NOT EXISTS audit_log(id INTEGER PRIMARY KEY AUTOINCREMENT, session_id TEXT, action TEXT, at_ms INTEGER, data TEXT);
+        CREATE TABLE IF NOT EXISTS workflow_outcomes(session_id TEXT, run_id TEXT, data TEXT NOT NULL, PRIMARY KEY(session_id,run_id));
         ''')
         try:
             yield c
@@ -31,6 +32,36 @@ class Repository:
             return json.loads(row['data']) if row else None
     def save_session(self,s):
         with self.connect() as c:c.execute('INSERT OR REPLACE INTO replay_sessions VALUES (?,?)',(s['id'],json.dumps(s)))
+
+    def save_workflow_outcome(self,sid,outcome):
+        from engine.outcomes import validate_outcome
+        with self.connect() as c:
+            c.execute('BEGIN IMMEDIATE')
+            row=c.execute('SELECT data FROM workflow_outcomes WHERE session_id=? AND run_id=?',
+                          (sid,outcome['run_id'])).fetchone()
+            previous=json.loads(row['data']) if row else None
+            validate_outcome(sid,outcome,previous)
+            c.execute('INSERT OR REPLACE INTO workflow_outcomes VALUES (?,?,?)',
+                      (sid,outcome['run_id'],json.dumps(outcome)))
+
+    def workflow_outcomes(self,sid):
+        with self.connect() as c:
+            outcomes=[json.loads(row['data']) for row in c.execute(
+                'SELECT data FROM workflow_outcomes WHERE session_id=?',(sid,))]
+            return sorted(outcomes,key=lambda o:(o['scheduled_at'],o['run_id']))
+
+    def interrupt_workflow_outcomes(self):
+        from engine.outcomes import ACTIVE_STATES, interrupted_outcome
+        count=0
+        with self.connect() as c:
+            c.execute('BEGIN IMMEDIATE')
+            for row in c.execute('SELECT session_id,run_id,data FROM workflow_outcomes').fetchall():
+                outcome=json.loads(row['data'])
+                if outcome['state'] in ACTIVE_STATES:
+                    c.execute('UPDATE workflow_outcomes SET data=? WHERE session_id=? AND run_id=?',
+                              (json.dumps(interrupted_outcome(outcome)),row['session_id'],row['run_id']))
+                    count+=1
+        return count
     @staticmethod
     def _latest(c,sid,story_id=None):
         if story_id is None:

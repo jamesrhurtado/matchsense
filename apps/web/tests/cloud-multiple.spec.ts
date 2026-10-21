@@ -1,0 +1,51 @@
+import {test,expect} from '@playwright/test';
+import {readFileSync,writeFileSync} from 'node:fs';
+import path from 'node:path';
+
+test('hosted Azure multi-moment archive, selected evidence, Spanish recap and mobile view',async({page,context,request})=>{
+ test.skip(process.env.WHY_NOW_CLOUD_TEST!=='1','Explicit hosted QA only; run scripts/cloud_multi_smoke.py first.');
+ test.setTimeout(180_000);
+ const root=path.resolve(__dirname,'../../..');
+ const access=JSON.parse(readFileSync(path.join(root,'.azure/qa-access.json'),'utf8')) as {url:string;producer_key:string};
+ const record=JSON.parse(readFileSync(path.join(root,'.run/cloud-multi-smoke.json'),'utf8')) as {session_id:string};
+ const base=access.url;const sid=record.session_id;const headers={'X-Producer-Token':access.producer_key};
+ const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
+ await page.addInitScript(key=>sessionStorage.setItem('why-now-token',key),access.producer_key);
+ await page.goto(`${base}/studio/${sid}`);
+ await expect(page.getByText('180-second segment')).toBeVisible({timeout:30_000});
+ const queue=page.getByRole('group',{name:'Story queue moments'});
+ await expect(queue.getByRole('button')).toHaveCount(3,{timeout:30_000});
+ await queue.getByRole('button',{name:/Moment 1/}).click();
+ await expect(queue.getByRole('button',{name:/Moment 1/})).toHaveAttribute('aria-pressed','true');
+ await expect(page.getByRole('button',{name:'Retract',exact:true})).toBeEnabled({timeout:30_000});
+ await page.getByRole('button',{name:'Show why',exact:true}).click();
+ await expect(page.getByRole('heading',{name:'Follow the escape.'})).toBeVisible({timeout:30_000});
+ await page.screenshot({path:path.join(root,'.run/cloud-multiple-producer.png'),fullPage:true});
+ const viewer=await context.newPage();viewer.on('pageerror',error=>errors.push(error.message));
+ await viewer.goto(`${base}/watch/${sid}`);
+ const history=viewer.getByRole('group',{name:'Approved moments'});
+ await expect(history.getByRole('button')).toHaveCount(2,{timeout:30_000});
+ const before=await request.get(`${base}/api/replay-sessions/${sid}/snapshot`);const shared=(await before.json()).overlay;
+ await history.getByRole('button',{name:/Moment 1/}).click();
+ await expect(history.getByRole('button',{name:/Moment 1/})).toHaveAttribute('aria-pressed','true');
+ await viewer.getByRole('button',{name:'Show the detail',exact:true}).click();
+ await viewer.getByLabel('Language',{exact:true}).selectOption('es');
+ await viewer.getByLabel('Follow a player or team').selectOption('blue-04');
+ await expect(viewer.locator('p[lang="es"]').first()).toContainText('Jori Luna',{timeout:30_000});
+ const after=await request.get(`${base}/api/replay-sessions/${sid}/snapshot?story_id=story-pass-1`);
+ const state=await after.json();expect(state.story.id).toBe('story-pass-1');
+ expect(state.overlay_story_id).toBe('story-pass-3');expect(state.overlay).toBe(shared);
+ await viewer.getByRole('button',{name:'Catch me up',exact:true}).click();
+ await expect(viewer.getByRole('heading',{name:'El partido hasta ahora'})).toBeVisible({timeout:30_000});
+ const recap=await request.post(`${base}/api/replay-sessions/${sid}/recaps`,{data:{language:'es'}});
+ expect((await recap.json()).moments.map((moment:{story_id:string})=>moment.story_id)).toEqual(['story-pass-1','story-pass-3']);
+ await viewer.setViewportSize({width:390,height:844});
+ expect(await viewer.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);
+ await viewer.screenshot({path:path.join(root,'.run/cloud-multiple-mobile.png'),fullPage:true});
+ const diagnostics=await request.get(`${base}/api/replay-sessions/${sid}/diagnostics?story_id=story-pass-1`,{headers});
+ const diag=await diagnostics.json();expect(diag.mode).toBe('Microsoft Agent Framework + Azure OpenAI');
+ expect(diag.model_calls).toBeGreaterThanOrEqual(3);expect(errors).toEqual([]);
+ writeFileSync(path.join(root,'.run/cloud-multiple-browser.json'),JSON.stringify({session_id:sid,checked_at:new Date().toISOString(),
+  verified:['three producer moments','archived approval retractable','selected historical evidence','two approved viewer moments',
+   'global overlay independent of history','Spanish actual receiver','multi-moment recap','390px layout'],javascript_errors:errors},null,2)+'\n');
+});

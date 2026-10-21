@@ -178,6 +178,8 @@ def markdown(report):
     lines += ['', '## Failures to prioritize', '', '| Family | Cases with mismatch |', '|---|---:|']
     for family,v in report['by_family'].items():
         if v['cases_failed']: lines.append(f"| {family} | {v['cases_failed']} / {v['cases']} |")
+    if not any(v['cases_failed'] for v in report['by_family'].values()):
+        lines.append('| No checkpoint mismatches | 0 |')
     lines += ['', 'Raw clocks, expected/detected IDs and metric operands are in `results.json`. Failures are reported even when they reflect a documented MVP scope limit. The first run caught six false alerts from rounding distance before the gate; eligibility now uses the original measurement. No threshold or reference label was changed. The original first-pass restriction has been resolved: all authored later-pass checkpoints are now evaluated. Observation and reference hashes remain identical to commit b9bc99f, as checked against input-baseline.json. These inspected parents are regression data; final blind evaluation requires new parents.', '',
               '## Family coverage', '', '| Family | Passed / total |', '|---|---:|']
     for family,v in report['by_family'].items(): lines.append(f"| {family} | {v['cases_passed']} / {v['cases']} |")

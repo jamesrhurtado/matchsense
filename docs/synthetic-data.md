@@ -21,9 +21,9 @@ Default export: `.run/synthetic/` (Git ignored). Each case has:
 - `evaluation-only/<match-id>.clean.jsonl`: complete clean trajectory, including future observations. Evaluation only.
 - `provenance/<match-id>.json`: generator version, opaque IDs and SHA-256 hashes of metadata, clean data and delivered data.
 
-Large exports are regenerated from source rather than committed. IDs, metadata, stream content and hashes are deterministic. Runtime metadata contains no seeds, scenario family, expected outcomes or fault descriptions. Pass-start events reveal neither outcome nor actual receiver.
+The large clean/reference export is regenerated from source rather than committed. The application also includes a committed, compressed observation-only runtime catalogue generated with `python -m simulator.publish` (about 25 MB for all 171 replays). IDs, metadata, stream content and hashes are deterministic. Runtime metadata contains no seeds, scenario family, expected outcomes or fault descriptions. Pass-start events reveal neither outcome nor actual receiver.
 
-The existing hosted application still offers its original three allowlisted demo fixtures and a 60 s replay clock. These exports are compatible with its data schemas and evidence functions. Longer segments and multiple-pass cases are evaluation inputs; they do not imply the current producer UI can replay or publish them. Use the evaluation runner and API tests for the new cases before changing the hosted fixture registry.
+The runtime catalogue allowlists the original three fixtures and all 168 new cases. The producer selector uses public `GET /api/matches` metadata, with neutral segment labels and actual durations. Longer and multiple-pass replays work through the same investigation, approval, history and recap paths. Clean state and authored references remain offline; no reference annotations or seeds are included in the deployed images.
 
 ## Situation coverage
 
@@ -57,15 +57,15 @@ The split was fixed before the first v2 evaluation. Once results are inspected, 
 make synthetic-evaluate
 # Small development sample, written under .run/:
 .venv313/bin/python -m evals.synthetic --case p01-01 --case p01-22
-# Fail on every mismatch, including documented unsupported multi-pass cases:
+# Fail on every authored mismatch:
 .venv313/bin/python -m evals.synthetic --strict
 ```
 
-The report separates scenario-level pass/fail, authored checkpoint precision/recall, distinct moments, missing-evidence cases, expiry/corrections, package/variant validation and model usage. Full reports are committed under `evals/synthetic-v2/`. The baseline contains dataset hashes plus every expected/detected checkpoint result, including known failures. CI fails on any changed outcome or dataset hash. An improvement also requires an explicit review/update; this avoids silently treating known failures as full acceptance.
+The report separates scenario-level pass/fail, authored checkpoint precision/recall, distinct moments, missing-evidence cases, expiry/corrections, package/variant validation and model usage. Full reports are committed under `evals/synthetic-v2/`. The baseline contains dataset hashes plus every expected/detected checkpoint result, including failures whenever present. CI fails on any changed outcome or dataset hash. An improvement also requires an explicit review/update; this avoids silently changing the acceptance criteria.
 
 The first frozen run of the expanded suite passed 150/168 cases and 570/594 checkpoints. Six false-positive cases exposed distance rounding before the five metre gate. Twelve further failing cases (six multi-pass, six three-minute sessions) exposed the documented first-pass-only engine limitation, missing eighteen expected later moments. The report contains the individual clocks and operands. These results are a baseline for fixes, not a release acceptance threshold.
 
-Twelve API integration cases inject the generated feeds into isolated local sessions and exercise real HTTP approval, Spanish actual-receiver variants, overlay expiry, correction-driven withdrawal and recap invalidation. They intentionally register the test sessions directly: the public fixture allowlist is not expanded by a test. Separate generator/evaluator tests reject conflicting retransmissions, invalid lineage, implausible movement, incorrect event/frame control and future-label exposure.
+Thirteen single-feed API cases inject generated observations into isolated local sessions and exercise real HTTP approval, Spanish actual-receiver variants, overlay expiry, correction-driven withdrawal and recap invalidation. Additional multi-story tests use the public replay-creation API against SQLite and a Cosmos test client; these verify three-minute clocks, independent approvals/revisions, correction isolation, out-of-order jobs, historical selection and multi-moment recaps. Separate generator/evaluator tests reject conflicting retransmissions, invalid lineage, implausible movement, incorrect event/frame control and future-label exposure.
 
 ### Optional actual-model sample
 
@@ -80,13 +80,15 @@ Foundry mode requires one to six explicit case IDs and limits workflow investiga
 
 ## Current findings and next product work
 
-The local distance-gate fix raises the result to **156/168 cases and 576/594 checkpoints**, with no false alerts in this constructed suite. All twelve remaining failing cases are multiple-pass/long-session probes: the current engine misses eighteen later expected moments because it selects the first pass only. These known gaps remain in both the report and CI regression baseline. The original five metre threshold and scenario expectations were preserved; display rounding remains one decimal place.
+The first run passed 150/168 cases. Correcting the distance gate raised that to 156/168, revealing eighteen missing later moments across twelve multiple-pass/long-session cases. The per-pass implementation now passes **168/168 cases and 594/594 checkpoints**, detecting all 72 distinct expected moments with no false alerts in this constructed suite. Observation and reference hashes are identical to commit `b9bc99f`, enforced by `evals/synthetic-v2/input-baseline.json`. Neither input data nor expected answers were changed to obtain the improvement. Thresholds remain unchanged; display rounding remains one decimal place.
 
-Priorities from this run:
+Each pass has an independent `story-<pass-id>` investigation, revision stream, approval, history entry and recap reference. Selecting older evidence does not change the shared live overlay. A correction, edit or retraction affects the selected story's approval; other approved moments remain available. Replay clocks follow segment duration, and protected forward jumps pause at the requested point. Backward navigation starts a new session so approvals cannot be rewound into an earlier observation state.
 
-1. Add independent per-pass investigation, stable story IDs and multiple stored publication packages before increasing the hosted replay scope.
-2. Add editorial ranking/cooldown for nearby candidates and ensure recap/retraction tracks each exact story revision.
-3. Run a small explicit actual-model evaluation, then fresh parent combinations and football-informed review. The optional model runner is implemented; this offline run does not certify new scenarios against the live AI service.
-4. After those changes, register selected new runtime fixtures in the hosted environment and exercise Event Hubs/Cosmos, browser delivery and bounded load. Local API tests do not establish that cloud path for the new corpus.
+Priorities beyond this release:
 
-The corpus is generated locally under `.run/synthetic/`; these files are Git ignored. Generator source, tests, reference definitions, dataset/reference hashes, reports and the CI baseline are version controlled. The expanded corpus and distance fix are local; the hosted environment still uses the original fixtures and deployed code.
+1. Add production editorial ranking/cooldown for closely competing moments and stronger player-specific analysis.
+2. Evaluate fresh unseen parents after tuning and obtain football-informed review and audience comprehension evidence.
+3. Run fair template/single-agent/multi-agent comparisons; the live integration smoke is not such a comparison.
+4. Exercise sustained load, distributed scaling and deliberate cloud outages appropriate to an actual broadcaster.
+
+The complete clean/reference corpus remains under `.run/synthetic/` and is Git ignored. Compressed observation-only runtime files, generator source, reference definitions, dataset/reference hashes, regression reports and CI checks are version controlled. The deployed model/API/browser verification is recorded separately in [QA guide](qa.md); offline template results do not certify model semantic accuracy on all 168 cases.

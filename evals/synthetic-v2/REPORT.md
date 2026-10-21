@@ -16,6 +16,7 @@ A passing case means every availability, candidate and expiry checkpoint matched
 
 | Family | Cases with mismatch |
 |---|---:|
+| No checkpoint mismatches | 0 |
 
 Raw clocks, expected/detected IDs and metric operands are in `results.json`. Failures are reported even when they reflect a documented MVP scope limit. The first run caught six false alerts from rounding distance before the gate; eligibility now uses the original measurement. No threshold or reference label was changed. The original first-pass restriction has been resolved: all authored later-pass checkpoints are now evaluated. Observation and reference hashes remain identical to commit b9bc99f, as checked against input-baseline.json. These inspected parents are regression data; final blind evaluation requires new parents.
 

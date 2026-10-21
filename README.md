@@ -63,7 +63,7 @@ make synthetic-data
 make synthetic-evaluate
 ```
 
-Runtime exports contain only observations; seeds, fault plans, clean future trajectories and expected results are separate offline files. The hosted UI still offers the original three fixtures. Multiple-pass and three-minute cases expose the current engine's first-pass-only scope; synthetic results do not establish real football accuracy. The expanded suite also caught a distance-rounding defect, now fixed locally with boundary tests.
+Runtime exports contain only observations; seeds, fault plans, clean future trajectories and expected results are separate offline files. The application catalogue offers all 171 replays, including three-minute segments. Each pass has its own investigation, approval and recap entry; viewers can select approved history without changing the shared live overlay. All 168 constructed cases and 594 checkpoints pass with unchanged inputs and references. Synthetic results do not establish real football accuracy. The expanded suite also caught and now guards a distance-rounding defect.
 
 ## Repository map
 
@@ -82,6 +82,6 @@ Runtime exports contain only observations; seeds, fault plans, clean future traj
 
 The local and Azure implementations are available; see the QA guide for completed live checks and remaining test boundaries. Competition submission packaging remains pending. [Implementation status](docs/implementation-status.md) maps the handoff's acceptance phases to evidence and outstanding work. [Demo guide](docs/demo.md) describes what can honestly be shown now.
 
-Local mode uses SQLite. Cloud mode uses Cosmos and Event Hubs, with one API worker/replica enforced for this engineering environment. It supports one pass candidate per segment, two fictional teams, 22 active players and 10 Hz observations. Runtime evidence is limited to the delivered clock, but the underlying dataset is synthetic and deliberately small. Local tests do not establish real-match tactical accuracy, general semantic verification, production scale, or measured editorial savings.
+Local mode uses SQLite. Cloud mode uses Cosmos and Event Hubs, with one API worker/replica enforced for this engineering environment. It supports independent pass investigations across each segment, two fictional teams, 22 active players and 10 Hz observations. Runtime evidence is limited to the delivered clock. The underlying dataset is synthetic, with six authored parent configurations. Local tests do not establish real-match tactical accuracy, general semantic verification, production scale, or measured editorial savings.
 
 No real match records, footage, team logos, viewer accounts or third-party TV synchronization are included. Cloud producer access uses a private key and request limits; enterprise multi-tenant authorization is future work. The repository and submission video have not been published.

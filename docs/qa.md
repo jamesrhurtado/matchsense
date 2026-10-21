@@ -2,7 +2,7 @@
 
 Application: https://whynow-web.graycoast-41e399d8.eastus.azurecontainerapps.io
 
-This is the hosted Azure MVP for engineering testing. It supports three fictional 60-second football segments and one pass investigation per segment. It does not claim full-match analysis, real broadcast synchronization, or validated professional-football accuracy.
+This is the hosted Azure MVP for engineering testing. It supports 171 fictional replay segments, including 90 s and 180 s sequences, with an independent investigation, approval and recap entry per delivered pass. It does not claim full-match analysis, real broadcast synchronization, or validated professional-football accuracy.
 
 ## Access and first run
 
@@ -37,7 +37,7 @@ The model has a 25-second workflow deadline, two concurrent executions, at most 
 
 ## Automated checks
 
-Local backend: `.venv313/bin/python -m pytest -q`.
+Local backend: `.venv313/bin/python -m pytest -q`. Expanded regression: `make synthetic-evaluate`; strict mode: `.venv313/bin/python -m evals.synthetic --strict --check-baseline`.
 
 Local frontend production build: `npm --prefix apps/web run build`.
 
@@ -47,13 +47,15 @@ Hosted API workflow: `.venv313/bin/python scripts/cloud_smoke.py`. It starts a r
 
 Restart the current API revision with Azure CLI, wait until `/api/ready` returns 200, then run `.venv313/bin/python scripts/cloud_smoke.py --retract`. This checks that the approved state survived and then retracts it.
 
-Hosted browser: `WHY_NOW_CLOUD_TEST=1 npm --prefix apps/web exec -- playwright test cloud.spec.ts`. It reads the private QA access file server-side and stores screenshots plus a nonsecret verification report in `.run/`.
+Hosted browser: `WHY_NOW_CLOUD_TEST=1 npm --prefix apps/web run test:e2e -- cloud.spec.ts`. It reads the private QA access file server-side and stores screenshots plus a nonsecret verification report in `.run/`.
+
+Multi-pass Azure QA: `.venv313/bin/python scripts/cloud_multi_smoke.py` starts three actual model investigations in one longer replay and verifies independent publication plus the deployed distance boundary. Then run `WHY_NOW_CLOUD_TEST=1 npm --prefix apps/web run test:e2e -- cloud-multiple.spec.ts` to inspect that same session through the hosted UI without additional model workflows. For restart verification, restart the current API revision, wait for a replacement replica to be ready, then run `.venv313/bin/python scripts/cloud_multi_smoke.py --restart-check`; this verifies stored approvals and retracts the last live QA moment.
 
 ## Report an issue
 
 Include session ID, UTC time, replay clock/speed, browser/device, story revision, displayed execution mode, expected/actual behavior and the relevant trace action. Include token counts and `ingestion_lag_ms` when timing is involved. Exclude the producer key and authorization headers.
 
-## Verification record
+## Initial Azure verification (historical)
 
 Verified 20 October 2026 (Lima), 21 October UTC, against API `cloud-v10` and web `cloud-v5`.
 
@@ -77,20 +79,44 @@ The historical offline synthetic evaluation remains in `evals/REPORT.md`; its sm
 
 ## Expanded synthetic regression
 
-After the Azure handoff, the v2 data suite added 168 cases across 28 families and six whole parent configurations. Reproduction and scope are in [the data guide](synthetic-data.md); individual results and clocks are in [the expanded report](../evals/synthetic-v2/REPORT.md).
+After the initial Azure handoff, the v2 data suite added 168 cases across 28 families and six whole parent configurations. The first-pass restriction was then removed and the observation-only corpus added to the runtime catalogue. Reproduction and scope are in [the data guide](synthetic-data.md); individual results and clocks are in [the expanded report](../evals/synthetic-v2/REPORT.md).
 
 | Local check | Result |
 |---|---|
-| Backend regression suite | 162 passed, including 13 generated-feed API cases and ten distance-boundary cases across both attack directions |
+| Backend regression suite | 196 passed, including generated-feed API cases, independent multi-story tests against SQLite/Cosmos test adapters, scoped agent tools, and ten distance-boundary cases across both attack directions |
 | Data validation | All 168 clean and observed feeds passed schema, roster, event/position, movement, clock, retransmission and correction checks |
 | Export integrity | All 168 runtime streams, metadata files, clean trajectories and reference annotations matched their recorded hashes; 109,932 observed source frames, 110,730 delivery rows |
-| Authored candidate/expiry checks | 156/168 cases passed all checks; 576/594 checkpoint decisions matched; no false alerts in this constructed suite |
-| Known scope failures | All twelve remaining failing cases contain multiple passes; the first-pass-only engine missed eighteen later moments |
-| Package integrity | 54 local template packages and 5,400 variants passed schema, numeric, source-cutoff and content-hash checks |
-| Defect found and fixed locally | The five metre progression gate now compares the original distance; 4.96 m cannot qualify through display rounding |
-| Evaluation cost | Zero model calls; new scenarios have not been evaluated against the live AI service |
+| Authored candidate/expiry checks | 168/168 cases passed all checks; 594/594 checkpoint decisions matched; 72/72 distinct moments detected and no false alerts in this constructed suite |
+| Historical scope defect resolved | The earlier twelve failing cases now pass; all eighteen previously missed later moments are investigated. Observation/reference hashes are unchanged from commit b9bc99f |
+| Package integrity | 72 local template packages and 7,200 variants passed schema, numeric, source-cutoff and content-hash checks |
+| Defect found and fixed | The five metre progression gate now compares the original distance; 4.96 m cannot qualify through display rounding |
+| Evaluation cost | Zero model calls for the complete offline regression; bounded live integration checks are recorded separately |
 
-CI checks dataset/reference hashes and all expected/detected outcomes against an explicit regression baseline. The known failures stay visible; the gate does not certify full acceptance. Strict mode was verified to return a failing exit code for an unsupported multiple-pass case. The optional model sample runner has budget/accounting tests; an actual-model run is pending. No new fixture registration or deployment was performed for this local data expansion.
+CI checks dataset/reference hashes and every expected/detected outcome against an explicit regression baseline. Strict mode and the unchanged-input guard both pass after the per-pass update. The first implementation correctly exposed multiple-pass failures before the fix; historical results are retained in Git. Offline success does not certify football realism or semantic AI accuracy on all 168 cases. The expanded observation-only catalogue contains 171 replays and is deployed without evaluation labels, references or seeds.
+
+## Multiple-pass Azure release verification
+
+Verified 21 October 2026 (Lima), API `cloud-v13` and web `cloud-v7`, version `0.3.0`.
+
+| Deployed check | Result |
+|---|---|
+| Resource use | Same resource group and 14 listed resources; no additional Azure services provisioned |
+| Runtime catalogue | All 171 observation-only replays available, with actual durations; expanded streams compressed and no reference labels in the runtime image |
+| Three-minute replay | Independently investigated passes 1, 2 and 3 through real Event Hubs ingestion and durable Cosmos storage |
+| Model execution | Final sample: 14 actual calls, 17,279 reported tokens, complete usage; two model-composed packages and one explicit factual-template fallback |
+| Measured workflow time | Moment 1: 17,260 ms; moment 2 fallback: 11,013 ms; moment 3: 15,863 ms; excludes replay waiting, ingestion and human approval |
+| Publication | Independent revision-1 approvals, source/hash checks after Cosmos/HTTP, current overlay, archived selection and Spanish actual-receiver variants passed |
+| Recap and retraction | All three approved moments accumulated; retracting the middle moment removed only that moment and preserved the newer live overlay |
+| Distance boundary | Fully ingested 4.96 m continuation produced no candidate and zero model calls on the deployed build |
+| Browser regression | Nine local browser tests passed, including independent approvals, archived retraction, selected-history races and streaming |
+| Final hosted browser | Passed three producer queue entries, archived evidence/retraction availability, two approved viewer entries, unchanged shared overlay while selecting history, Spanish Jori Luna focus, multi-moment recap and 390 px layout; zero JavaScript errors |
+| Final API restart | Replacement replica confirmed; independent approvals and two-moment recap survived. Retracting the last live QA moment preserved the earlier approved archive |
+
+Final browser evidence is `.run/cloud-multiple-browser.json`, `.run/cloud-multiple-producer.png` and `.run/cloud-multiple-mobile.png`.
+
+Final API QA session: `56f53290-7e3f-4fe3-9152-d023ffb8957c`. Nonsecret results are `.run/cloud-multi-smoke.json`; guard diagnostics are `.run/cloud-multi-guard-diagnostics.json`. The initial all-AI wording check stopped at moment 2 because repeated “key pass” wording was rejected after the bounded repair. The same session was resumed without regenerating existing model outputs. The report retains each actual execution mode and fallback reason. This is a small integration sample, not an AI factual-accuracy rate or a fair agent comparison. Use `--require-all-ai` for a separate strict wording gate; default integration testing accepts explicitly labeled, verified factual fallbacks.
+
+The first deployed browser inspection also exposed a broad Spanish opportunity claim and a misleading producer-edit label. The final guard rejects unsupported opportunity/chance wording in both languages, allows one repair, then uses the explicit factual fallback. The label now says “Proposed wording reviewed” without inventing who proposed it. Unit tests cover successful repair and repeated-claim fallback. Model review remains fallible; these checks do not establish complete free-text semantic verification.
 
 ## Known boundaries
 

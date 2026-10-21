@@ -42,4 +42,9 @@ Resources carry `project=why-now`, `environment=demo` and an expiry tag of `2026
 
 The deployed verification record is in [QA guide](../qa.md). API `cloud-v10` and web `cloud-v5` are the verified image tags.
 
+Verified image digests:
+
+- API: `sha256:1fd90aed70b990d2fa8ad87479105e2fb41d9e57c051207e387c7348e09f1cad`
+- Web: `sha256:29fb058a407f31be3be7956963352f383e3496ce57c427dcdb35414e3e7f959b`
+
 Per-service specifications below retain the design rationale and now identify implemented behavior: [Foundry](foundry.md), [Cosmos](cosmos-db.md), [transport](event-hubs.md), [hosting](container-apps.md), [identity](identity.md), [observability](observability.md).

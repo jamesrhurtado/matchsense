@@ -102,6 +102,7 @@ def generate_case(case: Case) -> Dataset:
             if plan['outcome'] == 'intercepted': positions[interceptor] = (ex, ey)
             for pid in knots:
                 knots[pid].append((t, positions[pid]))
+    motion = {pid:(rng.uniform(0,6),rng.uniform(0,6)) for pid in knots}
     # Holding the first state before the first anchor is intentional prior context.
     def canonical_point(x, y):
         return {'x_m': round(105-x if parent.reverse else x, 4), 'y_m': round(y, 4)}
@@ -117,6 +118,11 @@ def generate_case(case: Case) -> Dataset:
     for t in range(0, duration+1, 100):
         plan = max((p for p in plans if t >= p['start']-6000), key=lambda p:p['start'], default=plans[0])
         positions = {pid: _interpolate(path, t) for pid, path in knots.items()}
+        for pid,(x,y) in positions.items():
+            if pid not in (passer,receiver,interceptor):
+                phase_x,phase_y = motion[pid]
+                positions[pid] = (x+.25*math.sin(t/3000+phase_x),
+                                  y+.25*math.cos(t/3500+phase_y))
         if t < plan['start']:
             ball = positions[passer]; status = 'controlled'; control = passer; possession = team
         elif t < plan['end']:
@@ -213,7 +219,11 @@ def generate_case(case: Case) -> Dataset:
     if family == 'reordered_delivery':
         jitter = random.Random(parent.seed+991)
         for m in observations: m['available_at_ms'] += jitter.choice([0,100,300,700])
-        faults.append({'kind':'jitter','maximum_delay_ms':700})
+        # Guarantee a known earliest confirmation without implementing a second
+        # detector in the reference evaluator. All earlier frames arrive first.
+        endpoint = next(m for m in observations if m['kind']=='tracking_frame' and m['timeline_ms']==confirm)
+        endpoint['available_at_ms'] = confirm+700
+        faults.append({'kind':'jitter','maximum_delay_ms':700,'confirmation_delay_ms':700})
     if family in ('correction_withdraws','correction_restores'):
         old = next(m for m in observations if m['kind']=='tracking_frame' and m['timeline_ms']==confirm)
         correction = deepcopy(old)
@@ -257,7 +267,11 @@ def generate_case(case: Case) -> Dataset:
                                 'plays':[{'pass_id':p['pass_id'],'release_ms':p['start'],'resolution_ms':p['end'],
                                           'confirmation_ms':p['end']+3000,'expires_at_ms':p['end']+33000,
                                           'passer_id':passer,'actual_receiver_id':p['controller'],
-                                          'continuation_distance_m':p['carry']} for p in plans],
+                                          'continuation_distance_m':p['carry'],
+                                          'positive_claim_bounds':{'c-pressure':[2,2],'c-bypass':[3,3],
+                                                                   'c-retain':[3,3],
+                                                                   'c-progress':[6.8,7.2] if family=='noisy_tracking' else [7,7]}}
+                                         for p in plans],
                                 'reference_basis':'Authored play/outcome and explicit observation-fault plan; not detector output.',
                                 'football_expert_review':'pending'}
     return Dataset(metadata,clean,observations,reference)

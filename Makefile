@@ -22,5 +22,8 @@ synthetic-list:
 synthetic-data:
 	$(PYTHON) -m simulator.suite
 
+synthetic-evaluate:
+	$(PYTHON) -m evals.synthetic --check-baseline
+
 web-build:
 	npm --prefix apps/web run build

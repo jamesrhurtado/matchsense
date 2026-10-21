@@ -50,3 +50,30 @@ These are engineering reference annotations. Football expert review is explicitl
 Two complete parents belong to development, two to validation and two to held-out regression. All faults and counterexamples from a parent stay together. Each parent varies geometry, attack direction, passing team, release time, roster assignment and seed. Adjacent frames, checkpoints and fault variants are correlated and must not be counted as independent football examples. There are six independent authored parent configurations, not 168 independently observed matches.
 
 The split was fixed before the first v2 evaluation. Once results are inspected, these cases become a regression set. Create new parent configurations and combinations for any final blind evaluation after tuning metrics or prompts. The v1 report remains a separate historical result, not evidence of accuracy on this expanded suite.
+
+## Evaluate
+
+```sh
+make synthetic-evaluate
+# Small development sample, written under .run/:
+.venv313/bin/python -m evals.synthetic --case p01-01 --case p01-22
+# Fail on every mismatch, including documented unsupported multi-pass cases:
+.venv313/bin/python -m evals.synthetic --strict
+```
+
+The report separates scenario-level pass/fail, authored checkpoint precision/recall, distinct moments, missing-evidence cases, expiry/corrections, package/variant validation and model usage. Full reports are committed under `evals/synthetic-v2/`. The baseline contains dataset hashes plus every expected/detected checkpoint result, including known failures. CI fails on any changed outcome or dataset hash. An improvement also requires an explicit review/update; this avoids silently treating known failures as full acceptance.
+
+The first frozen run of the expanded suite passed 150/168 cases and 570/594 checkpoints. Six false-positive cases exposed distance rounding before the five metre gate. Twelve further failing cases (six multi-pass, six three-minute sessions) exposed the documented first-pass-only engine limitation, missing eighteen expected later moments. The report contains the individual clocks and operands. These results are a baseline for fixes, not a release acceptance threshold.
+
+Twelve API integration cases inject the generated feeds into isolated local sessions and exercise real HTTP approval, Spanish actual-receiver variants, overlay expiry, correction-driven withdrawal and recap invalidation. They intentionally register the test sessions directly: the public fixture allowlist is not expanded by a test. Separate generator/evaluator tests reject conflicting retransmissions, invalid lineage, implausible movement, incorrect event/frame control and future-label exposure.
+
+### Optional actual-model sample
+
+The full suite is offline, with no model requests or Azure charges from evaluation. To evaluate a small sample through the existing Agent Framework workflow, set the existing deployment endpoint/name and ensure local Azure authentication, then explicitly request:
+
+```sh
+# Uses the deployment identified by existing exported environment variables:
+.venv313/bin/python -m evals.synthetic --mode foundry --case p01-01 --case p02-25 --max-investigations 2
+```
+
+Foundry mode requires one to six explicit case IDs and limits workflow investigations to one to six (default four). Each workflow retains the application's existing eight-call, token and deadline limits. Skipped cases, reviewer abstentions and template fallbacks stay visible. Detection scores remain pre-model; they do not treat a fallback as successful AI generation. Actual available tokens/calls are reported, with incomplete usage explicitly marked when a workflow abstains without returning usage. Monetary model cost is not fabricated. This is an evaluation helper, not a fair template/single-agent/multi-agent study, a cloud end-to-end test or a load test.

@@ -113,3 +113,12 @@ def test_authored_boundary_and_receiver_expectations_are_not_detector_outputs():
     receiver=generate_case(next(c for c in cases() if c.family=='different_receiver'))
     start=next(m for m in receiver.clean if m['kind']=='event' and m['payload']['type']=='pass_started')
     assert start['payload']['details']['intended_receiver_id']!=receiver.reference['plays'][0]['actual_receiver_id']
+
+
+def test_jitter_reference_uses_a_known_confirmation_arrival():
+    ds=generate_case(next(c for c in cases() if c.family=='reordered_delivery'))
+    at=ds.reference['plays'][0]['confirmation_ms']
+    endpoint=next(m for m in ds.observations if m['kind']=='tracking_frame' and m['timeline_ms']==at)
+    assert endpoint['available_at_ms']==at+700
+    assert all(m['available_at_ms']<at+700 for m in ds.observations if m['timeline_ms']<at)
+    assert any(a['sequence_no']>b['sequence_no'] for a,b in zip(ds.observations,ds.observations[1:]))

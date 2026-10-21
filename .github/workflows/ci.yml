@@ -13,6 +13,7 @@ jobs:
       - run: python -m simulator.validate
       - run: python -m pytest -q
       - run: python -m evals.run
+      - run: python -m evals.synthetic --check-baseline
   web:
     runs-on: ubuntu-latest
     steps:

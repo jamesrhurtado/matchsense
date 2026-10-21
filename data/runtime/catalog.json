@@ -25,7 +25,7 @@
   },
   {
     "match_id": "match-f8b7c2564b7c527a",
-    "label": "Synthetic segment 027 \u00b7 1 min",
+    "label": "Synthetic segment 027 \u00b7 1.5 min",
     "duration_ms": 90000,
     "synthetic": true
   },
@@ -343,7 +343,7 @@
   },
   {
     "match_id": "match-64ff436f726550cb",
-    "label": "Synthetic segment 055 \u00b7 1 min",
+    "label": "Synthetic segment 055 \u00b7 1.5 min",
     "duration_ms": 90000,
     "synthetic": true
   },
@@ -511,7 +511,7 @@
   },
   {
     "match_id": "match-4dcb4d8ab2c95cc6",
-    "label": "Synthetic segment 083 \u00b7 1 min",
+    "label": "Synthetic segment 083 \u00b7 1.5 min",
     "duration_ms": 90000,
     "synthetic": true
   },
@@ -679,7 +679,7 @@
   },
   {
     "match_id": "match-a58d67ef8cc4575e",
-    "label": "Synthetic segment 111 \u00b7 1 min",
+    "label": "Synthetic segment 111 \u00b7 1.5 min",
     "duration_ms": 90000,
     "synthetic": true
   },
@@ -847,7 +847,7 @@
   },
   {
     "match_id": "match-5e9a587c93745d72",
-    "label": "Synthetic segment 139 \u00b7 1 min",
+    "label": "Synthetic segment 139 \u00b7 1.5 min",
     "duration_ms": 90000,
     "synthetic": true
   },
@@ -1015,7 +1015,7 @@
   },
   {
     "match_id": "match-0d93a8c9481b59f6",
-    "label": "Synthetic segment 167 \u00b7 1 min",
+    "label": "Synthetic segment 167 \u00b7 1.5 min",
     "duration_ms": 90000,
     "synthetic": true
   },

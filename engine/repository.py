@@ -87,18 +87,25 @@ class Repository:
         return result
 
     def append_observation(self,sid,message):
+        return bool(self.append_observations(sid,[message]))
+
+    def append_observations(self,sid,messages):
         from engine.contracts import OBSERVATION
         from engine.core import digest
         from engine.cloud_repository import RepositoryConflict
-        OBSERVATION.validate_python(message)
+        for message in messages:OBSERVATION.validate_python(message)
+        count=0
         with self.connect() as c:
             c.execute('CREATE TABLE IF NOT EXISTS observations(session_id TEXT,message_id TEXT,sequence_no INTEGER,data TEXT,PRIMARY KEY(session_id,message_id))')
-            old=c.execute('SELECT data FROM observations WHERE session_id=? AND message_id=?',(sid,message['message_id'])).fetchone()
-            if old:
-                if digest(json.loads(old['data']))!=digest(message):raise RepositoryConflict('observation_id_reused')
-                return False
-            c.execute('INSERT INTO observations VALUES (?,?,?,?)',(sid,message['message_id'],message['sequence_no'],json.dumps(message)))
-        return True
+            c.execute('BEGIN IMMEDIATE')
+            for message in messages:
+                old=c.execute('SELECT data FROM observations WHERE session_id=? AND message_id=?',(sid,message['message_id'])).fetchone()
+                if old:
+                    if digest(json.loads(old['data']))!=digest(message):raise RepositoryConflict('observation_id_reused')
+                    continue
+                c.execute('INSERT INTO observations VALUES (?,?,?,?)',(sid,message['message_id'],message['sequence_no'],json.dumps(message)))
+                count+=1
+        return count
 
     def read_observations(self,sid):
         with self.connect() as c:

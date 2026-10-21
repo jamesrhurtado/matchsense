@@ -42,6 +42,10 @@ class Container:
         rows = [deepcopy(d) for (sid,_),d in self.items.items() if partition_key is None or sid == partition_key]
         kind = next((k for k in ('session','audit','observation') if f'"{k}"' in query),None)
         rows = [d for d in rows if d.get('type') == kind]
+        parameters=kwargs.get('parameters',[])
+        if parameters:
+            wanted=parameters[0]['value']
+            rows=[d for d in rows if d['id'] in wanted]
         key = 'created_at' if 'created_at' in query else 'sequence_no'
         return sorted(rows,key=lambda d:d.get(key,0))
 
@@ -246,3 +250,104 @@ def test_invalidation_changes_etag_and_blocks_racing_approval():
         review(repo,key='racing-approval')
     assert repo.decision('session')['status'] == 'superseded'
     assert repo.operation('session','racing-approval') is None
+
+
+def test_idle_consumer_does_not_clear_publisher_failure(repo):
+    t=transport(repo)
+    context=SimpleNamespace(partition_id='0',update_checkpoint=lambda _:None)
+    t.publisher_error='OSError: sender is unavailable'
+    t.consumer_error='transient receive failure'
+    t.on_event(context,None)
+    assert t.consumer_error is None
+    assert t.diagnostics()['last_error'] == 'publisher: OSError: sender is unavailable'
+    t._on_error(context,RuntimeError('receiver is unavailable'))
+    assert 'publisher:' in t.last_error and 'consumer:' in t.last_error
+    t.publisher_error=None
+    assert t.last_error == 'consumer: RuntimeError: receiver is unavailable'
+
+
+def test_cache_reconciles_rows_checkpointed_by_another_host(repo,monkeypatch):
+    import engine.transport as module
+    now=[100.0]
+    monkeypatch.setattr(module.time,'monotonic',lambda:now[0])
+    t=transport(repo)
+    external=Repository(repo.path) if isinstance(repo,Repository) else CosmosRepository(client=repo.client)
+    _,messages=load_match('match-001')
+    initial,later,future=messages[0],messages[1],messages[20]
+    external.append_observation('session',initial)
+    session=repo.get_session('session')
+    cutoff=later['available_at_ms']
+    assert t.messages(session,cutoff) == [initial]
+    # A different ACA revision owns the partition and checkpoints these writes;
+    # this process gets no local consumer callback for either observation.
+    external.append_observation('session',later)
+    external.append_observation('session',future)
+    now[0]=101.0
+    assert t.messages(session,cutoff) == [initial]
+    now[0]=102.1
+    assert t.messages(session,cutoff) == [initial,later]
+    assert future['message_id'] in t.cache['session']
+    # Refresh merges durable arrivals without weakening the replay cutoff.
+    assert t.messages(session,future['available_at_ms']) == [initial,later,future]
+
+
+def test_bulk_observations_are_atomic_and_duplicate_safe(repo):
+    _,messages=load_match('match-001')
+    rows=messages[:100]
+    assert repo.append_observations('session',rows) == 100
+    assert repo.append_observations('session',rows) == 0
+    changed=deepcopy(rows[0]);changed['available_at_ms']+=1
+    with pytest.raises(RepositoryConflict,match='observation_id_reused'):
+        repo.append_observations('session',[messages[100],changed])
+    assert len(repo.read_observations('session')) == 100
+
+
+def test_bulk_cosmos_retries_concurrent_exact_creation():
+    repo=CosmosRepository(client=Client())
+    _,messages=load_match('match-001')
+    first,second=messages[:2]
+    def competing_write():
+        doc=repo._doc('session','observation:'+first['message_id'],'observation',first)
+        doc['sequence_no']=first['sequence_no']
+        repo.observations.create_item(doc)
+    repo.observations.before_batch=competing_write
+    assert repo.append_observations('session',[first,second]) == 1
+    assert repo.read_observations('session') == [first,second]
+
+
+def test_batch_consumer_caches_immutable_session_and_checkpoints_after_durability(repo,monkeypatch):
+    t=transport(repo)
+    _,messages=load_match('match-001')
+    calls=[]
+    original=repo.get_session
+    def counted(sid):
+        calls.append(sid)
+        return original(sid)
+    monkeypatch.setattr(repo,'get_session',counted)
+    events=[SimpleNamespace(body_as_str=lambda m=m,**kw:json.dumps(envelope(m))) for m in messages[:100]]
+    checkpoints=[]
+    context=SimpleNamespace(partition_id='0',update_checkpoint=lambda event:checkpoints.append((event,len(repo.read_observations('session')))))
+    t.on_event_batch(context,events)
+    assert calls == ['session']
+    assert checkpoints == [(events[-1],100)]
+    assert t.received == 100
+    t.on_event_batch(context,events)
+    assert calls == ['session']
+    assert t.received == 100
+
+
+def test_batch_consumer_retries_failed_batch_before_checkpoint(repo,monkeypatch):
+    t=transport(repo)
+    _,messages=load_match('match-001')
+    events=[SimpleNamespace(body_as_str=lambda m=m,**kw:json.dumps(envelope(m))) for m in messages[:3]]
+    checkpoints=[]
+    context=SimpleNamespace(partition_id='0',update_checkpoint=lambda e:checkpoints.append(e))
+    original=repo.append_observations
+    def fail(*args):raise OSError('database_unavailable')
+    monkeypatch.setattr(repo,'append_observations',fail)
+    with pytest.raises(OSError):t.on_event_batch(context,events[:2])
+    assert checkpoints == []
+    monkeypatch.setattr(repo,'append_observations',original)
+    t.on_event_batch(context,events[2:])
+    assert checkpoints == [events[-1]]
+    assert repo.read_observations('session') == messages[:3]

@@ -10,7 +10,7 @@ import logging
 import os
 import threading
 import time
-from collections import deque
+from collections import deque, OrderedDict
 from engine.core import available, digest, load_match
 from engine.contracts import OBSERVATION
 from engine.cloud_repository import RepositoryConflict
@@ -29,7 +29,12 @@ class EventHubTransport:
         self.stop = threading.Event()
         self.lock = threading.RLock()
         self.cache = {}
-        self.last_error = None
+        self.cache_refreshed_at = {}
+        self.cache_refresh_seconds = 2
+        self.session_metadata = OrderedDict()
+        self.session_cache_limit = 1024
+        self.publisher_error = None
+        self.consumer_error = None
         self.received = 0
         self.sent = 0
         self.threads = []
@@ -55,33 +60,81 @@ class EventHubTransport:
     def messages(self, session, cutoff):
         sid = session['id']
         with self.lock:
-            if sid not in self.cache:
-                self.cache[sid] = {m['message_id']: m for m in self.repo.read_observations(sid)}
+            refreshed = self.cache_refreshed_at.get(sid)
+            if refreshed is None or time.monotonic() - refreshed >= self.cache_refresh_seconds:
+                # During a rolling deployment another consumer can persist and
+                # checkpoint messages after this process first populates its cache.
+                # Reconcile durable rows periodically so those arrivals are visible
+                # even when Event Hubs never redelivers them to this process.
+                durable = self.repo.read_observations(sid)
+                current = self.cache.setdefault(sid, {})
+                for message in durable:
+                    old = current.get(message['message_id'])
+                    if old and digest(old) != digest(message):
+                        raise RepositoryConflict('observation_id_reused')
+                    current[message['message_id']] = message
+                self.cache_refreshed_at[sid] = time.monotonic()
             # The durable cache may include arrivals beyond the current replay clock.
             # Enforce both availability and occurrence at every boundary, also after pause/restart.
             return available(list(self.cache[sid].values()), cutoff)
 
-    def accept(self, envelope):
-        sid = envelope['session_id']
+    def _session(self, sid):
+        with self.lock:
+            if sid in self.session_metadata:
+                self.session_metadata.move_to_end(sid)
+                return self.session_metadata[sid]
         session = self.repo.get_session(sid)
         if not session:
             raise ValueError('unknown_transport_session')
-        if envelope['generation'] != session['generation'] or envelope['match_id'] != session['match_id']:
-            raise ValueError('transport_generation_mismatch')
-        message = OBSERVATION.validate_python(envelope['observation']).model_dump()
-        if message['match_id'] != session['match_id']:
-            raise ValueError('transport_match_mismatch')
-        # Cosmos create is the durability boundary. Exact retries are no-ops; changed
-        # content using an existing ID is rejected, including across restarts.
-        created = self.repo.append_observation(sid, message)
+        # Session identity, generation and match are immutable. Reset creates a
+        # fresh ID, so clock/control changes do not invalidate this metadata.
+        metadata = {key: session[key] for key in ('id', 'generation', 'match_id')}
         with self.lock:
-            if sid in self.cache:
-                old = self.cache[sid].get(message['message_id'])
-                if old and digest(old) != digest(message):
-                    raise RepositoryConflict('observation_id_reused')
-                self.cache[sid][message['message_id']] = message
-            self.received += int(created)
-        return created
+            self.session_metadata[sid] = metadata
+            self.session_metadata.move_to_end(sid)
+            while len(self.session_metadata) > self.session_cache_limit:
+                self.session_metadata.popitem(last=False)
+        return metadata
+
+    def accept(self, envelope):
+        return bool(self.accept_batch([envelope]))
+
+    def accept_batch(self, envelopes):
+        groups = {}
+        for envelope in envelopes:
+            sid = envelope['session_id']
+            session = self._session(sid)
+            if envelope['generation'] != session['generation'] or envelope['match_id'] != session['match_id']:
+                raise ValueError('transport_generation_mismatch')
+            message = OBSERVATION.validate_python(envelope['observation']).model_dump()
+            if message['match_id'] != session['match_id']:
+                raise ValueError('transport_match_mismatch')
+            groups.setdefault(sid, []).append(message)
+        count = 0
+        for sid, messages in groups.items():
+            # Durability precedes every cache update and every hub checkpoint.
+            created = self.repo.append_observations(sid, messages)
+            with self.lock:
+                if sid in self.cache:
+                    for message in messages:
+                        old = self.cache[sid].get(message['message_id'])
+                        if old and digest(old) != digest(message):
+                            raise RepositoryConflict('observation_id_reused')
+                        self.cache[sid][message['message_id']] = message
+                self.received += created
+            count += created
+        return count
+
+    def on_event_batch(self, context, events):
+        pending = self._pending_events.setdefault(context.partition_id, deque())
+        pending.extend(events or [])
+        if pending:
+            # A failed batch remains queued and is retried before newer arrivals.
+            # Already committed session groups are verified/deduplicated on retry.
+            self.accept_batch([json.loads(event.body_as_str(encoding='UTF-8')) for event in pending])
+            context.update_checkpoint(pending[-1])
+            pending.clear()
+        self.consumer_error = None
 
     def on_event(self, context, event):
         state = self._checkpoint_counts.setdefault(context.partition_id, {'count': 0, 'at': time.monotonic(), 'event': None})
@@ -99,7 +152,7 @@ class EventHubTransport:
         if state['event'] and (state['count'] >= 50 or time.monotonic() - state['at'] >= 1):
             context.update_checkpoint(state['event'])
             state.update(count=0, at=time.monotonic(), event=None)
-        self.last_error = None
+        self.consumer_error = None
 
     def publish_session(self, session):
         from azure.eventhub import EventData
@@ -142,25 +195,26 @@ class EventHubTransport:
                     if self.stop.is_set():
                         break
                     self.publish_session(session)
+                self.publisher_error = None
             except Exception as exc:
-                self.last_error = type(exc).__name__ + ': ' + str(exc)
+                self.publisher_error = type(exc).__name__ + ': ' + str(exc)
                 LOG.exception('Replay publication failed; durable cursor will retry')
             self.stop.wait(1)
 
     def _receive(self):
         while not self.stop.is_set():
             try:
-                self.consumer.receive(on_event=self.on_event, starting_position='-1', max_wait_time=1,
-                                      on_error=self._on_error)
+                self.consumer.receive_batch(on_event_batch=self.on_event_batch, starting_position='-1',
+                                            max_batch_size=100, max_wait_time=1, on_error=self._on_error)
             except Exception as exc:
-                self.last_error = type(exc).__name__ + ': ' + str(exc)
+                self.consumer_error = type(exc).__name__ + ': ' + str(exc)
                 if not self.stop.is_set():
                     LOG.exception('Event Hubs consumer failed; restarting from durable checkpoint')
                     self.stop.wait(3)
 
     def _on_error(self, context, error):
-        self.last_error = type(error).__name__ + ': ' + str(error)
-        LOG.error('Event Hubs partition failure: %s', self.last_error)
+        self.consumer_error = type(error).__name__ + ': ' + str(error)
+        LOG.error('Event Hubs partition failure: %s', self.consumer_error)
 
     def start(self):
         if self.threads:
@@ -177,8 +231,18 @@ class EventHubTransport:
         for thread in self.threads:
             thread.join(timeout=5)
 
+    @property
+    def last_error(self):
+        errors = []
+        if self.publisher_error:
+            errors.append('publisher: ' + self.publisher_error)
+        if self.consumer_error:
+            errors.append('consumer: ' + self.consumer_error)
+        return '; '.join(errors) or None
+
     def diagnostics(self):
         return {'mode': 'azure-event-hubs', 'sent_this_process': self.sent,
                 'persisted_this_process': self.received, 'last_error': self.last_error,
+                'publisher_error': self.publisher_error, 'consumer_error': self.consumer_error,
                 'publisher_alive': bool(self.threads and self.threads[0].is_alive()),
                 'consumer_alive': bool(len(self.threads) > 1 and self.threads[1].is_alive())}

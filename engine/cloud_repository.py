@@ -153,20 +153,52 @@ class CosmosRepository:
         return result
 
     def append_observation(self, sid, message):
+        return bool(self.append_observations(sid, [message]))
+
+    def append_observations(self, sid, messages):
         from engine.contracts import OBSERVATION
-        OBSERVATION.validate_python(message)
-        doc = self._doc(sid, 'observation:' + message['message_id'], 'observation', message)
-        doc['sequence_no'] = message['sequence_no']
-        try:
-            self.observations.create_item(doc)
-            return True
-        except Exception as exc:
-            if _status(exc) != 409:
-                raise
-            old = self._read(self.observations, doc['id'], sid)
-            if digest(old['data']) != digest(message):
+        unique = {}
+        for message in messages:
+            OBSERVATION.validate_python(message)
+            key = 'observation:' + message['message_id']
+            if key in unique and digest(unique[key]) != digest(message):
                 raise RepositoryConflict('observation_id_reused')
-            return False
+            unique[key] = message
+        if not unique:
+            return 0
+        # Cosmos allows at most 100 operations and 2MB per transactional batch.
+        # Event Hubs receive_batch is capped at 100; chunk defensively for callers.
+        total = 0
+        entries = list(unique.items())
+        for start in range(0, len(entries), 100):
+            group = dict(entries[start:start + 100])
+            for attempt in range(4):
+                existing = list(self.observations.query_items(
+                    query='SELECT c.id, c.data FROM c WHERE c.type = "observation" AND ARRAY_CONTAINS(@ids, c.id)',
+                    parameters=[{'name': '@ids', 'value': list(group)}], partition_key=sid))
+                known = {row['id']: row['data'] for row in existing}
+                for key, value in known.items():
+                    if digest(value) != digest(group[key]):
+                        raise RepositoryConflict('observation_id_reused')
+                docs = []
+                for key, message in group.items():
+                    if key not in known:
+                        doc = self._doc(sid, key, 'observation', message)
+                        doc['sequence_no'] = message['sequence_no']
+                        docs.append(doc)
+                if not docs:
+                    break
+                try:
+                    self.observations.execute_item_batch(
+                        batch_operations=[('create', (doc,)) for doc in docs], partition_key=sid)
+                    total += len(docs)
+                    break
+                except Exception as exc:
+                    if _status(exc) not in (409, 412, 424) or attempt == 3:
+                        raise
+                    # Another consumer may have durably written the same IDs
+                    # during rollout. Reread and verify hashes before retrying.
+        return total
 
     def read_observations(self, sid):
         return [d['data'] for d in self.observations.query_items(

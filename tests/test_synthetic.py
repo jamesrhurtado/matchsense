@@ -122,3 +122,10 @@ def test_jitter_reference_uses_a_known_confirmation_arrival():
     assert endpoint['available_at_ms']==at+700
     assert all(m['available_at_ms']<at+700 for m in ds.observations if m['timeline_ms']<at)
     assert any(a['sequence_no']>b['sequence_no'] for a,b in zip(ds.observations,ds.observations[1:]))
+
+
+def test_reference_claim_bounds_only_apply_to_authored_supported_moments():
+    quiet=generate_case(get_case('p01-08'))
+    assert quiet.reference['plays'][0]['positive_claim_bounds'] is None
+    positive=generate_case(get_case('p01-01'))
+    assert positive.reference['plays'][0]['positive_claim_bounds']['c-progress']==[7,7]

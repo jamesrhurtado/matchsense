@@ -160,3 +160,26 @@ def test_content_hash_survives_cosmos_integral_float_serialization():
     assert digest({'x':1})==digest({'x':1.0})
     assert digest({'x':1})!=digest({'x':'1'})
     assert digest({'x':1.1})!=digest({'x':1})
+
+
+@pytest.mark.parametrize('reverse',[False,True])
+@pytest.mark.parametrize('distance,expected',[(4.94,False),(4.96,False),(4.9999,False),(5.0,True),(5.04,True)])
+def test_progression_gate_uses_measurement_before_display_rounding(reverse,distance,expected):
+    from dataclasses import replace
+    from simulator.scenarios import get_case
+    from simulator.suite import generate_case
+    case=get_case('p01-08')
+    case=replace(case,parent=replace(case.parent,reverse=reverse))
+    ds=generate_case(case)
+    end=next(m for m in ds.observations if m['kind']=='event' and m['payload']['type']=='pass_resolved')
+    ex=end['payload']['details']['end_position']['x_m']
+    player=end['payload']['details']['controlling_player_id']
+    sign=-1 if reverse else 1
+    for row in ds.observations:
+        if row['kind']=='tracking_frame' and row['timeline_ms']>=end['timeline_ms']:
+            x=ex+sign*min(1,(row['timeline_ms']-end['timeline_ms'])/3000)*distance
+            row['payload']['ball']['x_m']=x
+            next(p for p in row['payload']['players'] if p['player_id']==player)['x_m']=x
+    result=metric(ds.observations,end['timeline_ms']+3000,ds.metadata)
+    assert result['eligible'] is expected
+    assert result['progression_m']==round(distance,1)

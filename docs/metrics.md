@@ -10,6 +10,8 @@ These are transparent heuristics for a synthetic prototype, fixed before the rec
 
 A candidate requires all three gates. It is first eligible after the confirmation observations and pass outcome are available. The overlay expires 30 s after the original confirmation timeline, even when observations are delivered late. At 60 s the synthetic segment stops. For the demo fixture, confirmation is 22,200 ms and expiry is 52,200 ms.
 
+Eligibility compares the original measured continuation distance with the 5 m gate. The displayed distance is rounded to one decimal place after measurement; a 4.96 m continuation must remain ineligible even though it displays as 5.0 m. The expanded synthetic suite caught and now guards this boundary.
+
 Every evidence object includes source message IDs, evidence content hash, metric definition version, source cutoff, windows, units, coverage and limitations. Source revisions replace old IDs only after their own availability time. Exact retransmissions are deduplicated. Raw operands remain inspectable; rendered positions are not added to the evidence stream.
 
 No probability of importance, confidence percentage, player intent, causal tactical story, real-match accuracy or sustained match-control claim is derived. The MVP supports one bounded pass investigation per segment; multi-possession ranking and editorial cooldown across a complete match remain future work.

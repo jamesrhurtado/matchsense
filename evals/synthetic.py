@@ -85,6 +85,7 @@ def evaluate_case(case, *, workflow_runner=run_workflow, budget=None):
     return {'case_id':case.id,'match_id':case.match_id,'split':case.parent.split,'parent':case.parent.id,
             'family':case.family,'duration_ms':dataset.reference['duration_ms'],
             'observations_sha256':hashlib.sha256(serialize(dataset.observations).encode()).hexdigest(),
+            'reference_sha256':hashlib.sha256(json.dumps(dataset.reference,sort_keys=True,separators=(',',':')).encode()).hexdigest(),
             'validation':validation,'checks':checks,'passed':not findings,'findings':findings,
             'workflows':workflow_rows,'metric_timings_ms':timings}
 
@@ -172,7 +173,7 @@ def markdown(report):
     lines += ['', '## Failures to prioritize', '', '| Family | Cases with mismatch |', '|---|---:|']
     for family,v in report['by_family'].items():
         if v['cases_failed']: lines.append(f"| {family} | {v['cases_failed']} / {v['cases']} |")
-    lines += ['', 'Raw clocks, expected/detected IDs and metric operands are in `results.json`. Failures are reported even when they reflect a documented MVP scope limit. No detector thresholds or reference labels were changed to improve these results.', '',
+    lines += ['', 'Raw clocks, expected/detected IDs and metric operands are in `results.json`. Failures are reported even when they reflect a documented MVP scope limit. The first run caught six false alerts from rounding distance before the gate; eligibility now uses the original measurement. No threshold or reference label was changed. These inspected parents are regression data; final blind evaluation requires new parents.', '',
               '## Family coverage', '', '| Family | Passed / total |', '|---|---:|']
     for family,v in report['by_family'].items(): lines.append(f"| {family} | {v['cases_passed']} / {v['cases']} |")
     lines += ['', '## Measurement scope', '',
@@ -193,6 +194,7 @@ def markdown(report):
 def signature(report):
     return {'generator_version':report['generator_version'],
             'cases':{r['case_id']:{'observations_sha256':r['observations_sha256'],
+                                   'reference_sha256':r['reference_sha256'],
                                    'outcomes':[{'at_ms':c['at_ms'],'expected':c['expected_pass_ids'],
                                                 'detected':c['detected_pass_ids']} for c in r['checks']]}
                      for r in report['rows']}}

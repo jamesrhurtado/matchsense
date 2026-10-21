@@ -2,15 +2,15 @@
 
 Generator 2.0.0; mode `template`; metric `pressure-escape-v1`.
 
-**150/168 cases passed every checkpoint; 18 cases have mismatches.** 570/594 checkpoint decisions matched their authored expectations.
+**156/168 cases passed every checkpoint; 12 cases have mismatches.** 576/594 checkpoint decisions matched their authored expectations.
 
 A passing case means every availability, candidate and expiry checkpoint matched. All exported original and corrected feeds passed structural and physical validation.
 
 | Split | Parents | Cases passed / total | Checkpoint TP / FP / FN | Expected moments detected / total |
 |---|---:|---:|---:|---:|
-| development | 2 | 50 / 56 | 20 / 2 / 6 | 18 / 24 |
-| held_out | 2 | 50 / 56 | 20 / 2 / 6 | 18 / 24 |
-| validation | 2 | 50 / 56 | 20 / 2 / 6 | 18 / 24 |
+| development | 2 | 52 / 56 | 20 / 0 / 6 | 18 / 24 |
+| held_out | 2 | 52 / 56 | 20 / 0 / 6 | 18 / 24 |
+| validation | 2 | 52 / 56 | 20 / 0 / 6 | 18 / 24 |
 
 ## Failures to prioritize
 
@@ -18,9 +18,8 @@ A passing case means every availability, candidate and expiry checkpoint matched
 |---|---:|
 | long_session | 6 / 6 |
 | multiple_passes | 6 / 6 |
-| rounding_boundary | 6 / 6 |
 
-Raw clocks, expected/detected IDs and metric operands are in `results.json`. Failures are reported even when they reflect a documented MVP scope limit. No detector thresholds or reference labels were changed to improve these results.
+Raw clocks, expected/detected IDs and metric operands are in `results.json`. Failures are reported even when they reflect a documented MVP scope limit. The first run caught six false alerts from rounding distance before the gate; eligibility now uses the original measurement. No threshold or reference label was changed. These inspected parents are regression data; final blind evaluation requires new parents.
 
 ## Family coverage
 
@@ -49,7 +48,7 @@ Raw clocks, expected/detected IDs and metric operands are in `results.json`. Fai
 | possession_interruption | 6 / 6 |
 | reordered_delivery | 6 / 6 |
 | retention_gap | 6 / 6 |
-| rounding_boundary | 0 / 6 |
+| rounding_boundary | 6 / 6 |
 | sparse_pressure | 6 / 6 |
 | uncontrolled | 6 / 6 |
 | unknown_possession | 6 / 6 |
@@ -57,11 +56,11 @@ Raw clocks, expected/detected IDs and metric operands are in `results.json`. Fai
 
 ## Measurement scope
 
-Distinct expected moments: 54/72 detected; distinct false alerts: 6 across 183.0 simulated minutes (0.0328/minute). These are correlated scripted examples.
+Distinct expected moments: 54/72 detected; distinct false alerts: 0 across 183.0 simulated minutes (0.0000/minute). These are correlated scripted examples.
 
-Median metric computation: 1.676 ms; maximum 4.575 ms. Warm-process metric computation only; excludes generation, validation, workflows, replay, network and human approval.
+Median metric computation: 1.711 ms; maximum 2.133 ms. Warm-process metric computation only; excludes generation, validation, workflows, replay, network and human approval.
 
-Workflows attempted: 60; packages produced: 60; variants structurally/numerically checked: 6000. Actual model calls: 0; reported tokens: 0.
+Workflows attempted: 54; packages produced: 54; variants structurally/numerically checked: 5400. Actual model calls: 0; reported tokens: 0.
 
 The default run uses deterministic templates. AI evaluation is a separately requested, budgeted run and must report actual model mode, fallbacks, abstentions and usage. Factual templates passing does not establish model semantic quality.
 

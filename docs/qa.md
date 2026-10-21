@@ -73,7 +73,24 @@ Positive API session: `03f77fe4-4135-4022-8519-a8cb7b7edc65`. Browser session: `
 
 Earlier deployment checks exposed and fixed missing WebSocket dependency, per-frame persistence latency, rollout cache/ownership handling and Cosmos integral-number serialization. Generated-text metric omissions correctly caused fallback; the final editor now appends authoritative facts rather than having the model retype numbers. These checks establish the engineering path, not a measured general AI success rate.
 
-The offline synthetic evaluation remains in `evals/REPORT.md`; its small constructed dataset and deterministic timings are not cloud model accuracy or latency results.
+The historical offline synthetic evaluation remains in `evals/REPORT.md`; its small constructed dataset and deterministic timings are not cloud model accuracy or latency results. The expanded local regression is recorded separately below.
+
+## Expanded synthetic regression
+
+After the Azure handoff, the v2 data suite added 168 cases across 28 families and six whole parent configurations. Reproduction and scope are in [the data guide](synthetic-data.md); individual results and clocks are in [the expanded report](../evals/synthetic-v2/REPORT.md).
+
+| Local check | Result |
+|---|---|
+| Backend regression suite | 162 passed, including 13 generated-feed API cases and ten distance-boundary cases across both attack directions |
+| Data validation | All 168 clean and observed feeds passed schema, roster, event/position, movement, clock, retransmission and correction checks |
+| Export integrity | All 168 runtime streams, metadata files, clean trajectories and reference annotations matched their recorded hashes; 109,932 observed source frames, 110,730 delivery rows |
+| Authored candidate/expiry checks | 156/168 cases passed all checks; 576/594 checkpoint decisions matched; no false alerts in this constructed suite |
+| Known scope failures | All twelve remaining failing cases contain multiple passes; the first-pass-only engine missed eighteen later moments |
+| Package integrity | 54 local template packages and 5,400 variants passed schema, numeric, source-cutoff and content-hash checks |
+| Defect found and fixed locally | The five metre progression gate now compares the original distance; 4.96 m cannot qualify through display rounding |
+| Evaluation cost | Zero model calls; new scenarios have not been evaluated against the live AI service |
+
+CI checks dataset/reference hashes and all expected/detected outcomes against an explicit regression baseline. The known failures stay visible; the gate does not certify full acceptance. Strict mode was verified to return a failing exit code for an unsupported multiple-pass case. The optional model sample runner has budget/accounting tests; an actual-model run is pending. No new fixture registration or deployment was performed for this local data expansion.
 
 ## Known boundaries
 

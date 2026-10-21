@@ -1,89 +1,89 @@
 {
   "generator_version": "2.0.0",
-  "generated_at": "2026-10-21T00:46:07.039548+00:00",
+  "generated_at": "2026-10-21T00:51:07.128595+00:00",
   "mode": "template",
   "metric_version": "pressure-escape-v1",
-  "scope": "Authored live-candidate checkpoints; producer approval is checked separately by API integration tests.",
+  "scope": "Pre-model live-candidate checkpoints; workflow abstentions/fallbacks are separate. Producer approval is checked separately by API integration tests.",
   "summary": {
     "cases": 168,
     "parents": 6,
-    "cases_passed": 150,
-    "cases_failed": 18,
+    "cases_passed": 156,
+    "cases_failed": 12,
     "checks": 594,
-    "checks_passed": 570,
+    "checks_passed": 576,
     "checkpoint_true_positive": 60,
-    "checkpoint_false_positive": 6,
+    "checkpoint_false_positive": 0,
     "checkpoint_false_negative": 18,
-    "checkpoint_precision": 0.9090909090909091,
+    "checkpoint_precision": 1.0,
     "checkpoint_recall": 0.7692307692307693,
     "expected_distinct_moments": 72,
     "detected_expected_moments": 54,
     "missed_distinct_moments": 18,
-    "false_alert_distinct_moments": 6,
+    "false_alert_distinct_moments": 0,
     "simulated_minutes": 183.0,
-    "false_alerts_per_simulated_minute": 0.03278688524590164,
-    "candidate_case_coverage": 0.35714285714285715
+    "false_alerts_per_simulated_minute": 0.0,
+    "candidate_case_coverage": 0.32142857142857145
   },
   "by_split": {
     "development": {
       "cases": 56,
       "parents": 2,
-      "cases_passed": 50,
-      "cases_failed": 6,
+      "cases_passed": 52,
+      "cases_failed": 4,
       "checks": 198,
-      "checks_passed": 190,
+      "checks_passed": 192,
       "checkpoint_true_positive": 20,
-      "checkpoint_false_positive": 2,
+      "checkpoint_false_positive": 0,
       "checkpoint_false_negative": 6,
-      "checkpoint_precision": 0.9090909090909091,
+      "checkpoint_precision": 1.0,
       "checkpoint_recall": 0.7692307692307693,
       "expected_distinct_moments": 24,
       "detected_expected_moments": 18,
       "missed_distinct_moments": 6,
-      "false_alert_distinct_moments": 2,
+      "false_alert_distinct_moments": 0,
       "simulated_minutes": 61.0,
-      "false_alerts_per_simulated_minute": 0.03278688524590164,
-      "candidate_case_coverage": 0.35714285714285715
+      "false_alerts_per_simulated_minute": 0.0,
+      "candidate_case_coverage": 0.32142857142857145
     },
     "held_out": {
       "cases": 56,
       "parents": 2,
-      "cases_passed": 50,
-      "cases_failed": 6,
+      "cases_passed": 52,
+      "cases_failed": 4,
       "checks": 198,
-      "checks_passed": 190,
+      "checks_passed": 192,
       "checkpoint_true_positive": 20,
-      "checkpoint_false_positive": 2,
+      "checkpoint_false_positive": 0,
       "checkpoint_false_negative": 6,
-      "checkpoint_precision": 0.9090909090909091,
+      "checkpoint_precision": 1.0,
       "checkpoint_recall": 0.7692307692307693,
       "expected_distinct_moments": 24,
       "detected_expected_moments": 18,
       "missed_distinct_moments": 6,
-      "false_alert_distinct_moments": 2,
+      "false_alert_distinct_moments": 0,
       "simulated_minutes": 61.0,
-      "false_alerts_per_simulated_minute": 0.03278688524590164,
-      "candidate_case_coverage": 0.35714285714285715
+      "false_alerts_per_simulated_minute": 0.0,
+      "candidate_case_coverage": 0.32142857142857145
     },
     "validation": {
       "cases": 56,
       "parents": 2,
-      "cases_passed": 50,
-      "cases_failed": 6,
+      "cases_passed": 52,
+      "cases_failed": 4,
       "checks": 198,
-      "checks_passed": 190,
+      "checks_passed": 192,
       "checkpoint_true_positive": 20,
-      "checkpoint_false_positive": 2,
+      "checkpoint_false_positive": 0,
       "checkpoint_false_negative": 6,
-      "checkpoint_precision": 0.9090909090909091,
+      "checkpoint_precision": 1.0,
       "checkpoint_recall": 0.7692307692307693,
       "expected_distinct_moments": 24,
       "detected_expected_moments": 18,
       "missed_distinct_moments": 6,
-      "false_alert_distinct_moments": 2,
+      "false_alert_distinct_moments": 0,
       "simulated_minutes": 61.0,
-      "false_alerts_per_simulated_minute": 0.03278688524590164,
-      "candidate_case_coverage": 0.35714285714285715
+      "false_alerts_per_simulated_minute": 0.0,
+      "candidate_case_coverage": 0.32142857142857145
     }
   },
   "by_family": {
@@ -550,22 +550,22 @@
     "rounding_boundary": {
       "cases": 6,
       "parents": 6,
-      "cases_passed": 0,
-      "cases_failed": 6,
+      "cases_passed": 6,
+      "cases_failed": 0,
       "checks": 18,
-      "checks_passed": 12,
+      "checks_passed": 18,
       "checkpoint_true_positive": 0,
-      "checkpoint_false_positive": 6,
+      "checkpoint_false_positive": 0,
       "checkpoint_false_negative": 0,
-      "checkpoint_precision": 0.0,
+      "checkpoint_precision": null,
       "checkpoint_recall": null,
       "expected_distinct_moments": 0,
       "detected_expected_moments": 0,
       "missed_distinct_moments": 0,
-      "false_alert_distinct_moments": 6,
+      "false_alert_distinct_moments": 0,
       "simulated_minutes": 6.0,
-      "false_alerts_per_simulated_minute": 1.0,
-      "candidate_case_coverage": 1.0
+      "false_alerts_per_simulated_minute": 0.0,
+      "candidate_case_coverage": 0.0
     },
     "sparse_pressure": {
       "cases": 6,
@@ -649,19 +649,19 @@
     }
   },
   "metric_latency_ms": {
-    "median": 1.676,
-    "maximum": 4.575,
+    "median": 1.711,
+    "maximum": 2.133,
     "scope": "Warm-process metric computation only; excludes generation, validation, workflows, replay, network and human approval."
   },
   "workflows": {
-    "attempted": 60,
-    "produced": 60,
+    "attempted": 54,
+    "produced": 54,
     "abstained": 0,
     "skipped_budget": 0,
     "modes": {
-      "local deterministic template": 60
+      "local deterministic template": 54
     },
-    "variants_checked": 6000
+    "variants_checked": 5400
   },
   "model_usage": {
     "calls": 0,
@@ -669,6 +669,7 @@
     "output_tokens": 0,
     "total_tokens": 0,
     "usage_complete": true,
+    "calls_are_lower_bound": false,
     "cost_usd": 0,
     "cost_note": "Offline mode makes no model requests."
   },
@@ -692,6 +693,7 @@
       "family": "escape",
       "duration_ms": 60000,
       "observations_sha256": "bbfa1714975616f2762a212cecb3fd1b93dfeb4a3d0831960f3e791ff08ba819",
+      "reference_sha256": "79d2395ed0ea89cc21eed9592e1cfa8840130f503a29ef4947ed0eb8681263e7",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -736,7 +738,7 @@
         {
           "cutoff_ms": 16200,
           "evidence_revision": "b330afc7ec298b74",
-          "wall_ms": 4.171,
+          "wall_ms": 4.641,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -769,6 +771,7 @@
       "family": "unpressured",
       "duration_ms": 60000,
       "observations_sha256": "d8255f751e02c0e55e1ffd83ccb2347b4c02460d975fe14e72a67e5409c65ee5",
+      "reference_sha256": "1d735c6897c2a70fbf028250d7c68d0f2dcefeecd7c8c5433f1174642497aa69",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -815,6 +818,7 @@
       "family": "intercepted",
       "duration_ms": 60000,
       "observations_sha256": "c45908826bc2a5991d061c418ffeaa4d565e60efac39664d0f409b5812052028",
+      "reference_sha256": "2904a272f5dea3cba9bbfdbabd2ebfded79c50972364b772df367fe4d10fdd1c",
       "validation": {
         "frames": 601,
         "messages": 605,
@@ -861,6 +865,7 @@
       "family": "insufficient_bypass",
       "duration_ms": 60000,
       "observations_sha256": "8b48b211e13de0389acf081b6ac7c1a4f31ef482fe197f9f6d37044e49db9338",
+      "reference_sha256": "faef5048832aec06ae8f581bb960f5f63bee962b6bf5cc3d33ff2c6dfa38eeb9",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -907,6 +912,7 @@
       "family": "backward_pass",
       "duration_ms": 60000,
       "observations_sha256": "b0ed130a62b686598e08034fa8878670610c51986e58a31f5e1d5f266c77282b",
+      "reference_sha256": "14983b0ecb07a7e1832cee30ce799d3013efff24b67e83d673544890ac92ae85",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -953,6 +959,7 @@
       "family": "lateral_pass",
       "duration_ms": 60000,
       "observations_sha256": "ec4741beaf80d29e633ea6c94f05d418fbb1277e5d404f739623ce5c5208b232",
+      "reference_sha256": "465e7f91129720cf77ea6e31869488752685cbbd6c1f907689898541848c074d",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -999,6 +1006,7 @@
       "family": "insufficient_progression",
       "duration_ms": 60000,
       "observations_sha256": "41e2385ec8835839965a3aa493156dec8ee709a28282469864c7fe977501c3e5",
+      "reference_sha256": "d38cdb1b3f0ca868c49d2e9cd86ae5545052f1c241b8326ed4d030e2ab09281f",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -1045,6 +1053,7 @@
       "family": "rounding_boundary",
       "duration_ms": 60000,
       "observations_sha256": "4150b840f91ef6517edea1b73e7fb51dff2e31ba62f4a222051e2c6cb08d37b7",
+      "reference_sha256": "182b652e44cfa7a0d69468766f73af7d91d9570e88954e71c241bd5c3866de8d",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -1068,10 +1077,8 @@
           "at_ms": 16200,
           "expected_pass_ids": [],
           "reason": "Authored candidate, subject to observation quality and original expiry.",
-          "detected_pass_ids": [
-            "pass-1"
-          ],
-          "passed": false
+          "detected_pass_ids": [],
+          "passed": true
         },
         {
           "at_ms": 46200,
@@ -1081,53 +1088,9 @@
           "passed": true
         }
       ],
-      "passed": false,
-      "findings": [
-        {
-          "at_ms": 16200,
-          "expected": [],
-          "detected": [
-            "pass-1"
-          ],
-          "metrics": {
-            "pass_id": "pass-1",
-            "coverage": 1,
-            "pressure_opponents_max": 2,
-            "bypassed_count": 3,
-            "retained": true,
-            "progression_m": 5.0,
-            "eligible": true
-          }
-        }
-      ],
-      "workflows": [
-        {
-          "cutoff_ms": 16200,
-          "evidence_revision": "f9f56708d3805419",
-          "wall_ms": 4.18,
-          "mode": "local deterministic template",
-          "status": "produced",
-          "usage": null,
-          "variants_checked": 100,
-          "trace_actions": [
-            {
-              "role": "Story Analyst",
-              "action": "compute_pass_metrics",
-              "status": "supported_candidate"
-            },
-            {
-              "role": "Evidence Reviewer",
-              "action": "independent_metric_check",
-              "status": "supported"
-            },
-            {
-              "role": "Audience Editor",
-              "action": "render_and_validate_variants",
-              "status": "valid"
-            }
-          ]
-        }
-      ]
+      "passed": true,
+      "findings": [],
+      "workflows": []
     },
     {
       "case_id": "p01-09",
@@ -1137,6 +1100,7 @@
       "family": "possession_interruption",
       "duration_ms": 60000,
       "observations_sha256": "4c495cb68788655bcb798ac345d656ccb7167876085f95346f893c76bbeeaec0",
+      "reference_sha256": "c7599b3eba21e8b8c385d660ba1ee8c59837e955f95321421a436020d2ebe040",
       "validation": {
         "frames": 601,
         "messages": 608,
@@ -1183,6 +1147,7 @@
       "family": "uncontrolled",
       "duration_ms": 60000,
       "observations_sha256": "0359c1d74553d6ac1b99b4ee3b11c2490bf0fa8c5f57e215e600de98e138e9eb",
+      "reference_sha256": "15f9de2ce25e8429c53f86c6e622c35ef54087bec9145462012405c57559625c",
       "validation": {
         "frames": 601,
         "messages": 605,
@@ -1229,6 +1194,7 @@
       "family": "out_of_play",
       "duration_ms": 60000,
       "observations_sha256": "b486a92972a7ba9c7895920a983a2486a5740cf0b369d8286384e809eb81c9e5",
+      "reference_sha256": "33ee081f5f06ddfbf1b97e08e287bdf3b749f53f9213ba742cee1af7e03be58b",
       "validation": {
         "frames": 601,
         "messages": 605,
@@ -1275,6 +1241,7 @@
       "family": "missing_pressure",
       "duration_ms": 60000,
       "observations_sha256": "0c93b9e6a9213b0c698622453743514bae85699e038f5171db7672b143a5204a",
+      "reference_sha256": "537536281bbeba72ca020c55c1f707442f08da59a0db7bd4f08f11d7005fd034",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -1321,6 +1288,7 @@
       "family": "sparse_pressure",
       "duration_ms": 60000,
       "observations_sha256": "dca0b3d5d743d2eda85ee6e82b53e0e966b6c40a62158bf9b3440afd8a5ecb51",
+      "reference_sha256": "48bf0d7fd5caaf83f0e852253f7963a227918ab0dc7d2f4ef3f11b4522717708",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -1367,6 +1335,7 @@
       "family": "missing_release",
       "duration_ms": 60000,
       "observations_sha256": "f9bdc2729a49836c2f644871b859708069f0fc51006d8e51e85244698e1099c1",
+      "reference_sha256": "4a46254c53a85aaf24411da2bb7e5f106ea1eb4c852e600213ef156abca3350e",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -1413,6 +1382,7 @@
       "family": "retention_gap",
       "duration_ms": 60000,
       "observations_sha256": "0ee1cded0cff554b85434e048ec5043ebdc4bf35c5127b779506981f8fe83074",
+      "reference_sha256": "c2bc4b7df4bdb273879ffc03b0ea34d2fab4825d1d2c39d56869e2f1af24074d",
       "validation": {
         "frames": 595,
         "messages": 598,
@@ -1459,6 +1429,7 @@
       "family": "missing_ball_confirmation",
       "duration_ms": 60000,
       "observations_sha256": "d838f1b46ecc5dd182e73a37b18f9271761e0da9f0b243787e97761457582711",
+      "reference_sha256": "ad895e47b6709d9e629a65f24659510583469226b44f1ecbf142ef6cc67f863b",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -1505,6 +1476,7 @@
       "family": "unknown_possession",
       "duration_ms": 60000,
       "observations_sha256": "975f6cb35c563ddefa1e47edea5ca704386a4a5161b7fd1bf7466a3adddd6d91",
+      "reference_sha256": "dfb30c68b9b5ee84397a469b926502f19f6c617a2d5cf6bffae1c158a37c579b",
       "validation": {
         "frames": 601,
         "messages": 608,
@@ -1551,6 +1523,7 @@
       "family": "delayed_outcome",
       "duration_ms": 60000,
       "observations_sha256": "d983cdd2aa87f23bccebc5abc13a909f57cd11f9bbbb2fabfe8e9c6aa5c72b4c",
+      "reference_sha256": "26db661cd3734903bce6b2476f8cb522fb832af5808a5b5eabdb4b700960ad4e",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -1602,7 +1575,7 @@
         {
           "cutoff_ms": 21200,
           "evidence_revision": "971dcc6b18ffad92",
-          "wall_ms": 4.119,
+          "wall_ms": 4.307,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -1635,6 +1608,7 @@
       "family": "expired_outcome",
       "duration_ms": 60000,
       "observations_sha256": "a6e11d6a069fa7ddd4ccc3c3d6342ed89e06dc223a658fbcb57d4e7965cba783",
+      "reference_sha256": "421f27b3f31e429b0c29208fb14fc896f2a93a2942d0334fcc8645bc24c70f75",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -1688,6 +1662,7 @@
       "family": "reordered_delivery",
       "duration_ms": 60000,
       "observations_sha256": "e43c0c6959777edce7e15f479a682d9039f48096da76a658f0a0ac05ba0257e0",
+      "reference_sha256": "99ec43b87db0440098f91e935411e53ee2fc1a7eaa40bab5951e536e51069040",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -1739,7 +1714,7 @@
         {
           "cutoff_ms": 16900,
           "evidence_revision": "71d04dc9d8b2da23",
-          "wall_ms": 4.044,
+          "wall_ms": 4.175,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -1772,6 +1747,7 @@
       "family": "duplicates",
       "duration_ms": 60000,
       "observations_sha256": "e35301da8de80969647ee47216cba8b005139e06b25df622fb01fff9155f98b0",
+      "reference_sha256": "a7af7d0436ed76e8ec28f3b61c30c6b5f2d711c6683dc5f7fdf7b3545adfbf67",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -1816,7 +1792,7 @@
         {
           "cutoff_ms": 16200,
           "evidence_revision": "999f6cec9158bab6",
-          "wall_ms": 4.085,
+          "wall_ms": 4.119,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -1849,6 +1825,7 @@
       "family": "correction_withdraws",
       "duration_ms": 60000,
       "observations_sha256": "ecf9c71b92c19279eeb4e8e134de463dd811e07e99efee481ff2ea14001b3c51",
+      "reference_sha256": "70694f3934cba67bd7726215af9ed3a63af3e20b70c50295fc1bef3c7d0d9404",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -1911,7 +1888,7 @@
         {
           "cutoff_ms": 16200,
           "evidence_revision": "929e66684bed4889",
-          "wall_ms": 4.11,
+          "wall_ms": 3.984,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -1944,6 +1921,7 @@
       "family": "correction_restores",
       "duration_ms": 60000,
       "observations_sha256": "84f84e1e8e92760c3e1dbf092b957c28df3a0bdbf834189544543e8d89f0665b",
+      "reference_sha256": "ab28c9316ec2565480cb6fbdbfdd3ce26853c68e0dae9f0ac4302e5cd95a60ac",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -1995,7 +1973,7 @@
         {
           "cutoff_ms": 20200,
           "evidence_revision": "83ef16d8b7803978",
-          "wall_ms": 4.112,
+          "wall_ms": 4.238,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -2028,6 +2006,7 @@
       "family": "noisy_tracking",
       "duration_ms": 60000,
       "observations_sha256": "0084cc08da2cbdfb924d0b40b60e1983f7852b82241b0b8be9e29dcc7c57fe37",
+      "reference_sha256": "6c42f2f3e050376e9a7f84d74e4f0ce8e8672a5ed6d44582c42d4f85d402165d",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -2072,7 +2051,7 @@
         {
           "cutoff_ms": 16200,
           "evidence_revision": "7a1299e82abedbd6",
-          "wall_ms": 4.173,
+          "wall_ms": 4.272,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -2105,6 +2084,7 @@
       "family": "different_receiver",
       "duration_ms": 60000,
       "observations_sha256": "585438f19ffa6dfbfef825c65d9b070a1d725d86393047764bc42c8f87847e26",
+      "reference_sha256": "dad83c7dbb9e36b0951293d8efd46938fe62532e65bac0586e08858fac75dfce",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -2149,7 +2129,7 @@
         {
           "cutoff_ms": 16200,
           "evidence_revision": "27cf13b981f90d53",
-          "wall_ms": 4.148,
+          "wall_ms": 4.184,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -2182,6 +2162,7 @@
       "family": "no_pass_events",
       "duration_ms": 60000,
       "observations_sha256": "17f797bfcf239dac6a24b06e34bc53acc18ca541e65cc74e206b54c1de71b2b2",
+      "reference_sha256": "fa25525af24995b2292b78f0237c30b8bc7f54387463932b789ce1aa839914f5",
       "validation": {
         "frames": 601,
         "messages": 602,
@@ -2228,6 +2209,7 @@
       "family": "multiple_passes",
       "duration_ms": 90000,
       "observations_sha256": "ab352924e67c45403f4b78c9767e99de6bd7016adf3dacc5bf30e577831bb066",
+      "reference_sha256": "d19da909ca02f54f01d4729188bfc93499abd84cb4058998be7a5f3c0d18b310",
       "validation": {
         "frames": 901,
         "messages": 911,
@@ -2314,6 +2296,7 @@
       "family": "long_session",
       "duration_ms": 180000,
       "observations_sha256": "71209a152c944b9f3bc371d6eda3810ee15260988176bc5281b0c8a10c288a1e",
+      "reference_sha256": "6ab88f74ead5fe7cd066c337bfadb8a6ba3f4b67d8b9461237eba86d912b8b25",
       "validation": {
         "frames": 1801,
         "messages": 1818,
@@ -2437,7 +2420,7 @@
         {
           "cutoff_ms": 16200,
           "evidence_revision": "f678598ed888cf97",
-          "wall_ms": 4.183,
+          "wall_ms": 4.215,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -2470,6 +2453,7 @@
       "family": "escape",
       "duration_ms": 60000,
       "observations_sha256": "9b83ed0f64c20231d3b763cd7130a28003f9a82ded48ff8d3c0faa79ba06f73e",
+      "reference_sha256": "55b2929b37ce977ddcbc7adb3cfe98444fc63a9ffb17ee459508caa12c60e35d",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -2514,7 +2498,7 @@
         {
           "cutoff_ms": 22200,
           "evidence_revision": "168290e7e1920d86",
-          "wall_ms": 4.205,
+          "wall_ms": 4.295,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -2547,6 +2531,7 @@
       "family": "unpressured",
       "duration_ms": 60000,
       "observations_sha256": "745cc8affc5d25413c7fa3377bc3d8b797a38fa632e96150025900774846cadc",
+      "reference_sha256": "931e3d2f1ea1c40e6d3af02a20890fa8981e48d25dfc58525d0de18385ac4f9d",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -2593,6 +2578,7 @@
       "family": "intercepted",
       "duration_ms": 60000,
       "observations_sha256": "42dcb2d216932d6ad966090a195bc504d3d3c7441d435ace8252f0ab0f9c6ace",
+      "reference_sha256": "686dc7ee3857324bd1a8c50e3fe9a0b9176c6af68e8439ea5531c374d8e1e2a2",
       "validation": {
         "frames": 601,
         "messages": 605,
@@ -2639,6 +2625,7 @@
       "family": "insufficient_bypass",
       "duration_ms": 60000,
       "observations_sha256": "9bee07ee5a7fac0d0e2281e152228b63e3f1fab2967a06ec13f9887333571360",
+      "reference_sha256": "cd21523ecf499318b9ceae2363853475429dd8385cf80542b65b20ec53bb3908",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -2685,6 +2672,7 @@
       "family": "backward_pass",
       "duration_ms": 60000,
       "observations_sha256": "6e7de2576e27b60d0ac8799313e4157373ca3ae26e61bef452823ce403ea0f25",
+      "reference_sha256": "6b25519c8bc6f02075fd12374555359cf5250d213e54aee0a2b332a99af52c2b",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -2731,6 +2719,7 @@
       "family": "lateral_pass",
       "duration_ms": 60000,
       "observations_sha256": "4f1f7eb06df8e8a62c7889a4f26e9a555e28600e3a1d85bace4cf9c22f820044",
+      "reference_sha256": "a40965f7bf7a556465c62a8f5e51ce51a36f6d4092934b6bf45b372287093850",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -2777,6 +2766,7 @@
       "family": "insufficient_progression",
       "duration_ms": 60000,
       "observations_sha256": "3cfaaac35f9625b25c3d0d9c529bad534e0aeb811feaa5e63fcbb47c29aba097",
+      "reference_sha256": "9428f088d0482308b1177cf8aa51ab27957a3beca5ccfef93758e825b4dc56a4",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -2823,6 +2813,7 @@
       "family": "rounding_boundary",
       "duration_ms": 60000,
       "observations_sha256": "500ad208c95bfb9e268671253c61c6293c2d6721021a8f17e4fa6327eb86c3f2",
+      "reference_sha256": "9ae7cbc6975e40112081878f755ec36858ecf4d1ab8e70d78af2a9afb80e5f6d",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -2846,10 +2837,8 @@
           "at_ms": 22200,
           "expected_pass_ids": [],
           "reason": "Authored candidate, subject to observation quality and original expiry.",
-          "detected_pass_ids": [
-            "pass-1"
-          ],
-          "passed": false
+          "detected_pass_ids": [],
+          "passed": true
         },
         {
           "at_ms": 52200,
@@ -2859,53 +2848,9 @@
           "passed": true
         }
       ],
-      "passed": false,
-      "findings": [
-        {
-          "at_ms": 22200,
-          "expected": [],
-          "detected": [
-            "pass-1"
-          ],
-          "metrics": {
-            "pass_id": "pass-1",
-            "coverage": 1,
-            "pressure_opponents_max": 2,
-            "bypassed_count": 3,
-            "retained": true,
-            "progression_m": 5.0,
-            "eligible": true
-          }
-        }
-      ],
-      "workflows": [
-        {
-          "cutoff_ms": 22200,
-          "evidence_revision": "c826dd9ef0999830",
-          "wall_ms": 4.11,
-          "mode": "local deterministic template",
-          "status": "produced",
-          "usage": null,
-          "variants_checked": 100,
-          "trace_actions": [
-            {
-              "role": "Story Analyst",
-              "action": "compute_pass_metrics",
-              "status": "supported_candidate"
-            },
-            {
-              "role": "Evidence Reviewer",
-              "action": "independent_metric_check",
-              "status": "supported"
-            },
-            {
-              "role": "Audience Editor",
-              "action": "render_and_validate_variants",
-              "status": "valid"
-            }
-          ]
-        }
-      ]
+      "passed": true,
+      "findings": [],
+      "workflows": []
     },
     {
       "case_id": "p02-09",
@@ -2915,6 +2860,7 @@
       "family": "possession_interruption",
       "duration_ms": 60000,
       "observations_sha256": "05927b361cb3c1889c9b86d437a9378f899297b42744f1c6671bf587a230aab9",
+      "reference_sha256": "4b839e63dc757514c9ad75c8ef8354c4882c95f3ed2bda9b1df7d4125a97b591",
       "validation": {
         "frames": 601,
         "messages": 608,
@@ -2961,6 +2907,7 @@
       "family": "uncontrolled",
       "duration_ms": 60000,
       "observations_sha256": "f9b64a1c5b51d903c6e1a4abaf45c4cb5d7da7b31a366058174ac7d05228450e",
+      "reference_sha256": "6958aa4ca4943617014599fbc9e33bf2b697730b14933b32e2122d856d130d2f",
       "validation": {
         "frames": 601,
         "messages": 605,
@@ -3007,6 +2954,7 @@
       "family": "out_of_play",
       "duration_ms": 60000,
       "observations_sha256": "9ae0634d1380b78ec1ac5e5984d8ea082e881a63c3ceac17ea0e03517685381b",
+      "reference_sha256": "27317d9e50810c2d3c5b48e5849ba2408cd13caa4d90adf84ffdaeea3533c940",
       "validation": {
         "frames": 601,
         "messages": 605,
@@ -3053,6 +3001,7 @@
       "family": "missing_pressure",
       "duration_ms": 60000,
       "observations_sha256": "62da5f26df7a0b4c6cad355e5ad7ebcff86eb9153d06d6301277066a1c512c49",
+      "reference_sha256": "dcdc3d59b2dba5d6a01a22f3b8a8bc830868837172fd24c78f35d12d2aecfdbe",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -3099,6 +3048,7 @@
       "family": "sparse_pressure",
       "duration_ms": 60000,
       "observations_sha256": "c16cc4d28e68d85bdcb004957494fa39f22a8c1a54c51308564da3f2fe9e9bcc",
+      "reference_sha256": "76a646ee75c84391b606044ccb7a571f01ea73523b32cdb1575dd9449d47e81c",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -3145,6 +3095,7 @@
       "family": "missing_release",
       "duration_ms": 60000,
       "observations_sha256": "9b9176a377b1729341f875a519e30033c5566a4ac364bd34fb791245331a39be",
+      "reference_sha256": "4c7d0ec6bd84969df2e7c2cb8adf358ee21305a074c4398ee7ada4a524bfdab8",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -3191,6 +3142,7 @@
       "family": "retention_gap",
       "duration_ms": 60000,
       "observations_sha256": "e0dc654e7e92a180270280def5f6a84c8f681498f14c9a040a693d1a943ec45e",
+      "reference_sha256": "dbf731abeef62d4e17381f6c6d3c5c8ec3b5d51251f7f5a44fd39c8ea662d867",
       "validation": {
         "frames": 595,
         "messages": 598,
@@ -3237,6 +3189,7 @@
       "family": "missing_ball_confirmation",
       "duration_ms": 60000,
       "observations_sha256": "96eaa4b3daf7d4a17c268a7d9c9bdcbf86813a4e55a324f48d012f096d4dba01",
+      "reference_sha256": "fd895188bc7cd5c1ac788c0b8aca158e00f8966faf219c49be7ee70afbb5f9ed",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -3283,6 +3236,7 @@
       "family": "unknown_possession",
       "duration_ms": 60000,
       "observations_sha256": "93be7e962e16f05b7bb728275412a15467ff4a4cfe8198c8a93ce20f988ef07f",
+      "reference_sha256": "652efe375c572439999f70b1b2ef052687ae27e55be12775f22c59d12171a9fd",
       "validation": {
         "frames": 601,
         "messages": 608,
@@ -3329,6 +3283,7 @@
       "family": "delayed_outcome",
       "duration_ms": 60000,
       "observations_sha256": "b12cd3f3ceb88b68c5cd57db044882dde14261eee615ec08b8b28eabb5e17f66",
+      "reference_sha256": "0035d29e3203f632ab8e14163e443236c4dc68853fa31f00ba0db2ac6d5c1eae",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -3380,7 +3335,7 @@
         {
           "cutoff_ms": 27200,
           "evidence_revision": "8008836c166117fc",
-          "wall_ms": 4.253,
+          "wall_ms": 4.293,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -3413,6 +3368,7 @@
       "family": "expired_outcome",
       "duration_ms": 60000,
       "observations_sha256": "39bcf6364ed1a22b817553b4f2f66cd412e5371f5c307918bcae89b5cc11238d",
+      "reference_sha256": "a855b10cd937ea469cc2634416276bcedc8064faf54cefa9cb52a717a7660004",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -3466,6 +3422,7 @@
       "family": "reordered_delivery",
       "duration_ms": 60000,
       "observations_sha256": "2d6e20b978142799328e2bafcb033088ad03ae5d04bae8c3ecbeec71826da3e3",
+      "reference_sha256": "1f477be695d86b9376d16253c0e6a470570b1e45f4c055ac9b230f78a8c91682",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -3517,7 +3474,7 @@
         {
           "cutoff_ms": 22900,
           "evidence_revision": "4952ec63c4c6591b",
-          "wall_ms": 4.16,
+          "wall_ms": 4.07,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -3550,6 +3507,7 @@
       "family": "duplicates",
       "duration_ms": 60000,
       "observations_sha256": "62ae13c8ae3712509d32510e50d587d1f8df1617d8aae05ff0bb7f145050880b",
+      "reference_sha256": "927be012c19068a0030076175c650af631bab5ec54369e5e8fc2236120451c98",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -3594,7 +3552,7 @@
         {
           "cutoff_ms": 22200,
           "evidence_revision": "4a3e1de163cad0b6",
-          "wall_ms": 4.179,
+          "wall_ms": 4.208,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -3627,6 +3585,7 @@
       "family": "correction_withdraws",
       "duration_ms": 60000,
       "observations_sha256": "dd59c28be1a850772c963e54f008a73ecf3edb4f3a1e22d8eeb932ce22851351",
+      "reference_sha256": "dc49e0714d938009713fb040b7d0ce5c7fd3cab2da2a1957fa7575d5f44665fa",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -3689,7 +3648,7 @@
         {
           "cutoff_ms": 22200,
           "evidence_revision": "16b7bc22d20b65ca",
-          "wall_ms": 4.197,
+          "wall_ms": 4.275,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -3722,6 +3681,7 @@
       "family": "correction_restores",
       "duration_ms": 60000,
       "observations_sha256": "b3d3725710e60797e43bbf60f7f504b28a700699f79f4e9ab2be20998b64020d",
+      "reference_sha256": "bd5d9f5f28d0e6f35f4ac5c9ad397afb30403031e926df3ace2669532afb446d",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -3773,7 +3733,7 @@
         {
           "cutoff_ms": 26200,
           "evidence_revision": "4f2117face49521f",
-          "wall_ms": 4.208,
+          "wall_ms": 4.262,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -3806,6 +3766,7 @@
       "family": "noisy_tracking",
       "duration_ms": 60000,
       "observations_sha256": "f1027264357eb74f23623be2c80966389dfab8a07706e117ddacab2d98cf82d5",
+      "reference_sha256": "b6d915324d2c0a2b1c6aaab6200cad594bbd0882d3fc28833463a2d76823716d",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -3850,7 +3811,7 @@
         {
           "cutoff_ms": 22200,
           "evidence_revision": "c51ac77055f1ddaf",
-          "wall_ms": 3.963,
+          "wall_ms": 4.306,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -3883,6 +3844,7 @@
       "family": "different_receiver",
       "duration_ms": 60000,
       "observations_sha256": "80e1c7a64f1e5de35a57c98a8199527914edf0a76d0bbaeaab1b603d6fda4a53",
+      "reference_sha256": "c50eb453df530a463c68527f759bdfb2e6707d7dc7efecac645487ff060ad002",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -3927,7 +3889,7 @@
         {
           "cutoff_ms": 22200,
           "evidence_revision": "0f9842de6835cf90",
-          "wall_ms": 4.202,
+          "wall_ms": 4.149,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -3960,6 +3922,7 @@
       "family": "no_pass_events",
       "duration_ms": 60000,
       "observations_sha256": "34c5ba822973e3e27257d2bceaef6e6e53f751706e14115d7b5cdeb6e10b5c6b",
+      "reference_sha256": "e61b1506d51b1020868d456e4d82f01ba0c559a3b8b76cd54d276505d30b2055",
       "validation": {
         "frames": 601,
         "messages": 602,
@@ -4006,6 +3969,7 @@
       "family": "multiple_passes",
       "duration_ms": 90000,
       "observations_sha256": "13a7956e0521b1ac0bc85339236044c9bedf0fa8294dce5133729b5cbb3433da",
+      "reference_sha256": "65f6a7a5b82a8235f9090288780794b88af80a7e55df723da099ec6b2a92516b",
       "validation": {
         "frames": 901,
         "messages": 911,
@@ -4092,6 +4056,7 @@
       "family": "long_session",
       "duration_ms": 180000,
       "observations_sha256": "ddb269c0acd087e1ee388fa1ba4d2eb631bd90ac160030430e45471e6f8b4962",
+      "reference_sha256": "782b3b2ec9c67debbfbf8e82ec69dcd8d9a06cfa88b528fbcf77418127d38b40",
       "validation": {
         "frames": 1801,
         "messages": 1818,
@@ -4215,7 +4180,7 @@
         {
           "cutoff_ms": 22200,
           "evidence_revision": "8e7d84e82d09f980",
-          "wall_ms": 4.273,
+          "wall_ms": 4.327,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -4248,6 +4213,7 @@
       "family": "escape",
       "duration_ms": 60000,
       "observations_sha256": "ed1be1c0c3cfbc8119699e1095b773877392556a7b4140529720aad2d2635840",
+      "reference_sha256": "5c438ce0f02dba3cbac0285c7f580a48b795f36b18f0457dc76b503951daf96a",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -4292,7 +4258,7 @@
         {
           "cutoff_ms": 20200,
           "evidence_revision": "4a454da31ef01d60",
-          "wall_ms": 4.183,
+          "wall_ms": 4.36,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -4325,6 +4291,7 @@
       "family": "unpressured",
       "duration_ms": 60000,
       "observations_sha256": "8f8ab72a5b30fb14c39d3801c451ce32a365a3cee77a1c474fa7fcd0db784726",
+      "reference_sha256": "658f3ec451d15606195343ae513dddb0562c7ea36c467f45f1af7e85d16bedec",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -4371,6 +4338,7 @@
       "family": "intercepted",
       "duration_ms": 60000,
       "observations_sha256": "bafc729c12f58c6f026ae778c1172dfc3e2ca527ecc97f504128f306f54ea9ef",
+      "reference_sha256": "11b006b8b349ab57a4a7c780872b80117d7037c4fa14cb6d23d1b3197bb23e13",
       "validation": {
         "frames": 601,
         "messages": 605,
@@ -4417,6 +4385,7 @@
       "family": "insufficient_bypass",
       "duration_ms": 60000,
       "observations_sha256": "558aadd335f3e55fda784273d3b610902f99c265ac6ea021e673c4d8cdb5b3b8",
+      "reference_sha256": "10fe55ed727d92ff51f1b23b4407620802779b3db912d799de43bdc14e2953d5",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -4463,6 +4432,7 @@
       "family": "backward_pass",
       "duration_ms": 60000,
       "observations_sha256": "9f079ee87201cd6ab1cf4273621109da7b700900780767b0b77e546c998b1b79",
+      "reference_sha256": "b7caa317c732e2ae12c40c260754dc39b29ea3d6bc8ab7e8e075516ec0945da7",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -4509,6 +4479,7 @@
       "family": "lateral_pass",
       "duration_ms": 60000,
       "observations_sha256": "595b14107a82b92f2844e405bc3406b9f456441fcbbc3d491824b9acba295b44",
+      "reference_sha256": "d8dd97aa70e1bf4abfe217ab0411c62c6d858929cfe1cffb51c6b24f9787c70d",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -4555,6 +4526,7 @@
       "family": "insufficient_progression",
       "duration_ms": 60000,
       "observations_sha256": "25ec33da6fd496e4235a034eb96c2c57b428bcf615cf02943b023f6372487fcf",
+      "reference_sha256": "082bb25337e16d6109583d1202ec2bbd50d93c76edf69415fd0efd2bdf9cb020",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -4601,6 +4573,7 @@
       "family": "rounding_boundary",
       "duration_ms": 60000,
       "observations_sha256": "056849bbc85f7efe051703e1c4c52fd4f17c12f3bea373dec738d07bd77f24a5",
+      "reference_sha256": "ecbf0bf9048b40aac01c748b8868358fb12cd937c9bdc2a62c87c7e629d5518f",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -4624,10 +4597,8 @@
           "at_ms": 20200,
           "expected_pass_ids": [],
           "reason": "Authored candidate, subject to observation quality and original expiry.",
-          "detected_pass_ids": [
-            "pass-1"
-          ],
-          "passed": false
+          "detected_pass_ids": [],
+          "passed": true
         },
         {
           "at_ms": 50200,
@@ -4637,53 +4608,9 @@
           "passed": true
         }
       ],
-      "passed": false,
-      "findings": [
-        {
-          "at_ms": 20200,
-          "expected": [],
-          "detected": [
-            "pass-1"
-          ],
-          "metrics": {
-            "pass_id": "pass-1",
-            "coverage": 1,
-            "pressure_opponents_max": 2,
-            "bypassed_count": 3,
-            "retained": true,
-            "progression_m": 5.0,
-            "eligible": true
-          }
-        }
-      ],
-      "workflows": [
-        {
-          "cutoff_ms": 20200,
-          "evidence_revision": "b8ddd21a318a36df",
-          "wall_ms": 4.157,
-          "mode": "local deterministic template",
-          "status": "produced",
-          "usage": null,
-          "variants_checked": 100,
-          "trace_actions": [
-            {
-              "role": "Story Analyst",
-              "action": "compute_pass_metrics",
-              "status": "supported_candidate"
-            },
-            {
-              "role": "Evidence Reviewer",
-              "action": "independent_metric_check",
-              "status": "supported"
-            },
-            {
-              "role": "Audience Editor",
-              "action": "render_and_validate_variants",
-              "status": "valid"
-            }
-          ]
-        }
-      ]
+      "passed": true,
+      "findings": [],
+      "workflows": []
     },
     {
       "case_id": "p03-09",
@@ -4693,6 +4620,7 @@
       "family": "possession_interruption",
       "duration_ms": 60000,
       "observations_sha256": "2dd56fff6f14c946df00a53d08d31aa41111c682cf1056ccd4f10e71820a44bc",
+      "reference_sha256": "1cea700f4d75022eee0fccdf8ff2b8eaf0b971ca1f2bcfd4e457e0af6cde8459",
       "validation": {
         "frames": 601,
         "messages": 608,
@@ -4739,6 +4667,7 @@
       "family": "uncontrolled",
       "duration_ms": 60000,
       "observations_sha256": "a5aeab07c717c6c35c5aed149c528643e285473e1cb3cb72c23270906f081dc3",
+      "reference_sha256": "8bceb384b743aba3166b71853fbc3fc3fed6d78774cf1fd361f1bc3ffddf2059",
       "validation": {
         "frames": 601,
         "messages": 605,
@@ -4785,6 +4714,7 @@
       "family": "out_of_play",
       "duration_ms": 60000,
       "observations_sha256": "25e6c172bfbc24719f43c7836b5fa03862e44d3da88bbd07c76c9c4e47494571",
+      "reference_sha256": "9b1d258b92e464e0cf16904c578d21cf685fa191425de022112e39a0ddabf0af",
       "validation": {
         "frames": 601,
         "messages": 605,
@@ -4831,6 +4761,7 @@
       "family": "missing_pressure",
       "duration_ms": 60000,
       "observations_sha256": "04c109a6636349d7e1a1c00c12d49f04f82adf0797b2ddd588e7c90658c606f0",
+      "reference_sha256": "f4550eda4b263d783cfca695d8f2a7a176b95de08c2c3f7ff4bfabb93d07db80",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -4877,6 +4808,7 @@
       "family": "sparse_pressure",
       "duration_ms": 60000,
       "observations_sha256": "411c8eea0c96ffab24db8ecc32bdfe9d4d2e00bb22d90f951909dce45d99aa73",
+      "reference_sha256": "c68b8dc7e52e91408b9a996594246770a36fbedc1a6e4915ae47044e4174006e",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -4923,6 +4855,7 @@
       "family": "missing_release",
       "duration_ms": 60000,
       "observations_sha256": "ff20a7e860294f3a9e4ba3adab24a5efb82b4a5cb3edc786873e76f2d636dece",
+      "reference_sha256": "19e93ea3be00ceb3683339fd27f296d1117bff4aaa5920b36f823fef5c46d0aa",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -4969,6 +4902,7 @@
       "family": "retention_gap",
       "duration_ms": 60000,
       "observations_sha256": "1232833196813dd881e7cf46658ff991fc0032c3f09ab85b3272f969f4948553",
+      "reference_sha256": "87b4b58942921d80c495be4be47615c685ae7030d4ca2cbd74be6e2ca3ace79f",
       "validation": {
         "frames": 595,
         "messages": 598,
@@ -5015,6 +4949,7 @@
       "family": "missing_ball_confirmation",
       "duration_ms": 60000,
       "observations_sha256": "182243c6a06fdc4b75dfbe43139c8ef30ec826b21880834d15736540b4760529",
+      "reference_sha256": "7ec4c56e4e065428133cbb136859d6ac28cff5dc5d7a5f952526bf612f347f28",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -5061,6 +4996,7 @@
       "family": "unknown_possession",
       "duration_ms": 60000,
       "observations_sha256": "5da1c483ad9744e0d34039f81fc8e31c1201a0133a8925e5c9732ffd5a3241da",
+      "reference_sha256": "252c301246c451169886faa93dabed53bcb5af4a79baba9f2651bd6e5cc68060",
       "validation": {
         "frames": 601,
         "messages": 608,
@@ -5107,6 +5043,7 @@
       "family": "delayed_outcome",
       "duration_ms": 60000,
       "observations_sha256": "5671136cf5021bbc038123308bb07b6e446b2d1fb57d2daf6a4aff7e3e62a918",
+      "reference_sha256": "83e7ebd5d42f196fc7ee76523694c088bb4f3b4bfa459fe5563cf4ccc6698c17",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -5158,7 +5095,7 @@
         {
           "cutoff_ms": 25200,
           "evidence_revision": "516f5b824f7cf8bb",
-          "wall_ms": 4.241,
+          "wall_ms": 4.324,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -5191,6 +5128,7 @@
       "family": "expired_outcome",
       "duration_ms": 60000,
       "observations_sha256": "c17f483d64cd1bdf3579b3f30ccf17d8be9c5b39d7943c5c94a178c4380474f5",
+      "reference_sha256": "8f655ca779d151e79acac99846220a49f5beee2837d987ce05d81fbbab5c69b5",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -5244,6 +5182,7 @@
       "family": "reordered_delivery",
       "duration_ms": 60000,
       "observations_sha256": "9a2a2a14ab35d3ad92c3100aaf93ae98b1461a9c9ea8079c2ad6869130cce157",
+      "reference_sha256": "20af6909988ae62ca794028986b1b3897e49b8e871cc09ef5353eaa5b955e36c",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -5295,7 +5234,7 @@
         {
           "cutoff_ms": 20900,
           "evidence_revision": "e018402f777fdbb8",
-          "wall_ms": 4.122,
+          "wall_ms": 4.321,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -5328,6 +5267,7 @@
       "family": "duplicates",
       "duration_ms": 60000,
       "observations_sha256": "15aeff0f14d9e202952f1fd7a655c8dc41ab3afc08ee901f3baf1ab12bb0641d",
+      "reference_sha256": "23f64bd4fda76619d91bc6bdab5e3a4a387945300eb61ec76d4d4e7c2a928e74",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -5372,7 +5312,7 @@
         {
           "cutoff_ms": 20200,
           "evidence_revision": "e5b98b9994c95b9c",
-          "wall_ms": 4.171,
+          "wall_ms": 4.389,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -5405,6 +5345,7 @@
       "family": "correction_withdraws",
       "duration_ms": 60000,
       "observations_sha256": "705e5e5a4146dd4fbbadc0d1ff3c90daa1eba335a8532086cd80b74399992a03",
+      "reference_sha256": "bb48900c84ee3fc62e4d80849a8d0e3be9afc7c9389df2b458fb84b922cbc8fa",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -5467,7 +5408,7 @@
         {
           "cutoff_ms": 20200,
           "evidence_revision": "f32505d46dd4f5e7",
-          "wall_ms": 4.191,
+          "wall_ms": 4.257,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -5500,6 +5441,7 @@
       "family": "correction_restores",
       "duration_ms": 60000,
       "observations_sha256": "edeae197f25aae647efcedc3dbb84430ce4a09c5338cbbdb5cc0bc414a054dc9",
+      "reference_sha256": "1bb9ec359a5889fa65095410008b3c0794763ca077e18a595910757784beddd2",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -5551,7 +5493,7 @@
         {
           "cutoff_ms": 24200,
           "evidence_revision": "86acc5e1073082a2",
-          "wall_ms": 4.215,
+          "wall_ms": 4.253,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -5584,6 +5526,7 @@
       "family": "noisy_tracking",
       "duration_ms": 60000,
       "observations_sha256": "a39a50d2c4699ccf85d1b9c5cbd7222dcf4c9cf748658ad20ccd5918fddfabda",
+      "reference_sha256": "42542418732b182d0e0a6db45fb777f1ecebfed6be7fbfdd77e15f2d381d6367",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -5628,7 +5571,7 @@
         {
           "cutoff_ms": 20200,
           "evidence_revision": "45208d3d2d3e4a0b",
-          "wall_ms": 4.235,
+          "wall_ms": 4.293,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -5661,6 +5604,7 @@
       "family": "different_receiver",
       "duration_ms": 60000,
       "observations_sha256": "8409c59871059cef680b1e91cd0bbef450d199fcffd8f1da7cf3924443046790",
+      "reference_sha256": "5abd3e0e11c6edbf437e2abfedac12237c82d06bb5eeddcd5c78ec3356f8520f",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -5705,7 +5649,7 @@
         {
           "cutoff_ms": 20200,
           "evidence_revision": "d9caf9a2e003eff7",
-          "wall_ms": 4.168,
+          "wall_ms": 4.263,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -5738,6 +5682,7 @@
       "family": "no_pass_events",
       "duration_ms": 60000,
       "observations_sha256": "4dcac3b5a2e29ae4eb29971975c6a95542dbfca9ec409381821e07292d62ed07",
+      "reference_sha256": "01b41c7b26aaf1551dd0885d0b4d8691a27dbabedb63aa77b390c7503b52a69f",
       "validation": {
         "frames": 601,
         "messages": 602,
@@ -5784,6 +5729,7 @@
       "family": "multiple_passes",
       "duration_ms": 90000,
       "observations_sha256": "d10b2d1a51f7a97beaed5bb92faeefd1bf103ebce287c9a83a2738381f2961bf",
+      "reference_sha256": "f6fb118a6ad0aa7dbabe029f063793e2eefbb559df91aa9a3bc79840a2718d6e",
       "validation": {
         "frames": 901,
         "messages": 911,
@@ -5870,6 +5816,7 @@
       "family": "long_session",
       "duration_ms": 180000,
       "observations_sha256": "b05c44b2f7d1e2167d660710a8424dd2426c69815e1122577aba4081ea85f185",
+      "reference_sha256": "43d36fd50875d7c7cb9c5104eb57753b5714a1f826205c946829ae263b3531a8",
       "validation": {
         "frames": 1801,
         "messages": 1818,
@@ -5993,7 +5940,7 @@
         {
           "cutoff_ms": 20200,
           "evidence_revision": "318b6914e63b36a0",
-          "wall_ms": 4.261,
+          "wall_ms": 4.258,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -6026,6 +5973,7 @@
       "family": "escape",
       "duration_ms": 60000,
       "observations_sha256": "6dae472ae0a09407c82ec098542b9198c0fc72c6eb8e0f8e8ce83800dc07d88b",
+      "reference_sha256": "b3ca6d51209d7fbf7ea6efa7e12f2f1615ec339130391e83bf6a42f73ec7c7e9",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -6070,7 +6018,7 @@
         {
           "cutoff_ms": 26200,
           "evidence_revision": "5bc0abfd52d5107a",
-          "wall_ms": 4.254,
+          "wall_ms": 4.237,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -6103,6 +6051,7 @@
       "family": "unpressured",
       "duration_ms": 60000,
       "observations_sha256": "96360e3ca48b2c3bb4be07cb6d632652e0598d014c88b3f56d71b654a14d934a",
+      "reference_sha256": "be3b57a75db95573680578893aef0be04e529fa0a16733a0d62ca313ece9db1b",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -6149,6 +6098,7 @@
       "family": "intercepted",
       "duration_ms": 60000,
       "observations_sha256": "471cf7c652a6f554278af9723cf64021734877c2a13eea46ded7ae3983221855",
+      "reference_sha256": "d7765a20eee1f8a3a0d07688df15b2e70cd45c661e1895508b125828752c1e3f",
       "validation": {
         "frames": 601,
         "messages": 605,
@@ -6195,6 +6145,7 @@
       "family": "insufficient_bypass",
       "duration_ms": 60000,
       "observations_sha256": "d3d14ab9f9a339557f978b3a873381c1686f9a206ab75bf18c959c96f556a990",
+      "reference_sha256": "d2782bb8ee42b228b3d48808fef7b738add643b6c1c47066a29177f55a1d7574",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -6241,6 +6192,7 @@
       "family": "backward_pass",
       "duration_ms": 60000,
       "observations_sha256": "144a69f43e22eada998ab16e0a4302fece9e3e533b7a983282ad4647052ac80f",
+      "reference_sha256": "790df265342237795cb0be28bed7931a91956236dcea05395f4cc4c85cc8fa76",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -6287,6 +6239,7 @@
       "family": "lateral_pass",
       "duration_ms": 60000,
       "observations_sha256": "d90ff86b76872e548476c50f1a3d4d1dc86282640c79b604bc9f6aedd06e82e1",
+      "reference_sha256": "0acc3cad47fbfff181e75cdbf6e4067dbc6d5c7a52bbb89fca14f31648b15049",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -6333,6 +6286,7 @@
       "family": "insufficient_progression",
       "duration_ms": 60000,
       "observations_sha256": "9dd542ccd8d4cdccfc448795a8a164d833bc87f18d86bfe71d0dcb3c17618035",
+      "reference_sha256": "eb740395984bc8eb902c52c9e3e64b6f70f6129b88124f1d6e29c635cdd05669",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -6379,6 +6333,7 @@
       "family": "rounding_boundary",
       "duration_ms": 60000,
       "observations_sha256": "ebe7b04ac7bef1f5cf92cf94e988ba56a6906c908e69c4b864888a3d4355b2c2",
+      "reference_sha256": "b21d66579f22bcaa478808e67f45cbfc85db11f09a1d67e55be8b3692b22d4b4",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -6402,10 +6357,8 @@
           "at_ms": 26200,
           "expected_pass_ids": [],
           "reason": "Authored candidate, subject to observation quality and original expiry.",
-          "detected_pass_ids": [
-            "pass-1"
-          ],
-          "passed": false
+          "detected_pass_ids": [],
+          "passed": true
         },
         {
           "at_ms": 56200,
@@ -6415,53 +6368,9 @@
           "passed": true
         }
       ],
-      "passed": false,
-      "findings": [
-        {
-          "at_ms": 26200,
-          "expected": [],
-          "detected": [
-            "pass-1"
-          ],
-          "metrics": {
-            "pass_id": "pass-1",
-            "coverage": 1,
-            "pressure_opponents_max": 2,
-            "bypassed_count": 3,
-            "retained": true,
-            "progression_m": 5.0,
-            "eligible": true
-          }
-        }
-      ],
-      "workflows": [
-        {
-          "cutoff_ms": 26200,
-          "evidence_revision": "3ef885c7f60d1ff3",
-          "wall_ms": 4.172,
-          "mode": "local deterministic template",
-          "status": "produced",
-          "usage": null,
-          "variants_checked": 100,
-          "trace_actions": [
-            {
-              "role": "Story Analyst",
-              "action": "compute_pass_metrics",
-              "status": "supported_candidate"
-            },
-            {
-              "role": "Evidence Reviewer",
-              "action": "independent_metric_check",
-              "status": "supported"
-            },
-            {
-              "role": "Audience Editor",
-              "action": "render_and_validate_variants",
-              "status": "valid"
-            }
-          ]
-        }
-      ]
+      "passed": true,
+      "findings": [],
+      "workflows": []
     },
     {
       "case_id": "p04-09",
@@ -6471,6 +6380,7 @@
       "family": "possession_interruption",
       "duration_ms": 60000,
       "observations_sha256": "4faeae00611b57a1ae29146cd2bd61977ab7ed92f226b13655814f214002791d",
+      "reference_sha256": "9c8689f386b97ad68e72d382a1783ac3761b975b73af320fdf2c94dcd36d3fa6",
       "validation": {
         "frames": 601,
         "messages": 608,
@@ -6517,6 +6427,7 @@
       "family": "uncontrolled",
       "duration_ms": 60000,
       "observations_sha256": "b89e7c17c7e4455b667e68da0b68c2c03e92ffcd7ea35472cdd95444cd4279c7",
+      "reference_sha256": "e8b7f836b25b8a59cda02f1251cb1b179510b54b8d475dec4005d4030d42b76a",
       "validation": {
         "frames": 601,
         "messages": 605,
@@ -6563,6 +6474,7 @@
       "family": "out_of_play",
       "duration_ms": 60000,
       "observations_sha256": "d312a0132c8a6d03cb3d7be38cb0458b4da1bf2b0d66b93bf98cfc696cb4e208",
+      "reference_sha256": "a122300ff58af02cc76f328184e9665048774d1fbd6a6b5f15bd14b1f5209967",
       "validation": {
         "frames": 601,
         "messages": 605,
@@ -6609,6 +6521,7 @@
       "family": "missing_pressure",
       "duration_ms": 60000,
       "observations_sha256": "675ec0039a359741ec89476d06c56984672b8f15f87cbc0da35306f2220739f8",
+      "reference_sha256": "75c68494fda460f4740c07d9043ad84dfdee42f1bd981aac0ea5cf123bf12f2b",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -6655,6 +6568,7 @@
       "family": "sparse_pressure",
       "duration_ms": 60000,
       "observations_sha256": "accbd34747a88c7dc77ed0c7987fce67499288df21e3cb4a7641d10d4d4b76d8",
+      "reference_sha256": "12c59e8ba68f0e7f17eea3c6aa153a41f9238860d62a9bce41c3c8c06352aebf",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -6701,6 +6615,7 @@
       "family": "missing_release",
       "duration_ms": 60000,
       "observations_sha256": "ed88418cffea52594bb2ef018dcb3a4a987d849d8bf1ccf4ef43157de276e9bb",
+      "reference_sha256": "a6b79a8c0cb0c72266c7969c38445c11f2ab98247ebf0bd555a054029c3130e0",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -6747,6 +6662,7 @@
       "family": "retention_gap",
       "duration_ms": 60000,
       "observations_sha256": "c475e485aa67d26b7a6fa59401a585b46c9e4ec2485a3f6c8d05336bd2c4fe73",
+      "reference_sha256": "2d966bbbabde69aa0be69fa95fdfd75f113b51fa17efb6ab2c4fa1050862ecf0",
       "validation": {
         "frames": 595,
         "messages": 598,
@@ -6793,6 +6709,7 @@
       "family": "missing_ball_confirmation",
       "duration_ms": 60000,
       "observations_sha256": "ba0467c09f8da8fd78b44fa4c7e8883a76e78274748b8781077f56ade552c932",
+      "reference_sha256": "cbcbc1e9591e51b46911a0d39aa528e45ab5272d2baf0484a36a63e6e7315325",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -6839,6 +6756,7 @@
       "family": "unknown_possession",
       "duration_ms": 60000,
       "observations_sha256": "9650692b9945465fe779a98b9c533811caeb09792e1df152694b8f30238acbd8",
+      "reference_sha256": "f60666ce21585d4e37e259cf5d79083cbb88c99e75a53134fa552606f84b8776",
       "validation": {
         "frames": 601,
         "messages": 608,
@@ -6885,6 +6803,7 @@
       "family": "delayed_outcome",
       "duration_ms": 60000,
       "observations_sha256": "4a9f7ece38a6cfc9c8f633a5c0c768a150cedc11d502824ca2eb27ff15c8a728",
+      "reference_sha256": "fe6940e3c2afafff66541b051f2920ccbd9ef4dd9c41de4f90d4f048b3e9ab50",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -6936,7 +6855,7 @@
         {
           "cutoff_ms": 31200,
           "evidence_revision": "3c29a3f230a6a899",
-          "wall_ms": 4.383,
+          "wall_ms": 4.458,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -6969,6 +6888,7 @@
       "family": "expired_outcome",
       "duration_ms": 60000,
       "observations_sha256": "ac41e8e1b2d4efa9ded674dbc836b5df265435059930309b9105dfea991386e3",
+      "reference_sha256": "d95aa747b29a5bdccdccad7b59110f8d1baee5d8946ef72782712929377f163e",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -7022,6 +6942,7 @@
       "family": "reordered_delivery",
       "duration_ms": 60000,
       "observations_sha256": "c5c8a964bcc2c45ff854af7a562e49ef637455c52749ef23d66364478919f5eb",
+      "reference_sha256": "67fd92a293dbc76cd4cd95ca1ddbfa98e1fe0701390bb1b15a9b8c3b335edef8",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -7073,7 +6994,7 @@
         {
           "cutoff_ms": 26900,
           "evidence_revision": "f6e528ccb92187e7",
-          "wall_ms": 4.263,
+          "wall_ms": 4.332,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -7106,6 +7027,7 @@
       "family": "duplicates",
       "duration_ms": 60000,
       "observations_sha256": "be30ac9ef7ab203ac402a24c68710c19c09467c18267c4450b05661d44a36ebe",
+      "reference_sha256": "64ed02dfebeaeb7cc77a7f952dabc44ccc2d21f27716b2be471f1e52fe2f13b3",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -7150,7 +7072,7 @@
         {
           "cutoff_ms": 26200,
           "evidence_revision": "15cf8a34bcb5f709",
-          "wall_ms": 4.08,
+          "wall_ms": 4.304,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -7183,6 +7105,7 @@
       "family": "correction_withdraws",
       "duration_ms": 60000,
       "observations_sha256": "106ddf94121a6b3605df9b3c937a9050997627b616eb687f5be280f517a6acf5",
+      "reference_sha256": "fadef41f18d482c7d89a4600a49b24553bfa3d7c0f9ed69f0983c5e4c3db6b4d",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -7245,7 +7168,7 @@
         {
           "cutoff_ms": 26200,
           "evidence_revision": "e698fbeb8d939210",
-          "wall_ms": 4.231,
+          "wall_ms": 4.31,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -7278,6 +7201,7 @@
       "family": "correction_restores",
       "duration_ms": 60000,
       "observations_sha256": "87746237b1e218faa513e5d4d63657a30970705f1121b95055a6673c8150d5f8",
+      "reference_sha256": "82bf9588f12b7531defe3ae9ed166d71d25763068aff610bd3dd69367af28c62",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -7329,7 +7253,7 @@
         {
           "cutoff_ms": 30200,
           "evidence_revision": "2af776501dd85cef",
-          "wall_ms": 4.262,
+          "wall_ms": 4.34,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -7362,6 +7286,7 @@
       "family": "noisy_tracking",
       "duration_ms": 60000,
       "observations_sha256": "557cbd0abf556b14449b3770e8d540be08e752a3b0dd0033b23501bc6a1b0222",
+      "reference_sha256": "e1f1e7f2d515e5f3c64fef0053465718181a78939c20af3fa13116473e2ae71f",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -7406,7 +7331,7 @@
         {
           "cutoff_ms": 26200,
           "evidence_revision": "7cd0cd1970492fe4",
-          "wall_ms": 4.264,
+          "wall_ms": 4.343,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -7439,6 +7364,7 @@
       "family": "different_receiver",
       "duration_ms": 60000,
       "observations_sha256": "0e3f054c0dd0c540dd1e8655e054cf155bcbc8de6544a42bab88e9024a704a7f",
+      "reference_sha256": "beb5e75942e1301f769e252f89561ac314c6acf97b6d71a04cf351f1b080340a",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -7483,7 +7409,7 @@
         {
           "cutoff_ms": 26200,
           "evidence_revision": "c3ca0f71862b4d93",
-          "wall_ms": 4.176,
+          "wall_ms": 4.355,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -7516,6 +7442,7 @@
       "family": "no_pass_events",
       "duration_ms": 60000,
       "observations_sha256": "cdaef4e232964812dcabc4692c9eb48a7802b85dc24a51fc18cf1fefe6ad81ae",
+      "reference_sha256": "879e13e0bd4dd400ef0c874cbd33233a9a92f764091590aa9cf6e862dc474085",
       "validation": {
         "frames": 601,
         "messages": 602,
@@ -7562,6 +7489,7 @@
       "family": "multiple_passes",
       "duration_ms": 90000,
       "observations_sha256": "c76bcdd8a9a3c5d375d3a64b4656e0d979401afd7bfba64458181dba9950e914",
+      "reference_sha256": "642a7548ad767874ea59208a0bbc4958a20ad01e603158bd2fc453711910b707",
       "validation": {
         "frames": 901,
         "messages": 911,
@@ -7648,6 +7576,7 @@
       "family": "long_session",
       "duration_ms": 180000,
       "observations_sha256": "fc1b3bc639217b7e0f0d43debffb0d084bb7d0ae585a77face83f76c0e32512f",
+      "reference_sha256": "be594a53050aa8b574099e523f330e1e22a246b66377e2707344cf2ec9432460",
       "validation": {
         "frames": 1801,
         "messages": 1818,
@@ -7771,7 +7700,7 @@
         {
           "cutoff_ms": 26200,
           "evidence_revision": "a3d9b939a839adb5",
-          "wall_ms": 4.126,
+          "wall_ms": 4.276,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -7804,6 +7733,7 @@
       "family": "escape",
       "duration_ms": 60000,
       "observations_sha256": "c6d27a53696c41d7761dd8de9231eea2a5881fb19f40ae501fe14c733a515d2f",
+      "reference_sha256": "f821c9bf91e5c815aceb5f22a7339907e6f0e0276f04325d5150f0590709889a",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -7848,7 +7778,7 @@
         {
           "cutoff_ms": 28200,
           "evidence_revision": "50fce245061a64bc",
-          "wall_ms": 4.24,
+          "wall_ms": 4.38,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -7881,6 +7811,7 @@
       "family": "unpressured",
       "duration_ms": 60000,
       "observations_sha256": "176f8c6359ead56a39bef18d6c5347262e96edd1c64b1a4a7b3bc35c418c172b",
+      "reference_sha256": "613c534606827f765f28e725d962c0fb8832cec89ce07d64f3fcbd235e7b2be3",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -7927,6 +7858,7 @@
       "family": "intercepted",
       "duration_ms": 60000,
       "observations_sha256": "330d9d71515615d92ba0ea3b5ffa0473797595f5c07215e52b6fee2783525c55",
+      "reference_sha256": "11073488e291a3aa3cd760bb9553293982cf0b435b143aea8cc1c8b4f776be0a",
       "validation": {
         "frames": 601,
         "messages": 605,
@@ -7973,6 +7905,7 @@
       "family": "insufficient_bypass",
       "duration_ms": 60000,
       "observations_sha256": "6e22e9b9be98f537fbb0ce182af923718a557b40589e435a51c3c8f116bdc225",
+      "reference_sha256": "6d81a0d62c8cb372dfcb59da7c31e7bbb46f3c244381c277f98013ff432a2570",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -8019,6 +7952,7 @@
       "family": "backward_pass",
       "duration_ms": 60000,
       "observations_sha256": "28036477ec35af501e2b9a14bf215000860396a8081e9e2aefa7bf6b0b43d8b2",
+      "reference_sha256": "dc0e03b92dc03a84466960fbd188531eca8a265bd6f78acee1775f931827ea26",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -8065,6 +7999,7 @@
       "family": "lateral_pass",
       "duration_ms": 60000,
       "observations_sha256": "2aa5b63def61bff7e63a0b136c53cff8d8e50d6f119f3c97509c8900b55d47c4",
+      "reference_sha256": "a99d575ec1a028bf87c4b2f6046ad62b87a24c095eec73f448681583cc1e1793",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -8111,6 +8046,7 @@
       "family": "insufficient_progression",
       "duration_ms": 60000,
       "observations_sha256": "0036347a3ddea2f65c0dbdf703d8d6866b0c641aab681b359c865136b74ccf9a",
+      "reference_sha256": "61a3d4bee131704770ad8c54be35a5ced14d748cbf3d02983115c2e97e55ac08",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -8157,6 +8093,7 @@
       "family": "rounding_boundary",
       "duration_ms": 60000,
       "observations_sha256": "5fc38cd0906e22f4717cdd446151e5315b8167a0bcc5d99ad0000db01dc4d799",
+      "reference_sha256": "de036f1ca6afe04ce697d9efa165b54e662e9a8c5cda45ebcf125734ecfdea02",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -8180,10 +8117,8 @@
           "at_ms": 28200,
           "expected_pass_ids": [],
           "reason": "Authored candidate, subject to observation quality and original expiry.",
-          "detected_pass_ids": [
-            "pass-1"
-          ],
-          "passed": false
+          "detected_pass_ids": [],
+          "passed": true
         },
         {
           "at_ms": 58200,
@@ -8193,53 +8128,9 @@
           "passed": true
         }
       ],
-      "passed": false,
-      "findings": [
-        {
-          "at_ms": 28200,
-          "expected": [],
-          "detected": [
-            "pass-1"
-          ],
-          "metrics": {
-            "pass_id": "pass-1",
-            "coverage": 1,
-            "pressure_opponents_max": 2,
-            "bypassed_count": 3,
-            "retained": true,
-            "progression_m": 5.0,
-            "eligible": true
-          }
-        }
-      ],
-      "workflows": [
-        {
-          "cutoff_ms": 28200,
-          "evidence_revision": "db963813590f9674",
-          "wall_ms": 4.125,
-          "mode": "local deterministic template",
-          "status": "produced",
-          "usage": null,
-          "variants_checked": 100,
-          "trace_actions": [
-            {
-              "role": "Story Analyst",
-              "action": "compute_pass_metrics",
-              "status": "supported_candidate"
-            },
-            {
-              "role": "Evidence Reviewer",
-              "action": "independent_metric_check",
-              "status": "supported"
-            },
-            {
-              "role": "Audience Editor",
-              "action": "render_and_validate_variants",
-              "status": "valid"
-            }
-          ]
-        }
-      ]
+      "passed": true,
+      "findings": [],
+      "workflows": []
     },
     {
       "case_id": "p05-09",
@@ -8249,6 +8140,7 @@
       "family": "possession_interruption",
       "duration_ms": 60000,
       "observations_sha256": "0499446738b99a2aeb2815813aef5c34ab9a222d6d97c13872b2daac47d355e3",
+      "reference_sha256": "62e336f5d3df1d08d4d30bd4d1938979e2ec4a68aa1eb97aa0546d1926d17deb",
       "validation": {
         "frames": 601,
         "messages": 608,
@@ -8295,6 +8187,7 @@
       "family": "uncontrolled",
       "duration_ms": 60000,
       "observations_sha256": "cf5d0c30416a25601d67dbaf030a519140486f3dc5d50d63455feb4509ab1046",
+      "reference_sha256": "8057481a4f90aaafc0bdd082bbe0ff7fdaa9708097e9e7caaabe89d84ed01190",
       "validation": {
         "frames": 601,
         "messages": 605,
@@ -8341,6 +8234,7 @@
       "family": "out_of_play",
       "duration_ms": 60000,
       "observations_sha256": "d8bf1ca3bcc60c5006a48b7beb4842c2a9632c56d0d3af6d2d476dcddbda5e70",
+      "reference_sha256": "fcdafd9a330be7b5dee8cf8cbdcf92ccef617ce9a7acd65c17dd277b28507ce3",
       "validation": {
         "frames": 601,
         "messages": 605,
@@ -8387,6 +8281,7 @@
       "family": "missing_pressure",
       "duration_ms": 60000,
       "observations_sha256": "9b17feb9470bef9af18f52cc942be91bf293ac7f12004df9d5619aa65d116d81",
+      "reference_sha256": "a19dc8cce289e790fb050ce85839df14f739e50c511b43c389d5fe9014399546",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -8433,6 +8328,7 @@
       "family": "sparse_pressure",
       "duration_ms": 60000,
       "observations_sha256": "f2c300215de323fc6a9ab15fc950354dd11b23877aa257abee02f3d2c16ede9d",
+      "reference_sha256": "4eb2ea4329b7ad13d5a8b80b1f40d79e4f652f8e701264cd57d635451a7a55b6",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -8479,6 +8375,7 @@
       "family": "missing_release",
       "duration_ms": 60000,
       "observations_sha256": "10164c96282ad688f4600114eb8c64ade9a671e0af4e9d64ccab1cd683035ba3",
+      "reference_sha256": "c1c2163f2bd24848f7af989e4f08da69273f1da385c79254d78bb8dde0035703",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -8525,6 +8422,7 @@
       "family": "retention_gap",
       "duration_ms": 60000,
       "observations_sha256": "ac9556ea9a45e66b3153a13e8d9e49daedf64441b843e36af3028816f8969cdc",
+      "reference_sha256": "bcf1bf77f985abbbedc3aee68d65adea66f175f1baf088d6554d07d8bc3b4c1a",
       "validation": {
         "frames": 595,
         "messages": 598,
@@ -8571,6 +8469,7 @@
       "family": "missing_ball_confirmation",
       "duration_ms": 60000,
       "observations_sha256": "af78d9030e5a0ad01cdf54910cb48018317fa82e7d31d5024e92e4cfd059cf5f",
+      "reference_sha256": "1736b756286461fc4b2fc36367553c636fd31131968c8bb71f0d8c9677bcd8ea",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -8617,6 +8516,7 @@
       "family": "unknown_possession",
       "duration_ms": 60000,
       "observations_sha256": "291675a6477cda1383f06e23da8fcf5bfade80af289f3361a4747815eafe2092",
+      "reference_sha256": "729210d708d65484732ced57d866896aa0def49036fedfaf8e1925509f7c36a0",
       "validation": {
         "frames": 601,
         "messages": 608,
@@ -8663,6 +8563,7 @@
       "family": "delayed_outcome",
       "duration_ms": 60000,
       "observations_sha256": "dc0899562630bfd8061368872528ee3551778eb9b7d6d760a194f1a91f91c5d1",
+      "reference_sha256": "c4357166e0520044d02363f37a2d29607421e19fb78e937d8c8da5dd28333d5f",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -8714,7 +8615,7 @@
         {
           "cutoff_ms": 33200,
           "evidence_revision": "0a05e176c4334249",
-          "wall_ms": 4.352,
+          "wall_ms": 4.439,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -8747,6 +8648,7 @@
       "family": "expired_outcome",
       "duration_ms": 60000,
       "observations_sha256": "d186e6e4d2c63886426b2f7a882478cff050e594c5d0af68bbe577428d84b943",
+      "reference_sha256": "56fb73ab1eb463e00445f23d03fee27ebba9d06318ff70c6345381ce18b3dbdb",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -8800,6 +8702,7 @@
       "family": "reordered_delivery",
       "duration_ms": 60000,
       "observations_sha256": "9da3b57cae1d17f4d0fee88ac82b722175c7fab4aa9102e94fd44f9871c8f895",
+      "reference_sha256": "53ca104d5708fba8ada4656fc9d294e886b8bcca2239c5d1a0ff947fd8e94085",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -8851,7 +8754,7 @@
         {
           "cutoff_ms": 28900,
           "evidence_revision": "dcafd3573a026455",
-          "wall_ms": 4.36,
+          "wall_ms": 4.416,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -8884,6 +8787,7 @@
       "family": "duplicates",
       "duration_ms": 60000,
       "observations_sha256": "922baa92887c271b70b2c344c6edb531b7a28d31b00cca534fd9d197e3fc8163",
+      "reference_sha256": "d8385e52b0b7f787c30fed784863f3eabf6f78de983a7f0b7f364a5a2ee05efc",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -8928,7 +8832,7 @@
         {
           "cutoff_ms": 28200,
           "evidence_revision": "108fd11f0f811174",
-          "wall_ms": 4.31,
+          "wall_ms": 4.406,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -8961,6 +8865,7 @@
       "family": "correction_withdraws",
       "duration_ms": 60000,
       "observations_sha256": "d73fc764a89ab5eb940cb2162f454d5f3041c811cce7839f2fa2fb8891fcba70",
+      "reference_sha256": "f6cf21359d7fedd82d5952a8744c92f469491da3ec4bee92ad8cec43dad43356",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -9023,7 +8928,7 @@
         {
           "cutoff_ms": 28200,
           "evidence_revision": "4b1d609773d663a2",
-          "wall_ms": 4.251,
+          "wall_ms": 4.324,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -9056,6 +8961,7 @@
       "family": "correction_restores",
       "duration_ms": 60000,
       "observations_sha256": "bea1822c443d1c4e2b1ae7b2ee8fc4f1c7090ed76d226855362b0a6384bc201f",
+      "reference_sha256": "ae3bf8fe3b7f486ee75d45d8e2c562339083a8c2b5ba0a736d7817d935c4dcf0",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -9107,7 +9013,7 @@
         {
           "cutoff_ms": 32200,
           "evidence_revision": "58b40ee96b8255cb",
-          "wall_ms": 4.286,
+          "wall_ms": 4.31,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -9140,6 +9046,7 @@
       "family": "noisy_tracking",
       "duration_ms": 60000,
       "observations_sha256": "719a27f203209de3415f625393c796958073828bc2b2af9e6245c10ccff9b3af",
+      "reference_sha256": "f210b59cc741af5a811b4acaffbddd67b15ae9ae0f43f1e20eaaca08766109c2",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -9184,7 +9091,7 @@
         {
           "cutoff_ms": 28200,
           "evidence_revision": "5eaa465083b67883",
-          "wall_ms": 4.268,
+          "wall_ms": 4.393,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -9217,6 +9124,7 @@
       "family": "different_receiver",
       "duration_ms": 60000,
       "observations_sha256": "c4aec87512a26368df8fe199ec96c2bb3e80dc9c67adf0d9a2bc78d00b220058",
+      "reference_sha256": "94cc4e3729798fae0af088e83a07bf5d6c9b2071058d820cd18821518ca27f28",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -9261,7 +9169,7 @@
         {
           "cutoff_ms": 28200,
           "evidence_revision": "7acb785edcff6f1c",
-          "wall_ms": 4.244,
+          "wall_ms": 4.33,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -9294,6 +9202,7 @@
       "family": "no_pass_events",
       "duration_ms": 60000,
       "observations_sha256": "68477fbd91663b816a3f7432b4e9bb146d122ad544906f0472c0362940f79f45",
+      "reference_sha256": "e83bc3ff2744fd9f1762bb2c73502c7d3d15428059ca920d82284d6580957da9",
       "validation": {
         "frames": 601,
         "messages": 602,
@@ -9340,6 +9249,7 @@
       "family": "multiple_passes",
       "duration_ms": 90000,
       "observations_sha256": "6ab6af0df2146cf7fcf1cf6a3cae744615f65bf2d044af2e1449a8fb2ff5e9ad",
+      "reference_sha256": "30441f7012ebed5403f05f091ba38b2ac50ce9a6929e894bffa886aadf595ab1",
       "validation": {
         "frames": 901,
         "messages": 911,
@@ -9426,6 +9336,7 @@
       "family": "long_session",
       "duration_ms": 180000,
       "observations_sha256": "99ae23b5ab201247584d4d5d264ba4ef2ac6f29d3833419c1338b4a968e57123",
+      "reference_sha256": "82b381d9d7cabd8ecc6261cc73feb124baddeb46d4eaff95344c0cbe94ec2f37",
       "validation": {
         "frames": 1801,
         "messages": 1818,
@@ -9549,7 +9460,7 @@
         {
           "cutoff_ms": 28200,
           "evidence_revision": "bee9d86c050f6688",
-          "wall_ms": 4.277,
+          "wall_ms": 4.23,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -9582,6 +9493,7 @@
       "family": "escape",
       "duration_ms": 60000,
       "observations_sha256": "0ad875df73c3d59f543bd64123ba1596f8dc296d7009c32ae64dcc650e4f9285",
+      "reference_sha256": "bfd0a312394f44f9d7b579e0bd8435b2d169d6a7e379b5bab30fdcfb9b96bcc4",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -9626,7 +9538,7 @@
         {
           "cutoff_ms": 18200,
           "evidence_revision": "638d1b2904037e95",
-          "wall_ms": 4.261,
+          "wall_ms": 4.334,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -9659,6 +9571,7 @@
       "family": "unpressured",
       "duration_ms": 60000,
       "observations_sha256": "9c83a52eb1dad7e7d4a650fb1c92a82d8abeec2846d2da9735260b1efc687e8f",
+      "reference_sha256": "6a9f12bb581eaedeef26040ee3f7c5c692574b7ddabc074dd7c1eb7cbcdeb88c",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -9705,6 +9618,7 @@
       "family": "intercepted",
       "duration_ms": 60000,
       "observations_sha256": "2f6b7fc0f4c3580cc4ff61b299495d803aa8c53587c1ffb59bb1d085764f9ff9",
+      "reference_sha256": "2565dd1a75c97e86b578ac071d649f3979c4348cd67b127d8ced256b6e1e8f03",
       "validation": {
         "frames": 601,
         "messages": 605,
@@ -9751,6 +9665,7 @@
       "family": "insufficient_bypass",
       "duration_ms": 60000,
       "observations_sha256": "1711ff02abf31af8905c7dce6befb1fee36ae9fee3c3e875cac086d1c0df2bcc",
+      "reference_sha256": "bedfb374f340e11a5b757eac81084c2cbd5ac01a812c18706ed6713a05897825",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -9797,6 +9712,7 @@
       "family": "backward_pass",
       "duration_ms": 60000,
       "observations_sha256": "0f6471b1e8436455bf4da0b5c99ba6a69171579d7bdbe3ebfac5ff6a7828016b",
+      "reference_sha256": "d2a2f96ae99633ed2e321c36a2a313d73e2834516302ff257cc96cdabb0c5822",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -9843,6 +9759,7 @@
       "family": "lateral_pass",
       "duration_ms": 60000,
       "observations_sha256": "e0f264bdae0fecdd527d53016c8b94074a915f4ff4b1229e5fd37ea614441ce5",
+      "reference_sha256": "d5a8324b31cf5beb5fc8af35bf58c0f84516f29db120de89b64a25747f282b31",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -9889,6 +9806,7 @@
       "family": "insufficient_progression",
       "duration_ms": 60000,
       "observations_sha256": "bcdc53e78b0649af54664ff1b7cfe4967de0848051776370b6946ce9e1eb35ef",
+      "reference_sha256": "164f18fabb0315921b81b98bae6317d5636102d56f1776f1467ebc9e9d8d90fd",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -9935,6 +9853,7 @@
       "family": "rounding_boundary",
       "duration_ms": 60000,
       "observations_sha256": "c2ac0bdf143c2420ae3951e3c1cdd4770fd3f97aeaea66be25a4fbec5200e6ba",
+      "reference_sha256": "e0cee8504cba8509f8b1dd01aaaefdd29597957eefbf5c6f4d2fdbac671d0123",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -9958,10 +9877,8 @@
           "at_ms": 18200,
           "expected_pass_ids": [],
           "reason": "Authored candidate, subject to observation quality and original expiry.",
-          "detected_pass_ids": [
-            "pass-1"
-          ],
-          "passed": false
+          "detected_pass_ids": [],
+          "passed": true
         },
         {
           "at_ms": 48200,
@@ -9971,53 +9888,9 @@
           "passed": true
         }
       ],
-      "passed": false,
-      "findings": [
-        {
-          "at_ms": 18200,
-          "expected": [],
-          "detected": [
-            "pass-1"
-          ],
-          "metrics": {
-            "pass_id": "pass-1",
-            "coverage": 1,
-            "pressure_opponents_max": 2,
-            "bypassed_count": 3,
-            "retained": true,
-            "progression_m": 5.0,
-            "eligible": true
-          }
-        }
-      ],
-      "workflows": [
-        {
-          "cutoff_ms": 18200,
-          "evidence_revision": "bd7bd01388d42584",
-          "wall_ms": 4.226,
-          "mode": "local deterministic template",
-          "status": "produced",
-          "usage": null,
-          "variants_checked": 100,
-          "trace_actions": [
-            {
-              "role": "Story Analyst",
-              "action": "compute_pass_metrics",
-              "status": "supported_candidate"
-            },
-            {
-              "role": "Evidence Reviewer",
-              "action": "independent_metric_check",
-              "status": "supported"
-            },
-            {
-              "role": "Audience Editor",
-              "action": "render_and_validate_variants",
-              "status": "valid"
-            }
-          ]
-        }
-      ]
+      "passed": true,
+      "findings": [],
+      "workflows": []
     },
     {
       "case_id": "p06-09",
@@ -10027,6 +9900,7 @@
       "family": "possession_interruption",
       "duration_ms": 60000,
       "observations_sha256": "8a40819dbf13458d85b4e5f67c48e967bab724a464e5da85922e61f1898bee6d",
+      "reference_sha256": "0e83c3c6a01c73168dbbefe22fa9e3a23df9d677d3cf896fd0f30c34a85a2748",
       "validation": {
         "frames": 601,
         "messages": 608,
@@ -10073,6 +9947,7 @@
       "family": "uncontrolled",
       "duration_ms": 60000,
       "observations_sha256": "6622ba612334fc2406417d17a7276b7c71172a37fc3a36dbfa38435d79584705",
+      "reference_sha256": "7e0eda0bdfba3c4a033865085659983422304daac10dc9d59f056b02d0b1cc11",
       "validation": {
         "frames": 601,
         "messages": 605,
@@ -10119,6 +9994,7 @@
       "family": "out_of_play",
       "duration_ms": 60000,
       "observations_sha256": "bd92bbf3db86b256ff34f558e0dd9c7c244ad79fb333ce8a39cbede4f4967abd",
+      "reference_sha256": "60a0dc569af84143a93747b00ca1720a38aff0cdebcd151e26b2c7a3359b2632",
       "validation": {
         "frames": 601,
         "messages": 605,
@@ -10165,6 +10041,7 @@
       "family": "missing_pressure",
       "duration_ms": 60000,
       "observations_sha256": "248abb53e1d08073a84748813b7b248e0af18ea9d973b393835d6a5baf41f052",
+      "reference_sha256": "c5077c9f9a4e816f555dc902d18d072748d283de7b01a292c822f746e1a3473e",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -10211,6 +10088,7 @@
       "family": "sparse_pressure",
       "duration_ms": 60000,
       "observations_sha256": "a6c89b8def2fa273c00669914f751ea2ea8042a02e307786c0a681c39ba03df0",
+      "reference_sha256": "843999abff87e75b06759ef149e74f5ec01e5960e8211f79ba166edd06c19afd",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -10257,6 +10135,7 @@
       "family": "missing_release",
       "duration_ms": 60000,
       "observations_sha256": "ddea6f10902759a086d540018dae8e094562da3eeb8b669f44508de6bca2908a",
+      "reference_sha256": "77e790a23d82fcc7061e6c811b74a14347e85a20261bab29124bd3b62f223751",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -10303,6 +10182,7 @@
       "family": "retention_gap",
       "duration_ms": 60000,
       "observations_sha256": "12ff1cdd5c87b69a8e306f9af2640cdb2ae4b55c0e039dd0d677c388ce78f17b",
+      "reference_sha256": "7587b6478f8fc3c6fa2013b6f19b98403fcfcee7d2cb651fb2de980ba181f722",
       "validation": {
         "frames": 595,
         "messages": 598,
@@ -10349,6 +10229,7 @@
       "family": "missing_ball_confirmation",
       "duration_ms": 60000,
       "observations_sha256": "99dfa5803a1bca5e50a7fd06923844ee0bbb02c4f348bd5bb16531e85eae1969",
+      "reference_sha256": "58b81ecaa34897d8fa508b20f1adb08fa589cd9cdeb1f486ce5d690865c7ea68",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -10395,6 +10276,7 @@
       "family": "unknown_possession",
       "duration_ms": 60000,
       "observations_sha256": "58a25529284a0e88c507a90bb132e84e919010f3f631aeac649d4519af7310e2",
+      "reference_sha256": "23222d23e02906ea7ba39677f1026d77c471488d5b2f98129b50a51ec2c45f6b",
       "validation": {
         "frames": 601,
         "messages": 608,
@@ -10441,6 +10323,7 @@
       "family": "delayed_outcome",
       "duration_ms": 60000,
       "observations_sha256": "f1a47d9874444dfb407716a0df9007b14fa696fb437aaab8613b23d80b825b2d",
+      "reference_sha256": "2975223f59057aa5a427521de66ad07ffc6909106f7d71fe2bda2570f7519daa",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -10492,7 +10375,7 @@
         {
           "cutoff_ms": 23200,
           "evidence_revision": "ee03a01caf8e71b6",
-          "wall_ms": 4.294,
+          "wall_ms": 4.35,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -10525,6 +10408,7 @@
       "family": "expired_outcome",
       "duration_ms": 60000,
       "observations_sha256": "cdcd22ec149bea37f9232c12ee4e180b12f2d5c9ccf1a347e86452a1e0ce79e9",
+      "reference_sha256": "83f80b81c9d3ef4c2aff2b4fef140a2040821ce8f80e1438ffb3e07f6cecb7cf",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -10578,6 +10462,7 @@
       "family": "reordered_delivery",
       "duration_ms": 60000,
       "observations_sha256": "1ae2f67520306dd1e2bcb540a61855196598804bd7c599a46b78850314e13acf",
+      "reference_sha256": "1f909478742249068d823e081ed267fd8202c411551ebd3210a58c43f6a4829c",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -10629,7 +10514,7 @@
         {
           "cutoff_ms": 18900,
           "evidence_revision": "1a0fc9b296d0e797",
-          "wall_ms": 4.297,
+          "wall_ms": 4.172,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -10662,6 +10547,7 @@
       "family": "duplicates",
       "duration_ms": 60000,
       "observations_sha256": "7e1b5d8097ba8186b2ead815a2f351c85e05fdce24398781a842517d3c008f8c",
+      "reference_sha256": "a58b683ce7206fc6eb9c38ce1818951ebaac5f4984de7195004f06f9d5e42b86",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -10706,7 +10592,7 @@
         {
           "cutoff_ms": 18200,
           "evidence_revision": "bd5c122086464e2f",
-          "wall_ms": 4.299,
+          "wall_ms": 4.325,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -10739,6 +10625,7 @@
       "family": "correction_withdraws",
       "duration_ms": 60000,
       "observations_sha256": "a5f1f4e57fdb9e602bdcf75ee3769e4d0a250e51502c4c3e222c2d1fc96f9bee",
+      "reference_sha256": "3d2158cd1cd591ca9f34f019c22d7e872f50842beff65a795edf92c71f9d7949",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -10801,7 +10688,7 @@
         {
           "cutoff_ms": 18200,
           "evidence_revision": "78ffe12f2852a635",
-          "wall_ms": 4.283,
+          "wall_ms": 4.358,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -10834,6 +10721,7 @@
       "family": "correction_restores",
       "duration_ms": 60000,
       "observations_sha256": "d2714f443fc60d075db4355fdfd4d2f2531a0809d92af189609a4233c1fff1ed",
+      "reference_sha256": "ca858b5e9f38b991749cef2b9d57506ee0ca9227094d68071505822fa7ab8427",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -10885,7 +10773,7 @@
         {
           "cutoff_ms": 22200,
           "evidence_revision": "4dff2bd547578e04",
-          "wall_ms": 4.293,
+          "wall_ms": 4.335,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -10918,6 +10806,7 @@
       "family": "noisy_tracking",
       "duration_ms": 60000,
       "observations_sha256": "92bd36d7ea49c76cb8353270b194c6edc6ffcf6f582cbcb0bce4acf06c79b2b1",
+      "reference_sha256": "27193a59e9435f97130757cd3d15f7ad853ec3f4660117688b835d542adeb294",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -10962,7 +10851,7 @@
         {
           "cutoff_ms": 18200,
           "evidence_revision": "c2bfb8947c036bdf",
-          "wall_ms": 4.483,
+          "wall_ms": 4.36,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -10995,6 +10884,7 @@
       "family": "different_receiver",
       "duration_ms": 60000,
       "observations_sha256": "4356105f2db5bad62d8d103051a52259d7d7380d6669c918f10f9e962a95fd29",
+      "reference_sha256": "cb4ad38c9ca36f01f6e383233466d7ab7493111981da7da8c2a016b4d398de83",
       "validation": {
         "frames": 601,
         "messages": 604,
@@ -11039,7 +10929,7 @@
         {
           "cutoff_ms": 18200,
           "evidence_revision": "2f5bf7a7b43cd4f7",
-          "wall_ms": 4.273,
+          "wall_ms": 4.242,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -11072,6 +10962,7 @@
       "family": "no_pass_events",
       "duration_ms": 60000,
       "observations_sha256": "1b647335961d97ad3a5f71dd5c22b74b26892e6c851d13091e7f6690c04a2fab",
+      "reference_sha256": "f728f521b84a948ba47b2dcf1d066a0f606dec0ca3e57d4e3f23eaa57e11cf05",
       "validation": {
         "frames": 601,
         "messages": 602,
@@ -11118,6 +11009,7 @@
       "family": "multiple_passes",
       "duration_ms": 90000,
       "observations_sha256": "b8e7fd091dc735eaf37d8c34d127fab781f72341d83d2c431cc57904271f5a87",
+      "reference_sha256": "c72def0a06a40c29836b0958159b8c2f5c5e4dd0cf71523c356608c50baf012a",
       "validation": {
         "frames": 901,
         "messages": 911,
@@ -11204,6 +11096,7 @@
       "family": "long_session",
       "duration_ms": 180000,
       "observations_sha256": "3f5239b6ce031103618f31e483e5c7edf23142edcd997ddea4f728cb62332945",
+      "reference_sha256": "d5e4629a3f47d748a8bffe62bab734587a91c654b0728d17d9ff23a5174dfed7",
       "validation": {
         "frames": 1801,
         "messages": 1818,
@@ -11327,7 +11220,7 @@
         {
           "cutoff_ms": 18200,
           "evidence_revision": "2e44d23c306c3d37",
-          "wall_ms": 4.214,
+          "wall_ms": 4.256,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,

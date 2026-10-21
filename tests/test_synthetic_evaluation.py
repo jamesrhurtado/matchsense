@@ -7,10 +7,10 @@ def test_report_counts_false_alerts_and_missed_later_passes():
     rows=[evaluate_case(get_case(c)) for c in ('p01-01','p01-08','p01-27','p01-28')]
     report=build_report(rows,'template')
     assert report['summary']['cases']==4
-    assert report['summary']['cases_passed']==1
-    assert report['summary']['false_alert_distinct_moments']==1
+    assert report['summary']['cases_passed']==2
+    assert report['summary']['false_alert_distinct_moments']==0
     assert report['summary']['missed_distinct_moments']==3
-    assert report['by_family']['rounding_boundary']['cases_failed']==1
+    assert report['by_family']['rounding_boundary']['cases_failed']==0
     assert report['model_usage']['calls']==0
     assert report['workflows']['variants_checked']>=100
     assert len(signature(report)['cases'])==4
@@ -41,3 +41,15 @@ def test_optional_model_budget_and_incomplete_abstention_usage_are_visible():
     assert report['model_usage']['calls_are_lower_bound'] is True
     assert report['model_usage']['usage_complete'] is False
     assert report['model_usage']['cost_usd'] is None
+
+
+def test_false_alert_accounting_does_not_inflate_true_moment_count():
+    row=evaluate_case(get_case('p01-01'))
+    row['checks'][0].update(detected_pass_ids=['pass-1'],passed=False)
+    row['passed']=False
+    summary=summarize([row])
+    assert summary['checkpoint_false_positive']==1
+    assert summary['false_alert_distinct_moments']==1
+    assert summary['expected_distinct_moments']==1
+    assert summary['detected_expected_moments']==1
+    assert summary['false_alerts_per_simulated_minute']==1

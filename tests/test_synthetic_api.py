@@ -19,7 +19,7 @@ from simulator.suite import generate_case
 @pytest.mark.parametrize('family',[
     'escape','different_receiver','noisy_tracking','duplicates','delayed_outcome',
     'expired_outcome','reordered_delivery','correction_withdraws','correction_restores',
-    'missing_pressure','unknown_possession','retention_gap',
+    'missing_pressure','unknown_possession','retention_gap','rounding_boundary',
 ])
 def test_synthetic_feed_obeys_live_publication_boundaries(family,tmp_path,monkeypatch):
     case=next(c for c in cases('development') if c.family==family)

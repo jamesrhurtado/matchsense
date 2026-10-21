@@ -122,7 +122,7 @@ Both the original view and the final corrected view must remain coherent.
         superseded.add(prior_id)
     order = lambda m:(m['timeline_ms'],m['sequence_no'])
     original = sorted((m for m in unique.values() if m['revision']==1),key=order)
-    result = validate(metadata,original,source_sequence=False)
+    result = validate(metadata,original)
     latest = sorted((m for mid,m in unique.items() if mid not in superseded),key=order)
     validate(metadata,latest,source_sequence=False)
     return result | {'delivery_rows':len(messages),'unique_observations':len(unique),

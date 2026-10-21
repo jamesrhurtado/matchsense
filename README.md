@@ -41,6 +41,7 @@ The producer access key is read by the API from `WHY_NOW_PRODUCER_TOKEN`; the do
 make test
 make data-check
 make evaluate
+make synthetic-evaluate
 make web-build
 # With API and production web server running:
 npm --prefix apps/web exec -- playwright install chromium
@@ -48,6 +49,21 @@ npm --prefix apps/web run test:e2e
 ```
 
 The browser tests cover the actual producer/viewer flow, Spanish and focus variants, review changes, retraction, phone layout, and streamed updates through the web proxy. See [evaluation results](evals/REPORT.md) for measured local processing and the exact scope of the synthetic evaluation. CI configuration is prepared in `.github/workflows/ci.yml`; it has not been run on GitHub.
+
+## Expanded synthetic data
+
+The v2 generator provides **168 reproducible cases across 28 scenario families and six parent configurations**, including near misses, missing observations, late arrivals, duplicates, corrections, different actual receivers and longer sequences. See the [generation and testing guide](docs/synthetic-data.md) and [expanded evaluation](evals/synthetic-v2/REPORT.md), which reports current failures explicitly.
+
+```sh
+make synthetic-list
+# Export one case using the existing data contract:
+.venv313/bin/python -m simulator.suite --case p01-01
+# Export the complete corpus under .run/synthetic/:
+make synthetic-data
+make synthetic-evaluate
+```
+
+Runtime exports contain only observations; seeds, fault plans, clean future trajectories and expected results are separate offline files. The hosted UI still offers the original three fixtures. Multiple-pass and three-minute cases expose the current engine's first-pass-only scope; synthetic results do not establish real football accuracy. The expanded suite also caught a distance-rounding defect, now fixed locally with boundary tests.
 
 ## Repository map
 

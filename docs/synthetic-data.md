@@ -77,3 +77,16 @@ The full suite is offline, with no model requests or Azure charges from evaluati
 ```
 
 Foundry mode requires one to six explicit case IDs and limits workflow investigations to one to six (default four). Each workflow retains the application's existing eight-call, token and deadline limits. Skipped cases, reviewer abstentions and template fallbacks stay visible. Detection scores remain pre-model; they do not treat a fallback as successful AI generation. Actual available tokens/calls are reported, with incomplete usage explicitly marked when a workflow abstains without returning usage. Monetary model cost is not fabricated. This is an evaluation helper, not a fair template/single-agent/multi-agent study, a cloud end-to-end test or a load test.
+
+## Current findings and next product work
+
+The local distance-gate fix raises the result to **156/168 cases and 576/594 checkpoints**, with no false alerts in this constructed suite. All twelve remaining failing cases are multiple-pass/long-session probes: the current engine misses eighteen later expected moments because it selects the first pass only. These known gaps remain in both the report and CI regression baseline. The original five metre threshold and scenario expectations were preserved; display rounding remains one decimal place.
+
+Priorities from this run:
+
+1. Add independent per-pass investigation, stable story IDs and multiple stored publication packages before increasing the hosted replay scope.
+2. Add editorial ranking/cooldown for nearby candidates and ensure recap/retraction tracks each exact story revision.
+3. Run a small explicit actual-model evaluation, then fresh parent combinations and football-informed review. The optional model runner is implemented; this offline run does not certify new scenarios against the live AI service.
+4. After those changes, register selected new runtime fixtures in the hosted environment and exercise Event Hubs/Cosmos, browser delivery and bounded load. Local API tests do not establish that cloud path for the new corpus.
+
+The corpus is generated locally under `.run/synthetic/`; these files are Git ignored. Generator source, tests, reference definitions, dataset/reference hashes, reports and the CI baseline are version controlled. The expanded corpus and distance fix are local; the hosted environment still uses the original fixtures and deployed code.

@@ -270,7 +270,8 @@ def generate_case(case: Case) -> Dataset:
                                           'continuation_distance_m':p['carry'],
                                           'positive_claim_bounds':{'c-pressure':[2,2],'c-bypass':[3,3],
                                                                    'c-retain':[3,3],
-                                                                   'c-progress':[6.8,7.2] if family=='noisy_tracking' else [7,7]}}
+                                                                   'c-progress':[6.8,7.2] if family=='noisy_tracking' else [7,7]}
+                                                                  if any(p['pass_id'] in c['expected_pass_ids'] for c in checks) else None}
                                          for p in plans],
                                 'reference_basis':'Authored play/outcome and explicit observation-fault plan; not detector output.',
                                 'football_expert_review':'pending'}

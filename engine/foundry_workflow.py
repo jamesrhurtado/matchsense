@@ -163,7 +163,7 @@ class Runner:
     def elapsed(self):
         return round((perf_counter() - self.started) * 1000, 3)
 
-    async def call(self, role, instruction, payload, schema, max_tokens=1100):
+    async def call(self, role, instruction, payload, schema, max_tokens=600):
         call_number = self.calls + 1
         attributes = {'gen_ai.operation.name': 'chat',
                       'gen_ai.provider.name': 'azure.ai.openai',
@@ -187,7 +187,7 @@ class Runner:
                         if field in entry:
                             span.set_attribute(attribute, entry[field])
 
-    async def _call(self, role, instruction, payload, schema, max_tokens=1100):
+    async def _call(self, role, instruction, payload, schema, max_tokens=600):
         encoded = json.dumps(payload, ensure_ascii=False, separators=(',', ':'))
         # Bound request size independently of any model-selected tool arguments.
         if len(encoded) > 28000:
@@ -305,26 +305,17 @@ class Runner:
             return None
         if review.action not in {'supported', 'revise'} or not review.text.strip():
             raise WorkflowLimit('unresolved_review')
-        cycles = max(cycles, int(review.action == 'revise'))
-        canonical = [v for v in baseline['variants'] if v['focus'] is None]
-        team_name = next(t['name'] for t in self.tools.metadata['teams'] if t['id'] == m['team_id'])
-        numeric_checklists = []
-        for v in canonical:
-            prose = v['text'].replace(team_name, 'TEAM')
-            numeric_checklists.append({'language': v['language'], 'detail': v['detail'],
-                                       'numeric_tokens_in_required_order': re.findall(r'\d+(?:\.\d+)?', prose)})
-        editor_facts = {k: m[k] for k in ['pressure_opponents_max', 'pressure_radius_m',
-                                          'bypassed_count', 'retention_window_ms', 'progression_m']}
-        editor_facts['pressure_prior_window_seconds'] = 2
-        # Keep coordinates and timestamps out of audience editing; these belong
-        # to evidence replay and create avoidable numeric drift in prose.
-        editor_context = {'reviewed_meaning': re.sub(r'\d+(?:\.\d+)?', '[measurement]', review.text),
-                          'review_reason': re.sub(r'\d+(?:\.\d+)?', '[measurement]', review.reason),
-                          'facts': editor_facts, 'teams': context['teams'],
-                          'numeric_checklists': numeric_checklists}
-        editor_instruction = ' Act as Audience Editor. Return exactly en/simple,en/detail,es/simple,es/detail. Write fresh audience wording using the reviewed meaning. Simple text should be immediately understandable to a casual fan and mention forward progress and keeping possession. Detailed text should explain the measurements and their limits. Keep EXACTLY the numeric tokens in the same order as each numeric checklist, using digits and a decimal dot in both languages. Do not add ANY extra number, timestamp or coordinate. In detailed text the numbers mean: maximum nearby opponents, radius in metres, PRIOR window BEFORE the pass in seconds, opponents bypassed longitudinally, possession retained in seconds, metres progressed after reception. In simple text the ONLY number is opponents bypassed longitudinally. Detail variants must explicitly qualify that longitudinal positions do not prove a defensive line break. Do not add player names or coordinates. Simple variants must retain the possession team name. Never invent a new fact.'
+        was_revised = review.action == 'revise' and review.text.strip() != candidate.strip()
+        cycles = max(cycles, int(was_revised))
+        editor_context = {
+            'reviewed_meaning': re.sub(r'\d+(?:\.\d+)?', '[measurement]', review.text),
+            'review_reason': re.sub(r'\d+(?:\.\d+)?', '[measurement]', review.reason),
+            'required_audiences': ['en/simple', 'en/detail', 'es/simple', 'es/detail'],
+            'composition': 'The application appends verified measurements, team names and limitations after your introduction.',
+        }
+        editor_instruction = ' Act as Audience Editor. Return exactly en/simple,en/detail,es/simple,es/detail. Each text must be a brief NUMBER-FREE introduction, exactly one short sentence of at most 25 words. Explain the value of looking at this passage using the reviewed meaning. Simple introductions address casual fans; detailed introductions explain why checking the evidence matters. The application appends authoritative measurements and the required qualifications, so NEVER reproduce metrics, numerical quantities, timestamps, coordinates, player names or factual counts. Do not write any number as digits OR words in either language. Do not claim a goal, key pass, assist, shot, chance, intent, defensive line break, match control or causation. No shot is evidenced. Do not include [measurement] placeholders. Write natural audience language.'
         for attempt in range(2):
-            edit = await self.call('Audience Editor', editor_instruction, editor_context, EditorDecision, max_tokens=2400)
+            edit = await self.call('Audience Editor', editor_instruction, editor_context, EditorDecision, max_tokens=900)
             try:
                 variants = expand_and_validate(edit, m, self.tools.metadata)
                 break
@@ -332,50 +323,59 @@ class Runner:
                 if attempt:
                     raise
                 editor_context['repair_required'] = str(exc)
+                editor_context['invalid_introductions'] = edit.model_dump()
+                editor_context['repair_instruction'] = (
+                    'Correct the invalid introductions, not the facts paragraph. '
+                    'Remove ALL numerical quantities, including spelled words such as '
+                    'two and dos. Write between players / entre jugadores without '
+                    'counting them. Remove names and unsupported shot/goal/tactical '
+                    'claims. Each introduction must be a single sentence of at most '
+                    '25 words. The application supplies every measured fact.'
+                )
         # Generated audience prose gets a final semantic review, independently of
         # structural/numeric checks. This remains fallible model review, not proof.
         final_review = await self.call('Evidence Reviewer',
                                       review_instruction + ' Review all four audience texts. Return supported only if every claim and qualification is supported. Otherwise reject; no further repair is allowed.',
-                                      {'facts': context['metrics'], 'variants': edit.model_dump(),
+                                      {'facts': context['metrics'], 'variants': [v for v in variants if v['focus'] is None],
                                        'limitations': 'Proximity and longitudinal bypass only; no tactical line break, intent, or sustained control.'},
-                                      ReviewerDecision)
+                                      ReviewerDecision, max_tokens=500)
         if final_review.action != 'supported':
             raise WorkflowLimit('editor_semantic_review_failed')
         package = baseline
         package.update(mode='Microsoft Agent Framework + Azure OpenAI', variants=variants,
                        title='A forward pass, with evidence',
-                       review={'status': 'revised' if cycles else 'supported', 'mode': 'foundry',
+                       review={'status': 'revised' if was_revised else 'supported', 'mode': 'foundry',
                                'reason': review.reason, 'proposed_text': candidate,
                                'revised_text': review.text, 'cycles': cycles})
         return package
 
 
 def expand_and_validate(edit, metrics, metadata):
-    """Preserve focus suffixes and validate the entire generated audience matrix."""
-    bases = {(v.language, v.detail): v.text for v in edit.variants}
+    """Compose generated introductions with application-controlled facts.
+
+    The model never types numerical facts or their units. Every audience receives
+    the complete canonical evidence text and qualification, even if its generated
+    introduction contains no measurements or caveats.
+    """
+    bases = {(v.language, v.detail): v.text.strip() for v in edit.variants}
     if len(bases) != 4:
         raise ValueError('duplicate_or_missing_audience_variant')
-    canonical = render_variants(metrics, metadata)
-    general = {(v['language'], v['detail']): v['text'] for v in canonical if v['focus'] is None}
-    entity_names = [p['name'] for p in metadata['players']] + [t['name'] for t in metadata['teams']]
-    for key, text in bases.items():
-        original = general[key]
-        if key[1] == 'simple':
-            team = next(t['name'] for t in metadata['teams'] if t['id'] == metrics['team_id'])
-            if team not in text:
-                raise ValueError('missing_possession_team')
-        for name in entity_names:
-            if name in text and name not in original:
-                raise ValueError('unexpected_entity')
-        if re.search(r'\b(goal|scored|dominat\w*|guarantee\w*|probabilit\w*|intent\w*|domini\w*|marcó|anotó)\b', text, re.I):
+    player_names = [p['name'] for p in metadata['players']]
+    number_words = r'\b(?:zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred|thousand|million|half|quarter|cero|uno|dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez|once|doce|trece|catorce|quince|diecis[eé]is|diecisiete|dieciocho|diecinueve|veinte|veinti\w*|treinta|cuarenta|cincuenta|sesenta|setenta|ochenta|noventa|cien|ciento|mil|mill[oó]n|mitad)\b'
+    for text in bases.values():
+        if not text or len(text) > 400 or len(text.split()) > 25:
+            raise ValueError('audience_introduction_length')
+        if re.search(r'\d', text) or re.search(number_words, text, re.I):
+            raise ValueError('audience_introduction_contains_number')
+        if '[measurement]' in text:
+            raise ValueError('audience_introduction_placeholder')
+        if any(name in text for name in player_names):
+            raise ValueError('unexpected_entity')
+        if re.search(r'\b(goal|scored|key pass|pase clave|assist\w*|asistencia|shot|disparo|chance|ocasión|dominat\w*|guarantee\w*|probabilit\w*|intent\w*|domini\w*|marcó|anotó)\b', text, re.I):
             raise ValueError('unsupported_semantic_category')
-        if key[1] == 'detail':
-            qualified = (re.search(r'\b(not|cannot|doesn.t|do not|does not)\b', text, re.I)
-                         if key[0] == 'en' else re.search(r'\bno\b', text, re.I))
-            if not qualified or not re.search(r'\b(lines?|líneas?)\b', text, re.I):
-                raise ValueError('missing_geometric_qualification')
-    variants = [{**v, 'text': bases[(v['language'], v['detail'])] +
-                 v['text'][len(general[(v['language'], v['detail'])]):]} for v in canonical]
+    canonical = render_variants(metrics, metadata)
+    variants = [{**v, 'text': bases[(v['language'], v['detail'])] + ' ' + v['text']}
+                for v in canonical]
     return validate_variants(variants, metrics, metadata)
 
 
@@ -396,7 +396,9 @@ async def _run(tools, revision, proposed_text, baseline, provider, limits):
         package['review']['reason'] = 'Model workflow unavailable or invalid; supported deterministic template used. ' + type(exc).__name__
         validation_codes = {'duplicate_or_missing_audience_variant', 'missing_possession_team',
                             'unexpected_entity', 'unsupported_semantic_category',
-                            'missing_geometric_qualification', 'variant_set_incomplete', 'variant_numeric_mismatch'}
+                            'missing_geometric_qualification', 'variant_set_incomplete', 'variant_numeric_mismatch',
+                            'audience_introduction_length', 'audience_introduction_contains_number',
+                            'audience_introduction_placeholder'}
         runner.trace.append({'role': 'Workflow', 'action': 'template_fallback',
                              'status': type(exc).__name__, 'reason': str(exc) if isinstance(exc, WorkflowLimit) or str(exc) in validation_codes else 'provider_or_validation_failure',
                              'elapsed_ms': runner.elapsed()})

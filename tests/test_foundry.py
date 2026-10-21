@@ -26,9 +26,12 @@ def request(name='compare_prior_window', start=6000, end=16000):
 
 
 def editor(t):
-    baseline = run_workflow(t)
-    return {'variants': [{k: v[k] for k in ['language', 'detail', 'text']}
-                         for v in baseline['variants'] if v['focus'] is None]}
+    return {'variants': [
+        {'language': 'en', 'detail': 'simple', 'text': 'See how the passage unfolded.'},
+        {'language': 'en', 'detail': 'detail', 'text': 'Check the measurements behind this passage.'},
+        {'language': 'es', 'detail': 'simple', 'text': 'Mira cómo se desarrolló la jugada.'},
+        {'language': 'es', 'detail': 'detail', 'text': 'Consulta las mediciones de esta jugada.'},
+    ]}
 
 
 class FakeProvider:
@@ -47,12 +50,12 @@ class FakeProvider:
 def test_model_editor_changes_published_wording_and_usage():
     t = tools()
     edited = editor(t)
-    edited['variants'][0]['text'] = edited['variants'][0]['text'].replace('passed beyond', 'played a pass beyond')
+    edited['variants'][0]['text'] = 'Follow the forward passage and its evidence.'
     provider = FakeProvider([decision(), decision('supported'), edited, decision('supported')])
     p = run_foundry_workflow(t, provider=provider)
     assert p['mode'] == 'Microsoft Agent Framework + Azure OpenAI'
     assert p['model_usage'] == {'calls': 4, 'input_tokens': 400, 'output_tokens': 160, 'total_tokens': 560, 'usage_complete': True}
-    assert 'played a pass beyond' in p['variants'][0]['text']
+    assert p['variants'][0]['text'].startswith('Follow the forward passage and its evidence.')
     assert len(p['variants']) == 100
     assert p['package_hash'] == digest({k: v for k, v in p.items() if k != 'package_hash'})
 
@@ -215,3 +218,38 @@ def test_failure_span_excludes_provider_body_and_exception_details(monkeypatch):
     assert not span.events
     assert private not in json.dumps(dict(span.attributes))
     assert span.status.description is None
+
+
+def test_number_free_introductions_receive_all_authoritative_facts_and_caveats():
+    t = tools()
+    provider = FakeProvider([decision(), decision('supported'), editor(t), decision('supported')])
+    p = run_foundry_workflow(t, provider=provider)
+    baseline = run_workflow(t)
+    for actual, canonical in zip(p['variants'], baseline['variants'], strict=True):
+        assert actual['text'].endswith(canonical['text'])
+    # The final independent reviewer sees the composed text, including all
+    # measurements and qualifications, rather than just a generated introduction.
+    reviewed = provider.calls[-1][2]['variants']
+    assert len(reviewed) == 4
+    assert all('longitudinal' in v['text'].lower() for v in reviewed if v['detail'] == 'detail')
+    assert any('do not prove a defensive line' in v['text'] for v in reviewed)
+
+
+def test_spelled_numeric_introduction_is_rejected_and_repaired():
+    t = tools()
+    invalid = editor(t)
+    invalid['variants'][0]['text'] = 'The pass bypassed three opponents.'
+    provider = FakeProvider([decision(), decision('supported'), invalid, editor(t), decision('supported')])
+    p = run_foundry_workflow(t, provider=provider)
+    assert p['mode'] == 'Microsoft Agent Framework + Azure OpenAI'
+    assert provider.calls[3][2]['repair_required'] == 'audience_introduction_contains_number'
+    assert 'three opponents' not in p['variants'][0]['text']
+
+
+def test_identical_reviewer_text_does_not_claim_a_revision():
+    t = tools()
+    candidate = 'The team advanced and retained the ball.'
+    provider = FakeProvider([decision(text=candidate), decision('revise', text=candidate), editor(t), decision('supported')])
+    p = run_foundry_workflow(t, provider=provider)
+    assert p['review']['status'] == 'supported'
+    assert p['review']['cycles'] == 0

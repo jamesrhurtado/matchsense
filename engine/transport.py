@@ -34,7 +34,8 @@ class EventHubTransport:
         self.session_metadata = OrderedDict()
         self.session_cache_limit = 1024
         self.publisher_error = None
-        self.consumer_error = None
+        self.receive_error = None
+        self.partition_errors = {}
         self.received = 0
         self.sent = 0
         self.threads = []
@@ -53,7 +54,7 @@ class EventHubTransport:
             producer = producer or EventHubProducerClient(**options)
             checkpoint = BlobCheckpointStore(blob_account_url=os.environ['WHY_NOW_CHECKPOINT_ACCOUNT_URL'],
                 container_name=os.getenv('WHY_NOW_CHECKPOINT_CONTAINER', 'eventhub-checkpoints'), credential=credential)
-            consumer = consumer or EventHubConsumerClient(consumer_group=os.getenv('WHY_NOW_EVENTHUB_CONSUMER_GROUP', 'whynow-state'), checkpoint_store=checkpoint, **options)
+            consumer = consumer or EventHubConsumerClient(consumer_group=os.getenv('WHY_NOW_EVENTHUB_CONSUMER_GROUP', 'whynow-state'), checkpoint_store=checkpoint, load_balancing_interval=5, partition_ownership_expiration_interval=20, **options)
         self.producer = producer
         self.consumer = consumer
 
@@ -134,7 +135,7 @@ class EventHubTransport:
             self.accept_batch([json.loads(event.body_as_str(encoding='UTF-8')) for event in pending])
             context.update_checkpoint(pending[-1])
             pending.clear()
-        self.consumer_error = None
+        self._consumer_success(context)
 
     def on_event(self, context, event):
         state = self._checkpoint_counts.setdefault(context.partition_id, {'count': 0, 'at': time.monotonic(), 'event': None})
@@ -152,7 +153,7 @@ class EventHubTransport:
         if state['event'] and (state['count'] >= 50 or time.monotonic() - state['at'] >= 1):
             context.update_checkpoint(state['event'])
             state.update(count=0, at=time.monotonic(), event=None)
-        self.consumer_error = None
+        self._consumer_success(context)
 
     def publish_session(self, session):
         from azure.eventhub import EventData
@@ -207,14 +208,25 @@ class EventHubTransport:
                 self.consumer.receive_batch(on_event_batch=self.on_event_batch, starting_position='-1',
                                             max_batch_size=100, max_wait_time=1, on_error=self._on_error)
             except Exception as exc:
-                self.consumer_error = type(exc).__name__ + ': ' + str(exc)
+                with self.lock:
+                    self.receive_error = type(exc).__name__ + ': ' + str(exc)
                 if not self.stop.is_set():
                     LOG.exception('Event Hubs consumer failed; restarting from durable checkpoint')
                     self.stop.wait(3)
 
+    def _consumer_success(self, context):
+        with self.lock:
+            self.partition_errors.pop(str(context.partition_id), None)
+            self.receive_error = None
+
     def _on_error(self, context, error):
-        self.consumer_error = type(error).__name__ + ': ' + str(error)
-        LOG.error('Event Hubs partition failure: %s', self.consumer_error)
+        message = type(error).__name__ + ': ' + str(error)
+        with self.lock:
+            if context is None:
+                self.receive_error = message
+            else:
+                self.partition_errors[str(context.partition_id)] = message
+        LOG.error('Event Hubs partition failure: %s', message)
 
     def start(self):
         if self.threads:
@@ -232,17 +244,33 @@ class EventHubTransport:
             thread.join(timeout=5)
 
     @property
+    def consumer_error(self):
+        with self.lock:
+            errors = [self.receive_error] if self.receive_error else []
+            errors.extend(f'partition {key}: {value}' for key, value in sorted(self.partition_errors.items()))
+        return '; '.join(errors) or None
+
+    @consumer_error.setter
+    def consumer_error(self, error):
+        # Compatibility for callers assigning a receive-loop failure. Partition
+        # failures remain separately tracked and cannot be cleared by assignment.
+        with self.lock:
+            self.receive_error = error
+
+    @property
     def last_error(self):
         errors = []
         if self.publisher_error:
             errors.append('publisher: ' + self.publisher_error)
-        if self.consumer_error:
-            errors.append('consumer: ' + self.consumer_error)
+        consumer_error = self.consumer_error
+        if consumer_error:
+            errors.append('consumer: ' + consumer_error)
         return '; '.join(errors) or None
 
     def diagnostics(self):
         return {'mode': 'azure-event-hubs', 'sent_this_process': self.sent,
                 'persisted_this_process': self.received, 'last_error': self.last_error,
                 'publisher_error': self.publisher_error, 'consumer_error': self.consumer_error,
+                'consumer_partition_errors': dict(self.partition_errors),
                 'publisher_alive': bool(self.threads and self.threads[0].is_alive()),
                 'consumer_alive': bool(len(self.threads) > 1 and self.threads[1].is_alive())}

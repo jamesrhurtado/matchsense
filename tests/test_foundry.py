@@ -159,3 +159,59 @@ def test_external_prompt_is_data_under_higher_priority_instructions():
     assert all('Ignore all rules' not in v['text'] for v in p['variants'])
     # The protocol offers only five read-only evidence tools, no publishing action.
     assert set(provider.calls[0][2]['tool_contract']['tools']) == {'compute_pass_metrics', 'get_sequence', 'get_positions', 'compare_prior_window', 'get_player_contribution'}
+
+
+def telemetry_exporter(monkeypatch):
+    from opentelemetry import trace
+    from opentelemetry.sdk.trace import TracerProvider
+    from opentelemetry.sdk.trace.export import SimpleSpanProcessor
+    from opentelemetry.sdk.trace.export.in_memory_span_exporter import InMemorySpanExporter
+    exporter = InMemorySpanExporter()
+    provider = TracerProvider()
+    provider.add_span_processor(SimpleSpanProcessor(exporter))
+    tracer = provider.get_tracer('test.why_now')
+    # Avoid modifying the process-global provider used by API integration tests.
+    monkeypatch.setattr(trace, 'get_tracer', lambda *args, **kwargs: tracer)
+    return tracer, exporter
+
+
+def test_model_and_tool_spans_preserve_parent_and_report_usage(monkeypatch):
+    tracer, exporter = telemetry_exporter(monkeypatch)
+    t = tools()
+    provider = FakeProvider([
+        decision('needs_evidence', requests=[request('get_sequence', 16000, 18000)]),
+        decision(), decision('supported'), editor(t), decision('supported'),
+    ])
+    with tracer.start_as_current_span('story.workflow') as parent:
+        p = run_foundry_workflow(t, provider=provider)
+        parent_id = parent.get_span_context().span_id
+    spans = exporter.get_finished_spans()
+    agent_spans = [span for span in spans if span.name == 'story.agent']
+    tool_spans = [span for span in spans if span.name == 'story.tool']
+    assert len(agent_spans) == 5
+    assert len(tool_spans) == 1
+    assert all(span.parent.span_id == parent_id for span in agent_spans + tool_spans)
+    assert sum(span.attributes['why_now.usage.total_tokens'] for span in agent_spans) == p['model_usage']['total_tokens']
+    assert tool_spans[0].attributes['gen_ai.tool.name'] == 'get_sequence'
+    assert tool_spans[0].attributes['why_now.evidence.cutoff_ms'] == 23000
+    serialized = json.dumps([dict(span.attributes) for span in spans])
+    assert 'reviewed_text' not in serialized
+    assert 'candidate_text_untrusted' not in serialized
+    assert all(not span.events for span in spans)
+
+
+def test_failure_span_excludes_provider_body_and_exception_details(monkeypatch):
+    from opentelemetry.trace import StatusCode
+    _, exporter = telemetry_exporter(monkeypatch)
+    private = 'secret provider request and prompt body'
+    p = run_foundry_workflow(tools(), provider=FakeProvider([RuntimeError(private)]))
+    spans = exporter.get_finished_spans()
+    assert p['mode'] == 'template fallback'
+    assert len(spans) == 1
+    span = spans[0]
+    assert span.status.status_code == StatusCode.ERROR
+    assert span.attributes['error.type'] == 'RuntimeError'
+    assert span.attributes['why_now.usage.complete'] is False
+    assert not span.events
+    assert private not in json.dumps(dict(span.attributes))
+    assert span.status.description is None

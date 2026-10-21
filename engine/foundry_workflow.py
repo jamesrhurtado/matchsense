@@ -7,6 +7,7 @@ SDK imports are lazy so template-only installations continue to work.
 from __future__ import annotations
 
 import asyncio
+from contextlib import contextmanager
 from dataclasses import dataclass
 import json
 import os
@@ -70,6 +71,31 @@ _GATE = threading.BoundedSemaphore(2)
 
 class WorkflowLimit(RuntimeError):
     pass
+
+
+@contextmanager
+def _telemetry_span(name, attributes):
+    """Export operational metadata only; provider error bodies can contain data.
+
+    The API configures the exporter and parent workflow/session span. The default
+    OpenTelemetry provider is a no-op, so local runs need no telemetry setup.
+    """
+    try:
+        from opentelemetry import trace
+        from opentelemetry.trace import Status, StatusCode
+    except ImportError:
+        yield None
+        return
+    tracer = trace.get_tracer('why_now.foundry_workflow', '1.0.0')
+    with tracer.start_as_current_span(name, attributes=attributes,
+                                      record_exception=False,
+                                      set_status_on_exception=False) as span:
+        try:
+            yield span
+        except BaseException as exc:
+            span.set_attribute('error.type', type(exc).__name__)
+            span.set_status(Status(StatusCode.ERROR))
+            raise
 
 
 class AgentFrameworkProvider:
@@ -138,6 +164,30 @@ class Runner:
         return round((perf_counter() - self.started) * 1000, 3)
 
     async def call(self, role, instruction, payload, schema, max_tokens=1100):
+        call_number = self.calls + 1
+        attributes = {'gen_ai.operation.name': 'chat',
+                      'gen_ai.provider.name': 'azure.ai.openai',
+                      'why_now.agent.role': role,
+                      'why_now.model.call': call_number,
+                      'why_now.output.token_limit': max_tokens}
+        with _telemetry_span('story.agent', attributes) as span:
+            try:
+                return await self._call(role, instruction, payload, schema, max_tokens)
+            finally:
+                # Never export prompts, model text, tools payloads or exception
+                # descriptions. They remain in the protected producer package.
+                entry = next((t for t in reversed(self.trace)
+                              if t['action'] == 'model_decision' and t.get('call') == call_number), None)
+                if span is not None and entry is not None:
+                    span.set_attribute('why_now.decision', entry['status'])
+                    span.set_attribute('why_now.usage.complete', entry.get('usage_reported', False))
+                    for field, attribute in [('input_tokens', 'gen_ai.usage.input_tokens'),
+                                             ('output_tokens', 'gen_ai.usage.output_tokens'),
+                                             ('total_tokens', 'why_now.usage.total_tokens')]:
+                        if field in entry:
+                            span.set_attribute(attribute, entry[field])
+
+    async def _call(self, role, instruction, payload, schema, max_tokens=1100):
         encoded = json.dumps(payload, ensure_ascii=False, separators=(',', ':'))
         # Bound request size independently of any model-selected tool arguments.
         if len(encoded) > 28000:
@@ -172,6 +222,16 @@ class Runner:
             raise
 
     def evidence(self, request, role):
+        with _telemetry_span('story.tool', {'why_now.agent.role': role,
+                                          'gen_ai.tool.name': request.tool,
+                                          'why_now.evidence.cutoff_ms': self.tools.cutoff_ms}) as span:
+            result = self._evidence(request, role)
+            if span is not None:
+                span.set_attribute('why_now.tool.status', 'completed')
+                span.set_attribute('why_now.tool.call', self.tool_calls)
+            return result
+
+    def _evidence(self, request, role):
         if self.tool_calls >= self.limits.tool_calls:
             raise WorkflowLimit('tool_budget')
         self.tool_calls += 1

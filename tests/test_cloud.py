@@ -263,7 +263,7 @@ def test_idle_consumer_does_not_clear_publisher_failure(repo):
     t._on_error(context,RuntimeError('receiver is unavailable'))
     assert 'publisher:' in t.last_error and 'consumer:' in t.last_error
     t.publisher_error=None
-    assert t.last_error == 'consumer: RuntimeError: receiver is unavailable'
+    assert t.last_error == 'consumer: partition 0: RuntimeError: receiver is unavailable'
 
 
 def test_cache_reconciles_rows_checkpointed_by_another_host(repo,monkeypatch):
@@ -351,3 +351,18 @@ def test_batch_consumer_retries_failed_batch_before_checkpoint(repo,monkeypatch)
     t.on_event_batch(context,events[2:])
     assert checkpoints == [events[-1]]
     assert repo.read_observations('session') == messages[:3]
+
+
+def test_idle_partition_cannot_clear_another_partition_failure(repo):
+    t=transport(repo)
+    failed=SimpleNamespace(partition_id='0',update_checkpoint=lambda _:None)
+    idle=SimpleNamespace(partition_id='1',update_checkpoint=lambda _:None)
+    t._on_error(failed,OSError('partition zero persistence failed'))
+    t.consumer_error='receive loop restarted'
+    t.on_event_batch(idle,[])
+    assert t.receive_error is None
+    assert t.consumer_error == 'partition 0: OSError: partition zero persistence failed'
+    assert t.diagnostics()['consumer_partition_errors'] == {'0':'OSError: partition zero persistence failed'}
+    t.on_event_batch(failed,[])
+    assert t.consumer_error is None
+    assert t.last_error is None

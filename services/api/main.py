@@ -32,12 +32,14 @@ if os.getenv('WHY_NOW_EVENTHUB_NAMESPACE'):
 WORKERS=ThreadPoolExecutor(max_workers=2,thread_name_prefix='story')
 JOBS={}
 logger=logging.getLogger('whynow')
+logger.setLevel(logging.INFO)
 
 def workflow(tools,**kwargs):
+    session_id=kwargs.pop('session_id','local')
     if FOUNDRY:
         from engine.foundry_workflow import run_foundry_workflow
         from opentelemetry import trace
-        with trace.get_tracer('whynow').start_as_current_span('story.workflow',attributes={'source.cutoff_ms':tools.cutoff_ms,'workflow.revision':kwargs.get('revision',1)}):
+        with trace.get_tracer('whynow').start_as_current_span('story.workflow',attributes={'source.cutoff_ms':tools.cutoff_ms,'workflow.revision':kwargs.get('revision',1),'replay.session_id':session_id,'match.id':tools.metadata['match_id']}):
             return run_foundry_workflow(tools,**kwargs)
     return run_workflow(tools,**kwargs)
 
@@ -61,7 +63,7 @@ app=FastAPI(title='WHY/NOW',version='0.2.0',lifespan=lifespan)
 if os.getenv('APPLICATIONINSIGHTS_CONNECTION_STRING'):
     from azure.monitor.opentelemetry import configure_azure_monitor
     from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
-    configure_azure_monitor(logger_name='whynow',enable_live_metrics=False)
+    configure_azure_monitor(logger_name='whynow',enable_live_metrics=False,sampling_ratio=0.1)
     FastAPIInstrumentor.instrument_app(app)
 
 app.add_middleware(CORSMiddleware,allow_origins=os.getenv('WHY_NOW_ORIGINS','http://localhost:3000,http://127.0.0.1:3000').split(','),allow_methods=['GET','POST'],allow_headers=['Content-Type','X-Producer-Token','Last-Event-ID'])
@@ -118,7 +120,7 @@ def materialize(s,at):
     future=JOBS.get(key)
     if future is None:
         if sum(not f.done() for f in JOBS.values())>=4:return None
-        future=WORKERS.submit(workflow,EvidenceTools(meta,messages,at),revision=revision)
+        future=WORKERS.submit(workflow,EvidenceTools(meta,messages,at),revision=revision,session_id=s['id'])
         JOBS[key]=future
         return None
     if not future.done():return None
@@ -250,7 +252,7 @@ def review(sid:str,story_id:str,body:Review,x_producer_token:str|None=Header(Non
         if body.action=='retract' and status not in ('approved','expired'):fail(409,'not_published')
         if body.action=='edit':
             if not body.text or not body.text.strip():fail(422,'edit_text_required')
-            meta,messages=inputs(s,at);p=workflow(EvidenceTools(meta,messages,at),revision=p['revision']+1,proposed_text=body.text)
+            meta,messages=inputs(s,at);p=workflow(EvidenceTools(meta,messages,at),revision=p['revision']+1,proposed_text=body.text,session_id=sid)
             if p is None:fail(422,'review_rejected')
             new_status='ready'
         else:new_status={'approve':'approved','suppress':'suppressed','retract':'retracted'}[body.action]
@@ -276,7 +278,7 @@ def diagnostics(sid:str,x_producer_token:str|None=Header(None)):
     with LOCK:
         s=get_session(sid);at=clock(s);p=materialize(s,at);meta,messages=inputs(s,at)
         usage=p.get('model_usage',{}) if p else {}
-        return {'session_id':sid,'clock_ms':at,'mode':p['mode'] if p else runtime_mode(),'observations_delivered':len(available(messages,at)),'metric_version':'pressure-escape-v1','workflow_ms':p['workflow_ms'] if p else None,'trace':p['trace'] if p else [],'audit':repo.audit(sid),'azure_deployed':CLOUD,'model_calls':p.get('model_calls',usage.get('calls',0)) if p else 0,'model_tokens':p.get('model_tokens',usage.get('total_tokens',0)) if p else 0,'model_usage':usage,'transport':transport.diagnostics() if transport else {'mode':'local'},'workflow_pending':any(k[0]==sid and not f.done() for k,f in JOBS.items())}
+        return {'session_id':sid,'clock_ms':at,'mode':p['mode'] if p else runtime_mode(),'observations_delivered':len(available(messages,at)),'ingestion_lag_ms':max(0,at-max((m['available_at_ms'] for m in available(messages,at)),default=0)),'metric_version':'pressure-escape-v1','workflow_ms':p['workflow_ms'] if p else None,'trace':p['trace'] if p else [],'audit':repo.audit(sid),'azure_deployed':CLOUD,'model_calls':p.get('model_calls',usage.get('calls',0)) if p else 0,'model_tokens':p.get('model_tokens',usage.get('total_tokens',0)) if p else 0,'model_usage':usage,'transport':transport.diagnostics() if transport else {'mode':'local'},'workflow_pending':any(k[0]==sid and not f.done() for k,f in JOBS.items())}
 
 _RATE=defaultdict(deque)
 _RATE_LOCK=threading.Lock()

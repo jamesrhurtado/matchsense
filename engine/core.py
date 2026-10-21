@@ -20,7 +20,17 @@ def load_match(match_id):
     for message in messages: OBSERVATION.validate_python(message)
     return metadata,messages
 
-def digest(value): return hashlib.sha256(json.dumps(value,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+def digest(value):
+    # Cosmos/JavaScript JSON serializers may return 1.0 as 1. Numeric equality
+    # must survive persistence without weakening string, array or field identity.
+    def canonical(item):
+        if isinstance(item,float):
+            if not math.isfinite(item):raise ValueError('nonfinite_hash_operand')
+            return int(item) if item.is_integer() else item
+        if isinstance(item,dict):return {key:canonical(v) for key,v in item.items()}
+        if isinstance(item,(list,tuple)):return [canonical(v) for v in item]
+        return item
+    return hashlib.sha256(json.dumps(canonical(value),sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest()
 
 def available(messages,cutoff):
     # Deduplicate exact retransmissions and apply only delivered correction lineages.

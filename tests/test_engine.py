@@ -143,3 +143,20 @@ def test_contract_rejects_future_fields_and_early_availability():
     with pytest.raises(ValidationError):OBSERVATION.validate_python(start)
     del start['payload']['details']['outcome'];start['available_at_ms']=start['timeline_ms']-1
     with pytest.raises(ValidationError):OBSERVATION.validate_python(start)
+
+
+def test_content_hash_survives_cosmos_integral_float_serialization():
+    import json
+    from engine.core import digest,load_match
+    from engine.workflow import EvidenceTools,run_workflow
+    meta,rows=load_match('match-001')
+    def cosmos_roundtrip(value):
+        return json.loads(json.dumps(value),parse_float=lambda text:int(float(text)) if float(text).is_integer() else float(text))
+    assert digest(rows)==digest(cosmos_roundtrip(rows))
+    package=run_workflow(EvidenceTools(meta,rows,25000))
+    stored=cosmos_roundtrip(package)
+    stored_hash=stored.pop('package_hash')
+    assert digest(stored)==stored_hash
+    assert digest({'x':1})==digest({'x':1.0})
+    assert digest({'x':1})!=digest({'x':'1'})
+    assert digest({'x':1.1})!=digest({'x':1})

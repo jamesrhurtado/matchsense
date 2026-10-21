@@ -82,6 +82,8 @@ Runtime exports contain only observations; seeds, fault plans, clean future traj
 
 The local and Azure implementations are available; see the QA guide for completed live checks and remaining test boundaries. Competition submission packaging remains pending. [Implementation status](docs/implementation-status.md) maps the handoff's acceptance phases to evidence and outstanding work. [Demo guide](docs/demo.md) describes what can honestly be shown now.
 
+The researched [Grand Prize improvement plan](docs/next-iteration/README.md) is the engineering handoff for the next iteration. It includes the current agent audit, prioritized tickets, evaluation and user-research protocols, release gates, and submission schedule. Proposed changes are explicitly separate from the implemented MVP.
+
 Local mode uses SQLite. Cloud mode uses Cosmos and Event Hubs, with one API worker/replica enforced for this engineering environment. It supports independent pass investigations across each segment, two fictional teams, 22 active players and 10 Hz observations. Runtime evidence is limited to the delivered clock. The underlying dataset is synthetic, with six authored parent configurations. Local tests do not establish real-match tactical accuracy, general semantic verification, production scale, or measured editorial savings.
 
 No real match records, footage, team logos, viewer accounts or third-party TV synchronization are included. Cloud producer access uses a private key and request limits; enterprise multi-tenant authorization is future work. The repository and submission video have not been published.

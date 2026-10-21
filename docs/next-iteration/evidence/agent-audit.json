@@ -1,0 +1,40 @@
+{
+  "assessment_date_lima": "2026-10-21",
+  "source_commit": "e62c043676f0083cb5e4808547c63292c3aad7a8",
+  "method": "offline adversarial fake-provider boundary probes",
+  "actual_model_calls": 0,
+  "azure_changes": false,
+  "findings": [
+    {
+      "probe": "permissive_fake_reviewer",
+      "untrusted_introduction": "The pass split the defensive line and left the defence exposed.",
+      "evidence_retained": true,
+      "package_returned": true,
+      "unsupported_introduction_survived": true,
+      "fake_provider_calls": 4,
+      "published_to_viewers": false
+    },
+    {
+      "probe": "permissive_fake_reviewer",
+      "untrusted_introduction": "The pass failed and possession was lost.",
+      "evidence_retained": true,
+      "package_returned": true,
+      "unsupported_introduction_survived": true,
+      "fake_provider_calls": 4,
+      "published_to_viewers": false
+    },
+    {
+      "probe": "abstention_result_accounting",
+      "package_returned": false,
+      "fake_provider_calls": 1,
+      "usage_available_in_return_value": false,
+      "note": "Per-call telemetry can exist; package-based accounting has no outcome."
+    },
+    {
+      "probe": "context_separation",
+      "producer_proposal_reaches_analyst": true,
+      "producer_proposal_reaches_first_reviewer": true,
+      "note": "Separate role calls are not a blind or statistically independent fact check."
+    }
+  ]
+}

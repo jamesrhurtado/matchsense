@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "status": "protocol, not completed results",
+  "baseline_commit": "e62c043",
+  "split": "developer-visible discovery",
+  "dataset_module": "evals.agentic.dataset",
+  "challenge_compositions": 4,
+  "shared_generator_backbones": 1,
+  "structural_independence": "unverified; do not count seeds or compositions as independent football parents",
+  "final_split": "pending independent QA authorship, football review and sealing",
+  "arms": {
+    "T2": "structured deterministic package; zero model calls",
+    "S2": "strong single agent, same evidence/tools/renderer and bounded repair",
+    "M2": "Director plus Claim Reviewer, same evidence/tools/renderer and total ceiling",
+    "L1": "historical anchor; separate contract and budget, excluded from matched comparison"
+  },
+  "default": "T2 offline smoke, zero model calls",
+  "live": "requires --live, explicit rate/budget/deadline config, and implemented bounded adapters",
+  "workflow_reservation": {"max_calls": 6, "input_tokens": 32000, "output_tokens": 6600},
+  "human_review": "pending; randomized arm-blind ratings required",
+  "claims": "No model advantage, usefulness, productivity, or real-match accuracy is established by this protocol."
+}

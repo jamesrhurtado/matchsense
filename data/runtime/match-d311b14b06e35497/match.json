@@ -1,0 +1,225 @@
+{
+  "schema_version": "1.0.0",
+  "match_id": "match-d311b14b06e35497",
+  "synthetic": true,
+  "scope": "segment",
+  "pitch": {
+    "length_m": 105,
+    "width_m": 68,
+    "convention": "x right, y down"
+  },
+  "teams": [
+    {
+      "id": "blue",
+      "name": "Harbor City",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "amber",
+      "name": "Alder Rovers",
+      "color": "#f59e0b"
+    }
+  ],
+  "players": [
+    {
+      "id": "blue-01",
+      "team_id": "blue",
+      "name": "Ilan Marin",
+      "number": 1,
+      "role": "keeper"
+    },
+    {
+      "id": "blue-02",
+      "team_id": "blue",
+      "name": "Jori Vela",
+      "number": 2,
+      "role": "outfield"
+    },
+    {
+      "id": "blue-03",
+      "team_id": "blue",
+      "name": "Kian Rocha",
+      "number": 3,
+      "role": "outfield"
+    },
+    {
+      "id": "blue-04",
+      "team_id": "blue",
+      "name": "Ari Roca",
+      "number": 4,
+      "role": "outfield"
+    },
+    {
+      "id": "blue-05",
+      "team_id": "blue",
+      "name": "Beni Prado",
+      "number": 5,
+      "role": "outfield"
+    },
+    {
+      "id": "blue-06",
+      "team_id": "blue",
+      "name": "Ciro Sierra",
+      "number": 6,
+      "role": "outfield"
+    },
+    {
+      "id": "blue-07",
+      "team_id": "blue",
+      "name": "Dani Vidal",
+      "number": 7,
+      "role": "outfield"
+    },
+    {
+      "id": "blue-08",
+      "team_id": "blue",
+      "name": "Eren Luna",
+      "number": 8,
+      "role": "outfield"
+    },
+    {
+      "id": "blue-09",
+      "team_id": "blue",
+      "name": "Feli Costa",
+      "number": 9,
+      "role": "outfield"
+    },
+    {
+      "id": "blue-10",
+      "team_id": "blue",
+      "name": "Gabi Neri",
+      "number": 10,
+      "role": "outfield"
+    },
+    {
+      "id": "blue-11",
+      "team_id": "blue",
+      "name": "Hugo Paz",
+      "number": 11,
+      "role": "outfield"
+    },
+    {
+      "id": "amber-01",
+      "team_id": "amber",
+      "name": "Jori Paz",
+      "number": 1,
+      "role": "keeper"
+    },
+    {
+      "id": "amber-02",
+      "team_id": "amber",
+      "name": "Kian Roca",
+      "number": 2,
+      "role": "outfield"
+    },
+    {
+      "id": "amber-03",
+      "team_id": "amber",
+      "name": "Ari Costa",
+      "number": 3,
+      "role": "outfield"
+    },
+    {
+      "id": "amber-04",
+      "team_id": "amber",
+      "name": "Beni Sierra",
+      "number": 4,
+      "role": "outfield"
+    },
+    {
+      "id": "amber-05",
+      "team_id": "amber",
+      "name": "Ciro Vela",
+      "number": 5,
+      "role": "outfield"
+    },
+    {
+      "id": "amber-06",
+      "team_id": "amber",
+      "name": "Dani Luna",
+      "number": 6,
+      "role": "outfield"
+    },
+    {
+      "id": "amber-07",
+      "team_id": "amber",
+      "name": "Eren Neri",
+      "number": 7,
+      "role": "outfield"
+    },
+    {
+      "id": "amber-08",
+      "team_id": "amber",
+      "name": "Feli Vidal",
+      "number": 8,
+      "role": "outfield"
+    },
+    {
+      "id": "amber-09",
+      "team_id": "amber",
+      "name": "Gabi Prado",
+      "number": 9,
+      "role": "outfield"
+    },
+    {
+      "id": "amber-10",
+      "team_id": "amber",
+      "name": "Hugo Rocha",
+      "number": 10,
+      "role": "outfield"
+    },
+    {
+      "id": "amber-11",
+      "team_id": "amber",
+      "name": "Ilan Marin",
+      "number": 11,
+      "role": "outfield"
+    }
+  ],
+  "periods": [
+    {
+      "period": 1,
+      "timeline_offset_ms": 0,
+      "attack_direction": {
+        "blue": "left",
+        "amber": "right"
+      }
+    }
+  ],
+  "initial_state": {
+    "period": 1,
+    "period_elapsed_ms": 0,
+    "score": {
+      "blue": 0,
+      "amber": 0
+    },
+    "active_player_ids": [
+      "blue-01",
+      "blue-02",
+      "blue-03",
+      "blue-04",
+      "blue-05",
+      "blue-06",
+      "blue-07",
+      "blue-08",
+      "blue-09",
+      "blue-10",
+      "blue-11",
+      "amber-01",
+      "amber-02",
+      "amber-03",
+      "amber-04",
+      "amber-05",
+      "amber-06",
+      "amber-07",
+      "amber-08",
+      "amber-09",
+      "amber-10",
+      "amber-11"
+    ],
+    "ball_status": "controlled",
+    "possession_team_id": "blue"
+  },
+  "tracking_hz": 10,
+  "provenance_id": "prov-d311b14b06e35497"
+}

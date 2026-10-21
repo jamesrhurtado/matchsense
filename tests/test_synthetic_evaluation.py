@@ -3,17 +3,18 @@ from evals.synthetic import build_report, evaluate_case, signature, summarize
 from simulator.scenarios import get_case
 
 
-def test_report_counts_false_alerts_and_missed_later_passes():
+def test_report_counts_false_alerts_and_detects_later_passes():
     rows=[evaluate_case(get_case(c)) for c in ('p01-01','p01-08','p01-27','p01-28')]
     report=build_report(rows,'template')
     assert report['summary']['cases']==4
-    assert report['summary']['cases_passed']==2
+    assert report['summary']['cases_passed']==4
     assert report['summary']['false_alert_distinct_moments']==0
-    assert report['summary']['missed_distinct_moments']==3
+    assert report['summary']['missed_distinct_moments']==0
     assert report['by_family']['rounding_boundary']['cases_failed']==0
     assert report['model_usage']['calls']==0
     assert report['workflows']['variants_checked']>=100
     assert len(signature(report)['cases'])==4
+    assert report['input_integrity']=={'source_commit':'b9bc99f','cases_checked':4,'unchanged':True}
 
 
 def test_counts_are_at_checkpoints_and_moments_not_tracking_rows():
@@ -53,3 +54,14 @@ def test_false_alert_accounting_does_not_inflate_true_moment_count():
     assert summary['expected_distinct_moments']==1
     assert summary['detected_expected_moments']==1
     assert summary['false_alerts_per_simulated_minute']==1
+
+
+def test_regression_inputs_match_snapshot_from_before_multipass_fix():
+    import json
+    from evals.synthetic import ROOT
+    frozen=json.loads((ROOT/'evals/synthetic-v2/input-baseline.json').read_text())
+    current=json.loads((ROOT/'evals/synthetic-v2/baseline.json').read_text())
+    assert frozen['source_commit']=='b9bc99f'
+    assert len(frozen['cases'])==len(current['cases'])==168
+    for case_id, hashes in frozen['cases'].items():
+        assert all(current['cases'][case_id][key]==value for key,value in hashes.items())

@@ -1,0 +1,1028 @@
+[
+  {
+    "match_id": "match-001",
+    "label": "Original segment 1 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-002",
+    "label": "Original segment 2 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-003",
+    "label": "Original segment 3 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-ce88c61d5a0c5d1d",
+    "label": "Synthetic segment 028 \u00b7 3 min",
+    "duration_ms": 180000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-f8b7c2564b7c527a",
+    "label": "Synthetic segment 027 \u00b7 1 min",
+    "duration_ms": 90000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-8a22d10f44fb50c6",
+    "label": "Synthetic segment 001 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-4f53fd9ef1315f09",
+    "label": "Synthetic segment 002 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-8918f0b661205c3c",
+    "label": "Synthetic segment 003 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-9545e3c42f4d5d26",
+    "label": "Synthetic segment 004 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-d2bf7507ee0350b0",
+    "label": "Synthetic segment 005 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-dadbfd0a91e3506a",
+    "label": "Synthetic segment 006 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-90ca1c3e11cf56ee",
+    "label": "Synthetic segment 007 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-fd5d0d3736055666",
+    "label": "Synthetic segment 008 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-27557aa5b5075753",
+    "label": "Synthetic segment 009 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-99c900ade60d5e6d",
+    "label": "Synthetic segment 010 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-82ee70a874de596f",
+    "label": "Synthetic segment 011 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-cf4791db33fe5568",
+    "label": "Synthetic segment 012 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-d2e530d3983253b0",
+    "label": "Synthetic segment 013 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-f5a63ac215bc5b65",
+    "label": "Synthetic segment 014 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-7e36c2f95e435e5c",
+    "label": "Synthetic segment 015 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-6b3b2f50771d58f0",
+    "label": "Synthetic segment 016 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-29f7642879be54b4",
+    "label": "Synthetic segment 017 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-56407b6f424d59d4",
+    "label": "Synthetic segment 018 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-222c308493f258a2",
+    "label": "Synthetic segment 019 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-643bdfcf48515bc0",
+    "label": "Synthetic segment 020 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-cd425ce888f3511f",
+    "label": "Synthetic segment 021 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-06adb9603afd55b8",
+    "label": "Synthetic segment 022 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-bba5572d53d25c8c",
+    "label": "Synthetic segment 023 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-689b3a6aacbb50e7",
+    "label": "Synthetic segment 024 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-feaed937bfa454e5",
+    "label": "Synthetic segment 025 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-75298ada78b25f0b",
+    "label": "Synthetic segment 026 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-69da4a51ca305efb",
+    "label": "Synthetic segment 029 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-2c0b10a546445826",
+    "label": "Synthetic segment 030 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-dc837b392d9d590f",
+    "label": "Synthetic segment 031 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-b9f1b2ab8a3a5bfb",
+    "label": "Synthetic segment 032 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-a6c3a7f8b71e5767",
+    "label": "Synthetic segment 033 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-acc982f04ba85ed4",
+    "label": "Synthetic segment 034 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-1dee90ca71dd5227",
+    "label": "Synthetic segment 035 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-b7f84ef073f7535e",
+    "label": "Synthetic segment 036 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-745582b9e9ed51a5",
+    "label": "Synthetic segment 037 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-d50afbbe51b552e2",
+    "label": "Synthetic segment 038 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-1b62b2b215f559bc",
+    "label": "Synthetic segment 039 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-6f4af7312330512e",
+    "label": "Synthetic segment 040 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-6e95d8f356d453a3",
+    "label": "Synthetic segment 041 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-4bb6ad6b25595695",
+    "label": "Synthetic segment 042 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-0cc5fd0ecb8e57fd",
+    "label": "Synthetic segment 043 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-4308f087c074564a",
+    "label": "Synthetic segment 044 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-26a3856ee5495085",
+    "label": "Synthetic segment 045 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-e68c8e64338c531f",
+    "label": "Synthetic segment 046 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-65ad393dc14b581d",
+    "label": "Synthetic segment 047 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-7d8d4bfe9a72571b",
+    "label": "Synthetic segment 048 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-6ab11fff435657aa",
+    "label": "Synthetic segment 049 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-904705eb3ab35a6e",
+    "label": "Synthetic segment 050 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-1061ae009c7053e2",
+    "label": "Synthetic segment 051 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-38bd32b66c9b5abd",
+    "label": "Synthetic segment 052 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-f30f200103675b35",
+    "label": "Synthetic segment 053 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-b3c32da615485c89",
+    "label": "Synthetic segment 054 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-64ff436f726550cb",
+    "label": "Synthetic segment 055 \u00b7 1 min",
+    "duration_ms": 90000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-bbd5b3369746561e",
+    "label": "Synthetic segment 056 \u00b7 3 min",
+    "duration_ms": 180000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-feacdaccea4f50dc",
+    "label": "Synthetic segment 057 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-76d71459baa35d2a",
+    "label": "Synthetic segment 058 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-dc9d8c2a4e095008",
+    "label": "Synthetic segment 059 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-a0d33052ddbe5d5a",
+    "label": "Synthetic segment 060 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-bab94425c5e3580f",
+    "label": "Synthetic segment 061 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-49306fa4d01e5a3b",
+    "label": "Synthetic segment 062 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-626b9860c10e5d51",
+    "label": "Synthetic segment 063 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-97b712ce510b56c9",
+    "label": "Synthetic segment 064 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-86dfae8baa9f55ff",
+    "label": "Synthetic segment 065 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-a8baf58e10cf58d2",
+    "label": "Synthetic segment 066 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-161969e2ca7c5da1",
+    "label": "Synthetic segment 067 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-ed382a2847e457b1",
+    "label": "Synthetic segment 068 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-49625a5b5d125e51",
+    "label": "Synthetic segment 069 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-e95594cbbee15c4f",
+    "label": "Synthetic segment 070 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-0755321e4f635a99",
+    "label": "Synthetic segment 071 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-8d75d55b776559df",
+    "label": "Synthetic segment 072 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-99ed710994af52ea",
+    "label": "Synthetic segment 073 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-0e5bd7558de154bd",
+    "label": "Synthetic segment 074 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-86aa3486a1865a21",
+    "label": "Synthetic segment 075 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-22ddb9b24070516f",
+    "label": "Synthetic segment 076 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-ef255bcaa68359a1",
+    "label": "Synthetic segment 077 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-6e9bbbfc32be5a21",
+    "label": "Synthetic segment 078 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-704b7b44c0385e7c",
+    "label": "Synthetic segment 079 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-10e43fb0f5d05a3b",
+    "label": "Synthetic segment 080 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-5a3544503df258e6",
+    "label": "Synthetic segment 081 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-c583f16167235835",
+    "label": "Synthetic segment 082 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-4dcb4d8ab2c95cc6",
+    "label": "Synthetic segment 083 \u00b7 1 min",
+    "duration_ms": 90000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-978f2bf3cae55992",
+    "label": "Synthetic segment 084 \u00b7 3 min",
+    "duration_ms": 180000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-0a1fb66709175f72",
+    "label": "Synthetic segment 085 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-f22619c63dc150c5",
+    "label": "Synthetic segment 086 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-a6888265c87f5e18",
+    "label": "Synthetic segment 087 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-28053f67e4545d0b",
+    "label": "Synthetic segment 088 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-36db9e9e33e35077",
+    "label": "Synthetic segment 089 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-b6717104742d5125",
+    "label": "Synthetic segment 090 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-d311b14b06e35497",
+    "label": "Synthetic segment 091 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-5bcbd406bbd35ac6",
+    "label": "Synthetic segment 092 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-f15dea7842a95ab1",
+    "label": "Synthetic segment 093 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-d181b70cc5395d9b",
+    "label": "Synthetic segment 094 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-831430c9e5b051ce",
+    "label": "Synthetic segment 095 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-803a984124645faf",
+    "label": "Synthetic segment 096 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-05950a5f6c3e55c7",
+    "label": "Synthetic segment 097 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-72b092dc9ae45cce",
+    "label": "Synthetic segment 098 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-65aea5ce56e45ca6",
+    "label": "Synthetic segment 099 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-ffce7cd07e0b5503",
+    "label": "Synthetic segment 100 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-fc6259f9439d5fe2",
+    "label": "Synthetic segment 101 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-c42918d682aa5e2a",
+    "label": "Synthetic segment 102 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-12048dcf18285c34",
+    "label": "Synthetic segment 103 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-8bac8e8a45845b37",
+    "label": "Synthetic segment 104 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-e1f9be7ca1bc5efa",
+    "label": "Synthetic segment 105 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-8bf899b2d73f549b",
+    "label": "Synthetic segment 106 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-d9abd89e541c514b",
+    "label": "Synthetic segment 107 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-2d488fca141c5a5a",
+    "label": "Synthetic segment 108 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-6decce4eb2f45396",
+    "label": "Synthetic segment 109 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-96c6aa86e3da5979",
+    "label": "Synthetic segment 110 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-a58d67ef8cc4575e",
+    "label": "Synthetic segment 111 \u00b7 1 min",
+    "duration_ms": 90000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-ceeeedd34956539e",
+    "label": "Synthetic segment 112 \u00b7 3 min",
+    "duration_ms": 180000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-dfa17ca2472c5b82",
+    "label": "Synthetic segment 113 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-98c1e1be23f7533a",
+    "label": "Synthetic segment 114 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-376c3897a83c5ab1",
+    "label": "Synthetic segment 115 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-4c6a4285a4f3536c",
+    "label": "Synthetic segment 116 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-04fe2ef7a8355420",
+    "label": "Synthetic segment 117 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-3dfd9ea850935498",
+    "label": "Synthetic segment 118 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-5930f0e50a21534e",
+    "label": "Synthetic segment 119 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-9379b6ea8aae58cd",
+    "label": "Synthetic segment 120 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-4f56c510c65d521d",
+    "label": "Synthetic segment 121 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-68fe0d836a635656",
+    "label": "Synthetic segment 122 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-b207b58fff325947",
+    "label": "Synthetic segment 123 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-19dbddb2d34e5be1",
+    "label": "Synthetic segment 124 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-f559ffca3f4f5e2f",
+    "label": "Synthetic segment 125 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-3b8394cac49253d6",
+    "label": "Synthetic segment 126 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-ae9c9b94129d5d4c",
+    "label": "Synthetic segment 127 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-d9e769e8fa545b0b",
+    "label": "Synthetic segment 128 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-807ab71e18b455ed",
+    "label": "Synthetic segment 129 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-39193d7bf98d5b1a",
+    "label": "Synthetic segment 130 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-ed458c238c50597a",
+    "label": "Synthetic segment 131 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-84df26ea90e35d49",
+    "label": "Synthetic segment 132 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-e95b012811055173",
+    "label": "Synthetic segment 133 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-e383249d7387534b",
+    "label": "Synthetic segment 134 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-f6bc3f1912cb543d",
+    "label": "Synthetic segment 135 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-fcea53ccfab65ba6",
+    "label": "Synthetic segment 136 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-a10b25b6d7b8550f",
+    "label": "Synthetic segment 137 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-0450df93030e5530",
+    "label": "Synthetic segment 138 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-5e9a587c93745d72",
+    "label": "Synthetic segment 139 \u00b7 1 min",
+    "duration_ms": 90000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-a105dfb6015e5bce",
+    "label": "Synthetic segment 140 \u00b7 3 min",
+    "duration_ms": 180000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-f5081f80e63752ff",
+    "label": "Synthetic segment 141 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-43de7a188c995e4f",
+    "label": "Synthetic segment 142 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-76c3356d44ed5483",
+    "label": "Synthetic segment 143 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-331a6d09f6505c3b",
+    "label": "Synthetic segment 144 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-a4374f6818f053d0",
+    "label": "Synthetic segment 145 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-be69bf07bb885979",
+    "label": "Synthetic segment 146 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-0ae262dd45f858d4",
+    "label": "Synthetic segment 147 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-dec1c442afe65938",
+    "label": "Synthetic segment 148 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-17e44ed957e456a8",
+    "label": "Synthetic segment 149 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-36b7d024bca45f36",
+    "label": "Synthetic segment 150 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-f7bdbf71bc0c59b5",
+    "label": "Synthetic segment 151 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-5b68e816649e5ba1",
+    "label": "Synthetic segment 152 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-c23f6e4ca1e55170",
+    "label": "Synthetic segment 153 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-019c5b833efe52bf",
+    "label": "Synthetic segment 154 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-9178f3ae078150e0",
+    "label": "Synthetic segment 155 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-e2972b940cba5f30",
+    "label": "Synthetic segment 156 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-e6ed0fc0f1595cc9",
+    "label": "Synthetic segment 157 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-fa1ed6c06d1d5d70",
+    "label": "Synthetic segment 158 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-f0c677779d915381",
+    "label": "Synthetic segment 159 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-98711d7c2d755065",
+    "label": "Synthetic segment 160 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-651961bad6435632",
+    "label": "Synthetic segment 161 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-a06637b01a2352d4",
+    "label": "Synthetic segment 162 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-8dba4ca26d65595a",
+    "label": "Synthetic segment 163 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-3bb022a36ccd5fde",
+    "label": "Synthetic segment 164 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-d6bb2793140d59cc",
+    "label": "Synthetic segment 165 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-3e7009cab53d59cc",
+    "label": "Synthetic segment 166 \u00b7 1 min",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-0d93a8c9481b59f6",
+    "label": "Synthetic segment 167 \u00b7 1 min",
+    "duration_ms": 90000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-780bbabca2bd5fc3",
+    "label": "Synthetic segment 168 \u00b7 3 min",
+    "duration_ms": 180000,
+    "synthetic": true
+  }
+]

@@ -15,7 +15,7 @@ import statistics
 from time import perf_counter
 
 from engine.contracts import PublicationPackage
-from engine.core import available, digest, metric
+from engine.core import available, digest, pass_metrics
 from engine.workflow import EvidenceTools, run_workflow, validate_variants
 from simulator.scenarios import VERSION, cases, get_case
 from simulator.suite import generate_case, serialize
@@ -38,14 +38,16 @@ def evaluate_case(case, *, workflow_runner=run_workflow, budget=None):
     for check in dataset.reference['checks']:
         cutoff = check['at_ms']
         started = perf_counter()
-        measured = metric(dataset.observations,cutoff,dataset.metadata)
+        measurements = pass_metrics(dataset.observations,cutoff,dataset.metadata)
         timings.append((perf_counter()-started)*1000)
         # This is the application's original overlay deadline, not an extension
         # when a late observation finally arrives. The core metric alone does not
         # decide whether a live overlay is still displayable.
         predicted = []
-        if measured and measured['eligible'] and measured['available_from_ms']<=cutoff<measured['retention_confirmed_at_ms']+30000:
-            predicted = [measured['pass_id']]
+        for measured in measurements:
+            if not (measured['eligible'] and measured['available_from_ms']<=cutoff<measured['retention_confirmed_at_ms']+30000):
+                continue
+            predicted.append(measured['pass_id'])
             revision = measured['evidence_revision']
             if revision not in packages:
                 if budget is not None and budget['remaining']<=0:
@@ -54,7 +56,7 @@ def evaluate_case(case, *, workflow_runner=run_workflow, budget=None):
                 else:
                     if budget is not None: budget['remaining'] -= 1
                     began = perf_counter()
-                    package = workflow_runner(EvidenceTools(dataset.metadata,dataset.observations,cutoff))
+                    package = workflow_runner(EvidenceTools(dataset.metadata,dataset.observations,cutoff,pass_id=measured['pass_id']))
                     packages[revision] = package
                     row = {'cutoff_ms':cutoff,'evidence_revision':revision,
                            'wall_ms':round((perf_counter()-began)*1000,3),
@@ -81,7 +83,7 @@ def evaluate_case(case, *, workflow_runner=run_workflow, budget=None):
         checks.append(row)
         if not row['passed']:
             findings.append({'at_ms':cutoff,'expected':expected,'detected':predicted,
-                             'metrics':{key:measured[key] for key in ('pass_id','coverage','pressure_opponents_max','bypassed_count','retained','progression_m','eligible')} if measured else None})
+                             'metrics':[{key:m[key] for key in ('pass_id','coverage','pressure_opponents_max','bypassed_count','retained','progression_m','eligible')} for m in measurements]})
     return {'case_id':case.id,'match_id':case.match_id,'split':case.parent.split,'parent':case.parent.id,
             'family':case.family,'duration_ms':dataset.reference['duration_ms'],
             'observations_sha256':hashlib.sha256(serialize(dataset.observations).encode()).hexdigest(),
@@ -121,7 +123,11 @@ def build_report(rows, mode):
     timings = [t for r in rows for t in r.pop('metric_timings_ms')]
     workflows = [w for r in rows for w in r['workflows']]
     usages = [w['usage'] for w in workflows if w.get('usage')]
+    input_baseline = json.loads((ROOT/'evals/synthetic-v2/input-baseline.json').read_text())
+    input_checks = [all(r[key] == input_baseline['cases'][r['case_id']][key] for key in ('observations_sha256','reference_sha256')) for r in rows]
+    assert all(input_checks), 'regression_inputs_changed_review_required'
     report = {
+        'input_integrity': {'source_commit':input_baseline['source_commit'],'cases_checked':len(input_checks),'unchanged':all(input_checks)},
         'generator_version':VERSION,'generated_at':datetime.now(timezone.utc).isoformat(),
         'mode':mode,'metric_version':'pressure-escape-v1','scope':'Pre-model live-candidate checkpoints; workflow abstentions/fallbacks are separate. Producer approval is checked separately by API integration tests.',
         'summary':summarize(rows),
@@ -151,7 +157,6 @@ def build_report(rows, mode):
             'Candidate coverage includes false alerts; quiet cases combine deliberate negatives and missing-evidence abstentions.',
             'Variant checks cover schema, evidence references, numeric consistency and hash integrity; free-form semantic correctness is not established.',
             'Local execution does not exercise Azure transport, durable production load, web presentation or human approval latency.',
-            'The existing engine investigates only the first pass. Multi-pass and long-session expectations intentionally exceed that capability.',
             'Held-out parents were fixed before the first run; after inspection they are regression data. Fresh final parents are required after tuning.',
         ],
         'rows':rows,
@@ -173,7 +178,7 @@ def markdown(report):
     lines += ['', '## Failures to prioritize', '', '| Family | Cases with mismatch |', '|---|---:|']
     for family,v in report['by_family'].items():
         if v['cases_failed']: lines.append(f"| {family} | {v['cases_failed']} / {v['cases']} |")
-    lines += ['', 'Raw clocks, expected/detected IDs and metric operands are in `results.json`. Failures are reported even when they reflect a documented MVP scope limit. The first run caught six false alerts from rounding distance before the gate; eligibility now uses the original measurement. No threshold or reference label was changed. These inspected parents are regression data; final blind evaluation requires new parents.', '',
+    lines += ['', 'Raw clocks, expected/detected IDs and metric operands are in `results.json`. Failures are reported even when they reflect a documented MVP scope limit. The first run caught six false alerts from rounding distance before the gate; eligibility now uses the original measurement. No threshold or reference label was changed. The original first-pass restriction has been resolved: all authored later-pass checkpoints are now evaluated. Observation and reference hashes remain identical to commit b9bc99f, as checked against input-baseline.json. These inspected parents are regression data; final blind evaluation requires new parents.', '',
               '## Family coverage', '', '| Family | Passed / total |', '|---|---:|']
     for family,v in report['by_family'].items(): lines.append(f"| {family} | {v['cases_passed']} / {v['cases']} |")
     lines += ['', '## Measurement scope', '',
@@ -187,7 +192,7 @@ def markdown(report):
               'The default run uses deterministic templates. AI evaluation is a separately requested, budgeted run and must report actual model mode, fallbacks, abstentions and usage. Factual templates passing does not establish model semantic quality.', '',
               '## Limitations', '']
     lines += ['- '+x for x in report['limitations']]
-    lines += ['', 'Reproduce with `make synthetic-evaluate`. Use `--strict` to return a failing exit code on any authored mismatch. `--check-baseline` fails on any changed case/check outcome, while retaining the disclosed current failures in the report.', '']
+    lines += ['', 'Reproduce with `make synthetic-evaluate`. Use `--strict` to return a failing exit code on any authored mismatch. `--check-baseline` fails on any changed case/check outcome, including changed detections when capabilities improve.', '']
     return '\n'.join(lines)
 
 

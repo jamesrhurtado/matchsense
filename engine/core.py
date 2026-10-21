@@ -9,16 +9,10 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 CONFIG={'version':'pressure-escape-v1','pressure_radius_m':6,'pressure_window_ms':2000,'minimum_coverage':.9,'minimum_bypassed':2,'minimum_progression_m':5,'retention_window_ms':3000,'maximum_gap_ms':200,'overlay_ttl_ms':30000}
 
-@lru_cache(maxsize=8)
 def load_match(match_id):
-    if match_id not in {'match-001','match-002','match-003'}: raise ValueError('unknown_match')
-    root=ROOT/'data/runtime'/match_id
-    metadata=json.loads((root/'match.json').read_text())
-    messages=[json.loads(x) for x in (root/'stream.jsonl').read_text().splitlines()]
-    from engine.contracts import MatchMetadata, OBSERVATION
-    MatchMetadata.model_validate(metadata)
-    for message in messages: OBSERVATION.validate_python(message)
-    return metadata,messages
+    from engine.catalog import load_runtime_match
+    return load_runtime_match(match_id)
+
 
 def digest(value):
     # Cosmos/JavaScript JSON serializers may return 1.0 as 1. Numeric equality
@@ -41,10 +35,23 @@ def available(messages,cutoff):
 def frame_at(messages,t):
     return max((m for m in messages if m['kind']=='tracking_frame' and m['timeline_ms']<=t),key=lambda m:(m['timeline_ms'],m['revision']),default=None)
 
-def metric(messages,cutoff,meta):
+def metric(messages,cutoff,meta,pass_id=None):
+    """One explicitly scoped investigation; legacy default is the first pass."""
     obs=available(messages,cutoff)
-    start=next((m for m in obs if m['kind']=='event' and m['payload']['type']=='pass_started'),None)
-    if not start:return None
+    start=next((m for m in obs if m['kind']=='event' and m['payload']['type']=='pass_started'
+                and (pass_id is None or m['payload']['details']['pass_id']==pass_id)),None)
+    return _pass_metric(obs,cutoff,meta,start) if start else None
+
+
+def pass_metrics(messages,cutoff,meta):
+    """Investigate every delivered pass, without exposing any future outcome."""
+    obs=available(messages,cutoff)
+    starts=[m for m in obs if m['kind']=='event' and m['payload']['type']=='pass_started']
+    values=[_pass_metric(obs,cutoff,meta,start) for start in starts]
+    return [value for value in values if value is not None]
+
+
+def _pass_metric(obs,cutoff,meta,start):
     team=start['payload']['team_id']; pass_id=start['payload']['details']['pass_id']
     end=next((m for m in obs if m['kind']=='event' and m['payload']['type']=='pass_resolved' and m['payload']['details']['pass_id']==pass_id),None)
     if not end:return None

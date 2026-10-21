@@ -13,6 +13,8 @@ class Repository:
         c.executescript('''
         CREATE TABLE IF NOT EXISTS replay_sessions(id TEXT PRIMARY KEY, data TEXT NOT NULL);
         CREATE TABLE IF NOT EXISTS packages(session_id TEXT, revision INTEGER, data TEXT NOT NULL, PRIMARY KEY(session_id,revision));
+        CREATE TABLE IF NOT EXISTS story_packages(sequence INTEGER PRIMARY KEY AUTOINCREMENT, session_id TEXT, story_id TEXT, revision INTEGER, data TEXT NOT NULL, UNIQUE(session_id,story_id,revision));
+        CREATE TABLE IF NOT EXISTS story_editorial(session_id TEXT, story_id TEXT, revision INTEGER, status TEXT, at_ms INTEGER, package_hash TEXT, PRIMARY KEY(session_id,story_id));
         CREATE TABLE IF NOT EXISTS editorial(session_id TEXT PRIMARY KEY, revision INTEGER, status TEXT, at_ms INTEGER, package_hash TEXT);
         CREATE TABLE IF NOT EXISTS operations(session_id TEXT, operation_id TEXT, request_hash TEXT, data TEXT, PRIMARY KEY(session_id,operation_id));
         CREATE TABLE IF NOT EXISTS audit_log(id INTEGER PRIMARY KEY AUTOINCREMENT, session_id TEXT, action TEXT, at_ms INTEGER, data TEXT);
@@ -29,14 +31,42 @@ class Repository:
             return json.loads(row['data']) if row else None
     def save_session(self,s):
         with self.connect() as c:c.execute('INSERT OR REPLACE INTO replay_sessions VALUES (?,?)',(s['id'],json.dumps(s)))
-    def latest_package(self,sid):
+    @staticmethod
+    def _latest(c,sid,story_id=None):
+        if story_id is None:
+            row=c.execute('SELECT data FROM story_packages WHERE session_id=? ORDER BY sequence DESC LIMIT 1',(sid,)).fetchone()
+        else:
+            row=c.execute('SELECT data FROM story_packages WHERE session_id=? AND story_id=? ORDER BY revision DESC LIMIT 1',(sid,story_id)).fetchone()
+        if row:return json.loads(row['data'])
+        for row in c.execute('SELECT data FROM packages WHERE session_id=? ORDER BY revision DESC',(sid,)):
+            package=json.loads(row['data'])
+            if story_id is None or package['id']==story_id:return package
+        return None
+
+    def latest_package(self,sid,story_id=None):
+        with self.connect() as c:return self._latest(c,sid,story_id)
+
+    def list_packages(self,sid):
         with self.connect() as c:
-            row=c.execute('SELECT data FROM packages WHERE session_id=? ORDER BY revision DESC LIMIT 1',(sid,)).fetchone()
-            return json.loads(row['data']) if row else None
-    def decision(self,sid):
+            packages={}
+            for row in c.execute('SELECT data FROM packages WHERE session_id=? ORDER BY revision',(sid,)):
+                package=json.loads(row['data']);packages[package['id']]=package
+            for row in c.execute('SELECT data FROM story_packages WHERE session_id=? ORDER BY sequence',(sid,)):
+                package=json.loads(row['data']);packages[package['id']]=package
+            return sorted(packages.values(),key=lambda p:(p.get('eligible_from_ms',0),p['id']))
+
+    def decision(self,sid,story_id=None):
         with self.connect() as c:
-            row=c.execute('SELECT * FROM editorial WHERE session_id=?',(sid,)).fetchone()
-            return dict(row) if row else None
+            package=self._latest(c,sid,story_id)
+            if not package:return None
+            story_id=package['id']
+            row=c.execute('SELECT * FROM story_editorial WHERE session_id=? AND story_id=?',(sid,story_id)).fetchone()
+            if row:return dict(row)
+            legacy=c.execute('SELECT data FROM packages WHERE session_id=? ORDER BY revision DESC LIMIT 1',(sid,)).fetchone()
+            if legacy and json.loads(legacy['data'])['id']==story_id:
+                row=c.execute('SELECT * FROM editorial WHERE session_id=?',(sid,)).fetchone()
+                return dict(row) if row else None
+            return None
     def audit(self,sid):
         with self.connect() as c:return [dict(row) for row in c.execute('SELECT action,at_ms,data FROM audit_log WHERE session_id=? ORDER BY id',(sid,))]
 
@@ -44,9 +74,17 @@ class Repository:
         with self.connect() as c:
             return [json.loads(row['data']) for row in c.execute('SELECT data FROM replay_sessions')]
 
-    def invalidate(self,sid):
+    def invalidate(self,sid,story_id=None):
         with self.connect() as c:
-            c.execute('UPDATE editorial SET status=? WHERE session_id=?',('superseded',sid))
+            c.execute('BEGIN IMMEDIATE')
+            if story_id is None:
+                c.execute('UPDATE story_editorial SET status=? WHERE session_id=?',('superseded',sid))
+                c.execute('UPDATE editorial SET status=? WHERE session_id=?',('superseded',sid))
+            else:
+                c.execute('UPDATE story_editorial SET status=? WHERE session_id=? AND story_id=?',('superseded',sid,story_id))
+                legacy=c.execute('SELECT data FROM packages WHERE session_id=? ORDER BY revision DESC LIMIT 1',(sid,)).fetchone()
+                if legacy and json.loads(legacy['data'])['id']==story_id:
+                    c.execute('UPDATE editorial SET status=? WHERE session_id=?',('superseded',sid))
 
     def operation(self,sid,key):
         with self.connect() as c:
@@ -57,12 +95,17 @@ class Repository:
         from engine.cloud_repository import RepositoryConflict
         with self.connect() as c:
             c.execute('BEGIN IMMEDIATE')
-            old=c.execute('SELECT MAX(revision) AS revision FROM packages WHERE session_id=?',(sid,)).fetchone()['revision'] or 0
+            previous=self._latest(c,sid,package['id'])
+            old=previous['revision'] if previous else 0
             if (expected_revision is not None and old!=expected_revision) or package['revision']!=old+1:
                 raise RepositoryConflict('stale_revision')
-            c.execute('INSERT INTO packages VALUES (?,?,?)',(sid,package['revision'],json.dumps(package)))
-            c.execute('UPDATE editorial SET status=? WHERE session_id=?',('superseded',sid))
-            c.execute('INSERT INTO audit_log(session_id,action,at_ms,data) VALUES (?,?,?,?)',(sid,'package_ready',at_ms,json.dumps({'revision':package['revision'],'workflow_ms':package['workflow_ms']})))
+            c.execute('INSERT INTO story_packages(session_id,story_id,revision,data) VALUES (?,?,?,?)',(sid,package['id'],package['revision'],json.dumps(package)))
+            c.execute('UPDATE story_editorial SET status=? WHERE session_id=? AND story_id=?',('superseded',sid,package['id']))
+            # Supersede legacy approval when this story is migrated.
+            legacy=c.execute('SELECT data FROM packages WHERE session_id=? ORDER BY revision DESC LIMIT 1',(sid,)).fetchone()
+            if legacy and json.loads(legacy['data'])['id']==package['id']:
+                c.execute('UPDATE editorial SET status=? WHERE session_id=?',('superseded',sid))
+            c.execute('INSERT INTO audit_log(session_id,action,at_ms,data) VALUES (?,?,?,?)',(sid,'package_ready',at_ms,json.dumps({'story_id':package['id'],'revision':package['revision'],'workflow_ms':package['workflow_ms']})))
 
     def commit_review(self,sid,key,request_hash,expected_revision,expected_hash,package,status,at_ms,result,edited=False):
         from engine.cloud_repository import RepositoryConflict
@@ -72,17 +115,17 @@ class Repository:
             if old:
                 if old['request_hash']!=request_hash:raise RepositoryConflict('idempotency_key_reused')
                 return json.loads(old['data'])
-            latest=c.execute('SELECT revision,data FROM packages WHERE session_id=? ORDER BY revision DESC LIMIT 1',(sid,)).fetchone()
-            if not latest or latest['revision']!=expected_revision or json.loads(latest['data'])['package_hash']!=expected_hash:
+            latest=self._latest(c,sid,package['id'])
+            if not latest or latest['revision']!=expected_revision or latest['package_hash']!=expected_hash:
                 raise RepositoryConflict('stale_revision')
             if not edited and (package['revision']!=expected_revision or package['package_hash']!=expected_hash):
                 raise RepositoryConflict('stale_revision')
             if edited:
                 if package['revision']!=expected_revision+1:raise RepositoryConflict('stale_revision')
-                c.execute('INSERT INTO packages VALUES (?,?,?)',(sid,package['revision'],json.dumps(package)))
-            c.execute('INSERT OR REPLACE INTO editorial VALUES (?,?,?,?,?)',(sid,package['revision'],status,at_ms,package['package_hash']))
+                c.execute('INSERT INTO story_packages(session_id,story_id,revision,data) VALUES (?,?,?,?)',(sid,package['id'],package['revision'],json.dumps(package)))
+            c.execute('INSERT OR REPLACE INTO story_editorial VALUES (?,?,?,?,?,?)',(sid,package['id'],package['revision'],status,at_ms,package['package_hash']))
             action='edit' if edited else {'approved':'approve','suppressed':'suppress','retracted':'retract'}[status]
-            c.execute('INSERT INTO audit_log(session_id,action,at_ms,data) VALUES (?,?,?,?)',(sid,action,at_ms,json.dumps(result)))
+            c.execute('INSERT INTO audit_log(session_id,action,at_ms,data) VALUES (?,?,?,?)',(sid,action,at_ms,json.dumps({**result,'story_id':package['id']})))
             c.execute('INSERT INTO operations VALUES (?,?,?,?)',(sid,key,request_hash,json.dumps(result)))
         return result
 

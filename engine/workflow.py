@@ -13,6 +13,7 @@ class EvidenceTools:
     metadata: dict
     messages: list
     cutoff_ms: int
+    pass_id: str|None = None
     def get_sequence(self,start_ms,end_ms):
         if start_ms<0 or end_ms>self.cutoff_ms or end_ms<start_ms or end_ms-start_ms>15000:
             raise ToolError('invalid_or_future_range')
@@ -23,10 +24,10 @@ class EvidenceTools:
             if not set(player_ids).issubset({p['id'] for p in self.metadata['players']}):raise ToolError('unknown_player')
             return [{'time_ms':m['timeline_ms'],'players':[p for p in m['payload']['players'] if p['player_id'] in player_ids],'source_message_id':m['message_id']} for m in rows]
         return rows
-    def compute_pass_metrics(self,pass_id='pass-1'):
-        value=metric(self.messages,self.cutoff_ms,self.metadata)
-        if value and value['pass_id']!=pass_id:raise ToolError('unknown_pass')
-        return value
+    def compute_pass_metrics(self,pass_id=None):
+        if self.pass_id is not None and pass_id is not None and pass_id!=self.pass_id:
+            raise ToolError('unknown_pass')
+        return metric(self.messages,self.cutoff_ms,self.metadata,pass_id=pass_id or self.pass_id)
     def compare_prior_window(self,start_ms,end_ms):
         rows=self.get_sequence(start_ms,end_ms)
         return {'status':'insufficient_history','sample_count':len(rows),'reason':'One segment cannot establish sustained match control.'}
@@ -82,7 +83,7 @@ def run_workflow(tools,revision=1,proposed_text=None):
     if not m or not m['eligible']:return None
     trace.append({'role':'Story Analyst','action':'compute_pass_metrics','status':'supported_candidate','elapsed_ms':round((perf_counter()-started)*1000,3)})
     # Independent recomputation is allowed to narrow an edited proposal; there is one revision cycle.
-    independently_checked=metric(tools.messages,tools.cutoff_ms,tools.metadata)
+    independently_checked=metric(tools.messages,tools.cutoff_ms,tools.metadata,pass_id=m['pass_id'])
     if not independently_checked or independently_checked['evidence_revision']!=m['evidence_revision']:return None
     variants=validate_variants(render_variants(m,tools.metadata),m,tools.metadata)
     base=next(v['text'] for v in variants if v['id']=='en_simple_general')
@@ -95,7 +96,7 @@ def run_workflow(tools,revision=1,proposed_text=None):
     trace.append({'role':'Audience Editor','action':'render_and_validate_variants','status':'valid','variants':len(variants),'elapsed_ms':round((perf_counter()-started)*1000,3)})
     title='The pass before the moment'
     claims=[{'id':name,'type':'derived','value':value,'unit':unit,'evidence_revision':m['evidence_revision'],'source_message_ids':m['source_message_ids']} for name,value,unit in [('c-pressure',m['pressure_opponents_max'],'players'),('c-bypass',m['bypassed_count'],'players'),('c-retain',m['retention_window_ms']//1000,'s'),('c-progress',m['progression_m'],'m')]]
-    package={'schema_version':'1.0.0','id':'story-pass-1','revision':revision,'title':title,'claims':claims,'metrics':m,'variants':variants,'review':review,'evidence_revision':m['evidence_revision'],'eligible_from_ms':m['available_from_ms'],'expires_at_ms':m['retention_confirmed_at_ms']+CONFIG['overlay_ttl_ms'],'trace':trace,'workflow_ms':round((perf_counter()-started)*1000,3),'mode':'local deterministic template'}
+    package={'schema_version':'1.0.0','id':f"story-{m['pass_id']}",'revision':revision,'title':title,'claims':claims,'metrics':m,'variants':variants,'review':review,'evidence_revision':m['evidence_revision'],'eligible_from_ms':m['available_from_ms'],'expires_at_ms':m['retention_confirmed_at_ms']+CONFIG['overlay_ttl_ms'],'trace':trace,'workflow_ms':round((perf_counter()-started)*1000,3),'mode':'local deterministic template'}
     package['package_hash']=digest(package)
     PublicationPackage.model_validate(package)
     return package

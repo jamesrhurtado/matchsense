@@ -1,89 +1,94 @@
 {
+  "input_integrity": {
+    "source_commit": "b9bc99f",
+    "cases_checked": 168,
+    "unchanged": true
+  },
   "generator_version": "2.0.0",
-  "generated_at": "2026-10-21T00:51:07.128595+00:00",
+  "generated_at": "2026-10-21T01:07:56.656035+00:00",
   "mode": "template",
   "metric_version": "pressure-escape-v1",
   "scope": "Pre-model live-candidate checkpoints; workflow abstentions/fallbacks are separate. Producer approval is checked separately by API integration tests.",
   "summary": {
     "cases": 168,
     "parents": 6,
-    "cases_passed": 156,
-    "cases_failed": 12,
+    "cases_passed": 168,
+    "cases_failed": 0,
     "checks": 594,
-    "checks_passed": 576,
-    "checkpoint_true_positive": 60,
+    "checks_passed": 594,
+    "checkpoint_true_positive": 78,
     "checkpoint_false_positive": 0,
-    "checkpoint_false_negative": 18,
+    "checkpoint_false_negative": 0,
     "checkpoint_precision": 1.0,
-    "checkpoint_recall": 0.7692307692307693,
+    "checkpoint_recall": 1.0,
     "expected_distinct_moments": 72,
-    "detected_expected_moments": 54,
-    "missed_distinct_moments": 18,
+    "detected_expected_moments": 72,
+    "missed_distinct_moments": 0,
     "false_alert_distinct_moments": 0,
     "simulated_minutes": 183.0,
     "false_alerts_per_simulated_minute": 0.0,
-    "candidate_case_coverage": 0.32142857142857145
+    "candidate_case_coverage": 0.35714285714285715
   },
   "by_split": {
     "development": {
       "cases": 56,
       "parents": 2,
-      "cases_passed": 52,
-      "cases_failed": 4,
+      "cases_passed": 56,
+      "cases_failed": 0,
       "checks": 198,
-      "checks_passed": 192,
-      "checkpoint_true_positive": 20,
+      "checks_passed": 198,
+      "checkpoint_true_positive": 26,
       "checkpoint_false_positive": 0,
-      "checkpoint_false_negative": 6,
+      "checkpoint_false_negative": 0,
       "checkpoint_precision": 1.0,
-      "checkpoint_recall": 0.7692307692307693,
+      "checkpoint_recall": 1.0,
       "expected_distinct_moments": 24,
-      "detected_expected_moments": 18,
-      "missed_distinct_moments": 6,
+      "detected_expected_moments": 24,
+      "missed_distinct_moments": 0,
       "false_alert_distinct_moments": 0,
       "simulated_minutes": 61.0,
       "false_alerts_per_simulated_minute": 0.0,
-      "candidate_case_coverage": 0.32142857142857145
+      "candidate_case_coverage": 0.35714285714285715
     },
     "held_out": {
       "cases": 56,
       "parents": 2,
-      "cases_passed": 52,
-      "cases_failed": 4,
+      "cases_passed": 56,
+      "cases_failed": 0,
       "checks": 198,
-      "checks_passed": 192,
-      "checkpoint_true_positive": 20,
+      "checks_passed": 198,
+      "checkpoint_true_positive": 26,
       "checkpoint_false_positive": 0,
-      "checkpoint_false_negative": 6,
+      "checkpoint_false_negative": 0,
       "checkpoint_precision": 1.0,
-      "checkpoint_recall": 0.7692307692307693,
+      "checkpoint_recall": 1.0,
       "expected_distinct_moments": 24,
-      "detected_expected_moments": 18,
-      "missed_distinct_moments": 6,
+      "detected_expected_moments": 24,
+      "missed_distinct_moments": 0,
       "false_alert_distinct_moments": 0,
       "simulated_minutes": 61.0,
       "false_alerts_per_simulated_minute": 0.0,
-      "candidate_case_coverage": 0.32142857142857145
+      "candidate_case_coverage": 0.35714285714285715
     },
     "validation": {
       "cases": 56,
       "parents": 2,
-      "cases_passed": 52,
-      "cases_failed": 4,
+      "cases_passed": 56,
+      "cases_failed": 0,
       "checks": 198,
-      "checks_passed": 192,
-      "checkpoint_true_positive": 20,
+      "checks_passed": 198,
+      "checkpoint_true_positive": 26,
       "checkpoint_false_positive": 0,
-      "checkpoint_false_negative": 6,
+      "checkpoint_false_negative": 0,
       "checkpoint_precision": 1.0,
-      "checkpoint_recall": 0.7692307692307693,
+      "checkpoint_recall": 1.0,
       "expected_distinct_moments": 24,
-      "detected_expected_moments": 18,
-      "missed_distinct_moments": 6,
+      "detected_expected_moments": 24,
+      "missed_distinct_moments": 0,
       "false_alert_distinct_moments": 0,
       "simulated_minutes": 61.0,
       "false_alerts_per_simulated_minute": 0.0,
-      "candidate_case_coverage": 0.32142857142857145
+      "candidate_case_coverage": 0.35714285714285715
     }
   },
   "by_family": {
@@ -330,18 +335,18 @@
     "long_session": {
       "cases": 6,
       "parents": 6,
-      "cases_passed": 0,
-      "cases_failed": 6,
+      "cases_passed": 6,
+      "cases_failed": 0,
       "checks": 54,
-      "checks_passed": 42,
-      "checkpoint_true_positive": 6,
+      "checks_passed": 54,
+      "checkpoint_true_positive": 18,
       "checkpoint_false_positive": 0,
-      "checkpoint_false_negative": 12,
+      "checkpoint_false_negative": 0,
       "checkpoint_precision": 1.0,
-      "checkpoint_recall": 0.3333333333333333,
+      "checkpoint_recall": 1.0,
       "expected_distinct_moments": 18,
-      "detected_expected_moments": 6,
-      "missed_distinct_moments": 12,
+      "detected_expected_moments": 18,
+      "missed_distinct_moments": 0,
       "false_alert_distinct_moments": 0,
       "simulated_minutes": 18.0,
       "false_alerts_per_simulated_minute": 0.0,
@@ -410,22 +415,22 @@
     "multiple_passes": {
       "cases": 6,
       "parents": 6,
-      "cases_passed": 0,
-      "cases_failed": 6,
+      "cases_passed": 6,
+      "cases_failed": 0,
       "checks": 36,
-      "checks_passed": 30,
-      "checkpoint_true_positive": 0,
+      "checks_passed": 36,
+      "checkpoint_true_positive": 6,
       "checkpoint_false_positive": 0,
-      "checkpoint_false_negative": 6,
-      "checkpoint_precision": null,
-      "checkpoint_recall": 0.0,
+      "checkpoint_false_negative": 0,
+      "checkpoint_precision": 1.0,
+      "checkpoint_recall": 1.0,
       "expected_distinct_moments": 6,
-      "detected_expected_moments": 0,
-      "missed_distinct_moments": 6,
+      "detected_expected_moments": 6,
+      "missed_distinct_moments": 0,
       "false_alert_distinct_moments": 0,
       "simulated_minutes": 9.0,
       "false_alerts_per_simulated_minute": 0.0,
-      "candidate_case_coverage": 0.0
+      "candidate_case_coverage": 1.0
     },
     "no_pass_events": {
       "cases": 6,
@@ -649,19 +654,19 @@
     }
   },
   "metric_latency_ms": {
-    "median": 1.711,
-    "maximum": 2.133,
+    "median": 1.733,
+    "maximum": 6.127,
     "scope": "Warm-process metric computation only; excludes generation, validation, workflows, replay, network and human approval."
   },
   "workflows": {
-    "attempted": 54,
-    "produced": 54,
+    "attempted": 72,
+    "produced": 72,
     "abstained": 0,
     "skipped_budget": 0,
     "modes": {
-      "local deterministic template": 54
+      "local deterministic template": 72
     },
-    "variants_checked": 5400
+    "variants_checked": 7200
   },
   "model_usage": {
     "calls": 0,
@@ -681,7 +686,6 @@
     "Candidate coverage includes false alerts; quiet cases combine deliberate negatives and missing-evidence abstentions.",
     "Variant checks cover schema, evidence references, numeric consistency and hash integrity; free-form semantic correctness is not established.",
     "Local execution does not exercise Azure transport, durable production load, web presentation or human approval latency.",
-    "The existing engine investigates only the first pass. Multi-pass and long-session expectations intentionally exceed that capability.",
     "Held-out parents were fixed before the first run; after inspection they are regression data. Fresh final parents are required after tuning."
   ],
   "rows": [
@@ -738,7 +742,7 @@
         {
           "cutoff_ms": 16200,
           "evidence_revision": "b330afc7ec298b74",
-          "wall_ms": 4.641,
+          "wall_ms": 4.487,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -1575,7 +1579,7 @@
         {
           "cutoff_ms": 21200,
           "evidence_revision": "971dcc6b18ffad92",
-          "wall_ms": 4.307,
+          "wall_ms": 4.284,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -1714,7 +1718,7 @@
         {
           "cutoff_ms": 16900,
           "evidence_revision": "71d04dc9d8b2da23",
-          "wall_ms": 4.175,
+          "wall_ms": 4.268,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -1792,7 +1796,7 @@
         {
           "cutoff_ms": 16200,
           "evidence_revision": "999f6cec9158bab6",
-          "wall_ms": 4.119,
+          "wall_ms": 4.337,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -1888,7 +1892,7 @@
         {
           "cutoff_ms": 16200,
           "evidence_revision": "929e66684bed4889",
-          "wall_ms": 3.984,
+          "wall_ms": 4.27,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -1973,7 +1977,7 @@
         {
           "cutoff_ms": 20200,
           "evidence_revision": "83ef16d8b7803978",
-          "wall_ms": 4.238,
+          "wall_ms": 4.25,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -2051,7 +2055,7 @@
         {
           "cutoff_ms": 16200,
           "evidence_revision": "7a1299e82abedbd6",
-          "wall_ms": 4.272,
+          "wall_ms": 4.677,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -2129,7 +2133,7 @@
         {
           "cutoff_ms": 16200,
           "evidence_revision": "27cf13b981f90d53",
-          "wall_ms": 4.184,
+          "wall_ms": 4.366,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -2256,8 +2260,10 @@
             "pass-2"
           ],
           "reason": "Authored candidate, subject to observation quality and original expiry.",
-          "detected_pass_ids": [],
-          "passed": false
+          "detected_pass_ids": [
+            "pass-2"
+          ],
+          "passed": true
         },
         {
           "at_ms": 81200,
@@ -2267,26 +2273,36 @@
           "passed": true
         }
       ],
-      "passed": false,
-      "findings": [
+      "passed": true,
+      "findings": [],
+      "workflows": [
         {
-          "at_ms": 51200,
-          "expected": [
-            "pass-2"
-          ],
-          "detected": [],
-          "metrics": {
-            "pass_id": "pass-1",
-            "coverage": 1,
-            "pressure_opponents_max": 0,
-            "bypassed_count": 0,
-            "retained": true,
-            "progression_m": 7.0,
-            "eligible": false
-          }
+          "cutoff_ms": 51200,
+          "evidence_revision": "6e39b2ee6013dac3",
+          "wall_ms": 4.587,
+          "mode": "local deterministic template",
+          "status": "produced",
+          "usage": null,
+          "variants_checked": 100,
+          "trace_actions": [
+            {
+              "role": "Story Analyst",
+              "action": "compute_pass_metrics",
+              "status": "supported_candidate"
+            },
+            {
+              "role": "Evidence Reviewer",
+              "action": "independent_metric_check",
+              "status": "supported"
+            },
+            {
+              "role": "Audience Editor",
+              "action": "render_and_validate_variants",
+              "status": "valid"
+            }
+          ]
         }
-      ],
-      "workflows": []
+      ]
     },
     {
       "case_id": "p01-28",
@@ -2347,8 +2363,10 @@
             "pass-2"
           ],
           "reason": "Authored candidate, subject to observation quality and original expiry.",
-          "detected_pass_ids": [],
-          "passed": false
+          "detected_pass_ids": [
+            "pass-2"
+          ],
+          "passed": true
         },
         {
           "at_ms": 106200,
@@ -2370,8 +2388,10 @@
             "pass-3"
           ],
           "reason": "Authored candidate, subject to observation quality and original expiry.",
-          "detected_pass_ids": [],
-          "passed": false
+          "detected_pass_ids": [
+            "pass-3"
+          ],
+          "passed": true
         },
         {
           "at_ms": 166200,
@@ -2381,46 +2401,65 @@
           "passed": true
         }
       ],
-      "passed": false,
-      "findings": [
-        {
-          "at_ms": 76200,
-          "expected": [
-            "pass-2"
-          ],
-          "detected": [],
-          "metrics": {
-            "pass_id": "pass-1",
-            "coverage": 1,
-            "pressure_opponents_max": 2,
-            "bypassed_count": 3,
-            "retained": true,
-            "progression_m": 7.0,
-            "eligible": true
-          }
-        },
-        {
-          "at_ms": 136200,
-          "expected": [
-            "pass-3"
-          ],
-          "detected": [],
-          "metrics": {
-            "pass_id": "pass-1",
-            "coverage": 1,
-            "pressure_opponents_max": 2,
-            "bypassed_count": 3,
-            "retained": true,
-            "progression_m": 7.0,
-            "eligible": true
-          }
-        }
-      ],
+      "passed": true,
+      "findings": [],
       "workflows": [
         {
           "cutoff_ms": 16200,
           "evidence_revision": "f678598ed888cf97",
-          "wall_ms": 4.215,
+          "wall_ms": 4.336,
+          "mode": "local deterministic template",
+          "status": "produced",
+          "usage": null,
+          "variants_checked": 100,
+          "trace_actions": [
+            {
+              "role": "Story Analyst",
+              "action": "compute_pass_metrics",
+              "status": "supported_candidate"
+            },
+            {
+              "role": "Evidence Reviewer",
+              "action": "independent_metric_check",
+              "status": "supported"
+            },
+            {
+              "role": "Audience Editor",
+              "action": "render_and_validate_variants",
+              "status": "valid"
+            }
+          ]
+        },
+        {
+          "cutoff_ms": 76200,
+          "evidence_revision": "e0c9274f1d3acde4",
+          "wall_ms": 4.57,
+          "mode": "local deterministic template",
+          "status": "produced",
+          "usage": null,
+          "variants_checked": 100,
+          "trace_actions": [
+            {
+              "role": "Story Analyst",
+              "action": "compute_pass_metrics",
+              "status": "supported_candidate"
+            },
+            {
+              "role": "Evidence Reviewer",
+              "action": "independent_metric_check",
+              "status": "supported"
+            },
+            {
+              "role": "Audience Editor",
+              "action": "render_and_validate_variants",
+              "status": "valid"
+            }
+          ]
+        },
+        {
+          "cutoff_ms": 136200,
+          "evidence_revision": "37c9ddd34bdc1d2f",
+          "wall_ms": 4.956,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -2498,7 +2537,7 @@
         {
           "cutoff_ms": 22200,
           "evidence_revision": "168290e7e1920d86",
-          "wall_ms": 4.295,
+          "wall_ms": 4.222,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -3335,7 +3374,7 @@
         {
           "cutoff_ms": 27200,
           "evidence_revision": "8008836c166117fc",
-          "wall_ms": 4.293,
+          "wall_ms": 4.27,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -3474,7 +3513,7 @@
         {
           "cutoff_ms": 22900,
           "evidence_revision": "4952ec63c4c6591b",
-          "wall_ms": 4.07,
+          "wall_ms": 4.642,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -3552,7 +3591,7 @@
         {
           "cutoff_ms": 22200,
           "evidence_revision": "4a3e1de163cad0b6",
-          "wall_ms": 4.208,
+          "wall_ms": 4.27,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -3648,7 +3687,7 @@
         {
           "cutoff_ms": 22200,
           "evidence_revision": "16b7bc22d20b65ca",
-          "wall_ms": 4.275,
+          "wall_ms": 4.219,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -3733,7 +3772,7 @@
         {
           "cutoff_ms": 26200,
           "evidence_revision": "4f2117face49521f",
-          "wall_ms": 4.262,
+          "wall_ms": 4.267,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -3811,7 +3850,7 @@
         {
           "cutoff_ms": 22200,
           "evidence_revision": "c51ac77055f1ddaf",
-          "wall_ms": 4.306,
+          "wall_ms": 4.105,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -3889,7 +3928,7 @@
         {
           "cutoff_ms": 22200,
           "evidence_revision": "0f9842de6835cf90",
-          "wall_ms": 4.149,
+          "wall_ms": 4.336,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -4016,8 +4055,10 @@
             "pass-2"
           ],
           "reason": "Authored candidate, subject to observation quality and original expiry.",
-          "detected_pass_ids": [],
-          "passed": false
+          "detected_pass_ids": [
+            "pass-2"
+          ],
+          "passed": true
         },
         {
           "at_ms": 87200,
@@ -4027,26 +4068,36 @@
           "passed": true
         }
       ],
-      "passed": false,
-      "findings": [
+      "passed": true,
+      "findings": [],
+      "workflows": [
         {
-          "at_ms": 57200,
-          "expected": [
-            "pass-2"
-          ],
-          "detected": [],
-          "metrics": {
-            "pass_id": "pass-1",
-            "coverage": 1,
-            "pressure_opponents_max": 0,
-            "bypassed_count": 0,
-            "retained": true,
-            "progression_m": 7.0,
-            "eligible": false
-          }
+          "cutoff_ms": 57200,
+          "evidence_revision": "7a266eac853ce06c",
+          "wall_ms": 4.613,
+          "mode": "local deterministic template",
+          "status": "produced",
+          "usage": null,
+          "variants_checked": 100,
+          "trace_actions": [
+            {
+              "role": "Story Analyst",
+              "action": "compute_pass_metrics",
+              "status": "supported_candidate"
+            },
+            {
+              "role": "Evidence Reviewer",
+              "action": "independent_metric_check",
+              "status": "supported"
+            },
+            {
+              "role": "Audience Editor",
+              "action": "render_and_validate_variants",
+              "status": "valid"
+            }
+          ]
         }
-      ],
-      "workflows": []
+      ]
     },
     {
       "case_id": "p02-28",
@@ -4107,8 +4158,10 @@
             "pass-2"
           ],
           "reason": "Authored candidate, subject to observation quality and original expiry.",
-          "detected_pass_ids": [],
-          "passed": false
+          "detected_pass_ids": [
+            "pass-2"
+          ],
+          "passed": true
         },
         {
           "at_ms": 112200,
@@ -4130,8 +4183,10 @@
             "pass-3"
           ],
           "reason": "Authored candidate, subject to observation quality and original expiry.",
-          "detected_pass_ids": [],
-          "passed": false
+          "detected_pass_ids": [
+            "pass-3"
+          ],
+          "passed": true
         },
         {
           "at_ms": 172200,
@@ -4141,46 +4196,65 @@
           "passed": true
         }
       ],
-      "passed": false,
-      "findings": [
-        {
-          "at_ms": 82200,
-          "expected": [
-            "pass-2"
-          ],
-          "detected": [],
-          "metrics": {
-            "pass_id": "pass-1",
-            "coverage": 1,
-            "pressure_opponents_max": 2,
-            "bypassed_count": 3,
-            "retained": true,
-            "progression_m": 7.0,
-            "eligible": true
-          }
-        },
-        {
-          "at_ms": 142200,
-          "expected": [
-            "pass-3"
-          ],
-          "detected": [],
-          "metrics": {
-            "pass_id": "pass-1",
-            "coverage": 1,
-            "pressure_opponents_max": 2,
-            "bypassed_count": 3,
-            "retained": true,
-            "progression_m": 7.0,
-            "eligible": true
-          }
-        }
-      ],
+      "passed": true,
+      "findings": [],
       "workflows": [
         {
           "cutoff_ms": 22200,
           "evidence_revision": "8e7d84e82d09f980",
-          "wall_ms": 4.327,
+          "wall_ms": 4.324,
+          "mode": "local deterministic template",
+          "status": "produced",
+          "usage": null,
+          "variants_checked": 100,
+          "trace_actions": [
+            {
+              "role": "Story Analyst",
+              "action": "compute_pass_metrics",
+              "status": "supported_candidate"
+            },
+            {
+              "role": "Evidence Reviewer",
+              "action": "independent_metric_check",
+              "status": "supported"
+            },
+            {
+              "role": "Audience Editor",
+              "action": "render_and_validate_variants",
+              "status": "valid"
+            }
+          ]
+        },
+        {
+          "cutoff_ms": 82200,
+          "evidence_revision": "aa2fe42c7734bb58",
+          "wall_ms": 4.649,
+          "mode": "local deterministic template",
+          "status": "produced",
+          "usage": null,
+          "variants_checked": 100,
+          "trace_actions": [
+            {
+              "role": "Story Analyst",
+              "action": "compute_pass_metrics",
+              "status": "supported_candidate"
+            },
+            {
+              "role": "Evidence Reviewer",
+              "action": "independent_metric_check",
+              "status": "supported"
+            },
+            {
+              "role": "Audience Editor",
+              "action": "render_and_validate_variants",
+              "status": "valid"
+            }
+          ]
+        },
+        {
+          "cutoff_ms": 142200,
+          "evidence_revision": "c1f922ee88de5de3",
+          "wall_ms": 5.086,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -4258,7 +4332,7 @@
         {
           "cutoff_ms": 20200,
           "evidence_revision": "4a454da31ef01d60",
-          "wall_ms": 4.36,
+          "wall_ms": 4.353,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -5095,7 +5169,7 @@
         {
           "cutoff_ms": 25200,
           "evidence_revision": "516f5b824f7cf8bb",
-          "wall_ms": 4.324,
+          "wall_ms": 4.374,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -5234,7 +5308,7 @@
         {
           "cutoff_ms": 20900,
           "evidence_revision": "e018402f777fdbb8",
-          "wall_ms": 4.321,
+          "wall_ms": 4.345,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -5312,7 +5386,7 @@
         {
           "cutoff_ms": 20200,
           "evidence_revision": "e5b98b9994c95b9c",
-          "wall_ms": 4.389,
+          "wall_ms": 4.241,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -5408,7 +5482,7 @@
         {
           "cutoff_ms": 20200,
           "evidence_revision": "f32505d46dd4f5e7",
-          "wall_ms": 4.257,
+          "wall_ms": 4.23,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -5493,7 +5567,7 @@
         {
           "cutoff_ms": 24200,
           "evidence_revision": "86acc5e1073082a2",
-          "wall_ms": 4.253,
+          "wall_ms": 4.101,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -5571,7 +5645,7 @@
         {
           "cutoff_ms": 20200,
           "evidence_revision": "45208d3d2d3e4a0b",
-          "wall_ms": 4.293,
+          "wall_ms": 4.306,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -5649,7 +5723,7 @@
         {
           "cutoff_ms": 20200,
           "evidence_revision": "d9caf9a2e003eff7",
-          "wall_ms": 4.263,
+          "wall_ms": 4.119,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -5776,8 +5850,10 @@
             "pass-2"
           ],
           "reason": "Authored candidate, subject to observation quality and original expiry.",
-          "detected_pass_ids": [],
-          "passed": false
+          "detected_pass_ids": [
+            "pass-2"
+          ],
+          "passed": true
         },
         {
           "at_ms": 85200,
@@ -5787,26 +5863,36 @@
           "passed": true
         }
       ],
-      "passed": false,
-      "findings": [
+      "passed": true,
+      "findings": [],
+      "workflows": [
         {
-          "at_ms": 55200,
-          "expected": [
-            "pass-2"
-          ],
-          "detected": [],
-          "metrics": {
-            "pass_id": "pass-1",
-            "coverage": 1,
-            "pressure_opponents_max": 0,
-            "bypassed_count": 0,
-            "retained": true,
-            "progression_m": 7.0,
-            "eligible": false
-          }
+          "cutoff_ms": 55200,
+          "evidence_revision": "7f8f9d9a641e0e21",
+          "wall_ms": 4.527,
+          "mode": "local deterministic template",
+          "status": "produced",
+          "usage": null,
+          "variants_checked": 100,
+          "trace_actions": [
+            {
+              "role": "Story Analyst",
+              "action": "compute_pass_metrics",
+              "status": "supported_candidate"
+            },
+            {
+              "role": "Evidence Reviewer",
+              "action": "independent_metric_check",
+              "status": "supported"
+            },
+            {
+              "role": "Audience Editor",
+              "action": "render_and_validate_variants",
+              "status": "valid"
+            }
+          ]
         }
-      ],
-      "workflows": []
+      ]
     },
     {
       "case_id": "p03-28",
@@ -5867,8 +5953,10 @@
             "pass-2"
           ],
           "reason": "Authored candidate, subject to observation quality and original expiry.",
-          "detected_pass_ids": [],
-          "passed": false
+          "detected_pass_ids": [
+            "pass-2"
+          ],
+          "passed": true
         },
         {
           "at_ms": 110200,
@@ -5890,8 +5978,10 @@
             "pass-3"
           ],
           "reason": "Authored candidate, subject to observation quality and original expiry.",
-          "detected_pass_ids": [],
-          "passed": false
+          "detected_pass_ids": [
+            "pass-3"
+          ],
+          "passed": true
         },
         {
           "at_ms": 170200,
@@ -5901,46 +5991,65 @@
           "passed": true
         }
       ],
-      "passed": false,
-      "findings": [
-        {
-          "at_ms": 80200,
-          "expected": [
-            "pass-2"
-          ],
-          "detected": [],
-          "metrics": {
-            "pass_id": "pass-1",
-            "coverage": 1,
-            "pressure_opponents_max": 2,
-            "bypassed_count": 3,
-            "retained": true,
-            "progression_m": 7.0,
-            "eligible": true
-          }
-        },
-        {
-          "at_ms": 140200,
-          "expected": [
-            "pass-3"
-          ],
-          "detected": [],
-          "metrics": {
-            "pass_id": "pass-1",
-            "coverage": 1,
-            "pressure_opponents_max": 2,
-            "bypassed_count": 3,
-            "retained": true,
-            "progression_m": 7.0,
-            "eligible": true
-          }
-        }
-      ],
+      "passed": true,
+      "findings": [],
       "workflows": [
         {
           "cutoff_ms": 20200,
           "evidence_revision": "318b6914e63b36a0",
-          "wall_ms": 4.258,
+          "wall_ms": 4.607,
+          "mode": "local deterministic template",
+          "status": "produced",
+          "usage": null,
+          "variants_checked": 100,
+          "trace_actions": [
+            {
+              "role": "Story Analyst",
+              "action": "compute_pass_metrics",
+              "status": "supported_candidate"
+            },
+            {
+              "role": "Evidence Reviewer",
+              "action": "independent_metric_check",
+              "status": "supported"
+            },
+            {
+              "role": "Audience Editor",
+              "action": "render_and_validate_variants",
+              "status": "valid"
+            }
+          ]
+        },
+        {
+          "cutoff_ms": 80200,
+          "evidence_revision": "b6f1c7f5241f8948",
+          "wall_ms": 4.908,
+          "mode": "local deterministic template",
+          "status": "produced",
+          "usage": null,
+          "variants_checked": 100,
+          "trace_actions": [
+            {
+              "role": "Story Analyst",
+              "action": "compute_pass_metrics",
+              "status": "supported_candidate"
+            },
+            {
+              "role": "Evidence Reviewer",
+              "action": "independent_metric_check",
+              "status": "supported"
+            },
+            {
+              "role": "Audience Editor",
+              "action": "render_and_validate_variants",
+              "status": "valid"
+            }
+          ]
+        },
+        {
+          "cutoff_ms": 140200,
+          "evidence_revision": "73a85bf404654bd2",
+          "wall_ms": 5.027,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -6018,7 +6127,7 @@
         {
           "cutoff_ms": 26200,
           "evidence_revision": "5bc0abfd52d5107a",
-          "wall_ms": 4.237,
+          "wall_ms": 4.25,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -6855,7 +6964,7 @@
         {
           "cutoff_ms": 31200,
           "evidence_revision": "3c29a3f230a6a899",
-          "wall_ms": 4.458,
+          "wall_ms": 4.396,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -6994,7 +7103,7 @@
         {
           "cutoff_ms": 26900,
           "evidence_revision": "f6e528ccb92187e7",
-          "wall_ms": 4.332,
+          "wall_ms": 4.098,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -7072,7 +7181,7 @@
         {
           "cutoff_ms": 26200,
           "evidence_revision": "15cf8a34bcb5f709",
-          "wall_ms": 4.304,
+          "wall_ms": 4.215,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -7168,7 +7277,7 @@
         {
           "cutoff_ms": 26200,
           "evidence_revision": "e698fbeb8d939210",
-          "wall_ms": 4.31,
+          "wall_ms": 4.312,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -7253,7 +7362,7 @@
         {
           "cutoff_ms": 30200,
           "evidence_revision": "2af776501dd85cef",
-          "wall_ms": 4.34,
+          "wall_ms": 4.446,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -7331,7 +7440,7 @@
         {
           "cutoff_ms": 26200,
           "evidence_revision": "7cd0cd1970492fe4",
-          "wall_ms": 4.343,
+          "wall_ms": 4.26,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -7409,7 +7518,7 @@
         {
           "cutoff_ms": 26200,
           "evidence_revision": "c3ca0f71862b4d93",
-          "wall_ms": 4.355,
+          "wall_ms": 4.241,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -7536,8 +7645,10 @@
             "pass-2"
           ],
           "reason": "Authored candidate, subject to observation quality and original expiry.",
-          "detected_pass_ids": [],
-          "passed": false
+          "detected_pass_ids": [
+            "pass-2"
+          ],
+          "passed": true
         },
         {
           "at_ms": 91200,
@@ -7547,26 +7658,36 @@
           "passed": true
         }
       ],
-      "passed": false,
-      "findings": [
+      "passed": true,
+      "findings": [],
+      "workflows": [
         {
-          "at_ms": 61200,
-          "expected": [
-            "pass-2"
-          ],
-          "detected": [],
-          "metrics": {
-            "pass_id": "pass-1",
-            "coverage": 1,
-            "pressure_opponents_max": 0,
-            "bypassed_count": 0,
-            "retained": true,
-            "progression_m": 7.0,
-            "eligible": false
-          }
+          "cutoff_ms": 61200,
+          "evidence_revision": "72966aab0a9659d3",
+          "wall_ms": 4.485,
+          "mode": "local deterministic template",
+          "status": "produced",
+          "usage": null,
+          "variants_checked": 100,
+          "trace_actions": [
+            {
+              "role": "Story Analyst",
+              "action": "compute_pass_metrics",
+              "status": "supported_candidate"
+            },
+            {
+              "role": "Evidence Reviewer",
+              "action": "independent_metric_check",
+              "status": "supported"
+            },
+            {
+              "role": "Audience Editor",
+              "action": "render_and_validate_variants",
+              "status": "valid"
+            }
+          ]
         }
-      ],
-      "workflows": []
+      ]
     },
     {
       "case_id": "p04-28",
@@ -7627,8 +7748,10 @@
             "pass-2"
           ],
           "reason": "Authored candidate, subject to observation quality and original expiry.",
-          "detected_pass_ids": [],
-          "passed": false
+          "detected_pass_ids": [
+            "pass-2"
+          ],
+          "passed": true
         },
         {
           "at_ms": 116200,
@@ -7650,8 +7773,10 @@
             "pass-3"
           ],
           "reason": "Authored candidate, subject to observation quality and original expiry.",
-          "detected_pass_ids": [],
-          "passed": false
+          "detected_pass_ids": [
+            "pass-3"
+          ],
+          "passed": true
         },
         {
           "at_ms": 176200,
@@ -7661,46 +7786,65 @@
           "passed": true
         }
       ],
-      "passed": false,
-      "findings": [
-        {
-          "at_ms": 86200,
-          "expected": [
-            "pass-2"
-          ],
-          "detected": [],
-          "metrics": {
-            "pass_id": "pass-1",
-            "coverage": 1,
-            "pressure_opponents_max": 2,
-            "bypassed_count": 3,
-            "retained": true,
-            "progression_m": 7.0,
-            "eligible": true
-          }
-        },
-        {
-          "at_ms": 146200,
-          "expected": [
-            "pass-3"
-          ],
-          "detected": [],
-          "metrics": {
-            "pass_id": "pass-1",
-            "coverage": 1,
-            "pressure_opponents_max": 2,
-            "bypassed_count": 3,
-            "retained": true,
-            "progression_m": 7.0,
-            "eligible": true
-          }
-        }
-      ],
+      "passed": true,
+      "findings": [],
       "workflows": [
         {
           "cutoff_ms": 26200,
           "evidence_revision": "a3d9b939a839adb5",
-          "wall_ms": 4.276,
+          "wall_ms": 4.224,
+          "mode": "local deterministic template",
+          "status": "produced",
+          "usage": null,
+          "variants_checked": 100,
+          "trace_actions": [
+            {
+              "role": "Story Analyst",
+              "action": "compute_pass_metrics",
+              "status": "supported_candidate"
+            },
+            {
+              "role": "Evidence Reviewer",
+              "action": "independent_metric_check",
+              "status": "supported"
+            },
+            {
+              "role": "Audience Editor",
+              "action": "render_and_validate_variants",
+              "status": "valid"
+            }
+          ]
+        },
+        {
+          "cutoff_ms": 86200,
+          "evidence_revision": "bd27d7d9c715ab2e",
+          "wall_ms": 4.571,
+          "mode": "local deterministic template",
+          "status": "produced",
+          "usage": null,
+          "variants_checked": 100,
+          "trace_actions": [
+            {
+              "role": "Story Analyst",
+              "action": "compute_pass_metrics",
+              "status": "supported_candidate"
+            },
+            {
+              "role": "Evidence Reviewer",
+              "action": "independent_metric_check",
+              "status": "supported"
+            },
+            {
+              "role": "Audience Editor",
+              "action": "render_and_validate_variants",
+              "status": "valid"
+            }
+          ]
+        },
+        {
+          "cutoff_ms": 146200,
+          "evidence_revision": "d40d3b6db7f1ebe4",
+          "wall_ms": 5.066,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -7778,7 +7922,7 @@
         {
           "cutoff_ms": 28200,
           "evidence_revision": "50fce245061a64bc",
-          "wall_ms": 4.38,
+          "wall_ms": 4.245,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -8615,7 +8759,7 @@
         {
           "cutoff_ms": 33200,
           "evidence_revision": "0a05e176c4334249",
-          "wall_ms": 4.439,
+          "wall_ms": 4.446,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -8754,7 +8898,7 @@
         {
           "cutoff_ms": 28900,
           "evidence_revision": "dcafd3573a026455",
-          "wall_ms": 4.416,
+          "wall_ms": 4.298,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -8832,7 +8976,7 @@
         {
           "cutoff_ms": 28200,
           "evidence_revision": "108fd11f0f811174",
-          "wall_ms": 4.406,
+          "wall_ms": 4.462,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -8928,7 +9072,7 @@
         {
           "cutoff_ms": 28200,
           "evidence_revision": "4b1d609773d663a2",
-          "wall_ms": 4.324,
+          "wall_ms": 4.423,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -9013,7 +9157,7 @@
         {
           "cutoff_ms": 32200,
           "evidence_revision": "58b40ee96b8255cb",
-          "wall_ms": 4.31,
+          "wall_ms": 4.451,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -9091,7 +9235,7 @@
         {
           "cutoff_ms": 28200,
           "evidence_revision": "5eaa465083b67883",
-          "wall_ms": 4.393,
+          "wall_ms": 4.327,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -9169,7 +9313,7 @@
         {
           "cutoff_ms": 28200,
           "evidence_revision": "7acb785edcff6f1c",
-          "wall_ms": 4.33,
+          "wall_ms": 4.302,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -9296,8 +9440,10 @@
             "pass-2"
           ],
           "reason": "Authored candidate, subject to observation quality and original expiry.",
-          "detected_pass_ids": [],
-          "passed": false
+          "detected_pass_ids": [
+            "pass-2"
+          ],
+          "passed": true
         },
         {
           "at_ms": 93200,
@@ -9307,26 +9453,36 @@
           "passed": true
         }
       ],
-      "passed": false,
-      "findings": [
+      "passed": true,
+      "findings": [],
+      "workflows": [
         {
-          "at_ms": 63200,
-          "expected": [
-            "pass-2"
-          ],
-          "detected": [],
-          "metrics": {
-            "pass_id": "pass-1",
-            "coverage": 1,
-            "pressure_opponents_max": 0,
-            "bypassed_count": 0,
-            "retained": true,
-            "progression_m": 7.0,
-            "eligible": false
-          }
+          "cutoff_ms": 63200,
+          "evidence_revision": "6b2fe9ad38a8a737",
+          "wall_ms": 4.435,
+          "mode": "local deterministic template",
+          "status": "produced",
+          "usage": null,
+          "variants_checked": 100,
+          "trace_actions": [
+            {
+              "role": "Story Analyst",
+              "action": "compute_pass_metrics",
+              "status": "supported_candidate"
+            },
+            {
+              "role": "Evidence Reviewer",
+              "action": "independent_metric_check",
+              "status": "supported"
+            },
+            {
+              "role": "Audience Editor",
+              "action": "render_and_validate_variants",
+              "status": "valid"
+            }
+          ]
         }
-      ],
-      "workflows": []
+      ]
     },
     {
       "case_id": "p05-28",
@@ -9387,8 +9543,10 @@
             "pass-2"
           ],
           "reason": "Authored candidate, subject to observation quality and original expiry.",
-          "detected_pass_ids": [],
-          "passed": false
+          "detected_pass_ids": [
+            "pass-2"
+          ],
+          "passed": true
         },
         {
           "at_ms": 118200,
@@ -9410,8 +9568,10 @@
             "pass-3"
           ],
           "reason": "Authored candidate, subject to observation quality and original expiry.",
-          "detected_pass_ids": [],
-          "passed": false
+          "detected_pass_ids": [
+            "pass-3"
+          ],
+          "passed": true
         },
         {
           "at_ms": 178200,
@@ -9421,46 +9581,65 @@
           "passed": true
         }
       ],
-      "passed": false,
-      "findings": [
-        {
-          "at_ms": 88200,
-          "expected": [
-            "pass-2"
-          ],
-          "detected": [],
-          "metrics": {
-            "pass_id": "pass-1",
-            "coverage": 1,
-            "pressure_opponents_max": 2,
-            "bypassed_count": 3,
-            "retained": true,
-            "progression_m": 7.0,
-            "eligible": true
-          }
-        },
-        {
-          "at_ms": 148200,
-          "expected": [
-            "pass-3"
-          ],
-          "detected": [],
-          "metrics": {
-            "pass_id": "pass-1",
-            "coverage": 1,
-            "pressure_opponents_max": 2,
-            "bypassed_count": 3,
-            "retained": true,
-            "progression_m": 7.0,
-            "eligible": true
-          }
-        }
-      ],
+      "passed": true,
+      "findings": [],
       "workflows": [
         {
           "cutoff_ms": 28200,
           "evidence_revision": "bee9d86c050f6688",
-          "wall_ms": 4.23,
+          "wall_ms": 4.419,
+          "mode": "local deterministic template",
+          "status": "produced",
+          "usage": null,
+          "variants_checked": 100,
+          "trace_actions": [
+            {
+              "role": "Story Analyst",
+              "action": "compute_pass_metrics",
+              "status": "supported_candidate"
+            },
+            {
+              "role": "Evidence Reviewer",
+              "action": "independent_metric_check",
+              "status": "supported"
+            },
+            {
+              "role": "Audience Editor",
+              "action": "render_and_validate_variants",
+              "status": "valid"
+            }
+          ]
+        },
+        {
+          "cutoff_ms": 88200,
+          "evidence_revision": "10c1f30423c6681f",
+          "wall_ms": 4.615,
+          "mode": "local deterministic template",
+          "status": "produced",
+          "usage": null,
+          "variants_checked": 100,
+          "trace_actions": [
+            {
+              "role": "Story Analyst",
+              "action": "compute_pass_metrics",
+              "status": "supported_candidate"
+            },
+            {
+              "role": "Evidence Reviewer",
+              "action": "independent_metric_check",
+              "status": "supported"
+            },
+            {
+              "role": "Audience Editor",
+              "action": "render_and_validate_variants",
+              "status": "valid"
+            }
+          ]
+        },
+        {
+          "cutoff_ms": 148200,
+          "evidence_revision": "c984ec4a7110c9dc",
+          "wall_ms": 5.322,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -9538,7 +9717,7 @@
         {
           "cutoff_ms": 18200,
           "evidence_revision": "638d1b2904037e95",
-          "wall_ms": 4.334,
+          "wall_ms": 4.33,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -10375,7 +10554,7 @@
         {
           "cutoff_ms": 23200,
           "evidence_revision": "ee03a01caf8e71b6",
-          "wall_ms": 4.35,
+          "wall_ms": 4.309,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -10514,7 +10693,7 @@
         {
           "cutoff_ms": 18900,
           "evidence_revision": "1a0fc9b296d0e797",
-          "wall_ms": 4.172,
+          "wall_ms": 4.195,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -10592,7 +10771,7 @@
         {
           "cutoff_ms": 18200,
           "evidence_revision": "bd5c122086464e2f",
-          "wall_ms": 4.325,
+          "wall_ms": 4.184,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -10688,7 +10867,7 @@
         {
           "cutoff_ms": 18200,
           "evidence_revision": "78ffe12f2852a635",
-          "wall_ms": 4.358,
+          "wall_ms": 4.326,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -10773,7 +10952,7 @@
         {
           "cutoff_ms": 22200,
           "evidence_revision": "4dff2bd547578e04",
-          "wall_ms": 4.335,
+          "wall_ms": 4.283,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -10851,7 +11030,7 @@
         {
           "cutoff_ms": 18200,
           "evidence_revision": "c2bfb8947c036bdf",
-          "wall_ms": 4.36,
+          "wall_ms": 4.283,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -10929,7 +11108,7 @@
         {
           "cutoff_ms": 18200,
           "evidence_revision": "2f5bf7a7b43cd4f7",
-          "wall_ms": 4.242,
+          "wall_ms": 4.301,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,
@@ -11056,8 +11235,10 @@
             "pass-2"
           ],
           "reason": "Authored candidate, subject to observation quality and original expiry.",
-          "detected_pass_ids": [],
-          "passed": false
+          "detected_pass_ids": [
+            "pass-2"
+          ],
+          "passed": true
         },
         {
           "at_ms": 83200,
@@ -11067,26 +11248,36 @@
           "passed": true
         }
       ],
-      "passed": false,
-      "findings": [
+      "passed": true,
+      "findings": [],
+      "workflows": [
         {
-          "at_ms": 53200,
-          "expected": [
-            "pass-2"
-          ],
-          "detected": [],
-          "metrics": {
-            "pass_id": "pass-1",
-            "coverage": 1,
-            "pressure_opponents_max": 0,
-            "bypassed_count": 0,
-            "retained": true,
-            "progression_m": 7.0,
-            "eligible": false
-          }
+          "cutoff_ms": 53200,
+          "evidence_revision": "239788d294cac170",
+          "wall_ms": 4.596,
+          "mode": "local deterministic template",
+          "status": "produced",
+          "usage": null,
+          "variants_checked": 100,
+          "trace_actions": [
+            {
+              "role": "Story Analyst",
+              "action": "compute_pass_metrics",
+              "status": "supported_candidate"
+            },
+            {
+              "role": "Evidence Reviewer",
+              "action": "independent_metric_check",
+              "status": "supported"
+            },
+            {
+              "role": "Audience Editor",
+              "action": "render_and_validate_variants",
+              "status": "valid"
+            }
+          ]
         }
-      ],
-      "workflows": []
+      ]
     },
     {
       "case_id": "p06-28",
@@ -11147,8 +11338,10 @@
             "pass-2"
           ],
           "reason": "Authored candidate, subject to observation quality and original expiry.",
-          "detected_pass_ids": [],
-          "passed": false
+          "detected_pass_ids": [
+            "pass-2"
+          ],
+          "passed": true
         },
         {
           "at_ms": 108200,
@@ -11170,8 +11363,10 @@
             "pass-3"
           ],
           "reason": "Authored candidate, subject to observation quality and original expiry.",
-          "detected_pass_ids": [],
-          "passed": false
+          "detected_pass_ids": [
+            "pass-3"
+          ],
+          "passed": true
         },
         {
           "at_ms": 168200,
@@ -11181,46 +11376,65 @@
           "passed": true
         }
       ],
-      "passed": false,
-      "findings": [
-        {
-          "at_ms": 78200,
-          "expected": [
-            "pass-2"
-          ],
-          "detected": [],
-          "metrics": {
-            "pass_id": "pass-1",
-            "coverage": 1,
-            "pressure_opponents_max": 2,
-            "bypassed_count": 3,
-            "retained": true,
-            "progression_m": 7.0,
-            "eligible": true
-          }
-        },
-        {
-          "at_ms": 138200,
-          "expected": [
-            "pass-3"
-          ],
-          "detected": [],
-          "metrics": {
-            "pass_id": "pass-1",
-            "coverage": 1,
-            "pressure_opponents_max": 2,
-            "bypassed_count": 3,
-            "retained": true,
-            "progression_m": 7.0,
-            "eligible": true
-          }
-        }
-      ],
+      "passed": true,
+      "findings": [],
       "workflows": [
         {
           "cutoff_ms": 18200,
           "evidence_revision": "2e44d23c306c3d37",
-          "wall_ms": 4.256,
+          "wall_ms": 4.321,
+          "mode": "local deterministic template",
+          "status": "produced",
+          "usage": null,
+          "variants_checked": 100,
+          "trace_actions": [
+            {
+              "role": "Story Analyst",
+              "action": "compute_pass_metrics",
+              "status": "supported_candidate"
+            },
+            {
+              "role": "Evidence Reviewer",
+              "action": "independent_metric_check",
+              "status": "supported"
+            },
+            {
+              "role": "Audience Editor",
+              "action": "render_and_validate_variants",
+              "status": "valid"
+            }
+          ]
+        },
+        {
+          "cutoff_ms": 78200,
+          "evidence_revision": "08c37a181d065fcc",
+          "wall_ms": 4.618,
+          "mode": "local deterministic template",
+          "status": "produced",
+          "usage": null,
+          "variants_checked": 100,
+          "trace_actions": [
+            {
+              "role": "Story Analyst",
+              "action": "compute_pass_metrics",
+              "status": "supported_candidate"
+            },
+            {
+              "role": "Evidence Reviewer",
+              "action": "independent_metric_check",
+              "status": "supported"
+            },
+            {
+              "role": "Audience Editor",
+              "action": "render_and_validate_variants",
+              "status": "valid"
+            }
+          ]
+        },
+        {
+          "cutoff_ms": 138200,
+          "evidence_revision": "636cd5c48a47d18f",
+          "wall_ms": 4.926,
           "mode": "local deterministic template",
           "status": "produced",
           "usage": null,

@@ -20,7 +20,7 @@ LOG = logging.getLogger(__name__)
 
 def replay_clock(session):
     elapsed = max(0, time.time() - session['updated_at']) * session['speed'] * 1000 if session['running'] else 0
-    return min(60000, int(session['clock_ms'] + elapsed))
+    return min(session.get('duration_ms',60000), int(session['clock_ms'] + elapsed))
 
 
 class EventHubTransport:

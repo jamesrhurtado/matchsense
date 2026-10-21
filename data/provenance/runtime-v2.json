@@ -1,0 +1,3031 @@
+{
+  "generator_version": "2.0.0",
+  "source": "Original fictional scripted trajectories; no real match records.",
+  "runtime_contains": "Match metadata and delivered observations only; no reference checks or seeds.",
+  "cases": [
+    {
+      "case_id": "p01-01",
+      "match_id": "match-8a22d10f44fb50c6",
+      "metadata_sha256": "0a5b47dbde66a2a14cf71b7eef84fd58cc22523b50574a875c0f30a71fa329d0",
+      "observations_sha256": "bbfa1714975616f2762a212cecb3fd1b93dfeb4a3d0831960f3e791ff08ba819",
+      "compressed_sha256": "d929f93e0eafd5d002fe00b3ae8e0dd449097f86069f87883a3883f52122d530",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p01-02",
+      "match_id": "match-4f53fd9ef1315f09",
+      "metadata_sha256": "bd5f4a2b5221de06c98b227b80eb3c266a610f2dabdd5fb0020cb91f44434809",
+      "observations_sha256": "d8255f751e02c0e55e1ffd83ccb2347b4c02460d975fe14e72a67e5409c65ee5",
+      "compressed_sha256": "322b78b05fc8033900f7ca64a476b13fa83c83af4c019600a10101448991d2d2",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p01-03",
+      "match_id": "match-8918f0b661205c3c",
+      "metadata_sha256": "c48881ecf5543340d3224fcb8536bfa2df6f2e07d7d5a2e70455112fb78d6583",
+      "observations_sha256": "c45908826bc2a5991d061c418ffeaa4d565e60efac39664d0f409b5812052028",
+      "compressed_sha256": "0623297964c8ebd53ca86920574c64472680bdd4c97596aef1c539b7c0466639",
+      "validation": {
+        "frames": 601,
+        "messages": 605,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p01-04",
+      "match_id": "match-9545e3c42f4d5d26",
+      "metadata_sha256": "580d7cb9d26d793f9327568a9991a138c0188ed22a3984fc39a0407fc502658a",
+      "observations_sha256": "8b48b211e13de0389acf081b6ac7c1a4f31ef482fe197f9f6d37044e49db9338",
+      "compressed_sha256": "790c7aa6d07786b05425c746304fd53411080ef24de2017f80b1c0a32984ea8e",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p01-05",
+      "match_id": "match-d2bf7507ee0350b0",
+      "metadata_sha256": "17d535829076aeb34f6a86336d86cd9930495a765ad4fe691c6417f6a9c90dc3",
+      "observations_sha256": "b0ed130a62b686598e08034fa8878670610c51986e58a31f5e1d5f266c77282b",
+      "compressed_sha256": "864a32234e89d03d8691e94716a5f7190e651a5246d258040430b8dc8f81b907",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p01-06",
+      "match_id": "match-dadbfd0a91e3506a",
+      "metadata_sha256": "b02f63aa0592143d19bb91075eb5682528a1fde8f287022b05da2c9c95b5b4c9",
+      "observations_sha256": "ec4741beaf80d29e633ea6c94f05d418fbb1277e5d404f739623ce5c5208b232",
+      "compressed_sha256": "67f111b8a539bd7809621396f394e3b0eab16392bf21a97254a9cd612cc836d5",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p01-07",
+      "match_id": "match-90ca1c3e11cf56ee",
+      "metadata_sha256": "8d6ae869291ac089a950e89e5767a8adb487ff6d73af2d7928918d6ff1be7bf2",
+      "observations_sha256": "41e2385ec8835839965a3aa493156dec8ee709a28282469864c7fe977501c3e5",
+      "compressed_sha256": "842639245a0200508fd2688d8766a3002e72b7a18df43bf923947375617405d6",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p01-08",
+      "match_id": "match-fd5d0d3736055666",
+      "metadata_sha256": "a4e93257866a90cbd4443a0c18ff77c6773a9d1172d420687280e3da021fa30d",
+      "observations_sha256": "4150b840f91ef6517edea1b73e7fb51dff2e31ba62f4a222051e2c6cb08d37b7",
+      "compressed_sha256": "6185d258e15dbe7dab1bff2e2b8c16c70332eb84758c8af56b389dd6fb5423b5",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p01-09",
+      "match_id": "match-27557aa5b5075753",
+      "metadata_sha256": "d56c8654116b549ab19bdae61f55ea60dee4c1c7908c6c9948fa589e14ed2035",
+      "observations_sha256": "4c495cb68788655bcb798ac345d656ccb7167876085f95346f893c76bbeeaec0",
+      "compressed_sha256": "66f24ce62c021e148ae51ddd9c4002be0a5392917e5a527cc7468ac249902ce0",
+      "validation": {
+        "frames": 601,
+        "messages": 608,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 608,
+        "unique_observations": 608,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p01-10",
+      "match_id": "match-99c900ade60d5e6d",
+      "metadata_sha256": "10374b73e2614ec133ef7f15003ef717fbd134aed89fdd8690a910ead367887b",
+      "observations_sha256": "0359c1d74553d6ac1b99b4ee3b11c2490bf0fa8c5f57e215e600de98e138e9eb",
+      "compressed_sha256": "beacec09c4db75eeb72a6e097e4643b37ebde12269e44b366dc9e71b169b18f6",
+      "validation": {
+        "frames": 601,
+        "messages": 605,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p01-11",
+      "match_id": "match-82ee70a874de596f",
+      "metadata_sha256": "55c63cfa8f3f46c9497031a7a3160b31a1489884acc1d0dd287a7bf675f4bfc3",
+      "observations_sha256": "b486a92972a7ba9c7895920a983a2486a5740cf0b369d8286384e809eb81c9e5",
+      "compressed_sha256": "19d6983b8bf091dfbda579127668f1c57e496fc1dba8a77e41e0c0871da3ecab",
+      "validation": {
+        "frames": 601,
+        "messages": 605,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p01-12",
+      "match_id": "match-cf4791db33fe5568",
+      "metadata_sha256": "9962c1f5501584940cafa0aef4d7e2ac828240067cc69d5f390c425d02eb8f8e",
+      "observations_sha256": "0c93b9e6a9213b0c698622453743514bae85699e038f5171db7672b143a5204a",
+      "compressed_sha256": "9c6529f9eacc2d28fdc2de4fd11a7c65d5cba0c203e50df2ea47ee3266133897",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p01-13",
+      "match_id": "match-d2e530d3983253b0",
+      "metadata_sha256": "dbd265ad5223399dfd3c7a2740771e4e81412a3bfd7e31ef4744085eab18a33d",
+      "observations_sha256": "dca0b3d5d743d2eda85ee6e82b53e0e966b6c40a62158bf9b3440afd8a5ecb51",
+      "compressed_sha256": "bb8ac4361e9104d1d5bd98d41a71af91dc2016bc55e8c67bf267b0a843995821",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p01-14",
+      "match_id": "match-f5a63ac215bc5b65",
+      "metadata_sha256": "cc6429a325c77f2f1a73fe19c8ad86f766c89caff6b8b3470bca088faafc133e",
+      "observations_sha256": "f9bdc2729a49836c2f644871b859708069f0fc51006d8e51e85244698e1099c1",
+      "compressed_sha256": "35fa768983cc9c569bb28d78b4c24dbf0385cc605b8d7f5d2ea24fb238837c21",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p01-15",
+      "match_id": "match-7e36c2f95e435e5c",
+      "metadata_sha256": "d0c5ca853d775a58a48edc9f29fc55d58e5743b3ed8802ec99d0dcd5c2b3d1ac",
+      "observations_sha256": "0ee1cded0cff554b85434e048ec5043ebdc4bf35c5127b779506981f8fe83074",
+      "compressed_sha256": "d9d36743d842657a74bcdd49cd99026931135fd33a459dfc03985370fc1923dd",
+      "validation": {
+        "frames": 595,
+        "messages": 598,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 598,
+        "unique_observations": 598,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p01-16",
+      "match_id": "match-6b3b2f50771d58f0",
+      "metadata_sha256": "4ff1008c906ae019fdaefacde15a90f37995620d587dc9971899b24aaf166c25",
+      "observations_sha256": "d838f1b46ecc5dd182e73a37b18f9271761e0da9f0b243787e97761457582711",
+      "compressed_sha256": "da93e3a1e34147af411d435527f39db62d08412b032d153bd44ad9c80dfaf5d0",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p01-17",
+      "match_id": "match-29f7642879be54b4",
+      "metadata_sha256": "0764cf121a2b9790ed710a3f75a6f44d17800bea07155d772b5b9490728384bc",
+      "observations_sha256": "975f6cb35c563ddefa1e47edea5ca704386a4a5161b7fd1bf7466a3adddd6d91",
+      "compressed_sha256": "5b9962728a9259fd271f70c54251f624885806909412914b9be23fba1545ce27",
+      "validation": {
+        "frames": 601,
+        "messages": 608,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 608,
+        "unique_observations": 608,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p01-18",
+      "match_id": "match-56407b6f424d59d4",
+      "metadata_sha256": "e6fdf4903227523bc5bee60a87a8a1d2528459242f5086a587b880828627f13b",
+      "observations_sha256": "d983cdd2aa87f23bccebc5abc13a909f57cd11f9bbbb2fabfe8e9c6aa5c72b4c",
+      "compressed_sha256": "a559ac687218d5e74c937982bed1df4423175f086caf736c747b8af7adbe6d10",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 8000
+      }
+    },
+    {
+      "case_id": "p01-19",
+      "match_id": "match-222c308493f258a2",
+      "metadata_sha256": "0d6258a7bd0905c0566fd318371617114994d6af927cd32309bb6e5968e48651",
+      "observations_sha256": "a6e11d6a069fa7ddd4ccc3c3d6342ed89e06dc223a658fbcb57d4e7965cba783",
+      "compressed_sha256": "c4a6758411eefe972bbc5d8327e40ece545d45d10a11ccce7d01dda12fb539eb",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 34000
+      }
+    },
+    {
+      "case_id": "p01-20",
+      "match_id": "match-643bdfcf48515bc0",
+      "metadata_sha256": "674371d21cf64b56a66d9df9ef28ef2671bf0ec9ffbb44c2be5bb8b930d43a64",
+      "observations_sha256": "e43c0c6959777edce7e15f479a682d9039f48096da76a658f0a0ac05ba0257e0",
+      "compressed_sha256": "363e48b82e5f1133372c1ee3942cd0b6a7fb9d65b67125ef2364a36685ca1b68",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 700
+      }
+    },
+    {
+      "case_id": "p01-21",
+      "match_id": "match-cd425ce888f3511f",
+      "metadata_sha256": "7aca6ca37e597461a01227e3754ea55895f10afd55c8dd2058b7ee3e3928b3cb",
+      "observations_sha256": "e35301da8de80969647ee47216cba8b005139e06b25df622fb01fff9155f98b0",
+      "compressed_sha256": "31a8665b266ec294f3a780511bc6b71fc2c5f7cd5f85842ec2456bb6c1d20eec",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 621,
+        "unique_observations": 604,
+        "exact_retransmissions": 17,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p01-22",
+      "match_id": "match-06adb9603afd55b8",
+      "metadata_sha256": "2b39ebaea4696620064a853a6853125d15479f837f2c658c2894cf74adddbfc6",
+      "observations_sha256": "ecf9c71b92c19279eeb4e8e134de463dd811e07e99efee481ff2ea14001b3c51",
+      "compressed_sha256": "6d29efab9d0ab1736a40c9853d6e31a6c6735556e01a83f691cb23b7caf5b44f",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 1,
+        "maximum_delivery_delay_ms": 4000
+      }
+    },
+    {
+      "case_id": "p01-23",
+      "match_id": "match-bba5572d53d25c8c",
+      "metadata_sha256": "420e342f67b6f327ca08aa3cc32caaac473ed1ad5133b89bc7f99eb3010de059",
+      "observations_sha256": "84f84e1e8e92760c3e1dbf092b957c28df3a0bdbf834189544543e8d89f0665b",
+      "compressed_sha256": "884fbb4f8a978b2732491a7db64695a89d86649f08decebf78dda9f0d593c0dc",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 1,
+        "maximum_delivery_delay_ms": 4000
+      }
+    },
+    {
+      "case_id": "p01-24",
+      "match_id": "match-689b3a6aacbb50e7",
+      "metadata_sha256": "7bb804e54149ce8db07e8a7e66a61c733000ec485971ab1cb7b08e5396c42de4",
+      "observations_sha256": "0084cc08da2cbdfb924d0b40b60e1983f7852b82241b0b8be9e29dcc7c57fe37",
+      "compressed_sha256": "c65341072da21ef2bbe0325788bd83111c30f49c152b574f7a1308ad6d93d612",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p01-25",
+      "match_id": "match-feaed937bfa454e5",
+      "metadata_sha256": "851280ef168bc3d496daa57c09433978d2950af7650b7bbfa39ccecc797a3bc1",
+      "observations_sha256": "585438f19ffa6dfbfef825c65d9b070a1d725d86393047764bc42c8f87847e26",
+      "compressed_sha256": "807cad87580a19c9d868081d0ac4c06c1e0aadb1a8a0d4d31f33695335efccb2",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p01-26",
+      "match_id": "match-75298ada78b25f0b",
+      "metadata_sha256": "1fe6394e7697b9fddf47b19e33d2333a5f19d4d8a28a51f3499889318fece4fc",
+      "observations_sha256": "17f797bfcf239dac6a24b06e34bc53acc18ca541e65cc74e206b54c1de71b2b2",
+      "compressed_sha256": "2dca046031d5ec5e23749f7a5d7f00b616d2b7ebd9ddf6c42e3cc10118ef9efc",
+      "validation": {
+        "frames": 601,
+        "messages": 602,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 602,
+        "unique_observations": 602,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p01-27",
+      "match_id": "match-f8b7c2564b7c527a",
+      "metadata_sha256": "4ced87608991c71c77c2084e82d249cee750c8decca6d9df9050e4966177cc20",
+      "observations_sha256": "ab352924e67c45403f4b78c9767e99de6bd7016adf3dacc5bf30e577831bb066",
+      "compressed_sha256": "961ac4166753ddfe070c43b68c49af2328eebbc66f077ac2d859475b0b79a9ea",
+      "validation": {
+        "frames": 901,
+        "messages": 911,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 911,
+        "unique_observations": 911,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p01-28",
+      "match_id": "match-ce88c61d5a0c5d1d",
+      "metadata_sha256": "31fead069f6e31bfaec452b6b9d7a8c38cf97b76f3456d3193730d3b13b650e5",
+      "observations_sha256": "71209a152c944b9f3bc371d6eda3810ee15260988176bc5281b0c8a10c288a1e",
+      "compressed_sha256": "003b8707a5d534a3ee85e01a2b76ad07692de7bc76570bd4a2d029ccf4a75582",
+      "validation": {
+        "frames": 1801,
+        "messages": 1818,
+        "duration_ms": 180000,
+        "active_players": 22,
+        "delivery_rows": 1818,
+        "unique_observations": 1818,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p02-01",
+      "match_id": "match-69da4a51ca305efb",
+      "metadata_sha256": "3bcc72fb48a152f9d2082e15f866fb470e1778f3ee74fa09444d02c8072c8041",
+      "observations_sha256": "9b83ed0f64c20231d3b763cd7130a28003f9a82ded48ff8d3c0faa79ba06f73e",
+      "compressed_sha256": "a61f3a71d8e614c255d996d4fc191205efb3b5c3f8de4f294b1369865d6fee1a",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p02-02",
+      "match_id": "match-2c0b10a546445826",
+      "metadata_sha256": "86b55682c62ba181585650d435695afae081f853ac3f390bd6957abdb2665b28",
+      "observations_sha256": "745cc8affc5d25413c7fa3377bc3d8b797a38fa632e96150025900774846cadc",
+      "compressed_sha256": "7153fdf70d8c663f32e9539b32162d105b95b85a9dca0656eae8eb974cab6d1b",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p02-03",
+      "match_id": "match-dc837b392d9d590f",
+      "metadata_sha256": "9fcf43aceba2946c060d9f61be3362f099256709c9df5f791ef0a4867ce0db15",
+      "observations_sha256": "42dcb2d216932d6ad966090a195bc504d3d3c7441d435ace8252f0ab0f9c6ace",
+      "compressed_sha256": "22f4645dfab3ff688ef4dcb2c87def2a336602964ace99f088bcb08c9efd31ef",
+      "validation": {
+        "frames": 601,
+        "messages": 605,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p02-04",
+      "match_id": "match-b9f1b2ab8a3a5bfb",
+      "metadata_sha256": "6ed201530785760f4e90dddcd259347a4c042bd9a6248ec4cb8104516ccb805c",
+      "observations_sha256": "9bee07ee5a7fac0d0e2281e152228b63e3f1fab2967a06ec13f9887333571360",
+      "compressed_sha256": "57958a69981eb98bf338a183dcf2c5453e21d5d20910596517bba6408d5e22f6",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p02-05",
+      "match_id": "match-a6c3a7f8b71e5767",
+      "metadata_sha256": "a0f4888eb0fcab886ddc275d4b91c041a74451769004b689f87affa00f31accb",
+      "observations_sha256": "6e7de2576e27b60d0ac8799313e4157373ca3ae26e61bef452823ce403ea0f25",
+      "compressed_sha256": "80eab1d03adcef778e296c67683684614c0f246cd048c8258581edfc4207be7f",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p02-06",
+      "match_id": "match-acc982f04ba85ed4",
+      "metadata_sha256": "5be8076834c345eed79031e433ff7f99b3786ea558585a25ed2d2a94d9061be6",
+      "observations_sha256": "4f1f7eb06df8e8a62c7889a4f26e9a555e28600e3a1d85bace4cf9c22f820044",
+      "compressed_sha256": "f315e6803c89b58ae11fb330369a665621155a74743b051cfc72fe6d056b1fb3",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p02-07",
+      "match_id": "match-1dee90ca71dd5227",
+      "metadata_sha256": "200c4af5766225c1909171d9538e2262fb37c11df0153b83cc527b9e89bbdd50",
+      "observations_sha256": "3cfaaac35f9625b25c3d0d9c529bad534e0aeb811feaa5e63fcbb47c29aba097",
+      "compressed_sha256": "91b214b9428907fa853ffba3899bee9927c8a0c7c98e7283becac0e580d60377",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p02-08",
+      "match_id": "match-b7f84ef073f7535e",
+      "metadata_sha256": "fe8267bceea46f38714172d7d992424e8bb1a4ffd1870eaa67242880d84569b7",
+      "observations_sha256": "500ad208c95bfb9e268671253c61c6293c2d6721021a8f17e4fa6327eb86c3f2",
+      "compressed_sha256": "c68bff3a1a6d68444ddfcacf769f1eb9eea5b35fffb53cd3a0b1426bab3e6f71",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p02-09",
+      "match_id": "match-745582b9e9ed51a5",
+      "metadata_sha256": "846bc83bfbe6a09c992ca1cc2f94f8b35101dbf6525b8bd324baa1bc8562dfb0",
+      "observations_sha256": "05927b361cb3c1889c9b86d437a9378f899297b42744f1c6671bf587a230aab9",
+      "compressed_sha256": "261997114b2fddb28f49834636d4e642f2554e03c321b41da2195dee904773f6",
+      "validation": {
+        "frames": 601,
+        "messages": 608,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 608,
+        "unique_observations": 608,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p02-10",
+      "match_id": "match-d50afbbe51b552e2",
+      "metadata_sha256": "852a4d6513949624cd5be2b5dd5701259982144db3f540c4ceb2d44616dc2a42",
+      "observations_sha256": "f9b64a1c5b51d903c6e1a4abaf45c4cb5d7da7b31a366058174ac7d05228450e",
+      "compressed_sha256": "973b76b3592bd149f69a27bdd35f40af86ca1b350010a56d0dc3fd1bd8c3a599",
+      "validation": {
+        "frames": 601,
+        "messages": 605,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p02-11",
+      "match_id": "match-1b62b2b215f559bc",
+      "metadata_sha256": "bd4892b448c9d4ae629e91f53aa332ed10ec0c4c68199266ad26c6c85a899fd4",
+      "observations_sha256": "9ae0634d1380b78ec1ac5e5984d8ea082e881a63c3ceac17ea0e03517685381b",
+      "compressed_sha256": "68ff45e7d35f2e747acbe30e6f6e939506f49363234141f6d949c0f4a6a2bc98",
+      "validation": {
+        "frames": 601,
+        "messages": 605,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p02-12",
+      "match_id": "match-6f4af7312330512e",
+      "metadata_sha256": "f15582dfd79abe3f59b0fd4497bc634b1a9a5af6edf8ae4115f80c05014b1df4",
+      "observations_sha256": "62da5f26df7a0b4c6cad355e5ad7ebcff86eb9153d06d6301277066a1c512c49",
+      "compressed_sha256": "5f843604e072300717ef0866928aefae997f85ee1c29d9d0085b908ece0830c5",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p02-13",
+      "match_id": "match-6e95d8f356d453a3",
+      "metadata_sha256": "6163812055e90d4c6893b8fb83655af10cde7732af3b9164b5fad9ce65da7da0",
+      "observations_sha256": "c16cc4d28e68d85bdcb004957494fa39f22a8c1a54c51308564da3f2fe9e9bcc",
+      "compressed_sha256": "cde052a404ef5b618cf38a1fb4850a68a2fae4e63e8a1c9054559136862fb4e0",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p02-14",
+      "match_id": "match-4bb6ad6b25595695",
+      "metadata_sha256": "bf75211b4c1800e5b7e74e5be6cba673cf01f67215db3ae912142d57bedb3429",
+      "observations_sha256": "9b9176a377b1729341f875a519e30033c5566a4ac364bd34fb791245331a39be",
+      "compressed_sha256": "ea51179ee0ac32be6830f6fcfe508d16c8666996ab4b313e7e0641f0e4f7249e",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p02-15",
+      "match_id": "match-0cc5fd0ecb8e57fd",
+      "metadata_sha256": "1247daa6974c8f585a1149f45248c2f7bc1e24b8c8491c77ac44576c211b1992",
+      "observations_sha256": "e0dc654e7e92a180270280def5f6a84c8f681498f14c9a040a693d1a943ec45e",
+      "compressed_sha256": "e7557bcd530fd1f4beeea6a595491c93484f5242d9d68ae96b11852d86cd1ec6",
+      "validation": {
+        "frames": 595,
+        "messages": 598,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 598,
+        "unique_observations": 598,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p02-16",
+      "match_id": "match-4308f087c074564a",
+      "metadata_sha256": "00db008bdd28ec07582d754d9a270c9498b276ca91897e129acbbf486bb982ef",
+      "observations_sha256": "96eaa4b3daf7d4a17c268a7d9c9bdcbf86813a4e55a324f48d012f096d4dba01",
+      "compressed_sha256": "f447337c0089c212c548bd7c40482d79dc9c5a8330450b3cec021488740c06da",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p02-17",
+      "match_id": "match-26a3856ee5495085",
+      "metadata_sha256": "1ab267fbd695b71226a05be0e41b95093931feaa671893e230cabbaa094cd2f6",
+      "observations_sha256": "93be7e962e16f05b7bb728275412a15467ff4a4cfe8198c8a93ce20f988ef07f",
+      "compressed_sha256": "3e1b1f32c07f9a6b6a3784bd27f06309f7cf67c536e3395598513966d244816f",
+      "validation": {
+        "frames": 601,
+        "messages": 608,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 608,
+        "unique_observations": 608,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p02-18",
+      "match_id": "match-e68c8e64338c531f",
+      "metadata_sha256": "74c42d75d0371f4b1c541d8861914fcb217742532ae706eeabd1e982c38dbb56",
+      "observations_sha256": "b12cd3f3ceb88b68c5cd57db044882dde14261eee615ec08b8b28eabb5e17f66",
+      "compressed_sha256": "8df9d2ed0ea37ccdb0e359f0f76fb37a9b6d548072549476b0dcf268cb351887",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 8000
+      }
+    },
+    {
+      "case_id": "p02-19",
+      "match_id": "match-65ad393dc14b581d",
+      "metadata_sha256": "0487b9320203b4f0e3d5bec8042116ea90806902f9a35fab3efa492c2b6f5e46",
+      "observations_sha256": "39bcf6364ed1a22b817553b4f2f66cd412e5371f5c307918bcae89b5cc11238d",
+      "compressed_sha256": "7d52db8e8272ac100d8476de1c41921e7f71a130b0879c1d2f29ae754ef8df87",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 34000
+      }
+    },
+    {
+      "case_id": "p02-20",
+      "match_id": "match-7d8d4bfe9a72571b",
+      "metadata_sha256": "e64146dbde122a938699bff261752eceeb367aa0b0552bb59b086ebe770bf93d",
+      "observations_sha256": "2d6e20b978142799328e2bafcb033088ad03ae5d04bae8c3ecbeec71826da3e3",
+      "compressed_sha256": "60eed72c53633e4da93bea1c112b63f14678815e38d3ca11bcdb5c43a7bf3a46",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 700
+      }
+    },
+    {
+      "case_id": "p02-21",
+      "match_id": "match-6ab11fff435657aa",
+      "metadata_sha256": "4f85d9c2f01d117813a882f78021ee445b44b4f78d9d6ce96a3bb2fdf89f01eb",
+      "observations_sha256": "62ae13c8ae3712509d32510e50d587d1f8df1617d8aae05ff0bb7f145050880b",
+      "compressed_sha256": "7e1558eeb7eba818afcc28f7009ac33ac414edc35532b0eabd40282a61cbc9f4",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 621,
+        "unique_observations": 604,
+        "exact_retransmissions": 17,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p02-22",
+      "match_id": "match-904705eb3ab35a6e",
+      "metadata_sha256": "54ced4ac07aef0ff897dfbb62927c0f90d6ac7b20fd490fb87a0502a21e00582",
+      "observations_sha256": "dd59c28be1a850772c963e54f008a73ecf3edb4f3a1e22d8eeb932ce22851351",
+      "compressed_sha256": "15dc55f3fb4ff44a9333938837aaf65295878d148d535ba9ab9f015eb2b41475",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 1,
+        "maximum_delivery_delay_ms": 4000
+      }
+    },
+    {
+      "case_id": "p02-23",
+      "match_id": "match-1061ae009c7053e2",
+      "metadata_sha256": "9a73aea2e66fd4e3e275507c4c126e3a9c54197960d051ac9a7d0c50653b4e5e",
+      "observations_sha256": "b3d3725710e60797e43bbf60f7f504b28a700699f79f4e9ab2be20998b64020d",
+      "compressed_sha256": "1aaa03462b061091b59ce40154eb209b16cb89dc8ba564827f64f60019ec1de8",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 1,
+        "maximum_delivery_delay_ms": 4000
+      }
+    },
+    {
+      "case_id": "p02-24",
+      "match_id": "match-38bd32b66c9b5abd",
+      "metadata_sha256": "ba4d3820a5c234e0872edb9fb2b2ac5a6f47d8d59987b6ccaadbf793e0ab2d97",
+      "observations_sha256": "f1027264357eb74f23623be2c80966389dfab8a07706e117ddacab2d98cf82d5",
+      "compressed_sha256": "b77440466ca63c0d3467b1ac642fee53535b4992a10d72c052f714b85fcb0792",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p02-25",
+      "match_id": "match-f30f200103675b35",
+      "metadata_sha256": "a04a5fd2f320ef332f4fb55a95c306a2fc4096ee40d31c3541a397da2447dfd2",
+      "observations_sha256": "80e1c7a64f1e5de35a57c98a8199527914edf0a76d0bbaeaab1b603d6fda4a53",
+      "compressed_sha256": "c8f9a064646cb08c3ea48041262da7180a9f53c92f4c232157429816a50e8279",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p02-26",
+      "match_id": "match-b3c32da615485c89",
+      "metadata_sha256": "b6f7a26c1813006c40bdb8ae7c4af495a464677d210e133c3df47ebee765a4eb",
+      "observations_sha256": "34c5ba822973e3e27257d2bceaef6e6e53f751706e14115d7b5cdeb6e10b5c6b",
+      "compressed_sha256": "ec35b17a90ffb7e1e9787b00752b57bd075cb3e814b90e3abfc614c174c3d830",
+      "validation": {
+        "frames": 601,
+        "messages": 602,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 602,
+        "unique_observations": 602,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p02-27",
+      "match_id": "match-64ff436f726550cb",
+      "metadata_sha256": "1d516d6e2198f27e81f59528251f738e284d0468cd10cb52b93a59dea22f9b81",
+      "observations_sha256": "13a7956e0521b1ac0bc85339236044c9bedf0fa8294dce5133729b5cbb3433da",
+      "compressed_sha256": "785a1314e48bfc2ea6d1b7485943ec8931a8f9d9a0ca09047eaacaeb8caaeed0",
+      "validation": {
+        "frames": 901,
+        "messages": 911,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 911,
+        "unique_observations": 911,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p02-28",
+      "match_id": "match-bbd5b3369746561e",
+      "metadata_sha256": "acd6a2d60589cf4c82f36757c4beaaa3d1e4fbf412f90bb5ec6df4f46641ecdf",
+      "observations_sha256": "ddb269c0acd087e1ee388fa1ba4d2eb631bd90ac160030430e45471e6f8b4962",
+      "compressed_sha256": "6c490f1ebb48e394db225e5a14f89f21b75df90cbb8ff4d17f92e9567a6df8df",
+      "validation": {
+        "frames": 1801,
+        "messages": 1818,
+        "duration_ms": 180000,
+        "active_players": 22,
+        "delivery_rows": 1818,
+        "unique_observations": 1818,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p03-01",
+      "match_id": "match-feacdaccea4f50dc",
+      "metadata_sha256": "95cd67d9e6302565f1163a703b782bffe1afa156d5facc9597372965be8db1b7",
+      "observations_sha256": "ed1be1c0c3cfbc8119699e1095b773877392556a7b4140529720aad2d2635840",
+      "compressed_sha256": "e4294fc1c88920977ee53f2f4cd22191a540d7c850a534a5eae612b46aecc36a",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p03-02",
+      "match_id": "match-76d71459baa35d2a",
+      "metadata_sha256": "58e8c72b761e94affe6a56ac969db6bcad63d9bc6d377afb6c40ce27856bf347",
+      "observations_sha256": "8f8ab72a5b30fb14c39d3801c451ce32a365a3cee77a1c474fa7fcd0db784726",
+      "compressed_sha256": "8ed23ce9f721bb2a23637314e4a3ad752fc0fa926d771869f35f63f2dd857d9e",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p03-03",
+      "match_id": "match-dc9d8c2a4e095008",
+      "metadata_sha256": "1bfea129926faa564244109e53ca5cf4bc91df9826340c4fa22d1483b950c202",
+      "observations_sha256": "bafc729c12f58c6f026ae778c1172dfc3e2ca527ecc97f504128f306f54ea9ef",
+      "compressed_sha256": "9f449a399b7c284e8d1cd10649ec19207aed135116a7afc0806e8091e6c08062",
+      "validation": {
+        "frames": 601,
+        "messages": 605,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p03-04",
+      "match_id": "match-a0d33052ddbe5d5a",
+      "metadata_sha256": "a52bf577e288b1f9ed72eaa7bc06ba1905dd94a28f8f23358bc242fd9a2634e7",
+      "observations_sha256": "558aadd335f3e55fda784273d3b610902f99c265ac6ea021e673c4d8cdb5b3b8",
+      "compressed_sha256": "082ad909b6c98b9405b2df4f3bd99ef8ff748322f1795ab4f62dea46db1af73f",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p03-05",
+      "match_id": "match-bab94425c5e3580f",
+      "metadata_sha256": "8f9957d300963f0f638d5262e36d91e3a53df11e4f6ce0af346430c8184069c9",
+      "observations_sha256": "9f079ee87201cd6ab1cf4273621109da7b700900780767b0b77e546c998b1b79",
+      "compressed_sha256": "156d055288e718b1c53ed3f57bd986acf71119cc1919b6c03860cc45debf337a",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p03-06",
+      "match_id": "match-49306fa4d01e5a3b",
+      "metadata_sha256": "d78f214e9288105d1ebbdf06e19c0ee38fcfc16e34049742e42b3f7f6e849f0f",
+      "observations_sha256": "595b14107a82b92f2844e405bc3406b9f456441fcbbc3d491824b9acba295b44",
+      "compressed_sha256": "d031a82476ec6558ab3eaa52d73e60acc15716a56fc77f1a968da9caba8dd054",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p03-07",
+      "match_id": "match-626b9860c10e5d51",
+      "metadata_sha256": "2bd210c1392750252d17be088c4cf297a0de4577d4a9b8f23aa12a0d2e3936b5",
+      "observations_sha256": "25ec33da6fd496e4235a034eb96c2c57b428bcf615cf02943b023f6372487fcf",
+      "compressed_sha256": "f73863ee8072a99e213bba4522f6bca1caae4adf7ca4968b8248e2761a995f90",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p03-08",
+      "match_id": "match-97b712ce510b56c9",
+      "metadata_sha256": "58c2499bb3e2449520b232d97d9a6f26c6e2acb73778726fba0e119c8e41eef4",
+      "observations_sha256": "056849bbc85f7efe051703e1c4c52fd4f17c12f3bea373dec738d07bd77f24a5",
+      "compressed_sha256": "12f7b0a383e2eba3bd05e1d4b387af5e025d16a373726bbc054d9c46f3cf1859",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p03-09",
+      "match_id": "match-86dfae8baa9f55ff",
+      "metadata_sha256": "616eec5ffe3dba7ed5695726790156b6c010856c185b7eabd3e8dc15150222c6",
+      "observations_sha256": "2dd56fff6f14c946df00a53d08d31aa41111c682cf1056ccd4f10e71820a44bc",
+      "compressed_sha256": "d371321188e269e2e1795a4b9845bf5174f59521356f925c9d40bad9695fedc7",
+      "validation": {
+        "frames": 601,
+        "messages": 608,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 608,
+        "unique_observations": 608,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p03-10",
+      "match_id": "match-a8baf58e10cf58d2",
+      "metadata_sha256": "3d7773f9b4a0919a3b3886e6b214342968d0285ac78d5b05adb8603935853851",
+      "observations_sha256": "a5aeab07c717c6c35c5aed149c528643e285473e1cb3cb72c23270906f081dc3",
+      "compressed_sha256": "50218797bb8b8994adbab014f47533ece713ba2070cb4c6f1e1f039ed8bb7e5b",
+      "validation": {
+        "frames": 601,
+        "messages": 605,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p03-11",
+      "match_id": "match-161969e2ca7c5da1",
+      "metadata_sha256": "ec661fde1e01a086d54dc3f3f7b8df5fbba74607c053300633ae3c9efd5ea663",
+      "observations_sha256": "25e6c172bfbc24719f43c7836b5fa03862e44d3da88bbd07c76c9c4e47494571",
+      "compressed_sha256": "40fd12a8f0dfd597abdf2fb68814f9ca9a59694180c20c65efe38eceea74614b",
+      "validation": {
+        "frames": 601,
+        "messages": 605,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p03-12",
+      "match_id": "match-ed382a2847e457b1",
+      "metadata_sha256": "0b9929e3ece2ac23a8da60cb28b691d5e06beafeef9bb853b80a75fddd76a885",
+      "observations_sha256": "04c109a6636349d7e1a1c00c12d49f04f82adf0797b2ddd588e7c90658c606f0",
+      "compressed_sha256": "7de54d170ffee1050398109a66312641f6afbe2c0d13a4822ae3512cf70c50c0",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p03-13",
+      "match_id": "match-49625a5b5d125e51",
+      "metadata_sha256": "7f5c357f0a252d6c4bb23debc727cba710dd116ad13d384562590a562d79e926",
+      "observations_sha256": "411c8eea0c96ffab24db8ecc32bdfe9d4d2e00bb22d90f951909dce45d99aa73",
+      "compressed_sha256": "e96db5d93c0af273f63d92dedba5ea5c8628f9f0eff515891928ffa3f14794c1",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p03-14",
+      "match_id": "match-e95594cbbee15c4f",
+      "metadata_sha256": "e8cc4a117bbe4d3084ae90dc0f3696f3f92bb8f47f4d94c2d02d68e0f1450bc5",
+      "observations_sha256": "ff20a7e860294f3a9e4ba3adab24a5efb82b4a5cb3edc786873e76f2d636dece",
+      "compressed_sha256": "46ece2b1b7e2e437f366b3a84a690fae9e42b3900acc1d95de465afee8e2f0a7",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p03-15",
+      "match_id": "match-0755321e4f635a99",
+      "metadata_sha256": "95d91a321c858874a327214cc36ef4d8663cc1ac7c621746db590b6463b62a32",
+      "observations_sha256": "1232833196813dd881e7cf46658ff991fc0032c3f09ab85b3272f969f4948553",
+      "compressed_sha256": "4b43f7c0d7669c2f17ab070bd8cb4e4ecf4e03c542abd667ed4db6a4d4f4504d",
+      "validation": {
+        "frames": 595,
+        "messages": 598,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 598,
+        "unique_observations": 598,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p03-16",
+      "match_id": "match-8d75d55b776559df",
+      "metadata_sha256": "d3ec83e0418c3a0ce9383f4e72a5edbbfd25e004c0f4a67fdd0e24182baa49ad",
+      "observations_sha256": "182243c6a06fdc4b75dfbe43139c8ef30ec826b21880834d15736540b4760529",
+      "compressed_sha256": "a7d2f9738a6ef3806af1ee2683ca346287125f58a9cb019687be9bfda9d08a9f",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p03-17",
+      "match_id": "match-99ed710994af52ea",
+      "metadata_sha256": "b48081f8ad4d34c4cbb1b0f46f3d605f6e3b2447ff5a2149ebc1f531183a8d76",
+      "observations_sha256": "5da1c483ad9744e0d34039f81fc8e31c1201a0133a8925e5c9732ffd5a3241da",
+      "compressed_sha256": "a7daebdba6c0b35c30ff914ef32b9c973e7372a336f583984ee6634bdeed67ab",
+      "validation": {
+        "frames": 601,
+        "messages": 608,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 608,
+        "unique_observations": 608,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p03-18",
+      "match_id": "match-0e5bd7558de154bd",
+      "metadata_sha256": "5042ba26b8b7626ee54852ccdb416f4664e4e427abb7c7c58afdbf3c5d3a4a3f",
+      "observations_sha256": "5671136cf5021bbc038123308bb07b6e446b2d1fb57d2daf6a4aff7e3e62a918",
+      "compressed_sha256": "cebe7d3bfe45fd5da5f35f3887a434b6b6e0ef4b4c3bba3579c74c500bbf1262",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 8000
+      }
+    },
+    {
+      "case_id": "p03-19",
+      "match_id": "match-86aa3486a1865a21",
+      "metadata_sha256": "43cf0b9121cc285a77be0aca036e91fd32881a949a622c24e5cb01df9ce2aa97",
+      "observations_sha256": "c17f483d64cd1bdf3579b3f30ccf17d8be9c5b39d7943c5c94a178c4380474f5",
+      "compressed_sha256": "9e857ac1567b75ee8ec989e3d87030f0a5234d8daeba749eeca97f3784a4ac19",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 34000
+      }
+    },
+    {
+      "case_id": "p03-20",
+      "match_id": "match-22ddb9b24070516f",
+      "metadata_sha256": "fbce273f114bc763a0f495cd01032a5737b5c477d871f455df37feeec835dff3",
+      "observations_sha256": "9a2a2a14ab35d3ad92c3100aaf93ae98b1461a9c9ea8079c2ad6869130cce157",
+      "compressed_sha256": "6809698a5a587fbfd2964989ecf199029a3aac1cef12a3e13f3f10c4430e8910",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 700
+      }
+    },
+    {
+      "case_id": "p03-21",
+      "match_id": "match-ef255bcaa68359a1",
+      "metadata_sha256": "f0e432c72509d96b5ced0addba7247b465cd206ad38ee28e7557fee14b59bd35",
+      "observations_sha256": "15aeff0f14d9e202952f1fd7a655c8dc41ab3afc08ee901f3baf1ab12bb0641d",
+      "compressed_sha256": "7012bb1118fe8eae27696f2cb0503ebec65ba63c800f7d4afba5d53e074f8087",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 621,
+        "unique_observations": 604,
+        "exact_retransmissions": 17,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p03-22",
+      "match_id": "match-6e9bbbfc32be5a21",
+      "metadata_sha256": "c32fd17ce40c86860496053c2042ad59a438500109362354dee18d6a638d6188",
+      "observations_sha256": "705e5e5a4146dd4fbbadc0d1ff3c90daa1eba335a8532086cd80b74399992a03",
+      "compressed_sha256": "7662488712c5dca0cb30e4f7d3676a91463122d76429d0b47a96c98fe9d799a4",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 1,
+        "maximum_delivery_delay_ms": 4000
+      }
+    },
+    {
+      "case_id": "p03-23",
+      "match_id": "match-704b7b44c0385e7c",
+      "metadata_sha256": "43c1e4729a0fb7bda533399e8d99aba903c41f90c102c63f13055a259f6d0b5e",
+      "observations_sha256": "edeae197f25aae647efcedc3dbb84430ce4a09c5338cbbdb5cc0bc414a054dc9",
+      "compressed_sha256": "9b3792f80374b130e76ddcbfffb0caee82794b84164556354bcc7b50f43349b8",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 1,
+        "maximum_delivery_delay_ms": 4000
+      }
+    },
+    {
+      "case_id": "p03-24",
+      "match_id": "match-10e43fb0f5d05a3b",
+      "metadata_sha256": "ec5772784fc8b8b6d500897faa6d0237940aa9e406f408256e0a2012ad9d21dd",
+      "observations_sha256": "a39a50d2c4699ccf85d1b9c5cbd7222dcf4c9cf748658ad20ccd5918fddfabda",
+      "compressed_sha256": "4fc416b0c5cbdffabe1a9dfab04625f44d16eb3b8772e9f060d4595f2564090b",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p03-25",
+      "match_id": "match-5a3544503df258e6",
+      "metadata_sha256": "2c43d6462bec16859e4fab9e28635afa2ae778933cd182cc00dec0e24d54aa7b",
+      "observations_sha256": "8409c59871059cef680b1e91cd0bbef450d199fcffd8f1da7cf3924443046790",
+      "compressed_sha256": "40a33b8f2b837e5cba8460b419b53ac6778115aee5c6fa7c78ff7264a85df4fa",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p03-26",
+      "match_id": "match-c583f16167235835",
+      "metadata_sha256": "02b09a92d48122a2cba0debb352fe4be83c80a754d1b0f132eb4cb1dcec4c960",
+      "observations_sha256": "4dcac3b5a2e29ae4eb29971975c6a95542dbfca9ec409381821e07292d62ed07",
+      "compressed_sha256": "a6a7c4a3ae84a3f9f9a38e2fae43ec9107b322a7e79f9a14716da9338dd92725",
+      "validation": {
+        "frames": 601,
+        "messages": 602,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 602,
+        "unique_observations": 602,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p03-27",
+      "match_id": "match-4dcb4d8ab2c95cc6",
+      "metadata_sha256": "32c602f891aed4d55ae632dafc8f6876d7dfeb3cdeb7f502aee3f3e606708d24",
+      "observations_sha256": "d10b2d1a51f7a97beaed5bb92faeefd1bf103ebce287c9a83a2738381f2961bf",
+      "compressed_sha256": "cea905fe6a222331e69f3f7dc1d2bff122b619e00c496c844ab0f0612a26ccc4",
+      "validation": {
+        "frames": 901,
+        "messages": 911,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 911,
+        "unique_observations": 911,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p03-28",
+      "match_id": "match-978f2bf3cae55992",
+      "metadata_sha256": "cbc8ac13fcf45586e7b9e61882a7defcd41e4c46dc4d2f8c0441d6e698787f05",
+      "observations_sha256": "b05c44b2f7d1e2167d660710a8424dd2426c69815e1122577aba4081ea85f185",
+      "compressed_sha256": "a3464bce605da8e15a0152d11a2ea2ef8a1fea9937940d0cf5e087a60a73f4bb",
+      "validation": {
+        "frames": 1801,
+        "messages": 1818,
+        "duration_ms": 180000,
+        "active_players": 22,
+        "delivery_rows": 1818,
+        "unique_observations": 1818,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p04-01",
+      "match_id": "match-0a1fb66709175f72",
+      "metadata_sha256": "f2acdf48f23349d22a643bdd0a5281435afcacc41c005473cae2d5c3f3ef0c21",
+      "observations_sha256": "6dae472ae0a09407c82ec098542b9198c0fc72c6eb8e0f8e8ce83800dc07d88b",
+      "compressed_sha256": "640c338f643d48e6d86ce101ec31e64f0fa30776c1341b304caf892bb0fda844",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p04-02",
+      "match_id": "match-f22619c63dc150c5",
+      "metadata_sha256": "5071b3440b3d1d7dc587e07fde9c25c9ca22a1594e94f9a6ff7c5b05353d4f16",
+      "observations_sha256": "96360e3ca48b2c3bb4be07cb6d632652e0598d014c88b3f56d71b654a14d934a",
+      "compressed_sha256": "76f23e986b6be5c6fa0693cbb34248c1b827d994fbb4eed0841c3dab440e0813",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p04-03",
+      "match_id": "match-a6888265c87f5e18",
+      "metadata_sha256": "ae6c2aa707d7de3d3c741f66a423f057dcfae881e2e007509766a861c87eabc9",
+      "observations_sha256": "471cf7c652a6f554278af9723cf64021734877c2a13eea46ded7ae3983221855",
+      "compressed_sha256": "55ac9b0c598d66b6cfb430ed4563857e00ba7a2f9657fbd5c8c7eb72e802d5b4",
+      "validation": {
+        "frames": 601,
+        "messages": 605,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p04-04",
+      "match_id": "match-28053f67e4545d0b",
+      "metadata_sha256": "e094676e39ec1aeb20a79d27db0073a82ebed8bb5936d5684ea46fd072a703ab",
+      "observations_sha256": "d3d14ab9f9a339557f978b3a873381c1686f9a206ab75bf18c959c96f556a990",
+      "compressed_sha256": "1922f75d42226755f0c43507db6b6f6175fdd3b82c8c2e9fcee4ea7258b94c63",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p04-05",
+      "match_id": "match-36db9e9e33e35077",
+      "metadata_sha256": "2733b5b60a0a7390ac5c13c60ae5c0e22f2e4ee1c30fe0b38f61cc6391c7cc1e",
+      "observations_sha256": "144a69f43e22eada998ab16e0a4302fece9e3e533b7a983282ad4647052ac80f",
+      "compressed_sha256": "8775b441db490a65f750f4ae78e21af6cb0ce283bb81ed1a90f03c5a7ec51645",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p04-06",
+      "match_id": "match-b6717104742d5125",
+      "metadata_sha256": "54511a31efaeeb7296234dc4b8ddd5943fc2d9176f654f51035acb770c7b612f",
+      "observations_sha256": "d90ff86b76872e548476c50f1a3d4d1dc86282640c79b604bc9f6aedd06e82e1",
+      "compressed_sha256": "5410b79917fd367b5f7c374c680fd2621f4aa8096db7262a5e8f306144f10c94",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p04-07",
+      "match_id": "match-d311b14b06e35497",
+      "metadata_sha256": "16b91a53db66b499dd28f0f44059cedbcb3a3b0cc55c3efa19bbd936fd22d6f4",
+      "observations_sha256": "9dd542ccd8d4cdccfc448795a8a164d833bc87f18d86bfe71d0dcb3c17618035",
+      "compressed_sha256": "69ab9b0c1a79c4fe89df5ef2b58de117c0223e839706fee9c6afb498a969e80e",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p04-08",
+      "match_id": "match-5bcbd406bbd35ac6",
+      "metadata_sha256": "8a9824f80ccf8c95506d5d22145a0d3aab0f402e0cbe33dbf8934a18badf912b",
+      "observations_sha256": "ebe7b04ac7bef1f5cf92cf94e988ba56a6906c908e69c4b864888a3d4355b2c2",
+      "compressed_sha256": "12605ef3c26bfe02e4b6ef22c5145c5ab3ad49c29b291ab02f13aeb74c2e80fe",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p04-09",
+      "match_id": "match-f15dea7842a95ab1",
+      "metadata_sha256": "c1ae1d17868836894348f82c1d0a04a2370769fea4ed284ded86367e5aef8d3b",
+      "observations_sha256": "4faeae00611b57a1ae29146cd2bd61977ab7ed92f226b13655814f214002791d",
+      "compressed_sha256": "0fb7028d201720c8a2e2ed2e4ff8602253dcd0edcbdc375738d35b23e3fe177a",
+      "validation": {
+        "frames": 601,
+        "messages": 608,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 608,
+        "unique_observations": 608,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p04-10",
+      "match_id": "match-d181b70cc5395d9b",
+      "metadata_sha256": "7bc4b1af7605e13c081c7de947945710032bf5e4b2f160551763340e89a3fbb4",
+      "observations_sha256": "b89e7c17c7e4455b667e68da0b68c2c03e92ffcd7ea35472cdd95444cd4279c7",
+      "compressed_sha256": "4a1a458d51faeaaff871c219a18b69fc39281d1708d8ff456a45d32105afce22",
+      "validation": {
+        "frames": 601,
+        "messages": 605,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p04-11",
+      "match_id": "match-831430c9e5b051ce",
+      "metadata_sha256": "4cb3a8c82df9b9abf4dd2e3c2eb7f240efef77c56cb37f7ad3485022b85becf2",
+      "observations_sha256": "d312a0132c8a6d03cb3d7be38cb0458b4da1bf2b0d66b93bf98cfc696cb4e208",
+      "compressed_sha256": "3ac714d3b29ebeddddb7c502062b80ae1e8f11f7f04d60e8620c94ed2b724fc1",
+      "validation": {
+        "frames": 601,
+        "messages": 605,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p04-12",
+      "match_id": "match-803a984124645faf",
+      "metadata_sha256": "dbe0cf96c720441b002241d1ff0b647e6471ba7598f82259b9d9541a9ff834e0",
+      "observations_sha256": "675ec0039a359741ec89476d06c56984672b8f15f87cbc0da35306f2220739f8",
+      "compressed_sha256": "675a084a27ceef75c7f1f0813e01f19b16e904c17198c25ad81f6f1b28c6fb0f",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p04-13",
+      "match_id": "match-05950a5f6c3e55c7",
+      "metadata_sha256": "f23af0c50ba5cd6d37a9baaa6f727d24d988ada84398cb87f5d63b9891ff0e5d",
+      "observations_sha256": "accbd34747a88c7dc77ed0c7987fce67499288df21e3cb4a7641d10d4d4b76d8",
+      "compressed_sha256": "d25447fdca224221d769aa0d67351a58e15d69594134a830d22144cc441ecc4a",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p04-14",
+      "match_id": "match-72b092dc9ae45cce",
+      "metadata_sha256": "8042f62089afc0474397700867445b7d5b7ec4734f268454d7ecf24609973957",
+      "observations_sha256": "ed88418cffea52594bb2ef018dcb3a4a987d849d8bf1ccf4ef43157de276e9bb",
+      "compressed_sha256": "f2809ad67f40cb8542c744affc9513e84215bccbdb72ea72ae4167c67c635ddc",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p04-15",
+      "match_id": "match-65aea5ce56e45ca6",
+      "metadata_sha256": "8616e211c23d73f8d924a5262a7b7ce95e106c5b27226cbcdb65af31cf7c788a",
+      "observations_sha256": "c475e485aa67d26b7a6fa59401a585b46c9e4ec2485a3f6c8d05336bd2c4fe73",
+      "compressed_sha256": "c1ae9ed6214f72bb313e2aaceb1f4b2b38660e1792173b4a94f785381c516e3d",
+      "validation": {
+        "frames": 595,
+        "messages": 598,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 598,
+        "unique_observations": 598,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p04-16",
+      "match_id": "match-ffce7cd07e0b5503",
+      "metadata_sha256": "59499bf68e873f6111d362b21980a973c1fedad9ba07339f8835c9cd4cb8a627",
+      "observations_sha256": "ba0467c09f8da8fd78b44fa4c7e8883a76e78274748b8781077f56ade552c932",
+      "compressed_sha256": "45a2380616cafa78910a297004ba4e2922ae3b7400d56101af6dc0a85d6ef3ed",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p04-17",
+      "match_id": "match-fc6259f9439d5fe2",
+      "metadata_sha256": "6fcd38463ea0b1349a5169970fc330076dde60b80f714d9627efc1c3823790b4",
+      "observations_sha256": "9650692b9945465fe779a98b9c533811caeb09792e1df152694b8f30238acbd8",
+      "compressed_sha256": "f69526322329ce4c886fa7bfe3ae12a3942237ddace1d1f16a096f1cbaa1c620",
+      "validation": {
+        "frames": 601,
+        "messages": 608,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 608,
+        "unique_observations": 608,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p04-18",
+      "match_id": "match-c42918d682aa5e2a",
+      "metadata_sha256": "8175ce060434f3805bc50019b08fc3a752461bbff94a9118c4c85e935a58ae6a",
+      "observations_sha256": "4a9f7ece38a6cfc9c8f633a5c0c768a150cedc11d502824ca2eb27ff15c8a728",
+      "compressed_sha256": "986118f798513fbea44b956eaa017a0f6dd0ca5b351a20e1e13a506438e7060b",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 8000
+      }
+    },
+    {
+      "case_id": "p04-19",
+      "match_id": "match-12048dcf18285c34",
+      "metadata_sha256": "87d610865f4280bd1bd042997489d477ecec600383c68dd9bc0220ec6e807120",
+      "observations_sha256": "ac41e8e1b2d4efa9ded674dbc836b5df265435059930309b9105dfea991386e3",
+      "compressed_sha256": "72254c1503c56320dd993523ec44981b17c9c58a1fa190ff9a9e41f6bb4a0e2c",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 34000
+      }
+    },
+    {
+      "case_id": "p04-20",
+      "match_id": "match-8bac8e8a45845b37",
+      "metadata_sha256": "85ac0ec7d702c0a6486f490044f9cf5a479c3e6b38c18863f7a45d79f098e2de",
+      "observations_sha256": "c5c8a964bcc2c45ff854af7a562e49ef637455c52749ef23d66364478919f5eb",
+      "compressed_sha256": "c5bc936d98b51ffc7d8d5d28677fed43f6d47f2acf5a63054482aab8cae24790",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 700
+      }
+    },
+    {
+      "case_id": "p04-21",
+      "match_id": "match-e1f9be7ca1bc5efa",
+      "metadata_sha256": "912440fe0b53e877ba7714353b4f450b263edece78ebfe11b37b08a00e6a0c14",
+      "observations_sha256": "be30ac9ef7ab203ac402a24c68710c19c09467c18267c4450b05661d44a36ebe",
+      "compressed_sha256": "d91ccc7c165b7a9f72693585f7b2e44becc32b3d4358bbbb1837ec39ad6c2d43",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 621,
+        "unique_observations": 604,
+        "exact_retransmissions": 17,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p04-22",
+      "match_id": "match-8bf899b2d73f549b",
+      "metadata_sha256": "89b5f69ca1217976afc7651f368bf8d69c7b71553fcf6da9cc2ab5a26c84cd82",
+      "observations_sha256": "106ddf94121a6b3605df9b3c937a9050997627b616eb687f5be280f517a6acf5",
+      "compressed_sha256": "e6d3dcf9ce97ae3deff1364ae018bbf4b089463cc902be88a0f25fce9dd72251",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 1,
+        "maximum_delivery_delay_ms": 4000
+      }
+    },
+    {
+      "case_id": "p04-23",
+      "match_id": "match-d9abd89e541c514b",
+      "metadata_sha256": "d1afb9e0d68b7d5bc4b12fb35acf4bc1b36f3061cf4fc099744763afa3f22d16",
+      "observations_sha256": "87746237b1e218faa513e5d4d63657a30970705f1121b95055a6673c8150d5f8",
+      "compressed_sha256": "8a070d76cc42504e43c736ec6cbbf6c5d96daa4b60006803c34d977fa79c051d",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 1,
+        "maximum_delivery_delay_ms": 4000
+      }
+    },
+    {
+      "case_id": "p04-24",
+      "match_id": "match-2d488fca141c5a5a",
+      "metadata_sha256": "7c284563c1f751c5289ca8c82d392b357b38ee323c5c60e160ffc69030f3994a",
+      "observations_sha256": "557cbd0abf556b14449b3770e8d540be08e752a3b0dd0033b23501bc6a1b0222",
+      "compressed_sha256": "3dc1a1ccd1d95b44e139909f774b487654c8c02fd0f90281991ded0f7ada20ca",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p04-25",
+      "match_id": "match-6decce4eb2f45396",
+      "metadata_sha256": "5aee9293f238aaac4d5b892199ec3cb5f4d0eea454ecfa19f4c0463bd7e15afc",
+      "observations_sha256": "0e3f054c0dd0c540dd1e8655e054cf155bcbc8de6544a42bab88e9024a704a7f",
+      "compressed_sha256": "77018d92dfab318606dd381de5e314096bd3cb1434df0a9ab4ed07d15fe6434c",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p04-26",
+      "match_id": "match-96c6aa86e3da5979",
+      "metadata_sha256": "75f58ae48efeec38a9317de6b1354062165468ac49e24af8d46b13d51403c987",
+      "observations_sha256": "cdaef4e232964812dcabc4692c9eb48a7802b85dc24a51fc18cf1fefe6ad81ae",
+      "compressed_sha256": "98fc8b9ec32cc0d0eef72132b8d03dc2c4b3d678f8259dddd2af401809c48332",
+      "validation": {
+        "frames": 601,
+        "messages": 602,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 602,
+        "unique_observations": 602,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p04-27",
+      "match_id": "match-a58d67ef8cc4575e",
+      "metadata_sha256": "0cd511622cef92160ed6b180eab180ed1874361c5f46e6a95244466fcd33d5f5",
+      "observations_sha256": "c76bcdd8a9a3c5d375d3a64b4656e0d979401afd7bfba64458181dba9950e914",
+      "compressed_sha256": "4c1e39e545f7ec903f43dd50af60c93bf691e10a49e01f9dd3624b8597b61786",
+      "validation": {
+        "frames": 901,
+        "messages": 911,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 911,
+        "unique_observations": 911,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p04-28",
+      "match_id": "match-ceeeedd34956539e",
+      "metadata_sha256": "020e2338a0baa42a61c1996f259481b8a5bcce98bd4ec3107833f7212c77b37a",
+      "observations_sha256": "fc1b3bc639217b7e0f0d43debffb0d084bb7d0ae585a77face83f76c0e32512f",
+      "compressed_sha256": "cb9cedd273eab113f3eb72f45d283e93ec103c0fab9279e206c8f44aa4a870bc",
+      "validation": {
+        "frames": 1801,
+        "messages": 1818,
+        "duration_ms": 180000,
+        "active_players": 22,
+        "delivery_rows": 1818,
+        "unique_observations": 1818,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p05-01",
+      "match_id": "match-dfa17ca2472c5b82",
+      "metadata_sha256": "7181c7d3fdf74ee150c3f5d8e8c022c163f09d242c2dad417acc7d2cd46ba768",
+      "observations_sha256": "c6d27a53696c41d7761dd8de9231eea2a5881fb19f40ae501fe14c733a515d2f",
+      "compressed_sha256": "15e6d7519599c495945fc95b76ad63474f58ac0dc76ab1590c89d7eb4a9179c1",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p05-02",
+      "match_id": "match-98c1e1be23f7533a",
+      "metadata_sha256": "443ed6a7a0d71049c3de3568dedb9975090e79667afd8f9c209c577f1cfe74bc",
+      "observations_sha256": "176f8c6359ead56a39bef18d6c5347262e96edd1c64b1a4a7b3bc35c418c172b",
+      "compressed_sha256": "06bbd6a901b93aead663701da854ae72c50e9e4e6ae22e3cfdfb0344e3605e8e",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p05-03",
+      "match_id": "match-376c3897a83c5ab1",
+      "metadata_sha256": "4b75662afd5c3583a4ab88b420059d920007261e48b36f9094a0ef235e760d80",
+      "observations_sha256": "330d9d71515615d92ba0ea3b5ffa0473797595f5c07215e52b6fee2783525c55",
+      "compressed_sha256": "213d7e5373a96e339b2480035ffe2f395ad6b0d08cf7d44d56852119a96aeabc",
+      "validation": {
+        "frames": 601,
+        "messages": 605,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p05-04",
+      "match_id": "match-4c6a4285a4f3536c",
+      "metadata_sha256": "77d03ea67573cbd9f6f6b9c66fe093ca416530d9b9e80b049be3203618cce3a6",
+      "observations_sha256": "6e22e9b9be98f537fbb0ce182af923718a557b40589e435a51c3c8f116bdc225",
+      "compressed_sha256": "c4349feda8ce50990e115e8987492a270e4c9afdb6a7d250c22f514e5023b1ad",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p05-05",
+      "match_id": "match-04fe2ef7a8355420",
+      "metadata_sha256": "70e53fe786e97d4486eb4ce4de530c9ff851e6600904137fb962af19e6de2431",
+      "observations_sha256": "28036477ec35af501e2b9a14bf215000860396a8081e9e2aefa7bf6b0b43d8b2",
+      "compressed_sha256": "b3fda81d6618001f5e35c0d11a69713435e938c536e29c56dda41222b850ada8",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p05-06",
+      "match_id": "match-3dfd9ea850935498",
+      "metadata_sha256": "24ef9063e7d9d63e22d8597621796ed81357582c1dfebac68176e80d6d70a857",
+      "observations_sha256": "2aa5b63def61bff7e63a0b136c53cff8d8e50d6f119f3c97509c8900b55d47c4",
+      "compressed_sha256": "97190fcd09b7649a5d1d63857cc7d831768addcf4e7c615e0a1e44fb91debf11",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p05-07",
+      "match_id": "match-5930f0e50a21534e",
+      "metadata_sha256": "7e9c0cad159f20b05824c794649597b6a8014e96811e7d6eb021687a67327f30",
+      "observations_sha256": "0036347a3ddea2f65c0dbdf703d8d6866b0c641aab681b359c865136b74ccf9a",
+      "compressed_sha256": "8735b96c9ff6267eee207bb5ecc251cd1774afb50b5328602ef6f15ac99aadaa",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p05-08",
+      "match_id": "match-9379b6ea8aae58cd",
+      "metadata_sha256": "748d8eb44e445d14274b14adff3a06430d10ea947ea4344ce067415081963c3b",
+      "observations_sha256": "5fc38cd0906e22f4717cdd446151e5315b8167a0bcc5d99ad0000db01dc4d799",
+      "compressed_sha256": "3998a82f8fb71e01f4376f4f412cd1d6773b41470fb29a8b1ead152e533560c4",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p05-09",
+      "match_id": "match-4f56c510c65d521d",
+      "metadata_sha256": "88796fb3a1e681323faca93e758bfadc1b8fd17af9d388f26e102e5877508098",
+      "observations_sha256": "0499446738b99a2aeb2815813aef5c34ab9a222d6d97c13872b2daac47d355e3",
+      "compressed_sha256": "742056ca281d3b7445536a754ad0179f680f083433a15297435a2775c9e2911c",
+      "validation": {
+        "frames": 601,
+        "messages": 608,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 608,
+        "unique_observations": 608,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p05-10",
+      "match_id": "match-68fe0d836a635656",
+      "metadata_sha256": "93f131fe6195144927b6ec0565b3b255998d525536fc0180f0ec583fac982b64",
+      "observations_sha256": "cf5d0c30416a25601d67dbaf030a519140486f3dc5d50d63455feb4509ab1046",
+      "compressed_sha256": "6a4d3fcc4cd89f28b7bba5a8f0b8015e5e979361a6ce312e1ecfa604d166acb0",
+      "validation": {
+        "frames": 601,
+        "messages": 605,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p05-11",
+      "match_id": "match-b207b58fff325947",
+      "metadata_sha256": "29b0feff1f7b0d1906970b4232ba540c87d3cdf03f533a7a1acdd72ee0caf0b5",
+      "observations_sha256": "d8bf1ca3bcc60c5006a48b7beb4842c2a9632c56d0d3af6d2d476dcddbda5e70",
+      "compressed_sha256": "44fbd30b323fe5b624bfbdda1316b062950fd4f728751af3542d29753cb1f03e",
+      "validation": {
+        "frames": 601,
+        "messages": 605,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p05-12",
+      "match_id": "match-19dbddb2d34e5be1",
+      "metadata_sha256": "b8875c732321c6ca4f1adcbf03eaef3b3f17aa9c5d423ce61db99393debc3558",
+      "observations_sha256": "9b17feb9470bef9af18f52cc942be91bf293ac7f12004df9d5619aa65d116d81",
+      "compressed_sha256": "d1c1abfacae232e86c8efce75ad326fa9eca680f7de40f821a63fb459aea856c",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p05-13",
+      "match_id": "match-f559ffca3f4f5e2f",
+      "metadata_sha256": "d0a2691be4b5cb41480a2f1ba919bba0992d27a7fc8dd70a094c1c2d6fa53bbc",
+      "observations_sha256": "f2c300215de323fc6a9ab15fc950354dd11b23877aa257abee02f3d2c16ede9d",
+      "compressed_sha256": "dc72b565277c1a8e9ba19ace86e93205269ec6af215c4e7c9f95a0b30fd22ca3",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p05-14",
+      "match_id": "match-3b8394cac49253d6",
+      "metadata_sha256": "f8b562e74d58bfb97d22dbca4287d779d8a6f538e11dc3994ceae3de5a54160c",
+      "observations_sha256": "10164c96282ad688f4600114eb8c64ade9a671e0af4e9d64ccab1cd683035ba3",
+      "compressed_sha256": "98645bf12965a5b67e7e8c9fd84063760acbe3680945b09250b930645006bbad",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p05-15",
+      "match_id": "match-ae9c9b94129d5d4c",
+      "metadata_sha256": "81bf166a1917b9e5a1b7d6ea08bea8e2a033db6d4b7fa5d0cd0fafee0d6896f0",
+      "observations_sha256": "ac9556ea9a45e66b3153a13e8d9e49daedf64441b843e36af3028816f8969cdc",
+      "compressed_sha256": "ba68cb6abc384bbdde0e294b26c84a389019c8aebb64e6368dbd9470ea59c495",
+      "validation": {
+        "frames": 595,
+        "messages": 598,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 598,
+        "unique_observations": 598,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p05-16",
+      "match_id": "match-d9e769e8fa545b0b",
+      "metadata_sha256": "d8b7b2836e4fc4549739a3df17d9b08820cbb1a634461047e35ea6633bb2828e",
+      "observations_sha256": "af78d9030e5a0ad01cdf54910cb48018317fa82e7d31d5024e92e4cfd059cf5f",
+      "compressed_sha256": "7d62f1b848012d89edbd94c8dc56862b70ae2fcc3a3ac3093935ad47dc57addb",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p05-17",
+      "match_id": "match-807ab71e18b455ed",
+      "metadata_sha256": "c6e024a446c0df11ca8753e6140b900dc7044bf76056ddee5e981952bfcb584c",
+      "observations_sha256": "291675a6477cda1383f06e23da8fcf5bfade80af289f3361a4747815eafe2092",
+      "compressed_sha256": "5d9c3ce39e5e8b6315b3c52ca1476f6fd36cc97ed8e785664dfbd102024ca892",
+      "validation": {
+        "frames": 601,
+        "messages": 608,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 608,
+        "unique_observations": 608,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p05-18",
+      "match_id": "match-39193d7bf98d5b1a",
+      "metadata_sha256": "0517af345ab1447857851182a8f3ef8968459dd610d2a0c6920ac5d19c8038e6",
+      "observations_sha256": "dc0899562630bfd8061368872528ee3551778eb9b7d6d760a194f1a91f91c5d1",
+      "compressed_sha256": "88299eadfc79107860aedcc9f8daf3e359b07f0c2dd4fd16c22ba8b03e2134d1",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 8000
+      }
+    },
+    {
+      "case_id": "p05-19",
+      "match_id": "match-ed458c238c50597a",
+      "metadata_sha256": "0d07d1377556b8edebf9e8c14ab3035bbc583975d6a42764363f64ea186db745",
+      "observations_sha256": "d186e6e4d2c63886426b2f7a882478cff050e594c5d0af68bbe577428d84b943",
+      "compressed_sha256": "3f0b0c8efd70beda7c0756a8dff4807c4c5c10a7b84136d5ca52de23181a7cb9",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 34000
+      }
+    },
+    {
+      "case_id": "p05-20",
+      "match_id": "match-84df26ea90e35d49",
+      "metadata_sha256": "1d19c71732d1e7045b6d1acfc5c23f62b96133651b0846fc65f90c6b3b92d4a8",
+      "observations_sha256": "9da3b57cae1d17f4d0fee88ac82b722175c7fab4aa9102e94fd44f9871c8f895",
+      "compressed_sha256": "42934a9713f565a7c6ed59da3a49ae0c6f50c92549f59ea317738d3f53935672",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 700
+      }
+    },
+    {
+      "case_id": "p05-21",
+      "match_id": "match-e95b012811055173",
+      "metadata_sha256": "0777db5edecefe7d6c7e81ee4274b5e80cc6e02074079a30b4eb1ff4b276530b",
+      "observations_sha256": "922baa92887c271b70b2c344c6edb531b7a28d31b00cca534fd9d197e3fc8163",
+      "compressed_sha256": "34e22950546114e9f5607ba21e8824b1d754b76ce1715098118abcb174c47ab2",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 621,
+        "unique_observations": 604,
+        "exact_retransmissions": 17,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p05-22",
+      "match_id": "match-e383249d7387534b",
+      "metadata_sha256": "f8481781bbb5959f863b357ee430abfb8df15d7da8111cd7bd3eac6fe2d80586",
+      "observations_sha256": "d73fc764a89ab5eb940cb2162f454d5f3041c811cce7839f2fa2fb8891fcba70",
+      "compressed_sha256": "f8c974760989e4b79b5731a5536e8c20f67e29d490cda22ebbf5e3da106a426f",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 1,
+        "maximum_delivery_delay_ms": 4000
+      }
+    },
+    {
+      "case_id": "p05-23",
+      "match_id": "match-f6bc3f1912cb543d",
+      "metadata_sha256": "0a8f7d8ed6f497b67ab0c181eb724153455f0c26a5c3eabc36d6ff68717f2d0b",
+      "observations_sha256": "bea1822c443d1c4e2b1ae7b2ee8fc4f1c7090ed76d226855362b0a6384bc201f",
+      "compressed_sha256": "0d3219be83a355b340eff6adb3803ba1e663e99b6d1fcf84ca6ebb15c605a981",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 1,
+        "maximum_delivery_delay_ms": 4000
+      }
+    },
+    {
+      "case_id": "p05-24",
+      "match_id": "match-fcea53ccfab65ba6",
+      "metadata_sha256": "7a38186b294e432d767bf9458f1dcce13f3e8746f2f093bb334d4d8762278832",
+      "observations_sha256": "719a27f203209de3415f625393c796958073828bc2b2af9e6245c10ccff9b3af",
+      "compressed_sha256": "6151ee16dfaa54692b6a9d2239b9e4e6225223ff4d2585e7629b384e7b93e87e",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p05-25",
+      "match_id": "match-a10b25b6d7b8550f",
+      "metadata_sha256": "a8a505b64f6448f3837989753c7707fd49cf32499d84f1bc967ac7334739c15e",
+      "observations_sha256": "c4aec87512a26368df8fe199ec96c2bb3e80dc9c67adf0d9a2bc78d00b220058",
+      "compressed_sha256": "9bff5f3e166bb27b519c35f99c3462f2e65baa59cb2153287d9de92272e0ce28",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p05-26",
+      "match_id": "match-0450df93030e5530",
+      "metadata_sha256": "2e3b23c51ddbfd16e60376018a1ab894abbc409348f62859da9f39417b4fbe51",
+      "observations_sha256": "68477fbd91663b816a3f7432b4e9bb146d122ad544906f0472c0362940f79f45",
+      "compressed_sha256": "d3db1e8b4e05b1a993adcf816ea6c9714e144cea4ec51010ceb47a6f6952a778",
+      "validation": {
+        "frames": 601,
+        "messages": 602,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 602,
+        "unique_observations": 602,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p05-27",
+      "match_id": "match-5e9a587c93745d72",
+      "metadata_sha256": "c0d170e60200aa2f0256954cda7b5fa7d10c637b10353e8fc888f1348cb53825",
+      "observations_sha256": "6ab6af0df2146cf7fcf1cf6a3cae744615f65bf2d044af2e1449a8fb2ff5e9ad",
+      "compressed_sha256": "baad74e4df539c24bbddff835e1e86f92d5a964dc520c1c87496d54b4c1de190",
+      "validation": {
+        "frames": 901,
+        "messages": 911,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 911,
+        "unique_observations": 911,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p05-28",
+      "match_id": "match-a105dfb6015e5bce",
+      "metadata_sha256": "85b6f6233111bfb235e2600fb28aa5a55aa73c0660d96626c932ee55c4ed8099",
+      "observations_sha256": "99ae23b5ab201247584d4d5d264ba4ef2ac6f29d3833419c1338b4a968e57123",
+      "compressed_sha256": "afe4aa173c25d4f78a629923d9e12d32eb69b078a99d8b8a1018cb0a23d530b5",
+      "validation": {
+        "frames": 1801,
+        "messages": 1818,
+        "duration_ms": 180000,
+        "active_players": 22,
+        "delivery_rows": 1818,
+        "unique_observations": 1818,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p06-01",
+      "match_id": "match-f5081f80e63752ff",
+      "metadata_sha256": "f3efe6c79c66fe16706fafc35bd6747ff97902389d6139213f7b65f91e11c023",
+      "observations_sha256": "0ad875df73c3d59f543bd64123ba1596f8dc296d7009c32ae64dcc650e4f9285",
+      "compressed_sha256": "5ed68a5bba51f7985f238dbdbfda4803d13f21e79a52a394c2a9a8084eb3753e",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p06-02",
+      "match_id": "match-43de7a188c995e4f",
+      "metadata_sha256": "64e9be74249d20bd27c34834cef0553c01a1b18c181f04bff7444f468c248e12",
+      "observations_sha256": "9c83a52eb1dad7e7d4a650fb1c92a82d8abeec2846d2da9735260b1efc687e8f",
+      "compressed_sha256": "df24281ba612186751bf007f899e9dea0ab1b231354039b3cc00899d531c9f68",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p06-03",
+      "match_id": "match-76c3356d44ed5483",
+      "metadata_sha256": "2e74b572de65979953afeed79879f3c1b718aa2a8d0ea39364c9d1f78acc1679",
+      "observations_sha256": "2f6b7fc0f4c3580cc4ff61b299495d803aa8c53587c1ffb59bb1d085764f9ff9",
+      "compressed_sha256": "95f4e17487feaf695c41fb0d433415e51b8bb06ddd88924802f081357a016804",
+      "validation": {
+        "frames": 601,
+        "messages": 605,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p06-04",
+      "match_id": "match-331a6d09f6505c3b",
+      "metadata_sha256": "ddb93bd32e7cda73546dd71b8df9bf953cf18a06cc4d1be1dd4478833000b5c3",
+      "observations_sha256": "1711ff02abf31af8905c7dce6befb1fee36ae9fee3c3e875cac086d1c0df2bcc",
+      "compressed_sha256": "ceed447e4afa980058811627d69e6479f4514cd4ac94120e1562098388281693",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p06-05",
+      "match_id": "match-a4374f6818f053d0",
+      "metadata_sha256": "2b5e960d7899684d40297289af93c869ad4a9d398a9243678a6d6f9554c3b4af",
+      "observations_sha256": "0f6471b1e8436455bf4da0b5c99ba6a69171579d7bdbe3ebfac5ff6a7828016b",
+      "compressed_sha256": "1492ca07eb571a628d4cd0247893a626ad32efc0c90181297cfad8bd7528c1fc",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p06-06",
+      "match_id": "match-be69bf07bb885979",
+      "metadata_sha256": "09709b183c5e6711e594011f1f44e3ce2eec49efef944612caa55cbbb49f91eb",
+      "observations_sha256": "e0f264bdae0fecdd527d53016c8b94074a915f4ff4b1229e5fd37ea614441ce5",
+      "compressed_sha256": "c18bc2f1c527483252dc1bc85d503c5a509591eaf98d40aebd4c11bbf8b42043",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p06-07",
+      "match_id": "match-0ae262dd45f858d4",
+      "metadata_sha256": "8507219f280a889067d73ac296781a9212ebd9c1ba0a05c3ad25c83f541bacb0",
+      "observations_sha256": "bcdc53e78b0649af54664ff1b7cfe4967de0848051776370b6946ce9e1eb35ef",
+      "compressed_sha256": "ed91c4b25a31b30deca16c71ffc60adaf11718e68dbeab31d466a466e8e43e16",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p06-08",
+      "match_id": "match-dec1c442afe65938",
+      "metadata_sha256": "ee5208df06c07edb84b26e564b1efac2d27f5eb0b9d0f194c946238ae646104f",
+      "observations_sha256": "c2ac0bdf143c2420ae3951e3c1cdd4770fd3f97aeaea66be25a4fbec5200e6ba",
+      "compressed_sha256": "a82707bdeb8ffe5464722f09d027ec7b27d301034b8b581475c10f9384484041",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p06-09",
+      "match_id": "match-17e44ed957e456a8",
+      "metadata_sha256": "e219e01e4f744ea3c19f09729ef13113a60fc4115ddc80a5a0cf260987412aca",
+      "observations_sha256": "8a40819dbf13458d85b4e5f67c48e967bab724a464e5da85922e61f1898bee6d",
+      "compressed_sha256": "6fdcdeedd685343b178c56987e439f1af7490ab14f8151a1306aac24343b837a",
+      "validation": {
+        "frames": 601,
+        "messages": 608,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 608,
+        "unique_observations": 608,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p06-10",
+      "match_id": "match-36b7d024bca45f36",
+      "metadata_sha256": "755ceebdef771f641bfb65c7227672e30aaa7eaf2844ff4baeddb3da87b961f8",
+      "observations_sha256": "6622ba612334fc2406417d17a7276b7c71172a37fc3a36dbfa38435d79584705",
+      "compressed_sha256": "5a05f461718268f018a6615fd844d8a11be065cc14d4be0a3faae945b21c3a4c",
+      "validation": {
+        "frames": 601,
+        "messages": 605,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p06-11",
+      "match_id": "match-f7bdbf71bc0c59b5",
+      "metadata_sha256": "0808e800ee642d63e0150ab72829360680f7b5f6ddbb8d2411aa6bf7e7d6e7f7",
+      "observations_sha256": "bd92bbf3db86b256ff34f558e0dd9c7c244ad79fb333ce8a39cbede4f4967abd",
+      "compressed_sha256": "f822eb9d56ea01ba1cc25cdbac98b128a2ac8032f3aeafd4cf41e9126acff710",
+      "validation": {
+        "frames": 601,
+        "messages": 605,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p06-12",
+      "match_id": "match-5b68e816649e5ba1",
+      "metadata_sha256": "42e0532496e3062259410e5389f00df4ae2e386ef9c64ba7a434a7ef022de82d",
+      "observations_sha256": "248abb53e1d08073a84748813b7b248e0af18ea9d973b393835d6a5baf41f052",
+      "compressed_sha256": "f1b9509ddb736c67295fa6c0a7febe3ec2e1c5224295d252f6b74f544a380d28",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p06-13",
+      "match_id": "match-c23f6e4ca1e55170",
+      "metadata_sha256": "7a1d92b82dead37a401dbd30e617bec5bebecee54d729ea6a7985e04c367615a",
+      "observations_sha256": "a6c89b8def2fa273c00669914f751ea2ea8042a02e307786c0a681c39ba03df0",
+      "compressed_sha256": "f19e8b67f0a35743e145ffbf793edf0f8f806f54eb765c9562c7a36f7bed8777",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p06-14",
+      "match_id": "match-019c5b833efe52bf",
+      "metadata_sha256": "657752066a169bcca1754d39e3d90667f17c0ae03915176226273e21321ba4c8",
+      "observations_sha256": "ddea6f10902759a086d540018dae8e094562da3eeb8b669f44508de6bca2908a",
+      "compressed_sha256": "4016b373e1c62e1a972b20e9918cf25545224f4f295f8c58e719f11a292f8a70",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p06-15",
+      "match_id": "match-9178f3ae078150e0",
+      "metadata_sha256": "468b411af55dbd75f7afb4b43979eff4c516242494d4cc813e4c034979505cc4",
+      "observations_sha256": "12ff1cdd5c87b69a8e306f9af2640cdb2ae4b55c0e039dd0d677c388ce78f17b",
+      "compressed_sha256": "b4d14f29935f9d01fbe93056a83c22f84d2787645b30a21f969e4ee8ce78d5c7",
+      "validation": {
+        "frames": 595,
+        "messages": 598,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 598,
+        "unique_observations": 598,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p06-16",
+      "match_id": "match-e2972b940cba5f30",
+      "metadata_sha256": "e193205e8f5c78130bdc3b4f2cca7a3fddf90922baeb8dc30c7ed89910c97f92",
+      "observations_sha256": "99dfa5803a1bca5e50a7fd06923844ee0bbb02c4f348bd5bb16531e85eae1969",
+      "compressed_sha256": "d10b85952b557844ea9779512ed3f335ae987c53e8bd297eee35ebea2abc5e1b",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p06-17",
+      "match_id": "match-e6ed0fc0f1595cc9",
+      "metadata_sha256": "08e81941bf04e0cee44321bae972d8834ff519fc17091bf8d198eebc0aa2bdc5",
+      "observations_sha256": "58a25529284a0e88c507a90bb132e84e919010f3f631aeac649d4519af7310e2",
+      "compressed_sha256": "5517b03ace438f182f3f14eaece866c6e56755a9a980d1ac11a6f0bc049f70ed",
+      "validation": {
+        "frames": 601,
+        "messages": 608,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 608,
+        "unique_observations": 608,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p06-18",
+      "match_id": "match-fa1ed6c06d1d5d70",
+      "metadata_sha256": "767d81bd80a9dcbb7e6ed624c83eda2e06ad5e29a06b87737362472b4597639d",
+      "observations_sha256": "f1a47d9874444dfb407716a0df9007b14fa696fb437aaab8613b23d80b825b2d",
+      "compressed_sha256": "8b29dc615557dbe3adb5da1a0b01c24f24aeb820a32daf3215e78d91892bdccd",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 8000
+      }
+    },
+    {
+      "case_id": "p06-19",
+      "match_id": "match-f0c677779d915381",
+      "metadata_sha256": "71f3b29e2efd3907f06f54ced9e9e04d6cf24dd466f6d89fb8446378d902f2f5",
+      "observations_sha256": "cdcd22ec149bea37f9232c12ee4e180b12f2d5c9ccf1a347e86452a1e0ce79e9",
+      "compressed_sha256": "37bb4d0e02fd59cfaa4972244929e54c936faf81059069812889edfbd965ef3e",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 34000
+      }
+    },
+    {
+      "case_id": "p06-20",
+      "match_id": "match-98711d7c2d755065",
+      "metadata_sha256": "20d7e044474f718b1defe90f7c8645bfc6f0851698c855709757b03e5b521b97",
+      "observations_sha256": "1ae2f67520306dd1e2bcb540a61855196598804bd7c599a46b78850314e13acf",
+      "compressed_sha256": "6d549ad39d14d0f6c1d456004979460b321ea7ad4bfece3c75b8416edb104ce2",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 700
+      }
+    },
+    {
+      "case_id": "p06-21",
+      "match_id": "match-651961bad6435632",
+      "metadata_sha256": "f7d04f6142bc4e467f462da8d9171bee58408000cccf7d954a0cd0a0103525ab",
+      "observations_sha256": "7e1b5d8097ba8186b2ead815a2f351c85e05fdce24398781a842517d3c008f8c",
+      "compressed_sha256": "6356f60436271f035a447f21072972c05bd68d5cd9db3ad2378df37b4062723f",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 621,
+        "unique_observations": 604,
+        "exact_retransmissions": 17,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p06-22",
+      "match_id": "match-a06637b01a2352d4",
+      "metadata_sha256": "393e3280f5332d01e3c86b1c40f5e2d7679d1f9d13efb0ff3a63b6c2096a85a6",
+      "observations_sha256": "a5f1f4e57fdb9e602bdcf75ee3769e4d0a250e51502c4c3e222c2d1fc96f9bee",
+      "compressed_sha256": "ada6534b84849d8368f97dc4a20541d4d78765372697ec73218494d6ffd5c919",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 1,
+        "maximum_delivery_delay_ms": 4000
+      }
+    },
+    {
+      "case_id": "p06-23",
+      "match_id": "match-8dba4ca26d65595a",
+      "metadata_sha256": "8ec19c2bbec7c616a56745963f5d99e42dcfa0f7caaafab727a463df80ce955f",
+      "observations_sha256": "d2714f443fc60d075db4355fdfd4d2f2531a0809d92af189609a4233c1fff1ed",
+      "compressed_sha256": "ffce76e826b75b9bcecd6436ac6504bca2274aaa4e78ba231a3c25cc8bc4aed4",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 605,
+        "unique_observations": 605,
+        "exact_retransmissions": 0,
+        "corrections": 1,
+        "maximum_delivery_delay_ms": 4000
+      }
+    },
+    {
+      "case_id": "p06-24",
+      "match_id": "match-3bb022a36ccd5fde",
+      "metadata_sha256": "de7c571d8184d4a2f943b8d88f8923d18eb5d860d193feddb3b57d8329824d99",
+      "observations_sha256": "92bd36d7ea49c76cb8353270b194c6edc6ffcf6f582cbcb0bce4acf06c79b2b1",
+      "compressed_sha256": "e1946e9729f3bfc10fbafc5c3f372642b517c439e89321d3fee5b589cba30c56",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p06-25",
+      "match_id": "match-d6bb2793140d59cc",
+      "metadata_sha256": "b0a40758c2efe429926b869f0b7de1337b6d7666f543b8a35107211f9ab3edc7",
+      "observations_sha256": "4356105f2db5bad62d8d103051a52259d7d7380d6669c918f10f9e962a95fd29",
+      "compressed_sha256": "38bfb181405c2e793c42eb07f16610944a8b56f7b6058a5ef817de92064f0589",
+      "validation": {
+        "frames": 601,
+        "messages": 604,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 604,
+        "unique_observations": 604,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p06-26",
+      "match_id": "match-3e7009cab53d59cc",
+      "metadata_sha256": "469568d0bb3c2a9a0c2a3a9ce469c5e18306a9cb4e6c54e298f45c74a4554166",
+      "observations_sha256": "1b647335961d97ad3a5f71dd5c22b74b26892e6c851d13091e7f6690c04a2fab",
+      "compressed_sha256": "33196bcfe2b8c2232a0e8aa7ca5475563ef60a78065e4d86c1793df325016206",
+      "validation": {
+        "frames": 601,
+        "messages": 602,
+        "duration_ms": 60000,
+        "active_players": 22,
+        "delivery_rows": 602,
+        "unique_observations": 602,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p06-27",
+      "match_id": "match-0d93a8c9481b59f6",
+      "metadata_sha256": "a81b5d211b1fdd77f02be60bbcc37f0809736eab13dcae29ca12b2a3a702cbdc",
+      "observations_sha256": "b8e7fd091dc735eaf37d8c34d127fab781f72341d83d2c431cc57904271f5a87",
+      "compressed_sha256": "dee5721bdc354d523e18b8fd475f41e40effe5a7058703711180788a11882813",
+      "validation": {
+        "frames": 901,
+        "messages": 911,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 911,
+        "unique_observations": 911,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    },
+    {
+      "case_id": "p06-28",
+      "match_id": "match-780bbabca2bd5fc3",
+      "metadata_sha256": "353b98b8a0fcdd5ea5647342fe8a6973b78d29653ec00391e3856e9b86fba83e",
+      "observations_sha256": "3f5239b6ce031103618f31e483e5c7edf23142edcd997ddea4f728cb62332945",
+      "compressed_sha256": "02a4c4a4b68f2635c9d349bfae041a07cc71ec17609effea143753872a900d03",
+      "validation": {
+        "frames": 1801,
+        "messages": 1818,
+        "duration_ms": 180000,
+        "active_players": 22,
+        "delivery_rows": 1818,
+        "unique_observations": 1818,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      }
+    }
+  ]
+}

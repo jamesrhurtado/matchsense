@@ -16,7 +16,8 @@ from concurrent.futures import ThreadPoolExecutor
 from collections import defaultdict, deque
 import logging
 from pydantic import BaseModel, ConfigDict, Field
-from engine.core import available, digest, load_match, metric, visual_snapshot
+from engine.core import available, digest, load_match, metric, pass_metrics, visual_snapshot
+from engine.catalog import list_matches, duration_for_match
 from engine.repository import Repository
 from engine.workflow import EvidenceTools, run_workflow
 
@@ -59,7 +60,7 @@ async def lifespan(app):
 
 TOKEN=os.getenv('WHY_NOW_PRODUCER_TOKEN','local-demo-producer')
 LOCK=threading.RLock()
-app=FastAPI(title='WHY/NOW',version='0.2.0',lifespan=lifespan)
+app=FastAPI(title='WHY/NOW',version='0.3.0',lifespan=lifespan)
 if os.getenv('APPLICATIONINSIGHTS_CONNECTION_STRING'):
     from azure.monitor.opentelemetry import configure_azure_monitor
     from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
@@ -69,10 +70,11 @@ if os.getenv('APPLICATIONINSIGHTS_CONNECTION_STRING'):
 app.add_middleware(CORSMiddleware,allow_origins=os.getenv('WHY_NOW_ORIGINS','http://localhost:3000,http://127.0.0.1:3000').split(','),allow_methods=['GET','POST'],allow_headers=['Content-Type','X-Producer-Token','Last-Event-ID'])
 
 class Body(BaseModel): model_config=ConfigDict(extra='forbid')
-class Create(Body): match_id:Literal['match-001','match-002','match-003']='match-001'
+class Create(Body): match_id:str=Field(default='match-001',min_length=1,max_length=80)
 class Control(Body):
-    action:Literal['start','pause','speed','reset']
+    action:Literal['start','pause','speed','reset','seek']
     speed:float|None=Field(default=None,ge=.25,le=8,allow_inf_nan=False)
+    clock_ms:int|None=Field(default=None,ge=0,le=5400000)
 class Review(Body):
     action:Literal['approve','suppress','retract','edit']
     expected_revision:int=Field(ge=1)
@@ -80,7 +82,7 @@ class Review(Body):
     idempotency_key:str=Field(min_length=8,max_length=100)
     text:str|None=Field(default=None,max_length=1000)
 class RecapRequest(Body):
-    through_ms:int|None=Field(default=None,ge=0,le=60000)
+    through_ms:int|None=Field(default=None,ge=0,le=5400000)
     language:Literal['en','es']='en'
 
 
@@ -98,78 +100,131 @@ def get_session(sid):
 
 def clock(s):
     elapsed=max(0,time.time()-s['updated_at'])*s['speed']*1000 if s['running'] else 0
-    return min(60000,int(s['clock_ms']+elapsed))
+    return min(s.get('duration_ms',60000),int(s['clock_ms']+elapsed))
 
 def new_session(match_id):
-    s={'id':str(uuid.uuid4()),'match_id':match_id,'clock_ms':0,'running':False,'speed':1,'updated_at':time.time(),'generation':1,'control_revision':1}
+    s={'id':str(uuid.uuid4()),'match_id':match_id,'clock_ms':0,'running':False,'speed':1,'updated_at':time.time(),'generation':1,'control_revision':1,'duration_ms':duration_for_match(match_id)}
     repo.save_session(s);return s
 
-def materialize(s,at):
-    meta,messages=inputs(s,at); old=repo.latest_package(s['id']); m=metric(messages,at,meta)
-    if not m or not m['eligible']:
-        if old:repo.invalidate(s['id'])
-        return None
-    if old and old['evidence_revision']==m['evidence_revision']:return old
-    if old:repo.invalidate(s['id'])
-    revision=old['revision']+1 if old else 1
-    if not FOUNDRY:
-        package=workflow(EvidenceTools(meta,messages,at),revision=revision)
-        if package:repo.store_package(s['id'],package,at,expected_revision=revision-1)
-        return package
-    key=(s['id'],m['evidence_revision'])
-    future=JOBS.get(key)
-    if future is None:
-        if sum(not f.done() for f in JOBS.values())>=4:return None
-        future=WORKERS.submit(workflow,EvidenceTools(meta,messages,at),revision=revision,session_id=s['id'])
-        JOBS[key]=future
-        return None
-    if not future.done():return None
-    try:
-        package=future.result()
-        if package:
-            repo.store_package(s['id'],package,at,expected_revision=revision-1)
-            logger.info('workflow_complete session=%s revision=%s mode=%s calls=%s',s['id'],revision,package['mode'],package.get('model_calls',package.get('model_usage',{})))
-        return package
-    except RepositoryConflict:
-        return repo.latest_package(s['id'])
-    except Exception:
-        logger.exception('workflow_failed session=%s',s['id'])
-        return None
+def materialize_all(s,at):
+    """Each pass owns its evidence, workflow, revision and publication decision."""
+    meta,messages=inputs(s,at)
+    stored={p['id']:p for p in repo.list_packages(s['id'])}
+    measured={f"story-{m['pass_id']}":m for m in pass_metrics(messages,at,meta)}
+    for story_id,old in stored.items():
+        m=measured.get(story_id)
+        if not m or not m['eligible'] or old['evidence_revision']!=m['evidence_revision']:
+            decision=repo.decision(s['id'],story_id)
+            if decision and decision['status']!='superseded':repo.invalidate(s['id'],story_id)
+    packages=[]
+    for story_id,m in measured.items():
+        if not m['eligible']:continue
+        old=stored.get(story_id)
+        if old and old['evidence_revision']==m['evidence_revision']:
+            packages.append(old)
+            continue
+        revision=old['revision']+1 if old else 1
+        tools=EvidenceTools(meta,messages,at,pass_id=m['pass_id'])
+        if not FOUNDRY:
+            package=workflow(tools,revision=revision)
+            if package:
+                repo.store_package(s['id'],package,at,expected_revision=revision-1)
+                packages.append(package)
+            continue
+        key=(s['id'],story_id,m['evidence_revision'])
+        future=JOBS.get(key)
+        if future is None:
+            # Never spend model calls on a new, already-expired live candidate.
+            if at>=m['retention_confirmed_at_ms']+30000:continue
+            if sum(not f.done() for f in JOBS.values())>=4:continue
+            future=WORKERS.submit(workflow,tools,revision=revision,session_id=s['id'])
+            JOBS[key]=future
+            continue
+        if not future.done():continue
+        try:
+            package=future.result()
+            if package:
+                # Results were generated against frozen scoped evidence; only
+                # this current-evidence key may commit. A stale job is ignored.
+                if package['id']!=story_id or package['evidence_revision']!=m['evidence_revision']:
+                    raise ValueError('workflow_scope_mismatch')
+                repo.store_package(s['id'],package,at,expected_revision=revision-1)
+                packages.append(package)
+                logger.info('workflow_complete session=%s story=%s revision=%s mode=%s usage=%s',s['id'],story_id,revision,package['mode'],package.get('model_usage',{}))
+        except RepositoryConflict:
+            latest=repo.latest_package(s['id'],story_id)
+            if latest and latest['evidence_revision']==m['evidence_revision']:packages.append(latest)
+        except Exception:
+            # Suppress repeated exception logging for the same completed job.
+            if not getattr(future,'_why_now_logged',False):
+                logger.exception('workflow_failed session=%s story=%s',s['id'],story_id)
+                future._why_now_logged=True
+    # Bound retained completed jobs; running work always keeps its slot/identity.
+    for key in list(JOBS):
+        if len(JOBS)<=512:break
+        if JOBS[key].done():del JOBS[key]
+    return sorted(packages,key=lambda p:(p['eligible_from_ms'],p['id']))
+
+
+def materialize(s,at,story_id=None):
+    packages=materialize_all(s,at)
+    if story_id is not None:return next((p for p in packages if p['id']==story_id),None)
+    return packages[-1] if packages else None
 
 
 def publication(s,package,at):
     if not package:return 'none',None
-    decision=repo.decision(s['id'])
+    decision=repo.decision(s['id'],package['id'])
     status=decision['status'] if decision and decision['revision']==package['revision'] and decision['package_hash']==package['package_hash'] else 'ready'
     if at>=package['expires_at_ms'] and status in ('approved','ready'):status='expired'
-    published=bool(decision and decision['status']=='approved' and decision['revision']==package['revision'] and decision['package_hash']==package['package_hash'] and decision['at_ms']<=at)
+    published=bool(decision and decision['status']=='approved' and decision['revision']==package['revision'] and decision['package_hash']==package['package_hash'] and decision['at_ms']<=at and package['eligible_from_ms']<=at)
     return status,package if published else None
 
 def safe_story(package,status):
     if not package:return None
     return {k:package[k] for k in ['id','revision','title','evidence_revision','eligible_from_ms','expires_at_ms']}|{'status':status}
 
-def snapshot_data(sid,is_producer=False):
+def snapshot_data(sid,is_producer=False,story_id=None):
     with LOCK:
-        s=get_session(sid);at=clock(s);meta,messages=inputs(s,at); package=materialize(s,at);status,published=publication(s,package,at)
-        current=package if is_producer else published
+        s=get_session(sid);at=clock(s);meta,messages=inputs(s,at)
+        packages=materialize_all(s,at)
+        entries=[(p,*publication(s,p,at)) for p in packages]
+        visible=[(p,status,published) for p,status,published in entries if is_producer or published]
+        selected=next((entry for entry in visible if entry[0]['id']==story_id),None) if story_id else None
+        if selected is None and visible:selected=visible[-1]
+        current,status,_=selected if selected else (None,'waiting',None)
+        live=[p for p,state,published in entries if published and state=='approved']
+        overlay_package=live[-1] if live else None
+        def summary(p,state,published):
+            result=safe_story(p,state)
+            result['approved']=published is not None
+            if is_producer:result['package_hash']=p['package_hash']
+            return result
         view=visual_snapshot(messages,at)
-        latest=repo.latest_package(sid)
-        revision=latest['revision'] if latest else 0
         audit=repo.audit(sid)
-        visible_story=safe_story(current,status)
-        if visible_story and is_producer:visible_story['package_hash']=current['package_hash']
-        return {'session_id':sid,'match_id':s['match_id'],'clock_ms':at,'duration_ms':60000,'running':s['running'] and at<60000,'speed':s['speed'],'synthetic':True,'score':meta['initial_state']['score'],'teams':meta['teams'],'players':meta['players'],**view,'story':visible_story,'story_status':status if is_producer or published else 'waiting','overlay':next(v['text'] for v in published['variants'] if v['id']=='en_simple_general') if published and status=='approved' else None,'mode':current['mode'] if current else runtime_mode(),'workflow_pending':any(k[0]==sid and not f.done() for k,f in JOBS.items()),'cursor':len(audit)*1000000+s['control_revision']*100000+at,'generation':s['generation']}
+        duration=s.get('duration_ms',60000)
+        return {'session_id':sid,'match_id':s['match_id'],'clock_ms':at,'duration_ms':duration,
+                'running':s['running'] and at<duration,'speed':s['speed'],'synthetic':True,
+                'score':meta['initial_state']['score'],'teams':meta['teams'],'players':meta['players'],**view,
+                'story':summary(current,status,selected[2]) if current else None,
+                'stories':[summary(p,state,published) for p,state,published in visible],
+                'story_status':status,'overlay_story_id':overlay_package['id'] if overlay_package else None,
+                'overlay':next(v['text'] for v in overlay_package['variants'] if v['id']=='en_simple_general') if overlay_package else None,
+                'mode':current['mode'] if current else runtime_mode(),
+                'workflow_pending':any(k[0]==sid and not f.done() for k,f in JOBS.items()),
+                'cursor':len(audit)*10000000+s['control_revision']*10000000+at,
+                'generation':s['generation']}
+
 
 def authorized_package(sid,story_id,token=None):
-    s=get_session(sid);at=clock(s); p=materialize(s,at)
-    if not p or story_id!=p['id']:fail(404,'story_unavailable')
+    s=get_session(sid);at=clock(s);p=materialize(s,at,story_id)
+    if not p:fail(404,'story_unavailable')
     status,published=publication(s,p,at)
     if not producer(token) and not published:fail(404,'story_unavailable')
     return s,at,p,status
 
 @app.get('/api/health')
-def health():return {'ok':True,'mode':runtime_mode(),'azure_deployed':CLOUD,'version':'0.2.0'}
+def health():return {'ok':True,'mode':runtime_mode(),'azure_deployed':CLOUD,'version':'0.3.0'}
 
 @app.get('/api/ready')
 def ready():
@@ -179,9 +234,14 @@ def ready():
     return {'ok':True,'persistence':'cosmos' if isinstance(repo,CosmosRepository) else 'sqlite','transport':'eventhubs' if transport else 'local','model':runtime_mode()}
 
 
+@app.get('/api/matches')
+def matches():return {'matches':list_matches()}
+
+
 @app.post('/api/replay-sessions')
 def create(body:Create,x_producer_token:str|None=Header(None)):
     require(x_producer_token)
+    if body.match_id not in {m['match_id'] for m in list_matches()}:fail(422,'unknown_match')
     with LOCK:s=new_session(body.match_id)
     return {'session_id':s['id'],'match_id':s['match_id']}
 
@@ -193,15 +253,19 @@ def control(sid:str,body:Control,x_producer_token:str|None=Header(None)):
         if body.action=='reset':
             fresh=new_session(s['match_id']);return {'session_id':fresh['id'],'reset_from':sid}
         at=clock(s);s['clock_ms']=at;s['updated_at']=time.time();s['control_revision']+=1
+        if body.action=='seek':
+            if body.clock_ms is None:fail(422,'seek_clock_required')
+            if body.clock_ms<at:fail(409,'seek_forward_only')
+            s['clock_ms']=min(body.clock_ms,s.get('duration_ms',60000));s['running']=False
         if body.action=='start':s['running']=True
         elif body.action=='pause':s['running']=False
         if body.speed is not None:s['speed']=body.speed
         repo.save_session(s)
-        return {'session_id':sid,'clock_ms':at,'running':s['running'],'speed':s['speed']}
+        return {'session_id':sid,'clock_ms':s['clock_ms'],'running':s['running'],'speed':s['speed']}
 
 @app.get('/api/replay-sessions/{sid}/snapshot')
-def snapshot(sid:str,x_producer_token:str|None=Header(None)):
-    return snapshot_data(sid,producer(x_producer_token))
+def snapshot(sid:str,x_producer_token:str|None=Header(None),story_id:str|None=None):
+    return snapshot_data(sid,producer(x_producer_token),story_id)
 
 @app.get('/api/replay-sessions/{sid}/stream')
 async def stream(sid:str,request:Request,last_event_id:str|None=Header(None)):
@@ -249,10 +313,13 @@ def review(sid:str,story_id:str,body:Review,x_producer_token:str|None=Header(Non
         s,at,p,status=authorized_package(sid,story_id,x_producer_token)
         if body.expected_revision!=p['revision'] or body.package_hash!=p['package_hash']:fail(409,'stale_revision')
         if body.action in ('approve','edit') and at>=p['expires_at_ms']:fail(409,'expired')
-        if body.action=='retract' and status not in ('approved','expired'):fail(409,'not_published')
+        if body.action=='retract':
+            decision=repo.decision(sid,story_id)
+            if not decision or decision['status']!='approved' or decision['revision']!=p['revision'] or decision['package_hash']!=p['package_hash']:
+                fail(409,'not_published')
         if body.action=='edit':
             if not body.text or not body.text.strip():fail(422,'edit_text_required')
-            meta,messages=inputs(s,at);p=workflow(EvidenceTools(meta,messages,at),revision=p['revision']+1,proposed_text=body.text,session_id=sid)
+            meta,messages=inputs(s,at);p=workflow(EvidenceTools(meta,messages,at,pass_id=p['metrics']['pass_id']),revision=p['revision']+1,proposed_text=body.text,session_id=sid)
             if p is None:fail(422,'review_rejected')
             new_status='ready'
         else:new_status={'approve':'approved','suppress':'suppressed','retract':'retracted'}[body.action]
@@ -265,18 +332,20 @@ def review(sid:str,story_id:str,body:Review,x_producer_token:str|None=Header(Non
 @app.post('/api/replay-sessions/{sid}/recaps')
 def recap(sid:str,body:RecapRequest):
     with LOCK:
-        s=get_session(sid); now=clock(s);cutoff=min(now,body.through_ms if body.through_ms is not None else now)
-        p=materialize(s,now);decision=repo.decision(sid);moments=[]
-        if p and decision and decision['status']=='approved' and decision['revision']==p['revision'] and decision['package_hash']==p['package_hash'] and decision['at_ms']<=cutoff and p['eligible_from_ms']<=cutoff:
-            v=next(v for v in p['variants'] if v['language']==body.language and v['detail']=='simple' and v['focus'] is None)
-            moments=[{'story_id':p['id'],'revision':p['revision'],'text':v['text'],'claim_ids':v['claim_ids']}]
+        s=get_session(sid);now=clock(s);cutoff=min(now,body.through_ms if body.through_ms is not None else now)
+        moments=[]
+        for p in materialize_all(s,now):
+            decision=repo.decision(sid,p['id'])
+            if decision and decision['status']=='approved' and decision['revision']==p['revision'] and decision['package_hash']==p['package_hash'] and decision['at_ms']<=cutoff and p['eligible_from_ms']<=cutoff:
+                v=next(v for v in p['variants'] if v['language']==body.language and v['detail']=='simple' and v['focus'] is None)
+                moments.append({'story_id':p['id'],'revision':p['revision'],'text':v['text'],'claim_ids':v['claim_ids'],'at_ms':p['eligible_from_ms']})
         return {'title':'El partido hasta ahora' if body.language=='es' else 'Match so far','through_ms':cutoff,'moments':moments,'mode':'approved moments only'}
 
 @app.get('/api/replay-sessions/{sid}/diagnostics')
-def diagnostics(sid:str,x_producer_token:str|None=Header(None)):
+def diagnostics(sid:str,x_producer_token:str|None=Header(None),story_id:str|None=None):
     require(x_producer_token)
     with LOCK:
-        s=get_session(sid);at=clock(s);p=materialize(s,at);meta,messages=inputs(s,at)
+        s=get_session(sid);at=clock(s);p=materialize(s,at,story_id);meta,messages=inputs(s,at)
         usage=p.get('model_usage',{}) if p else {}
         return {'session_id':sid,'clock_ms':at,'mode':p['mode'] if p else runtime_mode(),'observations_delivered':len(available(messages,at)),'ingestion_lag_ms':max(0,at-max((m['available_at_ms'] for m in available(messages,at)),default=0)),'metric_version':'pressure-escape-v1','workflow_ms':p['workflow_ms'] if p else None,'trace':p['trace'] if p else [],'audit':repo.audit(sid),'azure_deployed':CLOUD,'model_calls':p.get('model_calls',usage.get('calls',0)) if p else 0,'model_tokens':p.get('model_tokens',usage.get('total_tokens',0)) if p else 0,'model_usage':usage,'transport':transport.diagnostics() if transport else {'mode':'local'},'workflow_pending':any(k[0]==sid and not f.done() for k,f in JOBS.items())}
 

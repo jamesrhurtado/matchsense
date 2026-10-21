@@ -53,18 +53,83 @@ class CosmosRepository:
         return [d['data'] for d in self.sessions.query_items(
             query='SELECT c.data FROM c WHERE c.type = "session"', enable_cross_partition_query=True)]
 
-    def _pointer(self, sid):
-        return self._read(self.stories, 'current', sid)
+    @staticmethod
+    def _story_key(story_id):
+        return 'story:' + digest(story_id)
 
-    def latest_package(self, sid):
-        pointer = self._pointer(sid)
-        if not pointer:
-            return None
-        return self._read(self.stories, f"package:{pointer['revision']}", sid)['data']
+    def _pointer(self, sid, story_id=None):
+        if story_id is None:return self._read(self.stories, 'current', sid)
+        pointer=self._read(self.stories,self._story_key(story_id)+':current',sid)
+        if pointer:return pointer
+        legacy=self._read(self.stories,'current',sid)
+        if legacy and 'stories' not in legacy:
+            package=self._read(self.stories,f"package:{legacy['revision']}",sid)
+            if package and package['data']['id']==story_id:return legacy
+        # A migrated manifest can still refer to an unmigrated legacy story.
+        if legacy and story_id in legacy.get('stories',[]):
+            package_id=legacy.get('legacy_package_id')
+            package=self._read(self.stories,package_id,sid) if package_id else None
+            if package and package['data']['id']==story_id:
+                return {**legacy,'revision':package['data']['revision'],'package_hash':package['data']['package_hash'],'package_id':package_id}
+        return None
 
-    def decision(self, sid):
-        doc = self._read(self.stories, 'decision', sid)
+    def latest_package(self, sid, story_id=None):
+        pointer=self._pointer(sid,story_id)
+        if not pointer:return None
+        package_id=pointer.get('package_id',f"package:{pointer['revision']}")
+        doc=self._read(self.stories,package_id,sid)
         return doc['data'] if doc else None
+
+    def list_packages(self,sid):
+        current=self._pointer(sid)
+        if not current:return []
+        if 'stories' not in current:
+            package=self.latest_package(sid)
+            return [package] if package else []
+        packages=[self.latest_package(sid,story_id) for story_id in current['stories']]
+        return sorted((p for p in packages if p),key=lambda p:(p.get('eligible_from_ms',0),p['id']))
+
+    def _decision_doc(self,sid,story_id):
+        doc=self._read(self.stories,self._story_key(story_id)+':decision',sid)
+        if doc:return doc
+        legacy=self._read(self.stories,'decision',sid)
+        if legacy:
+            package=self._read(self.stories,f"package:{legacy['data']['revision']}",sid)
+            if package and package['data']['id']==story_id:return legacy
+        return None
+
+    def decision(self, sid, story_id=None):
+        package=self.latest_package(sid,story_id)
+        if not package:return None
+        doc=self._decision_doc(sid,package['id'])
+        return doc['data'] if doc else None
+
+    def _publication_ops(self,sid,package,advance_latest=True,expected_pointer=None):
+        """Guard the session manifest and the independently versioned story pointer."""
+        current=self._pointer(sid)
+        story_id=package['id'];key=self._story_key(story_id)
+        pointer=self._pointer(sid,story_id)
+        if (pointer or {}).get('_etag') != (expected_pointer or {}).get('_etag'):
+            raise RepositoryConflict('stale_revision')
+        package_id=key+':package:'+str(package['revision'])
+        story_current={'id':key+':current','session_id':sid,'story_id':story_id,
+                       'revision':package['revision'],'package_hash':package['package_hash'],'package_id':package_id}
+        manifest=dict(current) if current else {'id':'current','session_id':sid}
+        stories=list(manifest.get('stories',[]))
+        if current and 'stories' not in current:
+            legacy_id=f"package:{current['revision']}"
+            legacy=self._read(self.stories,legacy_id,sid)
+            if legacy:
+                stories.append(legacy['data']['id']);manifest['legacy_package_id']=legacy_id
+        if story_id not in stories:stories.append(story_id)
+        manifest['stories']=stories
+        if advance_latest or not current:
+            manifest.update({'story_id':story_id,'revision':package['revision'],'package_hash':package['package_hash'],'package_id':package_id})
+        ops=[('replace',('current',manifest),{'if_match_etag':current['_etag']}) if current else ('create',(manifest,))]
+        if pointer and pointer['id']==story_current['id']:
+            ops.append(('replace',(story_current['id'],story_current),{'if_match_etag':pointer['_etag']}))
+        else:ops.append(('create',(story_current,)))
+        return ops
 
     def audit(self, sid):
         return [d['data'] for d in self.stories.query_items(
@@ -93,61 +158,64 @@ class CosmosRepository:
                 raise RepositoryConflict('stale_revision') from exc
             raise
 
-    def invalidate(self, sid):
-        decision = self._read(self.stories, 'decision', sid)
-        pointer = self._pointer(sid)
-        if decision and decision['data']['status'] != 'superseded':
-            decision['data']['status'] = 'superseded'
-            ops = [('replace', ('decision', decision), {'if_match_etag': decision['_etag']})]
-            # Advance the publication ETag as well so an approval racing with
-            # invalidation cannot commit using the old evidence snapshot.
-            if pointer:
-                ops.append(('replace', ('current', pointer), {'if_match_etag': pointer['_etag']}))
-            self._batch(sid, ops)
+    def invalidate(self, sid, story_id=None):
+        current=self._pointer(sid)
+        if not current:return
+        packages=self.list_packages(sid) if story_id is None else [self.latest_package(sid,story_id)]
+        ops=[('replace',('current',current),{'if_match_etag':current['_etag']})]
+        for package in packages:
+            if not package:continue
+            pointer=self._pointer(sid,package['id'])
+            if pointer and pointer['id']!='current':
+                ops.append(('replace',(pointer['id'],pointer),{'if_match_etag':pointer['_etag']}))
+            decision=self._decision_doc(sid,package['id'])
+            if decision and decision['data']['status']!='superseded':
+                decision['data']['status']='superseded'
+                ops.append(('replace',(decision['id'],decision),{'if_match_etag':decision['_etag']}))
+        self._batch(sid,ops)
 
     def store_package(self, sid, package, at_ms, expected_revision=None):
-        pointer = self._pointer(sid)
-        prior = pointer['revision'] if pointer else 0
-        if (expected_revision is not None and prior != expected_revision) or package['revision'] != prior + 1:
+        pointer=self._pointer(sid,package['id'])
+        prior=pointer['revision'] if pointer else 0
+        if (expected_revision is not None and prior!=expected_revision) or package['revision']!=prior+1:
             raise RepositoryConflict('stale_revision')
-        current = {'id': 'current', 'session_id': sid, 'revision': package['revision'], 'package_hash': package['package_hash']}
-        ops = [('create', (self._doc(sid, f"package:{package['revision']}", 'package', package),)),
-               ('replace', ('current', current), {'if_match_etag': pointer['_etag']}) if pointer else ('create', (current,))]
-        decision = self._read(self.stories, 'decision', sid)
+        ops=self._publication_ops(sid,package,expected_pointer=pointer)
+        ops.append(('create',(self._doc(sid,self._story_key(package['id'])+':package:'+str(package['revision']),'package',package),)))
+        decision=self._decision_doc(sid,package['id'])
         if decision:
-            decision['data']['status'] = 'superseded'
-            ops.append(('replace', ('decision', decision), {'if_match_etag': decision['_etag']}))
-        ops.append(('create', (self._audit(sid, 'package_ready', at_ms, {'revision': package['revision'], 'workflow_ms': package['workflow_ms']}),)))
-        self._batch(sid, ops)
+            decision['data']['status']='superseded'
+            ops.append(('replace',(decision['id'],decision),{'if_match_etag':decision['_etag']}))
+        ops.append(('create',(self._audit(sid,'package_ready',at_ms,{'story_id':package['id'],'revision':package['revision'],'workflow_ms':package['workflow_ms']}),)))
+        self._batch(sid,ops)
 
     def commit_review(self, sid, key, request_hash, expected_revision, expected_hash, package, status, at_ms, result, edited=False):
-        old = self.operation(sid, key)
+        old=self.operation(sid,key)
         if old:
-            if old['request_hash'] != request_hash:
-                raise RepositoryConflict('idempotency_key_reused')
+            if old['request_hash']!=request_hash:raise RepositoryConflict('idempotency_key_reused')
             return old['data']
-        if not edited and (package['revision'] != expected_revision or package['package_hash'] != expected_hash):
+        pointer=self._pointer(sid,package['id'])
+        if not pointer or pointer['revision']!=expected_revision or pointer['package_hash']!=expected_hash:
             raise RepositoryConflict('stale_revision')
-        pointer = self._pointer(sid)
-        if not pointer or pointer['revision'] != expected_revision or pointer['package_hash'] != expected_hash:
+        if (edited and package['revision']!=expected_revision+1) or (not edited and (package['revision']!=expected_revision or package['package_hash']!=expected_hash)):
             raise RepositoryConflict('stale_revision')
-        current = {'id': 'current', 'session_id': sid, 'revision': package['revision'], 'package_hash': package['package_hash']}
-        decision = {'session_id': sid, 'revision': package['revision'], 'status': status, 'at_ms': at_ms, 'package_hash': package['package_hash']}
-        ops = [('replace', ('current', current), {'if_match_etag': pointer['_etag']}),
-               ('upsert', (self._doc(sid, 'decision', 'decision', decision),)),
-               ('create', (self._doc(sid, 'operation:' + digest(key), 'operation', {'request_hash': request_hash, 'data': result}),)),
-               ('create', (self._audit(sid, 'edit' if edited else {'approved': 'approve', 'suppressed': 'suppress', 'retracted': 'retract'}[status], at_ms, result),))]
-        if edited:
-            if package['revision'] != expected_revision + 1:
-                raise RepositoryConflict('stale_revision')
-            ops.append(('create', (self._doc(sid, f"package:{package['revision']}", 'package', package),)))
-        try:
-            self._batch(sid, ops)
+        ops=self._publication_ops(sid,package,advance_latest=edited,expected_pointer=pointer)
+        package_id=self._story_key(package['id'])+':package:'+str(package['revision'])
+        # Migrating an unedited legacy package also creates its story-specific immutable copy.
+        if edited or not self._read(self.stories,package_id,sid):
+            ops.append(('create',(self._doc(sid,package_id,'package',package),)))
+        decision={'session_id':sid,'story_id':package['id'],'revision':package['revision'],'status':status,'at_ms':at_ms,'package_hash':package['package_hash']}
+        decision_id=self._story_key(package['id'])+':decision'
+        prior_decision=self._read(self.stories,decision_id,sid)
+        doc=self._doc(sid,decision_id,'decision',decision)
+        ops.append(('replace',(decision_id,doc),{'if_match_etag':prior_decision['_etag']}) if prior_decision else ('create',(doc,)))
+        action='edit' if edited else {'approved':'approve','suppressed':'suppress','retracted':'retract'}[status]
+        ops.extend([('create',(self._doc(sid,'operation:'+digest(key),'operation',{'request_hash':request_hash,'data':result}),)),
+                    ('create',(self._audit(sid,action,at_ms,{**result,'story_id':package['id']}),))])
+        try:self._batch(sid,ops)
         except RepositoryConflict:
-            old = self.operation(sid, key)
+            old=self.operation(sid,key)
             if old:
-                if old['request_hash'] != request_hash:
-                    raise RepositoryConflict('idempotency_key_reused')
+                if old['request_hash']!=request_hash:raise RepositoryConflict('idempotency_key_reused')
                 return old['data']
             raise
         return result

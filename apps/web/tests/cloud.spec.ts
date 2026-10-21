@@ -49,7 +49,7 @@ test('hosted Azure workflow: evidence, real model review, approval and companion
  const viewer=await context.newPage();
  viewer.on('pageerror',error=>errors.push(error.message));
  await viewer.goto(`${base}/watch/${sid}`);
- await expect(viewer.getByRole('heading',{name:'Why this pass mattered'})).toBeVisible({timeout:30_000});
+ await expect(viewer.getByRole('heading',{name:'Understand this sequence'})).toBeVisible({timeout:30_000});
  await viewer.getByRole('button',{name:'Show the detail',exact:true}).click();
  await viewer.getByLabel('Language',{exact:true}).selectOption('es');
  await viewer.getByLabel('Follow a player or team').selectOption('blue-08');

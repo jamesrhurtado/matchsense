@@ -1,5 +1,5 @@
 import { Frame, Metrics } from '@/lib/api';
-export default function Pitch({frame,metrics,focus,compact=false}:{frame:Frame|null;metrics?:Metrics;focus?:string|null;compact?:boolean}) {
+export default function Pitch({frame,metrics,focus,compact=false,trails=[]}:{frame:Frame|null;metrics?:Metrics;focus?:string|null;compact?:boolean;trails?:{x_m:number;y_m:number}[][]}) {
  const position=(x:number,y:number)=>({x: x+5,y:y+5});
  return <svg viewBox="0 0 115 78" role="img" aria-label={metrics?'Evidence pitch with pass path and opponents bypassed':'Synthetic football pitch with 22 fictional players'} className="block w-full">
   <defs><marker id={compact?'arrow-small':'arrow'} markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0 0 L5 2.5 L0 5" fill="#ffffff"/></marker></defs>
@@ -12,6 +12,7 @@ export default function Pitch({frame,metrics,focus,compact=false}:{frame:Frame|n
    <rect x="3.5" y="35.34" width="1.5" height="7.32"/><rect x="110" y="35.34" width="1.5" height="7.32"/>
   </g>
   {metrics&&<g><circle cx={metrics.pass_start.x_m+5} cy={metrics.pass_start.y_m+5} r={metrics.pressure_radius_m} fill="#fbbf2422" stroke="#fcd34d" strokeWidth=".25" strokeDasharray="1 1"/><path d={`M${metrics.pass_start.x_m+5} ${metrics.pass_start.y_m+5} L${metrics.pass_end.x_m+5} ${metrics.pass_end.y_m+5}`} stroke="white" strokeWidth=".6" strokeDasharray="1 1" markerEnd={`url(#${compact?'arrow-small':'arrow'})`}/></g>}
+  {trails.map((points,index)=><polyline key={index} points={points.map(point=>`${point.x_m+5},${point.y_m+5}`).join(' ')} fill="none" stroke="#a7f3d0" strokeWidth=".6" opacity=".85"><title>Observed player positions; gaps are not connected</title></polyline>)}
   {frame?.players.map(p=>{const q=position(p.x_m,p.y_m);const highlighted=metrics?.bypassed_player_ids.includes(p.player_id)||focus===p.player_id;return <g key={p.player_id}>
    {highlighted&&<circle cx={q.x} cy={q.y} r="2.1" fill="none" stroke={p.team_id==='blue'?'white':'#fde68a'} strokeWidth=".35"/>}
    <circle cx={q.x} cy={q.y} r="1.15" fill={p.team_id==='blue'?'#60a5fa':'#fbbf24'} stroke="#0c3028" strokeWidth=".22"/>

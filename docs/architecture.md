@@ -9,10 +9,12 @@ flowchart LR
   H --> D[(Durable Cosmos observations)]
   D --> C[Available evidence cutoff]
   C --> M[Deterministic eligibility and metrics]
-  M --> A[Agent Framework analyst]
-  A --> V[Reviewer with bounded evidence tools]
-  V --> E[Audience editor and validation]
-  E --> S[(Immutable package and audit)]
+  M --> A[Story Director selects claim blocks]
+  A --> E[Scoped bilingual renderer and validation]
+  E --> V[Claim Reviewer with bounded evidence tools]
+  V --> S[(Immutable package and audit)]
+  A --> T[(Durable workflow outcomes)]
+  V --> T
   S --> P[Producer approves exact revision and hash]
   P --> O[Timed shared overlay]
   P --> W[Viewer variants and recap]
@@ -29,7 +31,7 @@ flowchart LR
 - Story packages are immutable SQLite rows locally and Cosmos documents in Azure. Edits create a new package revision, run a single bounded wording review, and invalidate approval. Review requests use the revision/hash actually shown to the producer. Retries use a session-scoped operation ID and request hash.
 - Each delivered pass has a separate investigation, `story-<pass-id>` identity, revision stream and editorial decision. Evidence tools bind the selected pass as well as the cutoff. A new pass never supersedes another pass's approval. Corrections invalidate only affected stories. New SQLite tables and Cosmos story pointers preserve legacy single-story records without destructive migration.
 - The producer selects reviewed moments independently. Viewers select approved history while the shared overlay remains the latest eligible approved moment. `approved` and `status=expired` are separate: an archived approval is still inspectable/retractable, while its overlay has ended. Recaps combine all currently approved exact story revisions through the requested clock.
-- Local mode has no model calls. Cloud mode uses distinct Agent Framework role contexts: analyst, reviewer, editor and a final reviewer pass. The model can request bounded tools and alter an interpretation. Numeric/schema checks and final semantic review constrain generated audience text. Model review is fallible; a comparative advantage over one agent has not been established.
+- Local mode has no model calls. Version 2 cloud generation uses a Story Director and Claim Reviewer, with bounded evidence requests and one repair. The Director selects supported claim blocks and audience emphasis; a deterministic bilingual renderer binds their actor, values, scope and qualifications. The Reviewer sees the final rendered content and per-claim evidence. The normal path is two model calls, with a six-call/15-second ceiling. Legacy analyst/reviewer/editor packages remain readable, and explicit version 1 generation remains available. A single-agent evaluation comparator gets equivalent tools, renderer and bounded self-review/repair. Model review is fallible; comparative usefulness remains unmeasured.
 - All 100 combinations of language, detail and focus are generated before approval: 4 base variants × (general + 22 players + 2 teams). Viewers select stored variants; they never cause model work or acquire editorial permission.
 - A viewer-safe snapshot and SSE stream expose approved content only. The protected producer projection adds candidate status and package hashes. Unapproved evidence and diagnostics require the producer key.
 - SSE sends an authoritative `resync` snapshot on connection, including reconnect with a last cursor. No durable stream backlog is claimed. Subsequent state updates include full current publication state, so removal/replacement is authoritative. Compression is disabled for stream delivery and the companion reconciles with a snapshot every two seconds as a recovery path.

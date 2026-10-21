@@ -23,6 +23,12 @@ Cloud configuration is read by the deployed adapter; local mode still uses SQLit
 
 ## Implemented workflow design
 
+Version 0.4 defaults to the scoped version 2 narrative workflow: Story Director selects claim blocks, the application renders exact bilingual variants, and Claim Reviewer checks final content with per-claim verdicts. Normal execution uses two model calls; evidence continuation and one repair/re-review share a six-call, twelve-tool, 15-second ceiling. The same model deployment and managed identity are reused. Legacy packages remain readable, with explicit version 1 generation available through `WHY_NOW_NARRATIVE_VERSION=1`.
+
+Every attempt is recorded separately from its publication package. This includes abstentions, rejections, failures and incomplete usage; unknown consumption is not zero cost. Outcome timestamps distinguish scheduling/start/completion. Exact ingestion-to-display timing and comparative agent usefulness still require the planned measurements.
+
+The following describes the retained version 1 path:
+
 - Analyst: read bounded sequence/positions/metrics, return a typed proposal containing evidence references and qualifications.
 - Reviewer: use independent tools; supported / needs evidence / revise / reject; at most one additional evidence/revision cycle.
 - Editor: generate four short number-free audience introductions. The application appends authoritative measurements and geometric caveats, then validates the complete variants. A final reviewer sees the composed text. One introduction repair is allowed; models never retype the measurements.

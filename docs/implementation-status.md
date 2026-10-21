@@ -2,6 +2,8 @@
 
 ## Engineering implementation
 
+The first researched improvement slice is implemented in version 0.4: structured claims, Director/Claim Reviewer selection, complete workflow outcome storage, exact spatial facts and audience/player experience changes. See [the decision log](next-iteration/decision-log.md) for ticket-by-ticket evidence and pending gates. A completed implementation is not a completed agent comparison, user study or submission.
+
 | Handoff phase | Status | Evidence |
 |---|---|---|
 | 0: Inspect and decide | Complete | Five Obsidian notes and attached concept brief read; empty project inspected; Git initialized |

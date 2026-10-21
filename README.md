@@ -2,13 +2,17 @@
 
 **Azure engineering build:** [Open WHY/NOW](https://whynow-web.graycoast-41e399d8.eastus.azurecontainerapps.io). See [QA access and testing](docs/qa.md) and [deployed Azure resources](docs/azure/README.md).
 
+**Source:** [jamesrhurtado/why-now](https://github.com/jamesrhurtado/why-now), currently private at the owner's request. Original project source is licensed under [MIT](LICENSE).
+
 **See the play. Understand the moment.** An evidence-first story desk for a fictional football broadcast, with a producer console and a responsive viewer companion.
 
 ## Working local MVP
 
 The local application implements synthetic replay → deterministic metrics → evidence replay → constrained wording review → exact-revision producer approval → timed shared overlay → English/Spanish companion variants and approved-moment recap.
 
-Local mode uses **deterministic templates**, including the analyst/reviewer/editor stages. It does not call an AI model. The hosted environment adds Microsoft Agent Framework with Azure OpenAI, Event Hubs transport, Cosmos persistence and managed-identity access. The default local mode remains available for offline development. Actual resources are documented in [docs/azure](docs/azure/README.md).
+Local mode uses **deterministic claim selection and bilingual rendering**. It does not call an AI model. The hosted environment adds Microsoft Agent Framework with Azure OpenAI, Event Hubs transport, Cosmos persistence and managed-identity access. The default local mode remains available for offline development. Actual resources are documented in [docs/azure](docs/azure/README.md).
+
+Version 0.4 adds scoped claim blocks and a two-role Story Director / Claim Reviewer workflow. The model selects and orders verified facts; bilingual wording, names, values, actor roles and qualifications resolve through the validated renderer. Explanations include forward pass displacement and reception zone, separate from subsequent team progression. Each workflow attempt has a durable outcome, including abstention and rejection. Existing version 1 packages remain readable; new application generation defaults to version 2. [Iteration status](docs/next-iteration/decision-log.md) distinguishes completed implementation from pending model comparisons and human studies.
 
 ## Run locally
 
@@ -73,7 +77,7 @@ Runtime exports contain only observations; seeds, fault plans, clean future traj
 | `services/api` | FastAPI, producer authorization, SSE, approval and recap APIs |
 | `engine` | Contracts, time-scoped metrics, bounded template/Foundry workflows, SQLite/Cosmos repositories and Event Hubs transport |
 | `simulator` | Seeded generator and independent structural/physical checks |
-| `data/runtime` | Three runtime fixtures: metadata and JSON Lines observations |
+| `data/runtime` | 171 observation-only runtime fixtures: metadata and JSON Lines/gzip observations |
 | `data/schemas` | Versioned JSON Schemas exported from Pydantic contracts |
 | `data/evaluation-only`, `evals` | Offline labels, split configurations and results; never exposed through runtime tools |
 | `docs` | Architecture, metric definitions, demo guide, implementation status, Azure specifications |

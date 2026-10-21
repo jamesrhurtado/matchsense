@@ -6,7 +6,7 @@ The user supplied the five WHY/NOW project notes in their Obsidian vault. `02 Te
 
 ## Original assets and data
 
-All runtime match data, fictional team/player identities, SVG pitch graphics and application copy are created for this project. The seeded generator and source hashes document provenance. No real match data, external data downloads, photographs, footage, logos or fonts are required. The project source license has not been selected; do not assume a license solely because a future repository will be public.
+All runtime match data, fictional team/player identities, SVG pitch graphics and application copy are created for this project. The seeded generator and source hashes document provenance. No real match data, external data downloads, photographs, footage, logos or fonts are required. On 21 October 2026, the owner selected the MIT license for project source; see the root LICENSE file. Dependency licenses remain with their respective packages. Repository visibility is separately controlled by the owner and is private at this stage.
 
 ## Dependencies and references
 

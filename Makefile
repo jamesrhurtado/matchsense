@@ -1,5 +1,5 @@
 PYTHON ?= .venv313/bin/python
-.PHONY: dev test data data-check evaluate web-build
+.PHONY: dev test data data-check evaluate synthetic-list synthetic-data synthetic-evaluate web-build
 
 dev:
 	$(PYTHON) scripts/dev.py
@@ -15,6 +15,12 @@ data-check:
 
 evaluate:
 	$(PYTHON) -m evals.run
+
+synthetic-list:
+	$(PYTHON) -m simulator.suite --list
+
+synthetic-data:
+	$(PYTHON) -m simulator.suite
 
 web-build:
 	npm --prefix apps/web run build

@@ -28,11 +28,16 @@ class EventHubTransport:
         self.repo = repository
         self.stop = threading.Event()
         self.lock = threading.RLock()
+        self.cache_condition = threading.Condition(self.lock)
+        self.cache_refreshing = set()
         self.cache = {}
         self.cache_refreshed_at = {}
         self.cache_refresh_seconds = 2
         self.session_metadata = OrderedDict()
         self.session_cache_limit = 1024
+        self.publication_signatures = OrderedDict()
+        self.ordered_matches = OrderedDict()
+        self.match_cache_limit = 8
         self.publisher_error = None
         self.receive_error = None
         self.partition_errors = {}
@@ -60,21 +65,36 @@ class EventHubTransport:
 
     def messages(self, session, cutoff):
         sid = session['id']
-        with self.lock:
+        with self.cache_condition:
+            while sid in self.cache_refreshing:
+                self.cache_condition.wait()
             refreshed = self.cache_refreshed_at.get(sid)
-            if refreshed is None or time.monotonic() - refreshed >= self.cache_refresh_seconds:
+            refresh = refreshed is None or time.monotonic() - refreshed >= self.cache_refresh_seconds
+            self.cache.setdefault(sid, {})
+            if refresh:
+                self.cache_refreshing.add(sid)
+        if refresh:
+            try:
                 # During a rolling deployment another consumer can persist and
                 # checkpoint messages after this process first populates its cache.
                 # Reconcile durable rows periodically so those arrivals are visible
                 # even when Event Hubs never redelivers them to this process.
                 durable = self.repo.read_observations(sid)
-                current = self.cache.setdefault(sid, {})
-                for message in durable:
-                    old = current.get(message['message_id'])
-                    if old and digest(old) != digest(message):
-                        raise RepositoryConflict('observation_id_reused')
-                    current[message['message_id']] = message
-                self.cache_refreshed_at[sid] = time.monotonic()
+                with self.lock:
+                    current = self.cache[sid]
+                    # Merge into the existing dictionary: consumer arrivals may
+                    # have been persisted and cached while this network read ran.
+                    for message in durable:
+                        old = current.get(message['message_id'])
+                        if old and digest(old) != digest(message):
+                            raise RepositoryConflict('observation_id_reused')
+                        current[message['message_id']] = message
+                    self.cache_refreshed_at[sid] = time.monotonic()
+            finally:
+                with self.cache_condition:
+                    self.cache_refreshing.discard(sid)
+                    self.cache_condition.notify_all()
+        with self.lock:
             # The durable cache may include arrivals beyond the current replay clock.
             # Enforce both availability and occurrence at every boundary, also after pause/restart.
             return available(list(self.cache[sid].values()), cutoff)
@@ -155,12 +175,19 @@ class EventHubTransport:
             state.update(count=0, at=time.monotonic(), event=None)
         self._consumer_success(context)
 
-    def publish_session(self, session):
+    def publish_session(self, session, cutoff=None):
         from azure.eventhub import EventData
-        _, observations = load_match(session['match_id'])
-        ordered = sorted(observations, key=lambda m: (m['available_at_ms'], m['timeline_ms'], m['sequence_no']))
+        match_id = session['match_id']
+        ordered = self.ordered_matches.get(match_id)
+        if ordered is None:
+            _, observations = load_match(match_id)
+            ordered = sorted(observations, key=lambda m: (m['available_at_ms'], m['timeline_ms'], m['sequence_no']))
+            self.ordered_matches[match_id] = ordered
+            while len(self.ordered_matches) > self.match_cache_limit:
+                self.ordered_matches.popitem(last=False)
+        self.ordered_matches.move_to_end(match_id)
         cursor = self.repo.transport_cursor(session['id'])
-        cutoff = replay_clock(session)
+        cutoff = replay_clock(session) if cutoff is None else cutoff
         pending = [(i, message) for i, message in enumerate(ordered)
                    if i > cursor and message['available_at_ms'] <= cutoff and message['timeline_ms'] <= cutoff]
         if not pending:
@@ -189,13 +216,40 @@ class EventHubTransport:
         self.repo.save_transport_cursor(session['id'], batch_last)
         self.sent += count
 
+    def publish_cycle(self):
+        """Serve moving clocks first; unchanged idle clocks need no network reads."""
+        sessions = [(session, replay_clock(session)) for session in self.repo.list_sessions()]
+        sessions.sort(key=lambda item: not (item[0]['running'] and item[1] < item[0].get('duration_ms', 60000)))
+        failure = None
+        for session, cutoff in sessions:
+            if self.stop.is_set():
+                break
+            sid = session['id']
+            idle = not session['running'] or cutoff >= session.get('duration_ms', 60000)
+            signature = (session['generation'], session['match_id'], cutoff)
+            if idle and self.publication_signatures.get(sid) == signature:
+                self.publication_signatures.move_to_end(sid)
+                continue
+            try:
+                self.publish_session(session, cutoff=cutoff)
+            except Exception as exc:
+                # A historical failure must not starve other active sessions.
+                failure = failure or exc
+                continue
+            # A failed send or cursor write is never marked complete. Retrying
+            # from the durable cursor retains existing at-least-once delivery.
+            if idle:
+                self.publication_signatures[sid] = signature
+                self.publication_signatures.move_to_end(sid)
+                while len(self.publication_signatures) > self.session_cache_limit:
+                    self.publication_signatures.popitem(last=False)
+        if failure is not None:
+            raise failure
+
     def _publish(self):
         while not self.stop.is_set():
             try:
-                for session in self.repo.list_sessions():
-                    if self.stop.is_set():
-                        break
-                    self.publish_session(session)
+                self.publish_cycle()
                 self.publisher_error = None
             except Exception as exc:
                 self.publisher_error = type(exc).__name__ + ': ' + str(exc)

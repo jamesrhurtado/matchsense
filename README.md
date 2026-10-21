@@ -52,7 +52,7 @@ npm --prefix apps/web exec -- playwright install chromium
 npm --prefix apps/web run test:e2e
 ```
 
-The browser tests cover the actual producer/viewer flow, Spanish and focus variants, review changes, retraction, phone layout, and streamed updates through the web proxy. See [evaluation results](evals/REPORT.md) for measured local processing and the exact scope of the synthetic evaluation. CI configuration is prepared in `.github/workflows/ci.yml`; it has not been run on GitHub.
+The browser tests cover the actual producer/viewer flow, Spanish and focus variants, review changes, retraction, phone layout, and streamed updates through the web proxy. See [evaluation results](evals/REPORT.md) for measured local processing and the exact scope of the synthetic evaluation. The backend and web checks have passed on [GitHub Actions](https://github.com/jamesrhurtado/why-now/actions/runs/39615382555). CI configuration is in `.github/workflows/ci.yml`.
 
 ## Expanded synthetic data
 
@@ -86,7 +86,7 @@ Runtime exports contain only observations; seeds, fault plans, clean future traj
 
 The local and Azure implementations are available; see the QA guide for completed live checks and remaining test boundaries. Competition submission packaging remains pending. [Implementation status](docs/implementation-status.md) maps the handoff's acceptance phases to evidence and outstanding work. [Demo guide](docs/demo.md) describes what can honestly be shown now.
 
-The researched [Grand Prize improvement plan](docs/next-iteration/README.md) is the engineering handoff for the next iteration. It includes the current agent audit, prioritized tickets, evaluation and user-research protocols, release gates, and submission schedule. Proposed changes are explicitly separate from the implemented MVP.
+The researched [Grand Prize improvement plan](docs/next-iteration/README.md) is the engineering handoff for the next iteration. It includes the current agent audit, prioritized tickets, evaluation and user-research protocols, release gates, and submission schedule. The [implementation record](docs/next-iteration/decision-log.md) identifies delivered changes and the comparison, timing and human-study gates still outstanding.
 
 Local mode uses SQLite. Cloud mode uses Cosmos and Event Hubs, with one API worker/replica enforced for this engineering environment. It supports independent pass investigations across each segment, two fictional teams, 22 active players and 10 Hz observations. Runtime evidence is limited to the delivered clock. The underlying dataset is synthetic, with six authored parent configurations. Local tests do not establish real-match tactical accuracy, general semantic verification, production scale, or measured editorial savings.
 

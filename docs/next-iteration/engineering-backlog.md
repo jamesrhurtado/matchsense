@@ -1,6 +1,6 @@
 # Engineering backlog — next submission iteration
 
-All tickets are **planned**, except the baseline audit and source research already recorded in this folder. Effort is hands-on engineering hours, excluding waiting for people or cloud jobs. The core totals roughly 60–90 h plus a 10 h integration buffer. C03/N01/L02 are conditional and add 15–23 h. Engineers should update estimates after the discovery gates.
+This is the original ticket specification. Current delivery status, explicit deferrals and outstanding acceptance evidence are tracked in [the implementation record](decision-log.md); several core tickets have now been implemented. Effort is hands-on engineering hours, excluding waiting for people or cloud jobs. The core totals roughly 60–90 h plus a 10 h integration buffer. C03/N01/L02 are conditional and add 15–23 h. Engineers should update estimates after the discovery gates.
 
 ## Ticket index
 

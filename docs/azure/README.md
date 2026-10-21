@@ -5,12 +5,12 @@ Provisioned on 20 October 2026 in the selected Visual Studio Enterprise Subscrip
 | Resource | Deployed configuration | Application use |
 |---|---|---|
 | Foundry | `whynow-foundry-jh1020`, project `whynow-project`, East US | Managed-identity model invocation from API |
-| Model | `story-model`: GPT-4o mini `2024-07-18`, GlobalStandard, capacity 50 | Bounded analyst, reviewer, editor and final review |
+| Model | `story-model`: GPT-4o mini `2024-07-18`, GlobalStandard, capacity 50 | Version 2 Story Director and Claim Reviewer; bounded evidence/repair |
 | Cosmos DB | `whynow-state-jh1020`, serverless, East US 2 | `whynow` database; `session-state`, `story-state`, `observations`, all partitioned by `/session_id` |
 | Event Hubs | `whynow-events-jh1020`, Standard, 1 throughput unit | `match-observations`, 2 partitions, 1 day retention; `whynow-state` consumer group |
 | Checkpoints | `whynowcheckpointsjh1020`, Standard LRS | Private `eventhub-checkpoints` Blob container |
 | Container Apps | `whynow-env`, East US, Consumption | Public web and internal API, one replica each |
-| API | `whynow-api`, 1 CPU / 2 GiB | FastAPI v0.3.0, independently scoped Agent Framework investigations, ingestion and per-story publication |
+| API | `whynow-api`, 1 CPU / 2 GiB | FastAPI v0.4.0, independently scoped Agent Framework investigations, ingestion and per-story publication |
 | Web | `whynow-web`, 0.5 CPU / 1 GiB | Next.js production server and runtime streaming proxy |
 | Registry | `whynowregistryjh1020`, Basic | Revisioned Linux amd64 images, managed-identity pulls |
 | Monitoring | `whynow-logs` and `whynow-insights` | Workspace-linked Application Insights, 30-day retention, workspace daily ingestion quota 0.2 GB |
@@ -40,11 +40,11 @@ These resources now incur charges. Event Hubs Standard and the registry have bas
 
 Resources carry `project=why-now`, `environment=demo` and an expiry tag of `2026-11-20` where supported. The expiry tag does not delete anything automatically. Delete the dedicated resource group only after preserving required QA evidence and receiving a cleanup instruction; doing so removes the database, observations, images and telemetry for this environment.
 
-The deployed verification record is in [QA guide](../qa.md). API `cloud-v13` and web `cloud-v7` are the current image tags for the multiple-pass release. The original `cloud-v10`/`cloud-v5` checks remain as historical QA evidence.
+The deployed verification record is in [QA guide](../qa.md). API `cloud-v17` and web `cloud-v8` are the current image tags for the scoped-narrative and audience iteration. API release provenance is `c85f035`; the deployment reuses the same 14 resources. The original `cloud-v10`/`cloud-v5` checks remain as historical QA evidence.
 
 Verified image digests:
 
-- API: `sha256:a1c3a042cca345bb1c39be303c090f98857334c2298aaad3c461e637b1ddeae1`
-- Web: `sha256:79ef31a40368a37cd5f66afd18019ef3ea64d23c077e8c463790117dbf840411`
+- API: `sha256:3e5022310c199179e5032af6399774fc71842fc13ef9ab2fb800b62f898c4fa1`
+- Web: `sha256:e6b8bac39c0c5480d675435e51519842a7e81bfd1ce935767192c80fc05e74dc`
 
 Per-service specifications below retain the design rationale and now identify implemented behavior: [Foundry](foundry.md), [Cosmos](cosmos-db.md), [transport](event-hubs.md), [hosting](container-apps.md), [identity](identity.md), [observability](observability.md).

@@ -118,6 +118,50 @@ Final API QA session: `56f53290-7e3f-4fe3-9152-d023ffb8957c`. Nonsecret results 
 
 The first deployed browser inspection also exposed a broad Spanish opportunity claim and a misleading producer-edit label. The final guard rejects unsupported opportunity/chance wording in both languages, allows one repair, then uses the explicit factual fallback. The label now says “Proposed wording reviewed” without inventing who proposed it. Unit tests cover successful repair and repeated-claim fallback. Model review remains fallible; these checks do not establish complete free-text semantic verification.
 
+## Version 0.4 Grand Prize iteration verification
+
+Verified 21 October 2026, web `cloud-v8`; API `cloud-v15` for multi-moment/browser verification and `cloud-v16` for replacement-replica and initial continuous timing.
+
+| Check | Actual result |
+|---|---|
+| Backend | 272 tests passed after the transport fix |
+| Existing synthetic regression | 168 cases, 594 checkpoints and 72 moments pass with unchanged inputs/references; zero model calls |
+| Frontend | Production build/TypeScript passed; 14 local browser tests passed |
+| Hosted browser | Multi-moment producer/viewer, history selection, role focus, Spanish, recap, shared overlay and 390 px layout passed; no JavaScript errors |
+| Three actual model attempts | Two AI packages and one explicit factual fallback; six calls, 12,909 tokens, complete reported usage |
+| Server workflow durations | 7,826.233 ms; 7,005.049 ms; fallback 7,203.831 ms; excludes replay waiting and human review |
+| Persistence/publication | Version 2 validation, exact hashes after Cosmos/HTTP, independent approvals, scoped retraction and replacement-replica survival passed |
+| Guard | Fully ingested 4.96 m case produced no candidate and no model calls |
+| Repository/CI | Private MIT repository pushed; backend and web GitHub Actions passed at `5949be4` |
+
+The third model attempt rejected true spatial claims as editorially irrelevant. The factual guard correctly selected the template fallback. Prompt v2.1 separates factual support from editorial relevance; later two-stream execution produced two AI packages. These few examples do not establish an accuracy rate or superiority over the single-agent comparator.
+
+Multi-moment artifact: `.run/cloud-multi-iteration-v2.json`, session `e25db3f8-31cf-4898-87bd-a4182ee91344`. Replacement verification retained approvals and recap; the last live QA moment was retracted afterward, preserving the earlier archive. Hosted browser evidence is `.run/cloud-multiple-browser.json` and the associated screenshots. The final state therefore differs from the earlier browser test's two-approved-moment setup.
+
+### Continuous 1× timing: initial bounded measurement
+
+The script `scripts/measure_replay.py` never pauses or seeks to help candidate readiness, automatically approves nothing, retains misses and checks that unapproved content stays private. The cloud report `.run/continuous-cloud-iteration-v2.json` used two concurrent replays of one known scripted parent on `5949be4` / API `cloud-v16`.
+
+| Replay | AI calls / tokens | Scheduling observation → candidate | First API candidate clock | Display window remaining |
+|---|---|---|---|---|
+| 1 | 2 / 4,269 | 8,524.557 ms | 34,646 ms | 17,554 ms |
+| 2 | 2 / 4,273 | 6,540.965 ms | 43,447 ms | 8,753 ms |
+
+One missed the proposed 10 s review-window target. The candidate computation duration alone does not capture the delay. Active-first transport scheduling, skipping successfully flushed idle clocks, cached source ordering and releasing the transport lock during durable reads were subsequently implemented. Six regressions cover cutoff safety, concurrent arrivals, failure/retry, idle seeks and bounded caches. API-wide locking and sequential monitoring can also affect this measurement; do not attribute every delay to transport.
+
+### Post-change bounded measurement
+
+API `cloud-v17` / commit `c85f035`, same web `cloud-v8`, report `.run/continuous-cloud-iteration-v2-transport.json`:
+
+| Replay | AI calls / tokens | Scheduling observation → candidate | First API candidate clock | Display window remaining |
+|---|---|---|---|---|
+| 1 | 2 / 4,371 | 6,225.911 ms | 32,414 ms | 19,786 ms |
+| 2 | 2 / 4,266 | 6,665.221 ms | 34,710 ms | 17,490 ms |
+
+Both produced AI candidates, complete usage and no publication; unapproved viewer isolation passed. Sessions `827cd17d-09b0-4442-9e59-038d8d476a89` and `6d3b045c-bcea-4249-aa30-de243ed808f9` were paused only after observation. Both left more than 10 s in this run. The earlier below-target result remains above; two pre/post samples with model and infrastructure variation are not a controlled causal experiment or evidence of a reliable target success rate. Current API and web revisions are healthy; no resources were added.
+
+This is not the planned 20-opportunity timing study, a P95 estimate, independent real-football data, a browser-display acknowledgment, exact durable-ingestion timing or a production load certification. Human comprehension, football expert review and blinded T2/S2/M2 comparison remain pending. Four developer-visible harness cases share one generator backbone and are not sealed independent final parents.
+
 ## Known boundaries
 
-One API replica/worker is enforced. Cosmos guards publication transactions, but this does not certify arbitrary horizontal scaling. Publisher scans historical sessions; high session counts need active-session scheduling before a broad rollout. SSE uses snapshot resync rather than a durable browser-event backlog. There is no human comprehension study, fair single-agent comparison, or production load certification yet. Model review is fallible even when numeric/schema checks pass. Generated introductions can be generic; richer football insight remains an improvement area. Spanish changes the explanation and recap, while interface labels currently remain English. Graceful API restart was tested; deliberate cloud outages at every checkpoint boundary and production load certification remain untested.
+One API replica/worker is enforced. Cosmos guards publication transactions, but this does not certify arbitrary horizontal scaling. Publisher prioritizes active sessions and skips unchanged idle clocks; high session counts still require load evaluation. SSE uses snapshot resync rather than a durable browser-event backlog. There is no human comprehension study, fair single-agent comparison, or production load certification yet. Model review is fallible even when numeric/schema checks pass. The version 2 constrained grammar covers a limited set of supported facts; richer football insight remains an improvement area. Spanish changes the explanation and recap, while interface labels currently remain English. Graceful API restart was tested; deliberate cloud outages at every checkpoint boundary and production load certification remain untested.

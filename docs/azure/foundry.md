@@ -4,7 +4,7 @@
 
 ## Resources and configuration
 
-Create a Foundry resource and project suitable for the selected model API, with one compatible model deployment shared by the three roles. A small structured-output-capable model is sufficient to begin; choose its exact model/version, deployment SKU, tokens-per-minute quota and region after verifying current availability and an acceptable budget. Do not assume the deployment name equals the model name.
+Create a Foundry resource and project suitable for the selected model API, with one compatible model deployment shared by the workflow roles. A small structured-output-capable model is sufficient to begin; choose its exact model/version, deployment SKU, tokens-per-minute quota and region after verifying current availability and an acceptable budget. Do not assume the deployment name equals the model name.
 
 The intended workflow runs in the Python API container. Agent Framework supplies typed orchestration; Foundry supplies model access. A Foundry hosted-agent runtime is not required and is not assumed compatible with an arbitrary Python workflow graph.
 
@@ -43,4 +43,4 @@ Official references: [Agent Framework workflow executors](https://learn.microsof
 
 The engineering deployment uses GPT-4o mini GlobalStandard through `story-model`, API version `2024-10-21`, Agent Framework core `1.22.0` and OpenAI provider `1.17.0`. `WHY_NOW_MODEL_MODE=foundry` selects the adapter; `WHY_NOW_AZURE_ENVIRONMENT=production` selects managed identity. `AZURE_CLIENT_ID` identifies the API identity. Offline mode uses local templates; local model development can use DefaultAzureCredential.
 
-Workflow limits are 25 seconds, two simultaneous model workflows, eight model calls, twelve read-only tool requests and a conservative token budget of 32,000. The API schedules at most four outstanding jobs. These are application bounds, not a hard Azure invoice cap. Provider usage remains explicit even when validation causes fallback.
+Version 2 limits are 15 seconds, two simultaneous model workflows, six model calls, twelve read-only tool requests and a conservative token budget of 32,000. The explicitly selected legacy version 1 path retains its 25-second/eight-call limits. The API schedules at most four outstanding jobs. These are application bounds, not a hard Azure invoice cap. Provider usage remains explicit even when validation causes fallback.

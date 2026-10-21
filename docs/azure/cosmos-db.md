@@ -1,6 +1,6 @@
 # Cosmos DB for NoSQL persistence
 
-**Status: specification only.** The local adapter is SQLite and is verified with one API worker. A transactional Cosmos adapter is not implemented yet.
+**Engineering implementation:** Implemented in engine/cloud_repository.py. Cosmos serverless is provisioned in East US 2 with three session-partitioned containers. Publication uses ETag-protected transactional batches; live verification status is in ../qa.md.
 
 Propose one account and a `whynow` database. Choose serverless versus provisioned throughput from the actual region, expected request rate and budget rather than assuming free capacity. Start with a single write region for the demo unless verified requirements justify more.
 

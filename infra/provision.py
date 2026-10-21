@@ -10,7 +10,7 @@ from pathlib import Path
 GROUP='rg-whynow-demo'
 LOCATION='eastus'
 SUFFIX='jh1020'
-NAMES={'group':GROUP,'location':LOCATION,'cosmos_location':'eastus2','identity':'whynow-api-identity','registry':'whynowregistry'+SUFFIX,'cosmos':'whynow-state-'+SUFFIX,'events':'whynow-events-'+SUFFIX,'storage':'whynowcheckpoints'+SUFFIX,'foundry':'whynow-foundry-'+SUFFIX,'project':'whynow-project','model':'story-model','logs':'whynow-logs','insights':'whynow-insights','environment':'whynow-env','api':'whynow-api','web':'whynow-web'}
+NAMES={'group':GROUP,'location':LOCATION,'cosmos_location':'eastus2','identity':'whynow-api-identity','web_identity':'whynow-web-identity','registry':'whynowregistry'+SUFFIX,'cosmos':'whynow-state-'+SUFFIX,'events':'whynow-events-'+SUFFIX,'storage':'whynowcheckpoints'+SUFFIX,'foundry':'whynow-foundry-'+SUFFIX,'project':'whynow-project','model':'story-model','logs':'whynow-logs','insights':'whynow-insights','environment':'whynow-env','api':'whynow-api','web':'whynow-web'}
 
 def az(*args,quiet=False):
     result=subprocess.run(['az',*args,'-o','json'],capture_output=True,text=True)
@@ -26,6 +26,7 @@ def main():
     tags={'project':'why-now','environment':'demo','owner':'james','expiry':'2026-11-20'}
     az('group','create','--name',GROUP,'--location',LOCATION,'--tags',*[f'{k}={v}' for k,v in tags.items()])
     identity=az('identity','create','-g',GROUP,'-n',NAMES['identity'],'-l',LOCATION,'--tags',*[f'{k}={v}' for k,v in tags.items()])
+    web_identity=az('identity','create','-g',GROUP,'-n',NAMES['web_identity'],'-l',LOCATION,'--tags',*[f'{k}={v}' for k,v in tags.items()])
     def resource(provider,name,version,**kwargs):
         value=put(root+'/providers/'+provider+'/'+name,{'location':LOCATION,'tags':tags,**kwargs},version)
         print('Provisioned',provider,name,flush=True);return value
@@ -46,9 +47,11 @@ def main():
             try:outputs[name]=future.result()
             except Exception as e:
                 print('FAILED',name,str(e),flush=True);errors.append(name)
-    state=NAMES|{'subscription':subscription,'identity_id':identity['id'],'identity_client_id':identity['clientId'],'identity_principal_id':identity['principalId']}
+    state=NAMES|{'subscription':subscription,'identity_id':identity['id'],'identity_client_id':identity['clientId'],'identity_principal_id':identity['principalId'],'web_identity_id':web_identity['id'],'web_identity_principal_id':web_identity['principalId']}
     Path('.azure').mkdir(exist_ok=True)
-    Path('.azure/deployment.json').write_text(json.dumps(state,indent=2)+'\n')
+    state_path=Path('.azure/deployment.json')
+    prior=json.loads(state_path.read_text()) if state_path.exists() else {}
+    state_path.write_text(json.dumps(prior|state,indent=2)+'\n')
     print('Base provision requests completed; state in .azure/deployment.json',flush=True)
     if errors:raise SystemExit(1)
 

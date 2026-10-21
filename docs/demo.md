@@ -1,4 +1,10 @@
-# Demonstrating the current local MVP
+# Demonstrating WHY/NOW
+
+## Hosted Azure build
+
+Use the public application and private producer key described in [QA guide](qa.md). Play segment 01 at 1×, pause near 25 s for review, and wait for the actual AI package. Show the analyst/reviewer/editor decisions, source evidence and measured model usage. Demonstrate an unsupported producer edit as a producer edit, then approval, Spanish detail/player focus, recap and retraction. Label any fallback honestly. State that the data is synthetic and the replay is paused for inspection; no external television synchronization is implemented. The final submission video remains to be recorded.
+
+## Offline local build
 
 Use segment 01. Say **local template mode** when explaining the workflow. Do not describe a model, Azure execution, an AI-caused error or TV synchronization that has not run.
 

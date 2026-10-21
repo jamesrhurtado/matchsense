@@ -1,6 +1,6 @@
 # Container Apps hosting and registry
 
-**Status: specification only.** The local servers have been verified on the development host; no cloud endpoint, image build or Container Apps deployment exists.
+**Engineering implementation:** Implemented with Dockerfile.api, Dockerfile.web, runtime web proxy and infra/deploy_apps.py. API ingress is internal; web ingress is public HTTPS. Each app is bounded to one replica. Actual resources and QA status are in README.md and ../qa.md.
 
 | Resource | Proposed initial configuration |
 |---|---|

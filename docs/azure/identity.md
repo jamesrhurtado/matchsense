@@ -1,6 +1,6 @@
 # Identity, producer access and secrets
 
-**Status: specification only.** The local MVP enforces producer API authorization with a header key; it does not implement cloud identities or multi-tenant access.
+**Engineering implementation:** Implemented using separate API and web managed identities. The web identity has image-pull permission only. Producer testing uses a private Container Apps secret; production Entra user onboarding remains future work. See README.md.
 
 Use a managed identity for the API/workflow host and narrow resource roles for model invocation, Event Hubs receive, Cosmos data access, checkpoint storage and telemetry as actually needed. Grant the replay publisher sender permissions separately. Give the web app only API connectivity and image pull permissions; viewer browsers need no Azure credentials.
 

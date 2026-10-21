@@ -4,6 +4,7 @@ Run after infra/deploy_apps.py. Optional --retract checks the persisted QA sessi
 from pathlib import Path
 import json,time,uuid,sys
 import httpx
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 access=json.loads(Path('.azure/qa-access.json').read_text())
 client=httpx.Client(base_url=access['url'],timeout=90)
 headers={'X-Producer-Token':access['producer_key']}
@@ -21,9 +22,11 @@ if '--retract' in sys.argv:
     assert not request('POST',f'/api/replay-sessions/{sid}/recaps',{})['moments']
     print('PASS persisted approval after restart, retraction and recap invalidation');sys.exit()
 health=request('GET','/api/health');assert health['azure_deployed']
+print('Connected to Azure application',flush=True)
 assert client.post('/api/replay-sessions',json={}).status_code==401
 sid=request('POST','/api/replay-sessions',{},True)['session_id']
 path=f'/api/replay-sessions/{sid}'
+print('QA session',sid,flush=True)
 request('POST',path+'/control',{'action':'speed','speed':4},True)
 request('POST',path+'/control',{'action':'start'},True)
 for i in range(100):
@@ -35,10 +38,13 @@ else:raise AssertionError('Replay did not advance')
 for i in range(100):
     s=snap(sid)
     if s['story']:break
+    if i%10==0:print('Awaiting story:',s['clock_ms'],'ms,',s['delivered_count'],'observations, pending=',s.get('workflow_pending'),flush=True)
     time.sleep(1)
 else:raise AssertionError('No reviewed story produced')
 p=request('GET',path+'/stories/story-pass-1/evidence',producer=True)['story']
-assert p['mode']=='Microsoft Agent Framework + Azure OpenAI',p.get('fallback_reason',p['mode'])
+assert p['mode']=='Microsoft Agent Framework + Azure OpenAI',{'mode':p['mode'],'reason':p['review']['reason'],'last_trace':p['trace'][-1] if p['trace'] else None}
+from engine.core import digest
+assert digest({k:v for k,v in p.items() if k!='package_hash'})==p['package_hash'],'Package hash changed through persistence or HTTP'
 assert p['model_usage']['calls']>=3
 assert snap(sid,False)['story'] is None
 assert client.get(access['url']+path+'/diagnostics').status_code==401
@@ -54,7 +60,9 @@ with client.stream('GET',path+'/stream',timeout=15) as stream:
         if line.startswith('data:'):break
     assert any('event: resync' in line for line in lines)
 diag=request('GET',path+'/diagnostics',producer=True)
-assert diag['transport']['persisted_this_process']>0
+assert diag['observations_delivered']>0
+assert diag['transport']['mode']=='azure-event-hubs'
+assert diag['transport']['publisher_alive'] and diag['transport']['consumer_alive']
 assert not diag['transport']['last_error'],diag['transport']
 Path('.azure/smoke-session.json').write_text(json.dumps({'session_id':sid,'diagnostics':diag},indent=2))
 print(json.dumps({'result':'PASS','session_id':sid,'mode':p['mode'],'workflow_ms':p['workflow_ms'],'usage':p['model_usage'],'transport':diag['transport'],'verified':['authorization','Event Hubs ingestion','Cosmos persistence','actual model workflow','producer approval','Spanish player variant','recap','SSE reconnect']},indent=2))

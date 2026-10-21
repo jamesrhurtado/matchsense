@@ -1,12 +1,14 @@
 # WHY/NOW
 
+**Azure engineering build:** [Open WHY/NOW](https://whynow-web.graycoast-41e399d8.eastus.azurecontainerapps.io). See [QA access and testing](docs/qa.md) and [deployed Azure resources](docs/azure/README.md).
+
 **See the play. Understand the moment.** An evidence-first story desk for a fictional football broadcast, with a producer console and a responsive viewer companion.
 
 ## Working local MVP
 
 The local application implements synthetic replay → deterministic metrics → evidence replay → constrained wording review → exact-revision producer approval → timed shared overlay → English/Spanish companion variants and approved-moment recap.
 
-Local mode uses **deterministic templates**, including the analyst/reviewer/editor stages. It does not call an AI model. Microsoft Foundry/Agent Framework execution, Event Hubs, Cosmos DB and Azure deployment are the next integration phase. Azure resource requirements are documented in [docs/azure](docs/azure/README.md); **no Azure resources have been created**.
+Local mode uses **deterministic templates**, including the analyst/reviewer/editor stages. It does not call an AI model. The hosted environment adds Microsoft Agent Framework with Azure OpenAI, Event Hubs transport, Cosmos persistence and managed-identity access. The default local mode remains available for offline development. Actual resources are documented in [docs/azure](docs/azure/README.md).
 
 ## Run locally
 
@@ -53,7 +55,7 @@ The browser tests cover the actual producer/viewer flow, Spanish and focus varia
 |---|---|
 | `apps/web` | Next.js producer, companion and shared overlay routes |
 | `services/api` | FastAPI, producer authorization, SSE, approval and recap APIs |
-| `engine` | Contracts, time-scoped metrics, bounded local workflow and SQLite repository |
+| `engine` | Contracts, time-scoped metrics, bounded template/Foundry workflows, SQLite/Cosmos repositories and Event Hubs transport |
 | `simulator` | Seeded generator and independent structural/physical checks |
 | `data/runtime` | Three runtime fixtures: metadata and JSON Lines observations |
 | `data/schemas` | Versioned JSON Schemas exported from Pydantic contracts |
@@ -62,8 +64,8 @@ The browser tests cover the actual producer/viewer flow, Spanish and focus varia
 
 ## Delivery status and limits
 
-The local MVP is usable and tested. The complete Azure/model-backed submission remains pending. [Implementation status](docs/implementation-status.md) maps the handoff's acceptance phases to evidence and outstanding work. [Demo guide](docs/demo.md) describes what can honestly be shown now.
+The local and Azure implementations are available; see the QA guide for completed live checks and remaining test boundaries. Competition submission packaging remains pending. [Implementation status](docs/implementation-status.md) maps the handoff's acceptance phases to evidence and outstanding work. [Demo guide](docs/demo.md) describes what can honestly be shown now.
 
-This is a single-host prototype with SQLite and one API worker. It supports one pass candidate per segment, two fictional teams, 22 active players and 10 Hz observations. Runtime evidence is limited to the delivered clock, but the underlying dataset is synthetic and deliberately small. Local tests do not establish real-match tactical accuracy, general semantic verification, production scale, or measured editorial savings.
+Local mode uses SQLite. Cloud mode uses Cosmos and Event Hubs, with one API worker/replica enforced for this engineering environment. It supports one pass candidate per segment, two fictional teams, 22 active players and 10 Hz observations. Runtime evidence is limited to the delivered clock, but the underlying dataset is synthetic and deliberately small. Local tests do not establish real-match tactical accuracy, general semantic verification, production scale, or measured editorial savings.
 
-No real match records, footage, team logos, viewer accounts, third-party TV synchronization, cloud deployments or paid inference are included. The current local API has no Internet-facing rate limiting or multi-tenant authorization. The public repository, judging URL and submission video have not been published.
+No real match records, footage, team logos, viewer accounts or third-party TV synchronization are included. Cloud producer access uses a private key and request limits; enterprise multi-tenant authorization is future work. The repository and submission video have not been published.

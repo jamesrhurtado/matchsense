@@ -1,6 +1,6 @@
 # Implementation status
 
-## Verified local MVP
+## Engineering implementation
 
 | Handoff phase | Status | Evidence |
 |---|---|---|
@@ -8,26 +8,26 @@
 | 1: Data foundation | Complete for local MVP | Versioned Pydantic/JSON contracts, three seeded 60 s fixtures, 22-player coverage, independent physical/temporal validation |
 | 2: Deterministic visual slice | Complete | Three metrics, time controls, negative-case abstention, live SVG pitch, independent historical evidence replay |
 | 3: Publication path | Complete for local MVP | Protected controls, immutable packages, exact revision/hash approvals, edit/review, suppression/retraction, expiry, SSE companion, 100 prevalidated variants, recap, SQLite restart safety |
-| 4: Foundry and Agent Framework | Pending | Local role workflow is deterministic and explicitly labeled; model access and framework host must be integrated and tested after resources exist |
-| 5: Evaluation and hardening | Partial | Automated backend/browser gates and 24 synthetic-segment evaluation; fair single-agent/model comparison, human comprehension tests and cloud failure tests remain pending |
-| 6: Azure and submission | Pending by request | Markdown resource specifications prepared; no resources, public repository, public judging endpoint or video created |
+| 4: Foundry and Agent Framework | Implemented | Actual Agent Framework analyst/reviewer/editor calls, typed decisions, bounded evidence requests, composed factual variants, usage/spans and explicit fallback; public API/browser tests and restart durability passed; evidence is in docs/qa.md |
+| 5: Evaluation and hardening | Partial | Backend/browser gates, cloud persistence/transport tests and 24 synthetic-segment evaluation; fair model comparison, human comprehension and production load tests remain pending |
+| 6: Azure and submission | Azure deployed; submission packaging pending | Dedicated resources and public engineering endpoint provisioned; private producer access configured. Public repository and final video remain pending |
 
 ## Implemented contract choices
 
 The endpoint names follow the technical handoff, with these MVP choices:
 
-- Story edits accept a proposed sentence. The constrained local reviewer restores the validated template if it cannot verify that exact wording. The result displays the producer's proposed wording and the actual review outcome. This is a real producer-edit branch, not an injected model error.
-- Viewers receive authoritative snapshot/SSE state. Durable stream history, distributed checkpoint recovery and stored recap jobs are deferred. Fresh recap generation is bounded and deterministic; no asynchronous model job or polling endpoint is needed in this mode.
+- Story edits accept proposed wording. Local mode restores the canonical template for unverified changes; cloud mode uses a separate reviewer context that can accept, revise, request evidence or reject. The producer retains publication control.
+- Viewers receive authoritative snapshot/SSE state. Browser event history and stored recap jobs are deferred. Cloud ingestion has Blob checkpoints and durable Cosmos observations. Fresh recap generation is bounded and deterministic; no asynchronous model job or polling endpoint is needed in this mode.
 - Only a currently approved story is viewer-visible; an expired approved moment remains in the companion/archive and recap, while the shared overlay disappears. Retraction and edits remove the current approval.
-- One API worker and SQLite are required locally. Thread locking and transactions protect the single-host path; this does not establish distributed production readiness.
-- A simple producer key provides real API authorization for the prototype. Internet hosting needs a private key, request limits and cloud identity controls before judging access is offered.
+- One API worker is required. Local state uses SQLite; cloud state uses session-partitioned Cosmos transactions and ETags. One cloud replica is enforced and broad distributed production readiness is not claimed.
+- The hosted prototype uses a private producer key, bounded requests and separate managed identities. Viewer requests have no Azure credentials. Enterprise producer user onboarding remains future work.
 
 ## Work still required for the full submission
 
-1. Create the documented Azure resources later, after region/model/cost decisions.
-2. Implement the chosen Microsoft Agent Framework workflow host with Foundry structured responses and independent tools. Add deadline, malformed-output and provider-failure tests against the actual adapter. Preserve the local template fallback and producer gate.
-3. Implement Event Hubs and Cosmos adapters with checkpointing, transactional revision checks and shared-worker concurrency. Connect real tracing and measured model usage.
-4. Run fair template/single-agent/workflow comparisons on fresh held-out configurations, and verify failure/recovery behavior in Azure.
-5. Publish the repository and judging build when authorized, record an honest sub-two-minute demo, and check the actual current contest rules before submission.
+1. Complete independent engineering QA using the public environment and document findings.
+2. Run fair template/single-agent/workflow comparisons on fresh held-out scenario families. The existing evaluation is a narrow deterministic synthetic test.
+3. Conduct user comprehension/editorial timing tests and production load/recovery exercises appropriate to an actual broadcaster.
+4. Expand football scenarios and substantive player personalization before claiming full-match applicability.
+5. Publish the repository and record the final sub-two-minute submission demo when requested.
 
-The local MVP is not the completed Azure submission. The current build can be demonstrated without credentials or paid resources.
+The hosted build is an engineering MVP. This does not certify production deployment, comprehensive AI factual accuracy, a winning judging score, or a completed competition submission. See [QA record](qa.md) for actually completed deployed checks.

@@ -1,6 +1,6 @@
 # Local evaluation results
 
-Measured median processing: 1.972 ms; maximum: 3.842 ms. Scope: metric calculation plus local template workflow, one warm process, excludes replay/network/human time.
+Measured median processing: 3.361 ms; maximum: 5.926 ms. Scope: metric calculation plus local template workflow, one warm process, excludes replay/network/human time.
 
 | Split | Parent configurations | Segments | TP / FP / FN | Precision | Recall | Alert coverage |
 |---|---:|---:|---|---:|---:|---:|

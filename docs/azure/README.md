@@ -1,20 +1,45 @@
-# Azure resource specifications — planned only
+# Azure engineering environment
 
-No resources were created. These notes describe the target architecture in the technical handoff so that provisioning can happen later. Resource names are suggestions, not existing identifiers. Subscription, tenant, region, model deployment, quota and budget remain to be chosen/verified.
+Provisioned on 20 October 2026 in the selected Visual Studio Enterprise Subscription. Resource group: `rg-whynow-demo`. Public application: https://whynow-web.graycoast-41e399d8.eastus.azurecontainerapps.io . Live QA results and remaining gates are recorded in [QA guide](../qa.md).
 
-| Required resource | Suggested name | Purpose | Detail |
-|---|---|---|---|
-| Resource group | `rg-whynow-demo` | Own and clean up the demo resources together | All resources tagged `project=why-now`, `environment=demo`, `owner`, `expiry` |
-| Foundry resource/project and model deployment | `whynow-foundry`, `whynow-project`, `story-model` | Structured model access for the bounded analyst/reviewer/editor workflow | [Foundry](foundry.md) |
-| Event Hubs namespace/hub and checkpoint storage | `whynow-events`, `match-observations` | Match-partitioned observation transport | [Event Hubs](event-hubs.md) |
-| Cosmos DB for NoSQL account/database/containers | `whynow-state`, `whynow` | Shared story state, exact revisions, approvals, audit and session snapshots | [Cosmos DB](cosmos-db.md) |
-| Container Apps environment and two apps | `whynow-env`, `whynow-api`, `whynow-web` | One workflow/API host and the Next.js surfaces | [Hosting](container-apps.md) |
-| Registry | `whynowregistry<unique>` | Store application images; alternatively use an existing authorized registry | [Hosting](container-apps.md) |
-| Application Insights + Log Analytics | `whynow-insights`, `whynow-logs` | Correlated traces, failures, latency and usage | [Observability](observability.md) |
-| Managed identities + Key Vault if secrets remain | `whynow-api-identity`, `whynow-vault` | Server credentials and narrow resource permissions | [Identity](identity.md) |
+| Resource | Deployed configuration | Application use |
+|---|---|---|
+| Foundry | `whynow-foundry-jh1020`, project `whynow-project`, East US | Managed-identity model invocation from API |
+| Model | `story-model`: GPT-4o mini `2024-07-18`, GlobalStandard, capacity 50 | Bounded analyst, reviewer, editor and final review |
+| Cosmos DB | `whynow-state-jh1020`, serverless, East US 2 | `whynow` database; `session-state`, `story-state`, `observations`, all partitioned by `/session_id` |
+| Event Hubs | `whynow-events-jh1020`, Standard, 1 throughput unit | `match-observations`, 2 partitions, 1 day retention; `whynow-state` consumer group |
+| Checkpoints | `whynowcheckpointsjh1020`, Standard LRS | Private `eventhub-checkpoints` Blob container |
+| Container Apps | `whynow-env`, East US, Consumption | Public web and internal API, one replica each |
+| API | `whynow-api`, 1 CPU / 2 GiB | FastAPI, Agent Framework, ingestion and publication |
+| Web | `whynow-web`, 0.5 CPU / 1 GiB | Next.js production server and runtime streaming proxy |
+| Registry | `whynowregistryjh1020`, Basic | Revisioned Linux amd64 images, managed-identity pulls |
+| Monitoring | `whynow-logs` and `whynow-insights` | Workspace-linked Application Insights, 30-day retention, workspace daily ingestion quota 0.2 GB |
+| Identities | `whynow-api-identity`, `whynow-web-identity` | API data/model roles; web identity only image pull |
 
-Use one region where the chosen model and required services are available. Verify capacity in the actual subscription before selecting it; this repository does not assert that any model/SKU/region is available. Budget estimates require actual region/SKU choices, expected tokens and demo uptime. There is no price quote or cost measurement for Azure in the local evaluation.
+East US rejected Cosmos account creation because of regional capacity. The failed empty account was removed and recreated in East US 2. Other resources remain in East US; account for that cross-region hop when assessing latency.
 
-Provisioning order: group and identities → Foundry/model → Cosmos and Event Hubs/checkpoints → registry/observability → apps/configuration/RBAC → verification. Run end-to-end approval/retraction/reconnect and failure tests in the resulting environment before recording Azure claims.
+Service authentication uses managed identities. Cosmos, Foundry and Event Hubs local-key authentication are disabled; Storage shared-key access is disabled. The prototype producer uses a private access key held as a Container Apps secret. The local access handoff is `.azure/qa-access.json`, owner-readable, Git-ignored and excluded from image uploads. No service key or producer credential is in the browser bundle or documentation.
 
-Do not add Fabric, vector search, APIM/MCP, Service Bus, Speech or AKS for this MVP. The current prototype needs cloud adapters before it can use the proposed resources. Resource creation alone does not complete the integration.
+The environment is for engineering tests: one API worker/replica, bounded model concurrency, request limits, public read-only viewer URLs, and private producer mutations. Horizontal scaling and production identity onboarding are not certified. No AI Search, AKS, Fabric, APIM or hosted-agent service was provisioned.
+
+## Reproduce and update
+
+Use the current authenticated Azure CLI. Scripts read the selected subscription, so verify it before provisioning. Defaults are in `infra/provision.py`; edit them for a separate environment. The scripts provision resources directly with Azure Resource Manager/CLI, rather than introducing a second hosted-agent deployment lifecycle.
+
+1. `python3 infra/provision.py`
+2. `python3 infra/configure.py`
+3. Build images using `az acr build --registry whynowregistryjh1020 --image whynow-api:<new-tag> --file Dockerfile.api --platform linux/amd64 .` and the corresponding `Dockerfile.web` / `whynow-web:<new-tag>`.
+4. `WHY_NOW_IMAGE_TAG=<api-tag> WHY_NOW_WEB_IMAGE_TAG=<web-tag> python3 infra/deploy_apps.py`
+5. `.venv313/bin/python scripts/cloud_smoke.py`
+
+Use new image/revision tags for every change. Check Container Apps revision health and the public `/api/ready` response after a rollout. `/healthz` tests the web process independently; API readiness checks persistence and transport errors. The web proxies `/api` to the internal API URL at runtime, including SSE.
+
+## Costs and cleanup
+
+These resources now incur charges. Event Hubs Standard and the registry have baseline charges; containers, Cosmos, logs, Storage and model calls add usage. The earlier $75–150/month figure was a planning allowance, not a measured bill or spending cap. Check actual Cost Management costs grouped by `rg-whynow-demo` after billing catches up.
+
+Resources carry `project=why-now`, `environment=demo` and an expiry tag of `2026-11-20` where supported. The expiry tag does not delete anything automatically. Delete the dedicated resource group only after preserving required QA evidence and receiving a cleanup instruction; doing so removes the database, observations, images and telemetry for this environment.
+
+The deployed verification record is in [QA guide](../qa.md). API `cloud-v10` and web `cloud-v5` are the verified image tags.
+
+Per-service specifications below retain the design rationale and now identify implemented behavior: [Foundry](foundry.md), [Cosmos](cosmos-db.md), [transport](event-hubs.md), [hosting](container-apps.md), [identity](identity.md), [observability](observability.md).

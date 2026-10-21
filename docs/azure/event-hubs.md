@@ -1,6 +1,6 @@
 # Event Hubs and replay checkpoint storage
 
-**Status: specification only.** Local runtime observations are released from JSON Lines files by the replay clock. No namespace, hub, consumer or Azure checkpoint store exists for this project.
+**Engineering implementation:** Implemented in engine/transport.py. Event Hubs Standard, two partitions, consumer group and Blob checkpoints are provisioned. Observations persist in batches before checkpointing, with immutable-ID deduplication and cutoff enforcement. Live verification status is in ../qa.md.
 
 | Item | Proposed configuration |
 |---|---|

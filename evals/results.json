@@ -3,8 +3,8 @@
   "metric_version": "pressure-escape-v1",
   "scenario_matching_tolerance_ms": 100,
   "latency_scope": "metric calculation plus local template workflow, one warm process, excludes replay/network/human time",
-  "median_processing_ms": 1.972,
-  "max_processing_ms": 3.842,
+  "median_processing_ms": 3.361,
+  "max_processing_ms": 5.926,
   "model_calls": 0,
   "model_cost_usd": 0,
   "summary": {

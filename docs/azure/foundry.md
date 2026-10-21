@@ -1,6 +1,6 @@
 # Microsoft Foundry and model deployment
 
-**Status: specification only.** The application currently uses local deterministic templates; no model endpoint, credentials, SDK call or hosted workflow has been verified.
+**Engineering implementation:** Implemented in engine/foundry_workflow.py. Dedicated Foundry/model resources are provisioned; real model calls have been exercised. See README.md and ../qa.md for deployment and live verification status.
 
 ## Resources and configuration
 
@@ -12,22 +12,29 @@ Required server configuration after selecting the API:
 
 | Setting | Meaning |
 |---|---|
-| `WHY_NOW_MODEL_MODE` (future) | Explicit `template` / `foundry`; no silent cloud claim |
-| `FOUNDRY_PROJECT_ENDPOINT` (future) | Endpoint from the selected project/API |
-| `FOUNDRY_MODEL_DEPLOYMENT` (future) | Actual deployment name |
+| `WHY_NOW_MODEL_MODE` | Explicit `template` / `foundry`; no silent cloud claim |
+| `AZURE_OPENAI_ENDPOINT` | Actual account model endpoint used by the Agent Framework client |
+| `FOUNDRY_PROJECT_ENDPOINT` | Project context endpoint; model calls use the account deployment endpoint |
+| `FOUNDRY_MODEL_DEPLOYMENT` | Actual deployment name |
 | Managed identity client ID | When selecting a user-assigned identity |
 | API version, if required by the chosen client | Pin only after the selected SDK/API is tested |
 
-These future configuration names are a design contract; the local API does not read them yet. Use managed identity and the minimum required project/model invocation permissions. Keep credentials server-side. Do not ship a model key to the web app.
+Cloud configuration is read by the deployed adapter; local mode still uses SQLite and templates. Use managed identity and the minimum required project/model invocation permissions. Keep credentials server-side. Do not ship a model key to the web app.
 
-## Workflow to implement after provisioning
+## Implemented workflow design
 
 - Analyst: read bounded sequence/positions/metrics, return a typed proposal containing evidence references and qualifications.
 - Reviewer: use independent tools; supported / needs evidence / revise / reject; at most one additional evidence/revision cycle.
-- Editor: transform reviewed facts into typed variants. Validate numbers, entities, units, claim references and required qualifications; one repair maximum.
+- Editor: generate four short number-free audience introductions. The application appends authoritative measurements and geometric caveats, then validates the complete variants. A final reviewer sees the composed text. One introduction repair is allowed; models never retype the measurements.
 - Total deadline, tool-call budget, token budget and concurrency semaphore are explicit. A timeout/malformed response/tool failure gives a labeled supported template fallback or abstention, never automatic publication.
 - Approval remains an exact package/evidence revision/hash with producer identity. Models cannot approve or publish.
 
 Test provider failure, prompt injection through external text, malformed structured output, timeouts and reviewer-driven changes. Measure actual usage/latency. Run a fair single-agent comparison with the same tools, model and disclosed budget before making collaboration-quality claims.
 
 Official references: [Agent Framework workflow executors](https://learn.microsoft.com/en-us/agent-framework/concepts/workflows/advanced/agent-executor), [official Python workflow sample](https://github.com/microsoft/agent-framework/blob/main/python/samples/03-workflows/agents/custom_agent_executors.py), [Microsoft Foundry documentation](https://learn.microsoft.com/en-us/azure/ai-foundry/). SDK imports/package versions and endpoint semantics must be confirmed when this integration is implemented; no untested dependency is presented as complete.
+
+## Verified implementation configuration
+
+The engineering deployment uses GPT-4o mini GlobalStandard through `story-model`, API version `2024-10-21`, Agent Framework core `1.22.0` and OpenAI provider `1.17.0`. `WHY_NOW_MODEL_MODE=foundry` selects the adapter; `WHY_NOW_AZURE_ENVIRONMENT=production` selects managed identity. `AZURE_CLIENT_ID` identifies the API identity. Offline mode uses local templates; local model development can use DefaultAzureCredential.
+
+Workflow limits are 25 seconds, two simultaneous model workflows, eight model calls, twelve read-only tool requests and a conservative token budget of 32,000. The API schedules at most four outstanding jobs. These are application bounds, not a hard Azure invoice cap. Provider usage remains explicit even when validation causes fallback.

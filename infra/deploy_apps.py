@@ -4,7 +4,7 @@ The local QA access file is owner-readable and ignored by Git and Docker.
 from provision import az,put
 from configure import S,RG,resource,wait_ready
 from pathlib import Path
-import json,secrets,os
+import json,secrets,os,time
 
 def deploy():
     env=wait_ready(resource('Microsoft.App/managedEnvironments',S['environment']),'2024-03-01')
@@ -37,6 +37,14 @@ def deploy():
         body={'location':S['location'],'tags':{'project':'why-now','environment':'demo','expiry':'2026-11-20'},'identity':{'type':'UserAssigned','userAssignedIdentities':{app_identity:{}}},'properties':{'managedEnvironmentId':env['id'],'workloadProfileName':'Consumption','configuration':configuration,'template':{'revisionSuffix':os.getenv('WHY_NOW_WEB_IMAGE_TAG',tag) if external else tag,'containers':[{'name':name,'image':registry+'/'+image+':'+(os.getenv('WHY_NOW_WEB_IMAGE_TAG',tag) if external else tag),'env':variables,'resources':{'cpu':.5 if external else 1,'memory':'1Gi' if external else '2Gi'},'probes':[{'type':'Liveness','httpGet':{'path':'/healthz' if external else '/api/health','port':port},'initialDelaySeconds':30,'periodSeconds':30,'timeoutSeconds':5},{'type':'Readiness','httpGet':{'path':'/healthz' if external else '/api/ready','port':port},'initialDelaySeconds':15,'periodSeconds':15,'timeoutSeconds':5,'failureThreshold':10}]}],'scale':{'minReplicas':1,'maxReplicas':1}}}}
         put(resource('Microsoft.App/containerApps',name),body,'2024-03-01')
         print('Deployment requested:',name,flush=True)
+        revision=name+'--'+(os.getenv('WHY_NOW_WEB_IMAGE_TAG',tag) if external else tag)
+        for attempt in range(100):
+            status=az('rest','--method','get','--url','https://management.azure.com'+resource('Microsoft.App/containerApps',name)+'?api-version=2024-03-01')
+            if status['properties'].get('latestReadyRevisionName')==revision:
+                print('Healthy revision:',revision,flush=True)
+                break
+            time.sleep(3)
+        else:raise RuntimeError('Revision did not become healthy: '+revision)
     app(S['api'],'whynow-api',8000,False,api_env,token)
     app(S['web'],'whynow-web',3000,True,{'API_URL':api_url})
     url='https://'+S['web']+'.'+domain

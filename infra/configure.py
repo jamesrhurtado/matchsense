@@ -47,7 +47,8 @@ def hosting():
     keys=az('rest','--method','post','--url','https://management.azure.com'+logs+'/sharedKeys?api-version=2023-09-01')
     put(resource('Microsoft.Insights/components',S['insights']),{'location':S['location'],'kind':'web','properties':{'Application_Type':'web','WorkspaceResourceId':logs,'RetentionInDays':30,'IngestionMode':'LogAnalytics'}},'2020-02-02')
     put(resource('Microsoft.App/managedEnvironments',S['environment']),{'location':S['location'],'tags':{'project':'why-now','environment':'demo','expiry':'2026-11-20'},'properties':{'appLogsConfiguration':{'destination':'log-analytics','logAnalyticsConfiguration':{'customerId':d['properties']['customerId'],'sharedKey':keys['primarySharedKey']}},'workloadProfiles':[{'name':'Consumption','workloadProfileType':'Consumption'}]}},'2024-03-01')
-    az('role','assignment','create','--assignee-object-id',S['identity_principal_id'],'--assignee-principal-type','ServicePrincipal','--role','AcrPull','--scope',resource('Microsoft.ContainerRegistry/registries',S['registry']))
+    for principal in {S['identity_principal_id'],S.get('web_identity_principal_id',S['identity_principal_id'])}:
+        az('role','assignment','create','--assignee-object-id',principal,'--assignee-principal-type','ServicePrincipal','--role','AcrPull','--scope',resource('Microsoft.ContainerRegistry/registries',S['registry']))
     print('Hosting environment requested; observability and image roles ready',flush=True)
 
 if __name__=='__main__':

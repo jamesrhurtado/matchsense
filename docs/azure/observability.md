@@ -1,6 +1,6 @@
 # Application Insights and Log Analytics
 
-**Status: specification only.** The local trace panel reports measured deterministic stage timings and SQLite audit events. No Application Insights workspace, Azure trace link, model token usage or cloud cost has been verified.
+**Engineering implementation:** Application Insights and Log Analytics are provisioned. API instrumentation exports OpenTelemetry with workflow context; packages persist role traces and measured model tokens in Cosmos. See ../qa.md for actual ingestion verification and remaining monitoring gates.
 
 Create one Application Insights component and Log Analytics workspace, linked to the Container Apps environment as appropriate. Add OpenTelemetry instrumentation using the current supported Azure/Foundry SDK integration after choosing actual model/workflow clients.
 

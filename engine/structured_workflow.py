@@ -15,7 +15,7 @@ from engine.foundry_workflow import (
 )
 from engine.narrative import build_structured_package
 
-PROMPT_VERSION = 'director-critic-v2'
+PROMPT_VERSION = 'director-critic-v2.1'
 
 
 class DirectorDecision(Output):
@@ -79,7 +79,12 @@ Self-check subject, polarity, scope and audience usefulness before proposing.'''
 
 CRITIC = ''' Act as Claim Reviewer. Inspect the exact final audience content and
 claim bindings against independently computed facts. Review actor, polarity,
-windows, units, qualifications and whether the selected emphasis is useful. Give
+windows, units and qualifications. Each per-claim verdict means FACTUAL SUPPORT
+ONLY. A true reception, location or pass displacement does not need tactical
+importance to be supported. Lack of tactical significance or causal insight is
+NEVER a reason to label an observed fact unsupported. Assess narrative usefulness
+separately through action=revise and the overall reason, keeping true fact verdicts
+supported. This product deliberately avoids tactical intent and line-break claims. Give
 one verdict for EACH supplied claim ID (all eight); supported requires complete
 coverage with no unsupported/insufficient verdicts. Request missing evidence only
 when useful. Reject if no defensible story exists. Revise names a specific plan

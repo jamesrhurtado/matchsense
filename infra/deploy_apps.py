@@ -4,15 +4,15 @@ The local QA access file is owner-readable and ignored by Git and Docker.
 from provision import az,put
 from configure import S,RG,resource,wait_ready
 from pathlib import Path
-import json,secrets,os,time
+import argparse,json,secrets,os,time
 
-def deploy():
+def deploy(only_web=False):
     env=wait_ready(resource('Microsoft.App/managedEnvironments',S['environment']),'2024-03-01')
     insights=az('rest','--method','get','--url','https://management.azure.com'+resource('Microsoft.Insights/components',S['insights'])+'?api-version=2020-02-02')
     access_path=Path('.azure/qa-access.json')
     existing=json.loads(access_path.read_text()) if access_path.exists() else {}
     token=existing.get('producer_key') or secrets.token_urlsafe(36)
-    access_path.write_text(json.dumps({'producer_key':token},indent=2)+'\n');os.chmod(access_path,0o600)
+    access_path.write_text(json.dumps({**existing,'producer_key':token},indent=2)+'\n');os.chmod(access_path,0o600)
     tag=os.getenv('WHY_NOW_IMAGE_TAG','cloud-v1')
     registry=S['registry']+'.azurecr.io'
     api_env={
@@ -41,13 +41,18 @@ def deploy():
         print('Deployment requested:',name,flush=True)
         revision=name+'--'+(os.getenv('WHY_NOW_WEB_IMAGE_TAG',tag) if external else tag)
         for attempt in range(100):
-            status=az('rest','--method','get','--url','https://management.azure.com'+resource('Microsoft.App/containerApps',name)+'?api-version=2024-03-01')
+            try:
+                status=az('containerapp','show','--resource-group',RG,'--name',name)
+            except RuntimeError as exc:
+                if not any(code in str(exc) for code in ['Service Unavailable','502','503','504','429','Too Many Requests']):raise
+                print('Temporary Azure control-plane error; retrying readiness check:',name,flush=True)
+                time.sleep(min(3+attempt,15));continue
             if status['properties'].get('latestReadyRevisionName')==revision:
                 print('Healthy revision:',revision,flush=True)
                 break
             time.sleep(3)
         else:raise RuntimeError('Revision did not become healthy: '+revision)
-    app(S['api'],'whynow-api',8000,False,api_env,token)
+    if not only_web:app(S['api'],'whynow-api',8000,False,api_env,token)
     app(S['web'],'whynow-web',3000,True,{'API_URL':api_url})
     url='https://'+S['web']+'.'+domain
     access_path.write_text(json.dumps({'url':url,'producer_key':token},indent=2)+'\n');os.chmod(access_path,0o600)
@@ -56,4 +61,7 @@ def deploy():
     print('Web URL:',url,flush=True)
     print('Producer key stored privately in .azure/qa-access.json',flush=True)
 
-if __name__=='__main__':deploy()
+if __name__=='__main__':
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--only-web',action='store_true',help='Resume a rollout after the API is already verified healthy.')
+    deploy(only_web=parser.parse_args().only_web)

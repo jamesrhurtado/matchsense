@@ -48,7 +48,7 @@ def workflow(tools,**kwargs):
             (measured or {}).get('evidence_revision','unavailable'),kwargs.get('revision',1),tools.cutoff_ms,runtime_mode())
     outcome={**outcome,'evidence_observed_at':outcome['scheduled_at'],
              'implementation':{'schema_version':'2.0.0' if STRUCTURED else '1.0.0',
-                               'prompt_version':'director-critic-v2' if STRUCTURED else 'legacy-v1',
+                               'prompt_version':'director-critic-v2.1' if STRUCTURED else 'legacy-v1',
                                'renderer_version':'claim-blocks-v2' if STRUCTURED else 'canonical-v1',
                                'metric_version':'pressure-escape-v1',
                                'model_deployment':os.getenv('FOUNDRY_MODEL_DEPLOYMENT') if FOUNDRY else None,

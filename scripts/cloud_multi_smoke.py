@@ -149,7 +149,7 @@ def main():
     record={'session_id':sid,'boundary_session_id':quiet,'catalogue_count':len(catalogue),
             'actual_ai_packages':actual,'template_fallback_packages':len(packages)-actual,'duration_ms':180000,
             'moments':[{'id':p['id'],'revision':p['revision'],'mode':p['mode'],'workflow_ms':p['workflow_ms'],'usage':p['model_usage'],
-                        'fallback_reason':next((t.get('reason') for t in p['trace'] if t['action']=='template_fallback'),None)} for p in packages],
+                        'fallback_reason':next((t.get('reason') or t.get('status') for t in p['trace'] if t['action']=='template_fallback'),None)} for p in packages],
             'verified':['catalogue','forward seek','Event Hubs ingestion','Cosmos scoped revisions','three bounded model workflows with per-moment modes recorded',
                         'independent approvals','Spanish actual receiver','archived story selection','multi-moment recap',
                         'isolated retraction','original expiry','deployed distance boundary'],

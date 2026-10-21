@@ -20,11 +20,14 @@ from engine.core import available, digest, load_match, metric, pass_metrics, vis
 from engine.catalog import list_matches, duration_for_match
 from engine.repository import Repository
 from engine.workflow import EvidenceTools, run_workflow
+from engine.narrative import build_structured_package
+from engine.outcomes import create_outcome, start_outcome, finish_outcome
 
 ROOT=Path(__file__).resolve().parents[2]
 from engine.cloud_repository import CosmosRepository, RepositoryConflict
 CLOUD=os.getenv('WHY_NOW_ENVIRONMENT')=='azure'
 FOUNDRY=os.getenv('WHY_NOW_MODEL_MODE','template')=='foundry'
+STRUCTURED=os.getenv('WHY_NOW_NARRATIVE_VERSION','2')=='2'
 repo=CosmosRepository() if os.getenv('WHY_NOW_COSMOS_ENDPOINT') else Repository(os.getenv('WHY_NOW_DB',str(ROOT/'why_now.db')))
 transport=None
 if os.getenv('WHY_NOW_EVENTHUB_NAMESPACE'):
@@ -37,12 +40,38 @@ logger.setLevel(logging.INFO)
 
 def workflow(tools,**kwargs):
     session_id=kwargs.pop('session_id','local')
-    if FOUNDRY:
-        from engine.foundry_workflow import run_foundry_workflow
-        from opentelemetry import trace
-        with trace.get_tracer('whynow').start_as_current_span('story.workflow',attributes={'source.cutoff_ms':tools.cutoff_ms,'workflow.revision':kwargs.get('revision',1),'replay.session_id':session_id,'match.id':tools.metadata['match_id']}):
-            return run_foundry_workflow(tools,**kwargs)
-    return run_workflow(tools,**kwargs)
+    store=kwargs.pop('outcome_repository',repo)
+    outcome=kwargs.pop('outcome',None)
+    measured=tools.compute_pass_metrics()
+    if outcome is None:
+        outcome=create_outcome(store,session_id,f'story-{tools.pass_id or (measured or {}).get("pass_id","unknown")}',
+            (measured or {}).get('evidence_revision','unavailable'),kwargs.get('revision',1),tools.cutoff_ms,runtime_mode())
+    outcome=start_outcome(store,outcome)
+    last={}
+    def observe(event):
+        nonlocal outcome,last
+        last=event
+        if event['state']=='started':
+            outcome={**outcome,'model_usage':event['usage'],'trace':event['trace']}
+            store.save_workflow_outcome(session_id,outcome)
+    try:
+        if FOUNDRY:
+            from engine.foundry_workflow import run_foundry_workflow
+            from engine.structured_workflow import run_structured_workflow
+            from opentelemetry import trace
+            with trace.get_tracer('whynow').start_as_current_span('story.workflow',attributes={'source.cutoff_ms':tools.cutoff_ms,'workflow.revision':kwargs.get('revision',1),'replay.session_id':session_id,'match.id':tools.metadata['match_id']}):
+                runner=run_structured_workflow if STRUCTURED else run_foundry_workflow
+                package=runner(tools,outcome_callback=observe,**kwargs)
+        else:
+            package=(build_structured_package if STRUCTURED else run_workflow)(tools,**kwargs)
+        state=last.get('state') or ('produced' if package else 'abstained')
+        zero={'calls':0,'input_tokens':0,'output_tokens':0,'total_tokens':0,'usage_complete':True}
+        finish_outcome(store,outcome,state,package=package,usage=last.get('usage') or (zero if not FOUNDRY else None),
+                       trace=last.get('trace'),reason=last.get('reason'))
+        return package
+    except Exception:
+        finish_outcome(store,outcome,'failed',usage=last.get('usage'),trace=last.get('trace'),reason='workflow_or_persistence_failure')
+        raise
 
 def inputs(session,at):
     meta,messages=load_match(session['match_id'])
@@ -54,13 +83,14 @@ def runtime_mode():return 'Microsoft Agent Framework + Azure OpenAI' if FOUNDRY 
 async def lifespan(app):
     if CLOUD and (not os.getenv('WHY_NOW_PRODUCER_TOKEN') or TOKEN=='local-demo-producer' or len(TOKEN)<24):
         raise RuntimeError('Cloud deployment requires a private producer key of at least 24 characters')
+    repo.interrupt_workflow_outcomes()
     if transport:transport.start()
     yield
     if transport:transport.close()
 
 TOKEN=os.getenv('WHY_NOW_PRODUCER_TOKEN','local-demo-producer')
 LOCK=threading.RLock()
-app=FastAPI(title='WHY/NOW',version='0.3.0',lifespan=lifespan)
+app=FastAPI(title='WHY/NOW',version='0.4.0',lifespan=lifespan)
 if os.getenv('APPLICATIONINSIGHTS_CONNECTION_STRING'):
     from azure.monitor.opentelemetry import configure_azure_monitor
     from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
@@ -126,7 +156,7 @@ def materialize_all(s,at):
         revision=old['revision']+1 if old else 1
         tools=EvidenceTools(meta,messages,at,pass_id=m['pass_id'])
         if not FOUNDRY:
-            package=workflow(tools,revision=revision)
+            package=workflow(tools,revision=revision,session_id=s['id'])
             if package:
                 repo.store_package(s['id'],package,at,expected_revision=revision-1)
                 packages.append(package)
@@ -137,7 +167,8 @@ def materialize_all(s,at):
             # Never spend model calls on a new, already-expired live candidate.
             if at>=m['retention_confirmed_at_ms']+30000:continue
             if sum(not f.done() for f in JOBS.values())>=4:continue
-            future=WORKERS.submit(workflow,tools,revision=revision,session_id=s['id'])
+            outcome=create_outcome(repo,s['id'],story_id,m['evidence_revision'],revision,at,runtime_mode())
+            future=WORKERS.submit(workflow,tools,revision=revision,session_id=s['id'],outcome=outcome,outcome_repository=repo)
             JOBS[key]=future
             continue
         if not future.done():continue
@@ -182,7 +213,7 @@ def publication(s,package,at):
 
 def safe_story(package,status):
     if not package:return None
-    return {k:package[k] for k in ['id','revision','title','evidence_revision','eligible_from_ms','expires_at_ms']}|{'status':status}
+    return {k:package[k] for k in ['id','revision','title','evidence_revision','eligible_from_ms','expires_at_ms']}|{'status':status}|{k:package['metrics'][k] for k in ['passer_id','receiver_id','team_id']}
 
 def snapshot_data(sid,is_producer=False,story_id=None):
     with LOCK:
@@ -224,7 +255,7 @@ def authorized_package(sid,story_id,token=None):
     return s,at,p,status
 
 @app.get('/api/health')
-def health():return {'ok':True,'mode':runtime_mode(),'azure_deployed':CLOUD,'version':'0.3.0'}
+def health():return {'ok':True,'mode':runtime_mode(),'azure_deployed':CLOUD,'version':'0.4.0','narrative_version':'2' if STRUCTURED else '1'}
 
 @app.get('/api/ready')
 def ready():
@@ -347,7 +378,9 @@ def diagnostics(sid:str,x_producer_token:str|None=Header(None),story_id:str|None
     with LOCK:
         s=get_session(sid);at=clock(s);p=materialize(s,at,story_id);meta,messages=inputs(s,at)
         usage=p.get('model_usage',{}) if p else {}
-        return {'session_id':sid,'clock_ms':at,'mode':p['mode'] if p else runtime_mode(),'observations_delivered':len(available(messages,at)),'ingestion_lag_ms':max(0,at-max((m['available_at_ms'] for m in available(messages,at)),default=0)),'metric_version':'pressure-escape-v1','workflow_ms':p['workflow_ms'] if p else None,'trace':p['trace'] if p else [],'audit':repo.audit(sid),'azure_deployed':CLOUD,'model_calls':p.get('model_calls',usage.get('calls',0)) if p else 0,'model_tokens':p.get('model_tokens',usage.get('total_tokens',0)) if p else 0,'model_usage':usage,'transport':transport.diagnostics() if transport else {'mode':'local'},'workflow_pending':any(k[0]==sid and not f.done() for k,f in JOBS.items())}
+        outcomes=repo.workflow_outcomes(sid)
+        if story_id:outcomes=[o for o in outcomes if o['story_id']==story_id]
+        return {'session_id':sid,'clock_ms':at,'mode':p['mode'] if p else runtime_mode(),'observations_delivered':len(available(messages,at)),'ingestion_lag_ms':max(0,at-max((m['available_at_ms'] for m in available(messages,at)),default=0)),'metric_version':'pressure-escape-v1','workflow_ms':p['workflow_ms'] if p else None,'trace':p['trace'] if p else [],'audit':repo.audit(sid),'azure_deployed':CLOUD,'model_calls':p.get('model_calls',usage.get('calls',0)) if p else 0,'model_tokens':p.get('model_tokens',usage.get('total_tokens',0)) if p else 0,'model_usage':usage,'workflow_outcomes':outcomes,'transport':transport.diagnostics() if transport else {'mode':'local'},'workflow_pending':any(k[0]==sid and not f.done() for k,f in JOBS.items())}
 
 _RATE=defaultdict(deque)
 _RATE_LOCK=threading.Lock()

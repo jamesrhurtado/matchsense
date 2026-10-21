@@ -1,0 +1,629 @@
+{
+  "$defs": {
+    "AudienceClause": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "claim_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Claim Ids",
+          "type": "array"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "claim_ids",
+        "text"
+      ],
+      "title": "AudienceClause",
+      "type": "object"
+    },
+    "AudienceVariant": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "language": {
+          "enum": [
+            "en",
+            "es"
+          ],
+          "title": "Language",
+          "type": "string"
+        },
+        "detail": {
+          "enum": [
+            "simple",
+            "detail"
+          ],
+          "title": "Detail",
+          "type": "string"
+        },
+        "focus": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Focus"
+        },
+        "text": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "claim_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Claim Ids",
+          "type": "array"
+        },
+        "factual_check_status": {
+          "const": "valid",
+          "title": "Factual Check Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "language",
+        "detail",
+        "focus",
+        "text",
+        "claim_ids",
+        "factual_check_status"
+      ],
+      "title": "AudienceVariant",
+      "type": "object"
+    },
+    "Claim": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "enum": [
+            "c-pressure",
+            "c-bypass",
+            "c-retain",
+            "c-progress"
+          ],
+          "title": "Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "derived",
+          "title": "Type",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        },
+        "unit": {
+          "enum": [
+            "players",
+            "s",
+            "m"
+          ],
+          "title": "Unit",
+          "type": "string"
+        },
+        "evidence_revision": {
+          "title": "Evidence Revision",
+          "type": "string"
+        },
+        "source_message_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Message Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "value",
+        "unit",
+        "evidence_revision",
+        "source_message_ids"
+      ],
+      "title": "Claim",
+      "type": "object"
+    },
+    "EvidenceClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^c-[a-z-]+$",
+          "title": "Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "scoped_fact",
+          "title": "Type",
+          "type": "string"
+        },
+        "predicate": {
+          "enum": [
+            "nearby_opponents",
+            "longitudinal_bypass",
+            "team_retained",
+            "team_progression",
+            "forward_pass_displacement",
+            "reception_zone",
+            "pass_reception",
+            "pass_release"
+          ],
+          "title": "Predicate",
+          "type": "string"
+        },
+        "subject_id": {
+          "title": "Subject Id",
+          "type": "string"
+        },
+        "subject_name": {
+          "title": "Subject Name",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "title": "Value"
+        },
+        "unit": {
+          "enum": [
+            "players",
+            "s",
+            "m",
+            "zone",
+            "player"
+          ],
+          "title": "Unit",
+          "type": "string"
+        },
+        "evidence_revision": {
+          "title": "Evidence Revision",
+          "type": "string"
+        },
+        "source_message_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Message Ids",
+          "type": "array"
+        },
+        "window_start_ms": {
+          "minimum": 0,
+          "title": "Window Start Ms",
+          "type": "integer"
+        },
+        "window_end_ms": {
+          "minimum": 0,
+          "title": "Window End Ms",
+          "type": "integer"
+        },
+        "input_cutoff_ms": {
+          "minimum": 0,
+          "title": "Input Cutoff Ms",
+          "type": "integer"
+        },
+        "coverage": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Coverage",
+          "type": "number"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "predicate",
+        "subject_id",
+        "subject_name",
+        "value",
+        "unit",
+        "evidence_revision",
+        "source_message_ids",
+        "window_start_ms",
+        "window_end_ms",
+        "input_cutoff_ms",
+        "coverage",
+        "qualification"
+      ],
+      "title": "EvidenceClaim",
+      "type": "object"
+    },
+    "ModelUsage": {
+      "additionalProperties": false,
+      "properties": {
+        "calls": {
+          "minimum": 0,
+          "title": "Calls",
+          "type": "integer"
+        },
+        "input_tokens": {
+          "minimum": 0,
+          "title": "Input Tokens",
+          "type": "integer"
+        },
+        "output_tokens": {
+          "minimum": 0,
+          "title": "Output Tokens",
+          "type": "integer"
+        },
+        "total_tokens": {
+          "minimum": 0,
+          "title": "Total Tokens",
+          "type": "integer"
+        },
+        "usage_complete": {
+          "title": "Usage Complete",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "calls",
+        "input_tokens",
+        "output_tokens",
+        "total_tokens",
+        "usage_complete"
+      ],
+      "title": "ModelUsage",
+      "type": "object"
+    },
+    "NarrativePlan": {
+      "additionalProperties": false,
+      "properties": {
+        "angle": {
+          "enum": [
+            "progression",
+            "reception",
+            "proximity"
+          ],
+          "title": "Angle",
+          "type": "string"
+        },
+        "simple_claim_ids": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 3,
+          "minItems": 2,
+          "title": "Simple Claim Ids",
+          "type": "array"
+        },
+        "detail_claim_ids": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 8,
+          "minItems": 4,
+          "title": "Detail Claim Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "angle",
+        "simple_claim_ids",
+        "detail_claim_ids"
+      ],
+      "title": "NarrativePlan",
+      "type": "object"
+    },
+    "ReviewDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "supported",
+            "revised"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "mode": {
+          "enum": [
+            "deterministic_template",
+            "foundry",
+            "template_fallback"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        },
+        "proposed_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Proposed Text"
+        },
+        "revised_text": {
+          "title": "Revised Text",
+          "type": "string"
+        },
+        "cycles": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Cycles",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "status",
+        "mode",
+        "reason",
+        "proposed_text",
+        "revised_text",
+        "cycles"
+      ],
+      "title": "ReviewDecision",
+      "type": "object"
+    },
+    "StructuredVariant": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "language": {
+          "enum": [
+            "en",
+            "es"
+          ],
+          "title": "Language",
+          "type": "string"
+        },
+        "detail": {
+          "enum": [
+            "simple",
+            "detail"
+          ],
+          "title": "Detail",
+          "type": "string"
+        },
+        "focus": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Focus"
+        },
+        "text": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "claim_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Claim Ids",
+          "type": "array"
+        },
+        "factual_check_status": {
+          "const": "valid",
+          "title": "Factual Check Status",
+          "type": "string"
+        },
+        "clauses": {
+          "items": {
+            "$ref": "#/$defs/AudienceClause"
+          },
+          "minItems": 1,
+          "title": "Clauses",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "language",
+        "detail",
+        "focus",
+        "text",
+        "claim_ids",
+        "factual_check_status",
+        "clauses"
+      ],
+      "title": "StructuredVariant",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "enum": [
+        "1.0.0",
+        "2.0.0"
+      ],
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "revision": {
+      "minimum": 1,
+      "title": "Revision",
+      "type": "integer"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    },
+    "claims": {
+      "items": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/Claim"
+          },
+          {
+            "$ref": "#/$defs/EvidenceClaim"
+          }
+        ]
+      },
+      "minItems": 1,
+      "title": "Claims",
+      "type": "array"
+    },
+    "metrics": {
+      "additionalProperties": true,
+      "title": "Metrics",
+      "type": "object"
+    },
+    "variants": {
+      "items": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/StructuredVariant"
+          },
+          {
+            "$ref": "#/$defs/AudienceVariant"
+          }
+        ]
+      },
+      "title": "Variants",
+      "type": "array"
+    },
+    "review": {
+      "$ref": "#/$defs/ReviewDecision"
+    },
+    "evidence_revision": {
+      "title": "Evidence Revision",
+      "type": "string"
+    },
+    "eligible_from_ms": {
+      "minimum": 0,
+      "title": "Eligible From Ms",
+      "type": "integer"
+    },
+    "expires_at_ms": {
+      "minimum": 0,
+      "title": "Expires At Ms",
+      "type": "integer"
+    },
+    "trace": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Trace",
+      "type": "array"
+    },
+    "workflow_ms": {
+      "minimum": 0,
+      "title": "Workflow Ms",
+      "type": "number"
+    },
+    "mode": {
+      "enum": [
+        "local deterministic template",
+        "Microsoft Agent Framework + Azure OpenAI",
+        "template fallback"
+      ],
+      "title": "Mode",
+      "type": "string"
+    },
+    "model_usage": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ModelUsage"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "narrative_plan": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/NarrativePlan"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "renderer_version": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Renderer Version"
+    },
+    "package_hash": {
+      "title": "Package Hash",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "revision",
+    "title",
+    "claims",
+    "metrics",
+    "variants",
+    "review",
+    "evidence_revision",
+    "eligible_from_ms",
+    "expires_at_ms",
+    "trace",
+    "workflow_ms",
+    "mode",
+    "package_hash"
+  ],
+  "title": "PublicationPackage",
+  "type": "object"
+}

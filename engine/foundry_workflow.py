@@ -380,7 +380,7 @@ def expand_and_validate(edit, metrics, metadata):
     return validate_variants(variants, metrics, metadata)
 
 
-async def _run(tools, revision, proposed_text, baseline, provider, limits):
+async def _run(tools, revision, proposed_text, baseline, provider, limits, outcome_callback=None):
     owned = provider is None
     runner = Runner(tools, provider, limits)
     try:
@@ -409,23 +409,28 @@ async def _run(tools, revision, proposed_text, baseline, provider, limits):
                 await asyncio.wait_for(provider.close(), timeout=2)
             except Exception:
                 pass
-    if package is None:
-        return None
     model_entries = [t for t in runner.trace if t['action'] == 'model_decision']
-    package.update(trace=runner.trace, workflow_ms=runner.elapsed(), model_usage={
+    usage={
         'calls': runner.calls,
         'input_tokens': sum(t.get('input_tokens', 0) for t in model_entries),
         'output_tokens': sum(t.get('output_tokens', 0) for t in model_entries),
         'total_tokens': sum(t.get('total_tokens', 0) for t in model_entries),
         'usage_complete': all(t.get('usage_reported', False) for t in model_entries),
-    })
+    }
+    if outcome_callback:
+        state='abstained' if package is None else 'fallback' if package['mode']=='template fallback' else 'produced'
+        if package is None and any(t.get('status')=='rejected' for t in runner.trace):state='rejected'
+        outcome_callback({'state':state,'usage':usage,'trace':runner.trace,'reason':None})
+    if package is None:
+        return None
+    package.update(trace=runner.trace, workflow_ms=runner.elapsed(), model_usage=usage)
     package.pop('package_hash', None)
     package['package_hash'] = digest(package)
     PublicationPackage.model_validate(package)
     return package
 
 
-def run_foundry_workflow(tools, revision=1, proposed_text=None, *, provider=None, limits=None):
+def run_foundry_workflow(tools, revision=1, proposed_text=None, *, provider=None, limits=None, outcome_callback=None):
     """Synchronous API entry point; call from a FastAPI sync worker/background task.
 
     Inject a provider in tests. No model is contacted before deterministic source
@@ -446,6 +451,6 @@ def run_foundry_workflow(tools, revision=1, proposed_text=None, *, provider=None
         PublicationPackage.model_validate(baseline)
         return baseline
     try:
-        return asyncio.run(_run(tools, revision, proposed_text, baseline, provider, limits or Limits()))
+        return asyncio.run(_run(tools, revision, proposed_text, baseline, provider, limits or Limits(), outcome_callback))
     finally:
         _GATE.release()

@@ -156,14 +156,44 @@ class ModelUsage(Strict):
     output_tokens:int=Field(ge=0)
     total_tokens:int=Field(ge=0)
     usage_complete:bool
+
+class EvidenceClaim(Strict):
+    id:str=Field(pattern=r'^c-[a-z-]+$')
+    type:Literal['scoped_fact']
+    predicate:Literal['nearby_opponents','longitudinal_bypass','team_retained','team_progression','forward_pass_displacement','reception_zone','pass_reception','pass_release']
+    subject_id:str
+    subject_name:str
+    value:float|str
+    unit:Literal['players','s','m','zone','player']
+    evidence_revision:str
+    source_message_ids:list[str]=Field(min_length=1)
+    window_start_ms:NonNegative
+    window_end_ms:NonNegative
+    input_cutoff_ms:NonNegative
+    coverage:float=Field(ge=0,le=1)
+    qualification:str
+
+class NarrativePlan(Strict):
+    angle:Literal['progression','reception','proximity']
+    simple_claim_ids:list[str]=Field(min_length=2,max_length=3)
+    detail_claim_ids:list[str]=Field(min_length=4,max_length=8)
+
+class AudienceClause(Strict):
+    id:str
+    claim_ids:list[str]
+    text:str
+
+class StructuredVariant(AudienceVariant):
+    clauses:list[AudienceClause]=Field(min_length=1)
+
 class PublicationPackage(Strict):
-    schema_version:Literal['1.0.0']
+    schema_version:Literal['1.0.0','2.0.0']
     id:str
     revision:int=Field(ge=1)
     title:str
-    claims:list[Claim]=Field(min_length=1)
+    claims:list[Claim|EvidenceClaim]=Field(min_length=1)
     metrics:dict
-    variants:list[AudienceVariant]
+    variants:list[StructuredVariant|AudienceVariant]
     review:ReviewDecision
     evidence_revision:str
     eligible_from_ms:NonNegative
@@ -172,6 +202,8 @@ class PublicationPackage(Strict):
     workflow_ms:float=Field(ge=0)
     mode:Literal['local deterministic template','Microsoft Agent Framework + Azure OpenAI','template fallback']
     model_usage:ModelUsage|None=None
+    narrative_plan:NarrativePlan|None=None
+    renderer_version:str|None=None
     package_hash:str
     @model_validator(mode='after')
     def consistent_references(self):
@@ -180,4 +212,10 @@ class PublicationPackage(Strict):
         if any(c.evidence_revision!=self.evidence_revision for c in self.claims):raise ValueError('claim_revision_mismatch')
         if len({v.id for v in self.variants})!=len(self.variants):raise ValueError('duplicate_variant')
         if any(not set(v.claim_ids).issubset(claim_ids) for v in self.variants):raise ValueError('unknown_claim_reference')
+        if self.schema_version=='2.0.0':
+            if not self.narrative_plan or self.renderer_version!='claim-blocks-v2':raise ValueError('missing_narrative_plan')
+            if not all(isinstance(c,EvidenceClaim) for c in self.claims):raise ValueError('unscoped_claim')
+            if not all(isinstance(v,StructuredVariant) for v in self.variants):raise ValueError('unbound_variant')
+            from engine.narrative import validate_realization
+            validate_realization(self.model_dump())
         return self

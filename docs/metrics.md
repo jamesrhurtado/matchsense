@@ -16,4 +16,10 @@ Every evidence object includes source message IDs, evidence content hash, metric
 
 Player reception and team retention are separate claims. A recorded receiver may pass onward during the confirmation interval. Focused explanations therefore credit the player with receiving the pass and the team with retaining possession; they do not imply continuous individual control. Nearby-opponent counts establish proximity only, and longitudinal bypass establishes geometry only.
 
+## Version 2 narrative facts
+
+The detector's eligibility and thresholds remain `pressure-escape-v1`. New narratives add `forward-zone-v1`: signed x displacement of the successfully received pass, and its normalized reception third. Forward pass displacement is separate from post-reception team progression. Pitch thirds are `[0,L/3)`, `[L/3,2L/3)`, `[2L/3,L]` in attacking coordinates; on a 105 m pitch, exactly 35 m is middle and exactly 70 m is attacking. Leftward attacks are mirrored before classification. Invalid endpoints, missing outcomes and unsuccessful passes cannot support these facts.
+
+Examples: a rightward pass from 35 m to 54 m moves 19 m forward and is received in the middle third; the mirrored pass from 70 m to 51 m has the same meaning. A 69.999 m reception is middle, while 70 m is attacking. Neither observation proves chance creation, pass difficulty, a tactical line break or a formal final-third entry. These definitions have engineering tests; external football review remains pending.
+
 No probability of importance, confidence percentage, player intent, causal tactical story, real-match accuracy or sustained match-control claim is derived. The MVP investigates each delivered pass independently and retains separate story identities and approvals. The shared overlay uses the newest live approved moment; professional editorial ranking and cooldown across a complete match remain future work.

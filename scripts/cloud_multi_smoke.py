@@ -28,11 +28,12 @@ def main():
     parser.add_argument('--restart-check',action='store_true')
     parser.add_argument('--session-id',help='Resume an interrupted QA replay without regenerating existing model output.')
     parser.add_argument('--require-all-ai',action='store_true',help='Additionally fail if any moment used the explicit factual fallback.')
+    parser.add_argument('--artifact',default='.run/cloud-multi-smoke.json',help='Nonsecret result file; use a separate path for each release.')
     args=parser.parse_args()
     access=json.loads((ROOT/'.azure/qa-access.json').read_text())
     client=httpx.Client(base_url=access['url'],timeout=90)
     headers={'X-Producer-Token':access['producer_key']}
-    artifact=ROOT/'.run/cloud-multi-smoke.json'
+    artifact=ROOT/args.artifact
     def request(method,path,body=None,producer=False):
         response=client.request(method,path,json=body,headers=headers if producer else {})
         response.raise_for_status()
@@ -58,7 +59,7 @@ def main():
         print('PASS durable independent approvals after restart; selected retraction leaves earlier archive intact')
         return
     health=request('GET','/api/health')
-    assert health['azure_deployed'] and health['version']=='0.3.0'
+    assert health['azure_deployed'] and health['version'] in {'0.3.0','0.4.0'}
     assert request('GET','/api/ready')['ok']
     catalogue=request('GET','/api/matches')['matches']
     assert len(catalogue)==171
@@ -91,11 +92,17 @@ def main():
         assert package['mode'] in ('Microsoft Agent Framework + Azure OpenAI','template fallback')
         assert package['model_usage']['calls']>=1 and package['model_usage']['usage_complete']
         if package['mode']=='Microsoft Agent Framework + Azure OpenAI':
-            assert package['model_usage']['calls']>=3
+            assert package['model_usage']['calls']>=(2 if package['schema_version']=='2.0.0' else 3)
             assert not any(t['action']=='template_fallback' for t in package['trace'])
         else:
             assert any(t['action']=='template_fallback' for t in package['trace'])
         assert digest({k:v for k,v in package.items() if k!='package_hash'})==package['package_hash']
+        if package['schema_version']=='2.0.0':
+            from engine.contracts import PublicationPackage
+            PublicationPackage.model_validate(package)
+            assert all('clauses' in v for v in package['variants'])
+            outcomes=request('GET',f'/api/replay-sessions/{sid}/diagnostics?story_id={wanted}',producer=True)['workflow_outcomes']
+            assert any(o['state'] in {'produced','fallback'} and o['model_usage']['calls']==package['model_usage']['calls'] for o in outcomes)
         assert package['metrics']['input_cutoff_ms']<=cutoff
         assert all(not(set(package['metrics']['source_message_ids'])&set(old['metrics']['source_message_ids'])) for old in packages)
         if not previously_approved:decide(sid,package,'approve')

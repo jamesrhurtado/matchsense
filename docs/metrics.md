@@ -43,3 +43,11 @@ Corrections, late insertion, corrected exclusions and boundary/tie changes are r
 `distinct-approved-v1` filters exact authorized approved revisions and verified focus **before** selection. Signature: ordered predicate, actor/team ID, comparison relation where present, and measurement bucket. Metres use `floor(value / 10)` (9.9 → 0; 10 → 1; −0.1 → −1); seconds/player counts remain exact and zones categorical. Exact actor IDs distinguish identical names.
 
 Keep the earliest representative per equivalent signature and its complete member IDs/revisions/times, then retain the newest three distinct signatures in chronology. Similarity never creates a trend claim. Approved counts, distinct counts, selection reason and an input-revision projection hash remain inspectable. Retractions recompute the projection. Expired approved entries are archival and do not revive the live overlay. All approved history stays accessible.
+
+## Editorial emphasis policy v4 — 22 October 2026
+
+`distance-emphasis-v1` does not change eligibility or the exact latest-three comparison. It recommends a historical lead only when the current raw forward distance exceeds the largest comparator by at least 3 m and at least 20% of that comparator's absolute distance. If the comparator magnitude is below 1 m, only the absolute gap is applied. This is a provisional product rule for avoiding trivial headlines, not a validated football significance threshold. Football/producer review may justify a versioned change.
+
+A raw 18.084 m pass versus a largest prior 18.0 m pass is a true comparison but defaults to current-play emphasis. A raw 18.084 m versus a largest prior 10 m pass meets both provisional conditions. Producers/agents can still select any supported historical contrast; if rounded values tie at one decimal, the sentence and chart disclose that the strict comparison uses original values. Full raw values remain in expandable source evidence.
+
+New v4 titles explicitly name the previous three passes. A comparison sentence already states the current distance, so detail rendering omits the redundant forward-distance clause. Focused reception/location share one sentence bound to both facts; later possession remains a team claim. Stored v3 text is immutable and retains its original rendering.

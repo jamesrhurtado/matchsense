@@ -78,3 +78,9 @@ Evidence: [metric contracts](../metrics.md), [runtime measurements](../runtime-p
 ### Ordered source handoff
 
 The contextual update was organized into local commits `9afd879` (backend/context/publication accounting), `56ff86e` (paired replay/evaluation evidence), and `c2778b0` (audience/producer UI and browser checks). A source-fingerprint audit confirmed all 41 files recorded in the candidate evaluation manifest match the committed implementation. The [PM update handoff](pm-update-handoff.md) records this delivery and the still-open plan gates. These commits have not been pushed or deployed as part of this handoff.
+
+## 22 October 2026 — version 0.5 quality iteration
+
+Delivered v4 concise rendering, provisional significance-aware emphasis, explicit comparison titles, signed comparison visualization, coherent viewer/evidence labels, earlier-moment return navigation and atomic package/acceptance accounting with recovery. Existing approved v1/v2/v3 packages remain unchanged. A real discovery failure omitted a mandatory claim; both agent strategies now receive identical bounded validator-repair feedback.
+
+Actual comparison: 60 outcomes, 15 correlated cases, 69 calls, complete usage; all broad angles matched, no reviewer repairs, one S3 factual fallback. Together with smoke and post-fix checks, estimated model usage is $0.0491799. No multi-agent advantage, human benefit or new score is asserted. See [quality handoff](quality-v4-handoff.md), [comparison evidence](../../evals/agentic/discovery-v4/README.md), and [reviewer guide](reviewer-guide-v4.md). James can arrange reviewers/testers; sessions remain pending.

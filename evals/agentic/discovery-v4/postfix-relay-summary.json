@@ -1,0 +1,274 @@
+{
+  "D3": {
+    "scheduled_outcomes": 1,
+    "unique_cases": 1,
+    "lineage_groups": {
+      "suite-v2-trajectory-backbone": 1
+    },
+    "outcomes": {
+      "ai_composed": 1
+    },
+    "packages": 1,
+    "expected_opportunities": 1,
+    "missing_expected_opportunities": 0,
+    "false_rejection_candidates": 0,
+    "repair_requests": 0,
+    "repair_returned_packages": 0,
+    "confirmed_correct_repairs": null,
+    "confirmed_false_rejections": null,
+    "human_graded_outcomes": 0,
+    "usage_complete": true,
+    "known_usage_subtotals": {
+      "model_calls": 1,
+      "input_tokens": 2048,
+      "output_tokens": 91
+    },
+    "observed_elapsed_ms": {
+      "count": 1,
+      "median": 3254.44,
+      "min": 3254.44,
+      "max": 3254.44
+    },
+    "checks": {
+      "expected_opportunity_delivered": {
+        "passed": 1,
+        "failed": 0,
+        "not_applicable": 0
+      },
+      "ineligible_opportunity_withheld": {
+        "passed": 0,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "input_cutoff_respected": {
+        "passed": 1,
+        "failed": 0,
+        "not_applicable": 0
+      },
+      "reference_comparator_identity": {
+        "passed": 0,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "reference_context_relation": {
+        "passed": 0,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "reference_context_status": {
+        "passed": 0,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "runtime_contract_valid": {
+        "passed": 1,
+        "failed": 0,
+        "not_applicable": 0
+      }
+    }
+  },
+  "M3": {
+    "scheduled_outcomes": 1,
+    "unique_cases": 1,
+    "lineage_groups": {
+      "suite-v2-trajectory-backbone": 1
+    },
+    "outcomes": {
+      "ai_composed": 1
+    },
+    "packages": 1,
+    "expected_opportunities": 1,
+    "missing_expected_opportunities": 0,
+    "false_rejection_candidates": 0,
+    "repair_requests": 0,
+    "repair_returned_packages": 0,
+    "confirmed_correct_repairs": null,
+    "confirmed_false_rejections": null,
+    "human_graded_outcomes": 0,
+    "usage_complete": true,
+    "known_usage_subtotals": {
+      "model_calls": 2,
+      "input_tokens": 4883,
+      "output_tokens": 363
+    },
+    "observed_elapsed_ms": {
+      "count": 1,
+      "median": 9859.615,
+      "min": 9859.615,
+      "max": 9859.615
+    },
+    "checks": {
+      "expected_opportunity_delivered": {
+        "passed": 1,
+        "failed": 0,
+        "not_applicable": 0
+      },
+      "ineligible_opportunity_withheld": {
+        "passed": 0,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "input_cutoff_respected": {
+        "passed": 1,
+        "failed": 0,
+        "not_applicable": 0
+      },
+      "reference_comparator_identity": {
+        "passed": 0,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "reference_context_relation": {
+        "passed": 0,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "reference_context_status": {
+        "passed": 0,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "runtime_contract_valid": {
+        "passed": 1,
+        "failed": 0,
+        "not_applicable": 0
+      }
+    }
+  },
+  "S3": {
+    "scheduled_outcomes": 1,
+    "unique_cases": 1,
+    "lineage_groups": {
+      "suite-v2-trajectory-backbone": 1
+    },
+    "outcomes": {
+      "ai_composed": 1
+    },
+    "packages": 1,
+    "expected_opportunities": 1,
+    "missing_expected_opportunities": 0,
+    "false_rejection_candidates": 0,
+    "repair_requests": 0,
+    "repair_returned_packages": 0,
+    "confirmed_correct_repairs": null,
+    "confirmed_false_rejections": null,
+    "human_graded_outcomes": 0,
+    "usage_complete": true,
+    "known_usage_subtotals": {
+      "model_calls": 2,
+      "input_tokens": 5044,
+      "output_tokens": 356
+    },
+    "observed_elapsed_ms": {
+      "count": 1,
+      "median": 8749.263,
+      "min": 8749.263,
+      "max": 8749.263
+    },
+    "checks": {
+      "expected_opportunity_delivered": {
+        "passed": 1,
+        "failed": 0,
+        "not_applicable": 0
+      },
+      "ineligible_opportunity_withheld": {
+        "passed": 0,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "input_cutoff_respected": {
+        "passed": 1,
+        "failed": 0,
+        "not_applicable": 0
+      },
+      "reference_comparator_identity": {
+        "passed": 0,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "reference_context_relation": {
+        "passed": 0,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "reference_context_status": {
+        "passed": 0,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "runtime_contract_valid": {
+        "passed": 1,
+        "failed": 0,
+        "not_applicable": 0
+      }
+    }
+  },
+  "T3": {
+    "scheduled_outcomes": 1,
+    "unique_cases": 1,
+    "lineage_groups": {
+      "suite-v2-trajectory-backbone": 1
+    },
+    "outcomes": {
+      "template": 1
+    },
+    "packages": 1,
+    "expected_opportunities": 1,
+    "missing_expected_opportunities": 0,
+    "false_rejection_candidates": 0,
+    "repair_requests": 0,
+    "repair_returned_packages": 0,
+    "confirmed_correct_repairs": null,
+    "confirmed_false_rejections": null,
+    "human_graded_outcomes": 0,
+    "usage_complete": true,
+    "known_usage_subtotals": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    "observed_elapsed_ms": {
+      "count": 1,
+      "median": 32.643,
+      "min": 32.643,
+      "max": 32.643
+    },
+    "checks": {
+      "expected_opportunity_delivered": {
+        "passed": 1,
+        "failed": 0,
+        "not_applicable": 0
+      },
+      "ineligible_opportunity_withheld": {
+        "passed": 0,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "input_cutoff_respected": {
+        "passed": 1,
+        "failed": 0,
+        "not_applicable": 0
+      },
+      "reference_comparator_identity": {
+        "passed": 0,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "reference_context_relation": {
+        "passed": 0,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "reference_context_status": {
+        "passed": 0,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "runtime_contract_valid": {
+        "passed": 1,
+        "failed": 0,
+        "not_applicable": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,138 @@
+[
+  {
+    "case_id": "relay-attribution",
+    "lineage": "suite-v2-trajectory-backbone",
+    "arm": "M3",
+    "trial": 0,
+    "outcome": "ai_composed",
+    "usage": {
+      "input_tokens": 4883,
+      "model_calls": 2,
+      "output_tokens": 363
+    },
+    "elapsed_ms": 9859.615,
+    "assessment": {
+      "checks": {
+        "expected_opportunity_delivered": true,
+        "ineligible_opportunity_withheld": null,
+        "input_cutoff_respected": true,
+        "reference_comparator_identity": null,
+        "reference_context_relation": null,
+        "reference_context_status": null,
+        "runtime_contract_valid": true
+      },
+      "correction_correctness": null,
+      "editorial_usefulness": null,
+      "false_rejection_candidate": false,
+      "false_rejection_confirmed": null,
+      "human_grading_status": "pending",
+      "mechanical_checks_pass": true,
+      "missing_expected_opportunity": false,
+      "repair_returned_package": false,
+      "reviewer_or_self_review_repair_requested": false
+    },
+    "accounting": "complete"
+  },
+  {
+    "case_id": "relay-attribution",
+    "lineage": "suite-v2-trajectory-backbone",
+    "arm": "S3",
+    "trial": 0,
+    "outcome": "ai_composed",
+    "usage": {
+      "input_tokens": 5044,
+      "model_calls": 2,
+      "output_tokens": 356
+    },
+    "elapsed_ms": 8749.263,
+    "assessment": {
+      "checks": {
+        "expected_opportunity_delivered": true,
+        "ineligible_opportunity_withheld": null,
+        "input_cutoff_respected": true,
+        "reference_comparator_identity": null,
+        "reference_context_relation": null,
+        "reference_context_status": null,
+        "runtime_contract_valid": true
+      },
+      "correction_correctness": null,
+      "editorial_usefulness": null,
+      "false_rejection_candidate": false,
+      "false_rejection_confirmed": null,
+      "human_grading_status": "pending",
+      "mechanical_checks_pass": true,
+      "missing_expected_opportunity": false,
+      "repair_returned_package": false,
+      "reviewer_or_self_review_repair_requested": false
+    },
+    "accounting": "complete"
+  },
+  {
+    "case_id": "relay-attribution",
+    "lineage": "suite-v2-trajectory-backbone",
+    "arm": "T3",
+    "trial": 0,
+    "outcome": "template",
+    "usage": {
+      "input_tokens": 0,
+      "model_calls": 0,
+      "output_tokens": 0
+    },
+    "elapsed_ms": 32.643,
+    "assessment": {
+      "checks": {
+        "expected_opportunity_delivered": true,
+        "ineligible_opportunity_withheld": null,
+        "input_cutoff_respected": true,
+        "reference_comparator_identity": null,
+        "reference_context_relation": null,
+        "reference_context_status": null,
+        "runtime_contract_valid": true
+      },
+      "correction_correctness": null,
+      "editorial_usefulness": null,
+      "false_rejection_candidate": false,
+      "false_rejection_confirmed": null,
+      "human_grading_status": "pending",
+      "mechanical_checks_pass": true,
+      "missing_expected_opportunity": false,
+      "repair_returned_package": false,
+      "reviewer_or_self_review_repair_requested": false
+    },
+    "accounting": "non_model"
+  },
+  {
+    "case_id": "relay-attribution",
+    "lineage": "suite-v2-trajectory-backbone",
+    "arm": "D3",
+    "trial": 0,
+    "outcome": "ai_composed",
+    "usage": {
+      "input_tokens": 2048,
+      "model_calls": 1,
+      "output_tokens": 91
+    },
+    "elapsed_ms": 3254.44,
+    "assessment": {
+      "checks": {
+        "expected_opportunity_delivered": true,
+        "ineligible_opportunity_withheld": null,
+        "input_cutoff_respected": true,
+        "reference_comparator_identity": null,
+        "reference_context_relation": null,
+        "reference_context_status": null,
+        "runtime_contract_valid": true
+      },
+      "correction_correctness": null,
+      "editorial_usefulness": null,
+      "false_rejection_candidate": false,
+      "false_rejection_confirmed": null,
+      "human_grading_status": "pending",
+      "mechanical_checks_pass": true,
+      "missing_expected_opportunity": false,
+      "repair_returned_package": false,
+      "reviewer_or_self_review_repair_requested": false
+    },
+    "accounting": "complete"
+  }
+]

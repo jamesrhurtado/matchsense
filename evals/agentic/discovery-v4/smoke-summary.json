@@ -1,0 +1,282 @@
+{
+  "D3": {
+    "scheduled_outcomes": 4,
+    "unique_cases": 4,
+    "lineage_groups": {
+      "authored-history/shared-current-match-001": 3,
+      "suite-v2-trajectory-backbone": 1
+    },
+    "outcomes": {
+      "ai_composed": 3,
+      "abstention": 1
+    },
+    "packages": 3,
+    "expected_opportunities": 3,
+    "missing_expected_opportunities": 0,
+    "false_rejection_candidates": 0,
+    "repair_requests": 0,
+    "repair_returned_packages": 0,
+    "confirmed_correct_repairs": null,
+    "confirmed_false_rejections": null,
+    "human_graded_outcomes": 0,
+    "usage_complete": true,
+    "known_usage_subtotals": {
+      "model_calls": 3,
+      "input_tokens": 8508,
+      "output_tokens": 396
+    },
+    "observed_elapsed_ms": {
+      "count": 4,
+      "median": 4129.1215,
+      "min": 15.887,
+      "max": 6308.782
+    },
+    "checks": {
+      "expected_opportunity_delivered": {
+        "passed": 3,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "ineligible_opportunity_withheld": {
+        "passed": 1,
+        "failed": 0,
+        "not_applicable": 3
+      },
+      "input_cutoff_respected": {
+        "passed": 3,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "reference_comparator_identity": {
+        "passed": 3,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "reference_context_relation": {
+        "passed": 3,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "reference_context_status": {
+        "passed": 3,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "runtime_contract_valid": {
+        "passed": 3,
+        "failed": 0,
+        "not_applicable": 1
+      }
+    }
+  },
+  "M3": {
+    "scheduled_outcomes": 4,
+    "unique_cases": 4,
+    "lineage_groups": {
+      "authored-history/shared-current-match-001": 3,
+      "suite-v2-trajectory-backbone": 1
+    },
+    "outcomes": {
+      "ai_composed": 3,
+      "abstention": 1
+    },
+    "packages": 3,
+    "expected_opportunities": 3,
+    "missing_expected_opportunities": 0,
+    "false_rejection_candidates": 0,
+    "repair_requests": 0,
+    "repair_returned_packages": 0,
+    "confirmed_correct_repairs": null,
+    "confirmed_false_rejections": null,
+    "human_graded_outcomes": 0,
+    "usage_complete": true,
+    "known_usage_subtotals": {
+      "model_calls": 6,
+      "input_tokens": 19273,
+      "output_tokens": 1294
+    },
+    "observed_elapsed_ms": {
+      "count": 4,
+      "median": 6609.0509999999995,
+      "min": 15.98,
+      "max": 9750.7
+    },
+    "checks": {
+      "expected_opportunity_delivered": {
+        "passed": 3,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "ineligible_opportunity_withheld": {
+        "passed": 1,
+        "failed": 0,
+        "not_applicable": 3
+      },
+      "input_cutoff_respected": {
+        "passed": 3,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "reference_comparator_identity": {
+        "passed": 3,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "reference_context_relation": {
+        "passed": 3,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "reference_context_status": {
+        "passed": 3,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "runtime_contract_valid": {
+        "passed": 3,
+        "failed": 0,
+        "not_applicable": 1
+      }
+    }
+  },
+  "S3": {
+    "scheduled_outcomes": 4,
+    "unique_cases": 4,
+    "lineage_groups": {
+      "authored-history/shared-current-match-001": 3,
+      "suite-v2-trajectory-backbone": 1
+    },
+    "outcomes": {
+      "ai_composed": 3,
+      "abstention": 1
+    },
+    "packages": 3,
+    "expected_opportunities": 3,
+    "missing_expected_opportunities": 0,
+    "false_rejection_candidates": 0,
+    "repair_requests": 0,
+    "repair_returned_packages": 0,
+    "confirmed_correct_repairs": null,
+    "confirmed_false_rejections": null,
+    "human_graded_outcomes": 0,
+    "usage_complete": true,
+    "known_usage_subtotals": {
+      "model_calls": 6,
+      "input_tokens": 19758,
+      "output_tokens": 1273
+    },
+    "observed_elapsed_ms": {
+      "count": 4,
+      "median": 8041.807,
+      "min": 19.04,
+      "max": 10332.035
+    },
+    "checks": {
+      "expected_opportunity_delivered": {
+        "passed": 3,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "ineligible_opportunity_withheld": {
+        "passed": 1,
+        "failed": 0,
+        "not_applicable": 3
+      },
+      "input_cutoff_respected": {
+        "passed": 3,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "reference_comparator_identity": {
+        "passed": 3,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "reference_context_relation": {
+        "passed": 3,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "reference_context_status": {
+        "passed": 3,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "runtime_contract_valid": {
+        "passed": 3,
+        "failed": 0,
+        "not_applicable": 1
+      }
+    }
+  },
+  "T3": {
+    "scheduled_outcomes": 4,
+    "unique_cases": 4,
+    "lineage_groups": {
+      "authored-history/shared-current-match-001": 3,
+      "suite-v2-trajectory-backbone": 1
+    },
+    "outcomes": {
+      "template": 3,
+      "abstention": 1
+    },
+    "packages": 3,
+    "expected_opportunities": 3,
+    "missing_expected_opportunities": 0,
+    "false_rejection_candidates": 0,
+    "repair_requests": 0,
+    "repair_returned_packages": 0,
+    "confirmed_correct_repairs": null,
+    "confirmed_false_rejections": null,
+    "human_graded_outcomes": 0,
+    "usage_complete": true,
+    "known_usage_subtotals": {
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    "observed_elapsed_ms": {
+      "count": 4,
+      "median": 32.128,
+      "min": 14.261,
+      "max": 38.358
+    },
+    "checks": {
+      "expected_opportunity_delivered": {
+        "passed": 3,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "ineligible_opportunity_withheld": {
+        "passed": 1,
+        "failed": 0,
+        "not_applicable": 3
+      },
+      "input_cutoff_respected": {
+        "passed": 3,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "reference_comparator_identity": {
+        "passed": 3,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "reference_context_relation": {
+        "passed": 3,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "reference_context_status": {
+        "passed": 3,
+        "failed": 0,
+        "not_applicable": 1
+      },
+      "runtime_contract_valid": {
+        "passed": 3,
+        "failed": 0,
+        "not_applicable": 1
+      }
+    }
+  }
+}

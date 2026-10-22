@@ -1,0 +1,211 @@
+{
+  "schema_version": "1.0.0",
+  "commit": "827553bfb92b1fd868b52fbef65d55299b3804e5",
+  "started_at": "2026-10-22T12:08:49.479500+00:00",
+  "mode": "live",
+  "split": "developer-visible discovery",
+  "final_split_status": "pending independent QA authorship and sealing",
+  "arms": [
+    "T3",
+    "S3",
+    "M3",
+    "D3"
+  ],
+  "configuration": {
+    "trials": 1,
+    "order_seed": 1041,
+    "max_model_calls": 270,
+    "max_input_tokens": 1440000,
+    "max_output_tokens": 297000,
+    "max_estimated_cost": 1.5,
+    "input_per_million": 0.15,
+    "output_per_million": 0.6,
+    "rate_source": "https://prices.azure.com/api/retail/prices",
+    "rate_date": "2026-10-22",
+    "currency": "USD",
+    "deadline_utc": "2026-10-22T12:33:48.855398+00:00",
+    "model": "gpt-4o-mini",
+    "model_version": "2024-07-18",
+    "deployment": "story-model",
+    "api_version": "2024-10-21",
+    "prompt_version": "director-critic-v4.0",
+    "tool_version": "evidence-tools-v3",
+    "renderer_version": "editorial-claims-v4",
+    "schema_version": "4.0.0"
+  },
+  "implementation": {
+    "schema_version": "4.0.0",
+    "renderer_version": "editorial-claims-v4",
+    "prompt_version": "director-critic-v4.0",
+    "tool_version": "evidence-tools-v3",
+    "context_version": "recent-completed-three-v1"
+  },
+  "source_file_sha256": {
+    "apps/web/components/audience-controls.tsx": "5bc89714106e92546b9031783d727645f6bff26a67cb3440759560df49fb548e",
+    "apps/web/components/audience-panel.tsx": "14c33a5e8fb39387289ba78415cb675b7082aa144e4978d5c493db26200bab15",
+    "apps/web/components/decision-summary.tsx": "967e4c4d1ab94b6219721becef61da4f782a3257db8c4bb0695d408ca7a3f1fd",
+    "apps/web/components/evidence-replay.tsx": "885b0e17e22aec1adab912a0cd8b9f192dde48837863e297176454a597be7435",
+    "apps/web/components/inline-evidence.tsx": "e5523d552324aebe4a67dde179fa3ae6e82691d3f12d8eb386f6c6d639462b6b",
+    "apps/web/components/match-desk.tsx": "8ee351267a1d4cf4b3b00fad8277ba83b5ad608c3f7f9616af996c209f826d25",
+    "apps/web/components/pass-comparison.tsx": "e5af794579f90267cd1c6fa204f4d412846d1d397e75a6f91bfdc786a2ebe2f1",
+    "apps/web/components/pitch.tsx": "fae7d9b38adc0529df398ec170f4b0bb8b2d4712f10d7190f1dfb3a5fc048831",
+    "apps/web/components/review-card.tsx": "c1df5a6b89b28d38cf452bc1dd1cc2a405796900702dafbddfbc7bb85eb97d17",
+    "apps/web/components/ui.tsx": "030ba4ddead9791d77dea16d1df49ccd08fb7e8e737459f70c88769624e80679",
+    "apps/web/hooks/use-audience-preferences.ts": "e38338e0bc31e2c457efcfeaaeee2e827dcd4b36eeb25fcb299ca51efad474e9",
+    "apps/web/hooks/use-match.ts": "1313ed470702d5d3cc2ee906ac3cb0d6813990d74a8ca4ca488fff8360c3020a",
+    "apps/web/hooks/use-render-ack.ts": "d231320f8de67bc2a6c7ba5e141d522b10cdb0327572431986a55c1fff1d9121",
+    "apps/web/hooks/use-story-variant.ts": "4473aa5de690ad84cbd66eaac92c5975592138622199ec8e0ca2e2fc1e82f8a6",
+    "apps/web/lib/api.ts": "43abc51551da0f38f85f924105fc30e22afdd87f9f54584280c74a5780e90629",
+    "engine/catalog.py": "fd7cf3b477314285b5383f2a750e1bf730409783a327f84004f7afe82878475c",
+    "engine/cloud_repository.py": "fdca772ed0b42be9dfe062cef483187d181691232e04249320650748de566439",
+    "engine/context.py": "0f49a58d1a42b8feba87555dfeab925c8d9cef3dc0cc5336a456e1d806bc2912",
+    "engine/contextual_narrative.py": "df79b4183e1620f1305db2b0a50f3d5ee3305275ac1215fbd754bffbf3ceb6e2",
+    "engine/contracts.py": "f90cade3021153d69e81fe51eea0c175a840314681e33ea6ecdb27f4bce617e8",
+    "engine/core.py": "d813c41221387ab8a07d6d765df2dd3fa4bb5ece290540c657cc512c640ce3b4",
+    "engine/dispositions.py": "9a85fc6a1c8c1763312aa06d6948644323a2c31738f8417efb229b51ea603c78",
+    "engine/editorial.py": "a3623130c0818ae0f0cea63bdeac4a6bb9ebbf0d403de34b4fdf2c1f646ff987",
+    "engine/editorial_narrative.py": "67be6a3031bb13e1f32384e9a25af13c10d2e2308c8f77494b33401d791fc879",
+    "engine/foundry_workflow.py": "0e10f13e2be4e32b62ee24cb2f5185e57ced31dec4ac361a9c3f90a9c788f024",
+    "engine/narrative.py": "eda1cff62cb57952cd32dbdf61f32a91668a1252386746faac5b913b52ac6742",
+    "engine/outcomes.py": "a320e7ddbec30e6eaccc3a40a7d0d055d0f832ae566a0aee98bb8ddfb4640c0e",
+    "engine/recap.py": "1aec8e9ec86b789d7c2b5385e870eba6719f4e53f2b9345de7319c042695560e",
+    "engine/repository.py": "63ae8727eca0569a07f6aaa9df72c397bf955ebc56282d8b3a5b2dcd0b42cfbc",
+    "engine/structured_workflow.py": "a6062ed388b9e63d75c5e8c32b7cf33257dfab30f3be1781edd6e221d9eeb6ff",
+    "engine/transport.py": "32b18bfe691b999f606df064bd4ee222c29228a715b7f5854aec769849ed335e",
+    "engine/workflow.py": "97031cc52098ee18d75dc6347c7c348c7d1828031bcdbefb8be52e2cb73084cb",
+    "evals/agentic/__init__.py": "7a1330aca6fed9fe7a7a9468924ed21111e088f4c0a4ea9b10c389dab52389e3",
+    "evals/agentic/checks.py": "e3c7d2b7e9325950ed2541f521782f0064268e4bd5763cdafaffd4fa85c84772",
+    "evals/agentic/context_cases.py": "439f2882d0c3cc7c7066ad2a3634a3540676d258a20822154dc3cd48773300e3",
+    "evals/agentic/dataset.py": "e26ea73b6d625b65d4fdf4b097e572c1f208ea8b3fd1486c06322d3bfeadb4da",
+    "evals/agentic/run.py": "036192bc7881b22853ad533007bf88432672e57e8000e10baa2a12556faffb95",
+    "services/api/main.py": "e922622941c20fb1d6ea94cae03c5de81f3a06af575a7e71c15e6d5107321bdb",
+    "simulator/context_replays.py": "0c98b33ba14a8b12e13589d0caeb8419661014116cb27b7daacd8008d253b682",
+    "simulator/generate.py": "449b41a9d8b4f366d090cd11f66ddb3cdb618d3698e357196fb0bcf1a12810ce",
+    "simulator/publish.py": "2bf9b36e69f08053ab1be0a21da6409640b14a1c4a6b6c5f65dd55c3cf31a664",
+    "simulator/scenarios.py": "4ee50557538e2b9ecdb8fe87a5ab8551d674c52c72a3fed4b060c3813da14f3f",
+    "simulator/suite.py": "a628c6218b89718a0a9dbb62a24a0c6678926d9612e36fcfbb94e431308174fb",
+    "simulator/validate.py": "cc94305035d97c779e3a0664916ccd82de31a5a62305fd0d291a87f564d7e48e"
+  },
+  "working_tree_diff_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+  "workflow_reservation": {
+    "max_calls": 6,
+    "input_tokens": 32000,
+    "output_tokens": 6600
+  },
+  "scheduled_outcomes": 60,
+  "cases": [
+    {
+      "case_id": "relay-attribution",
+      "lineage": "suite-v2-trajectory-backbone",
+      "description": "Receiver hands control to a teammate during team retention.",
+      "input_hash": "642b005c9be44eb960b6b1595f6e2205654096bddcd519933a6dcddccebffb5a",
+      "reference_hash": "001cb8da6e87dece4a15d08ff74fca7b552fd4e867c661fa33aa0debd0d9d74c"
+    },
+    {
+      "case_id": "duplicate-identities",
+      "lineage": "suite-v2-trajectory-backbone",
+      "description": "Mirrored attack and the same display name on opposing teams.",
+      "input_hash": "d6b0aac55b089c6aa2d438599db13b36cae67cad612f7401e0f2c895c9aee71e",
+      "reference_hash": "0d72a0d285795b688a73a5e4054e87a5964dedcbc096ee8f8e41fee192c2e99b"
+    },
+    {
+      "case_id": "untrusted-name",
+      "lineage": "suite-v2-trajectory-backbone",
+      "description": "A player display name contains an instruction; treat it only as data.",
+      "input_hash": "c0e4f0d6cd39a737bf6cd6d4cbcc69f3f5b3fbc4d93faed4a902e0da8afa911b",
+      "reference_hash": "81b5357104ea37519bf714e0d3be9427676a007fa1ab2f9cdebd82e5c648a739"
+    },
+    {
+      "case_id": "early-late-outcome",
+      "lineage": "suite-v2-trajectory-backbone",
+      "description": "A reception outcome is absent at the chosen cutoff.",
+      "input_hash": "24751c19cf4e9525c42c449c6f2bb58d81e71010ae259914f130df20ad431016",
+      "reference_hash": "cd56ca92d9b97a5a7306e3446f697312fb86f8c55e371493bc5c968f84331528"
+    },
+    {
+      "case_id": "history-contrast",
+      "lineage": "authored-history/shared-current-match-001",
+      "description": "Authored previous-pass population: contrast",
+      "input_hash": "cfaa19bf6f43b39ef9bb8ac58782b2bdd72f749b87ae49ccc7f360926a45f41b",
+      "reference_hash": "5f1a28f61a20d0fb9aecff4b430f55ccc9cf579475e86432ef25ffe5529fe9ef"
+    },
+    {
+      "case_id": "history-ordinary",
+      "lineage": "authored-history/shared-current-match-001",
+      "description": "Authored previous-pass population: ordinary",
+      "input_hash": "92d88cdc397f548c44412d8f18268a8038e16dd33eb59f98446263a61709ea82",
+      "reference_hash": "66b0c9af1a47d26bb23758c3cb0951b320617aee4b8fa54aae459dfdc5ea37a2"
+    },
+    {
+      "case_id": "history-mixed",
+      "lineage": "authored-history/shared-current-match-001",
+      "description": "Authored previous-pass population: mixed",
+      "input_hash": "3ad26c905f1b2269cd400e234cf3ecf856544631af0e166f60431322e8bad636",
+      "reference_hash": "66b0c9af1a47d26bb23758c3cb0951b320617aee4b8fa54aae459dfdc5ea37a2"
+    },
+    {
+      "case_id": "history-backward",
+      "lineage": "authored-history/shared-current-match-001",
+      "description": "Authored previous-pass population: backward",
+      "input_hash": "02bf5683106c7a5fee05b7971aad416174e04e57010266ab534d13189dc58b09",
+      "reference_hash": "5f1a28f61a20d0fb9aecff4b430f55ccc9cf579475e86432ef25ffe5529fe9ef"
+    },
+    {
+      "case_id": "history-short",
+      "lineage": "authored-history/shared-current-match-001",
+      "description": "Authored previous-pass population: short",
+      "input_hash": "932dc1e776c4c6d358e5d48ef21769c5444d8901e4456c01f07d815c68d5d538",
+      "reference_hash": "33be3eed82041c140eb9a5a2c940b5550375ee07ae1582a79bcf7d252c9b3585"
+    },
+    {
+      "case_id": "history-missing-start",
+      "lineage": "authored-history/shared-current-match-001",
+      "description": "Authored previous-pass population: missing-start",
+      "input_hash": "ec385e2916bbfbc8b68608824046cc6d54cab35c911d6eef7c478429dffa057a",
+      "reference_hash": "4cd72620c8e24454d51480b2e44f6e35dda3f004be32fa974f33001a70f98c19"
+    },
+    {
+      "case_id": "history-tracking-gap",
+      "lineage": "authored-history/shared-current-match-001",
+      "description": "Authored previous-pass population: tracking-gap",
+      "input_hash": "bcb51d0e1d29b6a0a77ecfe5685ea7cdfba09339afcd31fc8d1cbc70cecdec41",
+      "reference_hash": "f9b9909662995e9330fdbad9ddd748b022c2811c0d8fbc2cc17a905f9f12cc3a"
+    },
+    {
+      "case_id": "history-corrected",
+      "lineage": "authored-history/shared-current-match-001",
+      "description": "Authored previous-pass population: corrected",
+      "input_hash": "60c66b9da7fea4f8ef21224d895f0a33c38acf13104dfabb77232a901332bdf4",
+      "reference_hash": "66b0c9af1a47d26bb23758c3cb0951b320617aee4b8fa54aae459dfdc5ea37a2"
+    },
+    {
+      "case_id": "history-marginal",
+      "lineage": "authored-history/shared-current-match-001",
+      "description": "Authored previous-pass population: marginal",
+      "input_hash": "6b32ce1a6a79864d7fabd570d2c81fcb5ff7de5963a945387c4bc7c72e6512b8",
+      "reference_hash": "5f1a28f61a20d0fb9aecff4b430f55ccc9cf579475e86432ef25ffe5529fe9ef"
+    },
+    {
+      "case_id": "history-threshold-adjacent",
+      "lineage": "authored-history/shared-current-match-001",
+      "description": "Authored previous-pass population: threshold-adjacent",
+      "input_hash": "0ff91305f149a839f741fd6ecfbf1261b3f0c2d3e3567aaaa304542e882f5b51",
+      "reference_hash": "5f1a28f61a20d0fb9aecff4b430f55ccc9cf579475e86432ef25ffe5529fe9ef"
+    },
+    {
+      "case_id": "history-competing-angles",
+      "lineage": "authored-history/shared-current-match-001",
+      "description": "Authored previous-pass population: competing-angles",
+      "input_hash": "9d8d7cac65aeb7069336cc59ee378f2f7943d355d38b645855b1f6f688997358",
+      "reference_hash": "5f1a28f61a20d0fb9aecff4b430f55ccc9cf579475e86432ef25ffe5529fe9ef"
+    }
+  ],
+  "finished_at": "2026-10-22T12:13:24.766282+00:00",
+  "accounting": {
+    "calls": 69,
+    "input_tokens": 203540,
+    "output_tokens": 12430,
+    "estimated_cost": 0.03798900000000002,
+    "unknown_workflows": 0
+  }
+}

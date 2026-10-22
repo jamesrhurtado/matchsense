@@ -1,4 +1,56 @@
-import {cn} from '@/lib/api';
-export function Button({className,tone='secondary',...props}:React.ButtonHTMLAttributes<HTMLButtonElement>&{tone?:'primary'|'secondary'|'danger'}) {return <button className={cn('inline-flex min-h-10 items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium disabled:opacity-40',tone==='primary'?'bg-emerald-800 text-white hover:bg-emerald-900':tone==='danger'?'border border-red-200 bg-white text-red-700 hover:bg-red-50':'border border-stone-200 bg-white text-stone-700 hover:bg-stone-50',className)} {...props}/>;}
-export function Tag({children,className}:{children:React.ReactNode;className?:string}) {return <span className={cn('inline-flex items-center gap-1.5 rounded-full bg-stone-100 px-2.5 py-1 text-xs font-medium text-stone-600',className)}>{children}</span>;}
-export function Card({children,className}:{children:React.ReactNode;className?:string}) {return <section className={cn('rounded-2xl border border-stone-200 bg-white',className)}>{children}</section>;}
+import { cn } from "@/lib/api";
+export function Button({
+  className,
+  tone = "secondary",
+  ...props
+}: React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  tone?: "primary" | "secondary" | "danger";
+}) {
+  return (
+    <button
+      className={cn(
+        "inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700",
+        tone === "primary"
+          ? "bg-emerald-800 text-white hover:bg-emerald-900"
+          : tone === "danger"
+            ? "border border-red-200 bg-white text-red-700 hover:bg-red-50"
+            : "border border-stone-200 bg-white text-stone-700 hover:bg-stone-50",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+export function Tag({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center gap-1.5 rounded-full bg-stone-100 px-2.5 py-1 text-xs font-medium text-stone-600",
+        className,
+      )}
+    >
+      {children}
+    </span>
+  );
+}
+export function Card({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <section
+      className={cn("rounded-2xl border border-stone-200 bg-white", className)}
+    >
+      {children}
+    </section>
+  );
+}

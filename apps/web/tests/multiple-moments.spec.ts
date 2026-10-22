@@ -14,11 +14,12 @@ test('three-minute replay preserves independent approvals, archived evidence, an
  await expect(queue.getByRole('button')).toHaveCount(2);await queue.getByRole('button',{name:/Moment 2/}).click();await page.getByRole('button',{name:'Approve',exact:true}).click();
  await expect(page.getByRole('button',{name:'Retract',exact:true})).toBeVisible();
  const viewer=await context.newPage();await viewer.goto(`/watch/${sid}`);
+ await viewer.getByText('Approved history · 2',{exact:true}).click();
  const history=viewer.getByRole('group',{name:'Approved moments'});await expect(history.getByRole('button')).toHaveCount(2);
  await history.getByRole('button',{name:/Moment 1/}).click();await expect(history.getByRole('button',{name:/Moment 1/})).toHaveAttribute('aria-pressed','true');
- await viewer.getByRole('button',{name:'Show why',exact:true}).click();await expect(viewer.getByRole('heading',{name:'Follow the escape.'})).toBeVisible();
+ await viewer.getByRole('button',{name:'Show why',exact:true}).click();await expect(viewer.getByRole('heading',{name:'Replay the sequence.'})).toBeVisible();
  await viewer.getByRole('button',{name:'Catch me up',exact:true}).click();await expect(viewer.getByRole('heading',{name:'Match so far'})).toBeVisible();
- const recap=await request.post(`${path}/recaps`,{data:{language:'en'}});expect((await recap.json()).moments).toHaveLength(2);
+ const recap=await request.post(`${path}/recaps`,{data:{language:'en'}});const projected=await recap.json();expect(projected.approved_count).toBe(2);expect(projected.moments[0].similar_moments).toHaveLength(2);
  await page.getByLabel('Jump to second').fill('90');await page.getByRole('button',{name:'Jump forward',exact:true}).click();
  await queue.getByRole('button',{name:/Moment 1/}).click();await expect(page.getByRole('button',{name:'Retract',exact:true})).toBeEnabled();await page.getByRole('button',{name:'Retract',exact:true}).click();
  await expect.poll(async()=>{const response=await request.get(`${path}/snapshot`);const state=await response.json();return state.stories?.map((story:{id:string})=>story.id);}).toEqual(['story-pass-2']);

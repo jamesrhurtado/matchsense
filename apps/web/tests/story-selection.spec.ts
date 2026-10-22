@@ -23,7 +23,7 @@ test('producer selects independent moments and navigates a longer replay',async(
  await page.getByLabel('Jump to second').fill('20');await expect(page.getByRole('button',{name:'Jump forward',exact:true})).toBeDisabled();
 });
 test('viewer selects approved history without changing the shared overlay',async({page})=>{
- await mockQueue(page);await page.goto('/watch/queue-demo');const moments=page.getByRole('group',{name:'Approved moments'});await expect(moments.getByRole('button')).toHaveCount(2);await moments.getByRole('button',{name:/Moment 1/}).click();await expect(page.getByText('Explanation for First supported sequence')).toBeVisible();await expect(page.getByText('Shared second overlay',{exact:true})).toBeVisible();
+ await mockQueue(page);await page.goto('/watch/queue-demo');await page.getByText('Approved history · 2',{exact:true}).click();const moments=page.getByRole('group',{name:'Approved moments'});await expect(moments.getByRole('button')).toHaveCount(2);await moments.getByRole('button',{name:/Moment 1/}).click();await expect(page.getByText('Explanation for First supported sequence')).toBeVisible();await expect(page.getByText('Shared second overlay',{exact:true})).toBeVisible();
  await page.setViewportSize({width:390,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBeTruthy();
 });
 test('fixture options come from the public catalogue',async({page})=>{

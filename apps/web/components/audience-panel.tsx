@@ -97,6 +97,8 @@ export function AudiencePanel({
   onEvidence,
   onRecap,
   onWholePlay,
+  viewingEarlier,
+  onReturnLive,
   controls,
 }: {
   story: Story | null | undefined;
@@ -112,11 +114,29 @@ export function AudiencePanel({
   onEvidence: () => void;
   onRecap: () => void;
   onWholePlay: () => void;
+  viewingEarlier: boolean;
+  onReturnLive: () => void;
   controls: React.ReactNode;
 }) {
   const es = language === "es";
   return (
     <Card className="p-4 md:p-6">
+      {viewingEarlier && (
+        <div
+          className="mb-4 flex flex-wrap items-center justify-between gap-2 rounded-lg border border-amber-200 bg-amber-50 p-3"
+          data-testid="earlier-moment"
+        >
+          <p role="status" className="text-sm font-medium text-amber-950">
+            {es
+              ? "Estás viendo un momento anterior"
+              : "Viewing an earlier moment"}{" "}
+            · {timecode(story?.eligible_from_ms || 0)}
+          </p>
+          <Button onClick={onReturnLive}>
+            {es ? "Volver al directo" : "Return to live"}
+          </Button>
+        </div>
+      )}
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div>
           <p className="mb-1 text-xs font-semibold text-emerald-800">

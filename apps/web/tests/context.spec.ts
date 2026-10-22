@@ -25,6 +25,9 @@ test('five approved moments keep the mobile explanation and pitch together; cont
  await expect(page.getByTestId('audience-explanation')).toContainText('previous three completed passes in this replay');
  await page.getByText('Inspect the facts',{exact:true}).click();
  await page.getByRole('button',{name:/farther forward than each/}).click();
+ await expect(page.getByTestId('earlier-moment')).toContainText('Viewing an earlier moment');
+ await expect(page.getByTestId('pass-comparison').getByRole('list')).toContainText('Current pass');
+ await page.getByText('Original values and sources',{exact:true}).click();
  await expect(page.getByRole('table')).toContainText('pass-3');
  await expect(page.getByRole('table')).toContainText('16');
  await expect(page.getByRole('table')).toContainText('12');
@@ -35,4 +38,10 @@ test('five approved moments keep the mobile explanation and pitch together; cont
  await page.screenshot({path:testInfo.outputPath('context-mobile.png'),fullPage:true});
  await page.setViewportSize({width:1366,height:768});
  await page.screenshot({path:testInfo.outputPath('context-desktop.png'),fullPage:true});
+ await page.getByRole('button',{name:'Ver evidencia',exact:true}).click();
+ await expect(page.getByRole('heading',{name:'Repite la secuencia.'})).toBeVisible();
+ await expect(page.getByRole('group',{name:'Etapas de la evidencia'})).toBeVisible();
+ await page.getByRole('button',{name:'Cerrar evidencia'}).click();
+ await page.getByRole('button',{name:'Volver al directo',exact:true}).click();
+ await expect(page.getByTestId('earlier-moment')).toHaveCount(0);
 });

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { cn, Evidence, Variant, timecode } from "@/lib/api";
 import Pitch from "./pitch";
+import { PassComparison } from "./pass-comparison";
 
 /** Clause bindings select recorded frames; the arrow measures displacement only. */
 export function InlineEvidence({
@@ -77,6 +78,7 @@ export function InlineEvidence({
             metrics={m}
             focus={focus}
             compact
+            language={language}
             highlight={selected}
           />
         </div>
@@ -127,46 +129,7 @@ export function InlineEvidence({
         </div>
       </details>
       {selected === "c-context" && m.context && (
-        <div className="border-t border-stone-200 p-3">
-          <p className="mb-2 text-xs font-semibold">
-            {es
-              ? "Tres pases completados anteriores del equipo"
-              : "Previous three completed team passes"}
-          </p>
-          <table className="w-full text-left text-xs tabular-nums">
-            <caption className="sr-only">
-              {es
-                ? "Comparación de desplazamiento hacia adelante"
-                : "Forward displacement comparison"}
-            </caption>
-            <thead>
-              <tr>
-                <th scope="col">{es ? "Pase" : "Pass"}</th>
-                <th scope="col">{es ? "Recepción" : "Reception"}</th>
-                <th scope="col">m</th>
-              </tr>
-            </thead>
-            <tbody>
-              {m.context.comparators.map((pass) => (
-                <tr key={pass.pass_id} className="border-t border-stone-100">
-                  <th scope="row" className="break-all py-2 font-normal">
-                    {pass.pass_id}
-                  </th>
-                  <td>{timecode(pass.resolution_ms)}</td>
-                  <td>{String(pass.forward_m)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <p className="mt-2 text-xs tabular-nums">
-            {es ? "Pase actual" : "Current pass"}: {String(m.forward_pass_m)} m
-          </p>
-          <p className="mt-2 text-xs text-stone-600">
-            {es
-              ? "Solo esta repetición; no demuestra superioridad táctica."
-              : "This replay only; does not establish tactical superiority."}
-          </p>
-        </div>
+        <PassComparison metrics={m} language={language} />
       )}
     </div>
   );

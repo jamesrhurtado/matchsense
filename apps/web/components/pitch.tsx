@@ -6,14 +6,17 @@ export default function Pitch({
   compact = false,
   trails = [],
   highlight = "all",
+  language = "en",
 }: {
   frame: Frame | null;
   metrics?: Metrics;
   focus?: string | null;
   compact?: boolean;
+  language?: string;
   highlight?: string;
   trails?: { x_m: number; y_m: number }[][];
 }) {
+  const es = language === "es";
   const position = (x: number, y: number) => ({ x: x + 5, y: y + 5 });
   return (
     <svg
@@ -21,8 +24,12 @@ export default function Pitch({
       role="img"
       aria-label={
         metrics
-          ? "Evidence pitch with measured pass displacement and recorded positions"
-          : "Synthetic football pitch with 22 fictional players"
+          ? es
+            ? "Cancha con desplazamiento medido del pase y posiciones registradas"
+            : "Evidence pitch with measured pass displacement and recorded positions"
+          : es
+            ? "Cancha sintética con 22 jugadores ficticios"
+            : "Synthetic football pitch with 22 fictional players"
       }
       className="block w-full"
     >
@@ -73,7 +80,7 @@ export default function Pitch({
           strokeWidth=".6"
           strokeDasharray="2 1"
         >
-          <title>Reception third</title>
+          <title>{es ? "Tercio de recepción" : "Reception third"}</title>
         </rect>
       )}
       {metrics && (
@@ -113,7 +120,11 @@ export default function Pitch({
           strokeWidth=".6"
           opacity=".85"
         >
-          <title>Observed player positions; gaps are not connected</title>
+          <title>
+            {es
+              ? "Posiciones observadas; los intervalos sin datos no se unen"
+              : "Observed player positions; gaps are not connected"}
+          </title>
         </polyline>
       ))}
       {frame?.players.map((p) => {

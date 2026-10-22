@@ -360,12 +360,18 @@ export default function MatchDesk({
               className={cn(!isProducer && "border-l border-stone-300 pl-4")}
             >
               <p className="text-sm font-semibold">
-                {isProducer ? "Producer console" : "Viewer companion"}
+                {isProducer
+                  ? "Producer console"
+                  : language === "es"
+                    ? "Vista del espectador"
+                    : "Viewer companion"}
               </p>
               <p className="mt-1 text-xs text-stone-400">
                 {isProducer
                   ? "Live stories. Evidence in view."
-                  : "Your view of the moment."}
+                  : language === "es"
+                    ? "Tu perspectiva del momento."
+                    : "Your view of the moment."}
               </p>
             </div>
           </div>
@@ -383,7 +389,13 @@ export default function MatchDesk({
                   connected ? "bg-emerald-600" : "bg-amber-600",
                 )}
               />
-              {connected ? "Connected" : "Reconnecting"}
+              {connected
+                ? language === "es"
+                  ? "Conectado"
+                  : "Connected"
+                : language === "es"
+                  ? "Reconectando"
+                  : "Reconnecting"}
             </Tag>
             {isProducer && (
               <Link
@@ -430,9 +442,16 @@ export default function MatchDesk({
         <div className="flex flex-wrap items-end justify-between gap-3 py-4">
           <div>
             <div className="mb-2 flex items-center gap-2 text-xs text-stone-500">
-              <span>SESSION {id.slice(0, 8).toUpperCase()}</span>
+              <span>
+                {language === "es" ? "SESIÓN" : "SESSION"}{" "}
+                {id.slice(0, 8).toUpperCase()}
+              </span>
               <ChevronRight size={12} />
-              <span>{duration / 1000}-second segment</span>
+              <span>
+                {language === "es"
+                  ? `Segmento de ${duration / 1000} segundos`
+                  : `${duration / 1000}-second segment`}
+              </span>
             </div>
             <h1 className="text-balance text-2xl font-semibold md:text-3xl">
               Harbor City <span className="font-normal text-stone-400">vs</span>{" "}
@@ -441,7 +460,7 @@ export default function MatchDesk({
           </div>
           <Tag className="bg-stone-200/70">
             <Layers3 size={12} />
-            Synthetic data
+            {language === "es" ? "Datos sintéticos" : "Synthetic data"}
           </Tag>
         </div>
         {actionError && (
@@ -477,6 +496,10 @@ export default function MatchDesk({
         >
           <div
             id="live"
+            tabIndex={-1}
+            aria-label={
+              language === "es" ? "Repetición en directo" : "Live replay"
+            }
             className={cn("min-w-0", isProducer && "xl:col-span-2")}
           >
             <section className="overflow-hidden rounded-2xl border border-emerald-950 bg-emerald-950 text-white">
@@ -495,18 +518,26 @@ export default function MatchDesk({
                     {timecode(match?.clock_ms || 0)}
                   </span>
                   {match?.running
-                    ? "REPLAY RUNNING"
+                    ? language === "es"
+                      ? "REPETICIÓN EN CURSO"
+                      : "REPLAY RUNNING"
                     : (match?.clock_ms || 0) >= duration
-                      ? "SEGMENT COMPLETE"
-                      : "REPLAY PAUSED"}
+                      ? language === "es"
+                        ? "SEGMENTO COMPLETO"
+                        : "SEGMENT COMPLETE"
+                      : language === "es"
+                        ? "REPETICIÓN PAUSADA"
+                        : "REPLAY PAUSED"}
                   {match?.speed !== 1 && <span>{match?.speed}×</span>}
                 </span>
               </div>
-              <Pitch frame={match?.frame || null} />
+              <Pitch frame={match?.frame || null} language={language} />
               <div className="border-t border-white/10 px-5 py-4">
                 <div className="mb-2 flex items-center gap-2 text-xs font-medium text-emerald-200">
                   <Radio size={12} />
-                  SHARED BROADCAST OVERLAY
+                  {language === "es"
+                    ? "TEXTO COMPARTIDO DE LA TRANSMISIÓN"
+                    : "SHARED BROADCAST OVERLAY"}
                 </div>
                 {match?.overlay ? (
                   <p className="max-w-xl text-pretty text-base leading-relaxed">
@@ -515,8 +546,12 @@ export default function MatchDesk({
                 ) : (
                   <p className="text-sm text-emerald-200/70">
                     {story && match?.story_status === "expired"
-                      ? "Display interval ended. The approved moment remains available in the companion."
-                      : "Approved stories appear here at their eligible replay time."}
+                      ? language === "es"
+                        ? "Terminó el intervalo en pantalla. El momento aprobado sigue disponible en el historial."
+                        : "Display interval ended. The approved moment remains available in the companion."
+                      : language === "es"
+                        ? "Las historias aprobadas aparecen aquí durante su intervalo de repetición."
+                        : "Approved stories appear here at their eligible replay time."}
                   </p>
                 )}
               </div>
@@ -602,6 +637,7 @@ export default function MatchDesk({
             {showEvidence && visibleEvidence && (
               <EvidenceReplay
                 data={visibleEvidence}
+                language={language}
                 onClose={() => setShowEvidence(false)}
                 focus={focus}
               />
@@ -719,6 +755,23 @@ export default function MatchDesk({
                 onEvidence={() => void loadEvidence()}
                 onRecap={() => void catchUp()}
                 onWholePlay={() => changeFocus("")}
+                viewingEarlier={
+                  !!selectedStoryId &&
+                  !!audienceStory &&
+                  audienceStory.id !==
+                    (match?.overlay_story_id || liveApproved?.id)
+                }
+                onReturnLive={() => {
+                  setFocus("");
+                  setSelectedStoryId("");
+                  setShowEvidence(false);
+                  document
+                    .getElementById("live")
+                    ?.scrollIntoView({ block: "start" });
+                  document
+                    .getElementById("live")
+                    ?.focus({ preventScroll: true });
+                }}
                 controls={
                   <AudienceControls
                     language={language}
@@ -1012,10 +1065,16 @@ export default function MatchDesk({
           </Card>
         )}
         <footer className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-stone-200 pt-5 text-xs text-stone-400">
-          <span>WHY/NOW · See the play. Understand the moment.</span>
           <span>
-            Fictional identities · Original synthetic data ·{" "}
-            {match?.mode || "Connecting"}
+            {language === "es"
+              ? "WHY/NOW · Mira la jugada. Entiende el momento."
+              : "WHY/NOW · See the play. Understand the moment."}
+          </span>
+          <span>
+            {language === "es"
+              ? "Identidades ficticias · Datos sintéticos originales"
+              : "Fictional identities · Original synthetic data"}{" "}
+            · {match?.mode || "Connecting"}
           </span>
         </footer>
       </div>

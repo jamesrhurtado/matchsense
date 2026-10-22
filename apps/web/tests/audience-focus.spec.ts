@@ -33,3 +33,39 @@ test('retracting the only relevant story removes focused content and derived rec
  await page.goto('/watch/focus-demo');await page.getByLabel('Follow a player or team').selectOption('blue-07');await expect(page.getByTestId('audience-explanation')).toContainText('First');await page.getByRole('button',{name:'Catch me up',exact:true}).click();await expect(page.getByText('First recap wording',{exact:true})).toBeVisible();await expect(page.getByText('Second recap wording',{exact:true})).toHaveCount(0);
  retracted=true;await expect(page.getByText('No approved involvement in this interval.',{exact:true})).toBeVisible({timeout:6000});await expect(page.getByText('First recap wording',{exact:true})).toHaveCount(0);await expect(page.getByRole('button',{name:'Show why',exact:true})).toBeDisabled();await expect(page.getByText('The shared second overlay',{exact:true})).toBeVisible();
 });
+
+test('return to live leaves shared overlay untouched and clears historical focus',async({page})=>{
+ await mock(page);const mutations:string[]=[];
+ page.on('request',request=>{if(request.method()!=='GET'&&request.url().includes('/api/'))mutations.push(request.url());});
+ await page.goto('/watch/focus-demo');
+ await page.getByLabel('Follow a player or team').selectOption('blue-07');
+ await expect(page.getByTestId('earlier-moment')).toContainText('Viewing an earlier moment');
+ await expect(page.getByText('The shared second overlay',{exact:true})).toBeVisible();
+ await page.getByRole('button',{name:'Return to live',exact:true}).click();
+ await expect(page.getByTestId('audience-explanation')).toContainText('Second');
+ await expect(page.getByTestId('earlier-moment')).toHaveCount(0);
+ await expect(page.getByLabel('Follow a player or team')).toHaveValue('');
+ await expect(page.getByText('The shared second overlay',{exact:true})).toBeVisible();
+ await expect(page.getByLabel('Live replay',{exact:true})).toBeFocused();
+ expect(mutations.filter(url=>!url.endsWith('/render-ack'))).toEqual([]);
+});
+
+test('comparison preserves signed values, highlights current pass, and explains a rounded tie',async({page},testInfo)=>{
+ await mock(page);
+ await page.route('**/api/replay-sessions/focus-demo/stories/story-pass-2/variants*',route=>route.fulfill({json:{id:'v',text:'Supported comparison.',language:'en',detail:'simple',focus:null,clauses:[{id:'context',claim_ids:['c-context'],text:'Inspect the comparison.'}]}}));
+ await page.route('**/api/replay-sessions/focus-demo/stories/story-pass-2/evidence',route=>route.fulfill({json:{cutoff_ms:80000,frames:[],story:{...second,metrics:{forward_pass_m:18.084,reception_ms:69000,context:{status:'available',relation:'greater_than_all',comparators:[{pass_id:'older-negative',resolution_ms:19000,forward_m:-4.25},{pass_id:'older-zero',resolution_ms:39000,forward_m:0},{pass_id:'older-near-tie',resolution_ms:59000,forward_m:18.075}]},pressure_opponents_max:2,pressure_radius_m:5,pressure_samples:20,bypassed_count:3,bypassed_player_ids:[],progression_m:7,retention_window_ms:3000,coverage:1,source_message_ids:[],limitations:[],pass_start:{x_m:20,y_m:30},pass_end:{x_m:38.084,y_m:30},passer_id:'amber-07',receiver_id:'amber-04'}}}}));
+ await page.setViewportSize({width:390,height:844});await page.goto('/watch/focus-demo');
+ await page.getByText('Inspect the facts',{exact:true}).click();
+ await page.getByRole('button',{name:'Inspect the comparison.',exact:true}).click();
+ const comparison=page.getByTestId('pass-comparison');
+ await expect(comparison.getByRole('listitem').last()).toContainText('Current pass · 01:09');
+ await expect(comparison.getByRole('listitem').last()).toContainText('18.1 m');
+ await expect(comparison.getByRole('listitem').first()).toContainText('-4.3 m');
+ await expect(comparison).toContainText('Some values appear equal after rounding');
+ await page.getByText('Original values and sources',{exact:true}).click();
+ await expect(comparison.getByRole('table')).toContainText('18.084');
+ await expect(comparison.getByRole('table')).toContainText('18.075');
+ await expect(comparison.getByRole('table')).toContainText('-4.25');
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
+ await page.screenshot({path:testInfo.outputPath('comparison-mobile.png'),fullPage:true});
+});

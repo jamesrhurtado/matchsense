@@ -1,0 +1,18 @@
+{
+  "generator": "simulator.context_replays",
+  "status": "developer discovery; paired histories share one current-play backbone; football review pending",
+  "cases": [
+    {
+      "match_id": "match-57c134ad6e6457a4",
+      "compressed_sha256": "7ca9f613b16769e67da55d534a82420a5a7b1bdd9e46a2f46cae97b19e10304b",
+      "observations_sha256": "394be1104f5301683fd2628f9487dc33f5c58520aba667cace2c2c27ab40d382",
+      "metadata_sha256": "4953102b97075c4c519551e9e296581f41bc0c61b39e6c3aedf34b1ebe5d398b"
+    },
+    {
+      "match_id": "match-ace422836df75ecc",
+      "compressed_sha256": "3ef72f87cbe318d8c0b8f1425b8cf359942fcd5d620cf51c1ac7f304e51bef98",
+      "observations_sha256": "09354587b2acb7b59c3b53bf34d92660a790002a0714f67d4a6e561203bf06d1",
+      "metadata_sha256": "26eee864c73e429dc69dfe9b2f42d9d069c8c4da8e9c1bb9fe401ad09df489d1"
+    }
+  ]
+}

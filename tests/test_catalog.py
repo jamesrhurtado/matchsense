@@ -10,7 +10,9 @@ from engine.catalog import RUNTIME, duration_for_match, list_matches, load_runti
 
 def test_runtime_catalogue_contains_originals_and_all_added_cases():
     rows = list_matches()
-    assert len(rows) == 171
+    assert len(rows) == 173
+    assert len(rows[:-2])==171
+    assert all('Previous-pass history' in r['label'] for r in rows[-2:])
     assert [r['match_id'] for r in rows[:3]] == ['match-001','match-002','match-003']
     assert len({r['match_id'] for r in rows}) == len(rows)
     assert all(set(r) == {'match_id','label','duration_ms','synthetic'} for r in rows)

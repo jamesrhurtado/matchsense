@@ -14,7 +14,7 @@ def config():
             'max_estimated_cost':1,'input_per_million':1,'output_per_million':2,
             'rate_source':'test fixture, not a price quote','rate_date':'2026-10-21', 'currency':'USD',
             'deadline_utc':(datetime.now(timezone.utc)+timedelta(minutes=5)).isoformat(),
-            'model':'fake','deployment':'fake','api_version':'fake','prompt_version':'test',
+            'model':'fake','model_version':'fixture','deployment':'fake','api_version':'fake','prompt_version':'test',
             'tool_version':'test','renderer_version':'test','schema_version':'test'}
 
 
@@ -107,3 +107,29 @@ def test_real_adapter_forwards_limits_and_preserves_usage_after_final_validation
     assert response['outcome']=='failure' and response['package'] is None
     assert response['usage']=={'model_calls':2,'input_tokens':100,'output_tokens':20}
     assert response['reason']=='ValueError'
+
+
+def test_authored_context_reference_values_and_scope_match_aggregate_without_leaking_labels():
+    from evals.agentic.context_cases import context_cases
+    from engine.workflow import EvidenceTools
+    cases=context_cases()
+    assert len(cases)==8 and len({c.lineage for c in cases})==1
+    for case in cases:
+        context=EvidenceTools(case.runtime.metadata,case.runtime.observations,case.runtime.cutoff_ms,case.runtime.pass_id).get_recent_pass_context()
+        assert context['status']==case.reference['context_status']
+        assert context['relation']==case.reference['relation']
+        assert [p['pass_id'] for p in context['comparators']]==case.reference['comparator_ids']
+        assert set(asdict(case.runtime))=={'metadata','observations','cutoff_ms','pass_id'}
+
+
+def test_live_manifest_rejects_stale_renderer_or_unknown_provider_version():
+    from evals.agentic.run import validate_runtime_identifiers
+    settings={'schema_version':'3.0.0','renderer_version':'context-claims-v3',
+              'prompt_version':'director-critic-v3.0','tool_version':'evidence-tools-v3',
+              'deployment':'fixture','model':'fake','model_version':'fixture','api_version':'2024-10-21'}
+    env={'FOUNDRY_MODEL_DEPLOYMENT':'fixture','FOUNDRY_MODEL_NAME':'fake','FOUNDRY_MODEL_VERSION':'fixture'}
+    validate_runtime_identifiers(settings,env)
+    with pytest.raises(ValueError,match='renderer_version'):
+        validate_runtime_identifiers({**settings,'renderer_version':'claim-blocks-v2'},env)
+    with pytest.raises(ValueError,match='model_version'):
+        validate_runtime_identifiers(settings,{})

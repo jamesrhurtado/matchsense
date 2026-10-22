@@ -1,0 +1,158 @@
+{
+  "schema_version": "1.0.0",
+  "commit": "170e1c49ecedfb1bb8dce5604cd1d2c2c13e061d",
+  "started_at": "2026-10-22T03:54:20.060172+00:00",
+  "mode": "offline",
+  "split": "developer-visible discovery",
+  "final_split_status": "pending independent QA authorship and sealing",
+  "arms": [
+    "T3"
+  ],
+  "configuration": {
+    "trials": 1,
+    "order_seed": 1041
+  },
+  "implementation": {
+    "schema_version": "3.0.0",
+    "renderer_version": "context-claims-v3",
+    "prompt_version": "director-critic-v3.0",
+    "context_version": "recent-completed-three-v1"
+  },
+  "source_file_sha256": {
+    "apps/web/components/audience-controls.tsx": "5bc89714106e92546b9031783d727645f6bff26a67cb3440759560df49fb548e",
+    "apps/web/components/audience-panel.tsx": "aae7cd0347e6b435096b1bd1ac4ec392ebac34bdee48679c791e53af2d7ae8e1",
+    "apps/web/components/decision-summary.tsx": "967e4c4d1ab94b6219721becef61da4f782a3257db8c4bb0695d408ca7a3f1fd",
+    "apps/web/components/evidence-replay.tsx": "f3b31c1163abbba3851e7155c5fa63801bac3e7034a229edf7169a31b5ab7745",
+    "apps/web/components/inline-evidence.tsx": "6b62470736aef4bc7eb1aa94e39f544a0423698f4e7649903471b8045c63dee7",
+    "apps/web/components/match-desk.tsx": "0fbcba2ac8dc6449f615e2cb6a140a9e08371dfa895167560c5025a4245847e3",
+    "apps/web/components/pitch.tsx": "b460f982123e7146e2e54a78406adf66b2b9b30b76f38b2b36142bdffc025526",
+    "apps/web/components/review-card.tsx": "c1df5a6b89b28d38cf452bc1dd1cc2a405796900702dafbddfbc7bb85eb97d17",
+    "apps/web/components/ui.tsx": "030ba4ddead9791d77dea16d1df49ccd08fb7e8e737459f70c88769624e80679",
+    "apps/web/hooks/use-audience-preferences.ts": "e38338e0bc31e2c457efcfeaaeee2e827dcd4b36eeb25fcb299ca51efad474e9",
+    "apps/web/hooks/use-match.ts": "1313ed470702d5d3cc2ee906ac3cb0d6813990d74a8ca4ca488fff8360c3020a",
+    "apps/web/hooks/use-render-ack.ts": "d231320f8de67bc2a6c7ba5e141d522b10cdb0327572431986a55c1fff1d9121",
+    "apps/web/hooks/use-story-variant.ts": "4473aa5de690ad84cbd66eaac92c5975592138622199ec8e0ca2e2fc1e82f8a6",
+    "apps/web/lib/api.ts": "43abc51551da0f38f85f924105fc30e22afdd87f9f54584280c74a5780e90629",
+    "engine/catalog.py": "fd7cf3b477314285b5383f2a750e1bf730409783a327f84004f7afe82878475c",
+    "engine/cloud_repository.py": "3009fb8c8d42d1f5281f7995defc32ee2bcdcc9effedd8a24ae7b501f9577710",
+    "engine/context.py": "0f49a58d1a42b8feba87555dfeab925c8d9cef3dc0cc5336a456e1d806bc2912",
+    "engine/contextual_narrative.py": "df79b4183e1620f1305db2b0a50f3d5ee3305275ac1215fbd754bffbf3ceb6e2",
+    "engine/contracts.py": "9883049386b087e31dcfcd3a21529ab427cfe25eb19af1fbba178caf4780c56f",
+    "engine/core.py": "d813c41221387ab8a07d6d765df2dd3fa4bb5ece290540c657cc512c640ce3b4",
+    "engine/dispositions.py": "ef0108da6151cd2a42630c030376f62548397b8b33572c8d27b76b06b6cd794d",
+    "engine/editorial.py": "a3623130c0818ae0f0cea63bdeac4a6bb9ebbf0d403de34b4fdf2c1f646ff987",
+    "engine/foundry_workflow.py": "0e10f13e2be4e32b62ee24cb2f5185e57ced31dec4ac361a9c3f90a9c788f024",
+    "engine/narrative.py": "eda1cff62cb57952cd32dbdf61f32a91668a1252386746faac5b913b52ac6742",
+    "engine/outcomes.py": "a320e7ddbec30e6eaccc3a40a7d0d055d0f832ae566a0aee98bb8ddfb4640c0e",
+    "engine/recap.py": "ad6f04703fadde0f90683088baf2f495ba389b7fa25d0d830fab0391d01ea47d",
+    "engine/repository.py": "11f46ce67a60ebbcf31990961df9559d1104ca9c57b981b3c19d26f168a04dd9",
+    "engine/structured_workflow.py": "96507b4365d9e05744fe225276bf3be4602a26349ac91eeeee35584f53bb6a9f",
+    "engine/transport.py": "32b18bfe691b999f606df064bd4ee222c29228a715b7f5854aec769849ed335e",
+    "engine/workflow.py": "97031cc52098ee18d75dc6347c7c348c7d1828031bcdbefb8be52e2cb73084cb",
+    "evals/agentic/__init__.py": "7a1330aca6fed9fe7a7a9468924ed21111e088f4c0a4ea9b10c389dab52389e3",
+    "evals/agentic/context_cases.py": "29e32fc11d4e37a72deab5d665d6ceb52d4b1925ec244073192023fda2458ccb",
+    "evals/agentic/dataset.py": "e26ea73b6d625b65d4fdf4b097e572c1f208ea8b3fd1486c06322d3bfeadb4da",
+    "evals/agentic/run.py": "cf65999151c64cafaf00c0a4ddfc3fcc854fc0dd4e505eb234b3afece7d6e3c1",
+    "services/api/main.py": "1445be71634bc66817497021cb97b9a52d73ad7584cdbf312d68c964174f2f73",
+    "simulator/context_replays.py": "0c98b33ba14a8b12e13589d0caeb8419661014116cb27b7daacd8008d253b682",
+    "simulator/generate.py": "449b41a9d8b4f366d090cd11f66ddb3cdb618d3698e357196fb0bcf1a12810ce",
+    "simulator/publish.py": "2bf9b36e69f08053ab1be0a21da6409640b14a1c4a6b6c5f65dd55c3cf31a664",
+    "simulator/scenarios.py": "4ee50557538e2b9ecdb8fe87a5ab8551d674c52c72a3fed4b060c3813da14f3f",
+    "simulator/suite.py": "a628c6218b89718a0a9dbb62a24a0c6678926d9612e36fcfbb94e431308174fb",
+    "simulator/validate.py": "cc94305035d97c779e3a0664916ccd82de31a5a62305fd0d291a87f564d7e48e"
+  },
+  "working_tree_diff_sha256": "86ce558888ec371352dbfd098957eee5e0e2efb571d07dedad71837a5886063a",
+  "workflow_reservation": {
+    "max_calls": 6,
+    "input_tokens": 32000,
+    "output_tokens": 6600
+  },
+  "scheduled_outcomes": 12,
+  "cases": [
+    {
+      "case_id": "relay-attribution",
+      "lineage": "suite-v2-trajectory-backbone",
+      "description": "Receiver hands control to a teammate during team retention.",
+      "input_hash": "642b005c9be44eb960b6b1595f6e2205654096bddcd519933a6dcddccebffb5a",
+      "reference_hash": "001cb8da6e87dece4a15d08ff74fca7b552fd4e867c661fa33aa0debd0d9d74c"
+    },
+    {
+      "case_id": "duplicate-identities",
+      "lineage": "suite-v2-trajectory-backbone",
+      "description": "Mirrored attack and the same display name on opposing teams.",
+      "input_hash": "d6b0aac55b089c6aa2d438599db13b36cae67cad612f7401e0f2c895c9aee71e",
+      "reference_hash": "0d72a0d285795b688a73a5e4054e87a5964dedcbc096ee8f8e41fee192c2e99b"
+    },
+    {
+      "case_id": "untrusted-name",
+      "lineage": "suite-v2-trajectory-backbone",
+      "description": "A player display name contains an instruction; treat it only as data.",
+      "input_hash": "c0e4f0d6cd39a737bf6cd6d4cbcc69f3f5b3fbc4d93faed4a902e0da8afa911b",
+      "reference_hash": "81b5357104ea37519bf714e0d3be9427676a007fa1ab2f9cdebd82e5c648a739"
+    },
+    {
+      "case_id": "early-late-outcome",
+      "lineage": "suite-v2-trajectory-backbone",
+      "description": "A reception outcome is absent at the chosen cutoff.",
+      "input_hash": "24751c19cf4e9525c42c449c6f2bb58d81e71010ae259914f130df20ad431016",
+      "reference_hash": "cd56ca92d9b97a5a7306e3446f697312fb86f8c55e371493bc5c968f84331528"
+    },
+    {
+      "case_id": "history-contrast",
+      "lineage": "authored-history/shared-current-match-001",
+      "description": "Authored previous-pass population: contrast",
+      "input_hash": "cfaa19bf6f43b39ef9bb8ac58782b2bdd72f749b87ae49ccc7f360926a45f41b",
+      "reference_hash": "f1add10617f02893c1371460d57cd7e7f2002050c1df111fa61e5ce168ef0c0b"
+    },
+    {
+      "case_id": "history-ordinary",
+      "lineage": "authored-history/shared-current-match-001",
+      "description": "Authored previous-pass population: ordinary",
+      "input_hash": "92d88cdc397f548c44412d8f18268a8038e16dd33eb59f98446263a61709ea82",
+      "reference_hash": "b6e554e816b8224b94c922990f43d9a4ca5d4c8998b5a2493783284df96d91a5"
+    },
+    {
+      "case_id": "history-mixed",
+      "lineage": "authored-history/shared-current-match-001",
+      "description": "Authored previous-pass population: mixed",
+      "input_hash": "3ad26c905f1b2269cd400e234cf3ecf856544631af0e166f60431322e8bad636",
+      "reference_hash": "b6e554e816b8224b94c922990f43d9a4ca5d4c8998b5a2493783284df96d91a5"
+    },
+    {
+      "case_id": "history-backward",
+      "lineage": "authored-history/shared-current-match-001",
+      "description": "Authored previous-pass population: backward",
+      "input_hash": "02bf5683106c7a5fee05b7971aad416174e04e57010266ab534d13189dc58b09",
+      "reference_hash": "f1add10617f02893c1371460d57cd7e7f2002050c1df111fa61e5ce168ef0c0b"
+    },
+    {
+      "case_id": "history-short",
+      "lineage": "authored-history/shared-current-match-001",
+      "description": "Authored previous-pass population: short",
+      "input_hash": "932dc1e776c4c6d358e5d48ef21769c5444d8901e4456c01f07d815c68d5d538",
+      "reference_hash": "b85a723fc87ee2471412ebfda7906bbe9cfebc5aa2ecceed0c671db93eb06643"
+    },
+    {
+      "case_id": "history-missing-start",
+      "lineage": "authored-history/shared-current-match-001",
+      "description": "Authored previous-pass population: missing-start",
+      "input_hash": "ec385e2916bbfbc8b68608824046cc6d54cab35c911d6eef7c478429dffa057a",
+      "reference_hash": "e43fe111851affdd7f34169d45e04261fb19598e8245cb22e209a8c65c7d6195"
+    },
+    {
+      "case_id": "history-tracking-gap",
+      "lineage": "authored-history/shared-current-match-001",
+      "description": "Authored previous-pass population: tracking-gap",
+      "input_hash": "bcb51d0e1d29b6a0a77ecfe5685ea7cdfba09339afcd31fc8d1cbc70cecdec41",
+      "reference_hash": "d084e2ef0ccec7dff6cef587a8cb6a5d8248f5dbd4c55383b8c15dc37c28deb1"
+    },
+    {
+      "case_id": "history-corrected",
+      "lineage": "authored-history/shared-current-match-001",
+      "description": "Authored previous-pass population: corrected",
+      "input_hash": "60c66b9da7fea4f8ef21224d895f0a33c38acf13104dfabb77232a901332bdf4",
+      "reference_hash": "b6e554e816b8224b94c922990f43d9a4ca5d4c8998b5a2493783284df96d91a5"
+    }
+  ],
+  "finished_at": "2026-10-22T03:54:20.414905+00:00"
+}

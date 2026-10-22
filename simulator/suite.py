@@ -34,7 +34,7 @@ def _interpolate(knots, t):
     return knots[-1][1]
 
 
-def generate_case(case: Case) -> Dataset:
+def generate_case(case: Case, *, passage_schedule=None) -> Dataset:
     parent, family = case.parent, case.family
     rng = random.Random(parent.seed)
     team = parent.team
@@ -66,9 +66,14 @@ def generate_case(case: Case) -> Dataset:
     }
     duration = 180000 if family == 'long_session' else 90000 if family == 'multiple_passes' else 60000
     releases = [parent.release_ms + i * 60000 for i in range(3)] if family == 'long_session' else [parent.release_ms, parent.release_ms + 35000] if family == 'multiple_passes' else [parent.release_ms]
+    if passage_schedule is not None:
+        releases=[row['release_ms'] for row in passage_schedule]
+        duration=max(150000,releases[-1]+30000)
     plans = []
     for index, start in enumerate(releases):
         sx, cy, distance = parent.x, parent.y, parent.distance
+        if passage_schedule is not None:
+            distance=passage_schedule[index]['forward_m']
         ex, ey = sx + distance, cy + 3
         if family == 'backward_pass': ex = sx - 12
         if family == 'lateral_pass': ex = sx; ey = cy + 14

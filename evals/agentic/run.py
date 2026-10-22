@@ -7,6 +7,8 @@ from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 import json
 import math
+import os
+import hashlib
 from pathlib import Path
 import random
 import subprocess
@@ -66,7 +68,7 @@ class BudgetLedger:
 
 
 async def template_adapter(request, policy):
-    from engine.narrative import build_structured_package
+    from engine.contextual_narrative import build_contextual_package as build_structured_package
     from engine.workflow import EvidenceTools
     package = build_structured_package(EvidenceTools(request.metadata,request.observations,request.cutoff_ms,request.pass_id))
     return {'outcome':'template' if package else 'abstention','package':package,
@@ -104,7 +106,7 @@ def agent_adapter(strategy):
 def validate_live(config):
     required = ('max_model_calls','max_input_tokens','max_output_tokens','max_estimated_cost',
                 'input_per_million','output_per_million','rate_source','rate_date','currency',
-                'deadline_utc','model','deployment','api_version','prompt_version','tool_version','renderer_version','schema_version')
+                'deadline_utc','model','model_version','deployment','api_version','prompt_version','tool_version','renderer_version','schema_version')
     missing = [key for key in required if not config.get(key)]
     if missing:
         raise ValueError('Live run requires explicit configuration: '+', '.join(missing))
@@ -116,6 +118,25 @@ def validate_live(config):
         raise ValueError('deadline_utc must be a future timezone-aware timestamp')
 
 
+def validate_runtime_identifiers(config, environ):
+    expected={'schema_version':'3.0.0','renderer_version':'context-claims-v3',
+              'prompt_version':'director-critic-v3.0','tool_version':'evidence-tools-v3'}
+    expected.update(deployment=environ.get('FOUNDRY_MODEL_DEPLOYMENT'),
+                    api_version=environ.get('AZURE_OPENAI_API_VERSION','2024-10-21'),
+                    model=environ.get('FOUNDRY_MODEL_NAME'),model_version=environ.get('FOUNDRY_MODEL_VERSION'))
+    mismatch=[key for key,value in expected.items() if not value or config.get(key)!=value]
+    if mismatch:
+        raise ValueError('Live manifest does not match configured implementation/provider: '+', '.join(mismatch))
+
+
+def source_fingerprints():
+    root=Path(__file__).resolve().parents[2]
+    patterns=['engine/*.py','services/api/*.py','evals/agentic/*.py','simulator/*.py',
+              'apps/web/components/*.tsx','apps/web/hooks/*.ts','apps/web/lib/api.ts']
+    files=sorted({p for pattern in patterns for p in root.glob(pattern)})
+    return {str(p.relative_to(root)):hashlib.sha256(p.read_bytes()).hexdigest() for p in files}
+
+
 async def evaluate(cases, adapters, config, live=False):
     if type(config.get('trials',1)) is not int or config.get('trials',1)<1:
         raise ValueError('trials must be a positive integer')
@@ -124,7 +145,7 @@ async def evaluate(cases, adapters, config, live=False):
         validate_live(config)
     ledger = BudgetLedger(config) if live else None
     rows = []
-    jobs = [(case,arm,trial) for case in cases for arm in adapters for trial in range(1 if arm=='T2' else config.get('trials',1))]
+    jobs = [(case,arm,trial) for case in cases for arm in adapters for trial in range(1 if arm in {'T2','T3'} else config.get('trials',1))]
     random.Random(config.get('order_seed',1041)).shuffle(jobs)
     stopped = False
     for case,arm,trial in jobs:
@@ -133,7 +154,7 @@ async def evaluate(cases, adapters, config, live=False):
                'input_hash':fingerprint(asdict(case.runtime)), 'reference_hash':fingerprint(case.reference),
                'expected_story':case.reference['expected_story'], 'human_rating':None,
                'usage':{'model_calls':None,'input_tokens':None,'output_tokens':None}}
-        is_model = arm != 'T2'
+        is_model = arm not in {'T2','T3'}
         expired = live and datetime.now(timezone.utc)>=datetime.fromisoformat(config['deadline_utc'].replace('Z','+00:00'))
         reserved = False
         if is_model and live:
@@ -173,7 +194,7 @@ def report(rows, live):
     lines += ['', 'These developer-visible challenge compositions share the existing trajectory generator. ',
               'They are not a blind final set or independent evidence of real-match accuracy. ',
               'No agent superiority, usefulness, human acceptance, or Grand Prize score is established.',
-              'L1 is excluded from matched T2/S2/M2 comparisons and requires a separately budgeted historical run.',
+              'L1 is excluded from matched T3/S3/M3 comparisons and requires a separately budgeted historical run.',
               'Unknown usage retains its full reservation. Provider cancellation does not guarantee zero billing.']
     return '\n'.join(lines)+'\n'
 
@@ -186,21 +207,27 @@ def main():
     parser.add_argument('--dry-run',action='store_true')
     args = parser.parse_args()
     config = json.loads(args.config.read_text()) if args.config else {'trials':1,'order_seed':1041}
-    allowed_config = {'trials','order_seed','max_model_calls','max_input_tokens','max_output_tokens','max_estimated_cost', 'input_per_million','output_per_million','rate_source','rate_date','currency','deadline_utc','model','deployment','api_version','prompt_version','tool_version','renderer_version','schema_version'}
+    allowed_config = {'trials','order_seed','max_model_calls','max_input_tokens','max_output_tokens','max_estimated_cost', 'input_per_million','output_per_million','rate_source','rate_date','currency','deadline_utc','model','model_version','deployment','api_version','prompt_version','tool_version','renderer_version','schema_version'}
     if set(config)-allowed_config:
         raise ValueError('Unknown configuration fields; credentials belong only in the environment.')
     if args.live:
         validate_live(config)
-    adapters = {'T2':template_adapter}
+        validate_runtime_identifiers(config,os.environ)
+    adapters = {'T3':template_adapter}
     if args.live:
-        adapters.update(S2=agent_adapter('single'),M2=agent_adapter('collaborative'))
-    cases = discovery_cases()
+        adapters.update(S3=agent_adapter('single'),M3=agent_adapter('collaborative'))
+    from .context_cases import context_cases
+    cases = discovery_cases()+context_cases()
     revision = subprocess.run(['git','rev-parse','HEAD'],capture_output=True,text=True,check=True).stdout.strip()
     manifest = {'schema_version':'1.0.0','commit':revision,'started_at':datetime.now(timezone.utc).isoformat(),
                 'mode':'live' if args.live else 'offline','split':'developer-visible discovery',
                 'final_split_status':'pending independent QA authorship and sealing',
-                'arms':list(adapters),'configuration':config,'workflow_reservation':asdict(WorkflowBudget()),
-                'scheduled_outcomes':len(cases)*sum(1 if arm=='T2' else config.get('trials',1) for arm in adapters),
+                'arms':list(adapters),'configuration':config,'implementation':{'schema_version':'3.0.0','renderer_version':'context-claims-v3',
+                'prompt_version':'director-critic-v3.0','context_version':'recent-completed-three-v1'},
+                'source_file_sha256':source_fingerprints(),
+                'working_tree_diff_sha256':fingerprint(subprocess.run(['git','diff','HEAD'],capture_output=True,text=True,check=True).stdout),
+                'workflow_reservation':asdict(WorkflowBudget()),
+                'scheduled_outcomes':len(cases)*sum(1 if arm in {'T2','T3'} else config.get('trials',1) for arm in adapters),
                 'cases':[{'case_id':c.case_id,'lineage':c.lineage,'description':c.description,
                           'input_hash':fingerprint(asdict(c.runtime)),'reference_hash':fingerprint(c.reference)} for c in cases]}
     if args.dry_run:

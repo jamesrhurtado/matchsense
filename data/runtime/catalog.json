@@ -1024,5 +1024,17 @@
     "label": "Synthetic segment 168 \u00b7 3 min",
     "duration_ms": 180000,
     "synthetic": true
+  },
+  {
+    "match_id": "match-57c134ad6e6457a4",
+    "label": "Previous-pass history A \u00b7 5 moments \u00b7 2.5 min",
+    "duration_ms": 150000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-ace422836df75ecc",
+    "label": "Previous-pass history B \u00b7 5 moments \u00b7 2.5 min",
+    "duration_ms": 150000,
+    "synthetic": true
   }
 ]

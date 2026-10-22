@@ -12,7 +12,7 @@ The local application implements synthetic replay → deterministic metrics → 
 
 Local mode uses **deterministic claim selection and bilingual rendering**. It does not call an AI model. The hosted environment adds Microsoft Agent Framework with Azure OpenAI, Event Hubs transport, Cosmos persistence and managed-identity access. The default local mode remains available for offline development. Actual resources are documented in [docs/azure](docs/azure/README.md).
 
-Version 0.4 adds scoped claim blocks and a two-role Story Director / Claim Reviewer workflow. The model selects and orders verified facts; bilingual wording, names, values, actor roles and qualifications resolve through the validated renderer. Explanations include forward pass displacement and reception zone, separate from subsequent team progression. Each workflow attempt has a durable outcome, including abstention and rejection. Existing version 1 packages remain readable; new application generation defaults to version 2. [Iteration status](docs/next-iteration/decision-log.md) distinguishes completed implementation from pending model comparisons and human studies.
+The current local iteration adds bounded previous-pass context, distinct factual titles, a compact mobile evidence pitch, role-first player views and grouped approved recaps to the two-role Story Director / Claim Reviewer workflow. The model selects and orders verified facts; bilingual wording, names, values, actor roles and qualifications resolve through the validated renderer. Explanations include forward pass displacement and reception zone, separate from subsequent team progression. Each workflow attempt has a durable outcome, including abstention and rejection. Stored version 1 and 2 packages remain readable with unchanged text/hashes; new structured generation produces version 3. [Iteration status](docs/next-iteration/decision-log.md) distinguishes completed implementation from pending model comparisons and human studies.
 
 ## Run locally
 
@@ -67,7 +67,15 @@ make synthetic-data
 make synthetic-evaluate
 ```
 
-Runtime exports contain only observations; seeds, fault plans, clean future trajectories and expected results are separate offline files. The application catalogue offers all 171 replays, including three-minute segments. Each pass has its own investigation, approval and recap entry; viewers can select approved history without changing the shared live overlay. All 168 constructed cases and 594 checkpoints pass with unchanged inputs and references. Synthetic results do not establish real football accuracy. The expanded suite also caught and now guards a distance-rounding defect.
+Runtime exports contain only observations; seeds, fault plans, clean future trajectories and expected results are separate offline files. The application catalogue offers all 173 replays, including three-minute segments. Each pass has its own investigation, approval and recap entry; viewers can select approved history without changing the shared live overlay. All 168 constructed cases and 594 checkpoints pass with unchanged inputs and references. Synthetic results do not establish real football accuracy. The expanded suite also caught and now guards a distance-rounding defect.
+
+## Try contextual explanations
+
+Choose **Previous-pass history A** or **B** on the landing page. Both contain five moments over 2.5 minutes. In the producer console, jump to second 95 and select Moment 4. The present passage is identical: 30 m forward. History A has previous completed passes of 16, 12 and 8 m; B has 36, 34 and 32 m. Only A supports a comparison. Inspect the exact evidence, approve, then open the viewer companion. Select **Inspect the facts** and the comparison sentence to see the three-pass table. Replay history stays collapsed on phones.
+
+Producer **Suggest an emphasis** offers movement/reception and supported previous-pass comparison. Each edit creates a new exact proposal for approval. Recap groups similar approved facts, links to their moments and never claims a trend. The two new replays are developer discovery material sharing one trajectory backbone; they do not establish independent football validity. Regenerate with `.venv313/bin/python -m simulator.context_replays`.
+
+See [current delivery status](docs/next-iteration/decision-log.md), [runtime measurements](docs/runtime-performance.md) and [validation gaps](docs/product-validation.md). The 90+ reassessment remains open pending human/model/operational evidence.
 
 ## Repository map
 
@@ -77,7 +85,7 @@ Runtime exports contain only observations; seeds, fault plans, clean future traj
 | `services/api` | FastAPI, producer authorization, SSE, approval and recap APIs |
 | `engine` | Contracts, time-scoped metrics, bounded template/Foundry workflows, SQLite/Cosmos repositories and Event Hubs transport |
 | `simulator` | Seeded generator and independent structural/physical checks |
-| `data/runtime` | 171 observation-only runtime fixtures: metadata and JSON Lines/gzip observations |
+| `data/runtime` | 173 observation-only runtime fixtures: metadata and JSON Lines/gzip observations |
 | `data/schemas` | Versioned JSON Schemas exported from Pydantic contracts |
 | `data/evaluation-only`, `evals` | Offline labels, split configurations and results; never exposed through runtime tools |
 | `docs` | Architecture, metric definitions, demo guide, implementation status, Azure specifications |
@@ -85,6 +93,8 @@ Runtime exports contain only observations; seeds, fault plans, clean future traj
 ## Delivery status and limits
 
 The local and Azure implementations are available; see the QA guide for completed live checks and remaining test boundaries. Competition submission packaging remains pending. [Implementation status](docs/implementation-status.md) maps the handoff's acceptance phases to evidence and outstanding work. [Demo guide](docs/demo.md) describes what can honestly be shown now.
+
+The [PM update handoff](docs/next-iteration/pm-update-handoff.md) summarizes the contextual update, verification, ordered implementation commits and remaining release gates.
 
 The [90+ product improvement plan](docs/next-iteration/grand-prize-90-plus-plan.md) is the current engineering handoff, based on version 0.4. It specifies changes by judging category, agent/context contracts, priorities, dependencies, acceptance tests and evaluation gates, excluding submission logistics. The [implementation record](docs/next-iteration/decision-log.md) identifies delivered changes and outstanding evidence; the [earlier plan](docs/next-iteration/README.md) remains available as historical context.
 

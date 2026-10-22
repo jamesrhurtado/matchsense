@@ -23,3 +23,23 @@ The detector's eligibility and thresholds remain `pressure-escape-v1`. New narra
 Examples: a rightward pass from 35 m to 54 m moves 19 m forward and is received in the middle third; the mirrored pass from 70 m to 51 m has the same meaning. A 69.999 m reception is middle, while 70 m is attacking. Neither observation proves chance creation, pass difficulty, a tactical line break or a formal final-third entry. These definitions have engineering tests; external football review remains pending.
 
 No probability of importance, confidence percentage, player intent, causal tactical story, real-match accuracy or sustained match-control claim is derived. The MVP investigates each delivered pass independently and retains separate story identities and approvals. The shared overlay uses the newest live approved moment; professional editorial ranking and cooldown across a complete match remain future work.
+
+## Context contract v3 — 21 October 2026 iteration
+
+`recent-completed-three-v1` is a bounded aggregate tool, separate from the 15 s raw-observation window. It compares signed forward pass displacement in metres, using the team's period attack direction. It does not compare post-reception carry, pass difficulty, chance creation or tactical value.
+
+Population: this team's successful received passes in this period, resolved strictly before the current release, with resolution at or after `max(period start, replay start, release − 120000 ms)`. Select the latest three by descending resolution time, then ascending stable pass ID. Current pass excluded. Deduplication/corrections use the existing delivered-lineage resolver. Release/reception endpoints must be valid, paired and attributed to a verified receiving team/player. A comparator's release may precede the lower boundary; its resolution controls inclusion.
+
+Fewer than three means `insufficient_history`. Unpaired relevant endpoints, invalid attribution/coordinates, or tracking gaps exceeding 200 ms across the retained window mean `incomplete_history`. Both forbid comparison. A source that silently omits both pass events cannot be detected from tracking alone: the supported incoming-feed contract requires event completeness. Wording remains explicitly limited to **this replay**. No claim of source-independent completeness or match-wide ranking is made.
+
+Only `current raw forward displacement > each of all three selected raw values` permits `c-context`. Equality or mixed values omit comparison. The evidence table shows raw signed distances. At 30 m against [16, 12, 8], comparison is allowed; at 30 m against [36, 34, 32], or [30, 12, 8], it is not. Other-team, other-period, future and not-yet-delivered observations cannot enter the population.
+
+The context record retains team/period, window, dependency availability cutoff, comparator IDs/times/measurements, endpoint IDs/hashes, eligibility population IDs/hashes, completeness, relation and limitation. Its semantic fingerprint excludes the availability timestamp itself: a correction that leaves tracking continuity unchanged must not revoke an unrelated explanation merely because it arrived later. Endpoint/population hashes, coverage status and all measurements remain bound. Package evidence identity combines the original current-play revision with this context fingerprint. Moving the clock alone does not create a new revision.
+
+Corrections, late insertion, corrected exclusions and boundary/tie changes are recomputed against the relevant windows during materialization. Original approved packages remain immutable; invalidated projections lose approval and require review of a new exact revision. This first implementation uses bounded-window recomputation rather than a persistent reverse dependency index. The optimized index and its retention policy remain T02 work.
+
+## Recap selection contract
+
+`distinct-approved-v1` filters exact authorized approved revisions and verified focus **before** selection. Signature: ordered predicate, actor/team ID, comparison relation where present, and measurement bucket. Metres use `floor(value / 10)` (9.9 → 0; 10 → 1; −0.1 → −1); seconds/player counts remain exact and zones categorical. Exact actor IDs distinguish identical names.
+
+Keep the earliest representative per equivalent signature and its complete member IDs/revisions/times, then retain the newest three distinct signatures in chronology. Similarity never creates a trend claim. Approved counts, distinct counts, selection reason and an input-revision projection hash remain inspectable. Retractions recompute the projection. Expired approved entries are archival and do not revive the live overlay. All approved history stays accessible.

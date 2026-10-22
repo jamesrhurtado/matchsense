@@ -79,3 +79,11 @@ def test_reviewer_ablation_is_explicit_and_never_selected_by_production_default(
                               strategy='director_only',evaluation_only=True)
     assert p['model_usage']['calls']==1
     assert any(t['action']=='evaluation_no_reviewer' for t in p['trace'])
+
+
+def test_public_decision_summary_uses_the_exact_versioned_display_precision():
+    from engine.editorial import decision_summary
+    p=package()
+    summary=decision_summary(p,[])
+    assert summary['lead']==p['variants'][0]['clauses'][0]['text']
+    assert '18.084' not in summary['lead']

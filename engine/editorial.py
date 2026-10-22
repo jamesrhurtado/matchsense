@@ -20,7 +20,11 @@ def decision_summary(package, outcomes):
     if package and plan:
         cid = plan['simple_claim_ids'][0]
         claim = next(c for c in package['claims'] if c['id']==cid)
-        lead = render(claim, 'en', metrics)
+        if package['schema_version']=='4.0.0':
+            from engine.editorial_narrative import render as selected_render
+        else:
+            selected_render=render
+        lead = selected_render(claim, 'en', metrics)
     changes = [f'Reviewer requested a repair: {t.get("reason", "No reason recorded.")}'
                for t in verdicts if t['status']=='revise']
     if changes and package:

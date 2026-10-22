@@ -110,7 +110,7 @@ async def lifespan(app):
 
 TOKEN=os.getenv('WHY_NOW_PRODUCER_TOKEN','local-demo-producer')
 LOCK=threading.RLock()
-app=FastAPI(title='WHY/NOW',version='0.4.0',lifespan=lifespan)
+app=FastAPI(title='WHY/NOW',version='0.5.0',lifespan=lifespan)
 if os.getenv('APPLICATIONINSIGHTS_CONNECTION_STRING'):
     from azure.monitor.opentelemetry import configure_azure_monitor
     from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
@@ -332,7 +332,7 @@ def authorized_package(sid,story_id,token=None):
     return s,at,p,status
 
 @app.get('/api/health')
-def health():return {'ok':True,'mode':runtime_mode(),'azure_deployed':CLOUD,'version':'0.4.0','narrative_version':'2' if STRUCTURED else '1'}
+def health():return {'ok':True,'mode':runtime_mode(),'azure_deployed':CLOUD,'version':'0.5.0','narrative_version':'4' if STRUCTURED else '1'}
 
 @app.get('/api/ready')
 def ready():

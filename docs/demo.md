@@ -1,5 +1,7 @@
 # Demonstrating WHY/NOW
 
+For the current v0.5 candidate, use the [presenter script and rehearsal run sheet](demo-script-v4.md): a four-minute product walkthrough, two-minute cut, exact contextual replay setup, and narration for actual AI or local template mode. The hosted instructions below describe the earlier engineering build.
+
 ## Hosted rehearsal
 
 Open the public application with the private producer key described in [QA guide](qa.md). The catalogue contains the original three replays plus 168 expanded synthetic segments. Choose **Synthetic segment 028 · 3 min** (`match-ce88c61d5a0c5d1d`) for the multi-moment demo. It has passes at 12 s, 72 s and 132 s; confirmations occur at 16.2 s, 76.2 s and 136.2 s. The actor names are Beni Prado (passer) and Jori Luna (receiver).

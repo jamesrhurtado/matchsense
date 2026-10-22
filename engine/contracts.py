@@ -236,7 +236,7 @@ class StructuredVariant(AudienceVariant):
     clauses:list[AudienceClause]=Field(min_length=1)
 
 class PublicationPackage(Strict):
-    schema_version:Literal['1.0.0','2.0.0','3.0.0']
+    schema_version:Literal['1.0.0','2.0.0','3.0.0','4.0.0']
     id:str
     revision:int=Field(ge=1)
     title:str
@@ -272,5 +272,11 @@ class PublicationPackage(Strict):
             if not all(isinstance(c,EvidenceClaim) for c in self.claims):raise ValueError('unscoped_claim')
             if not all(isinstance(v,StructuredVariant) for v in self.variants):raise ValueError('unbound_variant')
             from engine.contextual_narrative import validate_realization
+            validate_realization(self.model_dump())
+        if self.schema_version=='4.0.0':
+            if not self.narrative_plan or self.renderer_version!='editorial-claims-v4':raise ValueError('missing_narrative_plan')
+            if not all(isinstance(c,EvidenceClaim) for c in self.claims):raise ValueError('unscoped_claim')
+            if not all(isinstance(v,StructuredVariant) for v in self.variants):raise ValueError('unbound_variant')
+            from engine.editorial_narrative import validate_realization
             validate_realization(self.model_dump())
         return self

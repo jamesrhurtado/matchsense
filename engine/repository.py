@@ -92,6 +92,18 @@ class Repository:
     def latest_package(self,sid,story_id=None):
         with self.connect() as c:return self._latest(c,sid,story_id)
 
+    def stored_package(self, sid, story_id, revision):
+        """Read an immutable revision without advancing publication pointers."""
+        with self.connect() as c:
+            row = c.execute('SELECT data FROM story_packages WHERE session_id=? AND story_id=? AND revision=?',
+                            (sid, story_id, revision)).fetchone()
+            if row:
+                return json.loads(row['data'])
+            row = c.execute('SELECT data FROM packages WHERE session_id=? AND revision=?',
+                            (sid, revision)).fetchone()
+            package = json.loads(row['data']) if row else None
+            return package if package and package['id'] == story_id else None
+
     def list_packages(self,sid):
         with self.connect() as c:
             packages={}
@@ -137,8 +149,10 @@ class Repository:
             row=c.execute('SELECT request_hash,data FROM operations WHERE session_id=? AND operation_id=?',(sid,key)).fetchone()
             return {'request_hash':row['request_hash'],'data':json.loads(row['data'])} if row else None
 
-    def store_package(self,sid,package,at_ms,expected_revision=None):
+    def store_package(self,sid,package,at_ms,expected_revision=None,acceptance_events=()):
         from engine.cloud_repository import RepositoryConflict
+        from engine.dispositions import validate_acceptance_events
+        validate_acceptance_events(sid,package,acceptance_events)
         with self.connect() as c:
             c.execute('BEGIN IMMEDIATE')
             previous=self._latest(c,sid,package['id'])
@@ -146,6 +160,9 @@ class Repository:
             if (expected_revision is not None and old!=expected_revision) or package['revision']!=old+1:
                 raise RepositoryConflict('stale_revision')
             c.execute('INSERT INTO story_packages(session_id,story_id,revision,data) VALUES (?,?,?,?)',(sid,package['id'],package['revision'],json.dumps(package)))
+            for event in acceptance_events:
+                c.execute('INSERT INTO lifecycle_events VALUES (?,?,?)',
+                          (sid,event['id'],json.dumps(event)))
             c.execute('UPDATE story_editorial SET status=? WHERE session_id=? AND story_id=?',('superseded',sid,package['id']))
             # Supersede legacy approval when this story is migrated.
             legacy=c.execute('SELECT data FROM packages WHERE session_id=? ORDER BY revision DESC LIMIT 1',(sid,)).fetchone()

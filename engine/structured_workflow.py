@@ -13,9 +13,9 @@ from engine.core import digest
 from engine.foundry_workflow import (
     AgentFrameworkProvider, EvidenceRequest, Limits, Output, Runner, WorkflowLimit, _GATE,
 )
-from engine.contextual_narrative import build_contextual_package as build_structured_package
+from engine.editorial_narrative import build_editorial_package as build_structured_package
 
-PROMPT_VERSION = 'director-critic-v3.0'
+PROMPT_VERSION = 'director-critic-v4.0'
 
 
 class DirectorDecision(Output):
@@ -69,7 +69,7 @@ class ObservedRunner(Runner):
 DIRECTOR = ''' Act as Story Director. Select concrete observed change and confirmed
 team outcome for a casual viewer; arrange detailed facts for an analyst. You may
 select/order ONLY the supplied claim IDs. simple_claim_ids must include c-retain
-and at least one of c-forward,c-bypass,c-progress,c-zone. detail_claim_ids must
+and at least one of c-forward,c-bypass,c-progress,c-zone,c-context. detail_claim_ids must
 include c-bypass,c-retain,c-progress,c-pressure. No duplicate IDs. The application
 renders exact bilingual text and actor-specific variants. Prefer a useful specific
 explanation over generic commentary. You may request at most two useful read tools
@@ -81,7 +81,13 @@ allowed ONLY when the supplied context relation is greater_than_each. c-context
 means farther forward than EACH of the previous THREE completed team passes in
 this replay; never best pass, tactical superiority or a trend. Context unavailable
 or incomplete means choose a current-play angle. Angle determines the lead and
-title. Self-check subject, polarity, scope and audience usefulness before proposing.'''
+title. Use editorial_policy to distinguish a true comparison from one worth leading
+with: a tiny distance difference should normally use current-play emphasis. This
+policy is provisional, not a tactical rating. Consider reception/location when it
+better answers what changed; do not select history just because it is available.
+Keep simple content concise and avoid repeating the same distance or reception.
+Your reason must identify the supplied fact that makes the angle useful; it is an
+observable editorial justification, not hidden reasoning. Self-check subject, polarity, scope and audience usefulness before proposing.'''
 
 CRITIC = ''' Act as Claim Reviewer. Inspect the exact final audience content and
 claim bindings against independently computed facts. Review actor, polarity,
@@ -110,7 +116,7 @@ async def _execute(tools, baseline, revision, proposed_text, strategy, provider,
                 runner.provider = provider
             facts = [{k: v for k, v in c.items() if k != 'source_message_ids'} for c in baseline['claims']]
             context = {'claims': facts, 'available_through_ms': tools.cutoff_ms,
-                       'producer_selected_angle':editorial_angle, 'historical_context': tools.get_recent_pass_context(), 'default_plan': baseline['narrative_plan'], 'producer_proposal_untrusted': proposed_text,
+                       'editorial_policy':baseline['metrics']['editorial_policy'], 'producer_selected_angle':editorial_angle, 'historical_context': tools.get_recent_pass_context(), 'default_plan': baseline['narrative_plan'], 'producer_proposal_untrusted': proposed_text,
                        'tool_contract': {'end_max_ms': tools.cutoff_ms, 'window_max_ms': 15000,
                                          'tools': list(EvidenceRequest.model_fields['tool'].annotation.__args__)}}
             for repair in range(2):
@@ -129,8 +135,14 @@ async def _execute(tools, baseline, revision, proposed_text, strategy, provider,
                 package = build_structured_package(tools, revision, proposed_text, plan=draft.plan.model_dump(), editorial_angle=editorial_angle)
                 runner.trace.append({'role': 'Story Director', 'action': 'select_claims',
                                      'status': 'proposed', 'plan': package['narrative_plan'], 'reason': draft.reason, 'elapsed_ms': runner.elapsed()})
+                if strategy == 'director_only':
+                    runner.trace.append({'role':'Story Director','action':'evaluation_no_reviewer',
+                                         'status':'unreviewed_evaluation_output','elapsed_ms':runner.elapsed()})
+                    package['review'].update(reason='Evaluation-only Director output; independent model review omitted.',
+                                            status='supported', mode='foundry')
+                    break
                 # Focus variants resolve mechanically from the same reviewed actor facts.
-                review_context = {'claims': facts, 'historical_context': tools.get_recent_pass_context(),
+                review_context = {'claims': facts, 'editorial_policy':baseline['metrics']['editorial_policy'], 'historical_context': tools.get_recent_pass_context(),
                                   'title': package['title'], 'plan': package['narrative_plan'],
                                   'audience_variants': [v for v in package['variants'] if v['focus'] is None],
                                   'focus_roles': {'passer_id': package['metrics']['passer_id'],
@@ -199,8 +211,10 @@ async def _execute(tools, baseline, revision, proposed_text, strategy, provider,
 
 
 def run_structured_workflow(tools, revision=1, proposed_text=None, *, provider=None,
-                            strategy='collaborative', outcome_callback=None, limits=None, editorial_angle=None):
-    if strategy not in {'collaborative','single'}:
+                            strategy='collaborative', outcome_callback=None, limits=None, editorial_angle=None, evaluation_only=False):
+    if strategy == 'director_only' and not evaluation_only:
+        raise ValueError('reviewer_ablation_requires_evaluation_only')
+    if strategy not in {'collaborative','single','director_only'}:
         raise ValueError('unknown_workflow_strategy')
     baseline = build_structured_package(tools, revision, proposed_text, editorial_angle=editorial_angle)
     if baseline is None:

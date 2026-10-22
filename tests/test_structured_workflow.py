@@ -23,7 +23,7 @@ def test_two_role_workflow_changes_fact_selection_with_two_real_provider_attempt
     plan=default_plan();plan['simple_claim_ids']=['c-forward','c-retain']
     provider=FakeProvider([director(plan),critic()]);events=[]
     p=run_structured_workflow(tools(),provider=provider,outcome_callback=events.append)
-    assert p['schema_version']=='3.0.0'
+    assert p['schema_version']=='4.0.0'
     assert p['mode']=='Microsoft Agent Framework + Azure OpenAI'
     assert p['variants'][0]['claim_ids']==['c-forward','c-retain']
     assert p['variants'][0]['text'].startswith('The pass moved the ball')

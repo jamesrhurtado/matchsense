@@ -20,11 +20,11 @@ from engine.core import available, digest, load_match, metric, pass_metrics, vis
 from engine.catalog import list_matches, duration_for_match
 from engine.repository import Repository
 from engine.workflow import EvidenceTools, run_workflow
-from engine.contextual_narrative import build_contextual_package as build_structured_package
+from engine.editorial_narrative import build_editorial_package as build_structured_package
 from engine.context import contextual_metrics
 from engine.recap import project_recap
 from engine.editorial import decision_summary
-from engine.dispositions import record, disposition, package_disposition
+from engine.dispositions import record, disposition, package_disposition, package_events, reconcile_acceptances
 from engine.outcomes import create_outcome, start_outcome, finish_outcome
 
 ROOT=Path(__file__).resolve().parents[2]
@@ -53,9 +53,9 @@ def workflow(tools,**kwargs):
         outcome=create_outcome(store,session_id,f'story-{tools.pass_id or (measured or {}).get("pass_id","unknown")}',
             (measured or {}).get('evidence_revision','unavailable'),kwargs.get('revision',1),tools.cutoff_ms,runtime_mode())
     outcome={**outcome,'evidence_observed_at':outcome['scheduled_at'],
-             'implementation':{'schema_version':'3.0.0' if STRUCTURED else '1.0.0',
-                               'prompt_version':'director-critic-v3.0' if STRUCTURED else 'legacy-v1',
-                               'renderer_version':'context-claims-v3' if STRUCTURED else 'canonical-v1',
+             'implementation':{'schema_version':'4.0.0' if STRUCTURED else '1.0.0',
+                               'prompt_version':'director-critic-v4.0' if STRUCTURED else 'legacy-v1',
+                               'renderer_version':'editorial-claims-v4' if STRUCTURED else 'canonical-v1',
                                'metric_version':'pressure-escape-v1',
                                'tool_version':'evidence-tools-v3',
                                'context_version':'recent-completed-three-v1' if STRUCTURED else None,
@@ -103,6 +103,7 @@ async def lifespan(app):
     if CLOUD and (not os.getenv('WHY_NOW_PRODUCER_TOKEN') or TOKEN=='local-demo-producer' or len(TOKEN)<24):
         raise RuntimeError('Cloud deployment requires a private producer key of at least 24 characters')
     repo.interrupt_workflow_outcomes()
+    reconcile_acceptances(repo)
     if transport:transport.start()
     yield
     if transport:transport.close()
@@ -158,14 +159,20 @@ def new_session(match_id):
     repo.save_session(s);return s
 
 def accept_package(sid,package,at,expected_revision):
+    events=package_events(repo,sid,package,'accepted',at)
     try:
-        repo.store_package(sid,package,at,expected_revision=expected_revision)
-    except RepositoryConflict:
+        repo.store_package(sid,package,at,expected_revision=expected_revision,acceptance_events=events)
+    except Exception as exc:
+        # A committed transaction can lose its response. Exact retries repair the
+        # ledger without advancing a pointer, changing approval, or spending AI.
+        latest=repo.latest_package(sid,package['id'])
+        if latest and all(latest[k]==package[k] for k in ('id','revision','package_hash')):
+            reconcile_acceptances(repo,sid)
+            return
+        if not isinstance(exc,RepositoryConflict):
+            package_disposition(repo,sid,package,'persistence_failed',at)
         raise
-    except Exception:
-        package_disposition(repo,sid,package,'persistence_failed',at)
-        raise
-    package_disposition(repo,sid,package,'accepted',at)
+
 
 def materialize_all(s,at):
     """Each pass owns its evidence, workflow, revision and publication decision."""
@@ -177,7 +184,7 @@ def materialize_all(s,at):
     # Stored approved v1/v2 packages keep their original revision and rendering.
     # A changed current source still invalidates them through the existing path.
     for key,old in stored.items():
-        if old['schema_version']!='3.0.0' and key in raw_measured:
+        if old['schema_version'] not in {'3.0.0','4.0.0'} and key in raw_measured:
             if old['evidence_revision']==raw_measured[key]['evidence_revision']:
                 measured[key]=raw_measured[key]
     for story_id,old in stored.items():
@@ -277,8 +284,11 @@ def publication(s,package,at):
 def safe_story(package,status):
     if not package:return None
     titles={}
-    if package['schema_version']=='3.0.0':
-        from engine.contextual_narrative import title_for
+    if package['schema_version'] in {'3.0.0','4.0.0'}:
+        if package['schema_version']=='4.0.0':
+            from engine.editorial_narrative import title_for
+        else:
+            from engine.contextual_narrative import title_for
         titles={lang:title_for(package['narrative_plan'],package['metrics'],lang) for lang in ['en','es']}
     return {k:package[k] for k in ['id','revision','title','evidence_revision','eligible_from_ms','expires_at_ms']}|{'titles':titles}|{'status':status}|{k:package['metrics'][k] for k in ['passer_id','receiver_id','team_id']}
 

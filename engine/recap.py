@@ -7,6 +7,7 @@ player counts stay exact; zones stay categorical. Similarity is never a trend.
 import math
 from engine.core import digest
 from engine.contextual_narrative import title_for
+from engine.editorial_narrative import title_for as editorial_title
 
 RECAP_VERSION = 'distinct-approved-v1'
 
@@ -36,7 +37,7 @@ def project_recap(packages, language, cutoff, focus=None):
             groups[key]['similar_moments'].append(member)
             continue
         groups[key] = {'story_id': package['id'], 'revision': package['revision'],
-                       'title': title_for(package['narrative_plan'], metrics, language) if package['schema_version'] == '3.0.0' else package['title'],
+                       'title': (editorial_title if package['schema_version']=='4.0.0' else title_for)(package['narrative_plan'], metrics, language) if package['schema_version'] in {'3.0.0','4.0.0'} else package['title'],
                        'text': variant['text'], 'claim_ids': variant['claim_ids'], 'at_ms': package['eligible_from_ms'],
                        'archived': cutoff >= package['expires_at_ms'], 'similar_moments': [member],
                        'selection_reason': 'First approved moment with this fact signature; newest three distinct signatures retained.',

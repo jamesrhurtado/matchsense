@@ -139,6 +139,14 @@ class CosmosRepository:
         doc=self._read(self.stories,package_id,sid)
         return doc['data'] if doc else None
 
+    def stored_package(self, sid, story_id, revision):
+        item = self._story_key(story_id) + ':package:' + str(revision)
+        doc = self._read(self.stories, item, sid)
+        if doc:
+            return doc['data']
+        legacy = self._read(self.stories, f'package:{revision}', sid)
+        return legacy['data'] if legacy and legacy['data']['id'] == story_id else None
+
     def list_packages(self,sid):
         current=self._pointer(sid)
         if not current:return []
@@ -233,7 +241,9 @@ class CosmosRepository:
                 ops.append(('replace',(decision['id'],decision),{'if_match_etag':decision['_etag']}))
         self._batch(sid,ops)
 
-    def store_package(self, sid, package, at_ms, expected_revision=None):
+    def store_package(self, sid, package, at_ms, expected_revision=None, acceptance_events=()):
+        from engine.dispositions import validate_acceptance_events
+        validate_acceptance_events(sid, package, acceptance_events)
         pointer=self._pointer(sid,package['id'])
         prior=pointer['revision'] if pointer else 0
         if (expected_revision is not None and prior!=expected_revision) or package['revision']!=prior+1:
@@ -245,6 +255,8 @@ class CosmosRepository:
             decision['data']['status']='superseded'
             ops.append(('replace',(decision['id'],decision),{'if_match_etag':decision['_etag']}))
         ops.append(('create',(self._audit(sid,'package_ready',at_ms,{'story_id':package['id'],'revision':package['revision'],'workflow_ms':package['workflow_ms']}),)))
+        ops.extend(('create', (self._doc(sid, 'lifecycle:' + event['id'], 'lifecycle_event', event),))
+                   for event in acceptance_events)
         self._batch(sid,ops)
 
     def commit_review(self, sid, key, request_hash, expected_revision, expected_hash, package, status, at_ms, result, edited=False):

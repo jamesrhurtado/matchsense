@@ -1,6 +1,6 @@
 """Authored history challenges around a shared present-play recording.
 
-Developer-visible discovery only. Eight variants are repeated measurements of one
+Developer-visible discovery only. The variants are repeated measurements of one
 current play, not eight independent football parents. References are handwritten
 here and never cross RuntimeInput or enter runtime images.
 """
@@ -19,6 +19,9 @@ def context_cases():
         ('history-missing-start', (5,7,10), 'incomplete_history', ['h1','h0'], 'no_comparative_claim'),
         ('history-tracking-gap', (5,7,10), 'incomplete_history', ['h2','h1','h0'], 'no_comparative_claim'),
         ('history-corrected', (5,7,10), 'available', ['h2','h1','h0'], 'no_comparative_claim'),
+        ('history-marginal', (17.8,17.9,18.0), 'available', ['h2','h1','h0'], 'greater_than_each'),
+        ('history-threshold-adjacent', (14.2,14.4,15.084), 'available', ['h2','h1','h0'], 'greater_than_each'),
+        ('history-competing-angles', (1,3,5), 'available', ['h2','h1','h0'], 'greater_than_each'),
     ]
     cases=[]
     for name,distances,status,ids,relation in definitions:
@@ -51,5 +54,7 @@ def context_cases():
                      RuntimeInput(metadata,visible,25000,'pass-1'),
                      {'expected_story':True,'context_status':status,'comparator_ids':ids,'relation':relation,
                       'human_review':'pending','football_realism_review':'pending',
+                      'plausible_angles':['progression','reception','proximity']+(['historical_contrast'] if relation=='greater_than_each' else []),
+                      'editorial_reference_status':'ungraded; candidate angles are not a preference answer key',
                       'expected_narrative':None,'forbidden_claims':['best pass','chance created','tactical superiority']}))
     return cases

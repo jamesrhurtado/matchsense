@@ -1,6 +1,7 @@
 """Bounded, explicit evaluation runner. Default command makes zero model calls."""
 from __future__ import annotations
 import argparse
+import csv
 from copy import deepcopy
 import asyncio
 from dataclasses import asdict, dataclass
@@ -15,6 +16,7 @@ import subprocess
 import time
 
 from .dataset import discovery_cases, fingerprint
+from .checks import check_result, summarize
 
 OUTCOMES = {'ai_composed', 'template', 'fallback', 'abstention', 'rejected', 'timeout', 'failure', 'stale', 'budget_exhausted'}
 
@@ -68,7 +70,7 @@ class BudgetLedger:
 
 
 async def template_adapter(request, policy):
-    from engine.contextual_narrative import build_contextual_package as build_structured_package
+    from engine.editorial_narrative import build_editorial_package as build_structured_package
     from engine.workflow import EvidenceTools
     package = build_structured_package(EvidenceTools(request.metadata,request.observations,request.cutoff_ms,request.pass_id))
     return {'outcome':'template' if package else 'abstention','package':package,
@@ -85,6 +87,7 @@ def agent_adapter(strategy):
         try:
             package = await asyncio.to_thread(run_structured_workflow, EvidenceTools(request.metadata,request.observations,request.cutoff_ms,request.pass_id),
                                               strategy=strategy, outcome_callback=outcomes.append,
+                                              **({'evaluation_only':True} if strategy=='director_only' else {}),
                                               limits=Limits(deadline_s=15, model_calls=policy.max_calls,token_budget=32000))
         except Exception as exc:
             package, error = None, type(exc).__name__
@@ -119,8 +122,8 @@ def validate_live(config):
 
 
 def validate_runtime_identifiers(config, environ):
-    expected={'schema_version':'3.0.0','renderer_version':'context-claims-v3',
-              'prompt_version':'director-critic-v3.0','tool_version':'evidence-tools-v3'}
+    expected=implementation_identifiers()
+    expected.pop('context_version')
     expected.update(deployment=environ.get('FOUNDRY_MODEL_DEPLOYMENT'),
                     api_version=environ.get('AZURE_OPENAI_API_VERSION','2024-10-21'),
                     model=environ.get('FOUNDRY_MODEL_NAME'),model_version=environ.get('FOUNDRY_MODEL_VERSION'))
@@ -182,22 +185,90 @@ async def evaluate(cases, adapters, config, live=False):
             else:
                 row['accounting'] = 'offline' if not live else 'non_model'
         row['elapsed_ms'] = round((time.monotonic()-start)*1000,3)
+        row['assessment'] = check_result(case,row)
         rows.append(row)
     return rows, ledger
 
 
+def implementation_identifiers():
+    from engine.editorial_narrative import RENDERER_VERSION, SCHEMA_VERSION
+    from engine.structured_workflow import PROMPT_VERSION
+    return {'schema_version':SCHEMA_VERSION, 'renderer_version':RENDERER_VERSION,
+            'prompt_version':PROMPT_VERSION, 'tool_version':'evidence-tools-v3',
+            'context_version':'recent-completed-three-v1'}
+
+
+def select_cases(cases, selected):
+    if not selected:
+        return cases
+    identifiers = [c.strip() for c in selected.split(',')]
+    unknown = set(identifiers)-{case.case_id for case in cases}
+    if unknown or len(set(identifiers)) != len(identifiers):
+        raise ValueError('Case IDs must be unique and known: '+', '.join(sorted(unknown)))
+    return [case for case in cases if case.case_id in identifiers]
+
+
+def select_adapters(selected, live):
+    arms = [a.strip() for a in selected.split(',')] if selected else (['T3','S3','M3'] if live else ['T3'])
+    if not arms or len(arms)!=len(set(arms)) or set(arms)-{'T3','S3','M3','D3'}:
+        raise ValueError('Arms must be unique choices from T3,S3,M3,D3')
+    if not live and set(arms)-{'T3'}:
+        raise ValueError('Model arms require explicit --live configuration')
+    available = {'T3':template_adapter, 'S3':agent_adapter('single'),
+                 'M3':agent_adapter('collaborative'),'D3':agent_adapter('director_only')}
+    return {arm:available[arm] for arm in arms}
+
+
 def report(rows, live):
-    modes = {mode:sum(r['outcome']==mode for r in rows) for mode in sorted(OUTCOMES)}
+    summary=summarize(rows)
     lines = ['# Agent evaluation run','',f"Mode: {'explicit model discovery' if live else 'offline template smoke (zero model calls)' }.",
-             '',f'Scheduled outcomes: {len(rows)}. Human grading pending.', '', '| Outcome | Count |','|---|---:|']
-    lines += [f'| {mode} | {count} |' for mode,count in modes.items()]
-    lines += ['', 'These developer-visible challenge compositions share the existing trajectory generator. ',
-              'They are not a blind final set or independent evidence of real-match accuracy. ',
+             '',f'Scheduled outcomes: {len(rows)}. Human grading pending.', '',
+             '| Arm | Scheduled | Packages | Missing expected | Rejection candidates | Repairs returning packages | Known calls | Median observed ms |',
+             '|---|---:|---:|---:|---:|---:|---:|---:|']
+    for arm,s in summary.items():
+        lines.append(f"| {arm} | {s['scheduled_outcomes']} | {s['packages']} | {s['missing_expected_opportunities']} | {s['false_rejection_candidates']} | {s['repair_returned_packages']} | {s['known_usage_subtotals']['model_calls']} | {s['observed_elapsed_ms']['median']} |")
+    lines += ['', 'All scheduled jobs, including failures, timeouts and budget skips, remain in opportunity denominators.',
+              'Known usage is a subtotal when any usage is unknown; manifest reservations remain the billing bound.',
+              'A repair returning a package is observed behavior, not proof that the repair was correct. Rejection candidates are not confirmed errors.',
+              'Contract validation and handwritten context references are mechanical checks, not independent football accuracy or usefulness grades.',
+              'T3 is run once per case; model trials are repeated observations, not additional independent cases.',
+              'D3 removes review only inside this evaluation; production approval and validation stay required.',
+              'These developer-visible challenge compositions share existing trajectory backbones and current-play recordings.',
+              'They are not a blind final set or independent evidence of real-match accuracy.',
               'No agent superiority, usefulness, human acceptance, or Grand Prize score is established.',
-              'L1 is excluded from matched T3/S3/M3 comparisons and requires a separately budgeted historical run.',
-              'Unknown usage retains its full reservation. Provider cancellation does not guarantee zero billing.']
+              'Unknown usage retains its full reservation. Provider cancellation does not guarantee zero billing.',
+              'Use rating-instrument.csv with rating-packets.json; preserve blank ratings until real reviewers complete them.',
+              'Results and rating-mapping-private.json identify arms and must not be supplied to blinded raters.']
     return '\n'.join(lines)+'\n'
 
+
+def write_rating_materials(output, rows, seed):
+    # IDs are allocated after a fresh shuffle, unrelated to scheduling order.
+    order=list(enumerate(rows))
+    random.Random(seed+1).shuffle(order)
+    blinded=[]
+    mapping={}
+    for i, (source_index,row) in enumerate(order,1):
+        rating_id=f'R{i:03d}'
+        package=row.get('package')
+        # Rendered content and evidence only: no mode, trace, plan or provider labels.
+        presentation=None if not package else {key:package[key] for key in ('title','claims','variants','eligible_from_ms','expires_at_ms') if key in package}
+        if presentation:
+            presentation['evidence']={key:package.get('metrics',{}).get(key) for key in ('passer_id','receiver_id','team_id','forward_pass_m','reception_zone','retention_confirmed_at_ms','context')}
+        blinded.append({'rating_id':rating_id,'case_id':row['case_id'],'presentation':presentation,
+                        'status':'output_available' if package else 'no_output'})
+        mapping[rating_id]={'row_index':source_index,'case_id':row['case_id'],'arm':row['arm'],'trial':row['trial']}
+    (output/'rating-packets.json').write_text(json.dumps(blinded,indent=2)+'\n')
+    private=output/'rating-mapping-private.json'
+    private.write_text(json.dumps(mapping,indent=2)+'\n')
+    private.chmod(0o600)
+    fields=['rating_id','case_id','rater_id','factual_correctness_1_5','editorial_usefulness_1_5',
+            'clarity_1_5','comparison_scope_understood_yes_no','would_publish_yes_no',
+            'withholding_appropriate_yes_no','preferred_angle','notes']
+    with (output/'rating-instrument.csv').open('w',newline='') as handle:
+        writer=csv.DictWriter(handle,fieldnames=fields)
+        writer.writeheader()
+        writer.writerows({'rating_id':packet['rating_id'],'case_id':packet['case_id']} for packet in blinded)
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -205,25 +276,29 @@ def main():
     parser.add_argument('--config',type=Path)
     parser.add_argument('--live',action='store_true')
     parser.add_argument('--dry-run',action='store_true')
+    parser.add_argument('--arms',help='Comma-separated T3,S3,M3,D3; D3 is evaluator-only reviewer removal')
+    parser.add_argument('--cases',help='Comma-separated exact case IDs; omitted means all discovery cases')
+    parser.add_argument('--trials',type=int,help='Override model trials; T3 remains once per case')
     args = parser.parse_args()
     config = json.loads(args.config.read_text()) if args.config else {'trials':1,'order_seed':1041}
+    if args.trials is not None:
+        if args.trials < 1:
+            raise ValueError('--trials must be positive')
+        config['trials']=args.trials
     allowed_config = {'trials','order_seed','max_model_calls','max_input_tokens','max_output_tokens','max_estimated_cost', 'input_per_million','output_per_million','rate_source','rate_date','currency','deadline_utc','model','model_version','deployment','api_version','prompt_version','tool_version','renderer_version','schema_version'}
     if set(config)-allowed_config:
         raise ValueError('Unknown configuration fields; credentials belong only in the environment.')
     if args.live:
         validate_live(config)
         validate_runtime_identifiers(config,os.environ)
-    adapters = {'T3':template_adapter}
-    if args.live:
-        adapters.update(S3=agent_adapter('single'),M3=agent_adapter('collaborative'))
+    adapters = select_adapters(args.arms,args.live)
     from .context_cases import context_cases
-    cases = discovery_cases()+context_cases()
+    cases = select_cases(discovery_cases()+context_cases(),args.cases)
     revision = subprocess.run(['git','rev-parse','HEAD'],capture_output=True,text=True,check=True).stdout.strip()
     manifest = {'schema_version':'1.0.0','commit':revision,'started_at':datetime.now(timezone.utc).isoformat(),
                 'mode':'live' if args.live else 'offline','split':'developer-visible discovery',
                 'final_split_status':'pending independent QA authorship and sealing',
-                'arms':list(adapters),'configuration':config,'implementation':{'schema_version':'3.0.0','renderer_version':'context-claims-v3',
-                'prompt_version':'director-critic-v3.0','context_version':'recent-completed-three-v1'},
+                'arms':list(adapters),'configuration':config,'implementation':implementation_identifiers(),
                 'source_file_sha256':source_fingerprints(),
                 'working_tree_diff_sha256':fingerprint(subprocess.run(['git','diff','HEAD'],capture_output=True,text=True,check=True).stdout),
                 'workflow_reservation':asdict(WorkflowBudget()),
@@ -241,12 +316,8 @@ def main():
     (args.output/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     (args.output/'results.jsonl').write_text(''.join(json.dumps(row,sort_keys=True)+'\n' for row in rows))
     (args.output/'REPORT.md').write_text(report(rows,args.live))
-    # Outputs for raters contain no arm/trial labels. The mapping stays local.
-    blinded = [{'rating_id':f'R{i+1:03d}','package':{key:value for key,value in row['package'].items() if key in ('title','claims','metrics','variants','narrative_plan','eligible_from_ms','expires_at_ms')},'case_id':row['case_id']} for i,row in enumerate(rows) if row.get('package')]
-    random.Random(config.get('order_seed',1041)+1).shuffle(blinded)
-    (args.output/'rating-packets.json').write_text(json.dumps(blinded,indent=2)+'\n')
-    mapping = {f'R{i+1:03d}': {'case_id':row['case_id'],'arm':row['arm'],'trial':row['trial']} for i,row in enumerate(rows) if row.get('package')}
-    (args.output/'rating-mapping-private.json').write_text(json.dumps(mapping,indent=2)+'\n')
+    (args.output/'summary.json').write_text(json.dumps(summarize(rows),indent=2)+'\n')
+    write_rating_materials(args.output,rows,config.get('order_seed',1041))
     print(f"Recorded {len(rows)} outcomes at {args.output}; human grading pending.")
 
 

@@ -1,5 +1,7 @@
 # WHY/NOW — Grand Prize improvement plan
 
+> **Current product handoff:** [90+ product improvement plan](grand-prize-90-plus-plan.md), based on version 0.4 and the latest 76/100 assessment. It covers the MVP only and supersedes the next-iteration scope below. The original version 0.3 plan is retained here as historical context; current delivery is tracked in [the implementation record](decision-log.md).
+
 **Prepared:** 21 October 2026, America/Lima. **Baseline:** `e62c043` / API 0.3.0, cloud-v13 / web cloud-v7. **Status:** researched engineering handoff; product changes below are not implemented. **Owner:** James. Target the first-place Grand Prize through a more useful, convincing end-to-end product.
 
 ## Read this first

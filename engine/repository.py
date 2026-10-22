@@ -18,6 +18,7 @@ class Repository:
         CREATE TABLE IF NOT EXISTS editorial(session_id TEXT PRIMARY KEY, revision INTEGER, status TEXT, at_ms INTEGER, package_hash TEXT);
         CREATE TABLE IF NOT EXISTS operations(session_id TEXT, operation_id TEXT, request_hash TEXT, data TEXT, PRIMARY KEY(session_id,operation_id));
         CREATE TABLE IF NOT EXISTS audit_log(id INTEGER PRIMARY KEY AUTOINCREMENT, session_id TEXT, action TEXT, at_ms INTEGER, data TEXT);
+        CREATE TABLE IF NOT EXISTS lifecycle_events(session_id TEXT, event_id TEXT, data TEXT NOT NULL, PRIMARY KEY(session_id,event_id));
         CREATE TABLE IF NOT EXISTS workflow_outcomes(session_id TEXT, run_id TEXT, data TEXT NOT NULL, PRIMARY KEY(session_id,run_id));
         ''')
         try:
@@ -32,6 +33,20 @@ class Repository:
             return json.loads(row['data']) if row else None
     def save_session(self,s):
         with self.connect() as c:c.execute('INSERT OR REPLACE INTO replay_sessions VALUES (?,?)',(s['id'],json.dumps(s)))
+
+    def append_lifecycle(self,sid,event):
+        from engine.dispositions import validate_event
+        validate_event(sid,event)
+        with self.connect() as c:
+            c.execute('BEGIN IMMEDIATE')
+            c.execute('INSERT OR IGNORE INTO lifecycle_events VALUES (?,?,?)',(sid,event['id'],json.dumps(event)))
+            return json.loads(c.execute('SELECT data FROM lifecycle_events WHERE session_id=? AND event_id=?',
+                                       (sid,event['id'])).fetchone()['data'])
+
+    def lifecycle_events(self,sid):
+        with self.connect() as c:
+            rows=[json.loads(row['data']) for row in c.execute('SELECT data FROM lifecycle_events WHERE session_id=?',(sid,))]
+            return sorted(rows,key=lambda e:(e['recorded_at'],e['id']))
 
     def save_workflow_outcome(self,sid,outcome):
         from engine.outcomes import validate_outcome

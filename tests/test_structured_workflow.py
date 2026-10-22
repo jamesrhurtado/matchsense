@@ -1,7 +1,7 @@
 import pytest
 
 from engine.foundry_workflow import Limits
-from engine.narrative import default_plan
+from engine.contextual_narrative import default_plan, check_plan
 from engine.structured_workflow import run_structured_workflow
 from tests.test_foundry import FakeProvider, tools, request
 
@@ -23,7 +23,7 @@ def test_two_role_workflow_changes_fact_selection_with_two_real_provider_attempt
     plan=default_plan();plan['simple_claim_ids']=['c-forward','c-retain']
     provider=FakeProvider([director(plan),critic()]);events=[]
     p=run_structured_workflow(tools(),provider=provider,outcome_callback=events.append)
-    assert p['schema_version']=='2.0.0'
+    assert p['schema_version']=='3.0.0'
     assert p['mode']=='Microsoft Agent Framework + Azure OpenAI'
     assert p['variants'][0]['claim_ids']==['c-forward','c-retain']
     assert p['variants'][0]['text'].startswith('The pass moved the ball')
@@ -47,7 +47,7 @@ def test_unknown_claim_never_reaches_permissive_reviewer():
     provider=FakeProvider([director(plan),critic()])
     p=run_structured_workflow(tools(),provider=provider)
     assert p['mode']=='template fallback'
-    assert p['variants'][0]['claim_ids']==['c-bypass','c-retain']
+    assert p['variants'][0]['claim_ids']==['c-forward','c-retain']
     assert len(provider.calls)==1
 
 
@@ -63,7 +63,8 @@ def test_both_architectures_get_a_bounded_meaningful_repair(strategy):
     provider=FakeProvider([director(),critic('revise'),director(plan),critic()])
     p=run_structured_workflow(tools(),provider=provider,strategy=strategy)
     assert p['mode']=='Microsoft Agent Framework + Azure OpenAI'
-    assert p['narrative_plan']==plan
+    assert p['narrative_plan']==check_plan(plan,p['claims'])
+    assert p['review']['cycles']==1
     assert len(provider.calls)==4
     if strategy=='single':assert all(c[0]=='Story Director' for c in provider.calls)
     else:assert provider.calls[1][0]=='Claim Reviewer'
@@ -112,3 +113,34 @@ def test_api_outcome_keeps_abstention_usage_and_session_identity(tmp_path,monkey
     assert outcomes[0]['model_usage']['total_tokens']==140
     assert outcomes[0]['package_ref'] is None
     assert not repository.workflow_outcomes('local')
+
+
+def test_context_tool_and_labeled_repair_use_exact_comparator_facts():
+    from tests.test_context import scene
+    from engine.workflow import EvidenceTools
+    meta,rows=scene();t=EvidenceTools(meta,rows,25000,'pass-1')
+    ids=['c-pressure','c-bypass','c-retain','c-progress','c-forward','c-zone','c-reception','c-release','c-context']
+    plan=default_plan(t.get_recent_pass_context())
+    # Deliberately injected editorial challenge, not an observed spontaneous error.
+    repair=critic('revise',ids);repair['reason']='Prefer the independently supported historical contrast over routine spatial detail.'
+    request_context=director(action='needs_evidence',requests=[request('get_recent_pass_context',0,0)])
+    provider=FakeProvider([request_context,director(),repair,director(plan),critic(ids=ids)])
+    p=run_structured_workflow(t,provider=provider)
+    assert p['mode']=='Microsoft Agent Framework + Azure OpenAI'
+    assert p['narrative_plan']['angle']=='historical_contrast' and p['review']['cycles']==1
+    assert p['model_usage']['calls']==5
+    independent=provider.calls[2][2]['historical_context']
+    assert [c['forward_m'] for c in independent['comparators']]==[10,7,5]
+    assert independent['relation']=='greater_than_each'
+    assert 'c-context' in p['variants'][0]['claim_ids']
+    assert any(t['action']=='claim_verdicts' and t['status']=='revise' for t in p['trace'])
+
+
+def test_missing_comparison_review_verdict_cannot_approve_context():
+    from tests.test_context import scene
+    from engine.workflow import EvidenceTools
+    meta,rows=scene();t=EvidenceTools(meta,rows,25000,'pass-1')
+    p=run_structured_workflow(t,provider=FakeProvider([director(default_plan(t.get_recent_pass_context())),critic()]))
+    assert p['mode']=='template fallback'
+    assert p['trace'][-1]['status']=='incomplete_claim_review'
+    assert p['model_usage']['calls']==2

@@ -27,7 +27,7 @@ class Output(BaseModel):
 
 
 class EvidenceRequest(Output):
-    tool: Literal['compute_pass_metrics', 'get_sequence', 'get_positions', 'compare_prior_window', 'get_player_contribution']
+    tool: Literal['compute_pass_metrics', 'get_sequence', 'get_positions', 'compare_prior_window', 'get_player_contribution', 'get_recent_pass_context']
     start_ms: int | None
     end_ms: int | None
     player_id: str | None
@@ -238,6 +238,8 @@ class Runner:
         name = request.tool
         if name == 'compute_pass_metrics':
             result = self.tools.compute_pass_metrics()
+        elif name == 'get_recent_pass_context':
+            result = self.tools.get_recent_pass_context()
         elif name == 'get_player_contribution':
             if request.player_id is None:
                 raise ToolError('player_required')
@@ -277,7 +279,7 @@ class Runner:
                    'claim_ids': ['c-pressure', 'c-bypass', 'c-retain', 'c-progress'],
                    'candidate_text_untrusted': proposed_text,
                    'tool_contract': {'window_max_ms': 15000, 'end_max_ms': self.tools.cutoff_ms,
-                                     'tools': list(EvidenceRequest.model_fields['tool'].annotation.__args__)}}
+                                     'tools': [name for name in EvidenceRequest.model_fields['tool'].annotation.__args__ if name!='get_recent_pass_context']}}
         # Keep the model prompt small: immutable hashes remain in package evidence.
         context['metrics'] = {k: v for k, v in m.items() if k != 'source_message_ids'}
         analyst_instruction = ' Act as Story Analyst. Investigate with at most two tool requests if useful; otherwise propose a concise factual English sentence, or abstain. Explain the short passage for a human audience. Do not include internal player ids, coordinates or clock times in the proposal. Do not repeat every metric in simple text.'

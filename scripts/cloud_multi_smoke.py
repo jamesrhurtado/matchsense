@@ -92,12 +92,12 @@ def main():
         assert package['mode'] in ('Microsoft Agent Framework + Azure OpenAI','template fallback')
         assert package['model_usage']['calls']>=1 and package['model_usage']['usage_complete']
         if package['mode']=='Microsoft Agent Framework + Azure OpenAI':
-            assert package['model_usage']['calls']>=(2 if package['schema_version']=='2.0.0' else 3)
+            assert package['model_usage']['calls']>=(2 if package['schema_version'] in {'2.0.0','3.0.0'} else 3)
             assert not any(t['action']=='template_fallback' for t in package['trace'])
         else:
             assert any(t['action']=='template_fallback' for t in package['trace'])
         assert digest({k:v for k,v in package.items() if k!='package_hash'})==package['package_hash']
-        if package['schema_version']=='2.0.0':
+        if package['schema_version'] in {'2.0.0','3.0.0'}:
             from engine.contracts import PublicationPackage
             PublicationPackage.model_validate(package)
             assert all('clauses' in v for v in package['variants'])

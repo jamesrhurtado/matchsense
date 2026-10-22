@@ -1,0 +1,34 @@
+"""Public summaries of observable selections and review verdicts."""
+from engine.contextual_narrative import render
+
+
+def decision_summary(package, outcomes):
+    latest = outcomes[-1] if outcomes else {}
+    trace = package['trace'] if package else latest.get('trace', [])
+    selected = next((t for t in reversed(trace) if t['action']=='select_claims'), {})
+    verdicts = [t for t in trace if t['action'] in {'claim_verdicts','self_review_verdicts'}]
+    plan = package.get('narrative_plan') if package else selected.get('plan')
+    metrics = package['metrics'] if package else {}
+    context = metrics.get('context')
+    scope = 'No previous-pass context was recorded.'
+    if context:
+        scope = (f'{context["status"].replace("_", " ")}: {context["sample_count"]} completed team passes, '
+                 f'period {context["period"]}, prior {context["lookback_ms"]/1000:g} s in this replay. '
+                 + ('Current pass is farther forward than each of the selected three.'
+                    if context['relation']=='greater_than_each' else 'No comparative wording selected.'))
+    lead = 'No publishable candidate was produced.'
+    if package and plan:
+        cid = plan['simple_claim_ids'][0]
+        claim = next(c for c in package['claims'] if c['id']==cid)
+        lead = render(claim, 'en', metrics)
+    changes = [f'Reviewer requested a repair: {t.get("reason", "No reason recorded.")}'
+               for t in verdicts if t['status']=='revise']
+    if changes and package:
+        changes.append('The revised selection was rendered and reviewed again: '+', '.join(plan['simple_claim_ids'])+'.')
+    fallback = next((t['status'] for t in trace if t['action']=='template_fallback'), None)
+    if package and 'fallback' in package['mode']:
+        fallback = 'Scoped factual rendering used; '+(fallback or 'model selection unavailable')+'. Producer approval is still required.'
+    return {'angle': (plan or {}).get('angle','none').replace('_',' '), 'lead': lead, 'context': scope,
+            'review': package['review']['reason'] if package else latest.get('reason') or 'No completed review.',
+            'changes': changes, 'fallback': fallback,
+            'outcome': latest.get('state') or ('candidate produced' if package else 'no candidate')}

@@ -6,6 +6,8 @@ import re
 from engine.contracts import PublicationPackage
 from engine.core import CONFIG, available, digest, metric
 
+TOOL_VERSION = 'evidence-tools-v3'
+
 class ToolError(ValueError): pass
 
 @dataclass(frozen=True)
@@ -28,6 +30,12 @@ class EvidenceTools:
         if self.pass_id is not None and pass_id is not None and pass_id!=self.pass_id:
             raise ToolError('unknown_pass')
         return metric(self.messages,self.cutoff_ms,self.metadata,pass_id=pass_id or self.pass_id)
+    def get_recent_pass_context(self,current_pass_id=None):
+        from engine.context import recent_pass_context
+        selected = current_pass_id or self.pass_id or (self.compute_pass_metrics() or {}).get('pass_id')
+        if self.pass_id and selected != self.pass_id:
+            raise ToolError('unknown_pass')
+        return recent_pass_context(self.metadata,self.messages,self.cutoff_ms,selected)
     def compare_prior_window(self,start_ms,end_ms):
         rows=self.get_sequence(start_ms,end_ms)
         return {'status':'insufficient_history','sample_count':len(rows),'reason':'One segment cannot establish sustained match control.'}

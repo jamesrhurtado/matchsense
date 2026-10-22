@@ -49,6 +49,22 @@ class CosmosRepository:
     def save_session(self, session):
         self.sessions.upsert_item({'id': 'session', 'session_id': session['id'], 'type': 'session', 'data': session})
 
+    def append_lifecycle(self,sid,event):
+        from engine.dispositions import validate_event
+        validate_event(sid,event)
+        key='lifecycle:'+event['id']
+        doc=self._doc(sid,key,'lifecycle_event',event)
+        try:
+            self.stories.create_item(doc)
+        except Exception as exc:
+            if _status(exc)!=409:raise
+        return self._read(self.stories,key,sid)['data']
+
+    def lifecycle_events(self,sid):
+        rows=[d['data'] for d in self.stories.query_items(
+            query='SELECT c.data FROM c WHERE c.type = "lifecycle_event"',partition_key=sid)]
+        return sorted(rows,key=lambda e:(e['recorded_at'],e['id']))
+
     def save_workflow_outcome(self, sid, outcome):
         from engine.outcomes import validate_outcome
         item = 'run:' + outcome['run_id']

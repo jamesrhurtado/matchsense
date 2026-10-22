@@ -69,7 +69,9 @@ def test_three_passes_preserve_prior_approval_recap_and_selected_history(client)
     assert all('package_hash' not in p for p in old['stories'])
     ev=client.get(base+'/stories/story-pass-1/evidence').json()
     assert ev['story']['metrics']['pass_id']=='pass-1'
-    assert len(client.post(base+'/recaps',json={}).json()['moments'])==2
+    recap=client.post(base+'/recaps',json={}).json()
+    assert recap['approved_count']==2
+    assert {m['story_id'] for item in recap['moments'] for m in item['similar_moments']}=={'story-pass-1','story-pass-2'}
     assert len(client.post(base+'/recaps',json={'through_ms':30000}).json()['moments'])==1
     assert decide(client,sid,first['story'],'retract').status_code==200
     public=client.get(base+'/snapshot',params={'story_id':'story-pass-1'}).json()
@@ -80,7 +82,8 @@ def test_three_passes_preserve_prior_approval_recap_and_selected_history(client)
     assert third['story']['id']=='story-pass-3'
     assert decide(client,sid,third['story']).status_code==200
     recap=client.post(base+'/recaps',json={'language':'es'}).json()
-    assert [p['story_id'] for p in recap['moments']]==['story-pass-2','story-pass-3']
+    assert recap['approved_count']==2
+    assert {m['story_id'] for item in recap['moments'] for m in item['similar_moments']}=={'story-pass-2','story-pass-3'}
     assert main.repo.decision(sid,'story-pass-2')['status']=='approved'
     assert main.repo.decision(sid,'story-pass-3')['status']=='approved'
 
@@ -151,10 +154,10 @@ def test_completed_out_of_order_model_jobs_commit_to_their_own_stories(client,mo
     monkeypatch.setattr(main,'pass_metrics',lambda messages,at,metadata:[m|{'retention_confirmed_at_ms':at} for m in pass_metrics(messages,at,metadata)])
     session.update(clock_ms=80000,running=False,updated_at=time.time());main.repo.save_session(session)
     assert main.materialize_all(session,80000)==[] and len(pending)==2
-    future,tools,kwargs=pending[1];future.set_result(run_workflow(tools,revision=kwargs['revision']))
+    future,tools,kwargs=pending[1];future.set_result(main.build_structured_package(tools,revision=kwargs['revision']))
     result=main.materialize_all(session,80000)
     assert [p['id'] for p in result]==['story-pass-2']
-    future,tools,kwargs=pending[0];future.set_result(run_workflow(tools,revision=kwargs['revision']))
+    future,tools,kwargs=pending[0];future.set_result(main.build_structured_package(tools,revision=kwargs['revision']))
     assert [p['id'] for p in main.materialize_all(session,80000)]==['story-pass-1','story-pass-2']
     assert main.repo.latest_package(sid,'story-pass-1')['revision']==1
     assert main.repo.latest_package(sid,'story-pass-2')['revision']==1

@@ -40,7 +40,7 @@ class Container:
 
     def query_items(self, query, partition_key=None, **kwargs):
         rows = [deepcopy(d) for (sid,_),d in self.items.items() if partition_key is None or sid == partition_key]
-        kind = next((k for k in ('session','audit','observation') if f'"{k}"' in query),None)
+        kind = next((k for k in ('session','audit','observation','lifecycle_event','workflow_outcome') if f'"{k}"' in query),None)
         rows = [d for d in rows if d.get('type') == kind]
         parameters=kwargs.get('parameters',[])
         if parameters:

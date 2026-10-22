@@ -45,7 +45,7 @@ def test_complete_publication_variants_and_recap(client):
     assert snap['overlay'] and snap['story']['revision']==1
     variants=f'/api/replay-sessions/{sid}/stories/story-pass-1/variants'
     simple=client.get(variants).json();spanish=client.get(variants,params={'language':'es','detail':'detail','focus':'blue-08'}).json()
-    assert '3 opponents' in simple['text'] and '3 rivales' in spanish['text']
+    assert '18.1 m forward' in simple['text'] and '3 rivales' in spanish['text']
     assert 'Theo Vega' in spanish['text']
     assert client.get(f'/api/replay-sessions/{sid}/snapshot').json()['overlay']==snap['overlay']
     recap=client.post(f'/api/replay-sessions/{sid}/recaps',json={}).json()

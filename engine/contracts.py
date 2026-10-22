@@ -160,7 +160,7 @@ class ModelUsage(Strict):
 class EvidenceClaim(Strict):
     id:str=Field(pattern=r'^c-[a-z-]+$')
     type:Literal['scoped_fact']
-    predicate:Literal['nearby_opponents','longitudinal_bypass','team_retained','team_progression','forward_pass_displacement','reception_zone','pass_reception','pass_release']
+    predicate:Literal['nearby_opponents','longitudinal_bypass','team_retained','team_progression','forward_pass_displacement','reception_zone','pass_reception','pass_release','previous_pass_comparison']
     subject_id:str
     subject_name:str
     value:float|str
@@ -173,10 +173,59 @@ class EvidenceClaim(Strict):
     coverage:float=Field(ge=0,le=1)
     qualification:str
 
+class PassComparator(Strict):
+    pass_id:str
+    release_ms:NonNegative
+    resolution_ms:NonNegative
+    forward_m:float=Field(allow_inf_nan=False)
+    release_position:Point
+    reception_position:Point
+    source_message_ids:list[str]=Field(min_length=2,max_length=2)
+    source_hashes:list[str]=Field(min_length=2,max_length=2)
+
+class RecentPassContext(Strict):
+    version:Literal['recent-completed-three-v1']
+    current_pass_id:str
+    team_id:str
+    attack_direction:Literal['left','right']
+    period:int=Field(ge=1)
+    release_ms:NonNegative
+    window_start_ms:NonNegative
+    lookback_ms:Literal[120000]
+    cutoff_ms:NonNegative
+    status:Literal['available','incomplete_history','insufficient_history']
+    sample_count:int=Field(ge=0,le=3)
+    comparators:list[PassComparator]=Field(max_length=3)
+    current_forward_m:float|None=Field(allow_inf_nan=False)
+    unit:Literal['m']
+    relation:Literal['greater_than_each','no_comparative_claim']
+    source_message_ids:list[str]=Field(min_length=2)
+    source_hashes:list[str]=Field(min_length=2)
+    coverage_complete:bool
+    limitation:str
+    revision:str=Field(pattern=r'^[a-f0-9]{16}$')
+    @model_validator(mode='after')
+    def population(self):
+        if self.sample_count!=len(self.comparators):raise ValueError('context_sample_count_mismatch')
+        if len(self.source_message_ids)!=len(self.source_hashes):raise ValueError('context_sources_mismatch')
+        if len(set(self.source_message_ids))!=len(self.source_message_ids):raise ValueError('context_sources_mismatch')
+        if self.window_start_ms>self.release_ms or self.cutoff_ms<self.release_ms:raise ValueError('context_window_mismatch')
+        if sorted(self.comparators,key=lambda p:(-p.resolution_ms,p.pass_id))!=self.comparators:
+            raise ValueError('context_order_mismatch')
+        if any(p.release_ms>=p.resolution_ms or not self.window_start_ms<=p.resolution_ms<self.release_ms
+               or p.pass_id==self.current_pass_id or not set(p.source_message_ids)<=set(self.source_message_ids)
+               for p in self.comparators):raise ValueError('context_population_mismatch')
+        sign=1 if self.attack_direction=='right' else -1
+        hashes=dict(zip(self.source_message_ids,self.source_hashes))
+        if any(p.forward_m!=sign*(p.reception_position.x_m-p.release_position.x_m) or
+               p.source_hashes!=[hashes[mid] for mid in p.source_message_ids]
+               for p in self.comparators):raise ValueError('context_measurement_mismatch')
+        return self
+
 class NarrativePlan(Strict):
-    angle:Literal['progression','reception','proximity']
+    angle:Literal['progression','reception','proximity','historical_contrast']
     simple_claim_ids:list[str]=Field(min_length=2,max_length=3)
-    detail_claim_ids:list[str]=Field(min_length=4,max_length=8)
+    detail_claim_ids:list[str]=Field(min_length=4,max_length=9)
 
 class AudienceClause(Strict):
     id:str
@@ -187,7 +236,7 @@ class StructuredVariant(AudienceVariant):
     clauses:list[AudienceClause]=Field(min_length=1)
 
 class PublicationPackage(Strict):
-    schema_version:Literal['1.0.0','2.0.0']
+    schema_version:Literal['1.0.0','2.0.0','3.0.0']
     id:str
     revision:int=Field(ge=1)
     title:str
@@ -217,5 +266,11 @@ class PublicationPackage(Strict):
             if not all(isinstance(c,EvidenceClaim) for c in self.claims):raise ValueError('unscoped_claim')
             if not all(isinstance(v,StructuredVariant) for v in self.variants):raise ValueError('unbound_variant')
             from engine.narrative import validate_realization
+            validate_realization(self.model_dump())
+        if self.schema_version=='3.0.0':
+            if not self.narrative_plan or self.renderer_version!='context-claims-v3':raise ValueError('missing_narrative_plan')
+            if not all(isinstance(c,EvidenceClaim) for c in self.claims):raise ValueError('unscoped_claim')
+            if not all(isinstance(v,StructuredVariant) for v in self.variants):raise ValueError('unbound_variant')
+            from engine.contextual_narrative import validate_realization
             validate_realization(self.model_dump())
         return self

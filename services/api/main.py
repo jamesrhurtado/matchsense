@@ -20,14 +20,18 @@ from engine.core import available, digest, load_match, metric, pass_metrics, vis
 from engine.catalog import list_matches, duration_for_match
 from engine.repository import Repository
 from engine.workflow import EvidenceTools, run_workflow
-from engine.narrative import build_structured_package
+from engine.contextual_narrative import build_contextual_package as build_structured_package
+from engine.context import contextual_metrics
+from engine.recap import project_recap
+from engine.editorial import decision_summary
+from engine.dispositions import record, disposition, package_disposition
 from engine.outcomes import create_outcome, start_outcome, finish_outcome
 
 ROOT=Path(__file__).resolve().parents[2]
 from engine.cloud_repository import CosmosRepository, RepositoryConflict
 CLOUD=os.getenv('WHY_NOW_ENVIRONMENT')=='azure'
 FOUNDRY=os.getenv('WHY_NOW_MODEL_MODE','template')=='foundry'
-STRUCTURED=os.getenv('WHY_NOW_NARRATIVE_VERSION','2')=='2'
+STRUCTURED=os.getenv('WHY_NOW_NARRATIVE_VERSION','3') in {'2','3'}
 repo=CosmosRepository() if os.getenv('WHY_NOW_COSMOS_ENDPOINT') else Repository(os.getenv('WHY_NOW_DB',str(ROOT/'why_now.db')))
 transport=None
 if os.getenv('WHY_NOW_EVENTHUB_NAMESPACE'):
@@ -43,14 +47,18 @@ def workflow(tools,**kwargs):
     store=kwargs.pop('outcome_repository',repo)
     outcome=kwargs.pop('outcome',None)
     measured=tools.compute_pass_metrics()
+    if STRUCTURED:
+        measured=contextual_metrics(measured,tools.metadata,tools.messages,tools.cutoff_ms)
     if outcome is None:
         outcome=create_outcome(store,session_id,f'story-{tools.pass_id or (measured or {}).get("pass_id","unknown")}',
             (measured or {}).get('evidence_revision','unavailable'),kwargs.get('revision',1),tools.cutoff_ms,runtime_mode())
     outcome={**outcome,'evidence_observed_at':outcome['scheduled_at'],
-             'implementation':{'schema_version':'2.0.0' if STRUCTURED else '1.0.0',
-                               'prompt_version':'director-critic-v2.1' if STRUCTURED else 'legacy-v1',
-                               'renderer_version':'claim-blocks-v2' if STRUCTURED else 'canonical-v1',
+             'implementation':{'schema_version':'3.0.0' if STRUCTURED else '1.0.0',
+                               'prompt_version':'director-critic-v3.0' if STRUCTURED else 'legacy-v1',
+                               'renderer_version':'context-claims-v3' if STRUCTURED else 'canonical-v1',
                                'metric_version':'pressure-escape-v1',
+                               'tool_version':'evidence-tools-v3',
+                               'context_version':'recent-completed-three-v1' if STRUCTURED else None,
                                'model_deployment':os.getenv('FOUNDRY_MODEL_DEPLOYMENT') if FOUNDRY else None,
                                'model_version':os.getenv('FOUNDRY_MODEL_VERSION') if FOUNDRY else None,
                                'release_commit':os.getenv('WHY_NOW_RELEASE_COMMIT','unknown')}}
@@ -74,11 +82,14 @@ def workflow(tools,**kwargs):
             package=(build_structured_package if STRUCTURED else run_workflow)(tools,**kwargs)
         state=last.get('state') or ('produced' if package else 'abstained')
         zero={'calls':0,'input_tokens':0,'output_tokens':0,'total_tokens':0,'usage_complete':True}
-        finish_outcome(store,outcome,state,package=package,usage=last.get('usage') or (zero if not FOUNDRY else None),
+        outcome=finish_outcome(store,outcome,state,package=package,usage=last.get('usage') or (zero if not FOUNDRY else None),
                        trace=last.get('trace'),reason=last.get('reason'))
+        if package is None:
+            disposition(store,session_id,outcome,'not_produced',at_ms=tools.cutoff_ms)
         return package
     except Exception:
-        finish_outcome(store,outcome,'failed',usage=last.get('usage'),trace=last.get('trace'),reason='workflow_or_persistence_failure')
+        if outcome['state'] in {'scheduled','started'}:
+            finish_outcome(store,outcome,'failed',usage=last.get('usage'),trace=last.get('trace'),reason='workflow_or_persistence_failure')
         raise
 
 def inputs(session,at):
@@ -119,9 +130,11 @@ class Review(Body):
     package_hash:str=Field(min_length=64,max_length=64)
     idempotency_key:str=Field(min_length=8,max_length=100)
     text:str|None=Field(default=None,max_length=1000)
+    angle:Literal['progression','reception','historical_contrast']|None=None
 class RecapRequest(Body):
     through_ms:int|None=Field(default=None,ge=0,le=5400000)
     language:Literal['en','es']='en'
+    focus:str|None=Field(default=None,max_length=80)
 
 
 def fail(status,code): raise HTTPException(status,detail={'code':code})
@@ -144,19 +157,43 @@ def new_session(match_id):
     s={'id':str(uuid.uuid4()),'match_id':match_id,'clock_ms':0,'running':False,'speed':1,'updated_at':time.time(),'generation':1,'control_revision':1,'duration_ms':duration_for_match(match_id)}
     repo.save_session(s);return s
 
+def accept_package(sid,package,at,expected_revision):
+    try:
+        repo.store_package(sid,package,at,expected_revision=expected_revision)
+    except RepositoryConflict:
+        raise
+    except Exception:
+        package_disposition(repo,sid,package,'persistence_failed',at)
+        raise
+    package_disposition(repo,sid,package,'accepted',at)
+
 def materialize_all(s,at):
     """Each pass owns its evidence, workflow, revision and publication decision."""
     meta,messages=inputs(s,at)
     stored={p['id']:p for p in repo.list_packages(s['id'])}
-    measured={f"story-{m['pass_id']}":m for m in pass_metrics(messages,at,meta)}
+    raw_measured={f"story-{m['pass_id']}":m for m in pass_metrics(messages,at,meta)}
+    measured={key:contextual_metrics(m,meta,messages,at) if STRUCTURED else m
+              for key,m in raw_measured.items()}
+    # Stored approved v1/v2 packages keep their original revision and rendering.
+    # A changed current source still invalidates them through the existing path.
+    for key,old in stored.items():
+        if old['schema_version']!='3.0.0' and key in raw_measured:
+            if old['evidence_revision']==raw_measured[key]['evidence_revision']:
+                measured[key]=raw_measured[key]
     for story_id,old in stored.items():
         m=measured.get(story_id)
         if not m or not m['eligible'] or old['evidence_revision']!=m['evidence_revision']:
             decision=repo.decision(s['id'],story_id)
-            if decision and decision['status']!='superseded':repo.invalidate(s['id'],story_id)
+            if decision and decision['status']!='superseded':
+                repo.invalidate(s['id'],story_id)
+                package_disposition(repo,s['id'],old,'superseded',at)
     packages=[]
     for story_id,m in measured.items():
         if not m['eligible']:continue
+        opportunity_id=[story_id,m['evidence_revision']]
+        record(repo,s['id'],'opportunity',[*opportunity_id,'detected'],story_id=story_id,
+               evidence_revision=m['evidence_revision'],state='detected',replay_ms=at)
+
         old=stored.get(story_id)
         if old and old['evidence_revision']==m['evidence_revision']:
             packages.append(old)
@@ -166,28 +203,38 @@ def materialize_all(s,at):
         if not FOUNDRY:
             package=workflow(tools,revision=revision,session_id=s['id'])
             if package:
-                repo.store_package(s['id'],package,at,expected_revision=revision-1)
+                accept_package(s['id'],package,at,expected_revision=revision-1)
                 packages.append(package)
             continue
         key=(s['id'],story_id,m['evidence_revision'])
         future=JOBS.get(key)
         if future is None:
             # Never spend model calls on a new, already-expired live candidate.
-            if at>=m['retention_confirmed_at_ms']+30000:continue
-            if sum(not f.done() for f in JOBS.values())>=4:continue
+            if at>=m['retention_confirmed_at_ms']+30000:
+                record(repo,s['id'],'opportunity',[*opportunity_id,'expired_unscheduled'],story_id=story_id,
+                       evidence_revision=m['evidence_revision'],state='expired_unscheduled',replay_ms=at)
+                continue
+            if sum(not f.done() for f in JOBS.values())>=4:
+                record(repo,s['id'],'opportunity',[*opportunity_id,'capacity_deferred'],story_id=story_id,
+                       evidence_revision=m['evidence_revision'],state='capacity_deferred',replay_ms=at)
+                continue
             outcome=create_outcome(repo,s['id'],story_id,m['evidence_revision'],revision,at,runtime_mode())
             future=WORKERS.submit(workflow,tools,revision=revision,session_id=s['id'],outcome=outcome,outcome_repository=repo)
+            future._why_now_run_id=outcome['run_id']
             JOBS[key]=future
             continue
         if not future.done():continue
         try:
             package=future.result()
             if package:
+                if at>=m['retention_confirmed_at_ms']+30000:
+                    package_disposition(repo,s['id'],package,'expired_before_acceptance',at)
+                    continue
                 # Results were generated against frozen scoped evidence; only
                 # this current-evidence key may commit. A stale job is ignored.
                 if package['id']!=story_id or package['evidence_revision']!=m['evidence_revision']:
                     raise ValueError('workflow_scope_mismatch')
-                repo.store_package(s['id'],package,at,expected_revision=revision-1)
+                accept_package(s['id'],package,at,expected_revision=revision-1)
                 packages.append(package)
                 logger.info('workflow_complete session=%s story=%s revision=%s mode=%s usage=%s',s['id'],story_id,revision,package['mode'],package.get('model_usage',{}))
         except RepositoryConflict:
@@ -198,6 +245,14 @@ def materialize_all(s,at):
             if not getattr(future,'_why_now_logged',False):
                 logger.exception('workflow_failed session=%s story=%s',s['id'],story_id)
                 future._why_now_logged=True
+    for key,future in JOBS.items():
+        if key[0]!=s['id'] or not future.done():continue
+        current=measured.get(key[1])
+        if current and current['eligible'] and current['evidence_revision']==key[2]:continue
+        run_id=getattr(future,'_why_now_run_id',None)
+        outcome=next((o for o in repo.workflow_outcomes(s['id']) if o['run_id']==run_id),None)
+        if outcome:
+            disposition(repo,s['id'],outcome,'discarded_stale',at_ms=at)
     # Bound retained completed jobs; running work always keeps its slot/identity.
     for key in list(JOBS):
         if len(JOBS)<=512:break
@@ -221,7 +276,11 @@ def publication(s,package,at):
 
 def safe_story(package,status):
     if not package:return None
-    return {k:package[k] for k in ['id','revision','title','evidence_revision','eligible_from_ms','expires_at_ms']}|{'status':status}|{k:package['metrics'][k] for k in ['passer_id','receiver_id','team_id']}
+    titles={}
+    if package['schema_version']=='3.0.0':
+        from engine.contextual_narrative import title_for
+        titles={lang:title_for(package['narrative_plan'],package['metrics'],lang) for lang in ['en','es']}
+    return {k:package[k] for k in ['id','revision','title','evidence_revision','eligible_from_ms','expires_at_ms']}|{'titles':titles}|{'status':status}|{k:package['metrics'][k] for k in ['passer_id','receiver_id','team_id']}
 
 def snapshot_data(sid,is_producer=False,story_id=None):
     with LOCK:
@@ -357,28 +416,53 @@ def review(sid:str,story_id:str,body:Review,x_producer_token:str|None=Header(Non
             if not decision or decision['status']!='approved' or decision['revision']!=p['revision'] or decision['package_hash']!=p['package_hash']:
                 fail(409,'not_published')
         if body.action=='edit':
-            if not body.text or not body.text.strip():fail(422,'edit_text_required')
-            meta,messages=inputs(s,at);p=workflow(EvidenceTools(meta,messages,at,pass_id=p['metrics']['pass_id']),revision=p['revision']+1,proposed_text=body.text,session_id=sid)
+            if not body.angle and (not body.text or not body.text.strip()):fail(422,'edit_text_required')
+            if body.angle and not STRUCTURED:fail(422,'emphasis_requires_structured_package')
+            if body.angle=='historical_contrast' and 'c-context' not in {c['id'] for c in p['claims']}:
+                fail(422,'historical_contrast_requires_evidence')
+            meta,messages=inputs(s,at);p=workflow(EvidenceTools(meta,messages,at,pass_id=p['metrics']['pass_id']),revision=p['revision']+1,proposed_text=body.text,session_id=sid,**({'editorial_angle':body.angle} if body.angle else {}))
             if p is None:fail(422,'review_rejected')
             new_status='ready'
         else:new_status={'approve':'approved','suppress':'suppressed','retract':'retracted'}[body.action]
+        record(repo,sid,'approval_received',[body.idempotency_key,body.action],story_id=story_id,revision=p['revision'],action=body.action,replay_ms=at)
         result={'story_id':story_id,'status':new_status,'revision':p['revision'],'at_ms':at,'review':p['review']}
         # The repository commits decision, audit, and idempotency in one partition transaction.
         try:
             return repo.commit_review(sid,body.idempotency_key,request_hash,body.expected_revision,body.package_hash,p,new_status,at,result,edited=body.action=='edit')
         except RepositoryConflict as exc:fail(409,exc.code)
 
+class BrowserAck(Body):
+    revision:int=Field(ge=1)
+    evidence_revision:str=Field(min_length=16,max_length=64)
+    event_id:uuid.UUID
+    paint_interval_ms:float=Field(ge=0,le=60000,allow_inf_nan=False)
+
+@app.post('/api/replay-sessions/{sid}/stories/{story_id}/render-ack')
+def render_ack(sid:str,story_id:str,body:BrowserAck):
+    with LOCK:
+        _,at,p,_=authorized_package(sid,story_id,None)
+        if p['revision']!=body.revision or p['evidence_revision']!=body.evidence_revision:
+            fail(409,'stale_render_identity')
+        event=record(repo,sid,'browser_ack',[story_id,body.revision],story_id=story_id,
+                     revision=body.revision,evidence_revision=body.evidence_revision,
+                     event_id=str(body.event_id),paint_interval_ms=body.paint_interval_ms,replay_ms=at,
+                     clock_scope='Browser monotonic interval only; no server/browser clock subtraction.')
+        return {'recorded_at':event['recorded_at'],'event_id':event['event_id']}
+
 @app.post('/api/replay-sessions/{sid}/recaps')
 def recap(sid:str,body:RecapRequest):
     with LOCK:
         s=get_session(sid);now=clock(s);cutoff=min(now,body.through_ms if body.through_ms is not None else now)
-        moments=[]
+        approved=[]
         for p in materialize_all(s,now):
             decision=repo.decision(sid,p['id'])
             if decision and decision['status']=='approved' and decision['revision']==p['revision'] and decision['package_hash']==p['package_hash'] and decision['at_ms']<=cutoff and p['eligible_from_ms']<=cutoff:
-                v=next(v for v in p['variants'] if v['language']==body.language and v['detail']=='simple' and v['focus'] is None)
-                moments.append({'story_id':p['id'],'revision':p['revision'],'text':v['text'],'claim_ids':v['claim_ids'],'at_ms':p['eligible_from_ms']})
-        return {'title':'El partido hasta ahora' if body.language=='es' else 'Match so far','through_ms':cutoff,'moments':moments,'mode':'approved moments only'}
+                approved.append(p)
+        if body.focus and body.focus not in {x['id'] for x in inputs(s,now)[0]['players']+inputs(s,now)[0]['teams']}:
+            fail(400,'invalid_preference')
+        return {'title':'El partido hasta ahora' if body.language=='es' else 'Match so far',
+                'through_ms':cutoff, 'mode':'approved moments only',
+                **project_recap(approved,body.language,cutoff,body.focus)}
 
 @app.get('/api/replay-sessions/{sid}/diagnostics')
 def diagnostics(sid:str,x_producer_token:str|None=Header(None),story_id:str|None=None):
@@ -388,7 +472,7 @@ def diagnostics(sid:str,x_producer_token:str|None=Header(None),story_id:str|None
         usage=p.get('model_usage',{}) if p else {}
         outcomes=repo.workflow_outcomes(sid)
         if story_id:outcomes=[o for o in outcomes if o['story_id']==story_id]
-        return {'session_id':sid,'clock_ms':at,'mode':p['mode'] if p else runtime_mode(),'observations_delivered':len(available(messages,at)),'ingestion_lag_ms':max(0,at-max((m['available_at_ms'] for m in available(messages,at)),default=0)),'metric_version':'pressure-escape-v1','workflow_ms':p['workflow_ms'] if p else None,'trace':p['trace'] if p else [],'audit':repo.audit(sid),'azure_deployed':CLOUD,'model_calls':p.get('model_calls',usage.get('calls',0)) if p else 0,'model_tokens':p.get('model_tokens',usage.get('total_tokens',0)) if p else 0,'model_usage':usage,'workflow_outcomes':outcomes,'transport':transport.diagnostics() if transport else {'mode':'local'},'workflow_pending':any(k[0]==sid and not f.done() for k,f in JOBS.items())}
+        return {'session_id':sid,'clock_ms':at,'mode':p['mode'] if p else runtime_mode(),'observations_delivered':len(available(messages,at)),'ingestion_lag_ms':max(0,at-max((m['available_at_ms'] for m in available(messages,at)),default=0)),'metric_version':'pressure-escape-v1','workflow_ms':p['workflow_ms'] if p else None,'trace':p['trace'] if p else [],'audit':repo.audit(sid),'azure_deployed':CLOUD,'model_calls':p.get('model_calls',usage.get('calls',0)) if p else 0,'model_tokens':p.get('model_tokens',usage.get('total_tokens',0)) if p else 0,'model_usage':usage,'workflow_outcomes':outcomes,'lifecycle_events':repo.lifecycle_events(sid),'decision_summary':decision_summary(p,outcomes),'transport':transport.diagnostics() if transport else {'mode':'local'},'workflow_pending':any(k[0]==sid and not f.done() for k,f in JOBS.items())}
 
 _RATE=defaultdict(deque)
 _RATE_LOCK=threading.Lock()

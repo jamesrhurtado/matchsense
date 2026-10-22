@@ -125,7 +125,7 @@ def test_authored_context_reference_values_and_scope_match_aggregate_without_lea
 def test_live_manifest_rejects_stale_renderer_or_unknown_provider_version():
     from evals.agentic.run import validate_runtime_identifiers
     settings={'schema_version':'4.0.0','renderer_version':'editorial-claims-v4',
-              'prompt_version':'director-critic-v4.0','tool_version':'evidence-tools-v3',
+              'prompt_version':'director-critic-v4.1','tool_version':'evidence-tools-v3',
               'deployment':'fixture','model':'fake','model_version':'fixture','api_version':'2024-10-21'}
     env={'FOUNDRY_MODEL_DEPLOYMENT':'fixture','FOUNDRY_MODEL_NAME':'fake','FOUNDRY_MODEL_VERSION':'fixture'}
     validate_runtime_identifiers(settings,env)

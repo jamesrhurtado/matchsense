@@ -15,7 +15,7 @@ from engine.foundry_workflow import (
 )
 from engine.editorial_narrative import build_editorial_package as build_structured_package
 
-PROMPT_VERSION = 'director-critic-v4.0'
+PROMPT_VERSION = 'director-critic-v4.1'
 
 
 class DirectorDecision(Output):
@@ -132,7 +132,24 @@ async def _execute(tools, baseline, revision, proposed_text, strategy, provider,
                     return None
                 if draft.action != 'propose' or draft.plan is None:
                     raise WorkflowLimit('unresolved_director')
-                package = build_structured_package(tools, revision, proposed_text, plan=draft.plan.model_dump(), editorial_angle=editorial_angle)
+                try:
+                    package = build_structured_package(tools, revision, proposed_text, plan=draft.plan.model_dump(), editorial_angle=editorial_angle)
+                except ValueError as exc:
+                    # An observed discovery failure omitted a required detail
+                    # claim. Give S3 and M3 the same one-repair allowance using
+                    # machine-readable validation feedback, never invalid text.
+                    known = {'missing_team_outcome', 'missing_evidence_detail',
+                             'angle_requires_evidence', 'unsupported_narrative_claim'}
+                    reason = str(exc) if str(exc) in known else 'invalid_narrative_plan'
+                    runner.trace.append({'role':'Evidence Validator','action':'plan_validation_feedback',
+                                         'status':reason,'elapsed_ms':runner.elapsed()})
+                    if repair:
+                        raise WorkflowLimit('repeated_invalid_narrative_plan') from exc
+                    context['validator_repair_request'] = {
+                        'reason':reason, 'required_simple':['c-retain'],
+                        'required_detail':['c-pressure','c-bypass','c-retain','c-progress'],
+                        'instruction':'Repair the supported plan once; no new facts or relaxed validation.'}
+                    continue
                 runner.trace.append({'role': 'Story Director', 'action': 'select_claims',
                                      'status': 'proposed', 'plan': package['narrative_plan'], 'reason': draft.reason, 'elapsed_ms': runner.elapsed()})
                 if strategy == 'director_only':

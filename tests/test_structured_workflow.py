@@ -44,11 +44,12 @@ def test_abstentions_and_rejections_report_attempts_without_a_package(stage):
 
 def test_unknown_claim_never_reaches_permissive_reviewer():
     plan=default_plan();plan['simple_claim_ids']=['c-goal','c-retain']
-    provider=FakeProvider([director(plan),critic()])
+    provider=FakeProvider([director(plan),director(plan)])
     p=run_structured_workflow(tools(),provider=provider)
     assert p['mode']=='template fallback'
     assert p['variants'][0]['claim_ids']==['c-forward','c-retain']
-    assert len(provider.calls)==1
+    assert len(provider.calls)==2
+    assert all(call[0]=='Story Director' for call in provider.calls)
 
 
 def test_incomplete_review_cannot_approve_package():

@@ -54,7 +54,7 @@ def workflow(tools,**kwargs):
             (measured or {}).get('evidence_revision','unavailable'),kwargs.get('revision',1),tools.cutoff_ms,runtime_mode())
     outcome={**outcome,'evidence_observed_at':outcome['scheduled_at'],
              'implementation':{'schema_version':'4.0.0' if STRUCTURED else '1.0.0',
-                               'prompt_version':'director-critic-v4.0' if STRUCTURED else 'legacy-v1',
+                               'prompt_version':'director-critic-v4.1' if STRUCTURED else 'legacy-v1',
                                'renderer_version':'editorial-claims-v4' if STRUCTURED else 'canonical-v1',
                                'metric_version':'pressure-escape-v1',
                                'tool_version':'evidence-tools-v3',

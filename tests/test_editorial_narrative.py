@@ -87,3 +87,19 @@ def test_public_decision_summary_uses_the_exact_versioned_display_precision():
     summary=decision_summary(p,[])
     assert summary['lead']==p['variants'][0]['clauses'][0]['text']
     assert '18.084' not in summary['lead']
+
+
+@pytest.mark.parametrize('strategy',['single','collaborative'])
+def test_observed_missing_required_fact_gets_same_bounded_repair_for_both_arms(strategy):
+    from tests.test_structured_workflow import critic
+    from tests.test_foundry import tools
+    from engine.editorial_narrative import legacy
+    bad=legacy.default_plan()
+    bad['detail_claim_ids']=[c for c in bad['detail_claim_ids'] if c!='c-pressure']
+    provider=FakeProvider([director(bad),director(),critic()])
+    p=run_structured_workflow(tools(),provider=provider,strategy=strategy)
+    assert p['mode']=='Microsoft Agent Framework + Azure OpenAI'
+    assert p['model_usage']['calls']==3
+    assert provider.calls[1][2]['validator_repair_request']['reason']=='missing_evidence_detail'
+    assert p['review']['cycles']==1
+    assert any(t['action']=='plan_validation_feedback' for t in p['trace'])

@@ -19,6 +19,7 @@ def main():
     p.add_argument('--stage',choices=['smoke','comparison'],required=True)
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--dry-run',action='store_true')
+    p.add_argument('--cases',help='Optional exact discovery case IDs for a targeted verification')
     args=p.parse_args()
     root=Path(__file__).resolve().parents[1]
     sys.path.insert(0,str(root))
@@ -38,7 +39,12 @@ def main():
     now=datetime.now(timezone.utc)
     from engine.structured_workflow import PROMPT_VERSION
     from engine.editorial_narrative import SCHEMA_VERSION, RENDERER_VERSION
-    cap=72 if args.stage=='smoke' else 270
+    default_cases='history-contrast,history-marginal,history-ordinary,early-late-outcome' if args.stage=='smoke' else None
+    selected_cases=args.cases or default_cases
+    count=len(selected_cases.split(',')) if selected_cases else 15
+    if count < 1 or count > (4 if args.stage=='smoke' else 15):
+        raise SystemExit('Selected case count exceeds the bounded stage.')
+    cap=count*3*6
     workflows=cap//6
     config={'trials':1,'order_seed':1041,'max_model_calls':cap,
             'max_input_tokens':workflows*32000,'max_output_tokens':workflows*6600,
@@ -62,7 +68,7 @@ def main():
     env.pop('AZURE_CLIENT_ID',None)
     command=[sys.executable,'-m','evals.agentic.run','--live','--arms','T3,S3,M3,D3',
              '--config',str(config_path),'--output',str(args.output)]
-    if args.stage=='smoke':command+=['--cases','history-contrast,history-marginal,history-ordinary,early-late-outcome']
+    if selected_cases:command+=['--cases',selected_cases]
     if args.dry_run:command+=['--dry-run']
     print(f"Verified rates: ${config['input_per_million']}/M input, ${config['output_per_million']}/M output. Stage ceiling ${config['max_estimated_cost']}; {cap} calls.",flush=True)
     subprocess.run(command,cwd=root,env=env,check=True)

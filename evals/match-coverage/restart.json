@@ -1,0 +1,22 @@
+{
+  "actual_api_process_restart": true,
+  "session_id": "88d6f14e-478b-4c30-961d-9cdea79393a4",
+  "exact_packages_preserved": 3,
+  "package_hashes": {
+    "story-goal-goal-1": "fc1878d35e02d97fb300245dbd174304ad112101493adc0062b00c5c58d5abfc",
+    "story-shot-attempt-2": "eec27655c2a99eba59f4a2957be5a5c6f46c22dfa32a77ea52d92b3c193a7b65",
+    "story-shot-attempt-1": "cbe9414b25a68103fd3a66ca938319c4fbd7f383aa61e3d2025b9179d7727d66"
+  },
+  "score_before": {
+    "blue": 1,
+    "amber": 0
+  },
+  "corrected_score": {
+    "blue": 0,
+    "amber": 0
+  },
+  "unrelated_approval_preserved": true,
+  "sse_reconnect_resynced": true,
+  "mode": "local template / SQLite",
+  "model_calls": 0
+}

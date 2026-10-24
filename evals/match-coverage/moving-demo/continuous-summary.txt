@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "sessions": [
+    {
+      "session_id": "6939fa7e-bd0c-45aa-98fd-c3a74d20a9b4",
+      "match_id": "match-0c0a000000000003",
+      "elapsed_s": 242.54,
+      "last_clock_ms": 240000,
+      "families": [
+        "goal",
+        "pass",
+        "possession",
+        "recovery",
+        "shot"
+      ],
+      "errors": []
+    },
+    {
+      "session_id": "d6c8d235-afdc-43f0-b200-9223e68a2cdc",
+      "match_id": "match-0c0a000000000004",
+      "elapsed_s": 241.56,
+      "last_clock_ms": 240000,
+      "families": [
+        "goal",
+        "pass",
+        "possession",
+        "recovery",
+        "shot"
+      ],
+      "errors": []
+    }
+  ]
+}

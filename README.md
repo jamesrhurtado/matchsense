@@ -6,6 +6,54 @@
 
 **See the play. Understand the moment.** An evidence-first story desk for a fictional football broadcast, with a producer console and a responsive viewer companion.
 
+## Broader match coverage — local engineering candidate
+
+The opt-in mixed replay adds source-confirmed clock/period/score, corrected goals,
+resolved shots, explicit recovery/control changes, and fixed possession windows.
+All story families use producer approval, English/Spanish, relevant player/team
+focus, family-specific evidence and approved timeline/recap. Score updates are
+source state and do not imply an approved explanation. Existing pass packages
+and the original 173-replay regression remain intact.
+
+The local match view now has a broadcast-style scoreboard, original fictional club
+crests, a textured pitch, observed control labels and an approved-story lower
+third, with responsive English/Spanish layouts. See the [visual design record](docs/match-stage-design.md).
+
+```sh
+make coverage-dev
+```
+
+Open [http://127.0.0.1:3000](http://127.0.0.1:3000), select **Pressure Swing flagship · guided mixed-event pitch**,
+and use the prefilled local producer key. The command enables
+`WHY_NOW_MATCH_COVERAGE=1` and isolates SQLite in `.run/match-coverage.db`.
+Coverage is off in ordinary `make dev`; the six additional fixtures have a separate
+catalogue. The guided demo uses continuous authored player/ball movement and keeper lanes,
+and pauses at the first example of each event type so you can inspect and approve
+it. Pressure Swing pauses at the comparative 30 m pass, around 91.3 s. Turn off **Pause at new event types** for continuous playback. **Check the evidence**
+opens the supporting facts and brings them into view. Observation counts are
+position samples/source records, not football incident counts. The original mixed
+fixtures and stored approvals remain unchanged. No Azure credentials or paid calls
+are needed. See the
+[mixed-event walkthrough](docs/match-coverage-demo.md),
+[event definitions/rollback matrix](docs/match-events.md),
+[verification record](docs/next-iteration/match-coverage-handoff.md) and
+[pilot materials](docs/match-coverage-pilot.md).
+
+The new **Pressure Swing** insight compares time-weighted nearby-opponent averages
+before a pass and after reception, with explicit intervals and coverage. The new
+flagship demonstrates **2.0 → 0.4** around a **30 m forward pass**, plus a scoped
+comparison against three previous team passes. “Why this moment?” is separate
+from factual evidence; casual/analyst and relevant player views share approved
+facts. This is a proximity proxy, not tactical intent, pass difficulty or a cause
+of the later goal. See [the flagship walkthrough and rubric rationale](docs/pressure-flagship.md).
+
+This is a local engineering candidate. Recruitment, external football/Spanish
+ratings, real-user findings and deployment remain pending. A bounded real
+**gpt-4o-mini 2024-07-18** smoke now verifies pressure, shot, goal, recovery and
+possession through Director/Reviewer (10 calls, exact source-rendered bilingual
+text). It does not establish broad model quality or user usefulness. The hosted
+0.5 build remains separate and has not been updated.
+
 ## Working local MVP
 
 The local version 0.5 candidate adds v4 editorial rendering, concise role-focused text, consistent measurement precision, comparison bars, explicit earlier-moment navigation, and atomic acceptance accounting. See [the latest quality handoff](docs/next-iteration/quality-v4-handoff.md), [multi-agent evidence](docs/next-iteration/multi-agent-evidence.md), and [reviewer guide](docs/next-iteration/reviewer-guide-v4.md). This local update has not replaced the previously documented Azure build.
@@ -49,6 +97,7 @@ make data-check
 make evaluate
 make synthetic-evaluate
 make web-build
+make coverage-evaluate  # separate new-family hand references and physical/feed checks
 # With API and production web server running:
 npm --prefix apps/web exec -- playwright install chromium
 npm --prefix apps/web run test:e2e
@@ -98,7 +147,7 @@ The local and Azure implementations are available; see the QA guide for complete
 
 The [PM update handoff](docs/next-iteration/pm-update-handoff.md) summarizes the contextual update, verification, ordered implementation commits and remaining release gates.
 
-The [90+ product improvement plan](docs/next-iteration/grand-prize-90-plus-plan.md) is the current engineering handoff, based on version 0.4. It specifies changes by judging category, agent/context contracts, priorities, dependencies, acceptance tests and evaluation gates, excluding submission logistics. The [implementation record](docs/next-iteration/decision-log.md) identifies delivered changes and outstanding evidence; the [earlier plan](docs/next-iteration/README.md) remains available as historical context.
+The [broader match implementation plan](docs/next-iteration/match-coverage-implementation-plan.md) governs this iteration. The [90+ product improvement plan](docs/next-iteration/grand-prize-90-plus-plan.md) is historical context, based on version 0.4. It specifies changes by judging category, agent/context contracts, priorities, dependencies, acceptance tests and evaluation gates, excluding submission logistics. The [implementation record](docs/next-iteration/decision-log.md) identifies delivered changes and outstanding evidence; the [earlier plan](docs/next-iteration/README.md) remains available as historical context.
 
 Local mode uses SQLite. Cloud mode uses Cosmos and Event Hubs, with one API worker/replica enforced for this engineering environment. It supports independent pass investigations across each segment, two fictional teams, 22 active players and 10 Hz observations. Runtime evidence is limited to the delivered clock. The underlying dataset is synthetic, with six authored parent configurations. Local tests do not establish real-match tactical accuracy, general semantic verification, production scale, or measured editorial savings.
 

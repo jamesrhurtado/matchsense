@@ -56,3 +56,13 @@ Report participant counts and backgrounds, failures as well as successes, anonym
 Any unsupported outcome believed by a participant or accidental publication is a release blocker until fixed and retested. Noncritical preferences inform priority. If a shorter factual explanation performs better, select it.
 
 Current observations: **none**. Findings, changes and retest results: **pending**.
+
+## Mixed-event iteration MC10 — 24 October 2026
+
+Use [the mixed-event pilot instrument](match-coverage-pilot.md) for the next
+formative round: 5–8 first-time viewers and 1–2 football-aware reviewers, with
+counterbalanced baseline/candidate order, consent, checkpoint answer keys,
+score/shot/control/possession/evidence tasks, normal-play overload observation,
+and raw-count gates. James owns recruitment; facilitator and external key review
+remain unassigned. Engineering checks are not participant observations. No people
+have participated in this iteration and no usefulness ratings are recorded.

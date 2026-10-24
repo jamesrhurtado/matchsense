@@ -1,0 +1,51 @@
+{
+  "retrieved_at": "2026-10-24T19:14:25.469750+00:00",
+  "source": "https://prices.azure.com/api/retail/prices",
+  "items": [
+    {
+      "currencyCode": "USD",
+      "tierMinimumUnits": 0.0,
+      "retailPrice": 0.0006,
+      "unitPrice": 0.0006,
+      "armRegionName": "eastus",
+      "location": "US East",
+      "effectiveStartDate": "2024-07-01T00:00:00Z",
+      "meterId": "8a5a8abb-6dbf-530a-9f40-7b17658df0f2",
+      "meterName": "gpt-4o-mini-0718-Outp-glbl Tokens",
+      "productId": "DZH318Z0HHG7",
+      "skuId": "DZH318Z0HHG7/0H34",
+      "productName": "Azure OpenAI",
+      "skuName": "gpt-4o-mini-0718-Outp-glbl",
+      "serviceName": "Foundry Models",
+      "serviceId": "DZH31600VF1F",
+      "serviceFamily": "AI + Machine Learning",
+      "unitOfMeasure": "1K",
+      "type": "Consumption",
+      "isPrimaryMeterRegion": true,
+      "armSkuName": "gpt-4o-mini-0718-Outp-glbl"
+    },
+    {
+      "currencyCode": "USD",
+      "tierMinimumUnits": 0.0,
+      "retailPrice": 0.00015,
+      "unitPrice": 0.00015,
+      "armRegionName": "eastus",
+      "location": "US East",
+      "effectiveStartDate": "2024-07-01T00:00:00Z",
+      "meterId": "932a4ba7-9944-5dd6-a3ef-f8e18f36eeae",
+      "meterName": "gpt-4o-mini-0718-Inp-glbl Tokens",
+      "productId": "DZH318Z0HHG7",
+      "skuId": "DZH318Z0HHG7/0H38",
+      "productName": "Azure OpenAI",
+      "skuName": "gpt-4o-mini-0718-Inp-glbl",
+      "serviceName": "Foundry Models",
+      "serviceId": "DZH31600VF1F",
+      "serviceFamily": "AI + Machine Learning",
+      "unitOfMeasure": "1K",
+      "type": "Consumption",
+      "isPrimaryMeterRegion": true,
+      "armSkuName": "gpt-4o-mini-0718-Inp-glbl"
+    }
+  ],
+  "reserved_usd": 0.0306
+}

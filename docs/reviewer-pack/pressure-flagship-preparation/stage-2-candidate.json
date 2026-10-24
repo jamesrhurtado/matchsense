@@ -1,0 +1,137 @@
+{
+  "status": "Prepared candidate only; not participant validation or producer publication",
+  "variants": [
+    {
+      "id": "en_simple_general",
+      "language": "en",
+      "detail": "simple",
+      "focus": null,
+      "text": "Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-09",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-09",
+      "text": "Receiver: Beni Vidal. Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-11",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-11",
+      "text": "Passer: Dani Luna. Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_general",
+      "language": "en",
+      "detail": "detail",
+      "focus": null,
+      "text": "Analyst: 6 m radius; time-weighted means 2.0 → 0.4 opponents; drop 1.6. Windows: 2 s before release and 2 s from reception; coverage 100.0%. Pass 30.0 m forward; team possession confirmed for 3 s. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-09",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-09",
+      "text": "Receiver: Beni Vidal. Analyst: 6 m radius; time-weighted means 2.0 → 0.4 opponents; drop 1.6. Windows: 2 s before release and 2 s from reception; coverage 100.0%. Pass 30.0 m forward; team possession confirmed for 3 s. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-11",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-11",
+      "text": "Passer: Dani Luna. Analyst: 6 m radius; time-weighted means 2.0 → 0.4 opponents; drop 1.6. Windows: 2 s before release and 2 s from reception; coverage 100.0%. Pass 30.0 m forward; team possession confirmed for 3 s. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_general",
+      "language": "es",
+      "detail": "simple",
+      "focus": null,
+      "text": "Dani Luna pasó 30.0 m hacia delante a Beni Vidal. La media de rivales cercanos pasó de 2.0 antes del pase a 0.4 tras la recepción. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-09",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-09",
+      "text": "Recepción de Beni Vidal. Dani Luna pasó 30.0 m hacia delante a Beni Vidal. La media de rivales cercanos pasó de 2.0 antes del pase a 0.4 tras la recepción. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-11",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-11",
+      "text": "Pase de Dani Luna. Dani Luna pasó 30.0 m hacia delante a Beni Vidal. La media de rivales cercanos pasó de 2.0 antes del pase a 0.4 tras la recepción. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_general",
+      "language": "es",
+      "detail": "detail",
+      "focus": null,
+      "text": "Análisis: radio 6 m; medias ponderadas por tiempo 2.0 → 0.4 rivales; descenso 1.6. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura 100.0%. Pase 30.0 m hacia delante; posesión del equipo confirmada durante 3 s. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-09",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-09",
+      "text": "Recepción de Beni Vidal. Análisis: radio 6 m; medias ponderadas por tiempo 2.0 → 0.4 rivales; descenso 1.6. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura 100.0%. Pase 30.0 m hacia delante; posesión del equipo confirmada durante 3 s. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-11",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-11",
+      "text": "Pase de Dani Luna. Análisis: radio 6 m; medias ponderadas por tiempo 2.0 → 0.4 rivales; descenso 1.6. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura 100.0%. Pase 30.0 m hacia delante; posesión del equipo confirmada durante 3 s. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    }
+  ]
+}

@@ -1,0 +1,1661 @@
+{
+  "source_sha256": {
+    "engine/catalog.py": "5a9ad8d8eee55a02ab7b48a077c58994a548fa07dad7b14d30eb8f83e235527c",
+    "engine/foundry_workflow.py": "0e10f13e2be4e32b62ee24cb2f5185e57ced31dec4ac361a9c3f90a9c788f024",
+    "engine/event_metrics.py": "b94d4758c4eae1c5500e3a77fc2ca5907531a279faf85912fc09cf459c40d936",
+    "engine/event_narrative.py": "58ae26173c1fda07824c35813f093375edee0c05f71a16510ad252494b90dcb4",
+    "engine/contextual_narrative.py": "df79b4183e1620f1305db2b0a50f3d5ee3305275ac1215fbd754bffbf3ceb6e2",
+    "engine/structured_workflow.py": "c30d9c06bc0c81985bf09b7aa3411de1a475cad273a61b59a2990e56d3e86ac8",
+    "engine/transport.py": "32b18bfe691b999f606df064bd4ee222c29228a715b7f5854aec769849ed335e",
+    "engine/dispositions.py": "9a85fc6a1c8c1763312aa06d6948644323a2c31738f8417efb229b51ea603c78",
+    "engine/cloud_repository.py": "90e549455c4070d2681c0a17c3b32daf38374101801b73ae084eae264a0163ed",
+    "engine/core.py": "d813c41221387ab8a07d6d765df2dd3fa4bb5ece290540c657cc512c640ce3b4",
+    "engine/narrative.py": "eda1cff62cb57952cd32dbdf61f32a91668a1252386746faac5b913b52ac6742",
+    "engine/match_state.py": "6efc2ef98ee3848e1619354f722dc69a8538b88885c601ecef538fc18b62f89f",
+    "engine/context.py": "0f49a58d1a42b8feba87555dfeab925c8d9cef3dc0cc5336a456e1d806bc2912",
+    "engine/event_workflow.py": "269fa669e314a0a4ee1fff089facfd907302e274fb3a13b028357edc0bc24371",
+    "engine/outcomes.py": "a320e7ddbec30e6eaccc3a40a7d0d055d0f832ae566a0aee98bb8ddfb4640c0e",
+    "engine/editorial.py": "cda3ef45d400c79715d69e9dbda0551849aa44e9ab5d0829d62216e11b52612e",
+    "engine/contracts.py": "4412fd99a4c763537fd4d93a9491504681e09b48848a7d7c48cd183d01bd583e",
+    "engine/workflow.py": "439e3211c8f5b5c20aaa8ddf366b4a262808431979e0a108c2ad17bf34d49a1a",
+    "engine/repository.py": "1106fea44b4b320b32e9980d59d3805bf2c4da0551a85520c00bcf7322165104",
+    "engine/recap.py": "be3e20686826b377cd9de3b6386d7326578b4882868e8ea785ac7fb977a064aa",
+    "engine/editorial_narrative.py": "67be6a3031bb13e1f32384e9a25af13c10d2e2308c8f77494b33401d791fc879",
+    "services/api/main.py": "23b9c13a1dcb6ccbb250579b4b51be1fa823e963de57e5022cba74ec4bda5f75",
+    "apps/web/components/audience-panel.tsx": "b7c83755daf7700d4d133889faf2d26b6da6037e7b1cd500c0b3b0ad0fda6029",
+    "apps/web/components/audience-controls.tsx": "5bc89714106e92546b9031783d727645f6bff26a67cb3440759560df49fb548e",
+    "apps/web/components/event-evidence.tsx": "bc380e160b06d1e0860fdc19b8d8e1498b4ed152eff1ac884db619c0ccd0aab5",
+    "apps/web/components/pass-comparison.tsx": "e5af794579f90267cd1c6fa204f4d412846d1d397e75a6f91bfdc786a2ebe2f1",
+    "apps/web/components/review-card.tsx": "c1df5a6b89b28d38cf452bc1dd1cc2a405796900702dafbddfbc7bb85eb97d17",
+    "apps/web/components/inline-evidence.tsx": "c4579fe7adb1f38e883f985556153046707ae53ef5d1a0f31820c4eddba67a9e",
+    "apps/web/components/evidence-replay.tsx": "6fb71ff7878a72ad673f3f426e06bdf267c6816a4f2f58de646bf8c501a5cc79",
+    "apps/web/components/pitch.tsx": "fae7d9b38adc0529df398ec170f4b0bb8b2d4712f10d7190f1dfb3a5fc048831",
+    "apps/web/components/decision-summary.tsx": "967e4c4d1ab94b6219721becef61da4f782a3257db8c4bb0695d408ca7a3f1fd",
+    "apps/web/components/match-desk.tsx": "9d58a9bfd66796eca71961d368d9ef2492dbe6756d27beb992b6f0a77d34bd6f",
+    "apps/web/components/ui.tsx": "030ba4ddead9791d77dea16d1df49ccd08fb7e8e737459f70c88769624e80679",
+    "apps/web/lib/api.ts": "4f3ef77f24a51c459977318fc883d113ab8f61c6556dbe175bb80dc75ba2905b",
+    "apps/web/hooks/use-story-variant.ts": "4473aa5de690ad84cbd66eaac92c5975592138622199ec8e0ca2e2fc1e82f8a6",
+    "apps/web/hooks/use-match.ts": "1313ed470702d5d3cc2ee906ac3cb0d6813990d74a8ca4ca488fff8360c3020a",
+    "apps/web/hooks/use-render-ack.ts": "d231320f8de67bc2a6c7ba5e141d522b10cdb0327572431986a55c1fff1d9121",
+    "apps/web/hooks/use-audience-preferences.ts": "e38338e0bc31e2c457efcfeaaeee2e827dcd4b36eeb25fcb299ca51efad474e9",
+    "apps/web/app/page.tsx": "cb9295119d0c7c002315587aca085b15a3952e3d8091d9ccdcbf6430b8bb0120"
+  },
+  "mode": "local deterministic template",
+  "speed": 1,
+  "simultaneous_sessions": 2,
+  "continuous": true,
+  "scope": "Full 4-minute replay. Poll consumer; conservative readiness upper bound, no producer approval timing. No model/cloud claims.",
+  "missing_telemetry": [
+    "Exact durable ingestion timestamp",
+    "Human review duration",
+    "Browser first-paint for every opportunity",
+    "Provider/model latency (zero calls)"
+  ],
+  "attempted": 85,
+  "found": 85,
+  "target_met": 85,
+  "target_fraction": 1.0,
+  "results": [
+    {
+      "session_id": "043c583d-2652-4ce4-b04f-2b10c4a8c354",
+      "correction": false,
+      "elapsed_s": 243.28124916699016,
+      "polls": 193,
+      "http_max_ms": 1816.0364999785088,
+      "opportunities": [
+        {
+          "family": "possession",
+          "story_id": "story-possession-15000",
+          "evidence_ready_ms": 15000,
+          "expires_at_ms": 30000,
+          "candidate_at_ms": 15652.914540973026,
+          "queue_wait_ms": 652.9145409730263,
+          "review_time_available_ms": 14347.085459026974,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-30000",
+          "evidence_ready_ms": 30000,
+          "expires_at_ms": 45000,
+          "candidate_at_ms": 32054.4667919958,
+          "queue_wait_ms": 2054.466791995801,
+          "review_time_available_ms": 12945.533208004199,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-45000",
+          "evidence_ready_ms": 45000,
+          "expires_at_ms": 60000,
+          "candidate_at_ms": 47351.118208998814,
+          "queue_wait_ms": 2351.118208998814,
+          "review_time_available_ms": 12648.881791001186,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-60000",
+          "evidence_ready_ms": 60000,
+          "expires_at_ms": 75000,
+          "candidate_at_ms": 61222.57908297749,
+          "queue_wait_ms": 1222.5790829774924,
+          "review_time_available_ms": 13777.420917022508,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-75000",
+          "evidence_ready_ms": 75000,
+          "expires_at_ms": 90000,
+          "candidate_at_ms": 76003.67220795527,
+          "queue_wait_ms": 1003.672207955271,
+          "review_time_available_ms": 13996.327792044729,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-90000",
+          "evidence_ready_ms": 90000,
+          "expires_at_ms": 105000,
+          "candidate_at_ms": 90408.75187502103,
+          "queue_wait_ms": 408.75187502102926,
+          "review_time_available_ms": 14591.24812497897,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-105000",
+          "evidence_ready_ms": 105000,
+          "expires_at_ms": 120000,
+          "candidate_at_ms": 105768.50670800637,
+          "queue_wait_ms": 768.5067080063745,
+          "review_time_available_ms": 14231.493291993625,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-120000",
+          "evidence_ready_ms": 120000,
+          "expires_at_ms": 135000,
+          "candidate_at_ms": 121360.37337497994,
+          "queue_wait_ms": 1360.373374979943,
+          "review_time_available_ms": 13639.626625020057,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-135000",
+          "evidence_ready_ms": 135000,
+          "expires_at_ms": 150000,
+          "candidate_at_ms": 135902.71650001314,
+          "queue_wait_ms": 902.7165000131354,
+          "review_time_available_ms": 14097.283499986865,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-150000",
+          "evidence_ready_ms": 150000,
+          "expires_at_ms": 165000,
+          "candidate_at_ms": 151116.2657499807,
+          "queue_wait_ms": 1116.2657499806955,
+          "review_time_available_ms": 13883.734250019304,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-165000",
+          "evidence_ready_ms": 165000,
+          "expires_at_ms": 180000,
+          "candidate_at_ms": 165660.15108303307,
+          "queue_wait_ms": 660.1510830330662,
+          "review_time_available_ms": 14339.848916966934,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-180000",
+          "evidence_ready_ms": 180000,
+          "expires_at_ms": 195000,
+          "candidate_at_ms": 180984.3307499704,
+          "queue_wait_ms": 984.3307499703951,
+          "review_time_available_ms": 14015.669250029605,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-195000",
+          "evidence_ready_ms": 195000,
+          "expires_at_ms": 210000,
+          "candidate_at_ms": 197076.4030830087,
+          "queue_wait_ms": 2076.403083008714,
+          "review_time_available_ms": 12923.596916991286,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-210000",
+          "evidence_ready_ms": 210000,
+          "expires_at_ms": 225000,
+          "candidate_at_ms": 210916.7759580016,
+          "queue_wait_ms": 916.7759580016136,
+          "review_time_available_ms": 14083.224041998386,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-225000",
+          "evidence_ready_ms": 225000,
+          "expires_at_ms": 240000,
+          "candidate_at_ms": 226667.0519999992,
+          "queue_wait_ms": 1667.0519999992102,
+          "review_time_available_ms": 13332.94800000079,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-240000",
+          "evidence_ready_ms": 240000,
+          "expires_at_ms": 255000,
+          "candidate_at_ms": 240000,
+          "queue_wait_ms": 0,
+          "review_time_available_ms": 15000,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "pass",
+          "story_id": "story-pass-1",
+          "evidence_ready_ms": 16200,
+          "expires_at_ms": 46200,
+          "candidate_at_ms": 17724.83487502113,
+          "queue_wait_ms": 1524.8348750211298,
+          "review_time_available_ms": 28475.16512497887,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "pass",
+          "story_id": "story-pass-2",
+          "evidence_ready_ms": 84200,
+          "expires_at_ms": 114200,
+          "candidate_at_ms": 84572.96937497938,
+          "queue_wait_ms": 372.9693749793805,
+          "review_time_available_ms": 29627.03062502062,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "pass",
+          "story_id": "story-pass-3",
+          "evidence_ready_ms": 164200,
+          "expires_at_ms": 194200,
+          "candidate_at_ms": 165660.15108303307,
+          "queue_wait_ms": 1460.1510830330662,
+          "review_time_available_ms": 28539.848916966934,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "pass",
+          "story_id": "story-pass-4",
+          "evidence_ready_ms": 214300,
+          "expires_at_ms": 244300,
+          "candidate_at_ms": 215205.1462080148,
+          "queue_wait_ms": 905.1462080148049,
+          "review_time_available_ms": 29094.853791985195,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-loose-1",
+          "evidence_ready_ms": 30000,
+          "expires_at_ms": 60000,
+          "candidate_at_ms": 32054.4667919958,
+          "queue_wait_ms": 2054.466791995801,
+          "review_time_available_ms": 27945.5332080042,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-loose-1",
+          "evidence_ready_ms": 33000,
+          "expires_at_ms": 63000,
+          "candidate_at_ms": 34736.86408397788,
+          "queue_wait_ms": 1736.8640839778818,
+          "review_time_available_ms": 28263.135916022118,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-change-1",
+          "evidence_ready_ms": 50000,
+          "expires_at_ms": 80000,
+          "candidate_at_ms": 52161.12704200251,
+          "queue_wait_ms": 2161.1270420025103,
+          "review_time_available_ms": 27838.87295799749,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-change-1",
+          "evidence_ready_ms": 53000,
+          "expires_at_ms": 83000,
+          "candidate_at_ms": 55842.492208980955,
+          "queue_wait_ms": 2842.492208980955,
+          "review_time_available_ms": 27157.507791019045,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-change-2",
+          "evidence_ready_ms": 70000,
+          "expires_at_ms": 100000,
+          "candidate_at_ms": 70784.25145805301,
+          "queue_wait_ms": 784.2514580530114,
+          "review_time_available_ms": 29215.74854194699,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-change-2",
+          "evidence_ready_ms": 73000,
+          "expires_at_ms": 103000,
+          "candidate_at_ms": 74084.62979201507,
+          "queue_wait_ms": 1084.6297920150682,
+          "review_time_available_ms": 28915.37020798493,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-e-pos-74000",
+          "evidence_ready_ms": 74000,
+          "expires_at_ms": 104000,
+          "candidate_at_ms": 74974.18437497364,
+          "queue_wait_ms": 974.1843749736436,
+          "review_time_available_ms": 29025.815625026356,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-e-pos-74000",
+          "evidence_ready_ms": 77000,
+          "expires_at_ms": 107000,
+          "candidate_at_ms": 77860.78487501852,
+          "queue_wait_ms": 860.7848750185221,
+          "review_time_available_ms": 29139.215124981478,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-e-pos-154000",
+          "evidence_ready_ms": 154000,
+          "expires_at_ms": 184000,
+          "candidate_at_ms": 154658.84399999864,
+          "queue_wait_ms": 658.843999998644,
+          "review_time_available_ms": 29341.156000001356,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-e-pos-154000",
+          "evidence_ready_ms": 157000,
+          "expires_at_ms": 187000,
+          "candidate_at_ms": 158340.65320798662,
+          "queue_wait_ms": 1340.6532079866156,
+          "review_time_available_ms": 28659.346792013384,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-e-pos-204000",
+          "evidence_ready_ms": 204000,
+          "expires_at_ms": 234000,
+          "candidate_at_ms": 205351.51770802727,
+          "queue_wait_ms": 1351.5177080272697,
+          "review_time_available_ms": 28648.48229197273,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-e-pos-204000",
+          "evidence_ready_ms": 207000,
+          "expires_at_ms": 237000,
+          "candidate_at_ms": 208112.65325000836,
+          "queue_wait_ms": 1112.6532500083558,
+          "review_time_available_ms": 28887.346749991644,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-restart-1",
+          "evidence_ready_ms": 110000,
+          "expires_at_ms": 140000,
+          "candidate_at_ms": 110967.57066697069,
+          "queue_wait_ms": 967.5706669706851,
+          "review_time_available_ms": 29032.429333029315,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-restart-1",
+          "evidence_ready_ms": 113000,
+          "expires_at_ms": 143000,
+          "candidate_at_ms": 114200.00083297864,
+          "queue_wait_ms": 1200.000832978636,
+          "review_time_available_ms": 28799.999167021364,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-recovery-3",
+          "evidence_ready_ms": 145000,
+          "expires_at_ms": 175000,
+          "candidate_at_ms": 146337.17341700383,
+          "queue_wait_ms": 1337.1734170038253,
+          "review_time_available_ms": 28662.826582996175,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-recovery-3",
+          "evidence_ready_ms": 148000,
+          "expires_at_ms": 178000,
+          "candidate_at_ms": 148585.26687501045,
+          "queue_wait_ms": 585.2668750104494,
+          "review_time_available_ms": 29414.73312498955,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "shot",
+          "story_id": "story-shot-attempt-1",
+          "evidence_ready_ms": 46000,
+          "expires_at_ms": 76000,
+          "candidate_at_ms": 49650.79237500252,
+          "queue_wait_ms": 3650.792375002522,
+          "review_time_available_ms": 26349.207624997478,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "shot",
+          "story_id": "story-shot-attempt-2",
+          "evidence_ready_ms": 101000,
+          "expires_at_ms": 131000,
+          "candidate_at_ms": 101535.05899999617,
+          "queue_wait_ms": 535.0589999961667,
+          "review_time_available_ms": 29464.941000003833,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "shot",
+          "story_id": "story-shot-attempt-2",
+          "evidence_ready_ms": 102000,
+          "expires_at_ms": 132000,
+          "candidate_at_ms": 102553.51829200517,
+          "queue_wait_ms": 553.5182920051739,
+          "review_time_available_ms": 29446.481707994826,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "shot",
+          "story_id": "story-shot-attempt-2",
+          "evidence_ready_ms": 104000,
+          "expires_at_ms": 134000,
+          "candidate_at_ms": 104578.82537498791,
+          "queue_wait_ms": 578.8253749879077,
+          "review_time_available_ms": 29421.174625012092,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "shot",
+          "story_id": "story-shot-attempt-3",
+          "evidence_ready_ms": 186000,
+          "expires_at_ms": 216000,
+          "candidate_at_ms": 187617.4811250004,
+          "queue_wait_ms": 1617.4811250003986,
+          "review_time_available_ms": 28382.5188749996,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "goal",
+          "story_id": "story-goal-goal-1",
+          "evidence_ready_ms": 104000,
+          "expires_at_ms": 134000,
+          "candidate_at_ms": 104578.82537498791,
+          "queue_wait_ms": 578.8253749879077,
+          "review_time_available_ms": 29421.174625012092,
+          "target_met": true,
+          "found": true
+        }
+      ],
+      "unexpected_observed_opportunities": [],
+      "deferrals_and_expiry": [],
+      "errors": [],
+      "usage": [
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        }
+      ]
+    },
+    {
+      "session_id": "07a9c433-ff15-4eb3-9621-e7606cbe5835",
+      "correction": true,
+      "elapsed_s": 242.50711420801235,
+      "polls": 193,
+      "http_max_ms": 1821.7456670245156,
+      "opportunities": [
+        {
+          "family": "possession",
+          "story_id": "story-possession-15000",
+          "evidence_ready_ms": 15000,
+          "expires_at_ms": 30000,
+          "candidate_at_ms": 15608.404417046811,
+          "queue_wait_ms": 608.4044170468114,
+          "review_time_available_ms": 14391.595582953189,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-30000",
+          "evidence_ready_ms": 30000,
+          "expires_at_ms": 45000,
+          "candidate_at_ms": 31965.232333986554,
+          "queue_wait_ms": 1965.2323339865543,
+          "review_time_available_ms": 13034.767666013446,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-45000",
+          "evidence_ready_ms": 45000,
+          "expires_at_ms": 60000,
+          "candidate_at_ms": 47212.326875028666,
+          "queue_wait_ms": 2212.326875028666,
+          "review_time_available_ms": 12787.673124971334,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-60000",
+          "evidence_ready_ms": 60000,
+          "expires_at_ms": 75000,
+          "candidate_at_ms": 61032.33891703747,
+          "queue_wait_ms": 1032.3389170374721,
+          "review_time_available_ms": 13967.661082962528,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-75000",
+          "evidence_ready_ms": 75000,
+          "expires_at_ms": 90000,
+          "candidate_at_ms": 75757.04916697973,
+          "queue_wait_ms": 757.0491669797339,
+          "review_time_available_ms": 14242.950833020266,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-90000",
+          "evidence_ready_ms": 90000,
+          "expires_at_ms": 105000,
+          "candidate_at_ms": 91164.02400000067,
+          "queue_wait_ms": 1164.0240000006743,
+          "review_time_available_ms": 13835.975999999326,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-105000",
+          "evidence_ready_ms": 105000,
+          "expires_at_ms": 120000,
+          "candidate_at_ms": 105391.01162500214,
+          "queue_wait_ms": 391.0116250021383,
+          "review_time_available_ms": 14608.988374997862,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-120000",
+          "evidence_ready_ms": 120000,
+          "expires_at_ms": 135000,
+          "candidate_at_ms": 120847.25616700342,
+          "queue_wait_ms": 847.2561670034193,
+          "review_time_available_ms": 14152.74383299658,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-135000",
+          "evidence_ready_ms": 135000,
+          "expires_at_ms": 150000,
+          "candidate_at_ms": 135425.02629199205,
+          "queue_wait_ms": 425.02629199204966,
+          "review_time_available_ms": 14574.97370800795,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-150000",
+          "evidence_ready_ms": 150000,
+          "expires_at_ms": 165000,
+          "candidate_at_ms": 150573.1934999521,
+          "queue_wait_ms": 573.193499952089,
+          "review_time_available_ms": 14426.806500047911,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-165000",
+          "evidence_ready_ms": 165000,
+          "expires_at_ms": 180000,
+          "candidate_at_ms": 166397.87812501425,
+          "queue_wait_ms": 1397.8781250142492,
+          "review_time_available_ms": 13602.12187498575,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-180000",
+          "evidence_ready_ms": 180000,
+          "expires_at_ms": 195000,
+          "candidate_at_ms": 181750.55604202207,
+          "queue_wait_ms": 1750.5560420220718,
+          "review_time_available_ms": 13249.443957977928,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-195000",
+          "evidence_ready_ms": 195000,
+          "expires_at_ms": 210000,
+          "candidate_at_ms": 196365.6849579611,
+          "queue_wait_ms": 1365.6849579610862,
+          "review_time_available_ms": 13634.315042038914,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-210000",
+          "evidence_ready_ms": 210000,
+          "expires_at_ms": 225000,
+          "candidate_at_ms": 211592.4800830339,
+          "queue_wait_ms": 1592.4800830339082,
+          "review_time_available_ms": 13407.519916966092,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-225000",
+          "evidence_ready_ms": 225000,
+          "expires_at_ms": 240000,
+          "candidate_at_ms": 225917.91762494715,
+          "queue_wait_ms": 917.9176249471493,
+          "review_time_available_ms": 14082.08237505285,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "possession",
+          "story_id": "story-possession-240000",
+          "evidence_ready_ms": 240000,
+          "expires_at_ms": 255000,
+          "candidate_at_ms": 240000,
+          "queue_wait_ms": 0,
+          "review_time_available_ms": 15000,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "pass",
+          "story_id": "story-pass-1",
+          "evidence_ready_ms": 16200,
+          "expires_at_ms": 46200,
+          "candidate_at_ms": 17681.490666977596,
+          "queue_wait_ms": 1481.4906669775955,
+          "review_time_available_ms": 28518.509333022404,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "pass",
+          "story_id": "story-pass-2",
+          "evidence_ready_ms": 84200,
+          "expires_at_ms": 114200,
+          "candidate_at_ms": 85333.25849998742,
+          "queue_wait_ms": 1133.2584999874234,
+          "review_time_available_ms": 28866.741500012577,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "pass",
+          "story_id": "story-pass-3",
+          "evidence_ready_ms": 164200,
+          "expires_at_ms": 194200,
+          "candidate_at_ms": 165125.05266601406,
+          "queue_wait_ms": 925.0526660140604,
+          "review_time_available_ms": 29074.94733398594,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "pass",
+          "story_id": "story-pass-4",
+          "evidence_ready_ms": 214300,
+          "expires_at_ms": 244300,
+          "candidate_at_ms": 215891.70041699847,
+          "queue_wait_ms": 1591.700416998472,
+          "review_time_available_ms": 28408.299583001528,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-loose-1",
+          "evidence_ready_ms": 30000,
+          "expires_at_ms": 60000,
+          "candidate_at_ms": 31965.232333986554,
+          "queue_wait_ms": 1965.2323339865543,
+          "review_time_available_ms": 28034.767666013446,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-loose-1",
+          "evidence_ready_ms": 33000,
+          "expires_at_ms": 63000,
+          "candidate_at_ms": 34691.69533302076,
+          "queue_wait_ms": 1691.6953330207616,
+          "review_time_available_ms": 28308.30466697924,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-change-1",
+          "evidence_ready_ms": 50000,
+          "expires_at_ms": 80000,
+          "candidate_at_ms": 52077.42683304055,
+          "queue_wait_ms": 2077.4268330405466,
+          "review_time_available_ms": 27922.573166959453,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-change-1",
+          "evidence_ready_ms": 53000,
+          "expires_at_ms": 83000,
+          "candidate_at_ms": 55750.93091599457,
+          "queue_wait_ms": 2750.9309159945697,
+          "review_time_available_ms": 27249.06908400543,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-change-2",
+          "evidence_ready_ms": 70000,
+          "expires_at_ms": 100000,
+          "candidate_at_ms": 71856.88687504409,
+          "queue_wait_ms": 1856.8868750440888,
+          "review_time_available_ms": 28143.11312495591,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-change-2",
+          "evidence_ready_ms": 73000,
+          "expires_at_ms": 103000,
+          "candidate_at_ms": 73907.73262503091,
+          "queue_wait_ms": 907.7326250309125,
+          "review_time_available_ms": 29092.267374969088,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-e-pos-74000",
+          "evidence_ready_ms": 74000,
+          "expires_at_ms": 104000,
+          "candidate_at_ms": 74798.75762500195,
+          "queue_wait_ms": 798.7576250019483,
+          "review_time_available_ms": 29201.24237499805,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-e-pos-74000",
+          "evidence_ready_ms": 77000,
+          "expires_at_ms": 107000,
+          "candidate_at_ms": 77652.78637499502,
+          "queue_wait_ms": 652.7863749950193,
+          "review_time_available_ms": 29347.21362500498,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-e-pos-154000",
+          "evidence_ready_ms": 154000,
+          "expires_at_ms": 184000,
+          "candidate_at_ms": 155394.75258298917,
+          "queue_wait_ms": 1394.7525829891674,
+          "review_time_available_ms": 28605.247417010833,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-e-pos-154000",
+          "evidence_ready_ms": 157000,
+          "expires_at_ms": 187000,
+          "candidate_at_ms": 157858.17525003385,
+          "queue_wait_ms": 858.175250033848,
+          "review_time_available_ms": 29141.824749966152,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-e-pos-204000",
+          "evidence_ready_ms": 204000,
+          "expires_at_ms": 234000,
+          "candidate_at_ms": 204665.72512499942,
+          "queue_wait_ms": 665.7251249994151,
+          "review_time_available_ms": 29334.274875000585,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-e-pos-204000",
+          "evidence_ready_ms": 207000,
+          "expires_at_ms": 237000,
+          "candidate_at_ms": 208774.5368329906,
+          "queue_wait_ms": 1774.5368329905905,
+          "review_time_available_ms": 28225.46316700941,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-restart-1",
+          "evidence_ready_ms": 110000,
+          "expires_at_ms": 140000,
+          "candidate_at_ms": 110676.1995839756,
+          "queue_wait_ms": 676.1995839755982,
+          "review_time_available_ms": 29323.8004160244,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-restart-1",
+          "evidence_ready_ms": 113000,
+          "expires_at_ms": 143000,
+          "candidate_at_ms": 113874.59904204914,
+          "queue_wait_ms": 874.5990420491435,
+          "review_time_available_ms": 29125.400957950857,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-recovery-3",
+          "evidence_ready_ms": 145000,
+          "expires_at_ms": 175000,
+          "candidate_at_ms": 145874.12624999695,
+          "queue_wait_ms": 874.1262499969453,
+          "review_time_available_ms": 29125.873750003055,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "recovery",
+          "story_id": "story-recovery-recovery-3",
+          "evidence_ready_ms": 148000,
+          "expires_at_ms": 178000,
+          "candidate_at_ms": 149341.13270800654,
+          "queue_wait_ms": 1341.1327080065385,
+          "review_time_available_ms": 28658.86729199346,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "shot",
+          "story_id": "story-shot-attempt-1",
+          "evidence_ready_ms": 46000,
+          "expires_at_ms": 76000,
+          "candidate_at_ms": 49573.29987500375,
+          "queue_wait_ms": 3573.2998750037514,
+          "review_time_available_ms": 26426.70012499625,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "shot",
+          "story_id": "story-shot-attempt-2",
+          "evidence_ready_ms": 101000,
+          "expires_at_ms": 131000,
+          "candidate_at_ms": 101261.4370409972,
+          "queue_wait_ms": 261.43704099720344,
+          "review_time_available_ms": 29738.562959002797,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "shot",
+          "story_id": "story-shot-attempt-2",
+          "evidence_ready_ms": 102000,
+          "expires_at_ms": 132000,
+          "candidate_at_ms": 102278.28916699579,
+          "queue_wait_ms": 278.28916699578986,
+          "review_time_available_ms": 29721.71083300421,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "shot",
+          "story_id": "story-shot-attempt-2",
+          "evidence_ready_ms": 104000,
+          "expires_at_ms": 134000,
+          "candidate_at_ms": 104311.5664999988,
+          "queue_wait_ms": 311.566499998793,
+          "review_time_available_ms": 29688.433500001207,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "shot",
+          "story_id": "story-shot-attempt-2",
+          "evidence_ready_ms": 135000,
+          "expires_at_ms": 165000,
+          "candidate_at_ms": 135425.02629199205,
+          "queue_wait_ms": 425.02629199204966,
+          "review_time_available_ms": 29574.97370800795,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "shot",
+          "story_id": "story-shot-attempt-3",
+          "evidence_ready_ms": 186000,
+          "expires_at_ms": 216000,
+          "candidate_at_ms": 187044.54825000744,
+          "queue_wait_ms": 1044.5482500074431,
+          "review_time_available_ms": 28955.451749992557,
+          "target_met": true,
+          "found": true
+        },
+        {
+          "family": "goal",
+          "story_id": "story-goal-goal-1",
+          "evidence_ready_ms": 104000,
+          "expires_at_ms": 134000,
+          "candidate_at_ms": 104311.5664999988,
+          "queue_wait_ms": 311.566499998793,
+          "review_time_available_ms": 29688.433500001207,
+          "target_met": true,
+          "found": true
+        }
+      ],
+      "unexpected_observed_opportunities": [],
+      "deferrals_and_expiry": [],
+      "errors": [],
+      "usage": [
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        },
+        {
+          "calls": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "usage_complete": true
+        }
+      ]
+    }
+  ],
+  "family_summary": {
+    "possession": {
+      "attempted": 32,
+      "found": 32,
+      "target_met": 32,
+      "minimum_review_ms": 12648.881791001186
+    },
+    "pass": {
+      "attempted": 8,
+      "found": 8,
+      "target_met": 8,
+      "minimum_review_ms": 28408.299583001528
+    },
+    "recovery": {
+      "attempted": 32,
+      "found": 32,
+      "target_met": 32,
+      "minimum_review_ms": 27157.507791019045
+    },
+    "shot": {
+      "attempted": 11,
+      "found": 11,
+      "target_met": 11,
+      "minimum_review_ms": 26349.207624997478
+    },
+    "goal": {
+      "attempted": 2,
+      "found": 2,
+      "target_met": 2,
+      "minimum_review_ms": 29421.174625012092
+    }
+  },
+  "live_before_segment_end": {
+    "attempted": 83,
+    "target_met": 83,
+    "minimum_review_ms": 12648.881791001186
+  },
+  "end_boundary_note": "Two 240 s possession snapshots are retained in all-opportunity accounting. The replay clock stops at segment end, so their nominal 15 s review window is not live latency evidence.",
+  "backend_source_matches_delivery": true,
+  "ui_changes_after_timing": [
+    "apps/web/app/page.tsx"
+  ],
+  "ui_scope_note": "Backend HTTP candidate-readiness measurement; browser paint excluded. Any later UI refinements are verified by the final browser suite."
+}

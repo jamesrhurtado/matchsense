@@ -1,0 +1,314 @@
+{
+  "scope": "One bounded real execution per family; no claim of usefulness, quality distribution or multi-agent superiority. No publication/deployment.",
+  "model": {
+    "callRateLimit": null,
+    "format": "OpenAI",
+    "name": "gpt-4o-mini",
+    "publisher": null,
+    "source": null,
+    "sourceAccount": null,
+    "version": "2024-07-18"
+  },
+  "sku": "GlobalStandard",
+  "api_version": "2024-10-21",
+  "usage": {
+    "calls": 10,
+    "input_tokens": 5026,
+    "output_tokens": 339,
+    "total_tokens": 5365
+  },
+  "retail_estimate_usd": 0.0009572999999999999,
+  "results": [
+    {
+      "family": "pressure",
+      "subject_id": "pass-4",
+      "passed": true,
+      "exact_source_rendering": true,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "terminal": {
+        "state": "produced",
+        "usage": {
+          "calls": 2,
+          "input_tokens": 1452,
+          "output_tokens": 70,
+          "total_tokens": 1522,
+          "usage_complete": true
+        },
+        "trace": [
+          {
+            "role": "Story Director",
+            "action": "model_decision",
+            "status": "propose",
+            "call": 1,
+            "elapsed_ms": 4916.843,
+            "input_tokens": 725,
+            "output_tokens": 34,
+            "total_tokens": 759,
+            "usage_reported": true,
+            "duration_ms": 4293.277,
+            "output": {
+              "action": "propose",
+              "claim_ids": [
+                "c-event"
+              ],
+              "reason": "The evidence supports the claim of a successful pass with notable forward progression and confirmed team possession."
+            }
+          },
+          {
+            "role": "Claim Reviewer",
+            "action": "model_decision",
+            "status": "supported",
+            "call": 2,
+            "elapsed_ms": 5991.008,
+            "input_tokens": 727,
+            "output_tokens": 36,
+            "total_tokens": 763,
+            "usage_reported": true,
+            "duration_ms": 1048.009,
+            "output": {
+              "action": "supported",
+              "claim_ids": [
+                "c-event"
+              ],
+              "reason": "The evidence confirms the details of the pass, including the forward movement, pressure metrics, and possession retention."
+            }
+          }
+        ],
+        "reason": null
+      }
+    },
+    {
+      "family": "shot",
+      "subject_id": "attempt-1",
+      "passed": true,
+      "exact_source_rendering": true,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "terminal": {
+        "state": "produced",
+        "usage": {
+          "calls": 2,
+          "input_tokens": 802,
+          "output_tokens": 66,
+          "total_tokens": 868,
+          "usage_complete": true
+        },
+        "trace": [
+          {
+            "role": "Story Director",
+            "action": "model_decision",
+            "status": "propose",
+            "call": 1,
+            "elapsed_ms": 2637.152,
+            "input_tokens": 400,
+            "output_tokens": 33,
+            "total_tokens": 433,
+            "usage_reported": true,
+            "duration_ms": 2633.492,
+            "output": {
+              "action": "propose",
+              "claim_ids": [
+                "c-event"
+              ],
+              "reason": "The evidence supports the event of a shot taken by blue-09 that was saved."
+            }
+          },
+          {
+            "role": "Claim Reviewer",
+            "action": "model_decision",
+            "status": "supported",
+            "call": 2,
+            "elapsed_ms": 3808.651,
+            "input_tokens": 402,
+            "output_tokens": 33,
+            "total_tokens": 435,
+            "usage_reported": true,
+            "duration_ms": 895.322,
+            "output": {
+              "action": "supported",
+              "claim_ids": [
+                "c-event"
+              ],
+              "reason": "The event is supported by the provided evidence indicating that Beni Vidal's shot was saved."
+            }
+          }
+        ],
+        "reason": null
+      }
+    },
+    {
+      "family": "goal",
+      "subject_id": "goal-1",
+      "passed": true,
+      "exact_source_rendering": true,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "terminal": {
+        "state": "produced",
+        "usage": {
+          "calls": 2,
+          "input_tokens": 816,
+          "output_tokens": 66,
+          "total_tokens": 882,
+          "usage_complete": true
+        },
+        "trace": [
+          {
+            "role": "Story Director",
+            "action": "model_decision",
+            "status": "propose",
+            "call": 1,
+            "elapsed_ms": 2587.919,
+            "input_tokens": 407,
+            "output_tokens": 32,
+            "total_tokens": 439,
+            "usage_reported": true,
+            "duration_ms": 2584.107,
+            "output": {
+              "action": "propose",
+              "claim_ids": [
+                "c-event"
+              ],
+              "reason": "The evidence confirms a goal scored by blue-09, with no assist attribution."
+            }
+          },
+          {
+            "role": "Claim Reviewer",
+            "action": "model_decision",
+            "status": "supported",
+            "call": 2,
+            "elapsed_ms": 4034.142,
+            "input_tokens": 409,
+            "output_tokens": 34,
+            "total_tokens": 443,
+            "usage_reported": true,
+            "duration_ms": 1164.907,
+            "output": {
+              "action": "supported",
+              "claim_ids": [
+                "c-event"
+              ],
+              "reason": "The evidence confirms a goal scored by Beni Vidal for Harbor City, with no assist attribution."
+            }
+          }
+        ],
+        "reason": null
+      }
+    },
+    {
+      "family": "recovery",
+      "subject_id": "loose-1",
+      "passed": true,
+      "exact_source_rendering": true,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "terminal": {
+        "state": "produced",
+        "usage": {
+          "calls": 2,
+          "input_tokens": 840,
+          "output_tokens": 75,
+          "total_tokens": 915,
+          "usage_complete": true
+        },
+        "trace": [
+          {
+            "role": "Story Director",
+            "action": "model_decision",
+            "status": "propose",
+            "call": 1,
+            "elapsed_ms": 1709.34,
+            "input_tokens": 419,
+            "output_tokens": 37,
+            "total_tokens": 456,
+            "usage_reported": true,
+            "duration_ms": 1705.451,
+            "output": {
+              "action": "propose",
+              "claim_ids": [
+                "c-event"
+              ],
+              "reason": "The evidence supports the claim of a recovery event by the player blue-08, with sustained possession observed."
+            }
+          },
+          {
+            "role": "Claim Reviewer",
+            "action": "model_decision",
+            "status": "supported",
+            "call": 2,
+            "elapsed_ms": 3051.045,
+            "input_tokens": 421,
+            "output_tokens": 38,
+            "total_tokens": 459,
+            "usage_reported": true,
+            "duration_ms": 1062.179,
+            "output": {
+              "action": "supported",
+              "claim_ids": [
+                "c-event"
+              ],
+              "reason": "The evidence confirms that Ari Vela recovered the loose ball and the team retained possession for the next 3 seconds."
+            }
+          }
+        ],
+        "reason": null
+      }
+    },
+    {
+      "family": "possession",
+      "subject_id": "60000",
+      "passed": true,
+      "exact_source_rendering": true,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "terminal": {
+        "state": "produced",
+        "usage": {
+          "calls": 2,
+          "input_tokens": 1116,
+          "output_tokens": 62,
+          "total_tokens": 1178,
+          "usage_complete": true
+        },
+        "trace": [
+          {
+            "role": "Story Director",
+            "action": "model_decision",
+            "status": "propose",
+            "call": 1,
+            "elapsed_ms": 2188.496,
+            "input_tokens": 557,
+            "output_tokens": 33,
+            "total_tokens": 590,
+            "usage_reported": true,
+            "duration_ms": 2183.276,
+            "output": {
+              "action": "propose",
+              "claim_ids": [
+                "c-event"
+              ],
+              "reason": "The evidence provides a clear account of possession percentages and time assigned within the specified window."
+            }
+          },
+          {
+            "role": "Claim Reviewer",
+            "action": "model_decision",
+            "status": "supported",
+            "call": 2,
+            "elapsed_ms": 3408.015,
+            "input_tokens": 559,
+            "output_tokens": 29,
+            "total_tokens": 588,
+            "usage_reported": true,
+            "duration_ms": 936.449,
+            "output": {
+              "action": "supported",
+              "claim_ids": [
+                "c-event"
+              ],
+              "reason": "The possession data provided is consistent with the stated percentages and time intervals."
+            }
+          }
+        ],
+        "reason": null
+      }
+    }
+  ],
+  "passed": true
+}

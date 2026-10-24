@@ -1,0 +1,50 @@
+Validated and evaluated 28/168 cases
+Validated and evaluated 56/168 cases
+Validated and evaluated 84/168 cases
+Validated and evaluated 112/168 cases
+Validated and evaluated 140/168 cases
+Validated and evaluated 168/168 cases
+{
+  "summary": {
+    "cases": 168,
+    "parents": 6,
+    "cases_passed": 168,
+    "cases_failed": 0,
+    "checks": 594,
+    "checks_passed": 594,
+    "checkpoint_true_positive": 78,
+    "checkpoint_false_positive": 0,
+    "checkpoint_false_negative": 0,
+    "checkpoint_precision": 1.0,
+    "checkpoint_recall": 1.0,
+    "expected_distinct_moments": 72,
+    "detected_expected_moments": 72,
+    "missed_distinct_moments": 0,
+    "false_alert_distinct_moments": 0,
+    "simulated_minutes": 183.0,
+    "false_alerts_per_simulated_minute": 0.0,
+    "candidate_case_coverage": 0.35714285714285715
+  },
+  "workflow": {
+    "attempted": 72,
+    "produced": 72,
+    "abstained": 0,
+    "skipped_budget": 0,
+    "modes": {
+      "local deterministic template": 72
+    },
+    "variants_checked": 7200
+  },
+  "model_usage": {
+    "calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "total_tokens": 0,
+    "usage_complete": true,
+    "calls_are_lower_bound": false,
+    "cost_usd": 0,
+    "cost_note": "Offline mode makes no model requests."
+  },
+  "baseline_changed": false,
+  "report": "evals/match-coverage/moving-demo/original-regression/REPORT.md"
+}

@@ -1,0 +1,26 @@
+{
+  "authorship": "Engineering-authored hand references, independent of production metric functions and discovery replay; external QA/football review pending",
+  "cases": [
+    {"id":"goal-pending","cutoff":1000,"events":[[1000,"goal_status_changed",{"goal_id":"g","status":"pending"}]],"expected":{"score":{"blue":0,"amber":0},"goal_count":0}},
+    {"id":"goal-confirmed-duplicate","cutoff":1000,"duplicate":true,"events":[[1000,"goal_status_changed",{"goal_id":"g","status":"confirmed"}]],"expected":{"score":{"blue":1,"amber":0},"goal_count":1}},
+    {"id":"goal-cancelled","cutoff":3000,"events":[[1000,"goal_status_changed",{"goal_id":"g","status":"confirmed"}],[1000,"goal_status_changed",{"goal_id":"g","status":"cancelled"},"blue",null,3000,2,0]],"expected":{"score":{"blue":0,"amber":0},"goal_count":0}},
+    {"id":"goal-corrected-team","cutoff":3000,"reverse":true,"events":[[1000,"goal_status_changed",{"goal_id":"g","status":"confirmed"}],[1000,"goal_status_changed",{"goal_id":"g","status":"confirmed"},"amber",null,3000,2,0]],"expected":{"score":{"blue":0,"amber":1},"goal_count":1}},
+    {"id":"own-goal-no-shot","cutoff":1000,"events":[[1000,"goal_status_changed",{"goal_id":"g","status":"confirmed","own_goal":true,"scorer_id":"amber-09"}]],"expected":{"score":{"blue":1,"amber":0},"scorer":"amber-09"}},
+    {"id":"unknown-scorer","cutoff":1000,"events":[[1000,"goal_status_changed",{"goal_id":"g","status":"confirmed"}]],"expected":{"scorer":null}},
+    {"id":"shot-start-only","cutoff":1000,"events":[[1000,"shot_started",{"shot_id":"s"}]],"expected":{"shot_count":0}},
+    {"id":"shot-saved","cutoff":2000,"events":[[1000,"shot_started",{"shot_id":"s"},"blue","blue-09"],[2000,"shot_resolved",{"shot_id":"s","outcome":"saved"}]],"expected":{"shot_count":1,"shot_outcome":"saved","shooter":"blue-09"}},
+    {"id":"shot-off-target-unknown-actor","cutoff":2000,"events":[[1000,"shot_started",{"shot_id":"s"}],[2000,"shot_resolved",{"shot_id":"s","outcome":"off_target"}]],"expected":{"shot_outcome":"off_target","shooter":null}},
+    {"id":"shot-no-goal-confirmation","cutoff":2000,"events":[[1000,"shot_started",{"shot_id":"s"}],[2000,"shot_resolved",{"shot_id":"s","outcome":"goal"}]],"expected":{"shot_outcome":"unknown","score":{"blue":0,"amber":0}}},
+    {"id":"shot-late-resolution","cutoff":2500,"events":[[1000,"shot_started",{"shot_id":"s"}],[2000,"shot_resolved",{"shot_id":"s","outcome":"blocked"},"blue",null,3000]],"expected":{"shot_count":0}},
+    {"id":"shot-corrected-outcome","cutoff":4000,"events":[[1000,"shot_started",{"shot_id":"s"}],[2000,"shot_resolved",{"shot_id":"s","outcome":"saved"}],[2000,"shot_resolved",{"shot_id":"s","outcome":"blocked"},"blue",null,4000,2,1]],"expected":{"shot_outcome":"blocked"}},
+    {"id":"possession-40-20-irregular","cutoff":60000,"frames":{"end":60000,"step":100,"blue_until":40000,"thin_blue":true},"expected":{"assigned_ms":60000,"blue_ms":40000,"amber_ms":20000,"unknown_ms":0,"has_percentages":true}},
+    {"id":"possession-gap-withheld","cutoff":60000,"frames":{"end":60000,"step":100,"omit":[20000,24000]},"expected":{"assigned_ms":55900,"unknown_ms":4100,"has_percentages":false}},
+    {"id":"possession-short-withheld","cutoff":29000,"frames":{"end":29000,"step":100},"expected":{"assigned_ms":29000,"has_percentages":false}},
+    {"id":"possession-dead-loose","cutoff":60000,"frames":{"end":60000,"step":100,"dead_until":10000,"loose_until":15000},"expected":{"assigned_ms":45000,"dead_ms":10000,"loose_ms":5000,"has_percentages":true}},
+    {"id":"team-only-control-change","cutoff":1000,"events":[[1000,"possession_changed",{"previous_team_id":"amber","new_team_id":"blue","controlling_player_id":null,"reason":"observed"}]],"expected":{"recovery_count":1,"recovering_player":null,"control_kind":"control_change"}},
+    {"id":"restart-is-not-recovery","cutoff":1000,"events":[[1000,"possession_changed",{"previous_team_id":null,"new_team_id":"blue","controlling_player_id":null,"reason":"restart"}]],"expected":{"control_kind":"restart","recovering_player":null}},
+    {"id":"loose-ball-recovery","cutoff":1000,"events":[[1000,"ball_recovered",{"incident_id":"r","previous_team_id":null,"cause":"loose_ball"},"blue","blue-08"]],"expected":{"control_kind":"recovery","recovering_player":"blue-08","sustained":false}},
+    {"id":"recovery-immediate-loss","cutoff":4000,"events":[[1000,"ball_recovered",{"incident_id":"r","previous_team_id":"amber","cause":"unknown"},"blue","blue-08"]],"frames":{"start":1000,"end":4000,"step":100,"blue_until":1500},"expected":{"sustained":false,"recovery_count":1}},
+    {"id":"recovery-corrected-actor","cutoff":4000,"events":[[1000,"ball_recovered",{"incident_id":"r","previous_team_id":"amber","cause":"tackle"},"blue","blue-08"],[1000,"ball_recovered",{"incident_id":"r","previous_team_id":"amber","cause":"tackle"},"blue","blue-06",4000,2,0]],"expected":{"recovering_player":"blue-06"}}
+  ]
+}

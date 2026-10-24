@@ -1,5 +1,11 @@
 # Demonstrating WHY/NOW
 
+> **24 October local mixed-event candidate:** start `make coverage-dev` and use
+> [the mixed-event walkthrough](match-coverage-demo.md) for the broader pitch.
+> It covers confirmed score/goals, shots, possession and control changes alongside
+> passes. It uses local templates; new-family live AI and human usefulness remain
+> unverified. The pass-focused script below is preserved as the baseline demo.
+
 For the current v0.5 candidate, use the [presenter script and rehearsal run sheet](demo-script-v4.md): a four-minute product walkthrough, two-minute cut, exact contextual replay setup, and narration for actual AI or local template mode. The hosted instructions below describe the earlier engineering build.
 
 ## Hosted rehearsal
@@ -34,3 +40,9 @@ Rehearse actual workflow latency before recording. Use the stable original segme
 The same interface runs locally with deterministic templates and SQLite. Say **local template mode**; there are no actual model calls in that mode. The full offline regression remains an engineering test on six authored parents, not an independently blind football benchmark. See [expanded results](../evals/synthetic-v2/REPORT.md) and [QA record](qa.md).
 
 No shot, goal, full-time result, real footage, professional broadcaster integration or external television synchronization is implemented. Model review is fallible, and a comparative advantage over a fairly configured single agent has not been measured.
+
+## Latest local pitch
+
+Use the additive [Pressure Swing flagship walkthrough](pressure-flagship.md#run-and-present)
+for the current mixed-event presentation. The homepage defaults to that scene
+when match coverage is enabled. Earlier scripts remain baseline/historical demos.

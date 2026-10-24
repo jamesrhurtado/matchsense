@@ -1,6 +1,6 @@
 # WHY/NOW — Grand Prize improvement plan
 
-> **Current product handoff:** [90+ product improvement plan](grand-prize-90-plus-plan.md), based on version 0.4 and the latest 76/100 assessment. It covers the MVP only and supersedes the next-iteration scope below. The original version 0.3 plan is retained here as historical context; current delivery is tracked in [the implementation record](decision-log.md).
+> **Next implementation handoff (23 October 2026):** [Broader match coverage implementation plan](match-coverage-implementation-plan.md). Goals, shots, possession summaries and recovery/control-change stories are now required next-iteration backlog, with shared evidence, approval, timeline and recap. The [90+ improvement plan](grand-prize-90-plus-plan.md) and the version 0.3 plan below remain historical specifications; their unresolved correctness/research gates still apply. New coverage is planned, not implemented. Delivery is tracked in [the implementation record](decision-log.md).
 
 **Prepared:** 21 October 2026, America/Lima. **Baseline:** `e62c043` / API 0.3.0, cloud-v13 / web cloud-v7. **Status:** researched engineering handoff; product changes below are not implemented. **Owner:** James. Target the first-place Grand Prize through a more useful, convincing end-to-end product.
 
@@ -136,3 +136,7 @@ Thresholds below are proposed project targets, not current results or externally
 5. Before running billable evaluations, calculate the bounded run estimate using current deployed-model rates and set the run's token/call/cost limits. No additional Azure services are required by this plan.
 
 Owner-dependent work: registration confirmation, GitHub repository ownership/publication and license choice, participant recruitment/consent, independent football review, and final submission. These are explicit dependencies; no participant results, registrations or publications are assumed completed.
+
+Latest owner-authorized follow-on: [Pressure Swing flagship](../pressure-flagship.md)
+and its [separate verification record](../../evals/match-coverage/pressure-flagship/verification.md).
+The existing hosted build has not been updated; real participants remain pending.

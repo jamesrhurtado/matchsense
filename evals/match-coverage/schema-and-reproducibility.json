@@ -1,0 +1,18 @@
+{
+  "reproducible": [
+    {
+      "match_id": "match-0c0a000000000001",
+      "sha256": "320f84d426c5bae7f79cc7b448d28075d287ccf345af2513879137ee39f242c7"
+    },
+    {
+      "match_id": "match-0c0a000000000002",
+      "sha256": "da54ba603cade84cc9a2d46db7769b823ff88289056a54a0a3c0e785b0ffb9a4"
+    }
+  ],
+  "schema_validated_families": [
+    "shot",
+    "goal",
+    "recovery",
+    "possession"
+  ]
+}

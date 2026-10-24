@@ -1,0 +1,6 @@
+
+> why-now-web@0.1.0 format:check
+> prettier --check "components/*.tsx" "hooks/*.ts" lib/api.ts
+
+Checking formatting...
+All matched files use Prettier code style!

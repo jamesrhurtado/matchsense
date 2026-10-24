@@ -1,0 +1,30 @@
+Traceback (most recent call last):
+  File "/Users/james/dev/why now/scripts/smoke_matchday_playback.py", line 45, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/james/dev/why now/scripts/smoke_matchday_playback.py", line 39, in main
+    with ThreadPoolExecutor(max_workers=2) as pool:results=list(pool.map(lambda c:run(args.base,c,args.flagship),[False,True]))
+                                                           ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/james/.local/share/uv/python/cpython-3.13.13-macos-aarch64-none/lib/python3.13/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Users/james/.local/share/uv/python/cpython-3.13.13-macos-aarch64-none/lib/python3.13/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ~~~~~~~~~~^^^^^^^^^
+  File "/Users/james/.local/share/uv/python/cpython-3.13.13-macos-aarch64-none/lib/python3.13/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/Users/james/.local/share/uv/python/cpython-3.13.13-macos-aarch64-none/lib/python3.13/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/Users/james/.local/share/uv/python/cpython-3.13.13-macos-aarch64-none/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/james/dev/why now/scripts/smoke_matchday_playback.py", line 39, in <lambda>
+    with ThreadPoolExecutor(max_workers=2) as pool:results=list(pool.map(lambda c:run(args.base,c,args.flagship),[False,True]))
+                                                                                  ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/james/dev/why now/scripts/smoke_matchday_playback.py", line 21, in run
+    r=client.get(path+'/snapshot');r.raise_for_status();s=r.json();at=s['clock_ms']
+                                   ~~~~~~~~~~~~~~~~~~^^
+  File "/Users/james/dev/why now/.venv313/lib/python3.13/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Server error '500 Internal Server Error' for url 'http://127.0.0.1:8100/api/replay-sessions/6fa4a1db-0021-411f-925a-e9cdeffe65d9/snapshot'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500

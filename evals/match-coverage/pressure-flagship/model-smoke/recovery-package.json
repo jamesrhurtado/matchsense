@@ -1,0 +1,1484 @@
+{
+  "schema_version": "5.0.0",
+  "id": "story-recovery-loose-1",
+  "revision": 1,
+  "title": "Change of control",
+  "family": "recovery",
+  "incident_id": "control:loose-1",
+  "metrics": {
+    "family": "recovery",
+    "subject_id": "loose-1",
+    "incident_id": "control:loose-1",
+    "team_id": "blue",
+    "participants": {
+      "recovering_player": "blue-08"
+    },
+    "occurrence_ms": 30000,
+    "evidence_ready_ms": 33000,
+    "input_cutoff_ms": 33000,
+    "window_start_ms": 30000,
+    "window_end_ms": 33000,
+    "source_message_ids": [
+      "ball_recovered-30000-r1",
+      "m-0000304",
+      "m-0000305",
+      "m-0000306",
+      "m-0000307",
+      "m-0000308",
+      "m-0000309",
+      "m-0000310",
+      "m-0000311",
+      "m-0000312",
+      "m-0000313",
+      "m-0000314",
+      "m-0000315",
+      "m-0000316",
+      "m-0000317",
+      "m-0000318",
+      "m-0000319",
+      "m-0000320",
+      "m-0000321",
+      "m-0000322",
+      "m-0000323",
+      "m-0000324",
+      "m-0000325",
+      "m-0000326",
+      "m-0000327",
+      "m-0000328",
+      "m-0000329",
+      "m-0000330",
+      "m-0000331",
+      "m-0000332",
+      "m-0000333",
+      "m-0000334"
+    ],
+    "source_hashes": [
+      "0938de3f6de70bdf35b55036820ce712653948722fe2e3e66ea1adb8b6c4158f",
+      "1298ab6105346292b479f6574e4e36f24b162c4cef0d8172f86537786dddf24c",
+      "b98c83740ca8bb666fdb2edd31b5a72de3520c9402f6ba6c059f9a3e92c397bc",
+      "b27526f799cb84a2851567694c0e446f479dc8f8326401fb7a41874a28624b08",
+      "56a8cc9bd7e69f94724b067544fa7462933b00f97a313c7b0c26be9b3db9a990",
+      "d0a93bddf8fe7ab062757f850b48914b67d526eb69a84c0b3bf1e11c379e8bfe",
+      "71581cc6f1c160e6e244184b14969b16b8620c7092692452878f39f3b6444cb6",
+      "769823f805efa69775701027a0cec7e93f65b9c6ade148b7621b642f17ba4362",
+      "4d750df1b0cb6d0b460b5049413d749bb06fcaf83d0ed96ab99d709e750586ce",
+      "27e1fdea8ac696e1814a226f2919a1ec447e35f212f26d0836cf2d5c9c73c2ea",
+      "c418b6f0980d138207304f7b1f89ce0b42210445af9174ade5ca747f098e91d4",
+      "3646c6380ca95e0bcbc95e1a1262291d23798f4094bc811d2199f4448dce7f0b",
+      "4229e1778a19021a525c57dcbe4678334e051b4efe4584f15c94e69b9797088d",
+      "309d30723ffa3c957a74decd6f896ad15ee13de342ea961d08e620457fa5ad1d",
+      "350f546ab7fc9e2cb145642abaf495c5b0c7dae98371e1c1a9d15f5403eb43af",
+      "eba6e9b2b6379271500a00b982d3a9650ee40d1f368f38aaea57ab041d5175fb",
+      "d2e0825ccc64348da1d0504a0f5815127d9493298b4b211e7738d1705d32eb4c",
+      "cc1af2cf0a7d8566bea1b121294d986867929bd6d6136474ed41b92d1acf8ce0",
+      "328969cdc3f5a7f52c1dc70532a2ed34183ba7ba70124237889584ad4e1d7d0f",
+      "d0a1ba846734b1a8ccb182f41ddf37bfc9202aa3771cb5d0fca03e893993fb23",
+      "04f070d61875f39200e41d4480cc020e2be90dc070e3892beaac907916694213",
+      "1acd1c166a17fda22d63999b5f1d5a500b383ecddcb6a9a08e9622fce84975f1",
+      "bc836d63f4c3738a4f497206796e0fc42714bd59e69a55d9d46b340c677b296c",
+      "21995e7cd17ae045803e389055675542c9310e7fc3d7983a42366e141bc9a7f1",
+      "f2d973a9966b2359087c4ae0b15c0328f32e3fb030e88b2bc0193faa898d01c0",
+      "fc6b4d331684577f5d6691020a278202164fe53fb7dd692e13dc1ef525dc090c",
+      "f90e10d46a6802048f20ceb5cfed4cd67fa41933003fddc8b69e70eb0bc74724",
+      "c1c3da78240bf695270da4c0e56ca4a3dce22f754a5735cfe727634af150202b",
+      "5b30f1993200f5e0a77853f51617a58164a1a3e2522f08e322b2dfea61a1742f",
+      "cc9a5263780b94e3edcc28ccd20a843c2616bfeb8cde4c7afeec4c40e90c05f2",
+      "55f1ccff834bb4f68d4c1682d7953da975e3d53bd91058a8888f4a6d80b00a91",
+      "47dd7a3ca135e63cc458396bfe2ef290a75cc27e16ca3b5027e81a793380f621"
+    ],
+    "facts": {
+      "previous_team_id": null,
+      "new_team_id": "blue",
+      "cause": "loose_ball",
+      "kind": "recovery",
+      "sustained": true
+    },
+    "eligible": true,
+    "definition_version": "match-events-v1",
+    "expires_at_ms": 63000,
+    "evidence_revision": "f5e6a82d382b8d87"
+  },
+  "claims": [
+    {
+      "id": "c-event",
+      "predicate": "control_transition",
+      "value": {
+        "previous_team_id": null,
+        "new_team_id": "blue",
+        "cause": "loose_ball",
+        "kind": "recovery",
+        "sustained": true
+      },
+      "unit": "observation",
+      "evidence_revision": "f5e6a82d382b8d87",
+      "source_message_ids": [
+        "ball_recovered-30000-r1",
+        "m-0000304",
+        "m-0000305",
+        "m-0000306",
+        "m-0000307",
+        "m-0000308",
+        "m-0000309",
+        "m-0000310",
+        "m-0000311",
+        "m-0000312",
+        "m-0000313",
+        "m-0000314",
+        "m-0000315",
+        "m-0000316",
+        "m-0000317",
+        "m-0000318",
+        "m-0000319",
+        "m-0000320",
+        "m-0000321",
+        "m-0000322",
+        "m-0000323",
+        "m-0000324",
+        "m-0000325",
+        "m-0000326",
+        "m-0000327",
+        "m-0000328",
+        "m-0000329",
+        "m-0000330",
+        "m-0000331",
+        "m-0000332",
+        "m-0000333",
+        "m-0000334"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": "en_simple_general",
+      "language": "en",
+      "detail": "simple",
+      "focus": null,
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-01",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-01",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-02",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-02",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-03",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-03",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-04",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-04",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-05",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-05",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-06",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-06",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-07",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-07",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-08",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-08",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-09",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-09",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-10",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-10",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-11",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-11",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-01",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-01",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-02",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-02",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-03",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-03",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-04",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-04",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-05",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-05",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-06",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-06",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-07",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-07",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-08",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-08",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-09",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-09",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-10",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-10",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-11",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-11",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_general",
+      "language": "en",
+      "detail": "detail",
+      "focus": null,
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. Observed loose-ball acquisition.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-01",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-01",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. Observed loose-ball acquisition. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-02",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-02",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. Observed loose-ball acquisition. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-03",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-03",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. Observed loose-ball acquisition. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-04",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-04",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. Observed loose-ball acquisition. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-05",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-05",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. Observed loose-ball acquisition. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-06",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-06",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. Observed loose-ball acquisition. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-07",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-07",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. Observed loose-ball acquisition. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-08",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-08",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. Observed loose-ball acquisition.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-09",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-09",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. Observed loose-ball acquisition. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-10",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-10",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. Observed loose-ball acquisition. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-11",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-11",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. Observed loose-ball acquisition. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-01",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-01",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. Observed loose-ball acquisition. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-02",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-02",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. Observed loose-ball acquisition. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-03",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-03",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. Observed loose-ball acquisition. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-04",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-04",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. Observed loose-ball acquisition. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-05",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-05",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. Observed loose-ball acquisition. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-06",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-06",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. Observed loose-ball acquisition. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-07",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-07",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. Observed loose-ball acquisition. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-08",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-08",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. Observed loose-ball acquisition. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-09",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-09",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. Observed loose-ball acquisition. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-10",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-10",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. Observed loose-ball acquisition. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-11",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-11",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. Observed loose-ball acquisition. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. Observed loose-ball acquisition.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber",
+      "text": "Ari Vela recovered the ball. The team retained possession for the next 3 s. Observed loose-ball acquisition. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_general",
+      "language": "es",
+      "detail": "simple",
+      "focus": null,
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-01",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-01",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-02",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-02",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-03",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-03",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-04",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-04",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-05",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-05",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-06",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-06",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-07",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-07",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-08",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-08",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-09",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-09",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-10",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-10",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-11",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-11",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-01",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-01",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-02",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-02",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-03",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-03",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-04",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-04",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-05",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-05",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-06",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-06",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-07",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-07",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-08",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-08",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-09",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-09",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-10",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-10",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-11",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-11",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_general",
+      "language": "es",
+      "detail": "detail",
+      "focus": null,
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Recuperación de balón suelto observada.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-01",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-01",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Recuperación de balón suelto observada. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-02",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-02",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Recuperación de balón suelto observada. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-03",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-03",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Recuperación de balón suelto observada. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-04",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-04",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Recuperación de balón suelto observada. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-05",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-05",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Recuperación de balón suelto observada. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-06",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-06",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Recuperación de balón suelto observada. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-07",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-07",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Recuperación de balón suelto observada. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-08",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-08",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Recuperación de balón suelto observada.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-09",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-09",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Recuperación de balón suelto observada. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-10",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-10",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Recuperación de balón suelto observada. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-11",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-11",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Recuperación de balón suelto observada. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-01",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-01",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Recuperación de balón suelto observada. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-02",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-02",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Recuperación de balón suelto observada. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-03",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-03",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Recuperación de balón suelto observada. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-04",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-04",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Recuperación de balón suelto observada. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-05",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-05",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Recuperación de balón suelto observada. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-06",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-06",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Recuperación de balón suelto observada. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-07",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-07",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Recuperación de balón suelto observada. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-08",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-08",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Recuperación de balón suelto observada. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-09",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-09",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Recuperación de balón suelto observada. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-10",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-10",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Recuperación de balón suelto observada. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-11",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-11",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Recuperación de balón suelto observada. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Recuperación de balón suelto observada.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber",
+      "text": "Ari Vela recuperó el balón. Conservó la posesión durante los 3 s siguientes. Recuperación de balón suelto observada. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    }
+  ],
+  "review": {
+    "status": "supported",
+    "mode": "foundry",
+    "reason": "The evidence confirms that Ari Vela recovered the loose ball and the team retained possession for the next 3 seconds.",
+    "proposed_text": null,
+    "revised_text": "Ari Vela recovered the ball. The team retained possession for the next 3 s.",
+    "cycles": 0
+  },
+  "evidence_revision": "f5e6a82d382b8d87",
+  "eligible_from_ms": 33000,
+  "expires_at_ms": 63000,
+  "trace": [
+    {
+      "role": "Story Director",
+      "action": "model_decision",
+      "status": "propose",
+      "call": 1,
+      "elapsed_ms": 1709.34,
+      "input_tokens": 419,
+      "output_tokens": 37,
+      "total_tokens": 456,
+      "usage_reported": true,
+      "duration_ms": 1705.451,
+      "output": {
+        "action": "propose",
+        "claim_ids": [
+          "c-event"
+        ],
+        "reason": "The evidence supports the claim of a recovery event by the player blue-08, with sustained possession observed."
+      }
+    },
+    {
+      "role": "Claim Reviewer",
+      "action": "model_decision",
+      "status": "supported",
+      "call": 2,
+      "elapsed_ms": 3051.045,
+      "input_tokens": 421,
+      "output_tokens": 38,
+      "total_tokens": 459,
+      "usage_reported": true,
+      "duration_ms": 1062.179,
+      "output": {
+        "action": "supported",
+        "claim_ids": [
+          "c-event"
+        ],
+        "reason": "The evidence confirms that Ari Vela recovered the loose ball and the team retained possession for the next 3 seconds."
+      }
+    }
+  ],
+  "workflow_ms": 3051.35,
+  "mode": "Microsoft Agent Framework + Azure OpenAI",
+  "model_usage": {
+    "calls": 2,
+    "input_tokens": 840,
+    "output_tokens": 75,
+    "total_tokens": 915,
+    "usage_complete": true
+  },
+  "renderer_version": "match-events-v5",
+  "entities": {
+    "players": [
+      {
+        "id": "blue-01",
+        "team_id": "blue",
+        "name": "Eren Rocha",
+        "number": 1,
+        "role": "keeper"
+      },
+      {
+        "id": "blue-02",
+        "team_id": "blue",
+        "name": "Feli Costa",
+        "number": 2,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-03",
+        "team_id": "blue",
+        "name": "Gabi Paz",
+        "number": 3,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-04",
+        "team_id": "blue",
+        "name": "Hugo Neri",
+        "number": 4,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-05",
+        "team_id": "blue",
+        "name": "Ilan Sierra",
+        "number": 5,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-06",
+        "team_id": "blue",
+        "name": "Jori Marin",
+        "number": 6,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-07",
+        "team_id": "blue",
+        "name": "Kian Roca",
+        "number": 7,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-08",
+        "team_id": "blue",
+        "name": "Ari Vela",
+        "number": 8,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-09",
+        "team_id": "blue",
+        "name": "Beni Vidal",
+        "number": 9,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-10",
+        "team_id": "blue",
+        "name": "Ciro Prado",
+        "number": 10,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-11",
+        "team_id": "blue",
+        "name": "Dani Luna",
+        "number": 11,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-01",
+        "team_id": "amber",
+        "name": "Feli Sierra",
+        "number": 1,
+        "role": "keeper"
+      },
+      {
+        "id": "amber-02",
+        "team_id": "amber",
+        "name": "Gabi Paz",
+        "number": 2,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-03",
+        "team_id": "amber",
+        "name": "Hugo Vidal",
+        "number": 3,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-04",
+        "team_id": "amber",
+        "name": "Ilan Rocha",
+        "number": 4,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-05",
+        "team_id": "amber",
+        "name": "Jori Marin",
+        "number": 5,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-06",
+        "team_id": "amber",
+        "name": "Kian Costa",
+        "number": 6,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-07",
+        "team_id": "amber",
+        "name": "Ari Roca",
+        "number": 7,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-08",
+        "team_id": "amber",
+        "name": "Beni Vela",
+        "number": 8,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-09",
+        "team_id": "amber",
+        "name": "Ciro Prado",
+        "number": 9,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-10",
+        "team_id": "amber",
+        "name": "Dani Luna",
+        "number": 10,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-11",
+        "team_id": "amber",
+        "name": "Eren Neri",
+        "number": 11,
+        "role": "outfield"
+      }
+    ],
+    "teams": [
+      {
+        "id": "blue",
+        "name": "Harbor City",
+        "color": "#3b82f6"
+      },
+      {
+        "id": "amber",
+        "name": "Alder Rovers",
+        "color": "#f59e0b"
+      }
+    ]
+  },
+  "package_hash": "7f77e6493356b88ab1a702a121507ae1e66055218c2716e6deb4095dfa5becff"
+}

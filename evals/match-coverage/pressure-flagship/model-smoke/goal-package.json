@@ -1,0 +1,1403 @@
+{
+  "schema_version": "5.0.0",
+  "id": "story-goal-goal-1",
+  "revision": 1,
+  "title": "Confirmed goal",
+  "family": "goal",
+  "incident_id": "shot:attempt-2",
+  "metrics": {
+    "family": "goal",
+    "subject_id": "goal-1",
+    "incident_id": "shot:attempt-2",
+    "team_id": "blue",
+    "participants": {
+      "scorer": "blue-09"
+    },
+    "occurrence_ms": 101000,
+    "evidence_ready_ms": 104000,
+    "input_cutoff_ms": 104000,
+    "window_start_ms": 101000,
+    "window_end_ms": 101000,
+    "source_message_ids": [
+      "goal_status_changed-101000-r2"
+    ],
+    "source_hashes": [
+      "39f3071be44d06e6942e0095adc55d62f38b62c6cdda1f1edb75a2b75796e457"
+    ],
+    "facts": {
+      "status": "confirmed",
+      "own_goal": false,
+      "score": {
+        "blue": 1,
+        "amber": 0
+      },
+      "score_before": {
+        "blue": 0,
+        "amber": 0
+      },
+      "shot_id": "attempt-2"
+    },
+    "eligible": true,
+    "definition_version": "match-events-v1",
+    "expires_at_ms": 134000,
+    "evidence_revision": "19953a2dad3a200b"
+  },
+  "claims": [
+    {
+      "id": "c-event",
+      "predicate": "confirmed_goal",
+      "value": {
+        "status": "confirmed",
+        "own_goal": false,
+        "score": {
+          "blue": 1,
+          "amber": 0
+        },
+        "score_before": {
+          "blue": 0,
+          "amber": 0
+        },
+        "shot_id": "attempt-2"
+      },
+      "unit": "observation",
+      "evidence_revision": "19953a2dad3a200b",
+      "source_message_ids": [
+        "goal_status_changed-101000-r2"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": "en_simple_general",
+      "language": "en",
+      "detail": "simple",
+      "focus": null,
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-01",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-01",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-02",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-02",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-03",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-03",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-04",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-04",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-05",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-05",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-06",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-06",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-07",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-07",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-08",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-08",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-09",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-09",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-10",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-10",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-11",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-11",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-01",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-01",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-02",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-02",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-03",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-03",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-04",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-04",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-05",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-05",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-06",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-06",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-07",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-07",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-08",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-08",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-09",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-09",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-10",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-10",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-11",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-11",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_general",
+      "language": "en",
+      "detail": "detail",
+      "focus": null,
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No assist attribution is established.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-01",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-01",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No assist attribution is established. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-02",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-02",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No assist attribution is established. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-03",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-03",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No assist attribution is established. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-04",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-04",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No assist attribution is established. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-05",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-05",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No assist attribution is established. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-06",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-06",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No assist attribution is established. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-07",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-07",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No assist attribution is established. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-08",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-08",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No assist attribution is established. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-09",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-09",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No assist attribution is established.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-10",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-10",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No assist attribution is established. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-11",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-11",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No assist attribution is established. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-01",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-01",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No assist attribution is established. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-02",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-02",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No assist attribution is established. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-03",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-03",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No assist attribution is established. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-04",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-04",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No assist attribution is established. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-05",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-05",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No assist attribution is established. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-06",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-06",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No assist attribution is established. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-07",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-07",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No assist attribution is established. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-08",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-08",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No assist attribution is established. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-09",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-09",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No assist attribution is established. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-10",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-10",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No assist attribution is established. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-11",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-11",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No assist attribution is established. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No assist attribution is established.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber",
+      "text": "Confirmed goal for Harbor City. Scorer: Beni Vidal. No assist attribution is established. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_general",
+      "language": "es",
+      "detail": "simple",
+      "focus": null,
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-01",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-01",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-02",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-02",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-03",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-03",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-04",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-04",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-05",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-05",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-06",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-06",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-07",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-07",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-08",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-08",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-09",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-09",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-10",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-10",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-11",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-11",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-01",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-01",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-02",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-02",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-03",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-03",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-04",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-04",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-05",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-05",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-06",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-06",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-07",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-07",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-08",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-08",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-09",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-09",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-10",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-10",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-11",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-11",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_general",
+      "language": "es",
+      "detail": "detail",
+      "focus": null,
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin atribución de asistencia.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-01",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-01",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin atribución de asistencia. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-02",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-02",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin atribución de asistencia. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-03",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-03",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin atribución de asistencia. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-04",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-04",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin atribución de asistencia. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-05",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-05",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin atribución de asistencia. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-06",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-06",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin atribución de asistencia. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-07",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-07",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin atribución de asistencia. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-08",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-08",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin atribución de asistencia. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-09",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-09",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin atribución de asistencia.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-10",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-10",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin atribución de asistencia. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-11",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-11",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin atribución de asistencia. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-01",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-01",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin atribución de asistencia. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-02",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-02",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin atribución de asistencia. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-03",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-03",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin atribución de asistencia. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-04",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-04",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin atribución de asistencia. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-05",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-05",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin atribución de asistencia. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-06",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-06",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin atribución de asistencia. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-07",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-07",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin atribución de asistencia. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-08",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-08",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin atribución de asistencia. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-09",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-09",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin atribución de asistencia. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-10",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-10",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin atribución de asistencia. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-11",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-11",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin atribución de asistencia. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin atribución de asistencia.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber",
+      "text": "Gol confirmado para Harbor City. Autor: Beni Vidal. Sin atribución de asistencia. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    }
+  ],
+  "review": {
+    "status": "supported",
+    "mode": "foundry",
+    "reason": "The evidence confirms a goal scored by Beni Vidal for Harbor City, with no assist attribution.",
+    "proposed_text": null,
+    "revised_text": "Confirmed goal for Harbor City. Scorer: Beni Vidal.",
+    "cycles": 0
+  },
+  "evidence_revision": "19953a2dad3a200b",
+  "eligible_from_ms": 104000,
+  "expires_at_ms": 134000,
+  "trace": [
+    {
+      "role": "Story Director",
+      "action": "model_decision",
+      "status": "propose",
+      "call": 1,
+      "elapsed_ms": 2587.919,
+      "input_tokens": 407,
+      "output_tokens": 32,
+      "total_tokens": 439,
+      "usage_reported": true,
+      "duration_ms": 2584.107,
+      "output": {
+        "action": "propose",
+        "claim_ids": [
+          "c-event"
+        ],
+        "reason": "The evidence confirms a goal scored by blue-09, with no assist attribution."
+      }
+    },
+    {
+      "role": "Claim Reviewer",
+      "action": "model_decision",
+      "status": "supported",
+      "call": 2,
+      "elapsed_ms": 4034.142,
+      "input_tokens": 409,
+      "output_tokens": 34,
+      "total_tokens": 443,
+      "usage_reported": true,
+      "duration_ms": 1164.907,
+      "output": {
+        "action": "supported",
+        "claim_ids": [
+          "c-event"
+        ],
+        "reason": "The evidence confirms a goal scored by Beni Vidal for Harbor City, with no assist attribution."
+      }
+    }
+  ],
+  "workflow_ms": 4034.487,
+  "mode": "Microsoft Agent Framework + Azure OpenAI",
+  "model_usage": {
+    "calls": 2,
+    "input_tokens": 816,
+    "output_tokens": 66,
+    "total_tokens": 882,
+    "usage_complete": true
+  },
+  "renderer_version": "match-events-v5",
+  "entities": {
+    "players": [
+      {
+        "id": "blue-01",
+        "team_id": "blue",
+        "name": "Eren Rocha",
+        "number": 1,
+        "role": "keeper"
+      },
+      {
+        "id": "blue-02",
+        "team_id": "blue",
+        "name": "Feli Costa",
+        "number": 2,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-03",
+        "team_id": "blue",
+        "name": "Gabi Paz",
+        "number": 3,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-04",
+        "team_id": "blue",
+        "name": "Hugo Neri",
+        "number": 4,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-05",
+        "team_id": "blue",
+        "name": "Ilan Sierra",
+        "number": 5,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-06",
+        "team_id": "blue",
+        "name": "Jori Marin",
+        "number": 6,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-07",
+        "team_id": "blue",
+        "name": "Kian Roca",
+        "number": 7,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-08",
+        "team_id": "blue",
+        "name": "Ari Vela",
+        "number": 8,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-09",
+        "team_id": "blue",
+        "name": "Beni Vidal",
+        "number": 9,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-10",
+        "team_id": "blue",
+        "name": "Ciro Prado",
+        "number": 10,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-11",
+        "team_id": "blue",
+        "name": "Dani Luna",
+        "number": 11,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-01",
+        "team_id": "amber",
+        "name": "Feli Sierra",
+        "number": 1,
+        "role": "keeper"
+      },
+      {
+        "id": "amber-02",
+        "team_id": "amber",
+        "name": "Gabi Paz",
+        "number": 2,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-03",
+        "team_id": "amber",
+        "name": "Hugo Vidal",
+        "number": 3,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-04",
+        "team_id": "amber",
+        "name": "Ilan Rocha",
+        "number": 4,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-05",
+        "team_id": "amber",
+        "name": "Jori Marin",
+        "number": 5,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-06",
+        "team_id": "amber",
+        "name": "Kian Costa",
+        "number": 6,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-07",
+        "team_id": "amber",
+        "name": "Ari Roca",
+        "number": 7,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-08",
+        "team_id": "amber",
+        "name": "Beni Vela",
+        "number": 8,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-09",
+        "team_id": "amber",
+        "name": "Ciro Prado",
+        "number": 9,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-10",
+        "team_id": "amber",
+        "name": "Dani Luna",
+        "number": 10,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-11",
+        "team_id": "amber",
+        "name": "Eren Neri",
+        "number": 11,
+        "role": "outfield"
+      }
+    ],
+    "teams": [
+      {
+        "id": "blue",
+        "name": "Harbor City",
+        "color": "#3b82f6"
+      },
+      {
+        "id": "amber",
+        "name": "Alder Rovers",
+        "color": "#f59e0b"
+      }
+    ]
+  },
+  "package_hash": "c54f77641b04f8e84ef10c38cf0c2bbbdbac16442d658b5eb39c3a97a3be15ec"
+}

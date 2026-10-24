@@ -1,0 +1,128 @@
+{
+  "baseline_commit": "2d515515f0dcaeac7ad48f62a63900bebaefc858",
+  "source_delivery": "uncommitted working tree; pre-existing planning/reviewer changes preserved",
+  "backend": {
+    "original": 325,
+    "new_family_checks": 46,
+    "total_passed": 371
+  },
+  "browser": {
+    "local_passed": 21,
+    "new_family_real_backend_flows": 3,
+    "linked_role_ui_mock": 1,
+    "paid_azure_skipped": 2,
+    "viewports": [
+      "1366x768",
+      "390x844"
+    ]
+  },
+  "original_references": {
+    "cases": 168,
+    "checkpoints": 594,
+    "baseline_changed": false
+  },
+  "new_reference_cases": 21,
+  "model_verification": "fake-provider only; no deployment-specific new-family model claim",
+  "paid_model_calls": 0,
+  "deployment": "not performed",
+  "checks": [
+    {
+      "check": "backend",
+      "command": "make test",
+      "passed": true,
+      "output": "evals/match-coverage/backend.txt",
+      "sha256": "efdbd22c76ae1a78b8b1395a0bde64ec54f0c7f0a3791e5dd11c7533c29b5ad7"
+    },
+    {
+      "check": "browser",
+      "command": "WHY_NOW_MATCH_COVERAGE_E2E=1 PLAYWRIGHT_BASE_URL=http://127.0.0.1:3100 npm --prefix apps/web run test:e2e",
+      "passed": true,
+      "output": "evals/match-coverage/browser.txt",
+      "sha256": "95f349b6b1d35892f877a69d05535bbddca43360b31ebffc9da0b0dc295397b3"
+    },
+    {
+      "check": "web-build",
+      "command": "make web-build",
+      "passed": true,
+      "output": "evals/match-coverage/web-build.txt",
+      "sha256": "a5888276357ba9b70a169fcf64b4cae43b414adec6f4a18f4628475fcb738b84"
+    },
+    {
+      "check": "typecheck",
+      "command": "npm --prefix apps/web run typecheck",
+      "passed": true,
+      "output": "evals/match-coverage/typecheck.txt",
+      "sha256": "302aaedd16e778b1ddc76b04c538e41e82946b6d7dbd64e5b38c2e6244de8df1"
+    },
+    {
+      "check": "format",
+      "command": "npm --prefix apps/web run format:check",
+      "passed": true,
+      "output": "evals/match-coverage/format.txt",
+      "sha256": "62a957cea659a7bd7633f0ae062315546c77b91ec6706c88da48dfa88a18ed87"
+    },
+    {
+      "check": "original-data-and-evaluation",
+      "command": "make data-check evaluate synthetic-evaluate",
+      "passed": true,
+      "output": "evals/match-coverage/original-data-and-evaluation.txt",
+      "sha256": "06fee20204f91aacccab8de27887cdeae1bbdb1b7d142bbb2a1b93083b13b30a"
+    }
+  ],
+  "human_participants": 0,
+  "reviewer_ratings": "pending",
+  "user_findings": "pending",
+  "continuous_play": {
+    "all_opportunities_found": 85,
+    "pre_end_live": 83,
+    "pre_end_target_met": 83,
+    "end_boundary_nominal_only": 2,
+    "minimum_live_review_seconds": 12.648881791,
+    "backend_source_matches_delivery": true,
+    "browser_paint_not_measured": true
+  },
+  "source_sha256": {
+    "engine/catalog.py": "5a9ad8d8eee55a02ab7b48a077c58994a548fa07dad7b14d30eb8f83e235527c",
+    "engine/foundry_workflow.py": "0e10f13e2be4e32b62ee24cb2f5185e57ced31dec4ac361a9c3f90a9c788f024",
+    "engine/event_metrics.py": "b94d4758c4eae1c5500e3a77fc2ca5907531a279faf85912fc09cf459c40d936",
+    "engine/event_narrative.py": "58ae26173c1fda07824c35813f093375edee0c05f71a16510ad252494b90dcb4",
+    "engine/contextual_narrative.py": "df79b4183e1620f1305db2b0a50f3d5ee3305275ac1215fbd754bffbf3ceb6e2",
+    "engine/structured_workflow.py": "c30d9c06bc0c81985bf09b7aa3411de1a475cad273a61b59a2990e56d3e86ac8",
+    "engine/transport.py": "32b18bfe691b999f606df064bd4ee222c29228a715b7f5854aec769849ed335e",
+    "engine/dispositions.py": "9a85fc6a1c8c1763312aa06d6948644323a2c31738f8417efb229b51ea603c78",
+    "engine/cloud_repository.py": "90e549455c4070d2681c0a17c3b32daf38374101801b73ae084eae264a0163ed",
+    "engine/core.py": "d813c41221387ab8a07d6d765df2dd3fa4bb5ece290540c657cc512c640ce3b4",
+    "engine/narrative.py": "eda1cff62cb57952cd32dbdf61f32a91668a1252386746faac5b913b52ac6742",
+    "engine/match_state.py": "6efc2ef98ee3848e1619354f722dc69a8538b88885c601ecef538fc18b62f89f",
+    "engine/context.py": "0f49a58d1a42b8feba87555dfeab925c8d9cef3dc0cc5336a456e1d806bc2912",
+    "engine/event_workflow.py": "269fa669e314a0a4ee1fff089facfd907302e274fb3a13b028357edc0bc24371",
+    "engine/outcomes.py": "a320e7ddbec30e6eaccc3a40a7d0d055d0f832ae566a0aee98bb8ddfb4640c0e",
+    "engine/editorial.py": "cda3ef45d400c79715d69e9dbda0551849aa44e9ab5d0829d62216e11b52612e",
+    "engine/contracts.py": "4412fd99a4c763537fd4d93a9491504681e09b48848a7d7c48cd183d01bd583e",
+    "engine/workflow.py": "439e3211c8f5b5c20aaa8ddf366b4a262808431979e0a108c2ad17bf34d49a1a",
+    "engine/repository.py": "1106fea44b4b320b32e9980d59d3805bf2c4da0551a85520c00bcf7322165104",
+    "engine/recap.py": "be3e20686826b377cd9de3b6386d7326578b4882868e8ea785ac7fb977a064aa",
+    "engine/editorial_narrative.py": "67be6a3031bb13e1f32384e9a25af13c10d2e2308c8f77494b33401d791fc879",
+    "services/api/main.py": "23b9c13a1dcb6ccbb250579b4b51be1fa823e963de57e5022cba74ec4bda5f75",
+    "apps/web/components/audience-panel.tsx": "b7c83755daf7700d4d133889faf2d26b6da6037e7b1cd500c0b3b0ad0fda6029",
+    "apps/web/components/audience-controls.tsx": "5bc89714106e92546b9031783d727645f6bff26a67cb3440759560df49fb548e",
+    "apps/web/components/event-evidence.tsx": "bc380e160b06d1e0860fdc19b8d8e1498b4ed152eff1ac884db619c0ccd0aab5",
+    "apps/web/components/pass-comparison.tsx": "e5af794579f90267cd1c6fa204f4d412846d1d397e75a6f91bfdc786a2ebe2f1",
+    "apps/web/components/review-card.tsx": "c1df5a6b89b28d38cf452bc1dd1cc2a405796900702dafbddfbc7bb85eb97d17",
+    "apps/web/components/inline-evidence.tsx": "c4579fe7adb1f38e883f985556153046707ae53ef5d1a0f31820c4eddba67a9e",
+    "apps/web/components/evidence-replay.tsx": "6fb71ff7878a72ad673f3f426e06bdf267c6816a4f2f58de646bf8c501a5cc79",
+    "apps/web/components/pitch.tsx": "fae7d9b38adc0529df398ec170f4b0bb8b2d4712f10d7190f1dfb3a5fc048831",
+    "apps/web/components/decision-summary.tsx": "967e4c4d1ab94b6219721becef61da4f782a3257db8c4bb0695d408ca7a3f1fd",
+    "apps/web/components/match-desk.tsx": "9d58a9bfd66796eca71961d368d9ef2492dbe6756d27beb992b6f0a77d34bd6f",
+    "apps/web/components/ui.tsx": "030ba4ddead9791d77dea16d1df49ccd08fb7e8e737459f70c88769624e80679",
+    "apps/web/lib/api.ts": "4f3ef77f24a51c459977318fc883d113ab8f61c6556dbe175bb80dc75ba2905b",
+    "apps/web/hooks/use-story-variant.ts": "4473aa5de690ad84cbd66eaac92c5975592138622199ec8e0ca2e2fc1e82f8a6",
+    "apps/web/hooks/use-match.ts": "1313ed470702d5d3cc2ee906ac3cb0d6813990d74a8ca4ca488fff8360c3020a",
+    "apps/web/hooks/use-render-ack.ts": "d231320f8de67bc2a6c7ba5e141d522b10cdb0327572431986a55c1fff1d9121",
+    "apps/web/hooks/use-audience-preferences.ts": "e38338e0bc31e2c457efcfeaaeee2e827dcd4b36eeb25fcb299ca51efad474e9",
+    "apps/web/app/page.tsx": "1cbbcf82d7fa2ed32456dd92e9312ee8f8c4b1bd7d39157d4894cace9bbe714c",
+    "tests/test_match_coverage.py": "2bdfce24d4b1d91f64c487be0f8b46176b9a185891302889589db7e97547cd8f",
+    "apps/web/tests/match-coverage.spec.ts": "ea0f1299c058fea7ed0dac2e635603746dda75798bbba58be55bed918668b7ea",
+    "apps/web/tests/flow.spec.ts": "f6d286c12b311d1c659640eddf9da00e7252d6094703f6bbddd8cf829c2dd254"
+  }
+}

@@ -1,0 +1,1398 @@
+{
+  "schema_version": "5.0.0",
+  "id": "story-shot-attempt-1",
+  "revision": 1,
+  "title": "Shot outcome",
+  "family": "shot",
+  "incident_id": "shot:attempt-1",
+  "metrics": {
+    "family": "shot",
+    "subject_id": "attempt-1",
+    "incident_id": "shot:attempt-1",
+    "team_id": "blue",
+    "participants": {
+      "shooter": "blue-09"
+    },
+    "occurrence_ms": 45000,
+    "evidence_ready_ms": 46000,
+    "input_cutoff_ms": 46000,
+    "window_start_ms": 45000,
+    "window_end_ms": 46000,
+    "source_message_ids": [
+      "shot_resolved-46000-r1",
+      "shot_started-45000-r1"
+    ],
+    "source_hashes": [
+      "d24f01bed170faf8240069b1ad212ff95eac4c529a005e6cb79c8b0451b1f611",
+      "346ba09013ae9b5c9e1133cb4243d8c221fb1dc9f47eb2e49c6c5de16e830052"
+    ],
+    "facts": {
+      "outcome": "saved",
+      "reported_outcome": "saved",
+      "goal_status": null,
+      "location": {
+        "x_m": 82,
+        "y_m": 30
+      }
+    },
+    "eligible": true,
+    "definition_version": "match-events-v1",
+    "expires_at_ms": 76000,
+    "evidence_revision": "e3393402d0cbdc80"
+  },
+  "claims": [
+    {
+      "id": "c-event",
+      "predicate": "shot_outcome",
+      "value": {
+        "outcome": "saved",
+        "reported_outcome": "saved",
+        "goal_status": null,
+        "location": {
+          "x_m": 82,
+          "y_m": 30
+        }
+      },
+      "unit": "observation",
+      "evidence_revision": "e3393402d0cbdc80",
+      "source_message_ids": [
+        "shot_resolved-46000-r1",
+        "shot_started-45000-r1"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": "en_simple_general",
+      "language": "en",
+      "detail": "simple",
+      "focus": null,
+      "text": "Beni Vidal: shot saved.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-01",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-01",
+      "text": "Beni Vidal: shot saved. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-02",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-02",
+      "text": "Beni Vidal: shot saved. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-03",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-03",
+      "text": "Beni Vidal: shot saved. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-04",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-04",
+      "text": "Beni Vidal: shot saved. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-05",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-05",
+      "text": "Beni Vidal: shot saved. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-06",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-06",
+      "text": "Beni Vidal: shot saved. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-07",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-07",
+      "text": "Beni Vidal: shot saved. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-08",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-08",
+      "text": "Beni Vidal: shot saved. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-09",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-09",
+      "text": "Beni Vidal: shot saved.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-10",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-10",
+      "text": "Beni Vidal: shot saved. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-11",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-11",
+      "text": "Beni Vidal: shot saved. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-01",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-01",
+      "text": "Beni Vidal: shot saved. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-02",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-02",
+      "text": "Beni Vidal: shot saved. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-03",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-03",
+      "text": "Beni Vidal: shot saved. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-04",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-04",
+      "text": "Beni Vidal: shot saved. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-05",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-05",
+      "text": "Beni Vidal: shot saved. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-06",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-06",
+      "text": "Beni Vidal: shot saved. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-07",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-07",
+      "text": "Beni Vidal: shot saved. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-08",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-08",
+      "text": "Beni Vidal: shot saved. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-09",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-09",
+      "text": "Beni Vidal: shot saved. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-10",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-10",
+      "text": "Beni Vidal: shot saved. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-11",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-11",
+      "text": "Beni Vidal: shot saved. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue",
+      "text": "Beni Vidal: shot saved.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber",
+      "text": "Beni Vidal: shot saved. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_general",
+      "language": "en",
+      "detail": "detail",
+      "focus": null,
+      "text": "Beni Vidal: shot saved. Observed outcome; this does not rate chance quality.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-01",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-01",
+      "text": "Beni Vidal: shot saved. Observed outcome; this does not rate chance quality. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-02",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-02",
+      "text": "Beni Vidal: shot saved. Observed outcome; this does not rate chance quality. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-03",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-03",
+      "text": "Beni Vidal: shot saved. Observed outcome; this does not rate chance quality. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-04",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-04",
+      "text": "Beni Vidal: shot saved. Observed outcome; this does not rate chance quality. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-05",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-05",
+      "text": "Beni Vidal: shot saved. Observed outcome; this does not rate chance quality. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-06",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-06",
+      "text": "Beni Vidal: shot saved. Observed outcome; this does not rate chance quality. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-07",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-07",
+      "text": "Beni Vidal: shot saved. Observed outcome; this does not rate chance quality. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-08",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-08",
+      "text": "Beni Vidal: shot saved. Observed outcome; this does not rate chance quality. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-09",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-09",
+      "text": "Beni Vidal: shot saved. Observed outcome; this does not rate chance quality.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-10",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-10",
+      "text": "Beni Vidal: shot saved. Observed outcome; this does not rate chance quality. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-11",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-11",
+      "text": "Beni Vidal: shot saved. Observed outcome; this does not rate chance quality. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-01",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-01",
+      "text": "Beni Vidal: shot saved. Observed outcome; this does not rate chance quality. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-02",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-02",
+      "text": "Beni Vidal: shot saved. Observed outcome; this does not rate chance quality. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-03",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-03",
+      "text": "Beni Vidal: shot saved. Observed outcome; this does not rate chance quality. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-04",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-04",
+      "text": "Beni Vidal: shot saved. Observed outcome; this does not rate chance quality. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-05",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-05",
+      "text": "Beni Vidal: shot saved. Observed outcome; this does not rate chance quality. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-06",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-06",
+      "text": "Beni Vidal: shot saved. Observed outcome; this does not rate chance quality. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-07",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-07",
+      "text": "Beni Vidal: shot saved. Observed outcome; this does not rate chance quality. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-08",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-08",
+      "text": "Beni Vidal: shot saved. Observed outcome; this does not rate chance quality. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-09",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-09",
+      "text": "Beni Vidal: shot saved. Observed outcome; this does not rate chance quality. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-10",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-10",
+      "text": "Beni Vidal: shot saved. Observed outcome; this does not rate chance quality. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-11",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-11",
+      "text": "Beni Vidal: shot saved. Observed outcome; this does not rate chance quality. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue",
+      "text": "Beni Vidal: shot saved. Observed outcome; this does not rate chance quality.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber",
+      "text": "Beni Vidal: shot saved. Observed outcome; this does not rate chance quality. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_general",
+      "language": "es",
+      "detail": "simple",
+      "focus": null,
+      "text": "Beni Vidal: remate atajado.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-01",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-01",
+      "text": "Beni Vidal: remate atajado. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-02",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-02",
+      "text": "Beni Vidal: remate atajado. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-03",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-03",
+      "text": "Beni Vidal: remate atajado. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-04",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-04",
+      "text": "Beni Vidal: remate atajado. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-05",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-05",
+      "text": "Beni Vidal: remate atajado. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-06",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-06",
+      "text": "Beni Vidal: remate atajado. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-07",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-07",
+      "text": "Beni Vidal: remate atajado. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-08",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-08",
+      "text": "Beni Vidal: remate atajado. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-09",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-09",
+      "text": "Beni Vidal: remate atajado.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-10",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-10",
+      "text": "Beni Vidal: remate atajado. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-11",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-11",
+      "text": "Beni Vidal: remate atajado. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-01",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-01",
+      "text": "Beni Vidal: remate atajado. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-02",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-02",
+      "text": "Beni Vidal: remate atajado. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-03",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-03",
+      "text": "Beni Vidal: remate atajado. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-04",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-04",
+      "text": "Beni Vidal: remate atajado. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-05",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-05",
+      "text": "Beni Vidal: remate atajado. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-06",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-06",
+      "text": "Beni Vidal: remate atajado. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-07",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-07",
+      "text": "Beni Vidal: remate atajado. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-08",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-08",
+      "text": "Beni Vidal: remate atajado. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-09",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-09",
+      "text": "Beni Vidal: remate atajado. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-10",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-10",
+      "text": "Beni Vidal: remate atajado. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-11",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-11",
+      "text": "Beni Vidal: remate atajado. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue",
+      "text": "Beni Vidal: remate atajado.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber",
+      "text": "Beni Vidal: remate atajado. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_general",
+      "language": "es",
+      "detail": "detail",
+      "focus": null,
+      "text": "Beni Vidal: remate atajado. Resultado observado; no indica la calidad de la ocasión.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-01",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-01",
+      "text": "Beni Vidal: remate atajado. Resultado observado; no indica la calidad de la ocasión. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-02",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-02",
+      "text": "Beni Vidal: remate atajado. Resultado observado; no indica la calidad de la ocasión. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-03",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-03",
+      "text": "Beni Vidal: remate atajado. Resultado observado; no indica la calidad de la ocasión. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-04",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-04",
+      "text": "Beni Vidal: remate atajado. Resultado observado; no indica la calidad de la ocasión. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-05",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-05",
+      "text": "Beni Vidal: remate atajado. Resultado observado; no indica la calidad de la ocasión. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-06",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-06",
+      "text": "Beni Vidal: remate atajado. Resultado observado; no indica la calidad de la ocasión. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-07",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-07",
+      "text": "Beni Vidal: remate atajado. Resultado observado; no indica la calidad de la ocasión. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-08",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-08",
+      "text": "Beni Vidal: remate atajado. Resultado observado; no indica la calidad de la ocasión. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-09",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-09",
+      "text": "Beni Vidal: remate atajado. Resultado observado; no indica la calidad de la ocasión.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-10",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-10",
+      "text": "Beni Vidal: remate atajado. Resultado observado; no indica la calidad de la ocasión. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-11",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-11",
+      "text": "Beni Vidal: remate atajado. Resultado observado; no indica la calidad de la ocasión. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-01",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-01",
+      "text": "Beni Vidal: remate atajado. Resultado observado; no indica la calidad de la ocasión. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-02",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-02",
+      "text": "Beni Vidal: remate atajado. Resultado observado; no indica la calidad de la ocasión. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-03",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-03",
+      "text": "Beni Vidal: remate atajado. Resultado observado; no indica la calidad de la ocasión. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-04",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-04",
+      "text": "Beni Vidal: remate atajado. Resultado observado; no indica la calidad de la ocasión. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-05",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-05",
+      "text": "Beni Vidal: remate atajado. Resultado observado; no indica la calidad de la ocasión. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-06",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-06",
+      "text": "Beni Vidal: remate atajado. Resultado observado; no indica la calidad de la ocasión. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-07",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-07",
+      "text": "Beni Vidal: remate atajado. Resultado observado; no indica la calidad de la ocasión. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-08",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-08",
+      "text": "Beni Vidal: remate atajado. Resultado observado; no indica la calidad de la ocasión. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-09",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-09",
+      "text": "Beni Vidal: remate atajado. Resultado observado; no indica la calidad de la ocasión. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-10",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-10",
+      "text": "Beni Vidal: remate atajado. Resultado observado; no indica la calidad de la ocasión. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-11",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-11",
+      "text": "Beni Vidal: remate atajado. Resultado observado; no indica la calidad de la ocasión. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue",
+      "text": "Beni Vidal: remate atajado. Resultado observado; no indica la calidad de la ocasión.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber",
+      "text": "Beni Vidal: remate atajado. Resultado observado; no indica la calidad de la ocasión. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    }
+  ],
+  "review": {
+    "status": "supported",
+    "mode": "foundry",
+    "reason": "The provided facts confirm that Beni Vidal's shot was saved, and the text supports this outcome.",
+    "proposed_text": null,
+    "revised_text": "Beni Vidal: shot saved.",
+    "cycles": 0
+  },
+  "evidence_revision": "e3393402d0cbdc80",
+  "eligible_from_ms": 46000,
+  "expires_at_ms": 76000,
+  "trace": [
+    {
+      "role": "Story Director",
+      "action": "model_decision",
+      "status": "propose",
+      "call": 1,
+      "elapsed_ms": 2708.889,
+      "input_tokens": 400,
+      "output_tokens": 33,
+      "total_tokens": 433,
+      "usage_reported": true,
+      "duration_ms": 2704.21,
+      "output": {
+        "action": "propose",
+        "claim_ids": [
+          "c-event"
+        ],
+        "reason": "The evidence supports the event of a shot taken by blue-09 that was saved."
+      }
+    },
+    {
+      "role": "Claim Reviewer",
+      "action": "model_decision",
+      "status": "supported",
+      "call": 2,
+      "elapsed_ms": 4126.678,
+      "input_tokens": 402,
+      "output_tokens": 35,
+      "total_tokens": 437,
+      "usage_reported": true,
+      "duration_ms": 1136.092,
+      "output": {
+        "action": "supported",
+        "claim_ids": [
+          "c-event"
+        ],
+        "reason": "The provided facts confirm that Beni Vidal's shot was saved, and the text supports this outcome."
+      }
+    }
+  ],
+  "workflow_ms": 4127.063,
+  "mode": "Microsoft Agent Framework + Azure OpenAI",
+  "model_usage": {
+    "calls": 2,
+    "input_tokens": 802,
+    "output_tokens": 68,
+    "total_tokens": 870,
+    "usage_complete": true
+  },
+  "renderer_version": "match-events-v5",
+  "entities": {
+    "players": [
+      {
+        "id": "blue-01",
+        "team_id": "blue",
+        "name": "Eren Rocha",
+        "number": 1,
+        "role": "keeper"
+      },
+      {
+        "id": "blue-02",
+        "team_id": "blue",
+        "name": "Feli Costa",
+        "number": 2,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-03",
+        "team_id": "blue",
+        "name": "Gabi Paz",
+        "number": 3,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-04",
+        "team_id": "blue",
+        "name": "Hugo Neri",
+        "number": 4,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-05",
+        "team_id": "blue",
+        "name": "Ilan Sierra",
+        "number": 5,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-06",
+        "team_id": "blue",
+        "name": "Jori Marin",
+        "number": 6,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-07",
+        "team_id": "blue",
+        "name": "Kian Roca",
+        "number": 7,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-08",
+        "team_id": "blue",
+        "name": "Ari Vela",
+        "number": 8,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-09",
+        "team_id": "blue",
+        "name": "Beni Vidal",
+        "number": 9,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-10",
+        "team_id": "blue",
+        "name": "Ciro Prado",
+        "number": 10,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-11",
+        "team_id": "blue",
+        "name": "Dani Luna",
+        "number": 11,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-01",
+        "team_id": "amber",
+        "name": "Feli Sierra",
+        "number": 1,
+        "role": "keeper"
+      },
+      {
+        "id": "amber-02",
+        "team_id": "amber",
+        "name": "Gabi Paz",
+        "number": 2,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-03",
+        "team_id": "amber",
+        "name": "Hugo Vidal",
+        "number": 3,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-04",
+        "team_id": "amber",
+        "name": "Ilan Rocha",
+        "number": 4,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-05",
+        "team_id": "amber",
+        "name": "Jori Marin",
+        "number": 5,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-06",
+        "team_id": "amber",
+        "name": "Kian Costa",
+        "number": 6,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-07",
+        "team_id": "amber",
+        "name": "Ari Roca",
+        "number": 7,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-08",
+        "team_id": "amber",
+        "name": "Beni Vela",
+        "number": 8,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-09",
+        "team_id": "amber",
+        "name": "Ciro Prado",
+        "number": 9,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-10",
+        "team_id": "amber",
+        "name": "Dani Luna",
+        "number": 10,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-11",
+        "team_id": "amber",
+        "name": "Eren Neri",
+        "number": 11,
+        "role": "outfield"
+      }
+    ],
+    "teams": [
+      {
+        "id": "blue",
+        "name": "Harbor City",
+        "color": "#3b82f6"
+      },
+      {
+        "id": "amber",
+        "name": "Alder Rovers",
+        "color": "#f59e0b"
+      }
+    ]
+  },
+  "package_hash": "33914c19bfeb610612f217862496a582f3fa6de12efb5c9a1fdbbb0b84d002fd"
+}

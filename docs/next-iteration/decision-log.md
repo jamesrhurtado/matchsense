@@ -1,5 +1,13 @@
 # Iteration implementation record
 
+## 23 October 2026 — broader match coverage selected for next-iteration planning
+
+James requested an implementable plan after reporting first-time-user confusion about pass-only information. [MC01–MC10](match-coverage-implementation-plan.md) specifies goals/confirmed score, shots, possession windows, recovery/control-change stories and a mixed-event timeline/recap, with evidence, English/Spanish, approval, correction handling and real-user validation. These are **planned, not implemented or verified**. No model run, deployment or product code change was performed for this planning task.
+
+This promotes basic event coverage previously staged in the original Obsidian notes and deferred/conditional in later repository plans. It supersedes those deferrals for the selected families; xG, tactical causation, set pieces, disciplinary events and real-feed integration are outside the required slice. Existing correctness and unresolved research/operational gates remain open. Estimates are 100–160 engineering hours plus a 20% integration allowance, subject to the schema/fixture checkpoint. Role assignments and pilot recruitment remain to be arranged. The owner's feedback is not recorded as a completed formal user study.
+
+Active handoff pointers in the plan index, prior improvement plan and engineering backlog now link to this plan so the scope does not disappear in the next implementation pass. Track per-ticket delivery evidence here during implementation.
+
 ## 21 October 2026 — first implementation slice
 
 Implementation began after the owner authorized applying the researched plan. The following statuses distinguish code delivered from evidence still required. The target remains the Grand Prize; no revised judging score is asserted.
@@ -84,3 +92,222 @@ The contextual update was organized into local commits `9afd879` (backend/contex
 Delivered v4 concise rendering, provisional significance-aware emphasis, explicit comparison titles, signed comparison visualization, coherent viewer/evidence labels, earlier-moment return navigation and atomic package/acceptance accounting with recovery. Existing approved v1/v2/v3 packages remain unchanged. A real discovery failure omitted a mandatory claim; both agent strategies now receive identical bounded validator-repair feedback.
 
 Actual comparison: 60 outcomes, 15 correlated cases, 69 calls, complete usage; all broad angles matched, no reviewer repairs, one S3 factual fallback. Together with smoke and post-fix checks, estimated model usage is $0.0491799. No multi-agent advantage, human benefit or new score is asserted. See [quality handoff](quality-v4-handoff.md), [comparison evidence](../../evals/agentic/discovery-v4/README.md), and [reviewer guide](reviewer-guide-v4.md). James can arrange reviewers/testers; sessions remain pending.
+
+## 24 October 2026 — MC01–MC10 local engineering delivery
+
+This entry supersedes the planning-only status for the match-coverage iteration.
+Baseline source: `2d515515f0dcaeac7ad48f62a63900bebaefc858`; kickoff backend gate
+325 passed. The working tree already contained planning documents, friend pitch,
+reviewer assignments and a review-preparation script; those were preserved.
+Delivery remains reviewable local changes, with no new commit, push or deployment.
+
+Engineering owner for this delivery: Codex. Product/recruitment owner: James.
+External football/Spanish reviewers and pilot facilitator remain unassigned.
+The primary MC plan governs scope; no required event family was deferred.
+
+| Ticket | Status progression / supported mode | Evidence and remaining limitation |
+|---|---|---|
+| MC01 | Planned → implemented → engineering-checked | [Definitions/examples and rollback matrix](../match-events.md); interval-end, cutoff, public-state, unknown-actor and approval rules frozen. External football review pending. |
+| MC02 | Planned → implemented → locally verified | Additive typed shot/goal/recovery/period payloads, strict v5 family evidence/claims/renderer/schema; original readers/hashes intact. SQLite and mocked Cosmos parity; live Cosmos unverified. |
+| MC03 | Planned → implemented → locally verified | Two reproducible four-minute observation-only exports, separate catalogue (original 173 untouched), 21 hand references independent of production metrics, physical/feed checks. Engineering-authored synthetic discovery, not human football validation. |
+| MC04 | Planned → implemented → locally verified | Pure public score/clock projection, source-confirmed goals, unknown/own/unlinked goals, shot outcomes; duplicates, late delivery, corrected team/scorer and cancellation checks. No inferred assists, saves or causation. |
+| MC05 | Planned → implemented → locally verified | Time integration, explicit base/coverage/exclusions/minimums, source dependencies and period clipping; recovery/control/restart distinction, incident dedup, immediate-loss and 3 s witness checks. |
+| MC06 | Planned → implemented → zero-call verified | Bilingual simple/detail/verified focus, bounded realization and denominator/role checks; Director/Reviewer adapter with fake-provider support/reject/abstain/failure tests. Deployment-specific new-family AI remains unverified and opt-in. |
+| MC07 | Planned → implemented → local template verified | Shared storage/approval/audit, protected producer/public projections, corrections, exact retries, archive-only approval, producer overlay override, stale job rejection, queued-outcome persistence and actual API/SQLite restart. Paid scheduling/cloud operating limits remain unverified. |
+| MC08 | Planned → implemented → browser verified | Prominent score/period, mixed queue/family filters, mobile/desktop evidence, approved possession interval, verified role/team focus, linked shot/goal incident details, timeline and max-five mixed recap. |
+| MC09 | Planned → implemented → local gates verified | 371 backend tests (325 original + 46 new); 21 browser tests incl. 3 real mixed flows and one mocked linked-role check; 2 Azure tests intentionally skipped; type/format/build passed. Original 168/168 cases, 594/594 checkpoints unchanged; new references 21/21. Continuous 1× two-session results are recorded separately from model/cloud claims. |
+| MC10 | Engineering preparation complete; human study pending | [Pilot packet](../match-coverage-pilot.md), setup, mixed demo, friend/presenter addenda, metrics/feed docs and [handoff](match-coverage-handoff.md). Recruitment, facilitator, reviewer ratings, user observations and retests pending. |
+
+No ticket is marked deployed. Source-confirmed state is public without editorial
+approval; explanatory variants, history and recap still require exact approval.
+Turning off the creation flag does not reinterpret already-created mixed sessions.
+Stored v1–v4 packages are never migrated in place; v5 rollback must retain a
+compatible reader or isolate these sessions.
+
+Verification: [actual command outputs and mode limits](../../evals/match-coverage/verification.json),
+[independent references](../../evals/match-coverage/results.json),
+[schema/reproducibility](../../evals/match-coverage/schema-and-reproducibility.json),
+[continuous playback](../../evals/match-coverage/continuous-play.json),
+[actual restart](../../evals/match-coverage/restart.json), and
+[desktop/phone captures](../../evals/match-coverage/screenshots/).
+
+The first continuous schedule missed eight observed control-change revisions in
+its denominator; that incomplete run is retained separately. The complete
+schedule accounts for 85 opportunities across two full 1× sessions and retains
+per-family readiness, queue wait, review time, expiry/deferrals and usage, including
+all attempted opportunities. Missing human review duration, per-opportunity browser
+paint, durable ingestion timing and provider/model latency remain explicit. These
+measurements support only the documented local template load, not production P95.
+
+Observed integration failures were corrected: original catalogue count/isolation,
+legacy async ordering, clock text markup, and a mistaken new opposing-team empty
+state assertion. The restart harness initially used a producer projection for a
+public-visibility assertion; the public check was corrected. Original numerical
+reference expectations were not changed. Generated old report timing differences
+were restored, with new results reported separately.
+
+Pilot status: 0 participants, no ratings/findings. James owns 5–8 viewer and 1–2
+football-aware reviewer recruitment; facilitator and independent Spanish/answer-key
+review remain pending. Counterbalance baseline/candidate, retain consent and raw
+counts, and fix/retest critical misconceptions before general release. Automated
+correctness does not prove usefulness. No paid model call, new Azure resource,
+external publication or hosted deployment was performed.
+
+
+Final local gate: **371/371 backend checks**, including 46 new-family checks;
+**21/21 local browser tests** (three real mixed backend flows plus one mocked
+linked-role edge case), two paid Azure tests skipped. Default mixed-segment
+selection is verified; the pass regression explicitly selects the original
+fixture without changing its numerical or wording expectations. Approved linked
+shooter/scorer roles and historical source-cutoff evidence are covered.
+Timing: 85/85 opportunities found; **83/83 pre-end live opportunities** meet the
+10 s review target, minimum 12.65 s. Two segment-end snapshots are retained with
+nominal windows, not counted as live latency evidence. The final backend matches
+the timing fingerprints; the homepage default was refined afterward and checked
+through the browser suite. Public-usefulness gates remain pending real people.
+
+## 2026-10-24 — Hackathon match-stage visual refresh
+
+Implemented the requested football UI research and live-panel redesign. Research
+and design rationale: [match-stage design](../match-stage-design.md). The original
+broadcast treatment adds fictional club crests, prominent source score and clock,
+textured pitch and shaded markers, observed team control, actual segment progress,
+and an approved-explanation lower third. Selection policy is still inspectable
+through a keyboard-operable disclosure. Missing scores display dashes. Producer
+and viewer share the stage; evidence diagrams retain their existing presentation.
+No claims, event locations, stored packages, approval rules or backend code changed.
+
+Final gate: production build, typecheck, formatting and **23 local browser tests
+passed**; two paid Azure tests skipped. All 21 existing local cases remain passing,
+with two new desktop/mobile stage regressions for source correction without
+approved narration, missing control, keyboard policy inspection and Spanish.
+Screenshots and the initial/final run record are in
+[UI verification](../../evals/match-coverage/ui-refresh/verification.md). The initial
+clock markup failure was fixed; a concurrent preview rebuild invalidated later
+pages, so the complete suite was repeated after restart. Final run: no failures.
+
+Desktop, mobile (360/390 px), tablet (768 px) and Spanish presentation inspected.
+This is a local engineering/design result. Human preference and usefulness remain
+pending real participants; no new model call, external publication or deployment.
+
+### Keeper/ball clarity follow-up
+
+User inspection identified confusing ball/player overlap and keeper locations.
+Confirmed that the mixed fixture inherits general off-ball grid positioning,
+without keeper-specific movement. Added explicit-metadata keeper kits (distinct
+colors and square shapes), EN/ES keeper legend, and a white linked ball symbol
+that exposes the overlapping player while anchoring the observed ball position.
+No player relocation, fixture rewrite, role inference from shirt numbers, source
+observation change or stored-package/hash change. Existing awkward keeper
+locations remain an acknowledged simulation limitation; realism needs a separate
+fixture version. See the match-stage design record and UI verification follow-up.
+
+Keeper/ball final gate: **24 local browser checks passed**, two paid Azure checks
+skipped; build/typecheck/format passed. Added a regression for explicit keeper
+roles and exact ball/source anchoring; desktop/mobile screenshots inspected.
+
+## 2026-10-24 — Moving fixture and first-run workflow correction
+
+Owner rehearsal feedback showed the pitch barely changing despite a progressing
+clock, confusing position-sample counts with incidents, and evidence opening
+outside the current viewport. This feedback is recorded as owner input, not a
+completed recruited pilot. Root causes: off-ball drift of about 0.25 m in the old
+fixture, a raw observation counter, and missing evidence navigation.
+
+Added separately versioned moving discovery/correction fixtures (`...0003/0004`)
+with continuous authored player/ball paths and keeper lanes. The old mixed
+fixtures and original 173 catalogue/reference cases are unchanged, as are stored
+package bytes/hashes. Physical/feed checks pass and all four pass opportunities
+remain eligible. New fixture goal/shot paths match their authored event locations;
+unknown shooter/location and missing ball observations remain unknown.
+
+The homepage defaults to the new guided fixture under the coverage flag. A
+producer-only client option pauses at the first example of each event family
+(possession from the 60 s summary), without auto-approving or publishing.
+Playback controls precede the pitch; a review action navigates to the queue;
+Show why scrolls to/focuses supporting evidence and clarifies that it does not
+infer tactical causation. Raw observation counts move into an explanatory
+disclosure. Guided pauses can be disabled for continuous playback.
+
+Verification: **381 full backend checks**, **25 local browser checks**, build,
+typecheck and formatting passed; two paid Azure checks skipped. Final fixture
+subset: **7 passed**, including additive catalogue regeneration. Original
+**168 cases / 594 checkpoints** match the saved baseline. New-family independent
+references remain **21/21**. Source/physical, new moving-demo, old baseline and
+browser results are kept separately. See [moving demo](../moving-demo.md) and
+[verification](../../evals/match-coverage/moving-demo/verification.md).
+
+This remains an authored synthetic segment, not a full football simulation.
+No human ratings, football-review findings, paid calls, external publication or
+deployment are claimed. Guided pauses rely on the open producer client; multiple
+controllers can still affect playback. Human usefulness/realism validation remains
+pending participants.
+
+Moving-demo continuity gate: both versioned four-minute segments completed at
+real 1× speed with no seeks/errors, all required families observed, and correct
+confirmation/cancellation state (242.54/241.56 s elapsed). Results are separate
+from the older timing benchmarks; no latency or user-usefulness claim added.
+
+### Controlled-ball badge readability
+
+Owner screenshot showed that the prior leader line and source-position dot could
+still obscure #11. Changed the live controlled-ball presentation to a small badge
+beside the explicitly observed carrier, with no line/dot over the number. Badge
+placement prefers a stable clear corner, gives keeper squares extra clearance and
+retains the source coordinates separately. Free-ball anchors paint behind player
+markers; free/in-flight rendering still follows observed coordinates. No carrier
+is inferred from proximity, and no source or stored package is changed.
+Desktop/mobile screenshots and browser checks are recorded under
+`evals/match-coverage/ball-badge/`. No model call or deployment.
+
+Ball badge final gate: **27 browser checks passed**, two paid Azure checks skipped;
+production build, typecheck and formatting passed. Crowded desktop/mobile cases
+verify the badge does not cover two-digit numbers, transitions to the observed
+free-ball coordinate and disappears when ball observations are missing.
+
+## 24 October 2026 — pressure flagship iteration (owner authorized)
+
+Selected **Pressure Swing**, defined as a nearby-opponent proxy, as the most
+worthwhile next pitch addition under the equal-weight rubric. The recommendation
+is judgment, not a predicted score. Chaos/difficulty indices and tactical turning
+points remain deferred until their target meanings and evidence can be validated.
+See [rationale and demo](../pressure-flagship.md),
+[frozen implementation contract](flagship-implementation.md) and
+[separate verification](../../evals/match-coverage/pressure-flagship/verification.md).
+
+| Work | Engineering status | Evidence / limitation |
+|---|---|---|
+| Nearby-opponent measurement | Implemented | Time-weighted 6 m counts; declared 2 s windows; ≥95% coverage, observed control, bounded gaps; no tactical cause |
+| New v6 family pipeline | Implemented | Source → review → exact approval → EN/ES, role focus, evidence, timeline/recap; SQLite and Cosmos adapter checks |
+| Integrated presentation fixture | Implemented | Additive IDs 0005/0006; four passes within comparison population, 2.0→0.4 and 30 m flagship; all old families retained; old exports unchanged |
+| Clear relevance/evidence and audience views | Implemented | Separate why/evidence, before/action/after, scoped comparison table, casual/analyst and verified passer/receiver focus |
+| Noise policy | Implemented | Flagship automatic 8 s hold; source withdrawal/expiry, goals and producer override respected; no automatic approval |
+| Current-model execution | Verified bounded smoke | Existing gpt-4o-mini 2024-07-18; five real families, ten calls; model-specific execution only, not broad quality or superiority |
+| Pilot/release materials | Prepared | Separate flagship task/key; recruitment, external football/Spanish ratings and findings pending |
+| External deployment/publication | Pending owner decision | Existing hosted build not updated |
+
+No extra agent roles or Azure resources added. The event model flag now initializes
+after its Foundry dependency (startup bug fixed). Continuous checks exposed an
+unknown-outcome status error; a focused regression covers it. Browser checks
+exposed the original mobile pass evidence moving below the established viewport;
+new relevance cards are scoped to flagship sessions so the original assertion is
+retained. The new recap test's hidden-option selector was corrected to a heading.
+Failed first-run logs remain in the verification folder.
+
+Final backend: **410 passed** (including 28 pressure-specific checks). Original
+**168 cases / 594 checkpoints** and mixed **21/21** remain separate and unchanged.
+Final continuous discovery/correction fixtures each reach 240 s at real 1× with
+zero seeks/errors and all six candidate families (242.57/243.83 s elapsed).
+Existing browser regression: **27 passed**, two hosted Azure cases skipped;
+new flagship browser verification is recorded separately after correcting test
+locators for the hidden option, heading level and translated language label.
+Production build, typecheck, formatting and whitespace checks pass. Latest real
+model smoke matches the final source exactly; both bounded smokes together used
+20 calls, estimated retail cost **$0.0019224**. No deployment or participant
+findings were added. The unassigned reviewer packet includes a frozen source
+cutoff, staged review task and headers-only rating sheet.
+
+Final flagship browser rerun: **1 passed**; combined final build coverage is
+**28 local browser scenarios passed**, **2 hosted-only skipped**. New-family
+screenshots and raw logs are retained separately in the flagship verification
+folder. Fresh local session at 0 s is paused and ready for the owner to start.

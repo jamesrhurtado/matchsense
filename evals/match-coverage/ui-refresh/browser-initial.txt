@@ -1,0 +1,51 @@
+
+> why-now-web@0.1.0 test:e2e
+> playwright test
+
+
+Running 23 tests using 1 worker
+
+(node:94913) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:94913) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/audience-focus.spec.ts:9:76 › explanation and evidence action are immediately discoverable at 1366 (295ms)
+  ✓   2 tests/audience-focus.spec.ts:9:76 › explanation and evidence action are immediately discoverable at 390 (223ms)
+  ✓   3 tests/audience-focus.spec.ts:12:5 › verified player and team focus filters history, disambiguates names, and preserves overlay (307ms)
+  ✘   4 tests/audience-focus.spec.ts:20:5 › evidence stages and focused trails use delivered source frames without filling gaps (5.3s)
+(node:94932) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:94932) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   5 tests/audience-focus.spec.ts:27:5 › retracting the only relevant story removes focused content and derived recap (3.0s)
+  ✓   6 tests/audience-focus.spec.ts:37:5 › return to live leaves shared overlay untouched and clears historical focus (240ms)
+  ✓   7 tests/audience-focus.spec.ts:53:5 › comparison preserves signed values, highlights current pass, and explains a rounded tie (231ms)
+  -   8 tests/cloud-multiple.spec.ts:5:5 › hosted Azure multi-moment archive, selected evidence, Spanish recap and mobile view
+  -   9 tests/cloud.spec.ts:6:5 › hosted Azure workflow: evidence, real model review, approval and companion
+  ✓  10 tests/context.spec.ts:4:5 › five approved moments keep the mobile explanation and pitch together; contrast links to three exact passes (1.1s)
+  ✓  11 tests/flow.spec.ts:3:5 › producer evidence → wording review → approval → viewer preferences → retraction (5.8s)
+  ✓  12 tests/flow.spec.ts:28:5 › viewer stream delivers resync and state updates through the web proxy (362ms)
+  ✓  13 tests/flow.spec.ts:40:5 › web proxy preserves authorization errors and rejects oversized bodies (8ms)
+  ✓  14 tests/flow.spec.ts:48:5 › pending AI review remains visible while replay continues (205ms)
+  ✓  15 tests/match-coverage.spec.ts:27:5 › mixed producer and mobile viewer: every family, evidence, Spanish, focus, recap, archived navigation (34.6s)
+  ✓  16 tests/match-coverage.spec.ts:94:5 › source score correction revokes affected narrative; reapproval, duplicate grouping, reconnect and recap refresh (16.6s)
+  ✘  17 tests/match-coverage.spec.ts:116:5 › expired producer candidates have an explicit archive-only approval control (45.0s)
+(node:95172) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:95172) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  18 tests/match-coverage.spec.ts:131:5 › linked approved shot remains selectable for a shooter different from the scorer (5.1s)
+(node:95184) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:95184) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  19 tests/multiple-moments.spec.ts:3:5 › three-minute replay preserves independent approvals, archived evidence, and recap (5.1s)
+(node:95196) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:95196) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  20 tests/story-selection.spec.ts:15:5 › producer selects independent moments and navigates a longer replay (5.1s)
+(node:95204) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:95204) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

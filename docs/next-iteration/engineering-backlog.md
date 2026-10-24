@@ -1,5 +1,7 @@
 # Engineering backlog — next submission iteration
 
+> **Active next-iteration backlog:** [MC01–MC10: broader match coverage](match-coverage-implementation-plan.md). James requested this plan on 23 October 2026 to address first-use confusion about pass-only coverage. It promotes basic goals/shots, possession overview and recovery/control-change stories; xG remains separate research. The tickets below retain their historical status and must not be counted as newly delivered coverage.
+
 This is the original ticket specification. Current delivery status, explicit deferrals and outstanding acceptance evidence are tracked in [the implementation record](decision-log.md); several core tickets have now been implemented. Effort is hands-on engineering hours, excluding waiting for people or cloud jobs. The core totals roughly 60–90 h plus a 10 h integration buffer. C03/N01/L02 are conditional and add 15–23 h. Engineers should update estimates after the discovery gates.
 
 ## Ticket index
@@ -201,3 +203,14 @@ Record approximately 115 s of functioning product: problem and moving play → c
 10. Submission documentation and recording assets/links.
 
 Keep each commit coherent and runnable. Update acceptance evidence alongside the related change. Do not squash away observed failures or change reference labels to conceal them.
+
+### Owner-authorized follow-on: pressure flagship (24 October)
+
+The bounded Pressure Swing pipeline, additive integrated fixtures, relevance and
+audience evidence views, overlay hold, current-model smoke and pilot materials
+are implemented separately from MC01–MC10's original scene. See
+[delivery and remaining human work](../pressure-flagship.md) and
+[verification](../../evals/match-coverage/pressure-flagship/verification.md).
+No tactical-turning-point, difficulty probability, chaos calibration, human
+rating, external publication or deployment is claimed. Do not merge these new
+pressure references into the original pass/mixed evaluation denominators.

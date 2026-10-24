@@ -1,0 +1,40 @@
+{
+  "family_summary": {
+    "possession": {
+      "attempted": 32,
+      "found": 32,
+      "target_met": 32,
+      "minimum_review_ms": 12648.881791001186
+    },
+    "pass": {
+      "attempted": 8,
+      "found": 8,
+      "target_met": 8,
+      "minimum_review_ms": 28408.299583001528
+    },
+    "recovery": {
+      "attempted": 32,
+      "found": 32,
+      "target_met": 32,
+      "minimum_review_ms": 27157.507791019045
+    },
+    "shot": {
+      "attempted": 11,
+      "found": 11,
+      "target_met": 11,
+      "minimum_review_ms": 26349.207624997478
+    },
+    "goal": {
+      "attempted": 2,
+      "found": 2,
+      "target_met": 2,
+      "minimum_review_ms": 29421.174625012092
+    }
+  },
+  "live_before_segment_end": {
+    "attempted": 83,
+    "target_met": 83,
+    "minimum_review_ms": 12648.881791001186
+  },
+  "backend_source_matches_delivery": true
+}

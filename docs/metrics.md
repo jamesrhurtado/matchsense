@@ -51,3 +51,28 @@ Keep the earliest representative per equivalent signature and its complete membe
 A raw 18.084 m pass versus a largest prior 18.0 m pass is a true comparison but defaults to current-play emphasis. A raw 18.084 m versus a largest prior 10 m pass meets both provisional conditions. Producers/agents can still select any supported historical contrast; if rounded values tie at one decimal, the sentence and chart disclose that the strict comparison uses original values. Full raw values remain in expandable source evidence.
 
 New v4 titles explicitly name the previous three passes. A comparison sentence already states the current distance, so detail rendering omits the redundant forward-distance clause. Focused reception/location share one sentence bound to both facts; later possession remains a team claim. Stored v3 text is immutable and retains its original rendering.
+
+## Match coverage v1 / publication v5 — 24 October 2026
+
+[Match event definitions](match-events.md) govern the opt-in mixed replay. Shots
+require observed resolution; only confirmed goal status changes score. Score
+recomputes from initial state plus latest available unique goals. Unknown actors,
+own goals and unlinked goals are supported without inferred assists or causes.
+
+Possession integrates elapsed milliseconds over fixed trailing 60 s windows on
+15 s boundaries. Assignment includes declared in-flight team possession; no gap
+over 200 ms inherits state. Dead, loose and unknown time are explicit. Team-share
+denominator is assigned time; coverage is assigned/(assigned+unknown). Percentages
+require >=30 s assigned and >=95% coverage. Period/segment boundaries clip windows;
+no extrapolation after the last frame. Evidence stores raw durations and sources,
+not rounded percentages alone. Corrected sources create new exact revisions.
+
+Recoveries need explicit observation for player/cause attribution. A team change
+alone says team change. Restarts are separate, linked transition/recovery records
+form one incident, and next-three-second retention is independently witnessed.
+
+`mixed-approved-v2` recap reads exact approved revisions, deduplicates linked
+shot/goal incidents and possession windows, prioritizes distinct goals then rounds
+through remaining families to at most five entries. Chronological presentation,
+complete timeline count and source-confirmed score header are separate. Legacy
+pass-only recaps keep `distinct-approved-v1`.

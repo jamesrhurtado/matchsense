@@ -1,4 +1,12 @@
+> For the latest mixed-event pitch use the [Pressure Swing walkthrough](pressure-flagship.md#run-and-present). This v4 script remains the pass-only baseline.
+
 # WHY/NOW — presenter script and demo run sheet
+
+> **24 October local mixed-event candidate:** start `make coverage-dev` and use
+> [the mixed-event walkthrough](match-coverage-demo.md) for the broader pitch.
+> It covers confirmed score/goals, shots, possession and control changes alongside
+> passes. It uses local templates; new-family live AI and human usefulness remain
+> unverified. The pass-focused script below is preserved as the baseline demo.
 
 Prepared 22 October 2026 for the local v0.5 MVP. Recommended duration: approximately four minutes, allowing for screen actions. This is a product demonstration, not a claim of measured broadcaster impact or a completed submission video.
 

@@ -1,5 +1,7 @@
 # WHY/NOW: engineering plan for a 90+ product assessment
 
+> **Scope update, 23 October 2026:** the [broader match coverage plan](match-coverage-implementation-plan.md) is the next implementation handoff. It promotes basic goals/shots, possession overview and recovery/control-change stories from deferred/conditional scope into required backlog. This document remains the earlier quality specification; outstanding verification and research are not marked complete. Advanced xG/tactical claims remain separate work.
+
 **Prepared:** 21 October 2026, America/Lima  
 **Product baseline:** version 0.4.0; source `8477c44`; API runtime source `c85f035`  
 **Status:** proposed work, ready for engineering handoff; acceptance results below are targets, not completed findings  

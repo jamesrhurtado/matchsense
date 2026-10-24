@@ -1,0 +1,139 @@
+{
+  "authorship": "Engineering-authored hand references, independent of production metric functions and discovery replay; external QA/football review pending",
+  "model_calls": 0,
+  "checkpoints": 21,
+  "passed": 21,
+  "results": [
+    {
+      "id": "goal-pending",
+      "passed": true,
+      "failures": {}
+    },
+    {
+      "id": "goal-confirmed-duplicate",
+      "passed": true,
+      "failures": {}
+    },
+    {
+      "id": "goal-cancelled",
+      "passed": true,
+      "failures": {}
+    },
+    {
+      "id": "goal-corrected-team",
+      "passed": true,
+      "failures": {}
+    },
+    {
+      "id": "own-goal-no-shot",
+      "passed": true,
+      "failures": {}
+    },
+    {
+      "id": "unknown-scorer",
+      "passed": true,
+      "failures": {}
+    },
+    {
+      "id": "shot-start-only",
+      "passed": true,
+      "failures": {}
+    },
+    {
+      "id": "shot-saved",
+      "passed": true,
+      "failures": {}
+    },
+    {
+      "id": "shot-off-target-unknown-actor",
+      "passed": true,
+      "failures": {}
+    },
+    {
+      "id": "shot-no-goal-confirmation",
+      "passed": true,
+      "failures": {}
+    },
+    {
+      "id": "shot-late-resolution",
+      "passed": true,
+      "failures": {}
+    },
+    {
+      "id": "shot-corrected-outcome",
+      "passed": true,
+      "failures": {}
+    },
+    {
+      "id": "possession-40-20-irregular",
+      "passed": true,
+      "failures": {}
+    },
+    {
+      "id": "possession-gap-withheld",
+      "passed": true,
+      "failures": {}
+    },
+    {
+      "id": "possession-short-withheld",
+      "passed": true,
+      "failures": {}
+    },
+    {
+      "id": "possession-dead-loose",
+      "passed": true,
+      "failures": {}
+    },
+    {
+      "id": "team-only-control-change",
+      "passed": true,
+      "failures": {}
+    },
+    {
+      "id": "restart-is-not-recovery",
+      "passed": true,
+      "failures": {}
+    },
+    {
+      "id": "loose-ball-recovery",
+      "passed": true,
+      "failures": {}
+    },
+    {
+      "id": "recovery-immediate-loss",
+      "passed": true,
+      "failures": {}
+    },
+    {
+      "id": "recovery-corrected-actor",
+      "passed": true,
+      "failures": {}
+    }
+  ],
+  "fixture_validation": [
+    {
+      "match_id": "match-0c0a000000000001",
+      "frames": 2401,
+      "messages": 2439,
+      "duration_ms": 240000,
+      "active_players": 22,
+      "delivery_rows": 2440,
+      "unique_observations": 2440,
+      "exact_retransmissions": 0,
+      "corrections": 1,
+      "maximum_delivery_delay_ms": 3000
+    },
+    {
+      "match_id": "match-0c0a000000000002",
+      "frames": 2401,
+      "messages": 2439,
+      "duration_ms": 240000,
+      "active_players": 22,
+      "delivery_rows": 2441,
+      "unique_observations": 2441,
+      "exact_retransmissions": 0,
+      "corrections": 2,
+      "maximum_delivery_delay_ms": 34000
+    }
+  ]
+}

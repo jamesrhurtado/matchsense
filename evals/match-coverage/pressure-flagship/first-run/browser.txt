@@ -1,0 +1,133 @@
+
+> why-now-web@0.1.0 test:e2e
+> playwright test
+
+
+Running 30 tests using 1 worker
+
+(node:1594) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1594) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/audience-focus.spec.ts:9:76 › explanation and evidence action are immediately discoverable at 1366 (211ms)
+  ✓   2 tests/audience-focus.spec.ts:9:76 › explanation and evidence action are immediately discoverable at 390 (246ms)
+  ✓   3 tests/audience-focus.spec.ts:12:5 › verified player and team focus filters history, disambiguates names, and preserves overlay (329ms)
+  ✓   4 tests/audience-focus.spec.ts:20:5 › evidence stages and focused trails use delivered source frames without filling gaps (291ms)
+  ✓   5 tests/audience-focus.spec.ts:27:5 › retracting the only relevant story removes focused content and derived recap (3.1s)
+  ✓   6 tests/audience-focus.spec.ts:37:5 › return to live leaves shared overlay untouched and clears historical focus (271ms)
+  ✓   7 tests/audience-focus.spec.ts:53:5 › comparison preserves signed values, highlights current pass, and explains a rounded tie (265ms)
+  -   8 tests/cloud-multiple.spec.ts:5:5 › hosted Azure multi-moment archive, selected evidence, Spanish recap and mobile view
+  -   9 tests/cloud.spec.ts:6:5 › hosted Azure workflow: evidence, real model review, approval and companion
+  ✘  10 tests/context.spec.ts:4:5 › five approved moments keep the mobile explanation and pitch together; contrast links to three exact passes (820ms)
+(node:1630) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1630) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  11 tests/flow.spec.ts:3:5 › producer evidence → wording review → approval → viewer preferences → retraction (7.2s)
+  ✓  12 tests/flow.spec.ts:28:5 › viewer stream delivers resync and state updates through the web proxy (518ms)
+  ✓  13 tests/flow.spec.ts:40:5 › web proxy preserves authorization errors and rejects oversized bodies (7ms)
+  ✓  14 tests/flow.spec.ts:48:5 › pending AI review remains visible while replay continues (201ms)
+  ✓  15 tests/guided-demo.spec.ts:3:5 › moving demo pauses for review, reveals evidence in view, and can play continuously (19.4s)
+  ✓  16 tests/match-coverage.spec.ts:27:5 › mixed producer and mobile viewer: every family, evidence, Spanish, focus, recap, archived navigation (36.9s)
+  ✘  17 tests/match-coverage.spec.ts:94:5 › source score correction revokes affected narrative; reapproval, duplicate grouping, reconnect and recap refresh (14.8s)
+(node:1736) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1736) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  18 tests/match-coverage.spec.ts:116:5 › expired producer candidates have an explicit archive-only approval control (4.0s)
+  ✓  19 tests/match-coverage.spec.ts:131:5 › linked approved shot remains selectable for a shooter different from the scorer (601ms)
+  ✓  20 tests/match-stage.spec.ts:4:7 › broadcast stage keeps confirmed state distinct from approved text at 390 (3.0s)
+  ✓  21 tests/match-stage.spec.ts:4:7 › broadcast stage keeps confirmed state distinct from approved text at 1440 (3.0s)
+  ✓  22 tests/match-stage.spec.ts:43:5 › keeper kits use recorded roles and the linked ball preserves the observed coordinate (124ms)
+  ✓  23 tests/match-stage.spec.ts:83:38 › carrier badge keeps two-digit numbers clear and releases to the observed ball at 390 (5.0s)
+  ✓  24 tests/match-stage.spec.ts:83:38 › carrier badge keeps two-digit numbers clear and releases to the observed ball at 1440 (4.8s)
+  ✓  25 tests/multiple-moments.spec.ts:3:5 › three-minute replay preserves independent approvals, archived evidence, and recap (1.5s)
+  ✘  26 tests/pressure-flagship.spec.ts:3:5 › pressure flagship: review, source evidence, approval, audience lenses, Spanish focus, mobile and recap (20.1s)
+(node:1804) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1804) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  27 tests/story-selection.spec.ts:15:5 › producer selects independent moments and navigates a longer replay (214ms)
+  ✓  28 tests/story-selection.spec.ts:25:5 › viewer selects approved history without changing the shared overlay (297ms)
+  ✓  29 tests/story-selection.spec.ts:29:5 › fixture options come from the public catalogue (220ms)
+  ✓  30 tests/story-selection.spec.ts:34:5 › a delayed earlier selection cannot replace the latest selected moment (926ms)
+
+
+  1) tests/context.spec.ts:4:5 › five approved moments keep the mobile explanation and pitch together; contrast links to three exact passes
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m844[39m
+    Received:   [31m977.03125[39m
+
+      18 |  await expect(page.getByRole('group',{name:'Approved moments'})).not.toBeVisible();
+      19 |  const pitch=page.getByTestId('inline-evidence').getByRole('img');
+    > 20 |  const box=await pitch.boundingBox();expect(box!.y+box!.height).toBeLessThan(844);
+         |                                                                 ^
+      21 |  const why=await page.getByRole('button',{name:'Show why',exact:true}).boundingBox();expect(why!.y+why!.height).toBeLessThan(844);
+      22 |  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
+      23 |  await page.getByText('Approved history · 5',{exact:true}).click();
+        at /Users/james/dev/why now/apps/web/tests/context.spec.ts:20:65
+
+    Error Context: test-results/context-five-approved-mome-06cd7-links-to-three-exact-passes/error-context.md
+
+  2) tests/match-coverage.spec.ts:94:5 › source score correction revokes affected narrative; reapproval, duplicate grouping, reconnect and recap refresh
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: getByTestId('audience-explanation')
+    Expected substring: [32m"cancelled"[39m
+    Received string:    [31m"Explanations appear once the producer approves a supported story."[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toContainText" with timeout 5000ms[22m
+    [2m  - waiting for getByTestId('audience-explanation')[22m
+    [2m    9 × locator resolved to <p lang="en" data-testid="audience-explanation" class="mt-3 text-pretty text-base">Explanations appear once the producer approves a …</p>[22m
+    [2m      - unexpected value "Explanations appear once the producer approves a supported story."[22m
+
+
+      105 |   await expect(page.getByTestId('audience-explanation')).not.toContainText('Confirmed goal');
+      106 |   await approve(request,base,'story-shot-attempt-2');
+    > 107 |   await expect(page.getByTestId('audience-explanation')).toContainText('cancelled');
+          |                                                          ^
+      108 |   await page.reload();
+      109 |   await expect(page.getByTestId('audience-explanation')).toContainText('cancelled');
+      110 |   await page.getByRole('button',{name:'Catch me up'}).click();
+        at /Users/james/dev/why now/apps/web/tests/match-coverage.spec.ts:107:58
+
+    Error Context: test-results/match-coverage-source-scor-e892f-reconnect-and-recap-refresh/error-context.md
+
+  3) tests/pressure-flagship.spec.ts:3:5 › pressure flagship: review, source evidence, approval, audience lenses, Spanish focus, mobile and recap
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator:  getByText('Cambio de presión cercana', { exact: true }).last()
+    Expected: visible
+    Received: hidden
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Cambio de presión cercana', { exact: true }).last()[22m
+    [2m    9 × locator resolved to <option value="pressure">Cambio de presión cercana</option>[22m
+    [2m      - unexpected value "hidden"[22m
+
+
+      43 |  await viewer.getByRole('button',{name:'Ponerme al día'}).click();
+      44 |  await expect(viewer.getByRole('heading',{name:'Resumen del segmento'})).toBeVisible();
+    > 45 |  await expect(viewer.getByRole('heading',{name:'Cambio de presión cercana',exact:true})).toBeVisible();
+         |                                                                                  ^
+      46 |  await viewer.getByRole('button',{name:'Close recap'}).click();
+      47 |  await viewer.setViewportSize({width:1366,height:900});
+      48 |  await viewer.getByLabel('Language',{exact:true}).selectOption('en');
+        at /Users/james/dev/why now/apps/web/tests/pressure-flagship.spec.ts:45:82
+
+    Error Context: test-results/pressure-flagship-pressure-bc0e6-nish-focus-mobile-and-recap/error-context.md
+
+  3 failed
+    tests/context.spec.ts:4:5 › five approved moments keep the mobile explanation and pitch together; contrast links to three exact passes
+    tests/match-coverage.spec.ts:94:5 › source score correction revokes affected narrative; reapproval, duplicate grouping, reconnect and recap refresh
+    tests/pressure-flagship.spec.ts:3:5 › pressure flagship: review, source evidence, approval, audience lenses, Spanish focus, mobile and recap
+  2 skipped
+  25 passed (2.2m)

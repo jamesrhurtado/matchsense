@@ -1,0 +1,1641 @@
+{
+  "schema_version": "6.0.0",
+  "id": "story-pressure-pass-4",
+  "revision": 1,
+  "title": "Pressure Swing",
+  "family": "pressure",
+  "incident_id": "story-pass-4",
+  "metrics": {
+    "family": "pressure",
+    "subject_id": "pass-4",
+    "incident_id": "story-pass-4",
+    "team_id": "blue",
+    "participants": {
+      "passer": "blue-11",
+      "receiver": "blue-09"
+    },
+    "occurrence_ms": 87000,
+    "evidence_ready_ms": 91300,
+    "input_cutoff_ms": 91300,
+    "window_start_ms": 85000,
+    "window_end_ms": 91300,
+    "source_message_ids": [
+      "m-0000122",
+      "m-0000135",
+      "m-0000809",
+      "m-0000822",
+      "m-0000861",
+      "m-0000862",
+      "m-0000863",
+      "m-0000864",
+      "m-0000865",
+      "m-0000866",
+      "m-0000867",
+      "m-0000868",
+      "m-0000869",
+      "m-0000870",
+      "m-0000871",
+      "m-0000872",
+      "m-0000873",
+      "m-0000874",
+      "m-0000875",
+      "m-0000876",
+      "m-0000877",
+      "m-0000878",
+      "m-0000879",
+      "m-0000880",
+      "m-0000881",
+      "m-0000894",
+      "m-0000895",
+      "m-0000896",
+      "m-0000897",
+      "m-0000898",
+      "m-0000899",
+      "m-0000900",
+      "m-0000901",
+      "m-0000902",
+      "m-0000903",
+      "m-0000904",
+      "m-0000905",
+      "m-0000906",
+      "m-0000907",
+      "m-0000908",
+      "m-0000909",
+      "m-0000910",
+      "m-0000911",
+      "m-0000912",
+      "m-0000913",
+      "m-0000914",
+      "m-0000915",
+      "m-0000916",
+      "m-0000917",
+      "m-0000918",
+      "m-0000919",
+      "m-0000920",
+      "m-0000921",
+      "m-0000922",
+      "m-0000923",
+      "m-0000924",
+      "m-0001616",
+      "m-0001629",
+      "m-0002123",
+      "m-0002137"
+    ],
+    "source_hashes": [
+      "f47e8053b962592c46f3a453ffbe4314afc1e22cfe7c84d9a763f0c62a548ecf",
+      "f96e051da9fab917e800378dfe603b94771dc82b406888328d32d9bfd7be0bb4",
+      "3b26366cf9e2110ace72b017f9dd2e354ada16fa09c72f76f3dadf722cbf250e",
+      "7117a427ba1ad905bf902e8c8b3c49edee6af6b5a63b3666261ab8b28cdcad6d",
+      "73db0b0aa2eb70305794a0809ed90f2f8101080d3a2c69e6cf2f3421873366c4",
+      "7b48603c10af4e2e2046e9dced6e31a828b55fcad3c1a94880a37ff1137b7ada",
+      "89dde581f8c1018eff0c453d43063a8745c14ae4412cfa51d5702fd86683d881",
+      "393e15be8eee94f93349298def0563ae04c81eb4ebde2d5a6aff4126bd1c0638",
+      "5ecf4def66585f390d7a732a1163595d430531e3825a13d7d48130864c0d44ec",
+      "d64efa3ea24cb489768988004aee840f0dcc133bb57211a371694f1404f7bd94",
+      "42a86d94e325bca33c1b2e242a19fe16d3efabead4ae7611fd14929d8bbcf47b",
+      "3dfd439021713ee236d7c73a84ea9c5416635a88713b894505c3a49f9dd85190",
+      "158648c018f79fbb797cddac9a311f2053d0e36720ce302fc9c9181bf21bcf9a",
+      "3151992ea25f778cf0c720e06ad71d6ecbe8b547eb235b8cbfb03d68f0e5c72d",
+      "00c0fb367f04c5679c6d028753f7345a929d86d84dac8630ff6522290a842f02",
+      "13ec434db031535edb09b8105f822dc5f4ce972a300d26dab1c182cbc65f45bd",
+      "58c6f462529bfd35bf3c354aee5f231a5b5a7031ad5ed586a2210687f6df2b42",
+      "070dc1e80dc64e5c881bc2b994cfe9601a51d6065e5747c4a7092c56012e1db5",
+      "17576d9561095a38aef4bf884d7a60d4a4e22aec856e472294a3810270c9421c",
+      "764e18a31d683f3b2d71665e72110314a95023599a42b302aa5eba25ee94e047",
+      "9ede94d2a3432817f93a5daa26882cbfb03c860b181120c9784db64a2c6ee433",
+      "3f6c8b8d53cc058f693d52910543cf505485c1c4ad049f3be6ff12213cb0d124",
+      "9715502d7b462c074101ea0a55686c48a6a44e464217e9f1008d891dba8547ac",
+      "097cb3c80ca56864a169b65f9e19b87b12f29e03e75c673246cdfa07a093b5bf",
+      "ec0e605b811599cc7402cc2c14928bfd2dcc0e004aee0c4a53097d5081e8eaae",
+      "d03db3d028de906d74369fd57db148be31794522bca16233a12503feae634f8a",
+      "cd32ee7eb8179cff20a9ef5cd78374ab71c4d6710d0366be9976ae7b4d91058c",
+      "c4448c7c2e27b6177aed475071c62e8a7a3021c9524365ca42715368413ffe00",
+      "627ae512e22261f853e5c03a6d14bcd94e5ee740283170babe6aac17867413ae",
+      "feb57a29f4f9dbb88a02f13ebda03e966f9b47795a5aee5dd4db2dce81d99f0c",
+      "5a3e4ce682da515b87e3c89760f4187a449ad1dc89af9765fc949b93d56baf47",
+      "09f619f49d7435ece7b1479bc1c9bed48ee10f2c4d01f329ae1357710e3426f4",
+      "428f1a76f27e405893717d71f50a2436ff859bb64f4fa9e9c14b74b7490438b5",
+      "c09b67b7374803dde77e8c0cbcbf352464e801a2ee620ad947cdf3811652cebc",
+      "790d5a1d5cb89d67fd923c5fce950b28506c4ae147f6a7e9a174b1df393efdb0",
+      "a892c346c306e52390cdaf7679c773229a1174c48961a77703d0ed66d502bcd8",
+      "ff8f58a12a769989c45fed8772da143a1486c1bb4c1ab7ce8ed7bff67e2812ed",
+      "99923a8d8b5dbb73faa0ba575e613f6ca0fbeedd855bcc2d7b974d56090f2584",
+      "acec1208ecea2a285eadfe30f0f5c2b39bff68c543e8c5afafbaa44076fa12b4",
+      "170db01298dc5b75bf1b70fe4c02cd838bb35d68693564e8a4285641809a1dc0",
+      "4ae46602bfd0a126015397c842d385b52f249d52c376951fde0d381e9a1082de",
+      "02f490588eb900e033c92cd80b4d334c760bd43d421b51f8ba08f638367774e3",
+      "f5b07f6837b9417aae1f3e3db2ec96a659d65c7969d53fd620974aa0738fa5eb",
+      "4797de6634302f3e618e9237f14949d4847b9c43325c86f09c9f196625321f71",
+      "e28cdd19a6bdc943f82df6f8ed8b90b7f1ca7fdb7e95ebd64a149847e8ded45e",
+      "8296dbaa42e11b7bc3ea95554a65c8745990a0cb4639877ff409f8ee66c06eca",
+      "7552ac5a779a8f399513649305c2e0d5a3947e468c35a7e0f5848837cd750f26",
+      "e784d1b4e3cd7ae130fe1abd5cf7fe79be879032bc5d2e12508cb64f65374334",
+      "eeafe82283525ab3f9a9c0846647a1d33f75d6d889ef47abffbb66c4c56fa566",
+      "8d5868287f478737e6d0fd93e8970e03ec744e569ff5b05dea0d029e8da55aa4",
+      "c59ca5062c016e29d6b84d57cde5445322fc72d9be8f93766a40d97005db9d73",
+      "23efb8f78484843e9707271553cc1f9cb79c064f19be3e3904f159f00fe32c1c",
+      "8a5515657ba99fc662c71247f39425d7dbcd056612458bc9bcf140590a282839",
+      "0b1626b4ebf496d0a849ae508886509e84bbe591b8302b909fecdbfbd8b7c342",
+      "6fa4c3baf5451de3937831df0e1e3acc915c5959b5f9a4990b739d1ac0d9d2e7",
+      "9558ce9b7a017ad4ed6c66c8633a4cf34d4f7f78531b4f568f9b55ea2c768222",
+      "9c52e623b0e5f0cb11f9193f175aeb7f61b14782e6e6b9f3f5df3a243010e484",
+      "a4317bd03897db359aee7fd6fe6864393e1e02bfe9821b0d0ea15690dd5a048d",
+      "ece19e1ac92e92f5db039320eb72287be2df51d2f1398f093b98300b383dd4ec",
+      "758bdbadb6c4a1fe0a1ac59a0425cd7779d05d44bde903498eece5cdc0a193d3"
+    ],
+    "facts": {
+      "before": {
+        "start_ms": 85000,
+        "end_ms": 87000,
+        "known_ms": 2000,
+        "coverage": 1.0,
+        "mean": 2.0
+      },
+      "after": {
+        "start_ms": 88300,
+        "end_ms": 90300,
+        "known_ms": 2000,
+        "coverage": 1.0,
+        "mean": 0.4
+      },
+      "radius_m": 6,
+      "drop": 1.6,
+      "forward_m": 30,
+      "pass_id": "pass-4",
+      "release_ms": 87000,
+      "reception_ms": 88300,
+      "retained_ms": 3000,
+      "retained_progression_m": 7.0,
+      "comparators": [
+        {
+          "pass_id": "pass-3",
+          "forward_m": 22,
+          "resolution_ms": 63200
+        },
+        {
+          "pass_id": "pass-2",
+          "forward_m": 25,
+          "resolution_ms": 38200
+        },
+        {
+          "pass_id": "pass-1",
+          "forward_m": 18,
+          "resolution_ms": 13200
+        }
+      ],
+      "comparison_status": "available",
+      "stands_out": true
+    },
+    "eligible": true,
+    "definition_version": "nearby-pressure-swing-v1",
+    "expires_at_ms": 121300,
+    "evidence_revision": "af5d9e9fe0cb0931"
+  },
+  "claims": [
+    {
+      "id": "c-event",
+      "predicate": "pressure_swing",
+      "value": {
+        "before": {
+          "start_ms": 85000,
+          "end_ms": 87000,
+          "known_ms": 2000,
+          "coverage": 1.0,
+          "mean": 2.0
+        },
+        "after": {
+          "start_ms": 88300,
+          "end_ms": 90300,
+          "known_ms": 2000,
+          "coverage": 1.0,
+          "mean": 0.4
+        },
+        "radius_m": 6,
+        "drop": 1.6,
+        "forward_m": 30,
+        "pass_id": "pass-4",
+        "release_ms": 87000,
+        "reception_ms": 88300,
+        "retained_ms": 3000,
+        "retained_progression_m": 7.0,
+        "comparators": [
+          {
+            "pass_id": "pass-3",
+            "forward_m": 22,
+            "resolution_ms": 63200
+          },
+          {
+            "pass_id": "pass-2",
+            "forward_m": 25,
+            "resolution_ms": 38200
+          },
+          {
+            "pass_id": "pass-1",
+            "forward_m": 18,
+            "resolution_ms": 13200
+          }
+        ],
+        "comparison_status": "available",
+        "stands_out": true
+      },
+      "unit": "observation",
+      "evidence_revision": "af5d9e9fe0cb0931",
+      "source_message_ids": [
+        "m-0000122",
+        "m-0000135",
+        "m-0000809",
+        "m-0000822",
+        "m-0000861",
+        "m-0000862",
+        "m-0000863",
+        "m-0000864",
+        "m-0000865",
+        "m-0000866",
+        "m-0000867",
+        "m-0000868",
+        "m-0000869",
+        "m-0000870",
+        "m-0000871",
+        "m-0000872",
+        "m-0000873",
+        "m-0000874",
+        "m-0000875",
+        "m-0000876",
+        "m-0000877",
+        "m-0000878",
+        "m-0000879",
+        "m-0000880",
+        "m-0000881",
+        "m-0000894",
+        "m-0000895",
+        "m-0000896",
+        "m-0000897",
+        "m-0000898",
+        "m-0000899",
+        "m-0000900",
+        "m-0000901",
+        "m-0000902",
+        "m-0000903",
+        "m-0000904",
+        "m-0000905",
+        "m-0000906",
+        "m-0000907",
+        "m-0000908",
+        "m-0000909",
+        "m-0000910",
+        "m-0000911",
+        "m-0000912",
+        "m-0000913",
+        "m-0000914",
+        "m-0000915",
+        "m-0000916",
+        "m-0000917",
+        "m-0000918",
+        "m-0000919",
+        "m-0000920",
+        "m-0000921",
+        "m-0000922",
+        "m-0000923",
+        "m-0000924",
+        "m-0001616",
+        "m-0001629",
+        "m-0002123",
+        "m-0002137"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": "en_simple_general",
+      "language": "en",
+      "detail": "simple",
+      "focus": null,
+      "text": "Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-01",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-01",
+      "text": "Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-02",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-02",
+      "text": "Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-03",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-03",
+      "text": "Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-04",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-04",
+      "text": "Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-05",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-05",
+      "text": "Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-06",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-06",
+      "text": "Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-07",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-07",
+      "text": "Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-08",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-08",
+      "text": "Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-09",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-09",
+      "text": "Receiver: Beni Vidal. Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-10",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-10",
+      "text": "Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue-11",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue-11",
+      "text": "Passer: Dani Luna. Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-01",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-01",
+      "text": "Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-02",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-02",
+      "text": "Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-03",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-03",
+      "text": "Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-04",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-04",
+      "text": "Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-05",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-05",
+      "text": "Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-06",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-06",
+      "text": "Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-07",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-07",
+      "text": "Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-08",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-08",
+      "text": "Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-09",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-09",
+      "text": "Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-10",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-10",
+      "text": "Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber-11",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber-11",
+      "text": "Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_blue",
+      "language": "en",
+      "detail": "simple",
+      "focus": "blue",
+      "text": "Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_simple_amber",
+      "language": "en",
+      "detail": "simple",
+      "focus": "amber",
+      "text": "Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_general",
+      "language": "en",
+      "detail": "detail",
+      "focus": null,
+      "text": "Analyst: 6 m radius; time-weighted means 2.0 → 0.4 opponents; drop 1.6. Windows: 2 s before release and 2 s from reception; coverage 100.0%. Pass 30.0 m forward; team possession confirmed for 3 s. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-01",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-01",
+      "text": "Analyst: 6 m radius; time-weighted means 2.0 → 0.4 opponents; drop 1.6. Windows: 2 s before release and 2 s from reception; coverage 100.0%. Pass 30.0 m forward; team possession confirmed for 3 s. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-02",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-02",
+      "text": "Analyst: 6 m radius; time-weighted means 2.0 → 0.4 opponents; drop 1.6. Windows: 2 s before release and 2 s from reception; coverage 100.0%. Pass 30.0 m forward; team possession confirmed for 3 s. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-03",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-03",
+      "text": "Analyst: 6 m radius; time-weighted means 2.0 → 0.4 opponents; drop 1.6. Windows: 2 s before release and 2 s from reception; coverage 100.0%. Pass 30.0 m forward; team possession confirmed for 3 s. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-04",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-04",
+      "text": "Analyst: 6 m radius; time-weighted means 2.0 → 0.4 opponents; drop 1.6. Windows: 2 s before release and 2 s from reception; coverage 100.0%. Pass 30.0 m forward; team possession confirmed for 3 s. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-05",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-05",
+      "text": "Analyst: 6 m radius; time-weighted means 2.0 → 0.4 opponents; drop 1.6. Windows: 2 s before release and 2 s from reception; coverage 100.0%. Pass 30.0 m forward; team possession confirmed for 3 s. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-06",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-06",
+      "text": "Analyst: 6 m radius; time-weighted means 2.0 → 0.4 opponents; drop 1.6. Windows: 2 s before release and 2 s from reception; coverage 100.0%. Pass 30.0 m forward; team possession confirmed for 3 s. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-07",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-07",
+      "text": "Analyst: 6 m radius; time-weighted means 2.0 → 0.4 opponents; drop 1.6. Windows: 2 s before release and 2 s from reception; coverage 100.0%. Pass 30.0 m forward; team possession confirmed for 3 s. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-08",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-08",
+      "text": "Analyst: 6 m radius; time-weighted means 2.0 → 0.4 opponents; drop 1.6. Windows: 2 s before release and 2 s from reception; coverage 100.0%. Pass 30.0 m forward; team possession confirmed for 3 s. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-09",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-09",
+      "text": "Receiver: Beni Vidal. Analyst: 6 m radius; time-weighted means 2.0 → 0.4 opponents; drop 1.6. Windows: 2 s before release and 2 s from reception; coverage 100.0%. Pass 30.0 m forward; team possession confirmed for 3 s. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-10",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-10",
+      "text": "Analyst: 6 m radius; time-weighted means 2.0 → 0.4 opponents; drop 1.6. Windows: 2 s before release and 2 s from reception; coverage 100.0%. Pass 30.0 m forward; team possession confirmed for 3 s. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue-11",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue-11",
+      "text": "Passer: Dani Luna. Analyst: 6 m radius; time-weighted means 2.0 → 0.4 opponents; drop 1.6. Windows: 2 s before release and 2 s from reception; coverage 100.0%. Pass 30.0 m forward; team possession confirmed for 3 s. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-01",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-01",
+      "text": "Analyst: 6 m radius; time-weighted means 2.0 → 0.4 opponents; drop 1.6. Windows: 2 s before release and 2 s from reception; coverage 100.0%. Pass 30.0 m forward; team possession confirmed for 3 s. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-02",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-02",
+      "text": "Analyst: 6 m radius; time-weighted means 2.0 → 0.4 opponents; drop 1.6. Windows: 2 s before release and 2 s from reception; coverage 100.0%. Pass 30.0 m forward; team possession confirmed for 3 s. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-03",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-03",
+      "text": "Analyst: 6 m radius; time-weighted means 2.0 → 0.4 opponents; drop 1.6. Windows: 2 s before release and 2 s from reception; coverage 100.0%. Pass 30.0 m forward; team possession confirmed for 3 s. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-04",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-04",
+      "text": "Analyst: 6 m radius; time-weighted means 2.0 → 0.4 opponents; drop 1.6. Windows: 2 s before release and 2 s from reception; coverage 100.0%. Pass 30.0 m forward; team possession confirmed for 3 s. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-05",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-05",
+      "text": "Analyst: 6 m radius; time-weighted means 2.0 → 0.4 opponents; drop 1.6. Windows: 2 s before release and 2 s from reception; coverage 100.0%. Pass 30.0 m forward; team possession confirmed for 3 s. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-06",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-06",
+      "text": "Analyst: 6 m radius; time-weighted means 2.0 → 0.4 opponents; drop 1.6. Windows: 2 s before release and 2 s from reception; coverage 100.0%. Pass 30.0 m forward; team possession confirmed for 3 s. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-07",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-07",
+      "text": "Analyst: 6 m radius; time-weighted means 2.0 → 0.4 opponents; drop 1.6. Windows: 2 s before release and 2 s from reception; coverage 100.0%. Pass 30.0 m forward; team possession confirmed for 3 s. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-08",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-08",
+      "text": "Analyst: 6 m radius; time-weighted means 2.0 → 0.4 opponents; drop 1.6. Windows: 2 s before release and 2 s from reception; coverage 100.0%. Pass 30.0 m forward; team possession confirmed for 3 s. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-09",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-09",
+      "text": "Analyst: 6 m radius; time-weighted means 2.0 → 0.4 opponents; drop 1.6. Windows: 2 s before release and 2 s from reception; coverage 100.0%. Pass 30.0 m forward; team possession confirmed for 3 s. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-10",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-10",
+      "text": "Analyst: 6 m radius; time-weighted means 2.0 → 0.4 opponents; drop 1.6. Windows: 2 s before release and 2 s from reception; coverage 100.0%. Pass 30.0 m forward; team possession confirmed for 3 s. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber-11",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber-11",
+      "text": "Analyst: 6 m radius; time-weighted means 2.0 → 0.4 opponents; drop 1.6. Windows: 2 s before release and 2 s from reception; coverage 100.0%. Pass 30.0 m forward; team possession confirmed for 3 s. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_blue",
+      "language": "en",
+      "detail": "detail",
+      "focus": "blue",
+      "text": "Analyst: 6 m radius; time-weighted means 2.0 → 0.4 opponents; drop 1.6. Windows: 2 s before release and 2 s from reception; coverage 100.0%. Pass 30.0 m forward; team possession confirmed for 3 s. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "en_detail_amber",
+      "language": "en",
+      "detail": "detail",
+      "focus": "amber",
+      "text": "Analyst: 6 m radius; time-weighted means 2.0 → 0.4 opponents; drop 1.6. Windows: 2 s before release and 2 s from reception; coverage 100.0%. Pass 30.0 m forward; team possession confirmed for 3 s. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation. No verified involvement in this event.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_general",
+      "language": "es",
+      "detail": "simple",
+      "focus": null,
+      "text": "Dani Luna pasó 30.0 m hacia delante a Beni Vidal. La media de rivales cercanos pasó de 2.0 antes del pase a 0.4 tras la recepción. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-01",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-01",
+      "text": "Dani Luna pasó 30.0 m hacia delante a Beni Vidal. La media de rivales cercanos pasó de 2.0 antes del pase a 0.4 tras la recepción. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-02",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-02",
+      "text": "Dani Luna pasó 30.0 m hacia delante a Beni Vidal. La media de rivales cercanos pasó de 2.0 antes del pase a 0.4 tras la recepción. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-03",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-03",
+      "text": "Dani Luna pasó 30.0 m hacia delante a Beni Vidal. La media de rivales cercanos pasó de 2.0 antes del pase a 0.4 tras la recepción. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-04",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-04",
+      "text": "Dani Luna pasó 30.0 m hacia delante a Beni Vidal. La media de rivales cercanos pasó de 2.0 antes del pase a 0.4 tras la recepción. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-05",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-05",
+      "text": "Dani Luna pasó 30.0 m hacia delante a Beni Vidal. La media de rivales cercanos pasó de 2.0 antes del pase a 0.4 tras la recepción. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-06",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-06",
+      "text": "Dani Luna pasó 30.0 m hacia delante a Beni Vidal. La media de rivales cercanos pasó de 2.0 antes del pase a 0.4 tras la recepción. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-07",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-07",
+      "text": "Dani Luna pasó 30.0 m hacia delante a Beni Vidal. La media de rivales cercanos pasó de 2.0 antes del pase a 0.4 tras la recepción. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-08",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-08",
+      "text": "Dani Luna pasó 30.0 m hacia delante a Beni Vidal. La media de rivales cercanos pasó de 2.0 antes del pase a 0.4 tras la recepción. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-09",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-09",
+      "text": "Recepción de Beni Vidal. Dani Luna pasó 30.0 m hacia delante a Beni Vidal. La media de rivales cercanos pasó de 2.0 antes del pase a 0.4 tras la recepción. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-10",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-10",
+      "text": "Dani Luna pasó 30.0 m hacia delante a Beni Vidal. La media de rivales cercanos pasó de 2.0 antes del pase a 0.4 tras la recepción. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue-11",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue-11",
+      "text": "Pase de Dani Luna. Dani Luna pasó 30.0 m hacia delante a Beni Vidal. La media de rivales cercanos pasó de 2.0 antes del pase a 0.4 tras la recepción. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-01",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-01",
+      "text": "Dani Luna pasó 30.0 m hacia delante a Beni Vidal. La media de rivales cercanos pasó de 2.0 antes del pase a 0.4 tras la recepción. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-02",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-02",
+      "text": "Dani Luna pasó 30.0 m hacia delante a Beni Vidal. La media de rivales cercanos pasó de 2.0 antes del pase a 0.4 tras la recepción. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-03",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-03",
+      "text": "Dani Luna pasó 30.0 m hacia delante a Beni Vidal. La media de rivales cercanos pasó de 2.0 antes del pase a 0.4 tras la recepción. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-04",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-04",
+      "text": "Dani Luna pasó 30.0 m hacia delante a Beni Vidal. La media de rivales cercanos pasó de 2.0 antes del pase a 0.4 tras la recepción. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-05",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-05",
+      "text": "Dani Luna pasó 30.0 m hacia delante a Beni Vidal. La media de rivales cercanos pasó de 2.0 antes del pase a 0.4 tras la recepción. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-06",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-06",
+      "text": "Dani Luna pasó 30.0 m hacia delante a Beni Vidal. La media de rivales cercanos pasó de 2.0 antes del pase a 0.4 tras la recepción. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-07",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-07",
+      "text": "Dani Luna pasó 30.0 m hacia delante a Beni Vidal. La media de rivales cercanos pasó de 2.0 antes del pase a 0.4 tras la recepción. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-08",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-08",
+      "text": "Dani Luna pasó 30.0 m hacia delante a Beni Vidal. La media de rivales cercanos pasó de 2.0 antes del pase a 0.4 tras la recepción. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-09",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-09",
+      "text": "Dani Luna pasó 30.0 m hacia delante a Beni Vidal. La media de rivales cercanos pasó de 2.0 antes del pase a 0.4 tras la recepción. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-10",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-10",
+      "text": "Dani Luna pasó 30.0 m hacia delante a Beni Vidal. La media de rivales cercanos pasó de 2.0 antes del pase a 0.4 tras la recepción. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber-11",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber-11",
+      "text": "Dani Luna pasó 30.0 m hacia delante a Beni Vidal. La media de rivales cercanos pasó de 2.0 antes del pase a 0.4 tras la recepción. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_blue",
+      "language": "es",
+      "detail": "simple",
+      "focus": "blue",
+      "text": "Dani Luna pasó 30.0 m hacia delante a Beni Vidal. La media de rivales cercanos pasó de 2.0 antes del pase a 0.4 tras la recepción. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_simple_amber",
+      "language": "es",
+      "detail": "simple",
+      "focus": "amber",
+      "text": "Dani Luna pasó 30.0 m hacia delante a Beni Vidal. La media de rivales cercanos pasó de 2.0 antes del pase a 0.4 tras la recepción. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_general",
+      "language": "es",
+      "detail": "detail",
+      "focus": null,
+      "text": "Análisis: radio 6 m; medias ponderadas por tiempo 2.0 → 0.4 rivales; descenso 1.6. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura 100.0%. Pase 30.0 m hacia delante; posesión del equipo confirmada durante 3 s. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-01",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-01",
+      "text": "Análisis: radio 6 m; medias ponderadas por tiempo 2.0 → 0.4 rivales; descenso 1.6. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura 100.0%. Pase 30.0 m hacia delante; posesión del equipo confirmada durante 3 s. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-02",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-02",
+      "text": "Análisis: radio 6 m; medias ponderadas por tiempo 2.0 → 0.4 rivales; descenso 1.6. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura 100.0%. Pase 30.0 m hacia delante; posesión del equipo confirmada durante 3 s. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-03",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-03",
+      "text": "Análisis: radio 6 m; medias ponderadas por tiempo 2.0 → 0.4 rivales; descenso 1.6. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura 100.0%. Pase 30.0 m hacia delante; posesión del equipo confirmada durante 3 s. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-04",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-04",
+      "text": "Análisis: radio 6 m; medias ponderadas por tiempo 2.0 → 0.4 rivales; descenso 1.6. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura 100.0%. Pase 30.0 m hacia delante; posesión del equipo confirmada durante 3 s. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-05",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-05",
+      "text": "Análisis: radio 6 m; medias ponderadas por tiempo 2.0 → 0.4 rivales; descenso 1.6. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura 100.0%. Pase 30.0 m hacia delante; posesión del equipo confirmada durante 3 s. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-06",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-06",
+      "text": "Análisis: radio 6 m; medias ponderadas por tiempo 2.0 → 0.4 rivales; descenso 1.6. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura 100.0%. Pase 30.0 m hacia delante; posesión del equipo confirmada durante 3 s. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-07",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-07",
+      "text": "Análisis: radio 6 m; medias ponderadas por tiempo 2.0 → 0.4 rivales; descenso 1.6. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura 100.0%. Pase 30.0 m hacia delante; posesión del equipo confirmada durante 3 s. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-08",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-08",
+      "text": "Análisis: radio 6 m; medias ponderadas por tiempo 2.0 → 0.4 rivales; descenso 1.6. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura 100.0%. Pase 30.0 m hacia delante; posesión del equipo confirmada durante 3 s. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-09",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-09",
+      "text": "Recepción de Beni Vidal. Análisis: radio 6 m; medias ponderadas por tiempo 2.0 → 0.4 rivales; descenso 1.6. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura 100.0%. Pase 30.0 m hacia delante; posesión del equipo confirmada durante 3 s. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-10",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-10",
+      "text": "Análisis: radio 6 m; medias ponderadas por tiempo 2.0 → 0.4 rivales; descenso 1.6. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura 100.0%. Pase 30.0 m hacia delante; posesión del equipo confirmada durante 3 s. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue-11",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue-11",
+      "text": "Pase de Dani Luna. Análisis: radio 6 m; medias ponderadas por tiempo 2.0 → 0.4 rivales; descenso 1.6. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura 100.0%. Pase 30.0 m hacia delante; posesión del equipo confirmada durante 3 s. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-01",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-01",
+      "text": "Análisis: radio 6 m; medias ponderadas por tiempo 2.0 → 0.4 rivales; descenso 1.6. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura 100.0%. Pase 30.0 m hacia delante; posesión del equipo confirmada durante 3 s. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-02",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-02",
+      "text": "Análisis: radio 6 m; medias ponderadas por tiempo 2.0 → 0.4 rivales; descenso 1.6. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura 100.0%. Pase 30.0 m hacia delante; posesión del equipo confirmada durante 3 s. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-03",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-03",
+      "text": "Análisis: radio 6 m; medias ponderadas por tiempo 2.0 → 0.4 rivales; descenso 1.6. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura 100.0%. Pase 30.0 m hacia delante; posesión del equipo confirmada durante 3 s. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-04",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-04",
+      "text": "Análisis: radio 6 m; medias ponderadas por tiempo 2.0 → 0.4 rivales; descenso 1.6. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura 100.0%. Pase 30.0 m hacia delante; posesión del equipo confirmada durante 3 s. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-05",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-05",
+      "text": "Análisis: radio 6 m; medias ponderadas por tiempo 2.0 → 0.4 rivales; descenso 1.6. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura 100.0%. Pase 30.0 m hacia delante; posesión del equipo confirmada durante 3 s. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-06",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-06",
+      "text": "Análisis: radio 6 m; medias ponderadas por tiempo 2.0 → 0.4 rivales; descenso 1.6. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura 100.0%. Pase 30.0 m hacia delante; posesión del equipo confirmada durante 3 s. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-07",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-07",
+      "text": "Análisis: radio 6 m; medias ponderadas por tiempo 2.0 → 0.4 rivales; descenso 1.6. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura 100.0%. Pase 30.0 m hacia delante; posesión del equipo confirmada durante 3 s. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-08",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-08",
+      "text": "Análisis: radio 6 m; medias ponderadas por tiempo 2.0 → 0.4 rivales; descenso 1.6. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura 100.0%. Pase 30.0 m hacia delante; posesión del equipo confirmada durante 3 s. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-09",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-09",
+      "text": "Análisis: radio 6 m; medias ponderadas por tiempo 2.0 → 0.4 rivales; descenso 1.6. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura 100.0%. Pase 30.0 m hacia delante; posesión del equipo confirmada durante 3 s. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-10",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-10",
+      "text": "Análisis: radio 6 m; medias ponderadas por tiempo 2.0 → 0.4 rivales; descenso 1.6. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura 100.0%. Pase 30.0 m hacia delante; posesión del equipo confirmada durante 3 s. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber-11",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber-11",
+      "text": "Análisis: radio 6 m; medias ponderadas por tiempo 2.0 → 0.4 rivales; descenso 1.6. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura 100.0%. Pase 30.0 m hacia delante; posesión del equipo confirmada durante 3 s. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_blue",
+      "language": "es",
+      "detail": "detail",
+      "focus": "blue",
+      "text": "Análisis: radio 6 m; medias ponderadas por tiempo 2.0 → 0.4 rivales; descenso 1.6. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura 100.0%. Pase 30.0 m hacia delante; posesión del equipo confirmada durante 3 s. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    },
+    {
+      "id": "es_detail_amber",
+      "language": "es",
+      "detail": "detail",
+      "focus": "amber",
+      "text": "Análisis: radio 6 m; medias ponderadas por tiempo 2.0 → 0.4 rivales; descenso 1.6. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura 100.0%. Pase 30.0 m hacia delante; posesión del equipo confirmada durante 3 s. Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición. La proximidad no demuestra intención ni causalidad táctica. Sin participación verificada en este evento.",
+      "claim_ids": [
+        "c-event"
+      ],
+      "factual_check_status": "valid"
+    }
+  ],
+  "review": {
+    "status": "supported",
+    "mode": "foundry",
+    "reason": "The evidence confirms the details of the pass, including the forward movement and the pressure on opponents.",
+    "proposed_text": null,
+    "revised_text": "Dani Luna passed 30.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 0.4 after reception. It travelled farther forward than each of the team’s previous three completed passes in this replay. Proximity does not establish tactical intent or causation.",
+    "cycles": 0
+  },
+  "evidence_revision": "af5d9e9fe0cb0931",
+  "eligible_from_ms": 91300,
+  "expires_at_ms": 121300,
+  "trace": [
+    {
+      "role": "Story Director",
+      "action": "model_decision",
+      "status": "propose",
+      "call": 1,
+      "elapsed_ms": 3982.507,
+      "input_tokens": 725,
+      "output_tokens": 33,
+      "total_tokens": 758,
+      "usage_reported": true,
+      "duration_ms": 3409.284,
+      "output": {
+        "action": "propose",
+        "claim_ids": [
+          "c-event"
+        ],
+        "reason": "The evidence supports the claim of a significant forward pass with confirmed possession and notable metrics."
+      }
+    },
+    {
+      "role": "Claim Reviewer",
+      "action": "model_decision",
+      "status": "supported",
+      "call": 2,
+      "elapsed_ms": 5017.189,
+      "input_tokens": 727,
+      "output_tokens": 34,
+      "total_tokens": 761,
+      "usage_reported": true,
+      "duration_ms": 1012.764,
+      "output": {
+        "action": "supported",
+        "claim_ids": [
+          "c-event"
+        ],
+        "reason": "The evidence confirms the details of the pass, including the forward movement and the pressure on opponents."
+      }
+    }
+  ],
+  "workflow_ms": 5017.568,
+  "mode": "Microsoft Agent Framework + Azure OpenAI",
+  "model_usage": {
+    "calls": 2,
+    "input_tokens": 1452,
+    "output_tokens": 67,
+    "total_tokens": 1519,
+    "usage_complete": true
+  },
+  "renderer_version": "pressure-swing-v6",
+  "entities": {
+    "players": [
+      {
+        "id": "blue-01",
+        "team_id": "blue",
+        "name": "Eren Rocha",
+        "number": 1,
+        "role": "keeper"
+      },
+      {
+        "id": "blue-02",
+        "team_id": "blue",
+        "name": "Feli Costa",
+        "number": 2,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-03",
+        "team_id": "blue",
+        "name": "Gabi Paz",
+        "number": 3,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-04",
+        "team_id": "blue",
+        "name": "Hugo Neri",
+        "number": 4,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-05",
+        "team_id": "blue",
+        "name": "Ilan Sierra",
+        "number": 5,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-06",
+        "team_id": "blue",
+        "name": "Jori Marin",
+        "number": 6,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-07",
+        "team_id": "blue",
+        "name": "Kian Roca",
+        "number": 7,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-08",
+        "team_id": "blue",
+        "name": "Ari Vela",
+        "number": 8,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-09",
+        "team_id": "blue",
+        "name": "Beni Vidal",
+        "number": 9,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-10",
+        "team_id": "blue",
+        "name": "Ciro Prado",
+        "number": 10,
+        "role": "outfield"
+      },
+      {
+        "id": "blue-11",
+        "team_id": "blue",
+        "name": "Dani Luna",
+        "number": 11,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-01",
+        "team_id": "amber",
+        "name": "Feli Sierra",
+        "number": 1,
+        "role": "keeper"
+      },
+      {
+        "id": "amber-02",
+        "team_id": "amber",
+        "name": "Gabi Paz",
+        "number": 2,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-03",
+        "team_id": "amber",
+        "name": "Hugo Vidal",
+        "number": 3,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-04",
+        "team_id": "amber",
+        "name": "Ilan Rocha",
+        "number": 4,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-05",
+        "team_id": "amber",
+        "name": "Jori Marin",
+        "number": 5,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-06",
+        "team_id": "amber",
+        "name": "Kian Costa",
+        "number": 6,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-07",
+        "team_id": "amber",
+        "name": "Ari Roca",
+        "number": 7,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-08",
+        "team_id": "amber",
+        "name": "Beni Vela",
+        "number": 8,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-09",
+        "team_id": "amber",
+        "name": "Ciro Prado",
+        "number": 9,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-10",
+        "team_id": "amber",
+        "name": "Dani Luna",
+        "number": 10,
+        "role": "outfield"
+      },
+      {
+        "id": "amber-11",
+        "team_id": "amber",
+        "name": "Eren Neri",
+        "number": 11,
+        "role": "outfield"
+      }
+    ],
+    "teams": [
+      {
+        "id": "blue",
+        "name": "Harbor City",
+        "color": "#3b82f6"
+      },
+      {
+        "id": "amber",
+        "name": "Alder Rovers",
+        "color": "#f59e0b"
+      }
+    ]
+  },
+  "package_hash": "cfc860a570433d35fc85458ea9624a0397ed6ca804fabb6fb07d75b85c62e3c9"
+}

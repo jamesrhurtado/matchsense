@@ -1,0 +1,16 @@
+{
+  "generator": "simulator.matchday_demo",
+  "status": "Authored presentation segment; football review pending; legacy fixtures unchanged",
+  "cases": [
+    {
+      "match_id": "match-0c0a000000000003",
+      "sha256": "93e73461926e885cce69476f0ed32ba08d1b8e75c85098e26826af5c4410d5dc",
+      "observations": 2428
+    },
+    {
+      "match_id": "match-0c0a000000000004",
+      "sha256": "1672b4cde7bb3fbfa70e79529ecb56a22a63921d823fc0d1339c4f6bf4203479",
+      "observations": 2429
+    }
+  ]
+}

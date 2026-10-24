@@ -27,3 +27,14 @@ synthetic-evaluate:
 
 web-build:
 	npm --prefix apps/web run build
+
+coverage-data:
+	$(PYTHON) -m simulator.match_coverage
+	$(PYTHON) -m simulator.matchday_demo
+	$(PYTHON) -m simulator.flagship
+
+coverage-evaluate:
+	$(PYTHON) -m evals.match_coverage
+
+coverage-dev:
+	WHY_NOW_MATCH_COVERAGE=1 WHY_NOW_DB=.run/match-coverage.db $(PYTHON) scripts/dev.py

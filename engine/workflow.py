@@ -36,6 +36,12 @@ class EvidenceTools:
         if self.pass_id and selected != self.pass_id:
             raise ToolError('unknown_pass')
         return recent_pass_context(self.metadata,self.messages,self.cutoff_ms,selected)
+    def get_event_facts(self,family,subject_id):
+        from engine.event_metrics import event_metrics
+        if family not in {'shot','goal','possession','recovery','pressure'}:raise ToolError('unsupported_event_family')
+        from engine.pressure import pressure_metrics
+        measured=pressure_metrics(self.metadata,self.messages,self.cutoff_ms) if family=='pressure' else event_metrics(self.metadata,self.messages,self.cutoff_ms)
+        return next((m for m in measured if m['family']==family and m['subject_id']==subject_id),None)
     def compare_prior_window(self,start_ms,end_ms):
         rows=self.get_sequence(start_ms,end_ms)
         return {'status':'insufficient_history','sample_count':len(rows),'reason':'One segment cannot establish sustained match control.'}

@@ -1,0 +1,1301 @@
+{
+  "$defs": {
+    "Ball": {
+      "additionalProperties": false,
+      "properties": {
+        "x_m": {
+          "maximum": 105,
+          "minimum": 0,
+          "title": "X M",
+          "type": "number"
+        },
+        "y_m": {
+          "maximum": 68,
+          "minimum": 0,
+          "title": "Y M",
+          "type": "number"
+        },
+        "z_m": {
+          "minimum": 0,
+          "title": "Z M",
+          "type": "number"
+        },
+        "quality": {
+          "enum": [
+            "simulated_observation",
+            "noisy_observation"
+          ],
+          "title": "Quality",
+          "type": "string"
+        }
+      },
+      "required": [
+        "x_m",
+        "y_m",
+        "z_m",
+        "quality"
+      ],
+      "title": "Ball",
+      "type": "object"
+    },
+    "BallRecovered": {
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "team_id": {
+          "minLength": 1,
+          "title": "Team Id",
+          "type": "string"
+        },
+        "player_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Player Id"
+        },
+        "possession_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Possession Id"
+        },
+        "type": {
+          "const": "ball_recovered",
+          "title": "Type",
+          "type": "string"
+        },
+        "details": {
+          "$ref": "#/$defs/RecoveryDetails"
+        }
+      },
+      "required": [
+        "event_id",
+        "team_id",
+        "player_id",
+        "possession_id",
+        "type",
+        "details"
+      ],
+      "title": "BallRecovered",
+      "type": "object"
+    },
+    "EndDetails": {
+      "additionalProperties": false,
+      "properties": {
+        "pass_id": {
+          "title": "Pass Id",
+          "type": "string"
+        },
+        "outcome": {
+          "enum": [
+            "received",
+            "intercepted",
+            "out_of_play",
+            "uncontrolled"
+          ],
+          "title": "Outcome",
+          "type": "string"
+        },
+        "end_position": {
+          "$ref": "#/$defs/Point"
+        },
+        "controlling_team_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Controlling Team Id"
+        },
+        "controlling_player_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Controlling Player Id"
+        }
+      },
+      "required": [
+        "pass_id",
+        "outcome",
+        "end_position",
+        "controlling_team_id",
+        "controlling_player_id"
+      ],
+      "title": "EndDetails",
+      "type": "object"
+    },
+    "EventObservation": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "match_id": {
+          "title": "Match Id",
+          "type": "string"
+        },
+        "message_id": {
+          "title": "Message Id",
+          "type": "string"
+        },
+        "sequence_no": {
+          "minimum": 0,
+          "title": "Sequence No",
+          "type": "integer"
+        },
+        "timeline_ms": {
+          "minimum": 0,
+          "title": "Timeline Ms",
+          "type": "integer"
+        },
+        "period": {
+          "minimum": 1,
+          "title": "Period",
+          "type": "integer"
+        },
+        "period_elapsed_ms": {
+          "minimum": 0,
+          "title": "Period Elapsed Ms",
+          "type": "integer"
+        },
+        "available_at_ms": {
+          "minimum": 0,
+          "title": "Available At Ms",
+          "type": "integer"
+        },
+        "revision": {
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "supersedes_message_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Supersedes Message Id"
+        },
+        "kind": {
+          "const": "event",
+          "title": "Kind",
+          "type": "string"
+        },
+        "payload": {
+          "discriminator": {
+            "mapping": {
+              "ball_recovered": "#/$defs/BallRecovered",
+              "goal_status_changed": "#/$defs/GoalStatusChanged",
+              "pass_resolved": "#/$defs/PassResolved",
+              "pass_started": "#/$defs/PassStarted",
+              "period_state_changed": "#/$defs/PeriodStateChanged",
+              "play_state_changed": "#/$defs/PlayStateChanged",
+              "possession_changed": "#/$defs/PossessionChanged",
+              "shot_resolved": "#/$defs/ShotResolved",
+              "shot_started": "#/$defs/ShotStarted"
+            },
+            "propertyName": "type"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/PassStarted"
+            },
+            {
+              "$ref": "#/$defs/PassResolved"
+            },
+            {
+              "$ref": "#/$defs/PossessionChanged"
+            },
+            {
+              "$ref": "#/$defs/PlayStateChanged"
+            },
+            {
+              "$ref": "#/$defs/ShotStarted"
+            },
+            {
+              "$ref": "#/$defs/ShotResolved"
+            },
+            {
+              "$ref": "#/$defs/GoalStatusChanged"
+            },
+            {
+              "$ref": "#/$defs/BallRecovered"
+            },
+            {
+              "$ref": "#/$defs/PeriodStateChanged"
+            }
+          ],
+          "title": "Payload"
+        }
+      },
+      "required": [
+        "schema_version",
+        "match_id",
+        "message_id",
+        "sequence_no",
+        "timeline_ms",
+        "period",
+        "period_elapsed_ms",
+        "available_at_ms",
+        "revision",
+        "supersedes_message_id",
+        "kind",
+        "payload"
+      ],
+      "title": "EventObservation",
+      "type": "object"
+    },
+    "Frame": {
+      "additionalProperties": false,
+      "properties": {
+        "frame_id": {
+          "title": "Frame Id",
+          "type": "string"
+        },
+        "players": {
+          "items": {
+            "$ref": "#/$defs/Position"
+          },
+          "title": "Players",
+          "type": "array"
+        },
+        "missing_player_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Player Ids",
+          "type": "array"
+        },
+        "ball": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Ball"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "ball_status": {
+          "enum": [
+            "controlled",
+            "in_flight",
+            "loose",
+            "out_of_play",
+            "unknown"
+          ],
+          "title": "Ball Status",
+          "type": "string"
+        },
+        "controlling_player_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Controlling Player Id"
+        },
+        "possession_team_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Possession Team Id"
+        }
+      },
+      "required": [
+        "frame_id",
+        "players",
+        "missing_player_ids",
+        "ball",
+        "ball_status",
+        "controlling_player_id",
+        "possession_team_id"
+      ],
+      "title": "Frame",
+      "type": "object"
+    },
+    "GoalDetails": {
+      "additionalProperties": false,
+      "properties": {
+        "goal_id": {
+          "maxLength": 80,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Goal Id",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "pending",
+            "confirmed",
+            "cancelled"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "scorer_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Scorer Id"
+        },
+        "shot_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shot Id"
+        },
+        "own_goal": {
+          "default": false,
+          "title": "Own Goal",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "goal_id",
+        "status"
+      ],
+      "title": "GoalDetails",
+      "type": "object"
+    },
+    "GoalStatusChanged": {
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "team_id": {
+          "minLength": 1,
+          "title": "Team Id",
+          "type": "string"
+        },
+        "player_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Player Id"
+        },
+        "possession_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Possession Id"
+        },
+        "type": {
+          "const": "goal_status_changed",
+          "title": "Type",
+          "type": "string"
+        },
+        "details": {
+          "$ref": "#/$defs/GoalDetails"
+        }
+      },
+      "required": [
+        "event_id",
+        "team_id",
+        "player_id",
+        "possession_id",
+        "type",
+        "details"
+      ],
+      "title": "GoalStatusChanged",
+      "type": "object"
+    },
+    "PassResolved": {
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "team_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Team Id"
+        },
+        "player_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Player Id"
+        },
+        "possession_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Possession Id"
+        },
+        "type": {
+          "const": "pass_resolved",
+          "title": "Type",
+          "type": "string"
+        },
+        "details": {
+          "$ref": "#/$defs/EndDetails"
+        }
+      },
+      "required": [
+        "event_id",
+        "team_id",
+        "player_id",
+        "possession_id",
+        "type",
+        "details"
+      ],
+      "title": "PassResolved",
+      "type": "object"
+    },
+    "PassStarted": {
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "team_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Team Id"
+        },
+        "player_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Player Id"
+        },
+        "possession_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Possession Id"
+        },
+        "type": {
+          "const": "pass_started",
+          "title": "Type",
+          "type": "string"
+        },
+        "details": {
+          "$ref": "#/$defs/StartDetails"
+        }
+      },
+      "required": [
+        "event_id",
+        "team_id",
+        "player_id",
+        "possession_id",
+        "type",
+        "details"
+      ],
+      "title": "PassStarted",
+      "type": "object"
+    },
+    "PeriodDetails": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "started",
+            "ended"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "title": "PeriodDetails",
+      "type": "object"
+    },
+    "PeriodStateChanged": {
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "team_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Team Id"
+        },
+        "player_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Player Id"
+        },
+        "possession_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Possession Id"
+        },
+        "type": {
+          "const": "period_state_changed",
+          "title": "Type",
+          "type": "string"
+        },
+        "details": {
+          "$ref": "#/$defs/PeriodDetails"
+        }
+      },
+      "required": [
+        "event_id",
+        "team_id",
+        "player_id",
+        "possession_id",
+        "type",
+        "details"
+      ],
+      "title": "PeriodStateChanged",
+      "type": "object"
+    },
+    "PlayDetails": {
+      "additionalProperties": false,
+      "properties": {
+        "ball_status": {
+          "enum": [
+            "controlled",
+            "in_flight",
+            "loose",
+            "out_of_play",
+            "unknown"
+          ],
+          "title": "Ball Status",
+          "type": "string"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ball_status",
+        "reason"
+      ],
+      "title": "PlayDetails",
+      "type": "object"
+    },
+    "PlayStateChanged": {
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "team_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Team Id"
+        },
+        "player_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Player Id"
+        },
+        "possession_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Possession Id"
+        },
+        "type": {
+          "const": "play_state_changed",
+          "title": "Type",
+          "type": "string"
+        },
+        "details": {
+          "$ref": "#/$defs/PlayDetails"
+        }
+      },
+      "required": [
+        "event_id",
+        "team_id",
+        "player_id",
+        "possession_id",
+        "type",
+        "details"
+      ],
+      "title": "PlayStateChanged",
+      "type": "object"
+    },
+    "Point": {
+      "additionalProperties": false,
+      "properties": {
+        "x_m": {
+          "maximum": 105,
+          "minimum": 0,
+          "title": "X M",
+          "type": "number"
+        },
+        "y_m": {
+          "maximum": 68,
+          "minimum": 0,
+          "title": "Y M",
+          "type": "number"
+        }
+      },
+      "required": [
+        "x_m",
+        "y_m"
+      ],
+      "title": "Point",
+      "type": "object"
+    },
+    "Position": {
+      "additionalProperties": false,
+      "properties": {
+        "x_m": {
+          "maximum": 105,
+          "minimum": 0,
+          "title": "X M",
+          "type": "number"
+        },
+        "y_m": {
+          "maximum": 68,
+          "minimum": 0,
+          "title": "Y M",
+          "type": "number"
+        },
+        "player_id": {
+          "title": "Player Id",
+          "type": "string"
+        },
+        "team_id": {
+          "title": "Team Id",
+          "type": "string"
+        },
+        "quality": {
+          "enum": [
+            "simulated_observation",
+            "noisy_observation"
+          ],
+          "title": "Quality",
+          "type": "string"
+        }
+      },
+      "required": [
+        "x_m",
+        "y_m",
+        "player_id",
+        "team_id",
+        "quality"
+      ],
+      "title": "Position",
+      "type": "object"
+    },
+    "PossessionChanged": {
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "team_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Team Id"
+        },
+        "player_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Player Id"
+        },
+        "possession_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Possession Id"
+        },
+        "type": {
+          "const": "possession_changed",
+          "title": "Type",
+          "type": "string"
+        },
+        "details": {
+          "$ref": "#/$defs/PossessionDetails"
+        }
+      },
+      "required": [
+        "event_id",
+        "team_id",
+        "player_id",
+        "possession_id",
+        "type",
+        "details"
+      ],
+      "title": "PossessionChanged",
+      "type": "object"
+    },
+    "PossessionDetails": {
+      "additionalProperties": false,
+      "properties": {
+        "previous_team_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Previous Team Id"
+        },
+        "new_team_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "New Team Id"
+        },
+        "controlling_player_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Controlling Player Id"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        },
+        "incident_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Incident Id"
+        },
+        "pass_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pass Id"
+        }
+      },
+      "required": [
+        "previous_team_id",
+        "new_team_id",
+        "controlling_player_id",
+        "reason"
+      ],
+      "title": "PossessionDetails",
+      "type": "object"
+    },
+    "RecoveryDetails": {
+      "additionalProperties": false,
+      "properties": {
+        "incident_id": {
+          "maxLength": 80,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Incident Id",
+          "type": "string"
+        },
+        "previous_team_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Previous Team Id"
+        },
+        "cause": {
+          "default": "unknown",
+          "enum": [
+            "tackle",
+            "interception",
+            "loose_ball",
+            "unknown"
+          ],
+          "title": "Cause",
+          "type": "string"
+        },
+        "pass_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pass Id"
+        }
+      },
+      "required": [
+        "incident_id",
+        "previous_team_id"
+      ],
+      "title": "RecoveryDetails",
+      "type": "object"
+    },
+    "ShotEndDetails": {
+      "additionalProperties": false,
+      "properties": {
+        "shot_id": {
+          "maxLength": 80,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Shot Id",
+          "type": "string"
+        },
+        "location": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Point"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "outcome": {
+          "enum": [
+            "goal",
+            "saved",
+            "blocked",
+            "off_target",
+            "unknown"
+          ],
+          "title": "Outcome",
+          "type": "string"
+        }
+      },
+      "required": [
+        "shot_id",
+        "outcome"
+      ],
+      "title": "ShotEndDetails",
+      "type": "object"
+    },
+    "ShotResolved": {
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "team_id": {
+          "minLength": 1,
+          "title": "Team Id",
+          "type": "string"
+        },
+        "player_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Player Id"
+        },
+        "possession_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Possession Id"
+        },
+        "type": {
+          "const": "shot_resolved",
+          "title": "Type",
+          "type": "string"
+        },
+        "details": {
+          "$ref": "#/$defs/ShotEndDetails"
+        }
+      },
+      "required": [
+        "event_id",
+        "team_id",
+        "player_id",
+        "possession_id",
+        "type",
+        "details"
+      ],
+      "title": "ShotResolved",
+      "type": "object"
+    },
+    "ShotStartDetails": {
+      "additionalProperties": false,
+      "properties": {
+        "shot_id": {
+          "maxLength": 80,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Shot Id",
+          "type": "string"
+        },
+        "location": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Point"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "shot_id"
+      ],
+      "title": "ShotStartDetails",
+      "type": "object"
+    },
+    "ShotStarted": {
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "team_id": {
+          "minLength": 1,
+          "title": "Team Id",
+          "type": "string"
+        },
+        "player_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Player Id"
+        },
+        "possession_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Possession Id"
+        },
+        "type": {
+          "const": "shot_started",
+          "title": "Type",
+          "type": "string"
+        },
+        "details": {
+          "$ref": "#/$defs/ShotStartDetails"
+        }
+      },
+      "required": [
+        "event_id",
+        "team_id",
+        "player_id",
+        "possession_id",
+        "type",
+        "details"
+      ],
+      "title": "ShotStarted",
+      "type": "object"
+    },
+    "StartDetails": {
+      "additionalProperties": false,
+      "properties": {
+        "pass_id": {
+          "title": "Pass Id",
+          "type": "string"
+        },
+        "start_position": {
+          "$ref": "#/$defs/Point"
+        },
+        "intended_receiver_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Intended Receiver Id"
+        }
+      },
+      "required": [
+        "pass_id",
+        "start_position",
+        "intended_receiver_id"
+      ],
+      "title": "StartDetails",
+      "type": "object"
+    },
+    "TrackingObservation": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "match_id": {
+          "title": "Match Id",
+          "type": "string"
+        },
+        "message_id": {
+          "title": "Message Id",
+          "type": "string"
+        },
+        "sequence_no": {
+          "minimum": 0,
+          "title": "Sequence No",
+          "type": "integer"
+        },
+        "timeline_ms": {
+          "minimum": 0,
+          "title": "Timeline Ms",
+          "type": "integer"
+        },
+        "period": {
+          "minimum": 1,
+          "title": "Period",
+          "type": "integer"
+        },
+        "period_elapsed_ms": {
+          "minimum": 0,
+          "title": "Period Elapsed Ms",
+          "type": "integer"
+        },
+        "available_at_ms": {
+          "minimum": 0,
+          "title": "Available At Ms",
+          "type": "integer"
+        },
+        "revision": {
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "supersedes_message_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Supersedes Message Id"
+        },
+        "kind": {
+          "const": "tracking_frame",
+          "title": "Kind",
+          "type": "string"
+        },
+        "payload": {
+          "$ref": "#/$defs/Frame"
+        }
+      },
+      "required": [
+        "schema_version",
+        "match_id",
+        "message_id",
+        "sequence_no",
+        "timeline_ms",
+        "period",
+        "period_elapsed_ms",
+        "available_at_ms",
+        "revision",
+        "supersedes_message_id",
+        "kind",
+        "payload"
+      ],
+      "title": "TrackingObservation",
+      "type": "object"
+    }
+  },
+  "discriminator": {
+    "mapping": {
+      "event": "#/$defs/EventObservation",
+      "tracking_frame": "#/$defs/TrackingObservation"
+    },
+    "propertyName": "kind"
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/EventObservation"
+    },
+    {
+      "$ref": "#/$defs/TrackingObservation"
+    }
+  ]
+}

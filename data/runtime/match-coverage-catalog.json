@@ -1,0 +1,38 @@
+[
+  {
+    "match_id": "match-0c0a000000000001",
+    "label": "Mixed-event discovery \u00b7 goals, shots, possession, recoveries",
+    "duration_ms": 240000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-0c0a000000000002",
+    "label": "Mixed-event correction replay",
+    "duration_ms": 240000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-0c0a000000000003",
+    "label": "Guided matchday demo \u00b7 moving play and mixed events",
+    "duration_ms": 240000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-0c0a000000000004",
+    "label": "Guided matchday demo \u00b7 score correction",
+    "duration_ms": 240000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-0c0a000000000005",
+    "label": "Pressure Swing flagship \u00b7 guided mixed-event pitch",
+    "duration_ms": 240000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-0c0a000000000006",
+    "label": "Pressure Swing flagship \u00b7 score correction",
+    "duration_ms": 240000,
+    "synthetic": true
+  }
+]

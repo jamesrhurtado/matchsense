@@ -30,19 +30,31 @@ def _catalog():
     return rows
 
 
-def list_matches():
+def list_matches(include_coverage=False):
     """Return only display metadata, never authored scenario expectations."""
-    return [dict(row) for row in _catalog()]
+    rows=[dict(row) for row in _catalog()]
+    extra=RUNTIME/'match-coverage-catalog.json'
+    if include_coverage and extra.exists():
+        additions=json.loads(extra.read_text())
+        seen={r['match_id'] for r in rows}
+        for row in additions:
+            if (set(row)!={'match_id','label','duration_ms','synthetic'} or not isinstance(row['match_id'],str)
+                    or not MATCH_ID.fullmatch(row['match_id']) or row['match_id'] in seen or row['synthetic'] is not True
+                    or type(row['duration_ms']) is not int or not 0<row['duration_ms']<=5400000
+                    or not isinstance(row['label'],str) or not row['label']):raise ValueError('invalid_coverage_catalog_entry')
+            seen.add(row['match_id'])
+        rows+=additions
+    return rows
 
 
 def duration_for_match(match_id):
-    return next((r['duration_ms'] for r in _catalog() if r['match_id'] == match_id), 60000)
+    return next((r['duration_ms'] for r in list_matches(True) if r['match_id'] == match_id), 60000)
 
 
 @lru_cache(maxsize=8)
 def load_runtime_match(match_id):
     if (not isinstance(match_id, str) or not MATCH_ID.fullmatch(match_id)
-            or match_id not in {r['match_id'] for r in _catalog()}):
+            or match_id not in {r['match_id'] for r in list_matches(True)}):
         raise ValueError('unknown_match')
     folder = RUNTIME / match_id
     metadata = json.loads((folder / 'match.json').read_text())

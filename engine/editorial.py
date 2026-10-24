@@ -3,6 +3,9 @@ from engine.contextual_narrative import render
 
 
 def decision_summary(package, outcomes):
+    if package and package.get('schema_version') in {'5.0.0','6.0.0'}:
+        return {'angle':package['family'],'lead':package['variants'][0]['text'],'context':'Source observations only; no tactical causation.',
+                'review':package['review']['reason'],'changes':[],'fallback':None,'outcome':'candidate produced'}
     latest = outcomes[-1] if outcomes else {}
     trace = package['trace'] if package else latest.get('trace', [])
     selected = next((t for t in reversed(trace) if t['action']=='select_claims'), {})

@@ -24,6 +24,14 @@ from engine.editorial_narrative import build_editorial_package as build_structur
 from engine.context import contextual_metrics
 from engine.recap import project_recap
 from engine.editorial import decision_summary
+from engine.event_metrics import event_metrics, FAMILY_PRIORITY
+from engine.event_narrative import build_event_package, story_id as event_story_id, LABELS
+from engine.match_state import match_state
+from engine.event_workflow import generate_event
+COVERAGE=os.getenv('WHY_NOW_MATCH_COVERAGE','0')=='1'
+FLAGSHIP_IDS={'match-0c0a000000000005','match-0c0a000000000006'}
+PRESENTATION_IDS={'match-0c0a000000000003','match-0c0a000000000004'}|FLAGSHIP_IDS
+MIXED_IDS={'match-0c0a000000000001','match-0c0a000000000002'}|PRESENTATION_IDS
 from engine.dispositions import record, disposition, package_disposition, package_events, reconcile_acceptances
 from engine.outcomes import create_outcome, start_outcome, finish_outcome
 
@@ -31,6 +39,7 @@ ROOT=Path(__file__).resolve().parents[2]
 from engine.cloud_repository import CosmosRepository, RepositoryConflict
 CLOUD=os.getenv('WHY_NOW_ENVIRONMENT')=='azure'
 FOUNDRY=os.getenv('WHY_NOW_MODEL_MODE','template')=='foundry'
+EVENT_MODEL=os.getenv('WHY_NOW_MATCH_MODEL','0')=='1' and FOUNDRY
 STRUCTURED=os.getenv('WHY_NOW_NARRATIVE_VERSION','3') in {'2','3'}
 repo=CosmosRepository() if os.getenv('WHY_NOW_COSMOS_ENDPOINT') else Repository(os.getenv('WHY_NOW_DB',str(ROOT/'why_now.db')))
 transport=None
@@ -126,7 +135,7 @@ class Control(Body):
     speed:float|None=Field(default=None,ge=.25,le=8,allow_inf_nan=False)
     clock_ms:int|None=Field(default=None,ge=0,le=5400000)
 class Review(Body):
-    action:Literal['approve','suppress','retract','edit']
+    action:Literal['approve','approve_archive','suppress','retract','edit']
     expected_revision:int=Field(ge=1)
     package_hash:str=Field(min_length=64,max_length=64)
     idempotency_key:str=Field(min_length=8,max_length=100)
@@ -155,7 +164,7 @@ def clock(s):
     return min(s.get('duration_ms',60000),int(s['clock_ms']+elapsed))
 
 def new_session(match_id):
-    s={'id':str(uuid.uuid4()),'match_id':match_id,'clock_ms':0,'running':False,'speed':1,'updated_at':time.time(),'generation':1,'control_revision':1,'duration_ms':duration_for_match(match_id)}
+    s={'id':str(uuid.uuid4()),'match_id':match_id,'match_coverage':COVERAGE and match_id in MIXED_IDS,'clock_ms':0,'running':False,'speed':1,'updated_at':time.time(),'generation':1,'control_revision':1,'duration_ms':duration_for_match(match_id)}
     repo.save_session(s);return s
 
 def accept_package(sid,package,at,expected_revision):
@@ -175,12 +184,18 @@ def accept_package(sid,package,at,expected_revision):
 
 
 def materialize_all(s,at):
-    """Each pass owns its evidence, workflow, revision and publication decision."""
+    """Dispatch supported families through shared immutable approval accounting."""
     meta,messages=inputs(s,at)
     stored={p['id']:p for p in repo.list_packages(s['id'])}
     raw_measured={f"story-{m['pass_id']}":m for m in pass_metrics(messages,at,meta)}
     measured={key:contextual_metrics(m,meta,messages,at) if STRUCTURED else m
               for key,m in raw_measured.items()}
+    coverage=s.get('match_coverage',COVERAGE and s['match_id'] in MIXED_IDS)
+    if coverage:
+        measured.update({event_story_id(m):m for m in event_metrics(meta,messages,at)})
+        if s['match_id'] in FLAGSHIP_IDS:
+            from engine.pressure import pressure_metrics
+            measured.update({event_story_id(m):m for m in pressure_metrics(meta,messages,at)})
     # Stored approved v1/v2 packages keep their original revision and rendering.
     # A changed current source still invalidates them through the existing path.
     for key,old in stored.items():
@@ -195,17 +210,57 @@ def materialize_all(s,at):
                 repo.invalidate(s['id'],story_id)
                 package_disposition(repo,s['id'],old,'superseded',at)
     packages=[]
-    for story_id,m in measured.items():
+    ordered=sorted(measured.items(),key=lambda item:(FAMILY_PRIORITY.get(item[1].get('family','pass'),4),-item[1].get('occurrence_ms',item[1].get('available_from_ms',0)),item[0])) if coverage else measured.items()
+    for story_id,m in ordered:
         if not m['eligible']:continue
         opportunity_id=[story_id,m['evidence_revision']]
-        record(repo,s['id'],'opportunity',[*opportunity_id,'detected'],story_id=story_id,
-               evidence_revision=m['evidence_revision'],state='detected',replay_ms=at)
-
         old=stored.get(story_id)
         if old and old['evidence_revision']==m['evidence_revision']:
             packages.append(old)
             continue
+        record(repo,s['id'],'opportunity',[*opportunity_id,'detected'],story_id=story_id,
+               evidence_revision=m['evidence_revision'],state='detected',replay_ms=at)
         revision=old['revision']+1 if old else 1
+        if m.get('family'):
+            if m['family']=='possession':
+                for previous in stored.values():
+                    if previous.get('family')!='possession' or previous['eligible_from_ms']>=m['evidence_ready_ms']:continue
+                    decision=repo.decision(s['id'],previous['id'])
+                    if not decision or decision['status']!='approved':package_disposition(repo,s['id'],previous,'replaced_unreviewed',at)
+            if EVENT_MODEL:
+                key=(s['id'],story_id,m['evidence_revision'])
+                future=JOBS.get(key)
+                if future is None:
+                    state='expired_unscheduled' if at>=m['expires_at_ms'] else 'capacity_deferred' if sum(not f.done() for f in JOBS.values())>=4 else None
+                    if state:
+                        record(repo,s['id'],'opportunity',[*opportunity_id,state],story_id=story_id,family=m['family'],state=state,replay_ms=at)
+                        continue
+                    outcome=create_outcome(repo,s['id'],story_id,m['evidence_revision'],revision,at,'Microsoft Agent Framework + Azure OpenAI')
+                    future=WORKERS.submit(generate_event,repo,s['id'],m,meta,messages,at,revision,True,outcome)
+                    future._why_now_run_id=outcome['run_id']
+                    JOBS[key]=future
+                    continue
+                if not future.done():continue
+                try:package=future.result()
+                except Exception:
+                    record(repo,s['id'],'opportunity',[*opportunity_id,'failed'],story_id=story_id,state='workflow_failed',replay_ms=at)
+                    continue
+                if not package:continue
+                if at>=m['expires_at_ms']:
+                    package_disposition(repo,s['id'],package,'expired_before_acceptance',at)
+                    continue
+                if package['evidence_revision']!=m['evidence_revision'] or package['id']!=story_id:
+                    package_disposition(repo,s['id'],package,'discarded_stale',at)
+                    continue
+            else:
+                package=generate_event(repo,s['id'],m,meta,messages,at,revision)
+            accept_package(s['id'],package,at,expected_revision=revision-1)
+            record(repo,s['id'],'opportunity',[*opportunity_id,'candidate_ready'],story_id=story_id,
+                   family=m['family'],state='candidate_ready',replay_ms=at,evidence_ready_ms=m['evidence_ready_ms'],expires_at_ms=m['expires_at_ms'])
+            if at>=m['expires_at_ms']:
+                record(repo,s['id'],'opportunity',[*opportunity_id,'expired'],story_id=story_id,state='expired_archive_candidate',replay_ms=at)
+            packages.append(package)
+            continue
         tools=EvidenceTools(meta,messages,at,pass_id=m['pass_id'])
         if not FOUNDRY:
             package=workflow(tools,revision=revision,session_id=s['id'])
@@ -260,6 +315,10 @@ def materialize_all(s,at):
         outcome=next((o for o in repo.workflow_outcomes(s['id']) if o['run_id']==run_id),None)
         if outcome:
             disposition(repo,s['id'],outcome,'discarded_stale',at_ms=at)
+        elif current is None or current.get('family'):
+            try:stale_package=future.result()
+            except Exception:stale_package=None
+            if stale_package:package_disposition(repo,s['id'],stale_package,'discarded_stale',at)
     # Bound retained completed jobs; running work always keeps its slot/identity.
     for key in list(JOBS):
         if len(JOBS)<=512:break
@@ -290,7 +349,13 @@ def safe_story(package,status):
         else:
             from engine.contextual_narrative import title_for
         titles={lang:title_for(package['narrative_plan'],package['metrics'],lang) for lang in ['en','es']}
-    return {k:package[k] for k in ['id','revision','title','evidence_revision','eligible_from_ms','expires_at_ms']}|{'titles':titles}|{'status':status}|{k:package['metrics'][k] for k in ['passer_id','receiver_id','team_id']}
+    if package['schema_version'] in {'5.0.0','6.0.0'}:titles={lang:LABELS[package['family']][i] for i,lang in enumerate(['en','es'])}
+    m=package['metrics']
+    from engine.explainability import why_now, evidence_state
+    return {k:package[k] for k in ['id','revision','title','evidence_revision','eligible_from_ms','expires_at_ms']}|{'why_now':{lang:why_now(package,lang) for lang in ['en','es']},'evidence_state':evidence_state(package),'notable':bool(m.get('facts',{}).get('stands_out')),'titles':titles,'status':status,
+            'family':m.get('family','pass'),'incident_id':m.get('incident_id',package['id']),
+            'participants':m.get('participants',{}),'occurrence_ms':m.get('occurrence_ms',package['eligible_from_ms']),
+            'selection_reason':'Priority: confirmed goals, shots, Pressure Swing, control changes, possession, passes; newest occurrence then stable ID.'}|{k:m.get(k) for k in ['passer_id','receiver_id','team_id']}
 
 def snapshot_data(sid,is_producer=False,story_id=None):
     with LOCK:
@@ -298,25 +363,53 @@ def snapshot_data(sid,is_producer=False,story_id=None):
         packages=materialize_all(s,at)
         entries=[(p,*publication(s,p,at)) for p in packages]
         visible=[(p,status,published) for p,status,published in entries if is_producer or published]
-        selected=next((entry for entry in visible if entry[0]['id']==story_id),None) if story_id else None
-        if selected is None and visible:selected=visible[-1]
+        if not is_producer:
+            grouped={}
+            for entry in sorted(visible,key=lambda e:(FAMILY_PRIORITY.get(e[0].get('family','pass'),4),-e[0]['eligible_from_ms'],e[0]['id'])):
+                grouped.setdefault(entry[0].get('incident_id',entry[0]['id']),entry)
+            visible=sorted(grouped.values(),key=lambda e:(e[0]['metrics'].get('occurrence_ms',e[0]['eligible_from_ms']),e[0]['id']))
+        selection_entries=entries if is_producer else [entry for entry in entries if entry[2]]
+        selected=next((entry for entry in selection_entries if entry[0]['id']==story_id),None) if story_id else None
+        if selected is None and visible:
+            live_candidates=[entry for entry in visible if at<entry[0]['expires_at_ms'] and entry[1]=='ready']
+            selected=min(live_candidates,key=lambda e:(FAMILY_PRIORITY.get(e[0].get('family','pass'),4),-e[0]['metrics'].get('occurrence_ms',e[0]['eligible_from_ms']),e[0]['id'])) if is_producer and live_candidates else visible[-1]
         current,status,_=selected if selected else (None,'waiting',None)
         live=[p for p,state,published in entries if published and state=='approved']
-        overlay_package=live[-1] if live else None
+        overlay_package=min(live,key=lambda p:(FAMILY_PRIORITY.get(p.get('family','pass'),5),-p['metrics'].get('occurrence_ms',p['eligible_from_ms']),p['id'])) if live else None
+        preference=s.get('overlay_preference',{})
+        override=next((p for p in live if all(p[k]==preference.get(k) for k in ['id','revision','package_hash'])),None)
+        if override:overlay_package=override
+        elif s['match_id'] in FLAGSHIP_IDS:
+            from engine.overlay_policy import choose_overlay
+            overlay_package=choose_overlay(live,s.get('auto_overlay'),at)
+            selected_auto={**{k:overlay_package[k] for k in ('id','revision','package_hash')},'shown_at_ms':at} if overlay_package else None
+            previous=s.get('auto_overlay')
+            if selected_auto and previous and all(selected_auto[k]==previous[k] for k in ('id','revision','package_hash')):selected_auto=previous
+            if previous!=selected_auto:
+                s['auto_overlay']=selected_auto;repo.save_session(s)
         def summary(p,state,published):
             result=safe_story(p,state)
             result['approved']=published is not None
+            result['queue_state']='live' if at<p['expires_at_ms'] else 'archived'
+            if p.get('family')=='possession' and not published and at>=p['expires_at_ms']:
+                result['queue_state']='replaced_by_next_boundary'
             if is_producer:result['package_hash']=p['package_hash']
+            elif p.get('incident_id'):
+                result['related_stories']=[safe_story(other,other_state)|{'approved':True}
+                    for other,other_state,other_published in entries
+                    if other_published and other['id']!=p['id'] and other.get('incident_id')==p['incident_id']]
             return result
         view=visual_snapshot(messages,at)
         audit=repo.audit(sid)
         duration=s.get('duration_ms',60000)
         return {'session_id':sid,'match_id':s['match_id'],'clock_ms':at,'duration_ms':duration,
-                'running':s['running'] and at<duration,'speed':s['speed'],'synthetic':True,
-                'score':meta['initial_state']['score'],'teams':meta['teams'],'players':meta['players'],**view,
+                'running':s['running'] and at<duration,'speed':s['speed'],'synthetic':True,'guided_demo':s['match_id'] in PRESENTATION_IDS,'flagship_demo':s['match_id'] in FLAGSHIP_IDS,
+                'match_state':match_state(meta,messages,at),'score':match_state(meta,messages,at)['score'],'coverage_enabled':s.get('match_coverage',COVERAGE and s['match_id'] in MIXED_IDS),'teams':meta['teams'],'players':meta['players'],**view,
                 'story':summary(current,status,selected[2]) if current else None,
                 'stories':[summary(p,state,published) for p,state,published in visible],
+                'approved_possession':next(({'interval':[p['metrics']['facts']['window_start_ms'],p['metrics']['facts']['window_end_ms']], 'text':p['variants'][0]['text'],'story_id':p['id']} for p,state,published in sorted(entries,key=lambda e:-e[0]['metrics'].get('occurrence_ms',0)) if published and p.get('family')=='possession'),None),
                 'story_status':status,'overlay_story_id':overlay_package['id'] if overlay_package else None,
+                'overlay_selection_reason':({'en':'Producer override of the eligible approved revision.','es':'Selección del productor entre revisiones aprobadas vigentes.'} if override else {'en':'Eligible approved stories by event priority; newest within each family. Flagship sessions hold a story for 8 s unless a goal, manual override or correction takes precedence.','es':'Historias aprobadas elegibles por prioridad; la más reciente de cada categoría. La demo principal mantiene el texto 8 s salvo gol, selección manual o corrección.'}) if overlay_package else None,
                 'overlay':next(v['text'] for v in overlay_package['variants'] if v['id']=='en_simple_general') if overlay_package else None,
                 'mode':current['mode'] if current else runtime_mode(),
                 'workflow_pending':any(k[0]==sid and not f.done() for k,f in JOBS.items()),
@@ -343,13 +436,13 @@ def ready():
 
 
 @app.get('/api/matches')
-def matches():return {'matches':list_matches()}
+def matches():return {'matches':[m for m in list_matches(COVERAGE) if COVERAGE or m['match_id'] not in MIXED_IDS]}
 
 
 @app.post('/api/replay-sessions')
 def create(body:Create,x_producer_token:str|None=Header(None)):
     require(x_producer_token)
-    if body.match_id not in {m['match_id'] for m in list_matches()}:fail(422,'unknown_match')
+    if body.match_id not in {m['match_id'] for m in matches()['matches']}:fail(422,'unknown_match')
     with LOCK:s=new_session(body.match_id)
     return {'session_id':s['id'],'match_id':s['match_id']}
 
@@ -392,10 +485,42 @@ async def stream(sid:str,request:Request,last_event_id:str|None=Header(None)):
             await asyncio.sleep(.25)
     return StreamingResponse(events(),media_type='text/event-stream',headers={'Cache-Control':'no-cache','X-Accel-Buffering':'no'})
 
+class OverlaySelection(Body):
+    story_id:str
+    expected_revision:int=Field(ge=1)
+    package_hash:str=Field(min_length=64,max_length=64)
+
+@app.post('/api/replay-sessions/{sid}/selection')
+def select_overlay(sid:str,body:OverlaySelection,x_producer_token:str|None=Header(None)):
+    require(x_producer_token)
+    with LOCK:
+        s,at,p,status=authorized_package(sid,body.story_id,x_producer_token)
+        if p['revision']!=body.expected_revision or p['package_hash']!=body.package_hash:fail(409,'stale_revision')
+        if status!='approved':fail(409,'approved_live_story_required')
+        s['overlay_preference']={k:p[k] for k in ['id','revision','package_hash']}
+        repo.save_session(s)
+        record(repo,sid,'approval_received',['overlay_selection',p['id'],p['revision'],at],story_id=p['id'],action='select_overlay',replay_ms=at)
+        return {'overlay_story_id':p['id'],'selection_reason':'Producer override of deterministic selection; exact approved live revision.'}
+
 @app.get('/api/replay-sessions/{sid}/stories/{story_id}/evidence')
 def evidence(sid:str,story_id:str,x_producer_token:str|None=Header(None)):
     with LOCK:
         s,at,p,status=authorized_package(sid,story_id,x_producer_token);meta,messages=inputs(s,at)
+        if p['schema_version'] in {'5.0.0','6.0.0'}:
+            related=[]
+            for other in materialize_all(s,at):
+                if other['id']==p['id'] or other.get('incident_id')!=p['incident_id']:continue
+                _,published=publication(s,other,at)
+                if not producer(x_producer_token) and not published:continue
+                related.append({'id':other['id'],'revision':other['revision'],'family':other.get('family','pass'),
+                                'texts':{lang:next(v['text'] for v in other['variants'] if v['language']==lang and v['detail']=='detail' and not v['focus']) for lang in ['en','es']},
+                                'source_message_ids':other['metrics']['source_message_ids'],'evidence_revision':other['evidence_revision']})
+            dependencies=set(p['metrics']['source_message_ids'])
+            rows=[m for m in available(messages,p['metrics']['input_cutoff_ms']) if m['message_id'] in dependencies]
+            return {'story':p if producer(x_producer_token) else {k:p[k] for k in ['id','revision','title','claims','metrics','variants','evidence_revision','family','incident_id','entities']},
+                    'frames':[], 'events':[m for m in rows if m['kind']=='event'],'related_stories':related,
+                    'sources':[{'message_id':m['message_id'],'timeline_ms':m['timeline_ms'],'available_at_ms':m['available_at_ms'],'revision':m['revision'],'kind':m['payload']['type'] if m['kind']=='event' else 'tracking_frame','hash':digest(m)} for m in rows],
+                    'cutoff_ms':p['metrics']['input_cutoff_ms'],'status':status}
         start=p['metrics']['pressure_window_ms'][0];end=p['metrics']['retention_confirmed_at_ms']
         rows=EvidenceTools(meta,messages,at).get_sequence(start,end)
         frames=[{'time_ms':m['timeline_ms'],'payload':m['payload'],'message_id':m['message_id']} for m in rows if m['kind']=='tracking_frame']
@@ -421,11 +546,13 @@ def review(sid:str,story_id:str,body:Review,x_producer_token:str|None=Header(Non
         s,at,p,status=authorized_package(sid,story_id,x_producer_token)
         if body.expected_revision!=p['revision'] or body.package_hash!=p['package_hash']:fail(409,'stale_revision')
         if body.action in ('approve','edit') and at>=p['expires_at_ms']:fail(409,'expired')
+        if body.action=='approve_archive' and at<p['expires_at_ms']:fail(409,'archive_requires_expired_candidate')
         if body.action=='retract':
             decision=repo.decision(sid,story_id)
             if not decision or decision['status']!='approved' or decision['revision']!=p['revision'] or decision['package_hash']!=p['package_hash']:
                 fail(409,'not_published')
         if body.action=='edit':
+            if p['schema_version'] in {'5.0.0','6.0.0'}:fail(422,'event_text_is_source_rendered')
             if not body.angle and (not body.text or not body.text.strip()):fail(422,'edit_text_required')
             if body.angle and not STRUCTURED:fail(422,'emphasis_requires_structured_package')
             if body.angle=='historical_contrast' and 'c-context' not in {c['id'] for c in p['claims']}:
@@ -433,9 +560,9 @@ def review(sid:str,story_id:str,body:Review,x_producer_token:str|None=Header(Non
             meta,messages=inputs(s,at);p=workflow(EvidenceTools(meta,messages,at,pass_id=p['metrics']['pass_id']),revision=p['revision']+1,proposed_text=body.text,session_id=sid,**({'editorial_angle':body.angle} if body.angle else {}))
             if p is None:fail(422,'review_rejected')
             new_status='ready'
-        else:new_status={'approve':'approved','suppress':'suppressed','retract':'retracted'}[body.action]
+        else:new_status={'approve':'approved','approve_archive':'approved','suppress':'suppressed','retract':'retracted'}[body.action]
         record(repo,sid,'approval_received',[body.idempotency_key,body.action],story_id=story_id,revision=p['revision'],action=body.action,replay_ms=at)
-        result={'story_id':story_id,'status':new_status,'revision':p['revision'],'at_ms':at,'review':p['review']}
+        result={'story_id':story_id,'status':new_status,'revision':p['revision'],'at_ms':at,'archive_only':body.action=='approve_archive','review':p['review']}
         # The repository commits decision, audit, and idempotency in one partition transaction.
         try:
             return repo.commit_review(sid,body.idempotency_key,request_hash,body.expected_revision,body.package_hash,p,new_status,at,result,edited=body.action=='edit')
@@ -470,7 +597,8 @@ def recap(sid:str,body:RecapRequest):
                 approved.append(p)
         if body.focus and body.focus not in {x['id'] for x in inputs(s,now)[0]['players']+inputs(s,now)[0]['teams']}:
             fail(400,'invalid_preference')
-        return {'title':'El partido hasta ahora' if body.language=='es' else 'Match so far',
+        meta,messages=inputs(s,now)
+        return {'title':('Resumen del segmento' if body.language=='es' else 'Segment catch-up') if s['match_id'] in MIXED_IDS else ('El partido hasta ahora' if body.language=='es' else 'Match so far'), 'match_state':match_state(meta,messages,now),
                 'through_ms':cutoff, 'mode':'approved moments only',
                 **project_recap(approved,body.language,cutoff,body.focus)}
 

@@ -1,0 +1,16 @@
+{
+  "generator": "simulator.flagship",
+  "status": "Authored demonstration; football review pending; old exports unchanged",
+  "cases": [
+    {
+      "match_id": "match-0c0a000000000005",
+      "sha256": "8a559b513d0e435cc6181886613e226711702f5954755b8bdbd23b960f7dcc9d",
+      "observations": 2428
+    },
+    {
+      "match_id": "match-0c0a000000000006",
+      "sha256": "ad962bd2475dc19f375b36cd00f9f3aa354e81d05c170bd42e4cba4e86de09e5",
+      "observations": 2429
+    }
+  ]
+}

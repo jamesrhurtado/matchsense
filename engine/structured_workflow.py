@@ -253,3 +253,71 @@ def run_structured_workflow(tools, revision=1, proposed_text=None, *, provider=N
                                    limits or Limits(deadline_s=15,model_calls=6),outcome_callback,editorial_angle))
     finally:
         _GATE.release()
+
+
+class EventSelection(Output):
+    action: Literal['propose','abstain']
+    claim_ids: list[Literal['c-event']] = Field(max_length=1)
+    reason: str = Field(max_length=400)
+
+class EventVerdict(Output):
+    action: Literal['supported','reject']
+    claim_ids: list[Literal['c-event']] = Field(max_length=1)
+    reason: str = Field(max_length=400)
+
+
+def run_event_workflow(tools, family, subject_id, revision=1, *, provider=None, limits=None, outcome_callback=None):
+    """Existing Director/Reviewer roles and ceilings, v5 fact grammar.
+
+    Source facts and all text are recomputed independently before the reviewer.
+    Model can select the composite family fact or abstain; no free prose slot.
+    This adapter is opt-in until the configured deployment is actually verified.
+    """
+    from engine.event_narrative import build_event_package, EventPackage
+    m=tools.get_event_facts(family,subject_id)
+    if not m:return None
+    baseline=build_event_package(m,tools.metadata,revision)
+    async def execute():
+        owned=provider is None
+        selected_provider=provider
+        runner=ObservedRunner(tools,provider,limits or Limits(deadline_s=15,model_calls=2),outcome_callback)
+        package=deepcopy(baseline);terminal='produced';reason=None
+        try:
+            async with asyncio.timeout(runner.limits.deadline_s):
+                if owned:selected_provider=AgentFrameworkProvider();runner.provider=selected_provider
+                # Omit source hash arrays from the bounded prompt; tools retain them.
+                payload={'family':family,'roles':m['participants'],'facts':{k:v for k,v in m['facts'].items() if k not in {'source_message_ids','source_hashes'}},
+                         'available_through_ms':tools.cutoff_ms,'claim_ids':['c-event'],
+                         'text':{lang:next(v['text'] for v in baseline['variants'] if v['language']==lang and v['detail']=='detail' and v['focus'] is None) for lang in ['en','es']}}
+                draft=await runner.call('Story Director','Select the supplied observed family fact or abstain. No edits, scores, causes or roles may be invented.',payload,EventSelection)
+                if draft.action=='abstain':terminal='abstained';reason=draft.reason;return None
+                if draft.claim_ids!=['c-event']:raise WorkflowLimit('missing_event_fact')
+                fresh=tools.get_event_facts(family,subject_id)
+                if fresh!=m:raise WorkflowLimit('stale_event_evidence')
+                verdict=await runner.call('Claim Reviewer','Verify only the supplied source fact and exact bilingual text. Return supported with c-event, or reject; no publication authority.',payload,EventVerdict)
+                if verdict.action=='reject':terminal='rejected';reason=verdict.reason;return None
+                if verdict.claim_ids!=['c-event']:raise WorkflowLimit('incomplete_event_verdict')
+                package['mode']='Microsoft Agent Framework + Azure OpenAI'
+                package['review']['mode']='foundry';package['review']['reason']=verdict.reason
+        except Exception as exc:
+            terminal='fallback';reason=str(exc) if isinstance(exc,WorkflowLimit) else type(exc).__name__
+            package['mode']='template fallback';package['review']['mode']='template_fallback'
+            package['review']['reason']='AI selection unavailable or invalid; source-rendered v5 fact used.'
+            runner.trace.append({'role':'Workflow','action':'template_fallback','status':reason,'elapsed_ms':runner.elapsed()})
+        finally:
+            if owned and selected_provider:
+                try:await asyncio.wait_for(selected_provider.close(),timeout=2)
+                except Exception:pass
+            runner.report(terminal,reason)
+        package.update(trace=runner.trace,workflow_ms=runner.elapsed(),model_usage=usage_for(runner))
+        package['package_hash']=digest({k:v for k,v in package.items() if k!='package_hash'})
+        EventPackage.model_validate(package)
+        return package
+    if not _GATE.acquire(blocking=False):
+        baseline['mode']='template fallback';baseline['review']['mode']='template_fallback'
+        baseline['review']['reason']='Workflow concurrency limit; source-rendered v5 fact used.'
+        baseline['package_hash']=digest({k:v for k,v in baseline.items() if k!='package_hash'})
+        if outcome_callback:outcome_callback({'state':'fallback','usage':baseline['model_usage'],'trace':baseline['trace'],'reason':'concurrency_limit'})
+        return baseline
+    try:return asyncio.run(execute())
+    finally:_GATE.release()

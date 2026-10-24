@@ -45,6 +45,8 @@ class PossessionDetails(Strict):
     new_team_id:str|None
     controlling_player_id:str|None
     reason:str
+    incident_id:str|None=None
+    pass_id:str|None=None
 class PlayDetails(Strict):
     ball_status:Literal['controlled','in_flight','loose','out_of_play','unknown']
     reason:str
@@ -65,7 +67,44 @@ class PossessionChanged(EventBase):
 class PlayStateChanged(EventBase):
     type:Literal['play_state_changed']
     details:PlayDetails
-EventPayload=Annotated[PassStarted|PassResolved|PossessionChanged|PlayStateChanged,Field(discriminator='type')]
+class ShotStartDetails(Strict):
+    shot_id:str=Field(min_length=1,max_length=80,pattern=r'^[A-Za-z0-9_-]+$')
+    location:Point|None=None
+class ShotEndDetails(ShotStartDetails):
+    outcome:Literal['goal','saved','blocked','off_target','unknown']
+class GoalDetails(Strict):
+    goal_id:str=Field(min_length=1,max_length=80,pattern=r'^[A-Za-z0-9_-]+$')
+    status:Literal['pending','confirmed','cancelled']
+    scorer_id:str|None=None
+    shot_id:str|None=None
+    own_goal:bool=False
+class RecoveryDetails(Strict):
+    incident_id:str=Field(min_length=1,max_length=80,pattern=r'^[A-Za-z0-9_-]+$')
+    previous_team_id:str|None
+    cause:Literal['tackle','interception','loose_ball','unknown']='unknown'
+    pass_id:str|None=None
+class PeriodDetails(Strict):
+    status:Literal['started','ended']
+class ShotStarted(EventBase):
+    team_id:str=Field(min_length=1)
+    type:Literal['shot_started']
+    details:ShotStartDetails
+class ShotResolved(EventBase):
+    team_id:str=Field(min_length=1)
+    type:Literal['shot_resolved']
+    details:ShotEndDetails
+class GoalStatusChanged(EventBase):
+    team_id:str=Field(min_length=1)
+    type:Literal['goal_status_changed']
+    details:GoalDetails
+class BallRecovered(EventBase):
+    team_id:str=Field(min_length=1)
+    type:Literal['ball_recovered']
+    details:RecoveryDetails
+class PeriodStateChanged(EventBase):
+    type:Literal['period_state_changed']
+    details:PeriodDetails
+EventPayload=Annotated[PassStarted|PassResolved|PossessionChanged|PlayStateChanged|ShotStarted|ShotResolved|GoalStatusChanged|BallRecovered|PeriodStateChanged,Field(discriminator='type')]
 class Envelope(Strict):
     schema_version:Literal['1.0.0']
     match_id:str

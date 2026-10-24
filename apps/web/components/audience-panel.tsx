@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ArrowLeft, Clock3, ScanLine } from "lucide-react";
 import { cn, Evidence, Story, Variant, timecode } from "@/lib/api";
 import { Button, Card, Tag } from "./ui";
@@ -7,12 +8,25 @@ import { InlineEvidence } from "./inline-evidence";
 export function relevantStories(stories: Story[], focus: string) {
   return !focus
     ? stories
-    : stories.filter(
-        (story) =>
-          story.team_id === focus ||
-          story.passer_id === focus ||
-          story.receiver_id === focus,
-      );
+    : stories
+        .flatMap((story) => [story, ...(story.related_stories || [])])
+        .filter(
+          (story) =>
+            story.team_id === focus ||
+            story.passer_id === focus ||
+            story.receiver_id === focus ||
+            Object.values(story.participants || {}).includes(focus) ||
+            (story.family === "possession" &&
+              ["blue", "amber"].includes(focus)),
+        )
+        .filter(
+          (story, index, rows) =>
+            rows.findIndex(
+              (other) =>
+                (other.incident_id || other.id) ===
+                (story.incident_id || story.id),
+            ) === index,
+        );
 }
 export function StoryPicker({
   stories,
@@ -28,6 +42,9 @@ export function StoryPicker({
   language?: string;
 }) {
   const es = language === "es";
+  const [family, setFamily] = useState("");
+  const [showArchive, setShowArchive] = useState(false);
+  const mixed = stories.some((s) => s.family && s.family !== "pass");
   return (
     <div
       className={cn(
@@ -43,43 +60,102 @@ export function StoryPicker({
             : "Approved moments"
       }
     >
-      {stories.map((item, index) => (
-        <button
-          key={item.id}
-          type="button"
-          aria-pressed={selected === item.id}
-          onClick={() => onSelect(item.id)}
-          className={cn(
-            "flex min-h-11 w-full items-center justify-between gap-3 rounded-lg border px-3 py-2 text-left text-sm",
-            selected === item.id
-              ? "border-emerald-300 bg-emerald-50 text-emerald-950"
-              : "border-stone-200 bg-white text-stone-600 hover:bg-stone-50",
-          )}
-        >
-          <span className="min-w-0">
-            <span className="block font-medium">
-              {es ? "Momento" : "Moment"} {index + 1} ·{" "}
-              {timecode(item.eligible_from_ms)}
+      {mixed && (
+        <label className="block text-sm">
+          {es ? "Categoría" : "Event family"}
+          <select
+            aria-label={es ? "Categoría" : "Event family"}
+            value={family}
+            onChange={(e) => setFamily(e.target.value)}
+            className="my-2 min-h-11 w-full rounded border border-stone-200 bg-white px-3"
+          >
+            <option value="">{es ? "Todos" : "All events"}</option>
+            {[
+              ["goal", "Goals", "Goles"],
+              ["shot", "Shots", "Remates"],
+              ["pressure", "Pressure Swing", "Cambio de presión cercana"],
+              ["recovery", "Control changes", "Cambios de control"],
+              ["possession", "Possession", "Posesión"],
+              ["pass", "Passes", "Pases"],
+            ].map(([id, en, esLabel]) => (
+              <option value={id} key={id}>
+                {es ? esLabel : en}
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
+      {producer && mixed && (
+        <label className="flex min-h-11 items-center gap-2 text-sm">
+          <input
+            type="checkbox"
+            checked={showArchive}
+            onChange={(e) => setShowArchive(e.target.checked)}
+          />
+          {es ? "Incluir candidatos archivados" : "Include archived candidates"}
+        </label>
+      )}
+      {stories
+        .filter(
+          (s) => !producer || !mixed || showArchive || s.queue_state === "live",
+        )
+        .flatMap((s) =>
+          family && s.family !== family && s.related_stories?.length
+            ? s.related_stories.filter((related) => related.family === family)
+            : [s],
+        )
+        .filter((s) => !family || (s.family || "pass") === family)
+        .map((item, index) => (
+          <button
+            key={item.id}
+            type="button"
+            aria-pressed={selected === item.id}
+            onClick={() => onSelect(item.id)}
+            className={cn(
+              "flex min-h-11 w-full items-center justify-between gap-3 rounded-lg border px-3 py-2 text-left text-sm",
+              selected === item.id
+                ? "border-emerald-300 bg-emerald-50 text-emerald-950"
+                : "border-stone-200 bg-white text-stone-600 hover:bg-stone-50",
+            )}
+          >
+            <span className="min-w-0">
+              <span className="block font-medium">
+                {es ? "Momento" : "Moment"} {index + 1} ·{" "}
+                {timecode(item.eligible_from_ms)}
+              </span>
+              <span className="block text-xs">
+                {item.family && (
+                  <span className="capitalize">
+                    {(
+                      {
+                        goal: es ? "Gol" : "Goal",
+                        shot: es ? "Remate" : "Shot",
+                        recovery: es ? "Control" : "Control",
+                        possession: es ? "Posesión" : "Possession",
+                        pass: es ? "Pase" : "Pass",
+                      } as Record<string, string>
+                    )[item.family] || item.family}{" "}
+                    ·{" "}
+                  </span>
+                )}
+                {item.titles?.[language] || item.title}
+              </span>
             </span>
-            <span className="block text-xs">
-              {item.titles?.[language] || item.title}
+            <span className="shrink-0 text-xs capitalize">
+              {item.approved && item.status === "expired"
+                ? es
+                  ? "Aprobado · archivo"
+                  : "Approved · archived"
+                : es
+                  ? {
+                      approved: "Aprobado",
+                      expired: "Archivado",
+                      ready: "Listo",
+                    }[item.status] || item.status
+                  : item.status}
             </span>
-          </span>
-          <span className="shrink-0 text-xs capitalize">
-            {item.approved && item.status === "expired"
-              ? es
-                ? "Aprobado · archivo"
-                : "Approved · archived"
-              : es
-                ? {
-                    approved: "Aprobado",
-                    expired: "Archivado",
-                    ready: "Listo",
-                  }[item.status] || item.status
-                : item.status}
-          </span>
-        </button>
-      ))}
+          </button>
+        ))}
     </div>
   );
 }
@@ -100,6 +176,7 @@ export function AudiencePanel({
   viewingEarlier,
   onReturnLive,
   controls,
+  flagship = false,
 }: {
   story: Story | null | undefined;
   stories: Story[];
@@ -117,6 +194,7 @@ export function AudiencePanel({
   viewingEarlier: boolean;
   onReturnLive: () => void;
   controls: React.ReactNode;
+  flagship?: boolean;
 }) {
   const es = language === "es";
   return (
@@ -185,8 +263,8 @@ export function AudiencePanel({
           </p>
           <p className="mt-2 text-pretty text-xs leading-relaxed text-stone-600">
             {es
-              ? "Solo se muestra participación verificada como pasador, receptor o equipo en posesión."
-              : "Only verified passer, receiver, or possession-team involvement appears here. Older stories may lack that information."}
+              ? "Solo se muestra participación verificada en el evento o equipo."
+              : "Only verified event roles and team involvement appear here. Older stories may lack that information."}
           </p>
           <Button className="mt-3" onClick={onWholePlay}>
             <ArrowLeft size={14} />
@@ -214,10 +292,40 @@ export function AudiencePanel({
         </p>
       )}
 
+      {flagship && story?.why_now && (
+        <section
+          className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 p-4"
+          aria-label={es ? "Por qué este momento" : "Why this moment"}
+        >
+          <h3 className="text-sm font-semibold text-emerald-950">
+            {es ? "¿Por qué este momento?" : "Why this moment?"}
+          </h3>
+          <p
+            lang={language}
+            className="mt-2 text-pretty text-sm leading-relaxed text-emerald-950"
+          >
+            {story.why_now[language]}
+          </p>
+          <p className="mt-3 text-xs text-emerald-900">
+            {es ? "Estado de evidencia" : "Evidence status"}:{" "}
+            {story.evidence_state === "complete"
+              ? es
+                ? "Observaciones requeridas disponibles"
+                : "Required observations available"
+              : story.evidence_state === "awaiting_outcome"
+                ? es
+                  ? "Resultado sin confirmar"
+                  : "Outcome unconfirmed"
+                : es
+                  ? "Observaciones limitadas"
+                  : "Limited observations"}
+          </p>
+        </section>
+      )}
       <div className="mt-4 flex flex-wrap gap-2">
         <Button disabled={!story} onClick={onEvidence}>
           <ScanLine size={15} />
-          {es ? "Ver evidencia" : "Show why"}
+          {es ? "Ver evidencia" : flagship ? "Check the evidence" : "Show why"}
         </Button>
         <Button onClick={onRecap}>
           <Clock3 size={15} />

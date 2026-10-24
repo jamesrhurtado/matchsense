@@ -1,10 +1,23 @@
+import { EventEvidence } from "./event-evidence";
 import { useState } from "react";
 import { cn, Evidence, Variant, timecode } from "@/lib/api";
 import Pitch from "./pitch";
 import { PassComparison } from "./pass-comparison";
 
 /** Clause bindings select recorded frames; the arrow measures displacement only. */
-export function InlineEvidence({
+export function InlineEvidence(props: {
+  evidence: Evidence;
+  variant: Variant | null;
+  language: string;
+  focus: string;
+}) {
+  return props.evidence.story.metrics.family ? (
+    <EventEvidence data={props.evidence} language={props.language} compact />
+  ) : (
+    <PassInlineEvidence {...props} />
+  );
+}
+function PassInlineEvidence({
   evidence,
   variant,
   language,

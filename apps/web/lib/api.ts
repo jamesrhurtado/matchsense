@@ -12,6 +12,7 @@ export type Player = {
   team_id: string;
   name: string;
   number: number;
+  role?: "keeper" | "outfield";
 };
 export type Frame = {
   players: { player_id: string; team_id: string; x_m: number; y_m: number }[];
@@ -24,8 +25,18 @@ export type Story = {
   revision: number;
   title: string;
   titles?: Record<string, string>;
+  family?: string;
+  why_now?: Record<string, string>;
+  evidence_state?: string;
+  notable?: boolean;
+  incident_id?: string;
+  participants?: Record<string, string | null>;
+  related_stories?: Story[];
+  selection_reason?: string;
+  queue_state?: string;
   evidence_revision: string;
   eligible_from_ms: number;
+  occurrence_ms?: number;
   expires_at_ms: number;
   status: string;
   approved?: boolean;
@@ -36,6 +47,22 @@ export type Story = {
 };
 export type Match = {
   session_id: string;
+  score?: Record<string, number>;
+  match_state?: {
+    score: Record<string, number>;
+    period: number;
+    period_elapsed_ms: number;
+    period_status: string;
+    source_status: string;
+  };
+  approved_possession?: {
+    interval: number[];
+    text: string;
+    story_id: string;
+  } | null;
+  coverage_enabled?: boolean;
+  guided_demo?: boolean;
+  flagship_demo?: boolean;
   clock_ms: number;
   duration_ms: number;
   running: boolean;
@@ -48,6 +75,7 @@ export type Match = {
   story_status: string;
   overlay: string | null;
   overlay_story_id?: string | null;
+  overlay_selection_reason?: Record<string, string> | null;
   delivered_count: number;
   frame: Frame | null;
   teams: { id: string; name: string; color: string }[];
@@ -55,6 +83,47 @@ export type Match = {
   cursor: number;
 };
 export type Metrics = {
+  family?: string;
+  participants?: Record<string, string | null>;
+  window_start_ms?: number;
+  window_end_ms?: number;
+  facts?: {
+    before?: {
+      start_ms: number;
+      end_ms: number;
+      known_ms: number;
+      coverage: number;
+      mean: number;
+    };
+    after?: {
+      start_ms: number;
+      end_ms: number;
+      known_ms: number;
+      coverage: number;
+      mean: number;
+    };
+    forward_m?: number;
+    drop?: number;
+    radius_m?: number;
+    comparators?: {
+      pass_id: string;
+      forward_m: number;
+      resolution_ms: number;
+    }[];
+    stands_out?: boolean;
+    location?: { x_m: number; y_m: number } | null;
+    team_ms?: Record<string, number>;
+    percentages?: Record<string, number> | null;
+    assigned_ms?: number;
+    coverage?: number;
+    dead_ms?: number;
+    loose_ms?: number;
+    unknown_ms?: number;
+    score?: Record<string, number>;
+    score_before?: Record<string, number>;
+    previous_team_id?: string | null;
+    new_team_id?: string;
+  };
   forward_pass_m?: number;
   release_ms?: number;
   reception_ms?: number;
@@ -94,6 +163,22 @@ export type Variant = {
   clauses?: { id: string; claim_ids: string[]; text: string }[];
 };
 export type Evidence = {
+  related_stories?: {
+    id: string;
+    revision: number;
+    family: string;
+    texts: Record<string, string>;
+    source_message_ids: string[];
+    evidence_revision: string;
+  }[];
+  sources?: {
+    message_id: string;
+    timeline_ms?: number;
+    available_at_ms?: number;
+    kind?: string;
+    revision?: number;
+    hash?: string;
+  }[];
   cutoff_ms: number;
   frames: { time_ms: number; payload: Frame; message_id: string }[];
   story: {
@@ -102,6 +187,7 @@ export type Evidence = {
     package_hash: string;
     evidence_revision: string;
     metrics: Metrics;
+    entities?: { players: Player[]; teams: { id: string; name: string }[] };
     narrative_plan?: { angle: string };
     variants: Variant[];
     mode: string;
@@ -126,6 +212,9 @@ export type Evidence = {
 export type Recap = {
   title: string;
   through_ms: number;
+  truncated?: boolean;
+  timeline_count?: number;
+  match_state?: Match["match_state"];
   moments: {
     story_id: string;
     revision: number;

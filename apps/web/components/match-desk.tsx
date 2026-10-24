@@ -34,7 +34,7 @@ import {
   Variant,
 } from "@/lib/api";
 import { Button, Card, Tag } from "./ui";
-import Pitch from "./pitch";
+import { MatchStage } from "./match-stage";
 import { AudiencePanel, StoryPicker, relevantStories } from "./audience-panel";
 import { useMatch } from "@/hooks/use-match";
 import { useRenderAck } from "@/hooks/use-render-ack";
@@ -61,8 +61,12 @@ export default function MatchDesk({
   );
   const [actionError, setActionError] = useState("");
   const [busy, setBusy] = useState(false);
+  const [guidedPauses, setGuidedPauses] = useState(true);
+  const [guidedNotice, setGuidedNotice] = useState("");
+  const guidedFamilies = useRef(new Set<string>());
   const [evidence, setEvidence] = useState<Evidence | null>(null);
   const [showEvidence, setShowEvidence] = useState(false);
+  const evidencePanel = useRef<HTMLDivElement>(null);
   const [diagnostics, setDiagnostics] = useState<Record<
     string,
     unknown
@@ -77,10 +81,12 @@ export default function MatchDesk({
       : match?.story;
   const stories = match?.stories || (match?.story ? [match.story] : []);
   const focusedStories = relevantStories(stories, focus);
-  const audienceStory =
-    focus && !focusedStories.some((item) => item.id === story?.id)
-      ? null
-      : story;
+  const storyMatchesFocus =
+    !focus ||
+    relevantStories(story ? [story] : [], focus).some(
+      (item) => item.id === story?.id,
+    );
+  const audienceStory = storyMatchesFocus ? story : null;
   const changeFocus = (next: string) => {
     setFocus(next);
     const relevant = relevantStories(stories, next);
@@ -91,7 +97,7 @@ export default function MatchDesk({
       !isProducer &&
       focus &&
       story &&
-      !focusedStories.some((item) => item.id === story.id) &&
+      !storyMatchesFocus &&
       focusedStories.length
     )
       setSelectedStoryId(focusedStories.at(-1)!.id);
@@ -100,6 +106,7 @@ export default function MatchDesk({
     focus,
     story?.id,
     focusedStories.map((item) => item.id).join(","),
+    storyMatchesFocus,
   ]);
   const storyApproved = story?.approved ?? story?.status === "approved";
   const duration = match?.duration_ms || 60000;
@@ -120,6 +127,16 @@ export default function MatchDesk({
     evidence.story.revision === story.revision
       ? evidence
       : null;
+  useEffect(() => {
+    if (showEvidence && visibleEvidence) {
+      evidencePanel.current?.scrollIntoView({ block: "start" });
+      evidencePanel.current?.focus({ preventScroll: true });
+    }
+  }, [
+    showEvidence,
+    visibleEvidence?.story.id,
+    visibleEvidence?.story.revision,
+  ]);
   const [seekSeconds, setSeekSeconds] = useState("");
   useEffect(() => {
     setEvidence(null);
@@ -131,7 +148,11 @@ export default function MatchDesk({
     if (
       selectedStoryId &&
       match?.stories &&
-      !match.stories.some((s) => s.id === selectedStoryId) &&
+      !match.stories.some(
+        (s) =>
+          s.id === selectedStoryId ||
+          s.related_stories?.some((related) => related.id === selectedStoryId),
+      ) &&
       match.story?.id !== selectedStoryId
     )
       setSelectedStoryId("");
@@ -146,10 +167,6 @@ export default function MatchDesk({
         usage_complete?: boolean;
       }
     | undefined;
-  useEffect(
-    () => setRecap(null),
-    [story?.id, story?.revision, match?.story_status],
-  );
   const recapContext = `${id}:${language}:${focus}:${stories.map((item) => `${item.id}:${item.revision}:${item.status}`).join(",")}`;
   const currentRecapContext = useRef(recapContext);
   currentRecapContext.current = recapContext;
@@ -203,6 +220,7 @@ export default function MatchDesk({
   }, [isProducer, path, audienceStory?.id, audienceStory?.revision]);
   async function control(action: string, speed?: number, clock_ms?: number) {
     setActionError("");
+    if (action === "start") setGuidedNotice("");
     try {
       const data = await api<{ session_id: string }>(
         `${path}/control`,
@@ -223,6 +241,40 @@ export default function MatchDesk({
       setActionError((e as Error).message);
     }
   }
+  useEffect(() => {
+    if (!isProducer || !match?.guided_demo || !guidedPauses || !match.running)
+      return;
+    const next = stories.find(
+      (item) =>
+        !item.approved &&
+        item.status === "ready" &&
+        item.eligible_from_ms <= match.clock_ms &&
+        item.expires_at_ms > match.clock_ms &&
+        !guidedFamilies.current.has(item.family || "pass") &&
+        (item.family !== "pressure" || item.notable) &&
+        (!match.flagship_demo ||
+          item.family !== "recovery" ||
+          match.clock_ms >=
+            (item.occurrence_ms ?? item.eligible_from_ms) + 3000) &&
+        (item.family !== "possession" || item.eligible_from_ms >= 60000),
+    );
+    if (!next) return;
+    const family = next.family || "pass";
+    guidedFamilies.current.add(family);
+    setSelectedStoryId(next.id);
+    setGuidedNotice(
+      `Paused for review: ${family === "recovery" ? "change of control" : family}. Inspect the evidence, approve or skip, then press Play to continue.`,
+    );
+    void control("pause");
+  }, [
+    isProducer,
+    match?.guided_demo,
+    match?.running,
+    match?.clock_ms,
+    stories,
+    guidedPauses,
+  ]);
+
   async function review(action: string, text?: string, angle?: string) {
     if (!story) return;
     setBusy(true);
@@ -491,7 +543,7 @@ export default function MatchDesk({
         <div
           className={cn(
             "grid items-start gap-6",
-            isProducer ? "xl:grid-cols-3" : "lg:grid-cols-2",
+            isProducer ? "lg:grid-cols-3" : "lg:grid-cols-2",
           )}
         >
           <div
@@ -500,64 +552,10 @@ export default function MatchDesk({
             aria-label={
               language === "es" ? "Repetición en directo" : "Live replay"
             }
-            className={cn("min-w-0", isProducer && "xl:col-span-2")}
+            className={cn("min-w-0", isProducer && "lg:col-span-2")}
           >
-            <section className="overflow-hidden rounded-2xl border border-emerald-950 bg-emerald-950 text-white">
-              <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-4">
-                <div className="flex items-center gap-3 text-sm font-semibold">
-                  <span className="size-2 rounded-full bg-blue-400" />
-                  HBC
-                  <span className="rounded-md bg-white/10 px-3 py-1 tabular-nums">
-                    0 : 0
-                  </span>
-                  ALD
-                  <span className="size-2 rounded-full bg-amber-400" />
-                </div>
-                <span className="flex items-center gap-2 text-xs text-emerald-200">
-                  <span className="rounded bg-white/10 px-2 py-1 font-mono tabular-nums">
-                    {timecode(match?.clock_ms || 0)}
-                  </span>
-                  {match?.running
-                    ? language === "es"
-                      ? "REPETICIÓN EN CURSO"
-                      : "REPLAY RUNNING"
-                    : (match?.clock_ms || 0) >= duration
-                      ? language === "es"
-                        ? "SEGMENTO COMPLETO"
-                        : "SEGMENT COMPLETE"
-                      : language === "es"
-                        ? "REPETICIÓN PAUSADA"
-                        : "REPLAY PAUSED"}
-                  {match?.speed !== 1 && <span>{match?.speed}×</span>}
-                </span>
-              </div>
-              <Pitch frame={match?.frame || null} language={language} />
-              <div className="border-t border-white/10 px-5 py-4">
-                <div className="mb-2 flex items-center gap-2 text-xs font-medium text-emerald-200">
-                  <Radio size={12} />
-                  {language === "es"
-                    ? "TEXTO COMPARTIDO DE LA TRANSMISIÓN"
-                    : "SHARED BROADCAST OVERLAY"}
-                </div>
-                {match?.overlay ? (
-                  <p className="max-w-xl text-pretty text-base leading-relaxed">
-                    {match.overlay}
-                  </p>
-                ) : (
-                  <p className="text-sm text-emerald-200/70">
-                    {story && match?.story_status === "expired"
-                      ? language === "es"
-                        ? "Terminó el intervalo en pantalla. El momento aprobado sigue disponible en el historial."
-                        : "Display interval ended. The approved moment remains available in the companion."
-                      : language === "es"
-                        ? "Las historias aprobadas aparecen aquí durante su intervalo de repetición."
-                        : "Approved stories appear here at their eligible replay time."}
-                  </p>
-                )}
-              </div>
-            </section>
             {isProducer && (
-              <div className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-stone-200 bg-white p-3">
+              <div className="mb-3 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-stone-200 bg-white p-3">
                 <div className="flex items-center gap-2">
                   <Button
                     disabled={!match || match.clock_ms >= duration}
@@ -628,19 +626,109 @@ export default function MatchDesk({
                     Jump forward
                   </Button>
                 </div>
-                <span className="pr-2 text-xs tabular-nums text-stone-400">
-                  {match?.delivered_count || 0} observations delivered
-                </span>
+                <details className="text-xs text-stone-500">
+                  <summary className="flex min-h-11 items-center">
+                    Replay data details
+                  </summary>
+                  <p className="max-w-sm pb-2 leading-relaxed">
+                    <span className="tabular-nums">
+                      {match?.delivered_count || 0} observations delivered.
+                    </span>{" "}
+                    These are position samples and source records, not a count
+                    of football incidents. Reviewable moments appear in the
+                    story queue.
+                  </p>
+                </details>
               </div>
             )}
 
+            {isProducer && match?.guided_demo && (
+              <div className="mb-3 rounded-xl border border-sky-200 bg-sky-50 p-4 text-sm text-sky-950">
+                <label className="flex min-h-11 items-center gap-3 font-semibold">
+                  <input
+                    type="checkbox"
+                    checked={guidedPauses}
+                    onChange={(e) => setGuidedPauses(e.target.checked)}
+                    className="size-4"
+                  />
+                  Pause at new event types
+                </label>
+                <p className="mt-1 text-xs leading-relaxed">
+                  Play the segment → inspect a moment’s evidence → approve it
+                  for viewers. Guided pauses stop at the first example of each
+                  event type; turn them off for continuous playback.
+                </p>
+                {guidedNotice && (
+                  <div className="mt-3">
+                    <p role="status" className="font-medium">
+                      {guidedNotice}
+                    </p>
+                    <Button
+                      className="mt-3"
+                      onClick={() => {
+                        document
+                          .getElementById("story-queue")
+                          ?.scrollIntoView({ block: "start" });
+                        document
+                          .getElementById("story-queue")
+                          ?.focus({ preventScroll: true });
+                      }}
+                    >
+                      Review paused moment
+                    </Button>
+                  </div>
+                )}
+              </div>
+            )}
+            <MatchStage
+              match={match}
+              language={language}
+              expired={Boolean(story && match?.story_status === "expired")}
+            />
             {showEvidence && visibleEvidence && (
-              <EvidenceReplay
-                data={visibleEvidence}
-                language={language}
-                onClose={() => setShowEvidence(false)}
-                focus={focus}
-              />
+              <div
+                ref={evidencePanel}
+                tabIndex={-1}
+                aria-label={
+                  language === "es"
+                    ? "Evidencia del momento seleccionado"
+                    : "Evidence for the selected moment"
+                }
+                className="scroll-mt-4"
+              >
+                <EvidenceReplay
+                  data={visibleEvidence}
+                  language={language}
+                  onClose={() => setShowEvidence(false)}
+                  focus={focus}
+                />
+              </div>
+            )}
+            {match?.approved_possession && (
+              <Card className="mt-5 p-4">
+                <h2 className="font-semibold">
+                  {language === "es"
+                    ? "Posesión aprobada"
+                    : "Approved possession window"}
+                </h2>
+                <p className="mt-2 text-sm">
+                  {timecode(match.approved_possession.interval[0])}–
+                  {timecode(match.approved_possession.interval[1])}
+                </p>
+                <Button
+                  className="mt-2"
+                  onClick={() =>
+                    setSelectedStoryId(match.approved_possession!.story_id)
+                  }
+                >
+                  {language === "es" ? "Abrir intervalo" : "Open window"}
+                </Button>
+                <p className="mt-2 text-xs text-stone-500">
+                  {language === "es"
+                    ? "Intervalo fijo aprobado; no es una estadística de todo el partido."
+                    : "Fixed approved interval; not a full-match statistic."}
+                </p>
+              </Card>
             )}
             {recap && (
               <Card className="mt-6 p-6">
@@ -662,6 +750,23 @@ export default function MatchDesk({
                     <X size={18} />
                   </button>
                 </div>
+                {recap.match_state && (
+                  <p className="mt-3 text-sm">
+                    {language === "es"
+                      ? "Marcador confirmado actual"
+                      : "Current source-confirmed score"}
+                    : {recap.match_state.score.blue} :{" "}
+                    {recap.match_state.score.amber}
+                  </p>
+                )}
+                {recap.truncated && (
+                  <p className="mt-2 text-xs">
+                    {language === "es"
+                      ? "Resumen limitado; historial completo"
+                      : "Recap shortened; complete approved timeline"}
+                    : {recap.timeline_count}
+                  </p>
+                )}
                 {recap.moments.length ? (
                   recap.moments.map((m) => (
                     <article
@@ -742,6 +847,7 @@ export default function MatchDesk({
           {!isProducer && (
             <aside className="order-first min-w-0 lg:order-last">
               <AudiencePanel
+                flagship={match?.flagship_demo}
                 story={audienceStory}
                 stories={focusedStories}
                 variant={audienceStory ? visibleVariant : null}
@@ -787,7 +893,12 @@ export default function MatchDesk({
             </aside>
           )}
           {isProducer && (
-            <aside className="order-first space-y-5 xl:order-last">
+            <aside
+              id="story-queue"
+              tabIndex={-1}
+              aria-label="Producer story queue"
+              className="order-last min-w-0 space-y-5"
+            >
               <Card className="overflow-hidden">
                 <div className="flex items-center justify-between border-b border-stone-100 p-5">
                   <h2 className="flex items-center gap-2 font-semibold">
@@ -836,14 +947,33 @@ export default function MatchDesk({
                       {visibleVariant?.text ||
                         "Loading the supported explanation…"}
                     </p>
+                    {match?.flagship_demo && story.why_now && (
+                      <section
+                        aria-label="Why this moment"
+                        className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 p-4"
+                      >
+                        <h4 className="text-sm font-semibold text-emerald-950">
+                          {language === "es"
+                            ? "¿Por qué este momento?"
+                            : "Why this moment?"}
+                        </h4>
+                        <p className="mt-2 text-pretty text-sm leading-relaxed text-emerald-950">
+                          {story.why_now[language]}
+                        </p>
+                      </section>
+                    )}
                     <Button
                       onClick={() => void loadEvidence()}
                       className="mt-5 w-full"
                     >
                       <ScanLine size={15} />
-                      Show why
+                      {match?.flagship_demo ? "Check the evidence" : "Show why"}
                       <ArrowRight size={15} />
                     </Button>
+                    <p className="mt-2 text-xs leading-relaxed text-stone-500">
+                      Opens the recorded facts supporting this explanation. It
+                      does not infer a tactical cause.
+                    </p>
                     <div className="my-5 border-t border-stone-100" />
                     <div className="flex items-start gap-2 text-xs leading-relaxed text-stone-500">
                       <FileCheck2
@@ -882,6 +1012,46 @@ export default function MatchDesk({
                         {storyApproved ? "Retract" : "Suppress"}
                       </Button>
                     </div>
+                    {match?.story_status === "expired" && !storyApproved && (
+                      <Button
+                        className="mt-3 w-full"
+                        disabled={busy}
+                        onClick={() => void review("approve_archive")}
+                      >
+                        Approve for history only
+                      </Button>
+                    )}
+                    {storyApproved && match?.story_status === "approved" && (
+                      <Button
+                        className="mt-3 w-full"
+                        onClick={async () => {
+                          try {
+                            await api(
+                              `${path}/selection`,
+                              {
+                                method: "POST",
+                                body: JSON.stringify({
+                                  story_id: story.id,
+                                  expected_revision: story.revision,
+                                  package_hash: story.package_hash,
+                                }),
+                              },
+                              true,
+                            );
+                            await refresh();
+                          } catch (e) {
+                            setActionError((e as Error).message);
+                          }
+                        }}
+                      >
+                        Select shared overlay
+                      </Button>
+                    )}
+                    {story.selection_reason && (
+                      <p className="mt-3 text-xs text-stone-500">
+                        {story.selection_reason}
+                      </p>
+                    )}
                     <p className="mt-3 text-xs tabular-nums text-stone-400">
                       Display ends at {timecode(story.expires_at_ms)} · replay
                       time
@@ -898,9 +1068,9 @@ export default function MatchDesk({
                         : "Let the play tell its story."}
                     </h3>
                     <p className="mt-3 text-pretty text-sm leading-relaxed text-stone-500">
-                      A candidate appears only when pressure, a pass beyond
-                      opponents, and retained progression are supported by
-                      delivered evidence.
+                      Candidates use observed goals, resolved shots, possession
+                      windows, control changes and supported passes. Review
+                      source facts before approval.
                     </p>
                     <div className="mt-6 space-y-4 text-xs text-stone-500">
                       {[
@@ -926,14 +1096,16 @@ export default function MatchDesk({
                   </div>
                 )}
               </Card>
-              {visibleEvidence && story && (
-                <ReviewCard
-                  key={story.id}
-                  data={visibleEvidence}
-                  busy={busy}
-                  onEdit={(text, angle) => void review("edit", text, angle)}
-                />
-              )}
+              {visibleEvidence &&
+                story &&
+                (!story.family || story.family === "pass") && (
+                  <ReviewCard
+                    key={story.id}
+                    data={visibleEvidence}
+                    busy={busy}
+                    onEdit={(text, angle) => void review("edit", text, angle)}
+                  />
+                )}
               <Card className="p-5">
                 <div className="mb-3 flex items-center gap-2 text-sm font-semibold">
                   <Eye size={16} />

@@ -1,3 +1,4 @@
+import { EventEvidence } from "./event-evidence";
 import { useEffect, useState } from "react";
 import { Pause, Play, ScanLine, X } from "lucide-react";
 import { Evidence, timecode } from "@/lib/api";
@@ -5,7 +6,24 @@ import { Button, Card } from "./ui";
 import Pitch from "./pitch";
 import { displayMetres } from "./pass-comparison";
 
-export function EvidenceReplay({
+export function EvidenceReplay(props: {
+  data: Evidence;
+  onClose: () => void;
+  focus: string;
+  language?: string;
+}) {
+  if (props.data.story.metrics.family)
+    return (
+      <Card className="mt-6 p-4">
+        <Button onClick={props.onClose}>
+          {props.language === "es" ? "Cerrar evidencia" : "Close evidence"}
+        </Button>
+        <EventEvidence data={props.data} language={props.language} />
+      </Card>
+    );
+  return <PassEvidenceReplay {...props} />;
+}
+function PassEvidenceReplay({
   data,
   onClose,
   focus,

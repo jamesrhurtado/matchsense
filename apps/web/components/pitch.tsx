@@ -1,4 +1,23 @@
-import { Frame, Metrics } from "@/lib/api";
+import { useId } from "react";
+import { Frame, Metrics, Player } from "@/lib/api";
+export function ballOverlapsPlayer(frame: Frame | null) {
+  return Boolean(
+    frame?.ball &&
+    frame.players.some(
+      (p) => Math.hypot(p.x_m - frame.ball!.x_m, p.y_m - frame.ball!.y_m) < 3,
+    ),
+  );
+}
+
+export function observedBallCarrier(frame: Frame | null) {
+  if (!frame?.ball || !frame.controlling_player_id) return undefined;
+  return frame.players.find(
+    (p) =>
+      p.player_id === frame.controlling_player_id &&
+      Math.hypot(p.x_m - frame.ball!.x_m, p.y_m - frame.ball!.y_m) < 3,
+  );
+}
+
 export default function Pitch({
   frame,
   metrics,
@@ -7,7 +26,11 @@ export default function Pitch({
   trails = [],
   highlight = "all",
   language = "en",
+  broadcast = false,
+  players = [],
 }: {
+  players?: Player[];
+  broadcast?: boolean;
   frame: Frame | null;
   metrics?: Metrics;
   focus?: string | null;
@@ -17,6 +40,141 @@ export default function Pitch({
   trails?: { x_m: number; y_m: number }[][];
 }) {
   const es = language === "es";
+  const uid = useId().replace(/:/g, "");
+  const carrier = broadcast ? observedBallCarrier(frame) : undefined;
+  const ballLinked = broadcast && !carrier && ballOverlapsPlayer(frame);
+  const ball = frame?.ball;
+  // Only the ball symbol is offset. The dot and leader preserve its source position.
+  const offset =
+    ballLinked && ball
+      ? ([
+          [-3.5, -3.5],
+          [3.5, -3.5],
+          [-3.5, 3.5],
+          [3.5, 3.5],
+        ]
+          .filter(
+            ([x, y]) =>
+              ball.x_m + x >= 0 &&
+              ball.x_m + x <= 105 &&
+              ball.y_m + y >= 0 &&
+              ball.y_m + y <= 68,
+          )
+          .sort((a, b) => {
+            const clearance = (d: number[]) =>
+              Math.min(
+                ...frame!.players.map((p) =>
+                  Math.hypot(p.x_m - ball.x_m - d[0], p.y_m - ball.y_m - d[1]),
+                ),
+              );
+            return clearance(b) - clearance(a);
+          })[0] ?? [0, 0])
+      : [0, 0];
+  const keeperCarrier =
+    players.find((p) => p.id === carrier?.player_id)?.role === "keeper";
+  const badgeDx = keeperCarrier ? 2.7 : 2.3;
+  const badgeDy = keeperCarrier ? 2.3 : 1.8;
+  const badgeCorners = carrier
+    ? [
+        [badgeDx, badgeDy],
+        [-badgeDx, badgeDy],
+        [badgeDx, -badgeDy],
+        [-badgeDx, -badgeDy],
+      ].filter(
+        ([x, y]) =>
+          carrier.x_m + x >= 0 &&
+          carrier.x_m + x <= 105 &&
+          carrier.y_m + y >= 0 &&
+          carrier.y_m + y <= 68,
+      )
+    : [];
+  const badgeClearance = ([x, y]: number[]) =>
+    Math.min(
+      ...(frame?.players ?? [])
+        .filter((p) => p.player_id !== carrier?.player_id)
+        .map((p) =>
+          Math.hypot(p.x_m - carrier!.x_m - x, p.y_m - carrier!.y_m - y),
+        ),
+    );
+  // Prefer a stable corner; move only when another player would obscure the badge.
+  const badgeOffset = badgeCorners.find((p) => badgeClearance(p) >= 2.6) ??
+    badgeCorners.sort((a, b) => badgeClearance(b) - badgeClearance(a))[0] ?? [
+      badgeDx,
+      badgeDy,
+    ];
+  const ballX = carrier
+    ? carrier.x_m + 5 + badgeOffset[0]
+    : (ball?.x_m ?? 0) + 5 + offset[0];
+  const ballY = carrier
+    ? carrier.y_m + 5 + badgeOffset[1]
+    : (ball?.y_m ?? 0) + 5 + offset[1];
+  const ballRadius = carrier ? 0.85 : 1.15;
+  const broadcastBall =
+    ball && broadcast ? (
+      <g
+        data-testid="broadcast-ball"
+        data-carrier-id={carrier?.player_id}
+        data-source-x={ball.x_m}
+        data-source-y={ball.y_m}
+      >
+        <title>
+          {carrier
+            ? es
+              ? "Insignia de balón junto al jugador con control observado; las coordenadas exactas se conservan en la evidencia."
+              : "Ball badge beside the observed carrier; exact coordinates are preserved in the evidence."
+            : ballLinked
+              ? es
+                ? "Balón: la línea termina en su posición observada; el símbolo está separado para mostrar al jugador."
+                : "Ball: the line ends at its observed position; the symbol is offset to reveal the player."
+              : es
+                ? "Posición observada del balón"
+                : "Observed ball position"}
+        </title>
+        {ballLinked && (
+          <>
+            <line
+              data-testid="ball-position-link"
+              x1={ball.x_m + 5}
+              y1={ball.y_m + 5}
+              x2={ballX}
+              y2={ballY}
+              stroke="white"
+              strokeWidth=".25"
+              strokeDasharray=".5 .4"
+            />
+            <circle
+              data-testid="ball-observed-position"
+              cx={ball.x_m + 5}
+              cy={ball.y_m + 5}
+              r=".3"
+              fill="white"
+              stroke="#11252d"
+              strokeWidth=".1"
+            />
+          </>
+        )}
+        <circle
+          cx={ballX}
+          cy={ballY}
+          r={ballRadius + 0.3}
+          fill="#0b191f"
+          opacity=".5"
+        />
+        <circle
+          data-testid="ball-symbol"
+          cx={ballX}
+          cy={ballY}
+          r={ballRadius}
+          fill="white"
+          stroke="#10232c"
+          strokeWidth=".2"
+        />
+        <path
+          d={`M${ballX} ${ballY - ballRadius * 0.48}l${ballRadius * 0.45} ${ballRadius * 0.33}-${ballRadius * 0.17} ${ballRadius * 0.53}h-${ballRadius * 0.56}l-${ballRadius * 0.17}-${ballRadius * 0.53}Z`}
+          fill="#23333e"
+        />
+      </g>
+    ) : null;
   const position = (x: number, y: number) => ({ x: x + 5, y: y + 5 });
   return (
     <svg
@@ -34,8 +192,37 @@ export default function Pitch({
       className="block w-full"
     >
       <defs>
+        <radialGradient id={`${uid}-grass`} cx="50%" cy="40%" r="70%">
+          <stop offset="0" stopColor="#2f7259" />
+          <stop offset="1" stopColor="#153f35" />
+        </radialGradient>
+        <radialGradient id={`${uid}-light`}>
+          <stop offset="0" stopColor="#d2f5de" stopOpacity=".07" />
+          <stop offset="1" stopColor="#d2f5de" stopOpacity="0" />
+        </radialGradient>
+        <linearGradient id={`${uid}-blue`} x2="0" y2="1">
+          <stop stopColor="#c4e6ff" />
+          <stop offset="1" stopColor="#69adf3" />
+        </linearGradient>
+        <linearGradient id={`${uid}-amber`} x2="0" y2="1">
+          <stop stopColor="#ffe4a2" />
+          <stop offset="1" stopColor="#e6ae45" />
+        </linearGradient>
+        <pattern
+          id={`${uid}-grain`}
+          width=".8"
+          height=".8"
+          patternUnits="userSpaceOnUse"
+        >
+          <path
+            d="M0 .2H.3M.4 .6H.7"
+            stroke="#c4efcb"
+            strokeWidth=".05"
+            opacity=".14"
+          />
+        </pattern>
         <marker
-          id={compact ? "arrow-small" : "arrow"}
+          id={`${uid}-arrow`}
           markerWidth="5"
           markerHeight="5"
           refX="4"
@@ -45,7 +232,19 @@ export default function Pitch({
           <path d="M0 0 L5 2.5 L0 5" fill="#ffffff" />
         </marker>
       </defs>
-      <rect width="115" height="78" fill="#153d32" />
+      <rect width="115" height="78" fill={broadcast ? "#0b191f" : "#153d32"} />
+      {broadcast && (
+        <rect
+          x="3.8"
+          y="3.8"
+          width="107.4"
+          height="70.4"
+          rx=".6"
+          fill={`url(#${uid}-grass)`}
+          stroke="#7bab9133"
+          strokeWidth=".15"
+        />
+      )}
       {Array.from({ length: 7 }, (_, i) => (
         <rect
           key={i}
@@ -53,13 +252,53 @@ export default function Pitch({
           y="5"
           width="15"
           height="68"
-          fill={i % 2 === 0 ? "#1a483b" : "#1d4e40"}
+          fill={
+            broadcast
+              ? i % 2 === 0
+                ? "#ffffff04"
+                : "#0000000a"
+              : i % 2 === 0
+                ? "#1a483b"
+                : "#1d4e40"
+          }
         />
       ))}
-      <g fill="none" stroke="#99b8a3" strokeWidth=".25" opacity=".65">
+      {broadcast && (
+        <>
+          <rect
+            x="5"
+            y="5"
+            width="105"
+            height="68"
+            fill={`url(#${uid}-grain)`}
+          />
+          <rect
+            x="5"
+            y="5"
+            width="105"
+            height="68"
+            fill={`url(#${uid}-light)`}
+          />
+        </>
+      )}
+      <g
+        fill="none"
+        stroke={broadcast ? "#c0dccb" : "#99b8a3"}
+        strokeWidth={broadcast ? ".2" : ".25"}
+        opacity={broadcast ? ".5" : ".65"}
+      >
         <rect x="5" y="5" width="105" height="68" />
         <path d="M57.5 5V73" />
         <circle cx="57.5" cy="39" r="9.15" />
+        {broadcast && (
+          <>
+            <circle cx="57.5" cy="39" r=".3" fill="#c0dccb" />
+            <circle cx="16" cy="39" r=".22" fill="#c0dccb" />
+            <circle cx="99" cy="39" r=".22" fill="#c0dccb" />
+            <path d="M21.5 31.69a9.15 9.15 0 0 1 0 14.62M93.5 31.69a9.15 9.15 0 0 0 0 14.62" />
+            <path d="M5 6a1 1 0 0 0 1-1M109 5a1 1 0 0 0 1 1M5 72a1 1 0 0 1 1 1M109 73a1 1 0 0 1 1-1" />
+          </>
+        )}
         <rect x="5" y="18.84" width="16.5" height="40.32" />
         <rect x="93.5" y="18.84" width="16.5" height="40.32" />
         <rect x="5" y="29.84" width="5.5" height="18.32" />
@@ -104,7 +343,7 @@ export default function Pitch({
               stroke="white"
               strokeWidth=".6"
               strokeDasharray="1 1"
-              markerEnd={`url(#${compact ? "arrow-small" : "arrow"})`}
+              markerEnd={`url(#${uid}-arrow)`}
             />
           )}
         </g>
@@ -127,14 +366,45 @@ export default function Pitch({
           </title>
         </polyline>
       ))}
+      {/* Free-ball source anchors are behind players, keeping shirt numbers clear. */}
+      {!carrier && broadcastBall}
       {frame?.players.map((p) => {
         const q = position(p.x_m, p.y_m);
+        const player = players.find((player) => player.id === p.player_id);
+        const keeper = broadcast && player?.role === "keeper";
+        const keeperColor = p.team_id === "blue" ? "#d7c7ff" : "#ffa9a4";
         const highlighted =
           (["all", "c-bypass"].includes(highlight) &&
             metrics?.bypassed_player_ids.includes(p.player_id)) ||
           focus === p.player_id;
         return (
-          <g key={p.player_id}>
+          <g
+            key={p.player_id}
+            data-player-id={p.player_id}
+            data-role={player?.role}
+          >
+            <title>{`${p.team_id === "blue" ? "HBC" : "ALD"} · ${parseInt(p.player_id.split("-")[1])}${keeper ? (es ? " · Portero" : " · Goalkeeper") : ""}${player ? ` · ${player.name}` : ""}`}</title>
+            {broadcast && (
+              <circle
+                cx={q.x}
+                cy={q.y + 0.4}
+                r="1.65"
+                fill="#001a17"
+                opacity=".4"
+              />
+            )}
+            {broadcast && frame.controlling_player_id === p.player_id && (
+              <circle
+                cx={q.x}
+                cy={q.y}
+                data-testid="controlled-player-indicator"
+                r={keeper ? "2.25" : "1.9"}
+                fill="none"
+                stroke="#ffffff"
+                strokeWidth=".28"
+                opacity=".85"
+              />
+            )}
             {highlighted && (
               <circle
                 cx={q.x}
@@ -145,20 +415,39 @@ export default function Pitch({
                 strokeWidth=".35"
               />
             )}
-            <circle
-              cx={q.x}
-              cy={q.y}
-              r="1.15"
-              fill={p.team_id === "blue" ? "#60a5fa" : "#fbbf24"}
-              stroke="#0c3028"
-              strokeWidth=".22"
-            />
+            {keeper ? (
+              <rect
+                x={q.x - 1.65}
+                y={q.y - 1.65}
+                width="3.3"
+                height="3.3"
+                rx=".45"
+                fill={keeperColor}
+                stroke="#192333"
+                strokeWidth=".25"
+              />
+            ) : (
+              <circle
+                cx={q.x}
+                cy={q.y}
+                r={broadcast ? "1.45" : "1.15"}
+                fill={
+                  broadcast
+                    ? `url(#${uid}-${p.team_id === "blue" ? "blue" : "amber"})`
+                    : p.team_id === "blue"
+                      ? "#60a5fa"
+                      : "#fbbf24"
+                }
+                stroke={broadcast ? "#112f2c" : "#0c3028"}
+                strokeWidth=".22"
+              />
+            )}
             <text
               x={q.x}
               y={q.y + 0.42}
               textAnchor="middle"
               fill={p.team_id === "blue" ? "#102b46" : "#392b06"}
-              fontSize="1.25"
+              fontSize={broadcast ? "1.45" : "1.25"}
               fontWeight="700"
             >
               {parseInt(p.player_id.split("-")[1])}
@@ -166,18 +455,19 @@ export default function Pitch({
           </g>
         );
       })}
-      {frame?.ball && (
+      {carrier && broadcastBall}
+      {ball && !broadcast && (
         <>
           <circle
-            cx={frame.ball.x_m + 5}
-            cy={frame.ball.y_m + 5}
+            cx={ball.x_m + 5}
+            cy={ball.y_m + 5}
             r="1"
             fill="#0b221b"
             opacity=".4"
           />
           <circle
-            cx={frame.ball.x_m + 5}
-            cy={frame.ball.y_m + 4.8}
+            cx={ball.x_m + 5}
+            cy={ball.y_m + 4.8}
             r=".65"
             fill="white"
             stroke="#14332a"
@@ -187,7 +477,9 @@ export default function Pitch({
       )}
       {!frame && (
         <text x="57.5" y="39" fill="#c6d4c7" fontSize="3" textAnchor="middle">
-          Preparing synthetic replay…
+          {es
+            ? "Preparando la repetición sintética…"
+            : "Preparing synthetic replay…"}
         </text>
       )}
     </svg>

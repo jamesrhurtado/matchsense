@@ -2,7 +2,7 @@ import {test,expect} from '@playwright/test';
 
 test('producer evidence → wording review → approval → viewer preferences → retraction',async({page,context})=>{
  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
- await page.goto('/');await page.getByRole('button',{name:'Open producer console'}).click();await expect(page).toHaveURL(/\/studio\//);
+ await page.goto('/');await page.getByLabel('Replay segment').selectOption('match-001');await page.getByRole('button',{name:'Open producer console'}).click();await expect(page).toHaveURL(/\/studio\//);
  const sid=page.url().split('/').pop()!;
  await page.getByLabel('Replay speed').selectOption('8');await page.getByRole('button',{name:'Play',exact:true}).click();
  await expect(page.getByRole('button',{name:'Show why',exact:true})).toBeVisible({timeout:10000});await page.getByRole('button',{name:'Pause',exact:true}).click();

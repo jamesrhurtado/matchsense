@@ -19,7 +19,7 @@ def generate_event(repo,sid,m,meta,messages,at,revision,model=False,outcome=None
             from engine.structured_workflow import run_event_workflow
             p=run_event_workflow(EvidenceTools(meta,messages,at),m['family'],m['subject_id'],revision,outcome_callback=observe)
         else:p=build_event_package(m,meta,revision)
-        finish_outcome(repo,outcome,last.get('state') or ('produced' if p else 'abstained'),package=p,usage=last.get('usage'),trace=last.get('trace'),reason=last.get('reason'))
+        finish_outcome(repo,outcome,last.get('state') or ('produced' if p else 'abstained'),package=p,usage=last.get('usage') or ({'calls':0,'input_tokens':0,'output_tokens':0,'total_tokens':0,'usage_complete':True} if not model else None),trace=last.get('trace'),reason=last.get('reason'))
         return p
     except Exception:
         finish_outcome(repo,outcome,'failed',usage=last.get('usage'),reason='event_workflow_failure')

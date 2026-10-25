@@ -2,6 +2,18 @@
 from engine.contextual_narrative import render
 
 
+def observable_decision(package):
+    """Summarize recorded actions, without treating a model's reasons as facts."""
+    trace = package.get('trace', [])
+    director = next((t for t in reversed(trace) if t.get('role') == 'Story Director' and t.get('action') == 'model_decision'), {})
+    reviewer = next((t for t in reversed(trace) if t.get('role') == 'Claim Reviewer' and t.get('action') == 'model_decision'), {})
+    fallback = 'fallback' in package.get('mode', '')
+    ids = [c['id'] for c in package['claims']]
+    return {'director': 'selected' if director.get('status') == 'propose' else 'factual_template',
+            'reviewer': 'supported' if reviewer.get('status') == 'supported' and not fallback else 'factual_template',
+            'claim_ids': ids, 'fallback': fallback}
+
+
 def decision_summary(package, outcomes):
     if package and package.get('schema_version') in {'5.0.0','6.0.0'}:
         return {'angle':package['family'],'lead':package['variants'][0]['text'],'context':'Source observations only; no tactical causation.',

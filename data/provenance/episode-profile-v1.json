@@ -1,0 +1,21 @@
+{
+  "version": "constrained-episodes-v1",
+  "status": "Frozen design choices before new-scene validation; not physiological limits or FIFA certification",
+  "tracking_hz": 10,
+  "pitch_m": [105, 68],
+  "coordinates": "x right, y down; meters; period-specific attack direction",
+  "player_max_speed_mps": 9.0,
+  "player_max_acceleration_mps2": 6.0,
+  "player_max_turn_radians_per_s": 3.0,
+  "turn_check_min_speed_mps": 1.0,
+  "ball_max_speed_mps": 30.0,
+  "position_tolerance_m": 0.03,
+  "derivative_tolerance": 0.05,
+  "control_distance_m": 1.1,
+  "contact_distance_m": 1.25,
+  "overlap_diagnostic_distance_m": 0.5,
+  "sampling_note": "Player velocity is interval displacement; acceleration uses successive velocity-midpoint spacing. Turn checks require both interval speeds above the minimum. Ball kicks may change velocity abruptly.",
+  "scope": "Authored 11v11 development excerpts; no substitutions, dismissals, calibrated tactics or full-match statistical representativeness",
+  "split_policy": "All episode, observation, mirror and delivery variants of one structural parent stay in development. No held-out parents are delivered in SD01-SD04.",
+  "source_policy": "Original fictional actors and authored coordinates only. No external trajectories, footage or model calls. Existing observation contracts and event definitions govern output."
+}

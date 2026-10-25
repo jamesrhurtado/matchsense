@@ -6,7 +6,9 @@ def why_now(package,language='en'):
         text=(f'La media de rivales cercanos bajó de {f["before"]["mean"]:.1f} a {f["after"]["mean"]:.1f} en un pase de {f["forward_m"]:.1f} m hacia delante.' if es else f'Average nearby opponents dropped from {f["before"]["mean"]:.1f} to {f["after"]["mean"]:.1f} around a {f["forward_m"]:.1f} m forward pass.')
         if f['stands_out']:text+=(' Además avanzó más que cada uno de los tres pases anteriores del equipo en esta repetición.' if es else ' It also travelled farther forward than each of the team’s previous three passes in this replay.')
         return text
-    if family=='goal':return 'La fuente ya confirmó un cambio de marcador; la explicación necesita aprobación aparte.' if es else 'The source has confirmed a score change; the explanation requires separate approval.'
+    if family=='goal':
+        before=f['score_before'];after=f['score']
+        return (f"El gol confirmado cambió el marcador de {before['blue']}:{before['amber']} a {after['blue']}:{after['amber']} en ese momento." if es else f"The confirmed goal changed the score from {before['blue']}:{before['amber']} to {after['blue']}:{after['amber']} at that moment.")
     if family=='shot' and f['outcome']=='unknown':return 'La fuente registra un remate, pero su resultado sigue sin confirmar.' if es else 'The source records an attempt, but its outcome remains unconfirmed.'
     if family=='shot':return 'El remate ya tiene un resultado observado; no se estima la calidad de la ocasión.' if es else 'The attempt now has an observed outcome; this does not estimate chance quality.'
     if family=='recovery':return 'Existe una observación explícita de recuperación o cambio de control; no se deduce por cercanía.' if es else 'A source observation records a recovery or control change; it is not inferred from proximity.'

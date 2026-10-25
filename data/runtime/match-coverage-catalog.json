@@ -34,5 +34,17 @@
     "label": "Pressure Swing flagship \u00b7 score correction",
     "duration_ms": 240000,
     "synthetic": true
+  },
+  {
+    "match_id": "match-0c0a000000000007",
+    "label": "Live simulation \u00b7 mirrored pressure sequence",
+    "duration_ms": 240000,
+    "synthetic": true
+  },
+  {
+    "match_id": "match-0c0a000000000008",
+    "label": "Live simulation \u00b7 delayed shot, duplicate, missing frames and score correction",
+    "duration_ms": 240000,
+    "synthetic": true
   }
 ]

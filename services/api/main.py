@@ -17,21 +17,26 @@ from collections import defaultdict, deque
 import logging
 from pydantic import BaseModel, ConfigDict, Field
 from engine.core import available, digest, load_match, metric, pass_metrics, visual_snapshot
-from engine.catalog import list_matches, duration_for_match
+from engine.catalog import list_matches, duration_for_match, development_matches
 from engine.repository import Repository
 from engine.workflow import EvidenceTools, run_workflow
 from engine.editorial_narrative import build_editorial_package as build_structured_package
 from engine.context import contextual_metrics
 from engine.recap import project_recap
+from engine.public_updates import record_source_withdrawal, public_updates
 from engine.editorial import decision_summary
 from engine.event_metrics import event_metrics, FAMILY_PRIORITY
 from engine.event_narrative import build_event_package, story_id as event_story_id, LABELS
 from engine.match_state import match_state
 from engine.event_workflow import generate_event
 COVERAGE=os.getenv('WHY_NOW_MATCH_COVERAGE','0')=='1'
-FLAGSHIP_IDS={'match-0c0a000000000005','match-0c0a000000000006'}
+DEVELOPMENT=COVERAGE and os.getenv('WHY_NOW_SYNTHETIC_DEVELOPMENT','0')=='1'
+DEVELOPMENT_IDS={r['match_id'] for r in development_matches()}
+FLAGSHIP_IDS={'match-0c0a000000000005','match-0c0a000000000006','match-0c0a000000000007','match-0c0a000000000008'}
 PRESENTATION_IDS={'match-0c0a000000000003','match-0c0a000000000004'}|FLAGSHIP_IDS
 MIXED_IDS={'match-0c0a000000000001','match-0c0a000000000002'}|PRESENTATION_IDS
+MIXED_IDS |= DEVELOPMENT_IDS
+PRESSURE_IDS=FLAGSHIP_IDS|DEVELOPMENT_IDS
 from engine.dispositions import record, disposition, package_disposition, package_events, reconcile_acceptances
 from engine.outcomes import create_outcome, start_outcome, finish_outcome
 
@@ -48,10 +53,13 @@ if os.getenv('WHY_NOW_EVENTHUB_NAMESPACE'):
     transport=EventHubTransport(repo)
 WORKERS=ThreadPoolExecutor(max_workers=2,thread_name_prefix='story')
 JOBS={}
+LIVE_MEASURED={}
 logger=logging.getLogger('whynow')
 logger.setLevel(logging.INFO)
 
 def workflow(tools,**kwargs):
+    force_template=kwargs.pop('force_template',False)
+    use_model=FOUNDRY and not force_template
     session_id=kwargs.pop('session_id','local')
     store=kwargs.pop('outcome_repository',repo)
     outcome=kwargs.pop('outcome',None)
@@ -60,7 +68,7 @@ def workflow(tools,**kwargs):
         measured=contextual_metrics(measured,tools.metadata,tools.messages,tools.cutoff_ms)
     if outcome is None:
         outcome=create_outcome(store,session_id,f'story-{tools.pass_id or (measured or {}).get("pass_id","unknown")}',
-            (measured or {}).get('evidence_revision','unavailable'),kwargs.get('revision',1),tools.cutoff_ms,runtime_mode())
+            (measured or {}).get('evidence_revision','unavailable'),kwargs.get('revision',1),tools.cutoff_ms,runtime_mode() if use_model else 'local deterministic template')
     outcome={**outcome,'evidence_observed_at':outcome['scheduled_at'],
              'implementation':{'schema_version':'4.0.0' if STRUCTURED else '1.0.0',
                                'prompt_version':'director-critic-v4.1' if STRUCTURED else 'legacy-v1',
@@ -80,7 +88,7 @@ def workflow(tools,**kwargs):
             outcome={**outcome,'model_usage':event['usage'],'trace':event['trace']}
             store.save_workflow_outcome(session_id,outcome)
     try:
-        if FOUNDRY:
+        if use_model:
             from engine.foundry_workflow import run_foundry_workflow
             from engine.structured_workflow import run_structured_workflow
             from opentelemetry import trace
@@ -91,7 +99,7 @@ def workflow(tools,**kwargs):
             package=(build_structured_package if STRUCTURED else run_workflow)(tools,**kwargs)
         state=last.get('state') or ('produced' if package else 'abstained')
         zero={'calls':0,'input_tokens':0,'output_tokens':0,'total_tokens':0,'usage_complete':True}
-        outcome=finish_outcome(store,outcome,state,package=package,usage=last.get('usage') or (zero if not FOUNDRY else None),
+        outcome=finish_outcome(store,outcome,state,package=package,usage=last.get('usage') or (zero if not use_model else None),
                        trace=last.get('trace'),reason=last.get('reason'))
         if package is None:
             disposition(store,session_id,outcome,'not_produced',at_ms=tools.cutoff_ms)
@@ -114,8 +122,13 @@ async def lifespan(app):
     repo.interrupt_workflow_outcomes()
     reconcile_acceptances(repo)
     if transport:transport.start()
-    yield
-    if transport:transport.close()
+    stop=threading.Event()
+    worker=threading.Thread(target=live_worker,args=(stop,),daemon=True,name='live-match-processor')
+    worker.start()
+    try:yield
+    finally:
+        stop.set();worker.join(timeout=10)
+        if transport:transport.close()
 
 TOKEN=os.getenv('WHY_NOW_PRODUCER_TOKEN','local-demo-producer')
 LOCK=threading.RLock()
@@ -129,9 +142,12 @@ if os.getenv('APPLICATIONINSIGHTS_CONNECTION_STRING'):
 app.add_middleware(CORSMiddleware,allow_origins=os.getenv('WHY_NOW_ORIGINS','http://localhost:3000,http://127.0.0.1:3000').split(','),allow_methods=['GET','POST'],allow_headers=['Content-Type','X-Producer-Token','Last-Event-ID'])
 
 class Body(BaseModel): model_config=ConfigDict(extra='forbid')
-class Create(Body): match_id:str=Field(default='match-001',min_length=1,max_length=80)
+class Create(Body):
+    match_id:str=Field(default='match-001',min_length=1,max_length=80)
+    mode:Literal['guided','live']='guided'
+    execution:Literal['configured','ai','template']='configured'
 class Control(Body):
-    action:Literal['start','pause','speed','reset','seek']
+    action:Literal['start','pause','speed','reset','seek','stop']
     speed:float|None=Field(default=None,ge=.25,le=8,allow_inf_nan=False)
     clock_ms:int|None=Field(default=None,ge=0,le=5400000)
 class Review(Body):
@@ -142,6 +158,7 @@ class Review(Body):
     text:str|None=Field(default=None,max_length=1000)
     angle:Literal['progression','reception','historical_contrast']|None=None
 class RecapRequest(Body):
+    from_ms:int|None=Field(default=None,ge=0,le=5400000)
     through_ms:int|None=Field(default=None,ge=0,le=5400000)
     language:Literal['en','es']='en'
     focus:str|None=Field(default=None,max_length=80)
@@ -163,8 +180,11 @@ def clock(s):
     elapsed=max(0,time.time()-s['updated_at'])*s['speed']*1000 if s['running'] else 0
     return min(s.get('duration_ms',60000),int(s['clock_ms']+elapsed))
 
-def new_session(match_id):
+def new_session(match_id,mode="guided",execution="configured"):
+    execution_explicit=execution!="configured"
+    execution=("ai" if FOUNDRY else "template") if execution=="configured" else execution
     s={'id':str(uuid.uuid4()),'match_id':match_id,'match_coverage':COVERAGE and match_id in MIXED_IDS,'clock_ms':0,'running':False,'speed':1,'updated_at':time.time(),'generation':1,'control_revision':1,'duration_ms':duration_for_match(match_id)}
+    s.update(session_mode=mode,execution=execution,execution_explicit=execution_explicit,running=mode=='live',model_identity={'deployment':os.getenv('FOUNDRY_MODEL_DEPLOYMENT'),'version':os.getenv('FOUNDRY_MODEL_VERSION')} if execution=='ai' else None)
     repo.save_session(s);return s
 
 def accept_package(sid,package,at,expected_revision):
@@ -183,19 +203,104 @@ def accept_package(sid,package,at,expected_revision):
         raise
 
 
+def live_ai_configured():
+    return bool(FOUNDRY and EVENT_MODEL and os.getenv('AZURE_OPENAI_ENDPOINT') and os.getenv('FOUNDRY_MODEL_DEPLOYMENT'))
+
+
+def live_attempt_blocked(s,story_id,evidence_revision,at):
+    if s.get('session_mode')!='live':return False
+    outcomes=repo.workflow_outcomes(s['id'])
+    same=[o for o in outcomes if o['story_id']==story_id and o['evidence_revision']==evidence_revision]
+    # After a restart, preserve rejected/failed attempts. Retry interrupted or
+    # produced-but-not-persisted work once, retaining both usage records.
+    blocked=bool(same and (len(same)>=2 or same[-1]['state'] not in {'interrupted','produced'}))
+    reserved=sum(6 if o['story_id'].startswith('story-pass-') else 2 for o in outcomes)
+    needed=6 if story_id.startswith('story-pass-') else 2
+    if blocked or reserved+needed>96:
+        record(repo,s['id'],'opportunity',[story_id,evidence_revision,'attempt_limit'],story_id=story_id,state='attempt_or_session_budget_limit',replay_ms=at)
+        return True
+    return False
+
+
+def live_attempt_summary(sid,at):
+    return [{'story_id':o['story_id'],'state':o['state'],'reason':o.get('reason'),
+             'mode':o['mode'],'usage':o['model_usage'],'scheduled_at':o['scheduled_at'],
+             'finished_at':o.get('finished_at'),'cutoff_ms':o['cutoff_ms']}
+            for o in repo.workflow_outcomes(sid)]
+
+
+def live_tick():
+    """Progress live sessions without page reads. Single execution host only."""
+    with LOCK:sessions=repo.list_sessions()
+    for previous in sessions:
+        with LOCK:
+            s=get_session(previous['id'])
+            if s.get('session_mode')!='live':continue
+            if s.get('ended_early'):
+                if s.get('ended_cleanup_done'):continue
+                pending=False
+                for key,future in JOBS.items():
+                    if key[0]!=s['id']:continue
+                    if not future.done():
+                        pending=True;continue
+                    outcome=next((o for o in repo.workflow_outcomes(s['id']) if o['run_id']==getattr(future,'_why_now_run_id',None)),None)
+                    if outcome:disposition(repo,s['id'],outcome,'session_ended',at_ms=clock(s))
+                if not pending:
+                    s['ended_cleanup_done']=True;repo.save_session(s)
+                continue
+            if not s['running']:continue
+            at=clock(s)
+            try:
+                packages=materialize_all(s,at)
+                s['available_story_ids']=[p['id'] for p in packages]
+                s['last_processed_ms']=at
+                pending=any(k[0]==s['id'] and not f.done() for k,f in JOBS.items())
+                if at>=s['duration_ms'] and not pending:
+                    s.update(clock_ms=s['duration_ms'],running=False,updated_at=time.time())
+                repo.save_session(s)
+            except Exception:
+                logger.exception('live_tick_failed session=%s',s['id'])
+
+
+def live_worker(stop):
+    while not stop.is_set():
+        try:live_tick()
+        except Exception:logger.exception('live_worker_failed')
+        stop.wait(1)
+
+
 def materialize_all(s,at):
     """Dispatch supported families through shared immutable approval accounting."""
     meta,messages=inputs(s,at)
+    use_model=(FOUNDRY if s.get('session_mode')!='live' and not s.get('execution_explicit') else s.get('execution','ai' if FOUNDRY else 'template')=='ai')
+    if s.get('ended_early'):return repo.list_packages(s['id'])
+    model_available=not use_model or (FOUNDRY and (s.get('session_mode')!='live' or live_ai_configured()))
     stored={p['id']:p for p in repo.list_packages(s['id'])}
-    raw_measured={f"story-{m['pass_id']}":m for m in pass_metrics(messages,at,meta)}
-    measured={key:contextual_metrics(m,meta,messages,at) if STRUCTURED else m
-              for key,m in raw_measured.items()}
+    cache_key=None
+    cached=None
+    if s.get('session_mode')=='live' and transport is None:
+        # Ordinary frame arrivals may delay a candidate by at most one source
+        # second. Every explicit event, delayed sample and correction bypasses
+        # that cache immediately; no future source enters a measurement.
+        delivered_changes=sum(1 for r in messages if r['available_at_ms']<=at and r['timeline_ms']<=at and (r['kind']=='event' or r['revision']>1 or r['available_at_ms']>r['timeline_ms']))
+        cache_key=(id(messages),at//1000,delivered_changes)
+        cached=LIVE_MEASURED.get(s['id'])
+    if cached and cached[0]==cache_key:
+        raw_measured,measured=cached[1],dict(cached[2])
+    else:
+        raw_measured={f"story-{m['pass_id']}":m for m in pass_metrics(messages,at,meta)}
+        measured={key:contextual_metrics(m,meta,messages,at) if STRUCTURED else m
+                  for key,m in raw_measured.items()}
+        coverage=s.get('match_coverage',COVERAGE and s['match_id'] in MIXED_IDS)
+        if coverage:
+            measured.update({event_story_id(m):m for m in event_metrics(meta,messages,at)})
+            if s['match_id'] in PRESSURE_IDS:
+                from engine.pressure import pressure_metrics
+                measured.update({event_story_id(m):m for m in pressure_metrics(meta,messages,at)})
+        if cache_key:
+            LIVE_MEASURED[s['id']]=(cache_key,raw_measured,dict(measured))
+            while len(LIVE_MEASURED)>128:LIVE_MEASURED.pop(next(iter(LIVE_MEASURED)))
     coverage=s.get('match_coverage',COVERAGE and s['match_id'] in MIXED_IDS)
-    if coverage:
-        measured.update({event_story_id(m):m for m in event_metrics(meta,messages,at)})
-        if s['match_id'] in FLAGSHIP_IDS:
-            from engine.pressure import pressure_metrics
-            measured.update({event_story_id(m):m for m in pressure_metrics(meta,messages,at)})
     # Stored approved v1/v2 packages keep their original revision and rendering.
     # A changed current source still invalidates them through the existing path.
     for key,old in stored.items():
@@ -207,16 +312,32 @@ def materialize_all(s,at):
         if not m or not m['eligible'] or old['evidence_revision']!=m['evidence_revision']:
             decision=repo.decision(s['id'],story_id)
             if decision and decision['status']!='superseded':
+                if decision['status']=='approved' and decision['revision']==old['revision'] and decision['package_hash']==old['package_hash']:
+                    record_source_withdrawal(repo,s['id'],old,at)
                 repo.invalidate(s['id'],story_id)
                 package_disposition(repo,s['id'],old,'superseded',at)
     packages=[]
     ordered=sorted(measured.items(),key=lambda item:(FAMILY_PRIORITY.get(item[1].get('family','pass'),4),-item[1].get('occurrence_ms',item[1].get('available_from_ms',0)),item[0])) if coverage else measured.items()
     for story_id,m in ordered:
         if not m['eligible']:continue
+        if s.get('session_mode')=='live' and m.get('family')=='possession' and int(m['subject_id'])%60000:
+            record(repo,s['id'],'opportunity',[story_id,'editorial_interval'],story_id=story_id,state='not_selected_live_possession_interval',replay_ms=at)
+            continue
+        if s.get('session_mode')=='live':
+            # Stabilize the already-defined follow-up evidence before spending
+            # model calls on successive revisions of the same incident.
+            waiting=(m.get('family')=='recovery' and at<m['occurrence_ms']+3000)
+            waiting=waiting or (m.get('family')=='shot' and m['facts'].get('reported_outcome')=='goal' and m['facts'].get('goal_status') not in {'confirmed','cancelled'} and at<m['occurrence_ms']+6000)
+            if waiting:
+                record(repo,s['id'],'opportunity',[story_id,'awaiting_followup'],story_id=story_id,state='awaiting_source_followup',replay_ms=at)
+                continue
         opportunity_id=[story_id,m['evidence_revision']]
         old=stored.get(story_id)
         if old and old['evidence_revision']==m['evidence_revision']:
             packages.append(old)
+            continue
+        if not model_available:
+            record(repo,s['id'],'opportunity',[*opportunity_id,'ai_unavailable'],story_id=story_id,state='ai_unavailable',replay_ms=at)
             continue
         record(repo,s['id'],'opportunity',[*opportunity_id,'detected'],story_id=story_id,
                evidence_revision=m['evidence_revision'],state='detected',replay_ms=at)
@@ -227,11 +348,12 @@ def materialize_all(s,at):
                     if previous.get('family')!='possession' or previous['eligible_from_ms']>=m['evidence_ready_ms']:continue
                     decision=repo.decision(s['id'],previous['id'])
                     if not decision or decision['status']!='approved':package_disposition(repo,s['id'],previous,'replaced_unreviewed',at)
-            if EVENT_MODEL:
+            if EVENT_MODEL and (use_model or (s.get('session_mode')!='live' and not s.get('execution_explicit'))):
                 key=(s['id'],story_id,m['evidence_revision'])
                 future=JOBS.get(key)
                 if future is None:
-                    state='expired_unscheduled' if at>=m['expires_at_ms'] else 'capacity_deferred' if sum(not f.done() for f in JOBS.values())>=4 else None
+                    if live_attempt_blocked(s,story_id,m['evidence_revision'],at):continue
+                    state='expired_unscheduled' if at>=m['expires_at_ms'] or (s.get('session_mode')=='live' and at>=s['duration_ms']) else 'capacity_deferred' if sum(not f.done() for f in JOBS.values())>=4 else None
                     if state:
                         record(repo,s['id'],'opportunity',[*opportunity_id,state],story_id=story_id,family=m['family'],state=state,replay_ms=at)
                         continue
@@ -262,8 +384,8 @@ def materialize_all(s,at):
             packages.append(package)
             continue
         tools=EvidenceTools(meta,messages,at,pass_id=m['pass_id'])
-        if not FOUNDRY:
-            package=workflow(tools,revision=revision,session_id=s['id'])
+        if not use_model:
+            package=workflow(tools,revision=revision,session_id=s['id'],force_template=True)
             if package:
                 accept_package(s['id'],package,at,expected_revision=revision-1)
                 packages.append(package)
@@ -271,8 +393,9 @@ def materialize_all(s,at):
         key=(s['id'],story_id,m['evidence_revision'])
         future=JOBS.get(key)
         if future is None:
+            if live_attempt_blocked(s,story_id,m['evidence_revision'],at):continue
             # Never spend model calls on a new, already-expired live candidate.
-            if at>=m['retention_confirmed_at_ms']+30000:
+            if at>=m['retention_confirmed_at_ms']+30000 or (s.get('session_mode')=='live' and at>=s['duration_ms']):
                 record(repo,s['id'],'opportunity',[*opportunity_id,'expired_unscheduled'],story_id=story_id,
                        evidence_revision=m['evidence_revision'],state='expired_unscheduled',replay_ms=at)
                 continue
@@ -336,7 +459,7 @@ def publication(s,package,at):
     if not package:return 'none',None
     decision=repo.decision(s['id'],package['id'])
     status=decision['status'] if decision and decision['revision']==package['revision'] and decision['package_hash']==package['package_hash'] else 'ready'
-    if at>=package['expires_at_ms'] and status in ('approved','ready'):status='expired'
+    if (at>=package['expires_at_ms'] or (s.get('session_mode')=='live' and (at>=s['duration_ms'] or s.get('ended_early')))) and status in ('approved','ready'):status='expired'
     published=bool(decision and decision['status']=='approved' and decision['revision']==package['revision'] and decision['package_hash']==package['package_hash'] and decision['at_ms']<=at and package['eligible_from_ms']<=at)
     return status,package if published else None
 
@@ -360,7 +483,7 @@ def safe_story(package,status):
 def snapshot_data(sid,is_producer=False,story_id=None):
     with LOCK:
         s=get_session(sid);at=clock(s);meta,messages=inputs(s,at)
-        packages=materialize_all(s,at)
+        packages=materialize_all(s,at) if s.get('session_mode')!='live' else [p for p in repo.list_packages(sid) if p['id'] in s.get('available_story_ids',[])]
         entries=[(p,*publication(s,p,at)) for p in packages]
         visible=[(p,status,published) for p,status,published in entries if is_producer or published]
         if not is_producer:
@@ -393,7 +516,10 @@ def snapshot_data(sid,is_producer=False,story_id=None):
             result['queue_state']='live' if at<p['expires_at_ms'] else 'archived'
             if p.get('family')=='possession' and not published and at>=p['expires_at_ms']:
                 result['queue_state']='replaced_by_next_boundary'
-            if is_producer:result['package_hash']=p['package_hash']
+            if is_producer:
+                from engine.editorial import observable_decision
+                result['package_hash']=p['package_hash']
+                result['editorial_decision']=observable_decision(p)
             elif p.get('incident_id'):
                 result['related_stories']=[safe_story(other,other_state)|{'approved':True}
                     for other,other_state,other_published in entries
@@ -403,15 +529,19 @@ def snapshot_data(sid,is_producer=False,story_id=None):
         audit=repo.audit(sid)
         duration=s.get('duration_ms',60000)
         return {'session_id':sid,'match_id':s['match_id'],'clock_ms':at,'duration_ms':duration,
-                'running':s['running'] and at<duration,'speed':s['speed'],'synthetic':True,'guided_demo':s['match_id'] in PRESENTATION_IDS,'flagship_demo':s['match_id'] in FLAGSHIP_IDS,
+                'running':s['running'] and at<duration,'speed':s['speed'],'synthetic':True,'guided_demo':s.get('session_mode')!='live' and s['match_id'] in PRESENTATION_IDS,'flagship_demo':s['match_id'] in FLAGSHIP_IDS,
+                'session_mode':s.get('session_mode','guided'),'execution':s.get('execution','ai' if FOUNDRY else 'template'),'model_identity':s.get('model_identity'),'live_status':('stopped' if s.get('ended_early') else 'complete' if at>=duration else 'ai_unavailable' if s.get('execution')=='ai' and not live_ai_configured() else 'running' if s['running'] else 'ready'),'last_processed_ms':s.get('last_processed_ms'),
+                'workflow_attempts':live_attempt_summary(sid,at) if is_producer and s.get('session_mode')=='live' else [],
+                'workflow_notices':[{'story_id':e.get('story_id'),'state':e['state'],'at_ms':e.get('replay_ms')} for e in reversed(repo.lifecycle_events(sid)) if e.get('kind')=='opportunity' and e.get('state') in {'capacity_deferred','attempt_or_session_budget_limit','ai_unavailable','expired_unscheduled'}][:8] if is_producer and s.get('session_mode')=='live' else [],
                 'match_state':match_state(meta,messages,at),'score':match_state(meta,messages,at)['score'],'coverage_enabled':s.get('match_coverage',COVERAGE and s['match_id'] in MIXED_IDS),'teams':meta['teams'],'players':meta['players'],**view,
                 'story':summary(current,status,selected[2]) if current else None,
                 'stories':[summary(p,state,published) for p,state,published in visible],
                 'approved_possession':next(({'interval':[p['metrics']['facts']['window_start_ms'],p['metrics']['facts']['window_end_ms']], 'text':p['variants'][0]['text'],'story_id':p['id']} for p,state,published in sorted(entries,key=lambda e:-e[0]['metrics'].get('occurrence_ms',0)) if published and p.get('family')=='possession'),None),
+                'corrections':public_updates(repo,sid,at)[:5],
                 'story_status':status,'overlay_story_id':overlay_package['id'] if overlay_package else None,
                 'overlay_selection_reason':({'en':'Producer override of the eligible approved revision.','es':'Selección del productor entre revisiones aprobadas vigentes.'} if override else {'en':'Eligible approved stories by event priority; newest within each family. Flagship sessions hold a story for 8 s unless a goal, manual override or correction takes precedence.','es':'Historias aprobadas elegibles por prioridad; la más reciente de cada categoría. La demo principal mantiene el texto 8 s salvo gol, selección manual o corrección.'}) if overlay_package else None,
                 'overlay':next(v['text'] for v in overlay_package['variants'] if v['id']=='en_simple_general') if overlay_package else None,
-                'mode':current['mode'] if current else runtime_mode(),
+                'mode':current['mode'] if current else ('AI unavailable' if s.get('session_mode')=='live' and s.get('execution')=='ai' and not live_ai_configured() else 'local deterministic template' if s.get('execution')=='template' else runtime_mode()),
                 'workflow_pending':any(k[0]==sid and not f.done() for k,f in JOBS.items()),
                 'cursor':len(audit)*10000000+s['control_revision']*10000000+at,
                 'generation':s['generation']}
@@ -425,7 +555,7 @@ def authorized_package(sid,story_id,token=None):
     return s,at,p,status
 
 @app.get('/api/health')
-def health():return {'ok':True,'mode':runtime_mode(),'azure_deployed':CLOUD,'version':'0.5.0','narrative_version':'4' if STRUCTURED else '1'}
+def health():return {'live_ai_configured':live_ai_configured(),'model_identity':{'deployment':os.getenv('FOUNDRY_MODEL_DEPLOYMENT'),'version':os.getenv('FOUNDRY_MODEL_VERSION')},'ok':True,'mode':runtime_mode(),'azure_deployed':CLOUD,'version':'0.5.0','narrative_version':'4' if STRUCTURED else '1'}
 
 @app.get('/api/ready')
 def ready():
@@ -436,14 +566,15 @@ def ready():
 
 
 @app.get('/api/matches')
-def matches():return {'matches':[m for m in list_matches(COVERAGE) if COVERAGE or m['match_id'] not in MIXED_IDS]}
+def matches():return {'matches':[m for m in list_matches(COVERAGE,DEVELOPMENT) if COVERAGE or m['match_id'] not in MIXED_IDS]}
 
 
 @app.post('/api/replay-sessions')
 def create(body:Create,x_producer_token:str|None=Header(None)):
     require(x_producer_token)
     if body.match_id not in {m['match_id'] for m in matches()['matches']}:fail(422,'unknown_match')
-    with LOCK:s=new_session(body.match_id)
+    if (body.execution=='ai' or (body.mode=='live' and body.execution=='configured')) and not live_ai_configured():fail(503,'live_ai_not_configured_choose_template_or_configure_model')
+    with LOCK:s=new_session(body.match_id,body.mode,body.execution)
     return {'session_id':s['id'],'match_id':s['match_id']}
 
 @app.post('/api/replay-sessions/{sid}/control')
@@ -452,7 +583,15 @@ def control(sid:str,body:Control,x_producer_token:str|None=Header(None)):
     with LOCK:
         s=get_session(sid)
         if body.action=='reset':
-            fresh=new_session(s['match_id']);return {'session_id':fresh['id'],'reset_from':sid}
+            if s.get('session_mode')=='live':
+                s.update(clock_ms=clock(s),running=False,ended_early=True,updated_at=time.time(),control_revision=s['control_revision']+1);repo.save_session(s)
+            fresh=new_session(s['match_id'],s.get('session_mode','guided'),s.get('execution','configured'));return {'session_id':fresh['id'],'reset_from':sid}
+        if body.action=='stop':
+            if s.get('session_mode')!='live':fail(409,'stop_requires_live_session')
+            s.update(clock_ms=clock(s),running=False,ended_early=True,updated_at=time.time(),control_revision=s['control_revision']+1);repo.save_session(s)
+            return {'session_id':sid,'running':False,'clock_ms':s['clock_ms'],'speed':1}
+        if s.get('ended_early') and body.action=='start':fail(409,'simulation_ended_start_new_session')
+        if s.get('session_mode')=='live' and (body.action in {'pause','seek','speed'} or body.speed is not None):fail(409,'live_match_clock_cannot_be_paused_or_sought')
         at=clock(s);s['clock_ms']=at;s['updated_at']=time.time();s['control_revision']+=1
         if body.action=='seek':
             if body.clock_ms is None:fail(422,'seek_clock_required')
@@ -545,8 +684,9 @@ def review(sid:str,story_id:str,body:Review,x_producer_token:str|None=Header(Non
             return old['data']
         s,at,p,status=authorized_package(sid,story_id,x_producer_token)
         if body.expected_revision!=p['revision'] or body.package_hash!=p['package_hash']:fail(409,'stale_revision')
-        if body.action in ('approve','edit') and at>=p['expires_at_ms']:fail(409,'expired')
-        if body.action=='approve_archive' and at<p['expires_at_ms']:fail(409,'archive_requires_expired_candidate')
+        ended=s.get('session_mode')=='live' and (at>=s['duration_ms'] or s.get('ended_early'))
+        if body.action in ('approve','edit') and (at>=p['expires_at_ms'] or ended):fail(409,'expired')
+        if body.action=='approve_archive' and at<p['expires_at_ms'] and not ended:fail(409,'archive_requires_expired_candidate')
         if body.action=='retract':
             decision=repo.decision(sid,story_id)
             if not decision or decision['status']!='approved' or decision['revision']!=p['revision'] or decision['package_hash']!=p['package_hash']:
@@ -590,16 +730,22 @@ def render_ack(sid:str,story_id:str,body:BrowserAck):
 def recap(sid:str,body:RecapRequest):
     with LOCK:
         s=get_session(sid);now=clock(s);cutoff=min(now,body.through_ms if body.through_ms is not None else now)
+        start=body.from_ms if body.from_ms is not None else 0
+        if start>cutoff:fail(400,'invalid_recap_interval')
         approved=[]
         for p in materialize_all(s,now):
             decision=repo.decision(sid,p['id'])
-            if decision and decision['status']=='approved' and decision['revision']==p['revision'] and decision['package_hash']==p['package_hash'] and decision['at_ms']<=cutoff and p['eligible_from_ms']<=cutoff:
+            occurrence=p['metrics'].get('occurrence_ms',p['eligible_from_ms'])
+            if decision and decision['status']=='approved' and decision['revision']==p['revision'] and decision['package_hash']==p['package_hash'] and decision['at_ms']<=cutoff and p['eligible_from_ms']<=cutoff and (body.from_ms is None or start<=occurrence<=cutoff):
                 approved.append(p)
         if body.focus and body.focus not in {x['id'] for x in inputs(s,now)[0]['players']+inputs(s,now)[0]['teams']}:
             fail(400,'invalid_preference')
         meta,messages=inputs(s,now)
+        updates=public_updates(repo,sid,now,body.language,body.focus,start,cutoff)
         return {'title':('Resumen del segmento' if body.language=='es' else 'Segment catch-up') if s['match_id'] in MIXED_IDS else ('El partido hasta ahora' if body.language=='es' else 'Match so far'), 'match_state':match_state(meta,messages,now),
-                'through_ms':cutoff, 'mode':'approved moments only',
+                'from_ms':start,'through_ms':cutoff,'evaluated_at_ms':now,
+                'interval_rule':'Inclusive occurrence-time interval; possession windows are included by their end time. Current validity and score evaluated at evaluated_at_ms.',
+                'corrections':updates[:5],'correction_count':len(updates),'mode':'approved moments only',
                 **project_recap(approved,body.language,cutoff,body.focus)}
 
 @app.get('/api/replay-sessions/{sid}/diagnostics')

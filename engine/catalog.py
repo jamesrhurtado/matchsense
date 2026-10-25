@@ -30,12 +30,19 @@ def _catalog():
     return rows
 
 
-def list_matches(include_coverage=False):
+def development_matches():
+    """Opt-in display catalogue only; never scene labels, profiles or references."""
+    path=RUNTIME/'synthetic-development-catalog.json'
+    return json.loads(path.read_text()) if path.exists() else []
+
+
+def list_matches(include_coverage=False, include_development=False):
     """Return only display metadata, never authored scenario expectations."""
     rows=[dict(row) for row in _catalog()]
     extra=RUNTIME/'match-coverage-catalog.json'
-    if include_coverage and extra.exists():
-        additions=json.loads(extra.read_text())
+    if (include_coverage and extra.exists()) or include_development:
+        additions=(json.loads(extra.read_text()) if include_coverage and extra.exists() else [])
+        if include_development:additions+=development_matches()
         seen={r['match_id'] for r in rows}
         for row in additions:
             if (set(row)!={'match_id','label','duration_ms','synthetic'} or not isinstance(row['match_id'],str)
@@ -48,13 +55,17 @@ def list_matches(include_coverage=False):
 
 
 def duration_for_match(match_id):
-    return next((r['duration_ms'] for r in list_matches(True) if r['match_id'] == match_id), 60000)
+    original=next((r['duration_ms'] for r in list_matches(True) if r['match_id']==match_id),None)
+    if original is not None:return original
+    return next((r['duration_ms'] for r in list_matches(False,True) if r['match_id']==match_id),60000)
 
 
 @lru_cache(maxsize=8)
 def load_runtime_match(match_id):
-    if (not isinstance(match_id, str) or not MATCH_ID.fullmatch(match_id)
-            or match_id not in {r['match_id'] for r in list_matches(True)}):
+    if (not isinstance(match_id, str) or not MATCH_ID.fullmatch(match_id)):
+        raise ValueError('unknown_match')
+    known={r['match_id'] for r in list_matches(True)}
+    if match_id not in known and match_id not in {r['match_id'] for r in list_matches(False,True)}:
         raise ValueError('unknown_match')
     folder = RUNTIME / match_id
     metadata = json.loads((folder / 'match.json').read_text())

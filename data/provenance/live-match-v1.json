@@ -1,0 +1,16 @@
+{
+  "generator": "simulator.live_match",
+  "scope": "Additive live-feed stress scenes, derived from the authored flagship.\n\nThese are transformed/delivery-fault variants of one trajectory backbone, not\nindependent football matches or expert tactical ground truth. References live in\nthe offline evaluation directory and are never loaded here or at runtime.\n",
+  "cases": [
+    {
+      "match_id": "match-0c0a000000000007",
+      "sha256": "f955934ec31c355467990e4dec5c04cbf3a9e266f441fa1c4e97be2f25e9159f",
+      "observations": 2428
+    },
+    {
+      "match_id": "match-0c0a000000000008",
+      "sha256": "6bf7efcbcd78132d471a505a25263de1f3f90c7bbd6de282910e3ba021ae377f",
+      "observations": 2428
+    }
+  ]
+}

@@ -1,5 +1,8 @@
-import { useId } from "react";
+"use client";
+
+import { KeyboardEvent, useId, useState } from "react";
 import { Frame, Metrics, Player } from "@/lib/api";
+import styles from "./pitch.module.css";
 export function ballOverlapsPlayer(frame: Frame | null) {
   return Boolean(
     frame?.ball &&
@@ -28,8 +31,10 @@ export default function Pitch({
   language = "en",
   broadcast = false,
   players = [],
+  teamNames = {},
 }: {
   players?: Player[];
+  teamNames?: Record<string, string>;
   broadcast?: boolean;
   frame: Frame | null;
   metrics?: Metrics;
@@ -41,6 +46,8 @@ export default function Pitch({
 }) {
   const es = language === "es";
   const uid = useId().replace(/:/g, "");
+  const [hoveredPlayerId, setHoveredPlayerId] = useState<string | null>(null);
+  const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
   const carrier = broadcast ? observedBallCarrier(frame) : undefined;
   const ballLinked = broadcast && !carrier && ballOverlapsPlayer(frame);
   const ball = frame?.ball;
@@ -109,6 +116,18 @@ export default function Pitch({
     ? carrier.y_m + 5 + badgeOffset[1]
     : (ball?.y_m ?? 0) + 5 + offset[1];
   const ballRadius = carrier ? 0.85 : 1.15;
+  const activePlayerId = hoveredPlayerId ?? selectedPlayerId;
+  const activePlayer = players.find((player) => player.id === activePlayerId);
+  const activeTeamName = activePlayer
+    ? teamNames[activePlayer.team_id] ?? activePlayer.team_id
+    : "";
+  const identityText = activePlayer
+    ? `${es ? "Jugador" : "Player"} #${activePlayer.number} ${activePlayer.name} · ${activeTeamName}${
+        activePlayer.role === "keeper"
+          ? ` · ${es ? "Portero" : "Goalkeeper"}`
+          : ""
+      }`
+    : null;
   const broadcastBall =
     ball && broadcast ? (
       <g
@@ -177,6 +196,7 @@ export default function Pitch({
     ) : null;
   const position = (x: number, y: number) => ({ x: x + 5, y: y + 5 });
   return (
+    <>
     <svg
       viewBox="0 0 115 78"
       role="img"
@@ -373,6 +393,24 @@ export default function Pitch({
         const player = players.find((player) => player.id === p.player_id);
         const keeper = broadcast && player?.role === "keeper";
         const keeperColor = p.team_id === "blue" ? "#d7c7ff" : "#ffa9a4";
+        const interactive = broadcast;
+        const selected = selectedPlayerId === p.player_id;
+        const shirtNumber =
+          player?.number ?? parseInt(p.player_id.split("-")[1]);
+        const teamName =
+          teamNames[p.team_id] ??
+          (p.team_id === "blue" ? "Harbor City" : "Alder Rovers");
+        const playerLabel = `${es ? "Jugador" : "Player"} #${shirtNumber}, ${player?.name ?? (es ? "nombre no disponible" : "name unavailable")}, ${teamName}${keeper ? (es ? ", portero" : ", goalkeeper") : ""}`;
+        const activate = () =>
+          setSelectedPlayerId((current) =>
+            current === p.player_id ? null : p.player_id,
+          );
+        const handleKeyDown = (event: KeyboardEvent<SVGGElement>) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            activate();
+          }
+        };
         const highlighted =
           (["all", "c-bypass"].includes(highlight) &&
             metrics?.bypassed_player_ids.includes(p.player_id)) ||
@@ -382,8 +420,38 @@ export default function Pitch({
             key={p.player_id}
             data-player-id={p.player_id}
             data-role={player?.role}
+            className={interactive ? styles.playerMarker : undefined}
+            role={interactive ? "button" : undefined}
+            tabIndex={interactive ? 0 : undefined}
+            aria-label={interactive ? playerLabel : undefined}
+            aria-pressed={interactive ? selected : undefined}
+            onPointerEnter={
+              interactive ? () => setHoveredPlayerId(p.player_id) : undefined
+            }
+            onPointerLeave={
+              interactive
+                ? () =>
+                    setHoveredPlayerId((current) =>
+                      current === p.player_id ? null : current,
+                    )
+                : undefined
+            }
+            onFocus={
+              interactive ? () => setHoveredPlayerId(p.player_id) : undefined
+            }
+            onBlur={
+              interactive
+                ? () =>
+                    setHoveredPlayerId((current) =>
+                      current === p.player_id ? null : current,
+                    )
+                : undefined
+            }
+            onClick={interactive ? activate : undefined}
+            onKeyDown={interactive ? handleKeyDown : undefined}
           >
-            <title>{`${p.team_id === "blue" ? "HBC" : "ALD"} · ${parseInt(p.player_id.split("-")[1])}${keeper ? (es ? " · Portero" : " · Goalkeeper") : ""}${player ? ` · ${player.name}` : ""}`}</title>
+            <title>{playerLabel}</title>
+            {interactive && <circle className={styles.focusRing} cx={q.x} cy={q.y} r="2.65" />}
             {broadcast && (
               <circle
                 cx={q.x}
@@ -450,7 +518,7 @@ export default function Pitch({
               fontSize={broadcast ? "1.45" : "1.25"}
               fontWeight="700"
             >
-              {parseInt(p.player_id.split("-")[1])}
+              {shirtNumber}
             </text>
           </g>
         );
@@ -483,5 +551,14 @@ export default function Pitch({
         </text>
       )}
     </svg>
+      {broadcast && (
+        <p className={styles.playerIdentity}>
+          {identityText ??
+            (es
+              ? "Selecciona un jugador para ver su nombre, dorsal y posición."
+              : "Select a player to see their name, number and role.")}
+        </p>
+      )}
+    </>
   );
 }

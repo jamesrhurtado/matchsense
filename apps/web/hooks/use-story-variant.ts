@@ -26,7 +26,12 @@ export function useStoryVariant(
       isProducer,
     )
       .then((variant) => {
-        if (!ignore) setResult({ key, variant });
+        if (
+          !ignore &&
+          variant.story_id === story.id &&
+          variant.revision === story.revision
+        )
+          setResult({ key, variant });
       })
       .catch(() => {
         if (!ignore) setResult(null);

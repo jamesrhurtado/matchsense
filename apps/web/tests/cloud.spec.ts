@@ -15,8 +15,8 @@ test('hosted Azure workflow: evidence, real model review, approval and companion
  page.on('pageerror',error=>errors.push(error.message));
  await page.goto(base);
  await page.getByLabel('Producer access key').fill(access.producer_key);
- await page.getByLabel('Replay segment').selectOption('match-001');
- await page.getByRole('button',{name:'Open producer console'}).click();
+ await page.getByText('More demo scenarios',{exact:true}).click();await page.getByLabel('Replay segment').selectOption('match-001');
+ await page.getByRole('button',{name:'Start the guided demo'}).click();
  await expect(page).toHaveURL(/\/studio\//,{timeout:30_000});
  const sid=page.url().split('/').pop()!;
  await page.getByLabel('Replay speed').selectOption('1');

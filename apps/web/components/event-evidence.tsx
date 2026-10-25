@@ -35,7 +35,7 @@ export function EventEvidence({
     receiver: es ? "Receptor" : "Receiver",
   };
   const labels: Record<string, string[]> = {
-    pressure: ["Pressure Swing", "Cambio de presión cercana"],
+    pressure: ["Nearby pressure change", "Cambio de presión cercana"],
     recovery: ["Change of control", "Cambio de control"],
     shot: ["Shot outcome", "Resultado del remate"],
     goal: ["Confirmed goal", "Gol confirmado"],
@@ -95,12 +95,12 @@ export function EventEvidence({
           <div className="grid gap-3 sm:grid-cols-3">
             {[
               [
-                es ? "ANTES DEL PASE" : "BEFORE RELEASE",
+                es ? "ANTES DEL PASE" : "BEFORE THE PASS",
                 f.before.mean.toFixed(1),
                 `${timecode(f.before.start_ms)}–${timecode(f.before.end_ms)}`,
               ],
               [
-                es ? "PASE HACIA DELANTE" : "FORWARD PASS",
+                es ? "DISTANCIA HACIA DELANTE" : "FORWARD DISTANCE",
                 `${f.forward_m?.toFixed(1)} m`,
                 es ? "Posesión posterior: 3 s" : "Subsequent possession: 3 s",
               ],
@@ -131,11 +131,10 @@ export function EventEvidence({
               ? "Rivales a 6 m: medias ponderadas por tiempo, alrededor del pasador antes y del receptor después. No es una probabilidad ni una medida de intención táctica."
               : "Opponents within 6 m: time-weighted averages around the passer before and the receiver after. This is a proximity measure, not a probability or a measure of tactical intent."}
           </p>
-          <p className="text-xs tabular-nums">
-            {es ? "Cobertura antes / después" : "Coverage before / after"}:{" "}
-            {(f.before.coverage * 100).toFixed(1)}% /{" "}
-            {(f.after.coverage * 100).toFixed(1)}% · {f.before.known_ms / 1000}{" "}
-            / 2 s · {f.after.known_ms / 1000} / 2 s
+          <p className="text-xs leading-relaxed tabular-nums">
+            {es
+              ? `Datos observados: antes ${(f.before.coverage * 100).toFixed(0)}% (${(f.before.known_ms / 1000).toFixed(1)} de 2.0 s); después ${(f.after.coverage * 100).toFixed(0)}% (${(f.after.known_ms / 1000).toFixed(1)} de 2.0 s).`
+              : `Observed data coverage: before ${(f.before.coverage * 100).toFixed(0)}% (${(f.before.known_ms / 1000).toFixed(1)} of 2.0 s); after ${(f.after.coverage * 100).toFixed(0)}% (${(f.after.known_ms / 1000).toFixed(1)} of 2.0 s).`}
           </p>
           {f.stands_out && (
             <table className="w-full text-left text-xs tabular-nums">
@@ -344,6 +343,7 @@ export function EventEvidence({
       )}
       <details>
         <summary className="min-h-11 cursor-pointer py-3 font-medium">
+          {es ? "Detalles técnicos de la fuente" : "Technical source details"} ·{" "}
           {es ? "Observaciones fuente" : "Source observations"} ·{" "}
           {m.source_message_ids.length}
         </summary>

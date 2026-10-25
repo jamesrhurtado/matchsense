@@ -42,13 +42,12 @@ export function Tag({
 export function Card({
   children,
   className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
+  ...props
+}: React.HTMLAttributes<HTMLElement>) {
   return (
     <section
       className={cn("rounded-2xl border border-stone-200 bg-white", className)}
+      {...props}
     >
       {children}
     </section>

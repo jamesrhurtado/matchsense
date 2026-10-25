@@ -44,7 +44,41 @@ export function StoryPicker({
   const es = language === "es";
   const [family, setFamily] = useState("");
   const [showArchive, setShowArchive] = useState(false);
+  const [showAll, setShowAll] = useState(false);
   const mixed = stories.some((s) => s.family && s.family !== "pass");
+  const priority: Record<string, number> = {
+    goal: 0,
+    shot: 1,
+    pressure: 2,
+    recovery: 3,
+    possession: 4,
+    pass: 5,
+  };
+  const ranked =
+    producer && mixed
+      ? [...stories].sort(
+          (a, b) =>
+            (priority[a.family || "pass"] ?? 6) -
+              (priority[b.family || "pass"] ?? 6) ||
+            (b.occurrence_ms ?? b.eligible_from_ms) -
+              (a.occurrence_ms ?? a.eligible_from_ms),
+        )
+      : stories;
+  const groups = new Map<string, Story[]>();
+  for (const item of ranked) {
+    const key = producer && mixed ? item.incident_id || item.id : item.id;
+    groups.set(key, [...(groups.get(key) || []), item]);
+  }
+  const visible = [...groups.values()]
+    .flat()
+    .filter(
+      (s) =>
+        !producer ||
+        !mixed ||
+        showArchive ||
+        (s.queue_state === "live" &&
+          !["suppressed", "retracted", "superseded"].includes(s.status)),
+    );
   return (
     <div
       className={cn(
@@ -54,10 +88,10 @@ export function StoryPicker({
       role="group"
       aria-label={
         producer
-          ? "Story queue moments"
+          ? "Suggested insights"
           : es
-            ? "Momentos aprobados"
-            : "Approved moments"
+            ? "Información del partido aprobada"
+            : "Approved match insights"
       }
     >
       {mixed && (
@@ -73,7 +107,7 @@ export function StoryPicker({
             {[
               ["goal", "Goals", "Goles"],
               ["shot", "Shots", "Remates"],
-              ["pressure", "Pressure Swing", "Cambio de presión cercana"],
+              ["pressure", "Nearby pressure change", "Cambio de presión cercana"],
               ["recovery", "Control changes", "Cambios de control"],
               ["possession", "Possession", "Posesión"],
               ["pass", "Passes", "Pases"],
@@ -95,7 +129,7 @@ export function StoryPicker({
           {es ? "Incluir candidatos archivados" : "Include archived candidates"}
         </label>
       )}
-      {stories
+      {visible
         .filter(
           (s) => !producer || !mixed || showArchive || s.queue_state === "live",
         )
@@ -105,57 +139,99 @@ export function StoryPicker({
             : [s],
         )
         .filter((s) => !family || (s.family || "pass") === family)
+        .filter(
+          (s, index) =>
+            !producer ||
+            !mixed ||
+            showAll ||
+            family ||
+            showArchive ||
+            index < 3 ||
+            s.id === selected,
+        )
         .map((item, index) => (
-          <button
-            key={item.id}
-            type="button"
-            aria-pressed={selected === item.id}
-            onClick={() => onSelect(item.id)}
-            className={cn(
-              "flex min-h-11 w-full items-center justify-between gap-3 rounded-lg border px-3 py-2 text-left text-sm",
-              selected === item.id
-                ? "border-emerald-300 bg-emerald-50 text-emerald-950"
-                : "border-stone-200 bg-white text-stone-600 hover:bg-stone-50",
-            )}
-          >
-            <span className="min-w-0">
-              <span className="block font-medium">
-                {es ? "Momento" : "Moment"} {index + 1} ·{" "}
-                {timecode(item.eligible_from_ms)}
+          <div key={item.id}>
+            {producer &&
+              mixed &&
+              !family &&
+              (groups.get(item.incident_id || item.id)?.length || 0) > 1 &&
+              groups.get(item.incident_id || item.id)?.[0].id === item.id && (
+                <p className="mb-2 mt-3 text-xs font-medium text-stone-500">
+                  {groups.get(item.incident_id || item.id)?.length} explanations
+                  · same incident
+                </p>
+              )}
+            <button
+              key={item.id}
+              type="button"
+              aria-pressed={selected === item.id}
+              onClick={() => onSelect(item.id)}
+              className={cn(
+                "flex min-h-11 w-full items-center justify-between gap-3 rounded-lg border px-3 py-2 text-left text-sm",
+                selected === item.id
+                  ? "border-emerald-300 bg-emerald-50 text-emerald-950"
+                  : "border-stone-200 bg-white text-stone-600 hover:bg-stone-50",
+              )}
+            >
+              <span className="min-w-0">
+                <span className="block font-medium">
+                  {es ? "Información" : "Insight"} {index + 1} ·{" "}
+                  {timecode(item.eligible_from_ms)}
+                </span>
+                <span className="block text-xs">
+                  {item.family && (
+                    <span className="capitalize">
+                      {(
+                        {
+                          goal: es ? "Gol" : "Goal",
+                          shot: es ? "Remate" : "Shot",
+                          pressure: es
+                            ? "Presión cercana"
+                            : "Nearby pressure",
+                          recovery: es ? "Control" : "Control",
+                          possession: es ? "Posesión" : "Possession",
+                          pass: es ? "Pase" : "Pass",
+                        } as Record<string, string>
+                      )[item.family] || item.family}{" "}
+                      ·{" "}
+                    </span>
+                  )}
+                  {item.family === "pressure"
+                    ? es
+                      ? "Cambio de presión cercana"
+                      : "Nearby pressure change"
+                    : item.titles?.[language] || item.title}
+                </span>
               </span>
-              <span className="block text-xs">
-                {item.family && (
-                  <span className="capitalize">
-                    {(
-                      {
-                        goal: es ? "Gol" : "Goal",
-                        shot: es ? "Remate" : "Shot",
-                        recovery: es ? "Control" : "Control",
-                        possession: es ? "Posesión" : "Possession",
-                        pass: es ? "Pase" : "Pass",
-                      } as Record<string, string>
-                    )[item.family] || item.family}{" "}
-                    ·{" "}
-                  </span>
-                )}
-                {item.titles?.[language] || item.title}
+              <span className="shrink-0 text-xs capitalize">
+                {item.approved && item.status === "expired"
+                  ? es
+                    ? "Aprobado · archivo"
+                    : "Approved · archived"
+                  : es
+                    ? {
+                        approved: "Aprobado",
+                        expired: "Archivado",
+                        ready: "Listo para revisar",
+                      }[item.status] || item.status
+                    : item.status === "ready"
+                      ? "Ready to review"
+                      : item.status}
               </span>
-            </span>
-            <span className="shrink-0 text-xs capitalize">
-              {item.approved && item.status === "expired"
-                ? es
-                  ? "Aprobado · archivo"
-                  : "Approved · archived"
-                : es
-                  ? {
-                      approved: "Aprobado",
-                      expired: "Archivado",
-                      ready: "Listo",
-                    }[item.status] || item.status
-                  : item.status}
-            </span>
-          </button>
+            </button>
+          </div>
         ))}
+      {producer && mixed && !family && !showArchive && visible.length > 3 && (
+        <button
+          type="button"
+          onClick={() => setShowAll((value) => !value)}
+          className="min-h-11 w-full rounded-lg px-3 text-left text-sm font-medium text-emerald-800"
+        >
+          {showAll
+            ? "Show fewer suggestions"
+            : `Show all ${visible.length} suggestions`}
+        </button>
+      )}
     </div>
   );
 }
@@ -222,7 +298,11 @@ export function AudiencePanel({
           </p>
           <h2 className="text-balance text-xl font-semibold">
             {story
-              ? story.titles?.[language] || story.title
+              ? story.family === "pressure"
+                ? es
+                  ? "Cambio de presión cercana"
+                  : "Nearby pressure change"
+                : story.titles?.[language] || story.title
               : focus
                 ? es
                   ? "Tu enfoque seleccionado"
@@ -292,7 +372,12 @@ export function AudiencePanel({
         </p>
       )}
 
-      {flagship && story?.why_now && (
+      {flagship &&
+        story?.why_now &&
+        (story.family !== "pressure" ||
+          /previous three|tres pases anteriores/i.test(
+            story.why_now[language] || "",
+          )) && (
         <section
           className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 p-4"
           aria-label={es ? "Por qué este momento" : "Why this moment"}
@@ -355,10 +440,10 @@ export function AudiencePanel({
             {focus
               ? es
                 ? "Historial aprobado relevante"
-                : "Relevant approved history"
+                : "Relevant approved insights"
               : es
                 ? "Historial aprobado"
-                : "Approved history"}{" "}
+                : "Approved match insights"}{" "}
             · {stories.length}
           </summary>
           <StoryPicker

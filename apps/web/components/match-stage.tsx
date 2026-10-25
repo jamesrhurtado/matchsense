@@ -27,10 +27,12 @@ export function MatchStage({
   match,
   language,
   expired,
+  showExplanation = true,
 }: {
   match: Match | null;
   language: string;
   expired: boolean;
+  showExplanation?: boolean;
 }) {
   const es = language === "es";
   const elapsed = match?.clock_ms ?? 0;
@@ -51,7 +53,13 @@ export function MatchStage({
           <span className={styles.channel}>{es ? "Partido" : "Matchday"}</span>
         </span>
         <span className={styles.synthetic}>
-          {es ? "Repetición sintética" : "Synthetic replay"}
+          {match?.session_mode === "live"
+            ? es
+              ? "Señal simulada en directo"
+              : "Simulated live feed"
+            : es
+              ? "Repetición sintética"
+              : "Synthetic replay"}
         </span>
       </div>
       <div
@@ -111,10 +119,14 @@ export function MatchStage({
             : match?.running
               ? es
                 ? "En curso"
-                : "Replay running"
+                : match?.session_mode === "live"
+                  ? "Simulation running"
+                  : "Replay running"
               : es
                 ? "En pausa"
-                : "Replay paused"}
+                : match?.session_mode === "live"
+                  ? "Simulation stopped"
+                  : "Replay paused"}
           {match && match.speed !== 1 && ` · ${match.speed}×`}
         </span>
       </div>
@@ -129,6 +141,9 @@ export function MatchStage({
         <Pitch
           frame={match?.frame ?? null}
           players={match?.players ?? []}
+          teamNames={Object.fromEntries(
+            (match?.teams ?? []).map((team) => [team.id, team.name]),
+          )}
           language={language}
           broadcast
         />
@@ -164,21 +179,19 @@ export function MatchStage({
             {es ? "Portero ALD" : "ALD goalkeeper"}
           </span>
         </div>
-        {observedBallCarrier(match?.frame ?? null) ? (
-          <p className={styles.fieldNote}>
-            {es
+        <p className={styles.fieldNote}>
+          {observedBallCarrier(match?.frame ?? null)
+            ? es
               ? "La insignia de balón identifica al jugador con control observado."
-              : "The ball badge identifies the observed ball carrier."}
-          </p>
-        ) : (
-          ballOverlapsPlayer(match?.frame ?? null) && (
-            <p className={styles.fieldNote}>
-              {es
+              : "The ball badge identifies the observed ball carrier."
+            : ballOverlapsPlayer(match?.frame ?? null)
+              ? es
                 ? "La línea del balón señala su posición observada."
-                : "The ball’s line points to its observed position."}
-            </p>
-          )
-        )}
+                : "The ball’s line points to its observed position."
+              : es
+                ? "El balón muestra su posición observada."
+                : "The ball shows its observed position."}
+        </p>
       </div>
       <div
         className={styles.progress}
@@ -193,47 +206,51 @@ export function MatchStage({
           style={{ width: `${Math.min(100, (elapsed / duration) * 100)}%` }}
         />
       </div>
-      <div className={styles.lowerThird}>
-        <div className={styles.momentIcon}>
-          {match?.overlay ? <Radio size={22} /> : <ShieldCheck size={22} />}
-        </div>
-        <div className={styles.momentBody}>
-          <div className={styles.momentHeading}>
-            <span>{es ? "En la transmisión" : "On the broadcast"}</span>
-            {match?.overlay && (
-              <span className={styles.approved}>
-                <Check size={12} />
-                {es ? "Aprobado" : "Producer approved"}
-              </span>
-            )}
+      {showExplanation && (
+        <div className={styles.lowerThird}>
+          <div className={styles.momentIcon}>
+            {match?.overlay ? <Radio size={22} /> : <ShieldCheck size={22} />}
           </div>
-          {match?.overlay ? (
-            <p className={styles.explanation}>{match.overlay}</p>
-          ) : (
-            <p className={styles.empty}>
-              {expired
-                ? es
-                  ? "Terminó el intervalo en pantalla. El momento aprobado sigue disponible en el historial."
-                  : "Display interval ended. The approved moment remains available in the companion."
-                : es
-                  ? "Las historias aprobadas aparecen aquí durante su intervalo de repetición."
-                  : "Approved stories appear here at their eligible replay time."}
-            </p>
-          )}
-          <details className={styles.policy}>
-            <summary>
-              {es ? "Cómo se elige este texto" : "How this text is selected"}
-              <ChevronDown size={12} />
-            </summary>
-            <p>
-              {es
-                ? "Las explicaciones requieren aprobación del productor. "
-                : "Explanations require producer approval. "}
-              {match?.overlay_selection_reason?.[language]}
-            </p>
-          </details>
+          <div className={styles.momentBody}>
+            <div className={styles.momentHeading}>
+              <span>{es ? "En la transmisión" : "On the broadcast"}</span>
+              {match?.overlay && (
+                <span className={styles.approved}>
+                  <Check size={12} />
+                  {es ? "Aprobado" : "Producer approved"}
+                </span>
+              )}
+            </div>
+            {match?.overlay ? (
+              <p className={styles.explanation}>{match.overlay}</p>
+            ) : (
+              <p className={styles.empty}>
+                {expired
+                  ? es
+                    ? "Terminó el intervalo en pantalla. El momento aprobado sigue disponible en el historial."
+                    : "Display interval ended. The approved moment remains available in the companion."
+                  : es
+                    ? "Las historias aprobadas aparecen aquí durante su intervalo de repetición."
+                    : match?.session_mode === "live"
+                      ? "Producer-approved insights appear here while the match unfolds."
+                      : "Approved stories appear here at their eligible replay time."}
+              </p>
+            )}
+            <details className={styles.policy}>
+              <summary>
+                {es ? "Cómo se elige este texto" : "How this text is selected"}
+                <ChevronDown size={12} />
+              </summary>
+              <p>
+                {es
+                  ? "Las explicaciones requieren aprobación del productor. "
+                  : "Explanations require producer approval. "}
+                {match?.overlay_selection_reason?.[language]}
+              </p>
+            </details>
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 }

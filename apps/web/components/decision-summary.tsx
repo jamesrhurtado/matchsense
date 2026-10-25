@@ -26,7 +26,6 @@ export function DecisionSummary({
       <dl className="mt-3 space-y-3 text-sm text-emerald-950">
         <div>
           <dt className="font-medium">Selected angle · {summary.angle}</dt>
-          <dd className="mt-1">{summary.lead}</dd>
         </div>
         <div>
           <dt className="font-medium">Previous-pass context</dt>

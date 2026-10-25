@@ -44,7 +44,8 @@ test('keeper kits use recorded roles and the linked ball preserves the observed 
   const snapshot = {
     session_id: 'marker-demo', clock_ms: 105000, duration_ms: 240000, running: false, speed: 1,
     mode: 'Local deterministic workflow', story: null, stories: [], story_status: 'none', overlay: null,
-    delivered_count: 1, cursor: 1, teams: [],
+    delivered_count: 1, cursor: 1,
+    teams: [{ id: 'blue', name: 'Harbor City', color: '#60a5fa' }, { id: 'amber', name: 'Alder Rovers', color: '#fbbf24' }],
     players: [
       { id: 'blue-01', team_id: 'blue', number: 1, name: 'Home Keeper', role: 'keeper' },
       { id: 'amber-01', team_id: 'amber', number: 1, name: 'Away Keeper', role: 'keeper' },
@@ -68,6 +69,8 @@ test('keeper kits use recorded roles and the linked ball preserves the observed 
   await expect(home.locator('rect')).toHaveCount(1);
   await expect(away.locator('rect')).toHaveCount(1);
   expect(await home.locator('rect').getAttribute('fill')).not.toEqual(await away.locator('rect').getAttribute('fill'));
+  await home.hover();
+  await expect(stage.getByText('Player #1 Home Keeper · Harbor City · Goalkeeper', { exact: true })).toBeVisible();
   // The fixture's awkward keeper positions remain recorded positions, not silently relocated.
   await expect(home.locator('text')).toHaveAttribute('x', '15');
   await expect(home.locator('text')).toHaveAttribute('y', '11.42');
@@ -76,6 +79,15 @@ test('keeper kits use recorded roles and the linked ball preserves the observed 
   await expect(stage.getByTestId('ball-position-link')).toHaveAttribute('x1', '60');
   expect(await stage.getByTestId('ball-symbol').getAttribute('cx')).not.toEqual('60');
   await expect(stage.locator('[data-player-id="blue-09"] text')).toHaveText('9');
+  const forward = stage.getByRole('button', { name: 'Player #9, Forward, Harbor City' });
+  await forward.focus();
+  await page.keyboard.press('Enter');
+  await expect(forward).toHaveAttribute('aria-pressed', 'true');
+  await expect(stage.getByText('Player #9 Forward · Harbor City', { exact: true })).toBeVisible();
+  await forward.click();
+  await page.mouse.move(0, 0);
+  await expect(forward).toHaveAttribute('aria-pressed', 'false');
+  await expect(stage.getByText('Select a player to see their name, number and role.', { exact: true })).toBeVisible();
   await page.getByLabel('Language', { exact: true }).selectOption('es');
   await expect(page.getByText('Portero HBC', { exact: true })).toBeVisible();
 });

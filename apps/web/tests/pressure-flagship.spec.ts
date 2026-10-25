@@ -12,15 +12,15 @@ test('pressure flagship: review, source evidence, approval, audience lenses, Spa
  const before=await(await request.get(base+'/snapshot')).json();expect(before.stories).toHaveLength(0);
  await page.addInitScript(()=>sessionStorage.setItem('why-now-token','local-demo-producer'));
  await page.goto(`/studio/${created.session_id}`);
- const queue=page.getByRole('group',{name:'Story queue moments'});
+ const queue=page.getByRole('group',{name:'Suggested insights'});
  await queue.getByLabel('Event family').selectOption('pressure');
- await queue.getByRole('button',{name:/01:31.*Pressure Swing/}).click();
+ await queue.getByRole('button',{name:/01:31.*Nearby pressure change/}).click();
  await expect(page.getByRole('region',{name:'Why this moment'})).toContainText('previous three');
  await page.getByRole('button',{name:'Check the evidence',exact:true}).click();
  const evidence=page.getByTestId('pressure-evidence').first();
  await expect(evidence).toContainText('2.0');await expect(evidence).toContainText('0.4');await expect(evidence).toContainText('30.0 m');
  await expect(evidence.getByRole('table')).toContainText('25.0 m');
- await expect(evidence).toContainText('100.0% / 100.0%');
+ await expect(evidence).toContainText('before 100% (2.0 of 2.0 s); after 100% (2.0 of 2.0 s)');
  await page.getByRole('button',{name:'Approve',exact:true}).click();
  const viewer=await context.newPage();await viewer.setViewportSize({width:390,height:844});
  await viewer.goto(`/watch/${created.session_id}`);
@@ -44,7 +44,7 @@ test('pressure flagship: review, source evidence, approval, audience lenses, Spa
  await viewer.getByRole('button',{name:'Ponerme al día'}).click();
  await expect(viewer.getByRole('heading',{name:'Resumen del segmento'})).toBeVisible();
  await expect(viewer.getByRole('heading',{name:'Cambio de presión cercana',level:3,exact:true})).toBeVisible();
- await viewer.getByRole('button',{name:'Close recap'}).click();
+ await viewer.getByRole('button',{name:'Cerrar resumen'}).click();
  await viewer.setViewportSize({width:1366,height:900});
  await viewer.getByLabel('Idioma',{exact:true}).selectOption('en');
  await expect(viewer.getByTestId('audience-explanation')).toContainText('30.0 m forward');

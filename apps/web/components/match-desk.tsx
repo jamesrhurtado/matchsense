@@ -23,24 +23,18 @@ import {
   Sparkles,
   X,
 } from "lucide-react";
-import {
-  api,
-  cn,
-  Evidence,
-  Match,
-  Recap,
-  timecode,
-  token,
-  Variant,
-} from "@/lib/api";
+import { api, cn, Evidence, Match, timecode, token, Variant } from "@/lib/api";
 import { Button, Card, Tag } from "./ui";
 import { MatchStage } from "./match-stage";
 import { AudiencePanel, StoryPicker, relevantStories } from "./audience-panel";
 import { useMatch } from "@/hooks/use-match";
 import { useRenderAck } from "@/hooks/use-render-ack";
 import { EvidenceReplay } from "./evidence-replay";
-import { DecisionSummary } from "./decision-summary";
+import { AudiencePreview } from "./audience-preview";
+import { CatchUpPanel } from "./catch-up-panel";
+import { useViewerVisit } from "@/hooks/use-viewer-visit";
 import { ReviewCard } from "./review-card";
+import { DecisionSummary } from "./decision-summary";
 import { AudienceControls } from "./audience-controls";
 import { useAudiencePreferences } from "@/hooks/use-audience-preferences";
 import { useStoryVariant } from "@/hooks/use-story-variant";
@@ -71,9 +65,25 @@ export default function MatchDesk({
     string,
     unknown
   > | null>(null);
+  const [diagnosticsLoading, setDiagnosticsLoading] = useState(false);
+  const diagnosticsHeading = useRef<HTMLHeadingElement>(null);
   const { language, setLanguage, detail, setDetail, focus, setFocus } =
     useAudiencePreferences();
-  const [recap, setRecap] = useState<Recap | null>(null);
+  const [recapOpen, setRecapOpen] = useState(false);
+  const [viewerDisplay, setViewerDisplay] = useState("match");
+  const recapPanel = useRef<HTMLDivElement>(null);
+  const visit = useViewerVisit(id, match?.clock_ms, !isProducer);
+  const quietViewer =
+    !isProducer && match?.session_mode === "live" && viewerDisplay === "match";
+  useEffect(() => {
+    if (recapOpen) recapPanel.current?.scrollIntoView({ block: "start" });
+  }, [recapOpen]);
+  useEffect(() => {
+    if (diagnostics) {
+      diagnosticsHeading.current?.scrollIntoView({ block: "start" });
+      diagnosticsHeading.current?.focus({ preventScroll: true });
+    }
+  }, [diagnostics]);
   const [access, setAccess] = useState("");
   const story =
     selectedStoryId && match?.story?.id !== selectedStoryId
@@ -157,6 +167,12 @@ export default function MatchDesk({
     )
       setSelectedStoryId("");
   }, [selectedStoryId, match?.stories, match?.story?.id]);
+  // Pin the first available producer story; arriving candidates never replace
+  // the evidence being read. Explicit selection and revision guards still apply.
+  useEffect(() => {
+    if (isProducer && !selectedStoryId && match?.story?.id)
+      setSelectedStoryId(match.story.id);
+  }, [isProducer, selectedStoryId, match?.story?.id]);
   const workflowPending = match?.workflow_pending === true;
   const modelUsage = diagnostics?.model_usage as
     | {
@@ -168,13 +184,13 @@ export default function MatchDesk({
       }
     | undefined;
   const recapContext = `${id}:${language}:${focus}:${stories.map((item) => `${item.id}:${item.revision}:${item.status}`).join(",")}`;
-  const currentRecapContext = useRef(recapContext);
-  currentRecapContext.current = recapContext;
-  useEffect(() => setRecap(null), [recapContext]);
+  const correctionContext = (match?.corrections || [])
+    .map((n) => n.notice_id)
+    .join(",");
   const path = `/replay-sessions/${id}`;
   const visibleVariant = useStoryVariant(
     path,
-    story,
+    quietViewer ? null : story,
     match?.story_status,
     language,
     detail,
@@ -185,11 +201,12 @@ export default function MatchDesk({
     path,
     audienceStory,
     visibleVariant,
-    !isProducer && mode === "watch" && !!storyApproved,
+    !isProducer && !quietViewer && mode === "watch" && !!storyApproved,
   );
   const loadEvidence = useCallback(async () => {
     if (!story) return;
     setActionError("");
+    setSelectedStoryId(story.id);
     try {
       const requestStory = `${story.id}:${story.revision}`;
       const data = await api<Evidence>(
@@ -205,7 +222,7 @@ export default function MatchDesk({
     }
   }, [story?.id, story?.revision, path, isProducer]);
   useEffect(() => {
-    if (isProducer || !audienceStory) return;
+    if (isProducer || quietViewer || !audienceStory) return;
     let ignore = false;
     api<Evidence>(`${path}/stories/${audienceStory.id}/evidence`)
       .then((data) => {
@@ -217,7 +234,13 @@ export default function MatchDesk({
     return () => {
       ignore = true;
     };
-  }, [isProducer, path, audienceStory?.id, audienceStory?.revision]);
+  }, [
+    isProducer,
+    quietViewer,
+    path,
+    audienceStory?.id,
+    audienceStory?.revision,
+  ]);
   async function control(action: string, speed?: number, clock_ms?: number) {
     setActionError("");
     if (action === "start") setGuidedNotice("");
@@ -310,21 +333,12 @@ export default function MatchDesk({
       setBusy(false);
     }
   }
-  async function catchUp() {
-    const requestedContext = recapContext;
-    setActionError("");
-    try {
-      const data = await api<Recap>(`${path}/recaps`, {
-        method: "POST",
-        body: JSON.stringify({ language, focus: focus || null }),
-      });
-      if (currentRecapContext.current === requestedContext) setRecap(data);
-    } catch (e) {
-      setActionError((e as Error).message);
-    }
+  function catchUp() {
+    setRecapOpen(true);
   }
   async function inspectDiagnostics() {
     const requestStory = activeStory.current;
+    setDiagnosticsLoading(true);
     try {
       const data = await api<Record<string, unknown>>(
         `${path}/diagnostics${story ? `?story_id=${encodeURIComponent(story.id)}` : ""}`,
@@ -334,6 +348,8 @@ export default function MatchDesk({
       if (activeStory.current === requestStory) setDiagnostics(data);
     } catch (e) {
       setActionError((e as Error).message);
+    } finally {
+      setDiagnosticsLoading(false);
     }
   }
   if (mode === "overlay")
@@ -495,14 +511,9 @@ export default function MatchDesk({
           <div>
             <div className="mb-2 flex items-center gap-2 text-xs text-stone-500">
               <span>
-                {language === "es" ? "SESIÓN" : "SESSION"}{" "}
-                {id.slice(0, 8).toUpperCase()}
-              </span>
-              <ChevronRight size={12} />
-              <span>
                 {language === "es"
-                  ? `Segmento de ${duration / 1000} segundos`
-                  : `${duration / 1000}-second segment`}
+                  ? `Demo de ${duration / 60000} minutos`
+                  : `${duration / 60000}-minute ${match?.session_mode === "live" ? "live simulation" : "demo replay"}`}
               </span>
             </div>
             <h1 className="text-balance text-2xl font-semibold md:text-3xl">
@@ -523,27 +534,36 @@ export default function MatchDesk({
             {actionError}
           </p>
         )}
-        {workflowPending && (
+        {isProducer && (
           <div
             role="status"
             aria-live="polite"
-            className="mb-5 rounded-xl border border-emerald-200 bg-emerald-50 p-4"
+            data-testid="review-status"
+            className="mb-5 flex h-16 items-center gap-3 rounded-xl border border-emerald-200 bg-emerald-50 px-4 text-sm text-emerald-900"
           >
-            <p className="flex items-center gap-2 text-sm font-semibold text-emerald-900">
-              <ShieldCheck size={16} />
-              AI review in progress
+            <ShieldCheck size={18} className="shrink-0" />
+            <p>
+              <strong className="block">
+                {workflowPending
+                  ? "AI review in progress"
+                  : "Producer review desk"}
+              </strong>
+              <span className="text-xs">
+                {workflowPending
+                  ? "Checking a new explanation. Keep reviewing your selected insight."
+                  : "New insights arrive in the queue. Your selected insight stays in view."}
+              </span>
             </p>
-            <p className="mt-2 text-pretty text-sm text-emerald-900">
-              A supported sequence is being reviewed before an explanation is
-              offered for producer approval. The replay can continue.
-            </p>
-            <p className="mt-2 text-xs text-emerald-800">{match?.mode}</p>
           </div>
         )}
         <div
           className={cn(
             "grid items-start gap-6",
-            isProducer ? "lg:grid-cols-3" : "lg:grid-cols-2",
+            isProducer
+              ? "lg:grid-cols-3"
+              : quietViewer
+                ? "grid-cols-1"
+                : "lg:grid-cols-2",
           )}
         >
           <div
@@ -554,7 +574,7 @@ export default function MatchDesk({
             }
             className={cn("min-w-0", isProducer && "lg:col-span-2")}
           >
-            {isProducer && (
+            {isProducer && match?.session_mode !== "live" && (
               <div className="mb-3 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-stone-200 bg-white p-3">
                 <div className="flex items-center gap-2">
                   <Button
@@ -592,56 +612,145 @@ export default function MatchDesk({
                     New replay
                   </Button>
                 </div>
-                <div className="flex flex-wrap items-center gap-2">
-                  <label
-                    htmlFor="jump-seconds"
-                    className="text-xs text-stone-500"
-                  >
-                    Jump to second
-                  </label>
-                  <input
-                    id="jump-seconds"
-                    type="number"
-                    min={Math.ceil((match?.clock_ms || 0) / 1000)}
-                    max={duration / 1000}
-                    step="1"
-                    value={seekSeconds}
-                    onChange={(e) => setSeekSeconds(e.target.value)}
-                    className="min-h-10 w-20 rounded-lg border border-stone-200 px-2 text-sm"
-                  />
-                  <Button
-                    disabled={
-                      !seekSeconds ||
-                      Number(seekSeconds) * 1000 < (match?.clock_ms || 0) ||
-                      Number(seekSeconds) * 1000 > duration
-                    }
-                    onClick={() =>
-                      void control(
-                        "seek",
-                        undefined,
-                        Math.round(Number(seekSeconds) * 1000),
-                      )
-                    }
-                  >
-                    Jump forward
-                  </Button>
-                </div>
+                <details className="text-sm text-stone-600">
+                  <summary className="flex min-h-11 cursor-pointer items-center">
+                    Replay navigation
+                  </summary>
+                  <div className="flex flex-wrap items-center gap-2 py-2">
+                    <label
+                      htmlFor="jump-seconds"
+                      className="text-xs text-stone-500"
+                    >
+                      Skip to time (seconds)
+                    </label>
+                    <input
+                      id="jump-seconds"
+                      type="number"
+                      min={Math.ceil((match?.clock_ms || 0) / 1000)}
+                      max={duration / 1000}
+                      step="1"
+                      placeholder="e.g. 90"
+                      value={seekSeconds}
+                      onChange={(e) => setSeekSeconds(e.target.value)}
+                      className="min-h-10 w-20 rounded-lg border border-stone-200 px-2 text-sm"
+                    />
+                    <Button
+                      disabled={
+                        !seekSeconds ||
+                        Number(seekSeconds) * 1000 < (match?.clock_ms || 0) ||
+                        Number(seekSeconds) * 1000 > duration
+                      }
+                      onClick={() =>
+                        void control(
+                          "seek",
+                          undefined,
+                          Math.round(Number(seekSeconds) * 1000),
+                        )
+                      }
+                    >
+                      Skip forward
+                    </Button>
+                  </div>
+                  <p className="max-w-sm pb-2 text-xs leading-relaxed">
+                    Enter seconds from the start: 90 means 01:30. Skipping
+                    pauses the replay at that time.
+                  </p>
+                </details>
                 <details className="text-xs text-stone-500">
                   <summary className="flex min-h-11 items-center">
                     Replay data details
                   </summary>
                   <p className="max-w-sm pb-2 leading-relaxed">
+                    Session reference: {id}.<br />
                     <span className="tabular-nums">
                       {match?.delivered_count || 0} observations delivered.
                     </span>{" "}
                     These are position samples and source records, not a count
-                    of football incidents. Reviewable moments appear in the
-                    story queue.
+                    of football incidents. Suggested insights appear in the
+                    review queue.
                   </p>
                 </details>
               </div>
             )}
 
+            {match?.session_mode === "live" && (
+              <div className="mb-3 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-950">
+                <p className="font-semibold">
+                  {["complete", "stopped"].includes(match.live_status || "")
+                    ? language === "es"
+                      ? "Simulación finalizada"
+                      : "Simulation ended"
+                    : match.live_status === "ai_unavailable"
+                      ? language === "es"
+                        ? "Conexión de IA no disponible"
+                        : "AI connection unavailable"
+                      : language === "es"
+                        ? "Partido simulado en directo · continuo a 1×"
+                        : "Simulated live match · continuous 1×"}
+                </p>
+                <p className={isProducer ? "mt-2" : "mt-1 text-xs"}>
+                  {match.execution === "ai"
+                    ? match.mode.includes("fallback")
+                      ? language === "es"
+                        ? "Alternativa factual tras fallar la IA"
+                        : "AI unavailable · factual fallback"
+                      : language === "es"
+                        ? "Explicaciones asistidas por IA"
+                        : "AI-assisted explanations"
+                    : language === "es"
+                      ? "Vista previa con plantillas · sin llamadas de IA"
+                      : "Template preview · no AI calls"}
+                  .{" "}
+                  {isProducer &&
+                    (["complete", "stopped"].includes(match.live_status || "")
+                      ? "Review approved insights and catch up on this segment."
+                      : "The match continues during evidence review. Only producer-approved explanations reach fans.")}
+                </p>
+                {isProducer && (
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    <Button onClick={() => void control("reset")}>
+                      New simulation
+                    </Button>
+                    {match.running && (
+                      <Button onClick={() => void control("stop")}>
+                        End simulation
+                      </Button>
+                    )}
+                    {["complete", "stopped"].includes(
+                      match.live_status || "",
+                    ) && (
+                      <Button onClick={() => void catchUp()}>
+                        Open segment recap
+                      </Button>
+                    )}
+                  </div>
+                )}
+                {isProducer && (
+                  <details className="mt-3">
+                    <summary className="cursor-pointer">
+                      Session details
+                    </summary>
+                    <p className="mt-2 break-all">
+                      Session reference: {id}. Model:{" "}
+                      {match.model_identity?.deployment || "none"}
+                      {match.model_identity?.version
+                        ? ` · ${match.model_identity.version}`
+                        : ""}
+                      .
+                    </p>
+                  </details>
+                )}
+              </div>
+            )}
+            {isProducer && match?.session_mode !== "live" && (
+              <p role="status" className="mb-3 text-sm text-stone-600">
+                {(match?.clock_ms || 0) >= duration
+                  ? "Replay complete. Review the remaining insights, open the recap, or choose New replay to start again."
+                  : "This replay ends at " +
+                    timecode(duration) +
+                    ". With guided pauses off, playback continues while suggested insights arrive. It will stop at the end."}
+              </p>
+            )}
             {isProducer && match?.guided_demo && (
               <div className="mb-3 rounded-xl border border-sky-200 bg-sky-50 p-4 text-sm text-sky-950">
                 <label className="flex min-h-11 items-center gap-3 font-semibold">
@@ -680,11 +789,76 @@ export default function MatchDesk({
                 )}
               </div>
             )}
+            {!isProducer && match?.session_mode === "live" && (
+              <div
+                className="mb-4 flex flex-wrap items-center justify-between gap-3"
+                aria-label={
+                  language === "es" ? "Vista del partido" : "Match viewing mode"
+                }
+              >
+                <div className="flex flex-wrap gap-2">
+                  <Button
+                    aria-pressed={quietViewer}
+                    tone={quietViewer ? "primary" : "secondary"}
+                    onClick={() => {
+                      setViewerDisplay("match");
+                      setShowEvidence(false);
+                    }}
+                  >
+                    {language === "es" ? "Solo el partido" : "Match first"}
+                  </Button>
+                  <Button
+                    aria-pressed={!quietViewer}
+                    tone={!quietViewer ? "primary" : "secondary"}
+                    onClick={() => setViewerDisplay("insights")}
+                  >
+                    {language === "es"
+                      ? "Explorar explicaciones"
+                      : "Explore explanations"}
+                  </Button>
+                </div>
+                {quietViewer && (
+                  <Button onClick={catchUp}>
+                    {language === "es" ? "Ponerme al día" : "Catch me up"}
+                  </Button>
+                )}
+                {quietViewer && (
+                  <p className="w-full text-sm text-stone-600">
+                    {language === "es"
+                      ? "Sigue el juego. Abre las explicaciones o el resumen cuando quieras."
+                      : "Enjoy the play. Open explanations or catch up whenever you choose."}
+                  </p>
+                )}
+              </div>
+            )}
             <MatchStage
+              showExplanation={!quietViewer}
               match={match}
               language={language}
               expired={Boolean(story && match?.story_status === "expired")}
             />
+            {!!match?.corrections?.length && (
+              <details
+                className="mt-3 rounded-lg border border-amber-200 bg-amber-50 px-4 text-sm"
+                key={match.corrections[0].notice_id}
+              >
+                <summary className="min-h-11 cursor-pointer py-3 font-medium">
+                  {language === "es"
+                    ? "Actualización: se retiró una explicación aprobada"
+                    : "Update: an approved explanation was withdrawn"}
+                </summary>
+                {match.corrections.map((notice) => (
+                  <p key={notice.notice_id} className="mb-3 leading-relaxed">
+                    {timecode(notice.at_ms)} ·{" "}
+                    {language === "es"
+                      ? notice.kind === "source_changed"
+                        ? "Cambió la fuente; se retiró la explicación afectada."
+                        : "El productor retiró la explicación."
+                      : notice.text}
+                  </p>
+                ))}
+              </details>
+            )}
             {showEvidence && visibleEvidence && (
               <div
                 ref={evidencePanel}
@@ -696,6 +870,13 @@ export default function MatchDesk({
                 }
                 className="scroll-mt-4"
               >
+                <p className="sticky top-0 z-10 mb-2 rounded-lg bg-white px-4 py-3 text-sm tabular-nums shadow-sm">
+                  {language === "es" ? "Reloj del partido" : "Match clock"} ·{" "}
+                  {timecode(match?.clock_ms || 0)} ·{" "}
+                  {language === "es"
+                    ? "La evidencia tiene su propio reloj"
+                    : "Evidence uses its own clock"}
+                </p>
                 <EvidenceReplay
                   data={visibleEvidence}
                   language={language}
@@ -704,7 +885,7 @@ export default function MatchDesk({
                 />
               </div>
             )}
-            {match?.approved_possession && (
+            {match?.approved_possession && !quietViewer && (
               <Card className="mt-5 p-4">
                 <h2 className="font-semibold">
                   {language === "es"
@@ -730,121 +911,27 @@ export default function MatchDesk({
                 </p>
               </Card>
             )}
-            {recap && (
-              <Card className="mt-6 p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <Tag>
-                      <Clock3 size={12} />
-                      Through {timecode(recap.through_ms)}
-                    </Tag>
-                    <h2 className="mt-3 text-xl font-semibold">
-                      {recap.title}
-                    </h2>
-                  </div>
-                  <button
-                    aria-label="Close recap"
-                    onClick={() => setRecap(null)}
-                    className="p-2"
-                  >
-                    <X size={18} />
-                  </button>
-                </div>
-                {recap.match_state && (
-                  <p className="mt-3 text-sm">
-                    {language === "es"
-                      ? "Marcador confirmado actual"
-                      : "Current source-confirmed score"}
-                    : {recap.match_state.score.blue} :{" "}
-                    {recap.match_state.score.amber}
-                  </p>
-                )}
-                {recap.truncated && (
-                  <p className="mt-2 text-xs">
-                    {language === "es"
-                      ? "Resumen limitado; historial completo"
-                      : "Recap shortened; complete approved timeline"}
-                    : {recap.timeline_count}
-                  </p>
-                )}
-                {recap.moments.length ? (
-                  recap.moments.map((m) => (
-                    <article
-                      lang={language}
-                      key={`${m.story_id}-${m.revision}`}
-                      className="mt-4 border-l-2 border-emerald-600 pl-4"
-                    >
-                      <p className="text-xs tabular-nums text-stone-500">
-                        {timecode(m.at_ms)} ·{" "}
-                        {m.archived
-                          ? language === "es"
-                            ? "Aprobado · archivo"
-                            : "Approved · archived"
-                          : language === "es"
-                            ? "Aprobado"
-                            : "Approved"}
-                      </p>
-                      <h3 className="mt-1 font-semibold">{m.title}</h3>
-                      <p className="mt-2 text-pretty leading-relaxed text-stone-600">
-                        {m.text}
-                      </p>
-                      <Button
-                        className="mt-2"
-                        onClick={() => {
-                          setSelectedStoryId(m.story_id);
-                          setRecap(null);
-                        }}
-                      >
-                        {language === "es" ? "Abrir momento" : "Open moment"}
-                      </Button>
-                      {m.similar_moments.length > 1 && (
-                        <details className="mt-2 text-sm">
-                          <summary>
-                            {m.similar_moments.length}{" "}
-                            {language === "es"
-                              ? "momentos aprobados similares"
-                              : "similar approved moments"}
-                          </summary>
-                          <p className="mt-2 text-xs text-stone-500">
-                            {language === "es"
-                              ? "La similitud no demuestra una tendencia."
-                              : "Similarity does not establish a trend."}
-                          </p>
-                          {m.similar_moments.map((member) => (
-                            <Button
-                              key={member.story_id}
-                              className="mr-2 mt-2"
-                              onClick={() => {
-                                setSelectedStoryId(member.story_id);
-                                setRecap(null);
-                              }}
-                            >
-                              {timecode(member.at_ms)} · {member.story_id}
-                            </Button>
-                          ))}
-                        </details>
-                      )}
-                    </article>
-                  ))
-                ) : (
-                  <p className="mt-4 text-sm text-stone-500">
-                    {language === "es"
-                      ? "No hay momentos aprobados para este enfoque."
-                      : "No approved moments are available for this focus."}
-                  </p>
-                )}
-                <p className="mt-4 text-xs text-stone-400">
-                  {language === "es"
-                    ? "Solo revisiones aprobadas · todos los momentos en el historial"
-                    : "Approved revisions only · all moments remain in history"}
-                </p>
-                <Button className="mt-3" onClick={catchUp}>
-                  {language === "es" ? "Actualizar resumen" : "Refresh recap"}
-                </Button>
-              </Card>
+            {recapOpen && (
+              <div ref={recapPanel} className="scroll-mt-4">
+                <CatchUpPanel
+                  path={path}
+                  language={language}
+                  focus={focus}
+                  context={`${recapContext}:${correctionContext}:${match?.score?.blue}:${match?.score?.amber}`}
+                  clock={match?.clock_ms || 0}
+                  visit={visit}
+                  stories={stories}
+                  onClose={() => setRecapOpen(false)}
+                  onSelect={(storyId) => {
+                    setViewerDisplay("insights");
+                    setSelectedStoryId(storyId);
+                    setRecapOpen(false);
+                  }}
+                />
+              </div>
             )}
           </div>
-          {!isProducer && (
+          {!isProducer && !quietViewer && (
             <aside className="order-first min-w-0 lg:order-last">
               <AudiencePanel
                 flagship={match?.flagship_demo}
@@ -903,22 +990,91 @@ export default function MatchDesk({
                 <div className="flex items-center justify-between border-b border-stone-100 p-5">
                   <h2 className="flex items-center gap-2 font-semibold">
                     <Layers3 size={16} />
-                    Story queue
+                    Suggested insights
                   </h2>
                   <Tag>
                     {stories.length
-                      ? `${stories.length} ${stories.length === 1 ? "moment" : "moments"}`
+                      ? `${stories.length} ${stories.length === 1 ? "insight" : "insights"}`
                       : "Watching"}
                   </Tag>
                 </div>
-                {stories.length > 0 && (
-                  <StoryPicker
-                    stories={stories}
-                    selected={story?.id || ""}
-                    onSelect={setSelectedStoryId}
-                    producer
-                  />
+                <p className="px-5 pt-4 text-sm leading-relaxed text-stone-500">
+                  Suggested explanations of observed incidents and possession
+                  windows. Review the evidence before approving for viewers;
+                  these are not necessarily match highlights.
+                </p>
+                {match?.session_mode === "live" && (
+                  <details className="mx-5 my-3 max-h-48 overflow-y-auto overscroll-contain text-sm">
+                    <summary className="cursor-pointer">
+                      AI review and delivery history
+                    </summary>
+                    <p className="my-2 text-xs text-stone-500">
+                      Technology: {match.mode}
+                    </p>
+                    {(match.workflow_notices || []).map((notice, i) => (
+                      <p
+                        key={i}
+                        className="my-2 rounded-lg bg-amber-50 p-3 text-xs text-amber-950"
+                      >
+                        {(
+                          {
+                            capacity_deferred:
+                              "Model capacity was busy; the insight waited in the queue.",
+                            attempt_or_session_budget_limit:
+                              "An insight reached its attempt or session call limit.",
+                            ai_unavailable:
+                              "The AI connection was unavailable; no AI explanation was substituted.",
+                            expired_unscheduled:
+                              "An insight's live window ended before it could be reviewed.",
+                          } as Record<string, string>
+                        )[notice.state] || notice.state}{" "}
+                        {notice.at_ms !== undefined
+                          ? `At ${timecode(notice.at_ms)}.`
+                          : ""}
+                      </p>
+                    ))}
+                    {(match.workflow_attempts || []).length ? (
+                      (match.workflow_attempts || []).map((attempt, i) => (
+                        <div
+                          key={i}
+                          className="my-2 rounded-lg bg-stone-50 p-3"
+                        >
+                          <p>
+                            {attempt.story_id} · {attempt.state}
+                          </p>
+                          <p className="text-xs text-stone-500">
+                            {attempt.mode} · {attempt.usage.calls ?? "unknown"}{" "}
+                            calls{attempt.reason ? ` · ${attempt.reason}` : ""}
+                          </p>
+                        </div>
+                      ))
+                    ) : (
+                      <p className="mt-2 text-stone-500">
+                        Watching for supported events. No explanation attempt
+                        yet.
+                      </p>
+                    )}
+                  </details>
                 )}
+                <div
+                  data-testid="producer-insight-list"
+                  className="h-80 overflow-y-auto overscroll-contain [scrollbar-gutter:stable]"
+                  tabIndex={0}
+                  aria-label="Incoming insights"
+                >
+                  {stories.length ? (
+                    <StoryPicker
+                      stories={stories}
+                      selected={story?.id || ""}
+                      onSelect={setSelectedStoryId}
+                      producer
+                    />
+                  ) : (
+                    <p className="p-5 text-sm text-stone-500">
+                      Watching for supported moments.
+                    </p>
+                  )}
+                </div>
                 {story ? (
                   <div className="p-5">
                     <Tag
@@ -937,17 +1093,33 @@ export default function MatchDesk({
                           : match?.story_status === "expired"
                             ? "Approved · archived"
                             : "Approved"
-                        : match?.story_status}{" "}
-                      · revision {story.revision}
+                        : story.status === "ready"
+                          ? language === "es"
+                            ? "Lista para revisión"
+                            : "Ready for review"
+                          : match?.story_status}
+                      {storyApproved && ` · revision ${story.revision}`}
                     </Tag>
-                    <h3 className="mt-4 text-balance text-2xl font-semibold leading-tight">
-                      {story.title}
+                    <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-emerald-800">
+                      {language === "es" ? "Qué cambió" : "What changed"}
+                    </p>
+                    <h3 className="mt-2 text-balance text-2xl font-semibold leading-tight">
+                      {story.family === "pressure"
+                        ? language === "es"
+                          ? "Cambio de presión cercana"
+                          : "Nearby pressure change"
+                        : story.title}
                     </h3>
                     <p className="mt-3 text-pretty text-sm leading-relaxed text-stone-500">
                       {visibleVariant?.text ||
                         "Loading the supported explanation…"}
                     </p>
-                    {match?.flagship_demo && story.why_now && (
+                    {match?.flagship_demo &&
+                      story.why_now &&
+                      (story.family !== "pressure" ||
+                        /previous three|tres pases anteriores/i.test(
+                          story.why_now[language] || "",
+                        )) && (
                       <section
                         aria-label="Why this moment"
                         className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 p-4"
@@ -961,6 +1133,33 @@ export default function MatchDesk({
                           {story.why_now[language]}
                         </p>
                       </section>
+                    )}
+                    <AudiencePreview
+                      key={`${story.id}:${story.revision}`}
+                      path={path}
+                      story={story}
+                      onInspect={() => setSelectedStoryId(story.id)}
+                    />
+                    {story.editorial_decision && (
+                      <details className="mt-2 text-sm">
+                        <summary className="min-h-11 cursor-pointer py-3 font-medium">
+                          Selection and review
+                        </summary>
+                        <p className="mt-2 text-stone-600">
+                          {story.editorial_decision.claim_ids.length} supported
+                          fact
+                          {story.editorial_decision.claim_ids.length === 1
+                            ? " block"
+                            : " blocks"}
+                          . Producer approval controls whether it is shared.
+                        </p>
+                        {story.editorial_decision.fallback && (
+                          <p className="mt-2 text-amber-900">
+                            AI did not complete this explanation. A factual
+                            fallback still needs producer approval.
+                          </p>
+                        )}
+                      </details>
                     )}
                     <Button
                       onClick={() => void loadEvidence()}
@@ -982,9 +1181,20 @@ export default function MatchDesk({
                       />
                       {match?.mode?.includes("local")
                         ? "Local factual template reviewed."
-                        : "Evidence review completed."}{" "}
+                        : match?.mode?.includes("fallback")
+                          ? "AI attempt used a factual template fallback."
+                          : "Evidence review completed."}{" "}
                       Inspect the evidence before approving.
                     </div>
+                    {match?.session_mode === "live" && (
+                      <p className="mt-3 text-sm font-medium">
+                        {story.status === "ready"
+                          ? `${Math.max(0, Math.ceil((story.expires_at_ms - match.clock_ms) / 1000))} s left for live approval`
+                          : story.status === "expired"
+                            ? "Live window ended · history review only"
+                            : `Review status: ${story.status}`}
+                      </p>
+                    )}
                     <div className="mt-5 flex gap-2">
                       <Button
                         tone="primary"
@@ -1112,7 +1322,7 @@ export default function MatchDesk({
                   Audience package
                 </div>
                 <p className="text-pretty text-sm leading-relaxed text-stone-500">
-                  Approved moments. Different ways to understand them.
+                  Approved match insights. Choose how you follow the game.
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   <Tag>Simple</Tag>
@@ -1131,11 +1341,16 @@ export default function MatchDesk({
               </Card>
               <button
                 onClick={inspectDiagnostics}
+                aria-expanded={Boolean(diagnostics)}
+                aria-busy={diagnosticsLoading}
+                disabled={diagnosticsLoading}
                 className="flex w-full items-center justify-between px-2 py-2 text-xs text-stone-500"
               >
                 <span className="flex items-center gap-2">
                   <Activity size={14} />
-                  Processing & review trace
+                  {diagnosticsLoading
+                    ? "Opening review trace…"
+                    : "Processing & review trace"}
                 </span>
                 <ChevronRight size={14} />
               </button>
@@ -1145,7 +1360,11 @@ export default function MatchDesk({
         {diagnostics && (
           <Card className="mt-6 p-6">
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold">
+              <h2
+                ref={diagnosticsHeading}
+                tabIndex={-1}
+                className="text-lg font-semibold outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
+              >
                 Processing & review trace
               </h2>
               <button
@@ -1156,69 +1375,96 @@ export default function MatchDesk({
                 <X size={18} />
               </button>
             </div>
-            <DecisionSummary
-              summary={
-                diagnostics.decision_summary as Parameters<
-                  typeof DecisionSummary
-                >[0]["summary"]
-              }
-            />
+            {(!story?.family || story.family === "pass") && (
+              <DecisionSummary
+                summary={
+                  diagnostics.decision_summary as Parameters<
+                    typeof DecisionSummary
+                  >[0]["summary"]
+                }
+              />
+            )}
+            {story?.family && story.family !== "pass" && (
+              <section
+                className="mt-4 rounded-xl border border-stone-200 p-4"
+                aria-label="AI role decisions"
+              >
+                <h3 className="text-sm font-semibold">AI review steps</h3>
+                <p className="mt-1 text-sm text-stone-600">
+                  The Director selects a supported moment; the Reviewer checks
+                  its facts and wording. Neither role approves publication.
+                </p>
+                <div className="mt-3 space-y-2">
+                  {(
+                    (diagnostics.trace ?? []) as {
+                      role: string;
+                      action: string;
+                      status: string;
+                      duration_ms?: number;
+                    }[]
+                  )
+                    .filter((entry) => entry.action === "model_decision")
+                    .map((entry, i) => {
+                      const result =
+                        entry.status === "propose"
+                          ? "Selected this explanation"
+                          : entry.status === "supported"
+                            ? "Supported the facts and wording"
+                            : entry.status === "abstain"
+                              ? "Suggested no explanation"
+                              : entry.status === "reject"
+                                ? "Could not support the explanation"
+                                : entry.status === "revise"
+                                  ? "Requested a wording change"
+                                  : entry.status.replaceAll("_", " ");
+                      return (
+                        <div
+                          key={`${entry.role}-${i}`}
+                          className="flex flex-wrap items-center justify-between gap-2 border-t border-stone-100 pt-2 text-sm"
+                        >
+                          <span className="font-medium">{entry.role}</span>
+                          <span className="text-stone-600">{result}</span>
+                          {entry.duration_ms != null && (
+                            <Tag>{(entry.duration_ms / 1000).toFixed(1)} s</Tag>
+                          )}
+                        </div>
+                      );
+                    })}
+                </div>
+              </section>
+            )}
             <details className="mt-5">
               <summary className="text-sm font-medium">
                 Technical calls, timing and usage
               </summary>
-              <div className="my-5 grid gap-3 text-sm sm:grid-cols-3">
+              <div className="my-5 grid gap-3 text-sm sm:grid-cols-2">
                 <div className="rounded-xl bg-stone-50 p-4">
-                  <p className="text-xs text-stone-500">Workflow processing</p>
+                  <p className="text-xs text-stone-500">Total workflow time</p>
                   <p className="mt-2 font-mono tabular-nums">
-                    {String(diagnostics.workflow_ms ?? "—")} ms
+                    {diagnostics.workflow_ms == null
+                      ? "—"
+                      : `${(Number(diagnostics.workflow_ms) / 1000).toFixed(2)} s`}
                   </p>
                 </div>
                 <div className="rounded-xl bg-stone-50 p-4">
-                  <p className="text-xs text-stone-500">
-                    Delivered observations
-                  </p>
-                  <p className="mt-2 font-mono tabular-nums">
-                    {String(diagnostics.observations_delivered)}
-                  </p>
-                </div>
-                <div className="rounded-xl bg-stone-50 p-4">
-                  <p className="text-xs text-stone-500">Execution mode</p>
+                  <p className="text-xs text-stone-500">Model usage</p>
                   <p className="mt-2">
-                    {String(diagnostics.mode ?? "Unknown")} ·{" "}
                     {String(
                       diagnostics.model_calls ?? modelUsage?.calls ?? "—",
                     )}{" "}
-                    model calls
+                    calls
                     {(diagnostics.model_tokens ?? modelUsage?.total_tokens) !=
                     null
-                      ? ` · ${String(diagnostics.model_tokens ?? modelUsage?.total_tokens)} tokens`
+                      ? ` · ${Number(diagnostics.model_tokens ?? modelUsage?.total_tokens).toLocaleString()} tokens`
                       : ""}
                   </p>
                 </div>
-              </div>
-              <div className="space-y-3">
-                {(
-                  (diagnostics.trace ?? []) as {
-                    role: string;
-                    action: string;
-                    status: string;
-                    elapsed_ms: number;
-                  }[]
-                ).map((t, i) => (
-                  <div
-                    key={i}
-                    className="flex flex-wrap justify-between gap-2 border-t border-stone-100 pt-3 text-sm"
-                  >
-                    <span className="font-medium">{t.role}</span>
-                    <span className="text-stone-500">
-                      {t.action.replaceAll("_", " ")}
-                    </span>
-                    <Tag>
-                      {t.status} · {t.elapsed_ms} ms
-                    </Tag>
-                  </div>
-                ))}
+                <div className="rounded-xl bg-stone-50 p-4 sm:col-span-2">
+                  <p className="text-xs text-stone-500">AI setup</p>
+                  <p className="mt-2">
+                    {String(diagnostics.mode ?? "Unknown")}
+                  </p>
+                </div>
               </div>
               <p className="mt-5 text-xs text-stone-400">
                 Workflow timing excludes replay waiting and human approval.{" "}
@@ -1228,9 +1474,6 @@ export default function MatchDesk({
                 Usage includes attempted model calls.
                 {modelUsage?.usage_complete === false
                   ? " Token totals are incomplete because the provider did not return usage for every attempt."
-                  : ""}
-                {modelUsage?.input_tokens != null
-                  ? ` Input: ${modelUsage.input_tokens} tokens. Output: ${modelUsage.output_tokens ?? "unavailable"} tokens.`
                   : ""}
               </p>
             </details>
@@ -1245,8 +1488,7 @@ export default function MatchDesk({
           <span>
             {language === "es"
               ? "Identidades ficticias · Datos sintéticos originales"
-              : "Fictional identities · Original synthetic data"}{" "}
-            · {match?.mode || "Connecting"}
+              : "Fictional identities · Original synthetic data"}
           </span>
         </footer>
       </div>

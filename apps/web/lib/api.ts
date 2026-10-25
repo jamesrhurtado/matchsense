@@ -44,8 +44,15 @@ export type Story = {
   receiver_id?: string;
   team_id?: string;
   package_hash?: string;
+  editorial_decision?: {
+    director: string;
+    reviewer: string;
+    claim_ids: string[];
+    fallback: boolean;
+  };
 };
 export type Match = {
+  corrections?: CorrectionNotice[];
   session_id: string;
   score?: Record<string, number>;
   match_state?: {
@@ -62,6 +69,22 @@ export type Match = {
   } | null;
   coverage_enabled?: boolean;
   guided_demo?: boolean;
+  session_mode?: "guided" | "live";
+  execution?: "ai" | "template";
+  live_status?: "ready" | "running" | "complete" | "stopped" | "ai_unavailable";
+  last_processed_ms?: number;
+  model_identity?: { deployment?: string; version?: string };
+  workflow_notices?: { story_id?: string; state: string; at_ms?: number }[];
+  workflow_attempts?: {
+    story_id: string;
+    state: string;
+    reason?: string;
+    mode: string;
+    usage: { calls?: number; total_tokens?: number };
+    scheduled_at: string;
+    finished_at?: string;
+    cutoff_ms: number;
+  }[];
   flagship_demo?: boolean;
   clock_ms: number;
   duration_ms: number;
@@ -155,6 +178,8 @@ export type Metrics = {
   retention_confirmed_at_ms?: number;
 };
 export type Variant = {
+  story_id?: string;
+  revision?: number;
   id: string;
   text: string;
   language: string;
@@ -209,8 +234,21 @@ export type Evidence = {
     }[];
   };
 };
+export type CorrectionNotice = {
+  notice_id: string;
+  story_id: string;
+  at_ms: number;
+  story_at_ms: number;
+  family: string;
+  kind: "source_changed" | "producer_retracted";
+  text: string;
+};
 export type Recap = {
   title: string;
+  from_ms?: number;
+  evaluated_at_ms?: number;
+  corrections?: CorrectionNotice[];
+  correction_count?: number;
   through_ms: number;
   truncated?: boolean;
   timeline_count?: number;

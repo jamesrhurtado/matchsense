@@ -2,7 +2,7 @@ import {test,expect} from '@playwright/test';
 
 test('producer evidence → wording review → approval → viewer preferences → retraction',async({page,context})=>{
  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
- await page.goto('/');await page.getByLabel('Replay segment').selectOption('match-001');await page.getByRole('button',{name:'Open producer console'}).click();await expect(page).toHaveURL(/\/studio\//);
+ await page.goto('/');await page.getByLabel('Experience',{exact:true}).selectOption('guided');await page.getByLabel('Explanations',{exact:true}).selectOption('template');await page.getByText('More demo scenarios',{exact:true}).click();await page.getByLabel('Replay segment').selectOption('match-001');await page.getByRole('button',{name:'Start the guided demo'}).click();await expect(page).toHaveURL(/\/studio\//);
  const sid=page.url().split('/').pop()!;
  await page.getByLabel('Replay speed').selectOption('8');await page.getByRole('button',{name:'Play',exact:true}).click();
  await expect(page.getByRole('button',{name:'Show why',exact:true})).toBeVisible({timeout:10000});await page.getByRole('button',{name:'Pause',exact:true}).click();
@@ -21,7 +21,9 @@ test('producer evidence → wording review → approval → viewer preferences �
  await viewer.setViewportSize({width:390,height:844});await viewer.screenshot({path:'../../.run/viewer-mobile.png',fullPage:true});
  expect(await viewer.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBeTruthy();
  await page.getByRole('button',{name:'Retract',exact:true}).click();await expect(viewer.getByText('No hay participación aprobada en este intervalo.')).toBeVisible();
- await expect(viewer.getByRole('heading',{name:'El partido hasta ahora'})).not.toBeVisible();
+ await expect(viewer.getByRole('heading',{name:'El partido hasta ahora'})).toBeVisible();
+ await expect(viewer.getByTestId('catch-up-panel')).toContainText('No hay explicaciones aprobadas en este intervalo');
+ await expect(viewer.getByTestId('catch-up-panel')).not.toContainText('Theo Vega');
  expect(errors).toEqual([]);
 });
 
@@ -52,8 +54,8 @@ test('pending AI review remains visible while replay continues',async({page})=>{
   overlay:null,delivered_count:2300,frame:null,teams:[],players:[],cursor:23000,
  }}));
  await page.goto('/studio/pending-demo');
- await expect(page.getByRole('status')).toContainText('AI review in progress');
- await expect(page.getByRole('status')).toContainText('Azure model workflow');
+ await expect(page.getByRole('status').filter({hasText:'AI review in progress'})).toContainText('AI review in progress');
+ await expect(page.getByRole('status').filter({hasText:'AI review in progress'})).toContainText('Azure model workflow');
  await expect(page.getByRole('button',{name:'Pause',exact:true})).toBeEnabled();
  await expect(page.getByRole('button',{name:'Approve',exact:true})).toHaveCount(0);
 });

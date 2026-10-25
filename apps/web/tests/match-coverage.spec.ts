@@ -28,7 +28,7 @@ test('mixed producer and mobile viewer: every family, evidence, Spanish, focus, 
   test.setTimeout(120000);
   await page.goto('/');
   await expect(page.getByLabel('Replay segment')).toHaveValue('match-0c0a000000000005');
-  await expect(page.getByRole('heading',{name:'Producer demo entrance'})).toBeVisible();
+  await expect(page.getByRole('heading',{name:'Your live match explanation desk.'})).toBeVisible();
   const base=await session(request);const sid=base.split('/').at(-1)!;
   for(const [at,id] of [[25000,'story-pass-1'],[33000,'story-recovery-loose-1'],[47000,'story-shot-attempt-1'],[60000,'story-possession-60000']] as const) {
     await seek(request,base,at);await approve(request,base,id);
@@ -39,7 +39,7 @@ test('mixed producer and mobile viewer: every family, evidence, Spanish, focus, 
   await page.addInitScript(()=>sessionStorage.setItem('why-now-token','local-demo-producer'));
   await page.goto(`/studio/${sid}`);
   await expect(page.getByText('1 : 0',{exact:true})).toBeVisible();
-  const queue=page.getByRole('group',{name:'Story queue moments'});
+  const queue=page.getByRole('group',{name:'Suggested insights'});
   await queue.getByLabel('Event family').selectOption('goal');
   await queue.getByRole('button',{name:/Confirmed goal/}).click();
   await page.getByRole('button',{name:'Show why',exact:true}).click();
@@ -63,9 +63,9 @@ test('mixed producer and mobile viewer: every family, evidence, Spanish, focus, 
   await viewer.getByRole('button',{name:'Ponerme al día'}).click();
   await expect(viewer.getByRole('heading',{name:'Resumen del segmento'})).toBeVisible();
   await expect(viewer.getByText('Marcador confirmado actual: 1 : 0')).toBeVisible();
-  await viewer.getByRole('button',{name:'Close recap'}).click();
+  await viewer.getByRole('button',{name:'Cerrar resumen'}).click();
   await viewer.getByText('Historial aprobado · 5',{exact:true}).click();
-  const history=viewer.getByRole('group',{name:'Momentos aprobados'});
+  const history=viewer.getByRole('group',{name:'Información del partido aprobada'});
   await history.getByLabel('Categoría').selectOption('shot');
   await history.getByRole('button',{name:/Resultado del remate/}).click();
   await expect(viewer.getByTestId('audience-explanation')).toContainText('atajado');
@@ -101,7 +101,8 @@ test('source score correction revokes affected narrative; reapproval, duplicate 
   await expect(page.getByRole('heading',{name:'Segment catch-up'})).toBeVisible();
   await seek(request,base,136000);
   await expect(page.getByText('0 : 0',{exact:true})).toBeVisible();
-  await expect(page.getByRole('heading',{name:'Segment catch-up'})).toHaveCount(0);
+  await expect(page.getByRole('heading',{name:'Segment catch-up'})).toBeVisible();
+  await expect(page.getByTestId('catch-up-panel')).toContainText('withdrawn');
   await expect(page.getByTestId('audience-explanation')).not.toContainText('Confirmed goal');
   await approve(request,base,'story-shot-attempt-2');
   await expect(page.getByTestId('audience-explanation')).toContainText('cancelled');
@@ -118,7 +119,7 @@ test('expired producer candidates have an explicit archive-only approval control
   await seek(request,base,105000);
   await page.addInitScript(()=>sessionStorage.setItem('why-now-token','local-demo-producer'));
   await page.goto(`/studio/${sid}`);
-  const queue=page.getByRole('group',{name:'Story queue moments'});
+  const queue=page.getByRole('group',{name:'Suggested insights'});
   await queue.getByLabel('Include archived candidates').check();
   await queue.getByLabel('Event family').selectOption('shot');
   await queue.getByRole('button',{name:/00:46/}).click();
@@ -136,18 +137,18 @@ test('linked approved shot remains selectable for a shooter different from the s
     const url=new URL(route.request().url());
     if(url.pathname.endsWith('/snapshot')) await route.fulfill({json:{...snap,story:url.searchParams.get('story_id')===shot.id?shot:goal}});
     else if(url.pathname.endsWith('/stream'))await route.fulfill({contentType:'text/event-stream',body:`event: resync\ndata: ${JSON.stringify(snap)}\n\n`});
-    else if(url.pathname.endsWith('/variants'))await route.fulfill({json:{id:'v',text:url.pathname.includes(shot.id)?'Verified Shooter: shot saved.':'Confirmed goal by Verified Scorer.',language:'en',detail:'simple',focus:url.searchParams.get('focus')}});
+    else if(url.pathname.endsWith('/variants'))await route.fulfill({json:{id:'v',story_id:url.pathname.includes(shot.id)?shot.id:goal.id,revision:1,text:url.pathname.includes(shot.id)?'Verified Shooter: shot saved.':'Confirmed goal by Verified Scorer.',language:'en',detail:'simple',focus:url.searchParams.get('focus')}});
     else await route.fulfill({status:404,json:{detail:{code:'unavailable'}}});
   });
   await page.goto('/watch/linked-demo');
   await expect(page.getByTestId('audience-explanation')).toContainText('Verified Scorer');
   await page.getByLabel('Follow a player or team').selectOption('blue-09');
   await expect(page.getByTestId('audience-explanation')).toContainText('Verified Shooter');
-  await expect(page.getByText('Relevant approved history · 1',{exact:true})).toBeVisible();
+  await expect(page.getByText('Relevant approved insights · 1',{exact:true})).toBeVisible();
   await page.getByLabel('Follow a player or team').selectOption('blue');
-  await expect(page.getByText('Relevant approved history · 1',{exact:true})).toBeVisible();
-  await page.getByText('Relevant approved history · 1',{exact:true}).click();
-  await page.getByRole('group',{name:'Approved moments'}).getByLabel('Event family').selectOption('shot');
-  await page.getByRole('group',{name:'Approved moments'}).getByRole('button',{name:/Shot outcome/}).click();
+  await expect(page.getByText('Relevant approved insights · 1',{exact:true})).toBeVisible();
+  await page.getByText('Relevant approved insights · 1',{exact:true}).click();
+  await page.getByRole('group',{name:'Approved match insights'}).getByLabel('Event family').selectOption('shot');
+  await page.getByRole('group',{name:'Approved match insights'}).getByRole('button',{name:/Shot outcome/}).click();
   await expect(page.getByTestId('audience-explanation')).toContainText('Verified Shooter');
 });

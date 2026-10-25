@@ -25,7 +25,7 @@ test('moving demo pauses for review, reveals evidence in view, and can play cont
  await page.getByRole('button',{name:'Approve',exact:true}).click();
  const publicSnap=await(await request.get(base+'/snapshot')).json();expect(publicSnap.overlay).toBeTruthy();
  await page.getByLabel('Pause at new event types').uncheck();
- await page.getByLabel('Jump to second').fill('28');await page.getByRole('button',{name:'Jump forward',exact:true}).click();
+ if(!(await page.getByLabel('Skip to time (seconds)').isVisible()))await page.getByText('Replay navigation',{exact:true}).click();await page.getByLabel('Skip to time (seconds)').fill('28');await page.getByRole('button',{name:'Skip forward',exact:true}).click();
  await page.getByLabel('Replay speed').selectOption('4');await page.getByRole('button',{name:'Play',exact:true}).click();
  await expect.poll(async()=>{const s=await(await request.get(base+'/snapshot',{headers})).json();return s.clock_ms;}).toBeGreaterThan(35000);
  await expect(page.getByRole('button',{name:'Pause',exact:true})).toBeVisible();

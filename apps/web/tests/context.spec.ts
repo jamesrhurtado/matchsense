@@ -14,14 +14,14 @@ test('five approved moments keep the mobile explanation and pitch together; cont
  await page.setViewportSize({width:390,height:844});
  await page.goto(`/watch/${sid}`);
  await expect(page.getByTestId('inline-evidence')).toBeVisible();
- await expect(page.getByText('Approved history · 5',{exact:true})).toBeVisible();
- await expect(page.getByRole('group',{name:'Approved moments'})).not.toBeVisible();
+ await expect(page.getByText('Approved match insights · 5',{exact:true})).toBeVisible();
+ await expect(page.getByRole('group',{name:'Approved match insights'})).not.toBeVisible();
  const pitch=page.getByTestId('inline-evidence').getByRole('img');
  const box=await pitch.boundingBox();expect(box!.y+box!.height).toBeLessThan(844);
  const why=await page.getByRole('button',{name:'Show why',exact:true}).boundingBox();expect(why!.y+why!.height).toBeLessThan(844);
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
- await page.getByText('Approved history · 5',{exact:true}).click();
- await page.getByRole('group',{name:'Approved moments'}).getByRole('button',{name:/Moment 4/}).click();
+ await page.getByText('Approved match insights · 5',{exact:true}).click();
+ await page.getByRole('group',{name:'Approved match insights'}).getByRole('button',{name:/Insight 4/}).click();
  await expect(page.getByTestId('audience-explanation')).toContainText('previous three completed passes in this replay');
  await page.getByText('Inspect the facts',{exact:true}).click();
  await page.getByRole('button',{name:/farther forward than each/}).click();

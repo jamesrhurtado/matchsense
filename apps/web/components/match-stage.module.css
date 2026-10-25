@@ -175,7 +175,7 @@
 }
 .fieldLegend {
   margin-top: 0;
-  font-size: 10px;
+  font-size: 12px;
 }
 .fieldLegend > span {
   display: flex;
@@ -192,6 +192,10 @@
   background: #92caff;
 }
 .lowerThird {
+  height: 240px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
   display: flex;
   align-items: flex-start;
   gap: 15px;
@@ -315,7 +319,7 @@
   .fieldHeading,
   .fieldLegend {
     padding: 0 8px;
-    font-size: 9px;
+    font-size: 11px;
   }
   .fieldHeading > span:last-child {
     font-size: 8px;
@@ -345,7 +349,7 @@
   gap: 14px;
   padding: 11px 7px 0;
   color: #c3cfd6;
-  font-size: 10px;
+  font-size: 12px;
 }
 .keeperLegend > span {
   display: inline-flex;
@@ -364,7 +368,15 @@
   background: #ffa9a4;
 }
 .fieldNote {
+  min-height: 30px;
   margin: 9px 7px 0;
-  font-size: 10px;
-  color: #a8bfbf;
+  font-size: 12px;
+  color: #c3d4d4;
+}
+
+@media (max-width: 600px) {
+  .keeperLegend,
+  .fieldNote {
+    font-size: 11px;
+  }
 }

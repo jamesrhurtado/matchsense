@@ -1,0 +1,138 @@
+
+> why-now-web@0.1.0 test:e2e
+> playwright test editorial-experience.spec.ts entrance.spec.ts match-coverage.spec.ts live.spec.ts
+
+
+Running 11 tests using 1 worker
+
+(node:22378) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22378) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   1 tests/editorial-experience.spec.ts:16:5 › continuous viewer starts match-first; preview is private, bilingual and optional on mobile (22.9s)
+(node:22408) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22408) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   2 tests/editorial-experience.spec.ts:59:5 › catch-up stays open on correction, restores private visit interval, and never repeats withdrawn copy (7.7s)
+(node:22421) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22421) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   3 tests/editorial-experience.spec.ts:80:5 › preview refuses a response for another revision and never approves the draft (1.9s)
+(node:22432) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22432) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   4 tests/entrance.spec.ts:2:5 › first-time entrance explains roles, hides setup and opens a playable producer session (477ms)
+  ✓   5 tests/entrance.spec.ts:31:5 › producer navigation explains duration and stops at the end without replacing the session (3.2s)
+  ✓   6 tests/live.spec.ts:3:5 › live simulation is explicit, keeps playing during review and reconnects to the shared clock (19.6s)
+  -   7 tests/live.spec.ts:35:5 › real AI live simulation: actual attempts, exact approval and bilingual viewer
+  ✘   8 tests/match-coverage.spec.ts:27:5 › mixed producer and mobile viewer: every family, evidence, Spanish, focus, recap, archived navigation (23.1s)
+
+
+  1) tests/editorial-experience.spec.ts:16:5 › continuous viewer starts match-first; preview is private, bilingual and optional on mobile
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: getByTestId('catch-up-panel')
+    Expected substring: [32m"Hechos ocurridos en este intervalo"[39m
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toContainText" with timeout 5000ms[22m
+    [2m  - waiting for getByTestId('catch-up-panel')[22m
+
+
+      51 |     await expect(page.getByRole('heading',{name:'Resumen del segmento'})).toBeVisible();
+      52 |     await page.getByLabel('Intervalo del resumen').selectOption('visit');
+    > 53 |     await expect(page.getByTestId('catch-up-panel')).toContainText('Hechos ocurridos en este intervalo');
+         |                                                      ^
+      54 |     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
+      55 |     expect((await(await request.get(`/api/replay-sessions/${sid}/snapshot`)).json()).running).toBeTruthy();
+      56 |   } finally {await request.post(`/api/replay-sessions/${sid}/control`,{headers,data:{action:'stop'}});}
+        at /Users/james/dev/why now/apps/web/tests/editorial-experience.spec.ts:53:54
+
+    Error Context: test-results/editorial-experience-conti-811fb-gual-and-optional-on-mobile/error-context.md
+
+  2) tests/editorial-experience.spec.ts:59:5 › catch-up stays open on correction, restores private visit interval, and never repeats withdrawn copy
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: getByTestId('catch-up-panel')
+    Expected substring: [32m"00:20–01:45"[39m
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toContainText" with timeout 5000ms[22m
+    [2m  - waiting for getByTestId('catch-up-panel')[22m
+
+
+      64 |   await page.getByRole('button',{name:'Catch me up',exact:true}).click();
+      65 |   await page.getByLabel('Catch-up interval').selectOption('visit');
+    > 66 |   await expect(page.getByTestId('catch-up-panel')).toContainText('00:20–01:45');
+         |                                                    ^
+      67 |   await expect(page.getByTestId('catch-up-panel')).toContainText('Beni');
+      68 |   await seek(request,sid,136000);
+      69 |   await expect(page.getByTestId('catch-up-panel')).toContainText('withdrawn');
+        at /Users/james/dev/why now/apps/web/tests/editorial-experience.spec.ts:66:52
+
+    Error Context: test-results/editorial-experience-catch-2e5fe-ever-repeats-withdrawn-copy/error-context.md
+
+  3) tests/editorial-experience.spec.ts:80:5 › preview refuses a response for another revision and never approves the draft
+
+    Error: "route.fetch: Target page, context or browser has been closed
+    Call log:
+    [2m  - → GET http://127.0.0.1:3200/api/replay-sessions/1519b99f-a8d2-4950-b036-10d6863d0f57/stories/story-goal-goal-1/variants?language=en&detail=simple[22m
+    [2m    - user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36[22m
+    [2m    - accept: */*[22m
+    [2m    - accept-encoding: gzip,deflate,br[22m
+    [2m    - accept-language: en-US[22m
+    [2m    - content-type: application/json[22m
+    [2m    - referer: http://127.0.0.1:3200/studio/1519b99f-a8d2-4950-b036-10d6863d0f57[22m
+    [2m    - x-producer-token: local-demo-producer[22m
+    [2m    - sec-ch-ua: "Not:A-Brand";v="99", "HeadlessChrome";v="145", "Chromium";v="145"[22m
+    [2m    - sec-ch-ua-mobile: ?0[22m
+    [2m    - sec-ch-ua-platform: "macOS"[22m
+    " while running route callback.
+    Consider awaiting `await page.unrouteAll({ behavior: 'ignoreErrors' })`
+    before the end of the test to ignore remaining routes in flight.
+
+      82 |   await page.addInitScript(()=>sessionStorage.setItem('why-now-token','local-demo-producer'));
+      83 |   await page.route('**/stories/**/variants?**',async route=>{
+    > 84 |     const response=await route.fetch(); const body=await response.json();
+         |                                ^
+      85 |     await route.fulfill({response,json:{...body,revision:body.revision+1,text:'STALE REVISION SHOULD NEVER DISPLAY'}});
+      86 |   });
+      87 |   await page.goto(`/studio/${sid}`);
+        at /Users/james/dev/why now/apps/web/tests/editorial-experience.spec.ts:84:32
+
+  4) tests/match-coverage.spec.ts:27:5 › mixed producer and mobile viewer: every family, evidence, Spanish, focus, recap, archived navigation
+
+    Test was interrupted.
+
+    Error: locator.click: Test ended.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Close recap' })[22m
+
+
+      64 |   await expect(viewer.getByRole('heading',{name:'Resumen del segmento'})).toBeVisible();
+      65 |   await expect(viewer.getByText('Marcador confirmado actual: 1 : 0')).toBeVisible();
+    > 66 |   await viewer.getByRole('button',{name:'Close recap'}).click();
+         |                                                         ^
+      67 |   await viewer.getByText('Historial aprobado · 5',{exact:true}).click();
+      68 |   const history=viewer.getByRole('group',{name:'Información del partido aprobada'});
+      69 |   await history.getByLabel('Categoría').selectOption('shot');
+        at /Users/james/dev/why now/apps/web/tests/match-coverage.spec.ts:66:57
+
+  3 failed
+    tests/editorial-experience.spec.ts:16:5 › continuous viewer starts match-first; preview is private, bilingual and optional on mobile
+    tests/editorial-experience.spec.ts:59:5 › catch-up stays open on correction, restores private visit interval, and never repeats withdrawn copy
+    tests/editorial-experience.spec.ts:80:5 › preview refuses a response for another revision and never approves the draft
+  1 interrupted
+    tests/match-coverage.spec.ts:27:5 › mixed producer and mobile viewer: every family, evidence, Spanish, focus, recap, archived navigation
+  1 skipped
+  3 did not run
+  3 passed (1.4m)

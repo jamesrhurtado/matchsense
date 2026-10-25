@@ -1,0 +1,70 @@
+
+> why-now-web@0.1.0 test:e2e
+> playwright test editorial-experience.spec.ts match-coverage.spec.ts
+
+
+Running 7 tests using 1 worker
+
+(node:22601) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22601) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/editorial-experience.spec.ts:16:5 › continuous viewer starts match-first; preview is private, bilingual and optional on mobile (18.0s)
+  ✓  2 tests/editorial-experience.spec.ts:59:5 › catch-up stays open on correction, restores private visit interval, and never repeats withdrawn copy (8.3s)
+  ✘  3 tests/editorial-experience.spec.ts:80:5 › preview refuses a response for another revision and never approves the draft (2.5s)
+(node:22627) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22627) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  4 tests/match-coverage.spec.ts:27:5 › mixed producer and mobile viewer: every family, evidence, Spanish, focus, recap, archived navigation (35.3s)
+  ✓  5 tests/match-coverage.spec.ts:94:5 › source score correction revokes affected narrative; reapproval, duplicate grouping, reconnect and recap refresh (16.5s)
+  ✓  6 tests/match-coverage.spec.ts:117:5 › expired producer candidates have an explicit archive-only approval control (4.4s)
+  ✘  7 tests/match-coverage.spec.ts:132:5 › linked approved shot remains selectable for a shooter different from the scorer (5.4s)
+
+
+  1) tests/editorial-experience.spec.ts:80:5 › preview refuses a response for another revision and never approves the draft
+
+    Error: route.fulfill: Route is already handled!
+
+      83 |   await page.route('**/stories/**/variants?**',async route=>{
+      84 |     const response=await route.fetch(); const body=await response.json();
+    > 85 |     await route.fulfill({response,json:{...body,revision:body.revision+1,text:'STALE REVISION SHOULD NEVER DISPLAY'}});
+         |                 ^
+      86 |   });
+      87 |   await page.goto(`/studio/${sid}`);
+      88 |   await page.getByText('Preview for viewers · draft',{exact:true}).click();
+        at /Users/james/dev/why now/apps/web/tests/editorial-experience.spec.ts:85:17
+
+    Error Context: test-results/editorial-experience-previ-ea0c9-nd-never-approves-the-draft/error-context.md
+
+  2) tests/match-coverage.spec.ts:132:5 › linked approved shot remains selectable for a shooter different from the scorer
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: getByTestId('audience-explanation')
+    Expected substring: [32m"Verified Scorer"[39m
+    Received string:    [31m"Explanations appear once the producer approves a supported story."[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toContainText" with timeout 5000ms[22m
+    [2m  - waiting for getByTestId('audience-explanation')[22m
+    [2m    9 × locator resolved to <p lang="en" data-testid="audience-explanation" class="mt-3 text-pretty text-base">Explanations appear once the producer approves a …</p>[22m
+    [2m      - unexpected value "Explanations appear once the producer approves a supported story."[22m
+
+
+      142 |   });
+      143 |   await page.goto('/watch/linked-demo');
+    > 144 |   await expect(page.getByTestId('audience-explanation')).toContainText('Verified Scorer');
+          |                                                          ^
+      145 |   await page.getByLabel('Follow a player or team').selectOption('blue-09');
+      146 |   await expect(page.getByTestId('audience-explanation')).toContainText('Verified Shooter');
+      147 |   await expect(page.getByText('Relevant approved insights · 1',{exact:true})).toBeVisible();
+        at /Users/james/dev/why now/apps/web/tests/match-coverage.spec.ts:144:58
+
+    Error Context: test-results/match-coverage-linked-appr-05b30-r-different-from-the-scorer/error-context.md
+
+  2 failed
+    tests/editorial-experience.spec.ts:80:5 › preview refuses a response for another revision and never approves the draft
+    tests/match-coverage.spec.ts:132:5 › linked approved shot remains selectable for a shooter different from the scorer
+  5 passed (1.5m)

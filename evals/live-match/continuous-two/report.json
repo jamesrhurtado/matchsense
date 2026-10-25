@@ -1,0 +1,86 @@
+{
+  "started_at": "2026-10-25T00:16:40.507403+00:00",
+  "reference_sha256": "6133f4c4111b3287ddd52ae1b1b8dfe0f5b1cfc5d018e3045c341dad79affe2b",
+  "scope": "Handwritten live-workflow references for two new coordinate/delivery-fault variants of the authored flagship. Correlated scenes and repeat trials are not independent matches. No runtime/model access to this file.",
+  "results": [
+    {
+      "clock_discontinuities": [],
+      "operating_run_valid": true,
+      "retail_estimate_usd": 0.0096357,
+      "session_id": "adbb52d7-0ca1-4cd8-9993-8387d527dded",
+      "match_id": "match-0c0a000000000007",
+      "elapsed_s": 241.2,
+      "speed": 1,
+      "seeks": 0,
+      "pauses": 0,
+      "automatic_approvals": 0,
+      "no_api_reads_during_playback": true,
+      "expected_count": 25,
+      "missing": [],
+      "timely_ai_count": 15,
+      "timely_ai_fraction": 0.6,
+      "gate_passed": false,
+      "families": [
+        "goal",
+        "pass",
+        "possession",
+        "pressure",
+        "recovery",
+        "shot"
+      ],
+      "usage": {
+        "calls": 66,
+        "input_tokens": 49098,
+        "output_tokens": 3785,
+        "total_tokens": 52883
+      },
+      "usage_complete": true,
+      "final_public_score": {
+        "blue": 1,
+        "amber": 0
+      },
+      "final_public_overlay": null,
+      "finished": true
+    },
+    {
+      "clock_discontinuities": [],
+      "operating_run_valid": true,
+      "retail_estimate_usd": 0.010013699999999999,
+      "session_id": "0fb6aa88-08cb-48c0-a735-451ab6a63468",
+      "match_id": "match-0c0a000000000008",
+      "elapsed_s": 243.205,
+      "speed": 1,
+      "seeks": 0,
+      "pauses": 0,
+      "automatic_approvals": 0,
+      "no_api_reads_during_playback": true,
+      "expected_count": 25,
+      "missing": [],
+      "timely_ai_count": 21,
+      "timely_ai_fraction": 0.84,
+      "gate_passed": false,
+      "families": [
+        "goal",
+        "pass",
+        "possession",
+        "pressure",
+        "recovery",
+        "shot"
+      ],
+      "usage": {
+        "calls": 72,
+        "input_tokens": 51146,
+        "output_tokens": 3903,
+        "total_tokens": 55049
+      },
+      "usage_complete": true,
+      "final_public_score": {
+        "blue": 0,
+        "amber": 0
+      },
+      "final_public_overlay": null,
+      "finished": true
+    }
+  ],
+  "all_gates_passed": false
+}

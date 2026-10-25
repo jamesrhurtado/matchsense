@@ -1,0 +1,140 @@
+{
+  "started_at": "2026-10-24T22:21:57.448945+00:00",
+  "reference_sha256": "6133f4c4111b3287ddd52ae1b1b8dfe0f5b1cfc5d018e3045c341dad79affe2b",
+  "scope": "Handwritten live-workflow references for two new coordinate/delivery-fault variants of the authored flagship. Correlated scenes and repeat trials are not independent matches. No runtime/model access to this file.",
+  "results": [
+    {
+      "retail_estimate_usd": 0.010104,
+      "session_id": "c1040974-bec1-4369-a0d2-b9d304bf2513",
+      "match_id": "match-0c0a000000000007",
+      "elapsed_s": 242.696,
+      "speed": 1,
+      "seeks": 0,
+      "pauses": 0,
+      "automatic_approvals": 0,
+      "no_api_reads_during_playback": true,
+      "expected_count": 25,
+      "missing": [],
+      "timely_ai_count": 22,
+      "timely_ai_fraction": 0.88,
+      "gate_passed": false,
+      "families": [
+        "goal",
+        "pass",
+        "possession",
+        "pressure",
+        "recovery",
+        "shot"
+      ],
+      "usage": {
+        "calls": 72,
+        "input_tokens": 51448,
+        "output_tokens": 3978,
+        "total_tokens": 55426
+      },
+      "usage_complete": true,
+      "final_public_score": {
+        "blue": 1,
+        "amber": 0
+      },
+      "final_public_overlay": null,
+      "finished": true
+    },
+    {
+      "retail_estimate_usd": 0.007452599999999999,
+      "session_id": "f711d7ca-f6e8-404a-a33c-a222e9ae3848",
+      "match_id": "match-0c0a000000000007",
+      "elapsed_s": 120.568,
+      "speed": 1,
+      "seeks": 0,
+      "pauses": 0,
+      "automatic_approvals": 0,
+      "no_api_reads_during_playback": true,
+      "expected_count": 25,
+      "missing": [
+        "story-shot-attempt-2",
+        "story-shot-attempt-3",
+        "story-goal-goal-1",
+        "story-possession-120000",
+        "story-possession-180000",
+        "story-recovery-restart-1",
+        "story-recovery-recovery-3",
+        "story-recovery-demo-control-154000",
+        "story-recovery-demo-control-180000",
+        "story-recovery-demo-control-204000"
+      ],
+      "timely_ai_count": 14,
+      "timely_ai_fraction": 0.56,
+      "gate_passed": false,
+      "families": [
+        "pass",
+        "possession",
+        "pressure",
+        "recovery",
+        "shot"
+      ],
+      "usage": {
+        "calls": 41,
+        "input_tokens": 38348,
+        "output_tokens": 2834,
+        "total_tokens": 41182
+      },
+      "usage_complete": true,
+      "final_public_score": {
+        "blue": 1,
+        "amber": 0
+      },
+      "final_public_overlay": null,
+      "finished": true
+    },
+    {
+      "retail_estimate_usd": 0.007467,
+      "session_id": "83be31c4-2be7-4b58-bfc5-162d2468ea26",
+      "match_id": "match-0c0a000000000008",
+      "elapsed_s": 119.312,
+      "speed": 1,
+      "seeks": 0,
+      "pauses": 0,
+      "automatic_approvals": 0,
+      "no_api_reads_during_playback": true,
+      "expected_count": 25,
+      "missing": [
+        "story-pass-4",
+        "story-shot-attempt-2",
+        "story-shot-attempt-3",
+        "story-goal-goal-1",
+        "story-possession-120000",
+        "story-possession-180000",
+        "story-recovery-restart-1",
+        "story-recovery-recovery-3",
+        "story-recovery-demo-control-154000",
+        "story-recovery-demo-control-180000",
+        "story-recovery-demo-control-204000"
+      ],
+      "timely_ai_count": 11,
+      "timely_ai_fraction": 0.44,
+      "gate_passed": false,
+      "families": [
+        "pass",
+        "possession",
+        "pressure",
+        "recovery",
+        "shot"
+      ],
+      "usage": {
+        "calls": 42,
+        "input_tokens": 38488,
+        "output_tokens": 2823,
+        "total_tokens": 41311
+      },
+      "usage_complete": true,
+      "final_public_score": {
+        "blue": 0,
+        "amber": 0
+      },
+      "final_public_overlay": null,
+      "finished": true
+    }
+  ],
+  "all_gates_passed": false
+}

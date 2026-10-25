@@ -1,0 +1,358 @@
+[
+  {
+    "run": "continuous-final",
+    "session": "83be31c4-2be7-4b58-bfc5-162d2468ea26",
+    "expected": 25,
+    "found": 14,
+    "timely": 11,
+    "missing": [
+      "story-pass-4",
+      "story-shot-attempt-2",
+      "story-shot-attempt-3",
+      "story-goal-goal-1",
+      "story-possession-120000",
+      "story-possession-180000",
+      "story-recovery-restart-1",
+      "story-recovery-recovery-3",
+      "story-recovery-demo-control-154000",
+      "story-recovery-demo-control-180000",
+      "story-recovery-demo-control-204000"
+    ],
+    "families": {
+      "pressure": [
+        20.923,
+        23.436,
+        17.193,
+        21.656
+      ],
+      "pass": [
+        15.661,
+        18.521,
+        2.833
+      ],
+      "recovery": [
+        25.614,
+        21.663,
+        22.371,
+        14.327,
+        18.327
+      ],
+      "shot": [
+        24.122
+      ],
+      "possession": [
+        7.136
+      ]
+    },
+    "calls": 42,
+    "estimate": 0.007467,
+    "operating_run_valid": false,
+    "policy": "v1"
+  },
+  {
+    "run": "continuous-final",
+    "session": "c1040974-bec1-4369-a0d2-b9d304bf2513",
+    "expected": 25,
+    "found": 25,
+    "timely": 22,
+    "missing": [],
+    "families": {
+      "pressure": [
+        24.237,
+        26.182,
+        24.908,
+        25.459
+      ],
+      "pass": [
+        22.189,
+        23.924,
+        21.351,
+        22.934
+      ],
+      "recovery": [
+        25.447,
+        25.718,
+        25.185,
+        25.739,
+        23.532,
+        24.08,
+        23.485,
+        22.246,
+        21.228,
+        21.885
+      ],
+      "shot": [
+        26.544,
+        21.065,
+        22.043
+      ],
+      "possession": [
+        10.721,
+        10.218,
+        10.351
+      ],
+      "goal": [
+        22.706
+      ]
+    },
+    "calls": 72,
+    "estimate": 0.010104,
+    "operating_run_valid": true,
+    "policy": "v1"
+  },
+  {
+    "run": "continuous-final",
+    "session": "f711d7ca-f6e8-404a-a33c-a222e9ae3848",
+    "expected": 25,
+    "found": 15,
+    "timely": 14,
+    "missing": [
+      "story-shot-attempt-2",
+      "story-shot-attempt-3",
+      "story-goal-goal-1",
+      "story-possession-120000",
+      "story-possession-180000",
+      "story-recovery-restart-1",
+      "story-recovery-recovery-3",
+      "story-recovery-demo-control-154000",
+      "story-recovery-demo-control-180000",
+      "story-recovery-demo-control-204000"
+    ],
+    "families": {
+      "pressure": [
+        25.184,
+        25.953,
+        23.027,
+        25.093
+      ],
+      "pass": [
+        23.071,
+        23.569,
+        20.393,
+        20.384
+      ],
+      "recovery": [
+        25.674,
+        22.042,
+        22.55,
+        22.607,
+        20.352
+      ],
+      "shot": [
+        25.793
+      ],
+      "possession": [
+        9.94
+      ]
+    },
+    "calls": 41,
+    "estimate": 0.007452599999999999,
+    "operating_run_valid": false,
+    "policy": "v1"
+  },
+  {
+    "run": "continuous-two",
+    "session": "adbb52d7-0ca1-4cd8-9993-8387d527dded",
+    "expected": 25,
+    "found": 25,
+    "timely": 15,
+    "missing": [],
+    "families": {
+      "pressure": [
+        19.747,
+        22.125,
+        15.255,
+        22.327
+      ],
+      "pass": [
+        14.395,
+        18.384,
+        1.93,
+        17.394
+      ],
+      "recovery": [
+        24.4,
+        20.21,
+        20.565,
+        18.734,
+        10.269,
+        18.568,
+        20.14,
+        20.353,
+        6.306,
+        18.903
+      ],
+      "shot": [
+        24.527,
+        13.824,
+        12.184
+      ],
+      "possession": [
+        6.478,
+        8.226,
+        0.35
+      ],
+      "goal": [
+        13.824
+      ]
+    },
+    "calls": 66,
+    "estimate": 0.0096357,
+    "operating_run_valid": true,
+    "policy": "v1"
+  },
+  {
+    "run": "continuous-two",
+    "session": "0fb6aa88-08cb-48c0-a735-451ab6a63468",
+    "expected": 25,
+    "found": 25,
+    "timely": 21,
+    "missing": [],
+    "families": {
+      "pressure": [
+        22.915,
+        25.824,
+        22.606,
+        24.13
+      ],
+      "pass": [
+        21.865,
+        23.433,
+        18.381,
+        22.598
+      ],
+      "recovery": [
+        25.591,
+        21.699,
+        22.017,
+        19.24,
+        18.958,
+        18.962,
+        20.677,
+        20.937,
+        13.824,
+        19.591
+      ],
+      "shot": [
+        22.889,
+        18.457,
+        16.824
+      ],
+      "possession": [
+        8.089,
+        6.771,
+        6.903
+      ],
+      "goal": [
+        18.457
+      ]
+    },
+    "calls": 72,
+    "estimate": 0.010013699999999999,
+    "operating_run_valid": true,
+    "policy": "v1"
+  },
+  {
+    "run": "scheduling-v2-two",
+    "session": "053fb4e2-a958-4086-833b-c996fb62f5cb",
+    "expected": 25,
+    "found": 24,
+    "timely": 21,
+    "missing": [
+      "story-recovery-change-1"
+    ],
+    "families": {
+      "pressure": [
+        24.006,
+        24.608,
+        25.64,
+        24.169
+      ],
+      "pass": [
+        21.864,
+        22.232,
+        23.031,
+        22.632
+      ],
+      "recovery": [
+        25.47,
+        25.134,
+        24.202,
+        24.753,
+        21.879,
+        22.567,
+        22.268,
+        19.149,
+        22.647
+      ],
+      "shot": [
+        20.965,
+        21.889,
+        16.427
+      ],
+      "possession": [
+        9.746,
+        8.952,
+        7.199
+      ],
+      "goal": [
+        21.889
+      ]
+    },
+    "calls": 49,
+    "estimate": 0.0082089,
+    "operating_run_valid": true,
+    "policy": "v2"
+  },
+  {
+    "run": "scheduling-v2-two",
+    "session": "b083233f-cf22-42e5-abe6-573a505f7aff",
+    "expected": 25,
+    "found": 25,
+    "timely": 21,
+    "missing": [],
+    "families": {
+      "pressure": [
+        20.763,
+        19.709,
+        21.552,
+        20.801
+      ],
+      "pass": [
+        16.501,
+        16.06,
+        16.975,
+        17.686
+      ],
+      "recovery": [
+        26.528,
+        23.037,
+        24.935,
+        20.528,
+        20.262,
+        21.154,
+        22.082,
+        21.784,
+        15.107,
+        21.961
+      ],
+      "shot": [
+        20.458,
+        17.473,
+        12.89
+      ],
+      "possession": [
+        9.572,
+        8.584,
+        2.822
+      ],
+      "goal": [
+        17.473
+      ]
+    },
+    "calls": 51,
+    "estimate": 0.00835125,
+    "operating_run_valid": true,
+    "policy": "v2"
+  }
+]

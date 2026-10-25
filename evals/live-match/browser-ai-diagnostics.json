@@ -1,0 +1,324 @@
+{
+  "session_id": "49fe5c6f-1cb0-48cd-b881-00a6c7f7ca02",
+  "clock_ms": 23370,
+  "mode": "Microsoft Agent Framework + Azure OpenAI",
+  "observations_delivered": 237,
+  "ingestion_lag_ms": 70,
+  "metric_version": "pressure-escape-v1",
+  "workflow_ms": 4883.739,
+  "trace": [
+    {
+      "role": "Story Director",
+      "action": "model_decision",
+      "status": "propose",
+      "call": 1,
+      "elapsed_ms": 3697.977,
+      "input_tokens": 633,
+      "output_tokens": 41,
+      "total_tokens": 674,
+      "usage_reported": true,
+      "duration_ms": 3175.728,
+      "output": {
+        "action": "propose",
+        "claim_ids": [
+          "c-event"
+        ],
+        "reason": "The evidence supports the claim of a pass made by blue-11 to blue-09 with specific metrics on pressure and distance."
+      }
+    },
+    {
+      "role": "Claim Reviewer",
+      "action": "model_decision",
+      "status": "supported",
+      "call": 2,
+      "elapsed_ms": 4881.342,
+      "input_tokens": 635,
+      "output_tokens": 32,
+      "total_tokens": 667,
+      "usage_reported": true,
+      "duration_ms": 1174.96,
+      "output": {
+        "action": "supported",
+        "claim_ids": [
+          "c-event"
+        ],
+        "reason": "The evidence supports the claim with specific metrics regarding pressure, pass distance, and possession."
+      }
+    }
+  ],
+  "audit": [
+    {
+      "action": "package_ready",
+      "at_ms": 21798,
+      "data": "{\"story_id\": \"story-pressure-pass-1\", \"revision\": 1, \"workflow_ms\": 4883.739}"
+    },
+    {
+      "action": "approve",
+      "at_ms": 23114,
+      "data": "{\"story_id\": \"story-pressure-pass-1\", \"status\": \"approved\", \"revision\": 1, \"at_ms\": 23114, \"archive_only\": false, \"review\": {\"status\": \"supported\", \"mode\": \"foundry\", \"reason\": \"The evidence supports the claim with specific metrics regarding pressure, pass distance, and possession.\", \"proposed_text\": null, \"revised_text\": \"Dani Luna passed 18.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 1.0 after reception. Proximity does not establish tactical intent or causation.\", \"cycles\": 0}}"
+    }
+  ],
+  "azure_deployed": false,
+  "model_calls": 2,
+  "model_tokens": 1341,
+  "model_usage": {
+    "calls": 2,
+    "input_tokens": 1268,
+    "output_tokens": 73,
+    "total_tokens": 1341,
+    "usage_complete": true
+  },
+  "workflow_outcomes": [
+    {
+      "run_id": "04255aca-d64b-42ad-91a4-228b1d6e984b",
+      "session_id": "49fe5c6f-1cb0-48cd-b881-00a6c7f7ca02",
+      "story_id": "story-pressure-pass-1",
+      "evidence_revision": "a9b83723f0b7c67b",
+      "revision": 1,
+      "cutoff_ms": 16610,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "state": "produced",
+      "scheduled_at": "2026-10-25T00:24:11.095364+00:00",
+      "started_at": "2026-10-25T00:24:11.096154+00:00",
+      "finished_at": "2026-10-25T00:24:15.997604+00:00",
+      "timing": {
+        "job_enqueued": "2026-10-25T00:24:11.095364+00:00",
+        "job_started": "2026-10-25T00:24:11.096154+00:00",
+        "candidate_ready": "2026-10-25T00:24:15.997604+00:00"
+      },
+      "model_usage": {
+        "calls": 2,
+        "input_tokens": 1268,
+        "output_tokens": 73,
+        "total_tokens": 1341,
+        "usage_complete": true
+      },
+      "trace": [
+        {
+          "role": "Story Director",
+          "action": "model_decision",
+          "status": "propose",
+          "call": 1,
+          "elapsed_ms": 3697.977,
+          "input_tokens": 633,
+          "output_tokens": 41,
+          "total_tokens": 674,
+          "usage_reported": true,
+          "duration_ms": 3175.728,
+          "output": {
+            "action": "propose",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence supports the claim of a pass made by blue-11 to blue-09 with specific metrics on pressure and distance."
+          }
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "model_decision",
+          "status": "supported",
+          "call": 2,
+          "elapsed_ms": 4881.342,
+          "input_tokens": 635,
+          "output_tokens": 32,
+          "total_tokens": 667,
+          "usage_reported": true,
+          "duration_ms": 1174.96,
+          "output": {
+            "action": "supported",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence supports the claim with specific metrics regarding pressure, pass distance, and possession."
+          }
+        }
+      ],
+      "reason": null,
+      "package_ref": {
+        "id": "story-pressure-pass-1",
+        "revision": 1,
+        "package_hash": "ff272b0281c8e7ef325483cce4fa4ac8dc3235af1ebf1e450ac5199c5ddc798e"
+      }
+    },
+    {
+      "run_id": "53ae4862-c13d-4c7e-9132-7dcfcf2eeef6",
+      "session_id": "49fe5c6f-1cb0-48cd-b881-00a6c7f7ca02",
+      "story_id": "story-pass-1",
+      "evidence_revision": "6639eacd27704675",
+      "revision": 1,
+      "cutoff_ms": 16610,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "state": "started",
+      "scheduled_at": "2026-10-25T00:24:11.112149+00:00",
+      "started_at": "2026-10-25T00:24:11.115688+00:00",
+      "finished_at": null,
+      "timing": {
+        "job_enqueued": "2026-10-25T00:24:11.112149+00:00",
+        "job_started": "2026-10-25T00:24:11.115688+00:00",
+        "candidate_ready": null
+      },
+      "model_usage": {
+        "calls": 1,
+        "input_tokens": 2050,
+        "output_tokens": 134,
+        "total_tokens": 2184,
+        "usage_complete": true
+      },
+      "trace": [
+        {
+          "role": "Story Director",
+          "action": "model_decision",
+          "status": "propose",
+          "call": 1,
+          "elapsed_ms": 4346.612,
+          "input_tokens": 2050,
+          "output_tokens": 134,
+          "total_tokens": 2184,
+          "usage_reported": true,
+          "duration_ms": 3854.171,
+          "output": {
+            "action": "propose",
+            "plan": {
+              "angle": "progression",
+              "simple_claim_ids": [
+                "c-retain",
+                "c-forward"
+              ],
+              "detail_claim_ids": [
+                "c-bypass",
+                "c-retain",
+                "c-progress",
+                "c-pressure"
+              ]
+            },
+            "reason": "The sequence shows a forward pass displacement of 18m, indicating effective progression, while the team retained possession for 3 seconds, demonstrating control during the play.",
+            "evidence_requests": [
+              {
+                "tool": "compute_pass_metrics",
+                "start_ms": 12000,
+                "end_ms": 13200,
+                "player_id": "blue-11"
+              },
+              {
+                "tool": "get_sequence",
+                "start_ms": 13200,
+                "end_ms": 16200,
+                "player_id": "blue-09"
+              }
+            ]
+          }
+        }
+      ],
+      "reason": null,
+      "package_ref": null,
+      "evidence_observed_at": "2026-10-25T00:24:11.112149+00:00",
+      "implementation": {
+        "schema_version": "4.0.0",
+        "prompt_version": "director-critic-v4.1",
+        "renderer_version": "editorial-claims-v4",
+        "metric_version": "pressure-escape-v1",
+        "tool_version": "evidence-tools-v3",
+        "context_version": "recent-completed-three-v1",
+        "model_deployment": "story-model",
+        "model_version": "2024-07-18",
+        "release_commit": "unknown"
+      }
+    }
+  ],
+  "lifecycle_events": [
+    {
+      "id": "1e056e3b5ee9cbb8d980f2ecca7a8c3f5847d889f2a9a9a22271febd1bcadb73",
+      "session_id": "49fe5c6f-1cb0-48cd-b881-00a6c7f7ca02",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:24:10.056531+00:00",
+      "story_id": "story-possession-15000",
+      "state": "not_selected_live_possession_interval",
+      "replay_ms": 15575
+    },
+    {
+      "id": "4f24112dc987ccb4eaf31f9f1b5d379b13cc0e1b63d3e89b6c5c630b1df22531",
+      "session_id": "49fe5c6f-1cb0-48cd-b881-00a6c7f7ca02",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:24:11.093602+00:00",
+      "story_id": "story-pressure-pass-1",
+      "evidence_revision": "a9b83723f0b7c67b",
+      "state": "detected",
+      "replay_ms": 16610
+    },
+    {
+      "id": "e0acd3b7713db1a9d2cc8d69d1ddda8a59fc941206d4412d019c061bde83e835",
+      "session_id": "49fe5c6f-1cb0-48cd-b881-00a6c7f7ca02",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:24:11.105768+00:00",
+      "story_id": "story-pass-1",
+      "evidence_revision": "6639eacd27704675",
+      "state": "detected",
+      "replay_ms": 16610
+    },
+    {
+      "id": "39dbdab2c68fa122a8ee7b3367f221a76ffa2eb9190b16ea32970d5763a3403f",
+      "session_id": "49fe5c6f-1cb0-48cd-b881-00a6c7f7ca02",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:24:16.279718+00:00",
+      "run_id": "04255aca-d64b-42ad-91a4-228b1d6e984b",
+      "story_id": "story-pressure-pass-1",
+      "revision": 1,
+      "evidence_revision": "a9b83723f0b7c67b",
+      "state": "accepted",
+      "package_ref": {
+        "id": "story-pressure-pass-1",
+        "revision": 1,
+        "package_hash": "ff272b0281c8e7ef325483cce4fa4ac8dc3235af1ebf1e450ac5199c5ddc798e"
+      },
+      "replay_ms": 21798
+    },
+    {
+      "id": "c0c6d6c441735b68fd31861aabf724ded2c082297a3afda5a3906e709d68a200",
+      "session_id": "49fe5c6f-1cb0-48cd-b881-00a6c7f7ca02",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:24:16.282439+00:00",
+      "story_id": "story-pressure-pass-1",
+      "family": "pressure",
+      "state": "candidate_ready",
+      "replay_ms": 21798,
+      "evidence_ready_ms": 16200,
+      "expires_at_ms": 46200
+    },
+    {
+      "id": "ac8c0ef7c66d4492379f1589edf288ecca80cd492b873ec882f143a269dfc02b",
+      "session_id": "49fe5c6f-1cb0-48cd-b881-00a6c7f7ca02",
+      "kind": "approval_received",
+      "recorded_at": "2026-10-25T00:24:17.569358+00:00",
+      "story_id": "story-pressure-pass-1",
+      "revision": 1,
+      "action": "approve",
+      "replay_ms": 23114
+    },
+    {
+      "id": "7b6b4edd6260331a58cc7aad01fffc2a64e95cf46e28f42726f9e0c7ec79f63a",
+      "session_id": "49fe5c6f-1cb0-48cd-b881-00a6c7f7ca02",
+      "kind": "browser_ack",
+      "recorded_at": "2026-10-25T00:24:17.716871+00:00",
+      "story_id": "story-pressure-pass-1",
+      "revision": 1,
+      "evidence_revision": "a9b83723f0b7c67b",
+      "event_id": "5964da28-e36b-456a-9ceb-6e42110e3885",
+      "paint_interval_ms": 10.300000011920929,
+      "replay_ms": 23262,
+      "clock_scope": "Browser monotonic interval only; no server/browser clock subtraction."
+    }
+  ],
+  "decision_summary": {
+    "angle": "pressure",
+    "lead": "Dani Luna passed 18.0 m forward to Beni Vidal. Average nearby opponents fell from 2.0 before the pass to 1.0 after reception. Proximity does not establish tactical intent or causation.",
+    "context": "Source observations only; no tactical causation.",
+    "review": "The evidence supports the claim with specific metrics regarding pressure, pass distance, and possession.",
+    "changes": [],
+    "fallback": null,
+    "outcome": "candidate produced"
+  },
+  "transport": {
+    "mode": "local"
+  },
+  "workflow_pending": true
+}

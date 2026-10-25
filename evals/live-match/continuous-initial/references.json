@@ -1,0 +1,8 @@
+{
+  "scope": "New handwritten live-workflow references for existing authored flagship trajectories. Repeated/related trajectories are not independent matches. No runtime/model access to this file.",
+  "scenes": ["match-0c0a000000000005", "match-0c0a000000000006"],
+  "expected_story_ids": ["story-pass-1", "story-pass-2", "story-pass-3", "story-pass-4", "story-pressure-pass-1", "story-pressure-pass-2", "story-pressure-pass-3", "story-pressure-pass-4", "story-shot-attempt-1", "story-shot-attempt-2", "story-shot-attempt-3", "story-goal-goal-1", "story-possession-60000", "story-possession-120000", "story-possession-180000", "story-recovery-loose-1", "story-recovery-change-1", "story-recovery-flagship-recovery-60000", "story-recovery-change-2", "story-recovery-demo-control-74000", "story-recovery-restart-1", "story-recovery-recovery-3", "story-recovery-demo-control-154000", "story-recovery-demo-control-180000", "story-recovery-demo-control-204000"],
+  "source_score_checkpoints": [{"at_ms":105000,"blue":1}, {"at_ms":136000,"blue":1,"correction_blue":0}],
+  "proposed_gate": {"ready_fraction":0.95,"review_seconds_remaining":15},
+  "policy_before_run": "Live possession candidates selected at complete 60-second boundaries, retaining the source interval and original 15-second expiry. Other supported families retain their existing confirmation and 30-second expiry. No new workflow after the feed ends. Gate failures remain failures."
+}

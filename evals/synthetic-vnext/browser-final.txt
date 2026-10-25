@@ -1,0 +1,29 @@
+
+> why-now-web@0.1.0 test:e2e
+> playwright test synthetic-episodes.spec.ts flow.spec.ts match-coverage.spec.ts pressure-flagship.spec.ts
+
+
+Running 16 tests using 1 worker
+
+(node:26966) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:26966) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/flow.spec.ts:3:5 › producer evidence → wording review → approval → viewer preferences → retraction (6.0s)
+  ✓   2 tests/flow.spec.ts:30:5 › viewer stream delivers resync and state updates through the web proxy (354ms)
+  ✓   3 tests/flow.spec.ts:42:5 › web proxy preserves authorization errors and rejects oversized bodies (6ms)
+  ✓   4 tests/flow.spec.ts:50:5 › pending AI review remains visible while replay continues (97ms)
+  ✓   5 tests/match-coverage.spec.ts:27:5 › mixed producer and mobile viewer: every family, evidence, Spanish, focus, recap, archived navigation (33.2s)
+  ✓   6 tests/match-coverage.spec.ts:94:5 › source score correction revokes affected narrative; reapproval, duplicate grouping, reconnect and recap refresh (16.5s)
+  ✓   7 tests/match-coverage.spec.ts:117:5 › expired producer candidates have an explicit archive-only approval control (4.0s)
+  ✓   8 tests/match-coverage.spec.ts:132:5 › linked approved shot remains selectable for a shooter different from the scorer (724ms)
+  ✓   9 tests/pressure-flagship.spec.ts:3:5 › pressure flagship: review, source evidence, approval, audience lenses, Spanish focus, mobile and recap (16.9s)
+  ✓  10 tests/synthetic-episodes.spec.ts:27:7 › new pass scene renders evidence and approved viewer copy on desktop and phone (1.8s)
+  ✓  11 tests/synthetic-episodes.spec.ts:27:7 › new pressure scene renders evidence and approved viewer copy on desktop and phone (1.0s)
+  ✓  12 tests/synthetic-episodes.spec.ts:27:7 › new recovery scene renders evidence and approved viewer copy on desktop and phone (714ms)
+  ✓  13 tests/synthetic-episodes.spec.ts:27:7 › new shot scene renders evidence and approved viewer copy on desktop and phone (763ms)
+  ✓  14 tests/synthetic-episodes.spec.ts:27:7 › new goal scene renders evidence and approved viewer copy on desktop and phone (1.2s)
+  ✓  15 tests/synthetic-episodes.spec.ts:27:7 › new possession scene renders evidence and approved viewer copy on desktop and phone (3.3s)
+  ✓  16 tests/synthetic-episodes.spec.ts:56:5 › 90-second mobile stream keeps its clock, withdraws a corrected goal and ends once (1.5m)
+
+  16 passed (3.0m)

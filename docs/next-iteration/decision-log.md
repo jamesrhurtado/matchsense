@@ -1,5 +1,186 @@
 # Iteration implementation record
 
+## 25 October 2026 — accessible pitch player identity
+
+Implemented producer walkthrough follow-ups. On the live match pitch, player
+markers expose name, shirt number, team and goalkeeper role on hover, keyboard
+focus and click/tap selection. Keyboard activation and selected state are
+accessible; an identity line stays reserved below the pitch so live updates do
+not shift the field. Control, ball and goalkeeper legend text is larger and
+clearer. Evidence/replay mini-pitches retain their non-interactive behavior.
+The review-trace action now reports when it is opening and moves focus to the
+trace once loaded. Candidates say “Ready for review”; internal revision numbers
+stay on approved status. The producer and viewer omit the extra “Why this
+moment?” pressure summary when it only repeats measured facts; the additional
+previous-three-pass comparison remains visible when supported. “Pressure Swing”
+is now “Nearby pressure change”; labels distinguish before-pass, forward
+distance and after-reception measurements, and coverage states the observed
+seconds out of each two-second window.
+
+Verification: web production build and TypeScript passed; ten focused
+`match-stage.spec.ts` and `story-selection.spec.ts` checks passed at the local
+port-3000 app, including keeper identity on hover, player identity via keyboard,
+selection clearing, clear review status, repeated-summary suppression, trace
+focus, clearer pressure labels/coverage, and the existing desktop/mobile pitch
+and ball-position checks. These changes address reported usability issues; they
+do not establish user comprehension. No backend, AI, deployment or external
+submission changed.
+
+## 25 October 2026 — keep live evidence reading stable
+
+Producer feedback identified shifting content while reading evidence. Reserved a
+constant status row, bounded the incoming-insight list and expanded delivery
+history, kept a constant pitch-note slot, and made the broadcast explanation a
+fixed-height scrollable region. Longer copy remains accessible rather than being
+truncated. The first producer selection is pinned as candidates arrive; existing
+revision/correction invalidation remains active. Technical framework attribution
+moved into delivery history instead of the primary status message or footer.
+
+New desktop/mobile browser checks simulate incoming candidates, review status and
+long broadcast copy while evidence stays open, measuring its viewport position
+and checking selected-story continuity. These are interface regression checks,
+not evidence of improved user comprehension. No AI workflow or model was changed.
+Production build and TypeScript passed. Seven existing selection/editorial browser
+checks passed; both new position checks passed at 1440 px and 390 px. Initial
+new-test failures used an unavailable pass-only button, then clicked the desktop
+rail before data readiness/on mobile where the rail is hidden; tests now use the
+loaded shared review action. These were test-selector failures, not relaxed layout
+expectations. Preview 3200 was rebuilt/restarted; Azure API 8200 remains configured.
+
+
+## 25 October 2026 — restore AI on the synthetic-data preview
+
+The port-3200 handoff initially pointed to a template-only engineering server,
+which made AI unavailable there while the original port-3100 Azure setup remained
+configured. Restarted only API 8200 through the existing `scripts/live_dev.py`
+launcher, retaining the development catalogue and SQLite store. Azure deployment
+identity, CLI authentication and retail-rate preflight passed; the web-proxied
+health endpoint now reports Microsoft Agent Framework + Azure OpenAI,
+`story-model` version `2024-07-18`, and `live_ai_configured: true`.
+No resources were created and no model generation was triggered by this check.
+Existing template sessions retain their mode; AI testing requires a new AI session.
+This is configuration readiness, not completion of SD05 model evaluation.
+
+## 25 October 2026 — SD01–SD04 synthetic development slice
+
+James authorized the first synthetic-data implementation slice. Existing live/UI
+work was preserved. Delivery uses the current observation contracts, evidence,
+approval, persistence, English/Spanish variants, focus and recap paths.
+
+| Ticket | Status and implementation evidence | Remaining boundary |
+| --- | --- | --- |
+| SD01 | Implemented: frozen profile, dataset card, parent/split/hash manifest, 385-file and stored-package snapshot | Design bounds are not physiological/FIFA standards; held-out parents not authored |
+| SD02 | Implemented: shared episode control/ball/events, C2 movement, ball-linked support/keeper targets and explicit shot/contact paths | Authored constrained passages, not tactical physics or a full-match simulator |
+| SD03 | Implemented: independent source-only derivatives, contact/state/direction/cutoff checks, original and latest corrected projections, deliberate invalid-source tests | Expert football plausibility and observed-source uncertainty remain separate |
+| SD04 | Implemented: 6 development parents, 12 paired specifications, 24 observation/delivery views; independent expected-fact key; opt-in application catalogue | No held-out set, new paid model comparison or participant findings |
+
+The [dataset card and walkthrough](../synthetic-dataset-v1.md) lists the twelve
+90-second passages. `WHY_NOW_SYNTHETIC_DEVELOPMENT=1` with coverage enabled exposes
+neutral numbered entries; the original 173-entry catalogue, 181-entry coverage
+catalogue and four-minute default remain unchanged. The opt-in combined catalogue
+has 205 entries. Export refuses different bytes at an existing fixture identity.
+
+Verification: **491 complete-backend tests passed**, **32/32 separately authored
+fact checkpoints**, **24/24 source views**, original **168 cases / 594 checkpoints**
+unchanged, production build and TypeScript passed. A clean **16-case browser run**
+includes six new-family desktop/mobile cases plus continuous 90-second mobile
+source confirmation → explicit test approval → cancellation/withdrawal → one end.
+The final focused suite additionally covers absent optional goal attribution and
+current family coverage. All checks use templates and zero model calls. See the
+[verification record](../../evals/synthetic-vnext/verification.md) for exact runs,
+development failures, fixes and remaining limits.
+
+All 385 original source/schema/reference files and package aggregates in 14
+pre-existing local stores remained unchanged. Runtime exports contain no reference
+keys, parent labels or seeds. The QA-only real-clock period excerpt is derived
+from the quiet parent and explicitly omits halftime; it is not a seventh scene or
+an accelerated football-half claim. No original expectation was rewritten.
+
+SD05–SD08 remain planned: held-out/current-AI comparison, two composed four-minute
+demos, human review and final release work. No superiority, user benefit or new
+live-AI timing success is asserted. No Azure resources, new model roles/prompts,
+paid model requests, deployment, commit, push or external publication occurred.
+
+## 25 October 2026 — synthetic-data research and proposed iteration
+
+James requested research before strengthening the synthetic football data.
+Delivered [primary research and source audit](../synthetic-data-research.md)
+and [SD01–SD08 implementation plan](synthetic-data-plan.md). All SD tickets are
+**proposed**. No product generator, fixture, stored package or model behavior was
+changed in this research task.
+
+Verified Firefox Developer Edition access and reread The Ninety Labs and Pulse
+project descriptions. Their described implementations and performance were not
+reproduced. Primary sources cover football laws/definitions, keeper positioning,
+tracking quality, coordinate systems, scenario simulation, dataset documentation
+and behavioral/grouped agent evaluation. No new participant findings are asserted.
+
+The [read-only reproducible audit](../../evals/synthetic-research/current-fixtures.json)
+checks existing flagship/live exports 005–008: all four pass the current source/feed
+validator. They share one authored trajectory ancestry. Sampled maximum player
+speed is about 8.16 m/s, while vector finite-difference acceleration reaches about
+103.54 m/s² (86.10 in the missing-frame variant). This is a path-join diagnostic,
+not a physiological estimate or a newly adopted pass/fail threshold. Existing
+validation does not check acceleration or fully establish football realism.
+
+Recommendation: additive coherent episode generation, smooth role-aware movement,
+stronger independent validators, structurally distinct parents and held-out cases,
+then fair current-workflow agent comparisons. Preserve original hashes/regression
+expectations, observation availability, exact approval and source corrections.
+The original Google Research Football repository was observed archived; a full
+simulator/vision migration is deferred. Research and audit made no paid model
+calls, real-data imports, deployment, push or publication. Actual implementation,
+football/Spanish review and user findings remain pending.
+
+## 25 October 2026 — quieter live editorial iteration
+
+James authorized implementing the evidence-led product plan, emphasizing that
+viewers should enjoy the match without being tired by the technology. Existing
+live engineering and unrelated work were preserved; no deployment or publication.
+
+| Ticket | Delivery in this slice | Remaining evidence/work |
+|---|---|---|
+| EV01 | Landing identifies the producer desk, AI suggestions, approval and viewer choice; README identifies the current local build and labels older instructions | First-time participant paraphrases remain pending |
+| EV02 | Existing facilitator guide has a neutral live-task/paired-comparison addendum, including missed match action and unsupported interpretation | Recruitment, source-checked comparison materials/independent keys, assignments, ratings and findings pending |
+| EV03 | Producer card says what changed; short queue retains Show all/filter/archive access; evidence clock stays visible; technical sources remain in disclosure; recorded Director/Reviewer actions summarized without model reasons being treated as facts | Independent usefulness and Spanish review pending; no new tactical claims |
+| EV04 | On-demand private casual/analyst and Spanish preview; one pane on phones; exact revision response check; no approval or model calls from preview | Human comprehension comparison pending |
+| EV05 | Additive from_ms interval API; browser-local visit boundary; explicit intervals, current score/validity and empty-state meaning; durable source withdrawal and editorial retraction notices without old text; open recap refreshes; stale recap members filtered against exact current approved revisions | Historical sessions invalidated before notice recording began cannot gain invented withdrawal timestamps; cross-device visit history is not provided |
+| EV06 | Reanalyzed retained real-model timings with clock domains kept separate; new short queue is a presentation change only; model scheduling, detection, expiry and original 95%/15-second gate unchanged | Actual distraction, accepted-story rate, policy comparison and independent agent ablation pending; original timing gate remains unmet |
+| EV07 | Updated startup/walkthrough and prepared a properly qualified research opening for the later video; local app refreshed | Recording, judge access, public repository and external release remain separate |
+| EV08 | Deferred as planned | Requires a graphics-partner task; no integration claim |
+
+Live viewers default to **Match first** with score/clock/pitch, keeping overlays and
+the explanation sidebar behind **Explore explanations**. Catch-up remains available.
+Guided onboarding retains its existing explanation-first view. No event family,
+source measurement or publication safeguard was removed. Empty catch-up is not
+described as an empty match. Current source state remains separate from approvals.
+
+Verification, failures/rechecks, immutable-package compatibility and remaining
+limitations are recorded in [editorial verification](../../evals/editorial-experience/verification.md).
+No new paid model calls or participant results are claimed for this iteration.
+
+## 25 October 2026 — problem evidence and competitive research
+
+At James's request, verified Firefox Developer Edition access and read the six
+open project descriptions, hackathon About/rubric and expanded challenge. Briefly
+inspected the public PitchPulse and Virtual Studio Crew demos; their backend/model
+claims and performance were not independently audited. Public research includes
+multi-sport surveys, football viewer discussions, scholarly visualization work,
+football definitions, reporting and existing commercial products.
+
+Delivered [problem evidence and comparison](../problem-evidence.md) and a
+[proposed product iteration](evidence-led-product-plan.md), with source limitations,
+claim boundaries, rubric mapping and acceptance checks. Recommendation: validate
+the producer task; improve readable editorial decisions and audience previews;
+test interval-specific approved catch-up and visible corrections. No new tactical
+score, vision pipeline or extra agent role is recommended for the deadline.
+
+EV01–EV08 are **proposed**, not implemented or newly verified. Existing live
+engineering changes are preserved. No paid model evaluation, participant session,
+deployment, repository-visibility change or external publication was performed in
+this research task. Existing failed timing targets and human-validation gaps stay
+open; competitor descriptions and survey attitudes are not product validation.
+
 ## 23 October 2026 — broader match coverage selected for next-iteration planning
 
 James requested an implementable plan after reporting first-time-user confusion about pass-only information. [MC01–MC10](match-coverage-implementation-plan.md) specifies goals/confirmed score, shots, possession windows, recovery/control-change stories and a mixed-event timeline/recap, with evidence, English/Spanish, approval, correction handling and real-user validation. These are **planned, not implemented or verified**. No model run, deployment or product code change was performed for this planning task.
@@ -311,3 +492,68 @@ Final flagship browser rerun: **1 passed**; combined final build coverage is
 **28 local browser scenarios passed**, **2 hosted-only skipped**. New-family
 screenshots and raw logs are retained separately in the flagship verification
 folder. Fresh local session at 0 s is paused and ready for the owner to start.
+
+## 24 October 2026 — first-time entrance clarity
+
+Owner feedback during review preparation identified an unclear product description,
+excessive setup terminology and ambiguity between replay segments and highlights.
+The entrance now explains producer and fan roles, leads with a guided demo,
+collapses the scenario catalogue and technical execution/access help, and retains
+an explicit fictional/simulated-data disclosure. Local access uses the existing
+prefilled key; authentication remains enforced. Producer suggestions and approved
+viewer insights use clearer labels, with a note that candidates are not necessarily
+match highlights. No participant usefulness findings are inferred from this change.
+
+Verification: production build, TypeScript, component formatting and diff checks
+passed. Across the focused browser runs, 21 distinct checks passed, including the
+new entrance desktop/mobile and authenticated producer-to-viewer navigation check,
+existing approval/retraction, focus/history/context, and mixed-event Spanish/evidence/
+recap flows. Initial failures were obsolete wording selectors and an ambiguous
+viewer-link locator; corrected checks passed. The updated local frontend is running
+at http://127.0.0.1:3100; no Azure deployment was performed.
+
+## 24 October 2026 — live-match explanation desk
+
+The owner selected a live-match explanation product demonstrated through synthetic
+replay, then authorized implementation after the original Chrome research plan
+was reread and reconciled with `live-match-plan.md`. Earlier entrance and replay
+clarity edits in this worktree are retained. This is a local pilot candidate;
+there is no new Azure app deployment, public publication or completed human study.
+
+| Ticket | Status | Implementation / evidence |
+|---|---|---|
+| LM01 | Implemented | Persisted live/guided and explicit AI/template selection. Live starts at 1×; server rejects pause, seek and speed edits. End/stop/new simulation preserve history; reset ends the old simulation. |
+| LM02 | Implemented locally | Lifespan background processor runs without browser reads. Source cutoffs, outcome restart interruption, bounded retries and exact-revision publication reused. Shared lock scope narrowed; live measurements cache ordinary frames within one source second, bypassed by explicit events, late samples and corrections. Single execution host; distributed operation not certified. |
+| LM03 | Implemented; real model exercised | Existing Director/Reviewer reused for pass, pressure, shot, goal, recovery and possession. Launcher verifies deployment, prices and CLI credentials. Per-live-session conservative reservation: 96 calls; producer edits are separately bounded. AI/template/fallback and rejection/abstention remain visible; no silent AI-to-template session switch. |
+| LM04 | Implemented | Incident-grouped priority queue, live approval countdown, explicit review/delivery history, existing suppress/retract/manual overlay selection. Source correction withdraws dependent content even if AI configuration is lost. Source state never requires explanation approval. |
+| LM05 | Implemented | Simulated-live labels, uninterrupted viewing, approved evidence/history, role/team focus, casual/analyst and English/Spanish views, end-of-segment recap. No automatic replay loop or full-time claim. |
+| LM06 | Executed; proposed timing gate unmet | Full backend 427 passed; 19 later targeted live/fault/fixture checks passed, including two scheduling tests added after that full run. Original 168/168 cases and 594/594 checkpoints unchanged; original mixed references 21/21. Across broad/recheck/explicit-model runs, 32 distinct local browser cases passed; two hosted-only cases remain unrun. Build/types/format/diff checks pass. Continuous results and failures are in `evals/live-match/verification.md`. |
+| LM07 | Materials ready; humans/release pending | `docs/live-match-demo.md` contains startup, live walkthrough, short reviewer tasks and reproduction. README identifies actual execution modes. Participant ratings, usefulness, final video and deployment remain pending. |
+
+Continuous actual-model evidence: earlier v1 single stream found all 25 handwritten
+references, with 22 ready at least 15 seconds before live expiry. Valid v1 two-stream
+runs found 25/25 each, but only 15/25 and 21/25 met that proposed timing target.
+An intervening host inactivity/clock discontinuity invalidated an earlier dual run;
+its failures remain retained. Later v2 scheduling waits for the existing recovery
+follow-up and briefly defers unconfirmed goal-shot explanations; it does not delay
+source score, alter metrics, extend expiry or change expected logical IDs.
+
+The v2 dual run produced 24/25 and 25/25 referenced candidates, all six required
+families, correct final score/cancellation, and complete reported usage. One
+control insight was declined by AI and remains a missed opportunity. Both streams
+had 21/25 (84%) ready with at least 15 seconds for review: **the proposed 95% gate
+is not passed**. Three possession summaries necessarily have less than 15 seconds
+after processing within their original 15-second eligibility interval; queue/model
+latency or abstention also affected other opportunities. Calls were 49 and 51
+(versus 66 and 72 in the earlier dual samples), with retail estimates $0.008209 and
+$0.008351. These are correlated scenes/single trials, not independent football
+validation, a benchmark distribution, invoiced cost or proof of agent superiority.
+
+The normal local entrance is http://127.0.0.1:3100, with an AI-configured API on
+8100 and isolated local storage. Real AI producer approval → Spanish viewer →
+recap passed there. Later mobile/template live checks passed as well. The existing
+Azure hosted build is separate. Remaining work includes independent football and
+Spanish review, producer/viewer usefulness, comprehensive durability-to-browser
+measurement, further timing policy/operating-envelope evidence and separately
+authorized deployment. Do not present this candidate as certified production live
+readiness or convert automated results into human findings.

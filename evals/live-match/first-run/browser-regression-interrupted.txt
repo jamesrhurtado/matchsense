@@ -1,0 +1,243 @@
+
+Running 34 tests using 1 worker
+
+(node:10732) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:10732) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/audience-focus.spec.ts:9:76 › explanation and evidence action are immediately discoverable at 1366 (324ms)
+  ✓   2 tests/audience-focus.spec.ts:9:76 › explanation and evidence action are immediately discoverable at 390 (219ms)
+  ✓   3 tests/audience-focus.spec.ts:12:5 › verified player and team focus filters history, disambiguates names, and preserves overlay (301ms)
+  ✓   4 tests/audience-focus.spec.ts:20:5 › evidence stages and focused trails use delivered source frames without filling gaps (277ms)
+  ✓   5 tests/audience-focus.spec.ts:27:5 › retracting the only relevant story removes focused content and derived recap (2.2s)
+  ✓   6 tests/audience-focus.spec.ts:37:5 › return to live leaves shared overlay untouched and clears historical focus (228ms)
+  ✓   7 tests/audience-focus.spec.ts:53:5 › comparison preserves signed values, highlights current pass, and explains a rounded tie (229ms)
+  -   8 tests/cloud-multiple.spec.ts:5:5 › hosted Azure multi-moment archive, selected evidence, Spanish recap and mobile view
+  -   9 tests/cloud.spec.ts:6:5 › hosted Azure workflow: evidence, real model review, approval and companion
+  ✓  10 tests/context.spec.ts:4:5 › five approved moments keep the mobile explanation and pitch together; contrast links to three exact passes (1.1s)
+  ✓  11 tests/entrance.spec.ts:2:5 › first-time entrance explains roles, hides setup and opens a playable producer session (423ms)
+  ✓  12 tests/entrance.spec.ts:31:5 › producer navigation explains duration and stops at the end without replacing the session (3.1s)
+  ✓  13 tests/flow.spec.ts:3:5 › producer evidence → wording review → approval → viewer preferences → retraction (5.7s)
+  ✓  14 tests/flow.spec.ts:28:5 › viewer stream delivers resync and state updates through the web proxy (356ms)
+  ✓  15 tests/flow.spec.ts:40:5 › web proxy preserves authorization errors and rejects oversized bodies (5ms)
+  ✓  16 tests/flow.spec.ts:48:5 › pending AI review remains visible while replay continues (200ms)
+  ✓  17 tests/guided-demo.spec.ts:3:5 › moving demo pauses for review, reveals evidence in view, and can play continuously (19.8s)
+  ✓  18 tests/live.spec.ts:3:5 › live simulation is explicit, keeps playing during review and reconnects to the shared clock (18.7s)
+  -  19 tests/live.spec.ts:34:5 › real AI live simulation: actual attempts, exact approval and bilingual viewer
+  ✓  20 tests/match-coverage.spec.ts:27:5 › mixed producer and mobile viewer: every family, evidence, Spanish, focus, recap, archived navigation (35.1s)
+  ✓  21 tests/match-coverage.spec.ts:94:5 › source score correction revokes affected narrative; reapproval, duplicate grouping, reconnect and recap refresh (16.1s)
+  ✓  22 tests/match-coverage.spec.ts:116:5 › expired producer candidates have an explicit archive-only approval control (4.4s)
+  ✓  23 tests/match-coverage.spec.ts:131:5 › linked approved shot remains selectable for a shooter different from the scorer (666ms)
+  ✘  24 tests/match-stage.spec.ts:4:7 › broadcast stage keeps confirmed state distinct from approved text at 390 (9.9m)
+(node:11186) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11186) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  25 tests/match-stage.spec.ts:4:7 › broadcast stage keeps confirmed state distinct from approved text at 1440 (3.0s)
+  ✓  26 tests/match-stage.spec.ts:43:5 › keeper kits use recorded roles and the linked ball preserves the observed coordinate (175ms)
+  ✘  27 tests/match-stage.spec.ts:83:38 › carrier badge keeps two-digit numbers clear and releases to the observed ball at 390 (15.4m)
+(node:11213) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11213) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  28 tests/match-stage.spec.ts:83:38 › carrier badge keeps two-digit numbers clear and releases to the observed ball at 1440 (16.8m)
+(node:11253) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11253) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  29 tests/multiple-moments.spec.ts:3:5 › three-minute replay preserves independent approvals, archived evidence, and recap (10.4m)
+(node:11281) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11281) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  30 tests/pressure-flagship.spec.ts:3:5 › pressure flagship: review, source evidence, approval, audience lenses, Spanish focus, mobile and recap (7.2m)
+(node:11333) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11333) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  31 tests/story-selection.spec.ts:15:5 › producer selects independent moments and navigates a longer replay (5.1s)
+(node:11366) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11366) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  32 tests/story-selection.spec.ts:25:5 › viewer selects approved history without changing the shared overlay (444ms)
+  ✓  33 tests/story-selection.spec.ts:29:5 › fixture options come from the public catalogue (432ms)
+  ✓  34 tests/story-selection.spec.ts:34:5 › a delayed earlier selection cannot replace the latest selected moment (1.5s)
+
+
+  1) tests/match-stage.spec.ts:4:7 › broadcast stage keeps confirmed state distinct from approved text at 390
+
+    [31mTest timeout of 45000ms exceeded.[39m
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('region', { name: 'Match centre' }).getByText('0 : 0', { exact: true })
+    Expected: visible
+    Timeout: 6000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 6000ms[22m
+    [2m  - waiting for getByRole('region', { name: 'Match centre' }).getByText('0 : 0', { exact: true })[22m
+
+
+      33 |     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
+      34 |     corrected = true;
+    > 35 |     await expect(stage.getByText('0 : 0', { exact: true })).toBeVisible({ timeout: 6000 });
+         |                                                             ^
+      36 |     await page.getByLabel('Language', { exact: true }).selectOption('es');
+      37 |     await expect(page.getByRole('region', { name: 'Centro del partido' }).getByText('Marcador confirmado por la fuente', { exact: true })).toBeVisible();
+      38 |     await expect(page.getByText('Sin control de equipo observado')).toBeVisible();
+        at /Users/james/dev/why now/apps/web/tests/match-stage.spec.ts:35:61
+
+    Error Context: test-results/match-stage-broadcast-stag-79a46-t-from-approved-text-at-390/error-context.md
+
+  2) tests/match-stage.spec.ts:83:38 › carrier badge keeps two-digit numbers clear and releases to the observed ball at 390
+
+    [31mTest timeout of 45000ms exceeded.[39m
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveCount[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  getByRole('region', { name: 'Match centre' }).getByTestId('broadcast-ball')
+    Expected: [32m0[39m
+    Received: [31m1[39m
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toHaveCount" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('region', { name: 'Match centre' }).getByTestId('broadcast-ball')[22m
+    [2m    6 × locator resolved to 1 element[22m
+    [2m      - unexpected value "1"[22m
+
+
+      109 |   await expect(stage.getByTestId('controlled-player-indicator')).toHaveCount(0);
+      110 |   ball=null;
+    > 111 |   await expect(marker).toHaveCount(0);
+          |                        ^
+      112 |   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
+      113 | });
+      114 |
+        at /Users/james/dev/why now/apps/web/tests/match-stage.spec.ts:111:24
+
+    Error Context: test-results/match-stage-carrier-badge--613cd-to-the-observed-ball-at-390/error-context.md
+
+  3) tests/match-stage.spec.ts:83:38 › carrier badge keeps two-digit numbers clear and releases to the observed ball at 1440
+
+    [31mTest timeout of 45000ms exceeded.[39m
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveCount[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  getByRole('region', { name: 'Match centre' }).getByTestId('broadcast-ball')
+    Expected: [32m0[39m
+    Received: [31m1[39m
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toHaveCount" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('region', { name: 'Match centre' }).getByTestId('broadcast-ball')[22m
+    [2m    5 × locator resolved to 1 element[22m
+    [2m      - unexpected value "1"[22m
+
+
+      109 |   await expect(stage.getByTestId('controlled-player-indicator')).toHaveCount(0);
+      110 |   ball=null;
+    > 111 |   await expect(marker).toHaveCount(0);
+          |                        ^
+      112 |   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
+      113 | });
+      114 |
+        at /Users/james/dev/why now/apps/web/tests/match-stage.spec.ts:111:24
+
+    Error Context: test-results/match-stage-carrier-badge--5c56f-o-the-observed-ball-at-1440/error-context.md
+
+  4) tests/multiple-moments.spec.ts:3:5 › three-minute replay preserves independent approvals, archived evidence, and recap
+
+    [31mTest timeout of 45000ms exceeded.[39m
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('180-second segment')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('180-second segment')[22m
+
+
+       6 |  expect(created.ok()).toBeTruthy();const sid=(await created.json()).session_id;const path=`/api/replay-sessions/${sid}`;
+       7 |  await page.addInitScript(()=>sessionStorage.setItem('why-now-token','local-demo-producer'));
+    >  8 |  await page.goto(`/studio/${sid}`);await expect(page.getByText('180-second segment')).toBeVisible();
+         |                                                                                       ^
+       9 |  if(!(await page.getByLabel('Skip to time (seconds)').isVisible()))await page.getByText('Replay navigation',{exact:true}).click();await page.getByLabel('Skip to time (seconds)').fill('20');await page.getByRole('button',{name:'Skip forward',exact:true}).click();
+      10 |  const queue=page.getByRole('group',{name:'Suggested insights'});
+      11 |  await expect(queue.getByRole('button')).toHaveCount(1);await page.getByRole('button',{name:'Approve',exact:true}).click();
+        at /Users/james/dev/why now/apps/web/tests/multiple-moments.spec.ts:8:87
+
+    Error Context: test-results/multiple-moments-three-min-20938-archived-evidence-and-recap/error-context.md
+
+  5) tests/pressure-flagship.spec.ts:3:5 › pressure flagship: review, source evidence, approval, audience lenses, Spanish focus, mobile and recap
+
+    [31mTest timeout of 120000ms exceeded.[39m
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('pressure-evidence').last()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByTestId('pressure-evidence').last()[22m
+
+
+      28 |  await expect(viewer.getByRole('region',{name:'Why this moment'})).toContainText('2.0 to 0.4');
+      29 |  await viewer.getByRole('button',{name:'Check the evidence',exact:true}).click();
+    > 30 |  await expect(viewer.getByTestId('pressure-evidence').last()).toBeVisible();
+         |                                                               ^
+      31 |  await viewer.getByText('Compare audience views',{exact:true}).last().click();
+      32 |  await expect(viewer.getByRole('heading',{name:'For the casual viewer'}).last()).toBeVisible();
+      33 |  await expect(viewer.getByRole('heading',{name:'For the analyst'}).last()).toBeVisible();
+        at /Users/james/dev/why now/apps/web/tests/pressure-flagship.spec.ts:30:63
+
+    Error Context: test-results/pressure-flagship-pressure-bc0e6-nish-focus-mobile-and-recap/error-context.md
+
+  6) tests/story-selection.spec.ts:15:5 › producer selects independent moments and navigates a longer replay
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('180-second segment')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('180-second segment')[22m
+
+
+      15 | test('producer selects independent moments and navigates a longer replay',async({page})=>{
+      16 |  await mockQueue(page);await page.goto('/studio/queue-demo');
+    > 17 |  await expect(page.getByText('180-second segment')).toBeVisible();await expect(page.getByRole('button',{name:'Play',exact:true})).toBeEnabled();
+         |                                                     ^
+      18 |  const queue=page.getByRole('group',{name:'Suggested insights'});await expect(queue.getByRole('button')).toHaveCount(2);
+      19 |  await expect(page.getByText('Explanation for Second supported sequence')).toBeVisible();await queue.getByRole('button',{name:/Insight 1/}).click();
+      20 |  await expect(queue.getByRole('button',{name:/Insight 1/})).toHaveAttribute('aria-pressed','true');await expect(page.getByText('Explanation for First supported sequence')).toBeVisible();
+        at /Users/james/dev/why now/apps/web/tests/story-selection.spec.ts:17:53
+
+    Error Context: test-results/story-selection-producer-s-979f8-d-navigates-a-longer-replay/error-context.md
+
+  Slow test file: tests/multiple-moments.spec.ts (10.4m)
+  Slow test file: tests/pressure-flagship.spec.ts (7.2m)
+  Consider running tests from slow files in parallel. See: https://playwright.dev/docs/test-parallel
+  6 failed
+    tests/match-stage.spec.ts:4:7 › broadcast stage keeps confirmed state distinct from approved text at 390
+    tests/match-stage.spec.ts:83:38 › carrier badge keeps two-digit numbers clear and releases to the observed ball at 390
+    tests/match-stage.spec.ts:83:38 › carrier badge keeps two-digit numbers clear and releases to the observed ball at 1440
+    tests/multiple-moments.spec.ts:3:5 › three-minute replay preserves independent approvals, archived evidence, and recap
+    tests/pressure-flagship.spec.ts:3:5 › pressure flagship: review, source evidence, approval, audience lenses, Spanish focus, mobile and recap
+    tests/story-selection.spec.ts:15:5 › producer selects independent moments and navigates a longer replay
+  3 skipped
+  25 passed (1.0h)

@@ -1,0 +1,14 @@
+
+> why-now-web@0.1.0 test:e2e
+> playwright test live.spec.ts --grep keeps playing
+
+
+Running 1 test using 1 worker
+
+(node:13513) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13513) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/live.spec.ts:3:5 › live simulation is explicit, keeps playing during review and reconnects to the shared clock (18.0s)
+
+  1 passed (18.9s)

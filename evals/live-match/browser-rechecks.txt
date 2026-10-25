@@ -1,0 +1,20 @@
+
+Running 11 tests using 1 worker
+
+(node:11753) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11753) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/match-stage.spec.ts:4:7 › broadcast stage keeps confirmed state distinct from approved text at 390 (2.3s)
+  ✓   2 tests/match-stage.spec.ts:4:7 › broadcast stage keeps confirmed state distinct from approved text at 1440 (3.0s)
+  ✓   3 tests/match-stage.spec.ts:43:5 › keeper kits use recorded roles and the linked ball preserves the observed coordinate (116ms)
+  ✓   4 tests/match-stage.spec.ts:83:38 › carrier badge keeps two-digit numbers clear and releases to the observed ball at 390 (4.9s)
+  ✓   5 tests/match-stage.spec.ts:83:38 › carrier badge keeps two-digit numbers clear and releases to the observed ball at 1440 (5.0s)
+  ✓   6 tests/multiple-moments.spec.ts:3:5 › three-minute replay preserves independent approvals, archived evidence, and recap (1.6s)
+  ✓   7 tests/pressure-flagship.spec.ts:3:5 › pressure flagship: review, source evidence, approval, audience lenses, Spanish focus, mobile and recap (15.0s)
+  ✓   8 tests/story-selection.spec.ts:15:5 › producer selects independent moments and navigates a longer replay (355ms)
+  ✓   9 tests/story-selection.spec.ts:25:5 › viewer selects approved history without changing the shared overlay (236ms)
+  ✓  10 tests/story-selection.spec.ts:29:5 › fixture options come from the public catalogue (221ms)
+  ✓  11 tests/story-selection.spec.ts:34:5 › a delayed earlier selection cannot replace the latest selected moment (889ms)
+
+  11 passed (34.7s)

@@ -1,0 +1,478 @@
+[
+  {
+    "session_id": "053fb4e2-a958-4086-833b-c996fb62f5cb",
+    "operating_run_valid": true,
+    "expected": 25,
+    "found": 24,
+    "timely_ai_count": 21,
+    "original_gate_passed": false,
+    "missing": [
+      "story-recovery-change-1"
+    ],
+    "families": {
+      "pressure": {
+        "candidates": 4,
+        "evidence_eligibility_to_ready_replay_ms": {
+          "known": 4,
+          "median": 5611.5,
+          "min": 4360,
+          "max": 5994
+        },
+        "review_remaining_s": {
+          "known": 4,
+          "median": 24.3885,
+          "min": 24.006,
+          "max": 25.64
+        },
+        "worker_queue_wall_ms": {
+          "known": 4,
+          "median": 0.8845000000000001,
+          "min": 0.596,
+          "max": 756.795
+        },
+        "workflow_wall_ms": {
+          "known": 4,
+          "median": 3850.409,
+          "min": 2805.077,
+          "max": 4509.754
+        }
+      },
+      "pass": {
+        "candidates": 4,
+        "evidence_eligibility_to_ready_replay_ms": {
+          "known": 4,
+          "median": 7568.0,
+          "min": 6969,
+          "max": 8136
+        },
+        "review_remaining_s": {
+          "known": 4,
+          "median": 22.432000000000002,
+          "min": 21.864,
+          "max": 23.031
+        },
+        "worker_queue_wall_ms": {
+          "known": 4,
+          "median": 4.122,
+          "min": 3.522,
+          "max": 860.849
+        },
+        "workflow_wall_ms": {
+          "known": 4,
+          "median": 5782.905,
+          "min": 4799.859,
+          "max": 7445.312
+        }
+      },
+      "recovery": {
+        "candidates": 9,
+        "evidence_eligibility_to_ready_replay_ms": {
+          "known": 9,
+          "median": 7353,
+          "min": 4530,
+          "max": 10851
+        },
+        "review_remaining_s": {
+          "known": 9,
+          "median": 22.647,
+          "min": 19.149,
+          "max": 25.47
+        },
+        "worker_queue_wall_ms": {
+          "known": 9,
+          "median": 185.651,
+          "min": 0.617,
+          "max": 2089.543
+        },
+        "workflow_wall_ms": {
+          "known": 9,
+          "median": 4552.442,
+          "min": 2794.925,
+          "max": 5785.622
+        }
+      },
+      "shot": {
+        "candidates": 3,
+        "evidence_eligibility_to_ready_replay_ms": {
+          "known": 3,
+          "median": 9035,
+          "min": 8111,
+          "max": 13573
+        },
+        "review_remaining_s": {
+          "known": 3,
+          "median": 20.965,
+          "min": 16.427,
+          "max": 21.889
+        },
+        "worker_queue_wall_ms": {
+          "known": 3,
+          "median": 4095.355,
+          "min": 0.68,
+          "max": 4641.81
+        },
+        "workflow_wall_ms": {
+          "known": 3,
+          "median": 4306.408,
+          "min": 3661.324,
+          "max": 5562.783
+        }
+      },
+      "possession": {
+        "candidates": 3,
+        "evidence_eligibility_to_ready_replay_ms": {
+          "known": 3,
+          "median": 6048,
+          "min": 5254,
+          "max": 7801
+        },
+        "review_remaining_s": {
+          "known": 3,
+          "median": 8.952,
+          "min": 7.199,
+          "max": 9.746
+        },
+        "worker_queue_wall_ms": {
+          "known": 3,
+          "median": 0.615,
+          "min": 0.446,
+          "max": 0.633
+        },
+        "workflow_wall_ms": {
+          "known": 3,
+          "median": 3730.457,
+          "min": 3418.527,
+          "max": 5423.92
+        }
+      },
+      "goal": {
+        "candidates": 1,
+        "evidence_eligibility_to_ready_replay_ms": {
+          "known": 1,
+          "median": 8111,
+          "min": 8111,
+          "max": 8111
+        },
+        "review_remaining_s": {
+          "known": 1,
+          "median": 21.889,
+          "min": 21.889,
+          "max": 21.889
+        },
+        "worker_queue_wall_ms": {
+          "known": 1,
+          "median": 0.886,
+          "min": 0.886,
+          "max": 0.886
+        },
+        "workflow_wall_ms": {
+          "known": 1,
+          "median": 5851.088,
+          "min": 5851.088,
+          "max": 5851.088
+        }
+      }
+    },
+    "shortest_review_windows": [
+      {
+        "story_id": "story-possession-180000",
+        "evidence_eligibility_to_ready_replay_ms": 7801,
+        "review_remaining_s": 7.199,
+        "worker_queue_wall_ms": 0.446,
+        "workflow_wall_ms": 5423.92
+      },
+      {
+        "story_id": "story-possession-120000",
+        "evidence_eligibility_to_ready_replay_ms": 6048,
+        "review_remaining_s": 8.952,
+        "worker_queue_wall_ms": 0.633,
+        "workflow_wall_ms": 3730.457
+      },
+      {
+        "story_id": "story-possession-60000",
+        "evidence_eligibility_to_ready_replay_ms": 5254,
+        "review_remaining_s": 9.746,
+        "worker_queue_wall_ms": 0.615,
+        "workflow_wall_ms": 3418.527
+      },
+      {
+        "story_id": "story-shot-attempt-3",
+        "evidence_eligibility_to_ready_replay_ms": 13573,
+        "review_remaining_s": 16.427,
+        "worker_queue_wall_ms": 4641.81,
+        "workflow_wall_ms": 4306.408
+      },
+      {
+        "story_id": "story-recovery-demo-control-180000",
+        "evidence_eligibility_to_ready_replay_ms": 10851,
+        "review_remaining_s": 19.149,
+        "worker_queue_wall_ms": 2089.543,
+        "workflow_wall_ms": 5785.622
+      },
+      {
+        "story_id": "story-shot-attempt-1",
+        "evidence_eligibility_to_ready_replay_ms": 9035,
+        "review_remaining_s": 20.965,
+        "worker_queue_wall_ms": 4095.355,
+        "workflow_wall_ms": 3661.324
+      },
+      {
+        "story_id": "story-pass-1",
+        "evidence_eligibility_to_ready_replay_ms": 8136,
+        "review_remaining_s": 21.864,
+        "worker_queue_wall_ms": 3.583,
+        "workflow_wall_ms": 7445.312
+      },
+      {
+        "story_id": "story-recovery-restart-1",
+        "evidence_eligibility_to_ready_replay_ms": 8121,
+        "review_remaining_s": 21.879,
+        "worker_queue_wall_ms": 917.787,
+        "workflow_wall_ms": 4552.442
+      }
+    ],
+    "unmeasured": [
+      "durable source receipt to evidence readiness",
+      "human review duration",
+      "complete source-to-browser latency"
+    ],
+    "note": "Reanalysis of retained runs, not a new trial. No clock-domain subtraction or gate/expiry changes."
+  },
+  {
+    "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+    "operating_run_valid": true,
+    "expected": 25,
+    "found": 25,
+    "timely_ai_count": 21,
+    "original_gate_passed": false,
+    "missing": [],
+    "families": {
+      "pressure": {
+        "candidates": 4,
+        "evidence_eligibility_to_ready_replay_ms": {
+          "known": 4,
+          "median": 9218.0,
+          "min": 8448,
+          "max": 10291
+        },
+        "review_remaining_s": {
+          "known": 4,
+          "median": 20.782,
+          "min": 19.709,
+          "max": 21.552
+        },
+        "worker_queue_wall_ms": {
+          "known": 4,
+          "median": 3646.7795,
+          "min": 2066.943,
+          "max": 4465.367
+        },
+        "workflow_wall_ms": {
+          "known": 4,
+          "median": 3645.2455,
+          "min": 3245.023,
+          "max": 4227.21
+        }
+      },
+      "pass": {
+        "candidates": 4,
+        "evidence_eligibility_to_ready_replay_ms": {
+          "known": 4,
+          "median": 13262.0,
+          "min": 12314,
+          "max": 13940
+        },
+        "review_remaining_s": {
+          "known": 4,
+          "median": 16.738,
+          "min": 16.06,
+          "max": 17.686
+        },
+        "worker_queue_wall_ms": {
+          "known": 4,
+          "median": 5604.3975,
+          "min": 4166.584,
+          "max": 7394.731
+        },
+        "workflow_wall_ms": {
+          "known": 4,
+          "median": 5977.1044999999995,
+          "min": 5135.468,
+          "max": 6650.688
+        }
+      },
+      "recovery": {
+        "candidates": 10,
+        "evidence_eligibility_to_ready_replay_ms": {
+          "known": 10,
+          "median": 8127.5,
+          "min": 3472,
+          "max": 14893
+        },
+        "review_remaining_s": {
+          "known": 10,
+          "median": 21.8725,
+          "min": 15.107,
+          "max": 26.528
+        },
+        "worker_queue_wall_ms": {
+          "known": 10,
+          "median": 659.23,
+          "min": 0.607,
+          "max": 4099.833
+        },
+        "workflow_wall_ms": {
+          "known": 10,
+          "median": 4527.7595,
+          "min": 2889.255,
+          "max": 6909.443
+        }
+      },
+      "shot": {
+        "candidates": 3,
+        "evidence_eligibility_to_ready_replay_ms": {
+          "known": 3,
+          "median": 12527,
+          "min": 9542,
+          "max": 17110
+        },
+        "review_remaining_s": {
+          "known": 3,
+          "median": 17.473,
+          "min": 12.89,
+          "max": 20.458
+        },
+        "worker_queue_wall_ms": {
+          "known": 3,
+          "median": 5056.084,
+          "min": 4484.144,
+          "max": 5279.021
+        },
+        "workflow_wall_ms": {
+          "known": 3,
+          "median": 4569.275,
+          "min": 2618.826,
+          "max": 4828.805
+        }
+      },
+      "possession": {
+        "candidates": 3,
+        "evidence_eligibility_to_ready_replay_ms": {
+          "known": 3,
+          "median": 6416,
+          "min": 5428,
+          "max": 12178
+        },
+        "review_remaining_s": {
+          "known": 3,
+          "median": 8.584,
+          "min": 2.822,
+          "max": 9.572
+        },
+        "worker_queue_wall_ms": {
+          "known": 3,
+          "median": 0.563,
+          "min": 0.51,
+          "max": 0.693
+        },
+        "workflow_wall_ms": {
+          "known": 3,
+          "median": 3308.856,
+          "min": 2917.563,
+          "max": 7473.744
+        }
+      },
+      "goal": {
+        "candidates": 1,
+        "evidence_eligibility_to_ready_replay_ms": {
+          "known": 1,
+          "median": 12527,
+          "min": 12527,
+          "max": 12527
+        },
+        "review_remaining_s": {
+          "known": 1,
+          "median": 17.473,
+          "min": 17.473,
+          "max": 17.473
+        },
+        "worker_queue_wall_ms": {
+          "known": 1,
+          "median": 4769.457,
+          "min": 4769.457,
+          "max": 4769.457
+        },
+        "workflow_wall_ms": {
+          "known": 1,
+          "median": 5160.932,
+          "min": 5160.932,
+          "max": 5160.932
+        }
+      }
+    },
+    "shortest_review_windows": [
+      {
+        "story_id": "story-possession-180000",
+        "evidence_eligibility_to_ready_replay_ms": 12178,
+        "review_remaining_s": 2.822,
+        "worker_queue_wall_ms": 0.51,
+        "workflow_wall_ms": 7473.744
+      },
+      {
+        "story_id": "story-possession-120000",
+        "evidence_eligibility_to_ready_replay_ms": 6416,
+        "review_remaining_s": 8.584,
+        "worker_queue_wall_ms": 0.563,
+        "workflow_wall_ms": 3308.856
+      },
+      {
+        "story_id": "story-possession-60000",
+        "evidence_eligibility_to_ready_replay_ms": 5428,
+        "review_remaining_s": 9.572,
+        "worker_queue_wall_ms": 0.693,
+        "workflow_wall_ms": 2917.563
+      },
+      {
+        "story_id": "story-shot-attempt-3",
+        "evidence_eligibility_to_ready_replay_ms": 17110,
+        "review_remaining_s": 12.89,
+        "worker_queue_wall_ms": 4484.144,
+        "workflow_wall_ms": 4828.805
+      },
+      {
+        "story_id": "story-recovery-demo-control-180000",
+        "evidence_eligibility_to_ready_replay_ms": 14893,
+        "review_remaining_s": 15.107,
+        "worker_queue_wall_ms": 4086.771,
+        "workflow_wall_ms": 6909.443
+      },
+      {
+        "story_id": "story-pass-2",
+        "evidence_eligibility_to_ready_replay_ms": 13940,
+        "review_remaining_s": 16.06,
+        "worker_queue_wall_ms": 6100.907,
+        "workflow_wall_ms": 6382.308
+      },
+      {
+        "story_id": "story-pass-1",
+        "evidence_eligibility_to_ready_replay_ms": 13499,
+        "review_remaining_s": 16.501,
+        "worker_queue_wall_ms": 7394.731,
+        "workflow_wall_ms": 5135.468
+      },
+      {
+        "story_id": "story-pass-3",
+        "evidence_eligibility_to_ready_replay_ms": 13025,
+        "review_remaining_s": 16.975,
+        "worker_queue_wall_ms": 4166.584,
+        "workflow_wall_ms": 6650.688
+      }
+    ],
+    "unmeasured": [
+      "durable source receipt to evidence readiness",
+      "human review duration",
+      "complete source-to-browser latency"
+    ],
+    "note": "Reanalysis of retained runs, not a new trial. No clock-domain subtraction or gate/expiry changes."
+  }
+]

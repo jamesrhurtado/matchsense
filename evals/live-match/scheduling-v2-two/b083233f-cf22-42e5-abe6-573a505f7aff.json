@@ -1,0 +1,5193 @@
+{
+  "clock_discontinuities": [],
+  "operating_run_valid": true,
+  "retail_estimate_usd": 0.00835125,
+  "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+  "match_id": "match-0c0a000000000008",
+  "elapsed_s": 242.973,
+  "speed": 1,
+  "seeks": 0,
+  "pauses": 0,
+  "automatic_approvals": 0,
+  "no_api_reads_during_playback": true,
+  "expected_count": 25,
+  "missing": [],
+  "timely_ai_count": 21,
+  "timely_ai_fraction": 0.84,
+  "gate_passed": false,
+  "families": [
+    "goal",
+    "pass",
+    "possession",
+    "pressure",
+    "recovery",
+    "shot"
+  ],
+  "first_candidates": {
+    "story-pressure-pass-1": {
+      "family": "pressure",
+      "eligible_ms": 16200,
+      "expires_ms": 46200,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "revision": 1,
+      "package_hash": "c5088d5df1dae3f29d7d3251c2e27218053843bb80f2e64d7f75f0de36b1e4f4",
+      "ready_replay_ms": 25437,
+      "review_remaining_s": 20.763
+    },
+    "story-pass-1": {
+      "family": "pass",
+      "eligible_ms": 16200,
+      "expires_ms": 46200,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "revision": 1,
+      "package_hash": "edcc0c10ff7f9355800415d10c5af0397678c7b2454354fb716eaa42f7988f43",
+      "ready_replay_ms": 29699,
+      "review_remaining_s": 16.501
+    },
+    "story-recovery-loose-1": {
+      "family": "recovery",
+      "eligible_ms": 33000,
+      "expires_ms": 63000,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "revision": 1,
+      "package_hash": "6c3fbf10d44133edc56e788ce2675c30f81c2eca85fd9ac59ca0a3bf3a1879b2",
+      "ready_replay_ms": 36472,
+      "review_remaining_s": 26.528
+    },
+    "story-pressure-pass-2": {
+      "family": "pressure",
+      "eligible_ms": 41200,
+      "expires_ms": 71200,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "revision": 1,
+      "package_hash": "77f56a512fa226caf74cc19ea05b0946f5e967687356c46c8b60e47f3335ca07",
+      "ready_replay_ms": 51491,
+      "review_remaining_s": 19.709
+    },
+    "story-pass-2": {
+      "family": "pass",
+      "eligible_ms": 41200,
+      "expires_ms": 71200,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "revision": 1,
+      "package_hash": "a31f8c9ac2c9ee722a0ee7b83d5bb12d47fbb896f94c9e33c003300225e701b9",
+      "ready_replay_ms": 55140,
+      "review_remaining_s": 16.06
+    },
+    "story-shot-attempt-1": {
+      "family": "shot",
+      "eligible_ms": 48000,
+      "expires_ms": 78000,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "revision": 1,
+      "package_hash": "6283f73df49ef1c6af2e5e043506d582f747e5628c5922e47ba60047006e2f94",
+      "ready_replay_ms": 57542,
+      "review_remaining_s": 20.458
+    },
+    "story-recovery-change-1": {
+      "family": "recovery",
+      "eligible_ms": 53000,
+      "expires_ms": 83000,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "revision": 1,
+      "package_hash": "665d04a6157f35f196eb8f5dcd81509cfceada28a43c43a7bdd6d9fdb0676344",
+      "ready_replay_ms": 59963,
+      "review_remaining_s": 23.037
+    },
+    "story-possession-60000": {
+      "family": "possession",
+      "eligible_ms": 60000,
+      "expires_ms": 75000,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "revision": 1,
+      "package_hash": "44109daa97583216ffe57db872a5c8b03fb174f91b460088487a8ab31a564e11",
+      "ready_replay_ms": 65428,
+      "review_remaining_s": 9.572
+    },
+    "story-recovery-flagship-recovery-60000": {
+      "family": "recovery",
+      "eligible_ms": 63000,
+      "expires_ms": 93000,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "revision": 1,
+      "package_hash": "94ea2f984a8f5093cb41fda4f7aaf86737facb4ef54e3b82a0d2bb0275fba6ba",
+      "ready_replay_ms": 68065,
+      "review_remaining_s": 24.935
+    },
+    "story-pressure-pass-3": {
+      "family": "pressure",
+      "eligible_ms": 66200,
+      "expires_ms": 96200,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "revision": 1,
+      "package_hash": "ade93d8b6f2e08048f525219ec323f304d7323b805fb3155bbeaf33088435818",
+      "ready_replay_ms": 74648,
+      "review_remaining_s": 21.552
+    },
+    "story-pass-3": {
+      "family": "pass",
+      "eligible_ms": 66200,
+      "expires_ms": 96200,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "revision": 1,
+      "package_hash": "75ad14a6e3160808b43b48c0c4a76296611243c62f2b13b207c3e1c00271a979",
+      "ready_replay_ms": 79225,
+      "review_remaining_s": 16.975
+    },
+    "story-recovery-change-2": {
+      "family": "recovery",
+      "eligible_ms": 73000,
+      "expires_ms": 103000,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "revision": 1,
+      "package_hash": "e54b0d1b4b604805f15601bb113533461bb6083e2d24e375a2cbc9df5ef132bd",
+      "ready_replay_ms": 82472,
+      "review_remaining_s": 20.528
+    },
+    "story-recovery-demo-control-74000": {
+      "family": "recovery",
+      "eligible_ms": 77000,
+      "expires_ms": 107000,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "revision": 1,
+      "package_hash": "63cadb915714f26a6ce405ed10d3adec9105a4a9209ea20483a7efbaa3d8c086",
+      "ready_replay_ms": 86738,
+      "review_remaining_s": 20.262
+    },
+    "story-pressure-pass-4": {
+      "family": "pressure",
+      "eligible_ms": 91300,
+      "expires_ms": 121300,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "revision": 1,
+      "package_hash": "0f7ba7108ccab98a53a595a232c553d368cc277de6f30c8ba5960cd29792a7dc",
+      "ready_replay_ms": 100499,
+      "review_remaining_s": 20.801
+    },
+    "story-pass-4": {
+      "family": "pass",
+      "eligible_ms": 91300,
+      "expires_ms": 121300,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "revision": 1,
+      "package_hash": "54439c23dedbb18625f487f0a05c0e58c8e8d0ddfc346de6d421a1699c3f9313",
+      "ready_replay_ms": 103614,
+      "review_remaining_s": 17.686
+    },
+    "story-goal-goal-1": {
+      "family": "goal",
+      "eligible_ms": 104000,
+      "expires_ms": 134000,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "revision": 1,
+      "package_hash": "f1bad0688dfec6bc772266e65db04f57254aedbed92a6b98bd824bbffc9df64f",
+      "ready_replay_ms": 116527,
+      "review_remaining_s": 17.473
+    },
+    "story-shot-attempt-2": {
+      "family": "shot",
+      "eligible_ms": 104000,
+      "expires_ms": 134000,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "revision": 1,
+      "package_hash": "d2d23c3b410ec0ace12719911ab19a9a1edcd76d671973acdd7e3a6a7ed8366e",
+      "ready_replay_ms": 116527,
+      "review_remaining_s": 17.473
+    },
+    "story-recovery-restart-1": {
+      "family": "recovery",
+      "eligible_ms": 113000,
+      "expires_ms": 143000,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "revision": 1,
+      "package_hash": "ca5cc730127eea7e6f5d332836736154fc537c24b1e598ea7eaf3dfcd58b48e5",
+      "ready_replay_ms": 121846,
+      "review_remaining_s": 21.154
+    },
+    "story-possession-120000": {
+      "family": "possession",
+      "eligible_ms": 120000,
+      "expires_ms": 135000,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "revision": 1,
+      "package_hash": "fa5514522bea0454e1773aa163b6734ebe69730c126d7b1a439dc49a619e66e9",
+      "ready_replay_ms": 126416,
+      "review_remaining_s": 8.584
+    },
+    "story-recovery-recovery-3": {
+      "family": "recovery",
+      "eligible_ms": 148000,
+      "expires_ms": 178000,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "revision": 1,
+      "package_hash": "8c0550dc117d9c44c2c85e9f77858e32b73146ea75e4855cb8ce687d53378b37",
+      "ready_replay_ms": 155918,
+      "review_remaining_s": 22.082
+    },
+    "story-recovery-demo-control-154000": {
+      "family": "recovery",
+      "eligible_ms": 157000,
+      "expires_ms": 187000,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "revision": 1,
+      "package_hash": "95adb8541a8797bd4a35754422a1c23d60aa67fb6c5ff29f55e74583432eb502",
+      "ready_replay_ms": 165216,
+      "review_remaining_s": 21.784
+    },
+    "story-possession-180000": {
+      "family": "possession",
+      "eligible_ms": 180000,
+      "expires_ms": 195000,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "revision": 1,
+      "package_hash": "2b8548eb53e60f7c4ed1bb3c75dd28fc45af9050e4c03bcb7baa59d44e01d8b8",
+      "ready_replay_ms": 192178,
+      "review_remaining_s": 2.822
+    },
+    "story-recovery-demo-control-180000": {
+      "family": "recovery",
+      "eligible_ms": 183000,
+      "expires_ms": 213000,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "revision": 1,
+      "package_hash": "0a0654acf98a4b47ae54902918fe86433570fb30f7bc10f2181294384bb294e4",
+      "ready_replay_ms": 197893,
+      "review_remaining_s": 15.107
+    },
+    "story-shot-attempt-3": {
+      "family": "shot",
+      "eligible_ms": 186000,
+      "expires_ms": 216000,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "revision": 1,
+      "package_hash": "90830badbb78714f17f4e39cf15b7f3abc9f4a989eabc694cf1b103a5d7837c1",
+      "ready_replay_ms": 203110,
+      "review_remaining_s": 12.89
+    },
+    "story-recovery-demo-control-204000": {
+      "family": "recovery",
+      "eligible_ms": 207000,
+      "expires_ms": 237000,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "revision": 1,
+      "package_hash": "dbfc16dae1fb983f5b1a2453897e8b1714e09ede6bd6d780a90bb8611643bbf4",
+      "ready_replay_ms": 215039,
+      "review_remaining_s": 21.961
+    }
+  },
+  "usage": {
+    "calls": 51,
+    "input_tokens": 42999,
+    "output_tokens": 3169,
+    "total_tokens": 46168
+  },
+  "usage_complete": true,
+  "outcomes": [
+    {
+      "run_id": "c819f094-9286-41b5-aba1-b5042c33a400",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "story_id": "story-pressure-pass-1",
+      "evidence_revision": "ee85de79bb31026a",
+      "revision": 1,
+      "cutoff_ms": 16883,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "state": "produced",
+      "scheduled_at": "2026-10-25T00:25:22.768366+00:00",
+      "started_at": "2026-10-25T00:25:27.233733+00:00",
+      "finished_at": "2026-10-25T00:25:31.127369+00:00",
+      "timing": {
+        "job_enqueued": "2026-10-25T00:25:22.768366+00:00",
+        "job_started": "2026-10-25T00:25:27.233733+00:00",
+        "candidate_ready": "2026-10-25T00:25:31.127369+00:00"
+      },
+      "model_usage": {
+        "calls": 2,
+        "input_tokens": 1268,
+        "output_tokens": 63,
+        "total_tokens": 1331,
+        "usage_complete": true
+      },
+      "trace": [
+        {
+          "role": "Story Director",
+          "action": "model_decision",
+          "status": "propose",
+          "call": 1,
+          "elapsed_ms": 2827.896,
+          "input_tokens": 633,
+          "output_tokens": 30,
+          "total_tokens": 663,
+          "usage_reported": true,
+          "duration_ms": 2824.021,
+          "output": {
+            "action": "propose",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence supports the claim regarding the pass and the conditions surrounding it."
+          }
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "model_decision",
+          "status": "supported",
+          "call": 2,
+          "elapsed_ms": 3882.087,
+          "input_tokens": 635,
+          "output_tokens": 33,
+          "total_tokens": 668,
+          "usage_reported": true,
+          "duration_ms": 1039.593,
+          "output": {
+            "action": "supported",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence supports the claim with specific metrics on pressure, pass distance, and possession retention."
+          }
+        }
+      ],
+      "reason": null,
+      "package_ref": {
+        "id": "story-pressure-pass-1",
+        "revision": 1,
+        "package_hash": "c5088d5df1dae3f29d7d3251c2e27218053843bb80f2e64d7f75f0de36b1e4f4"
+      }
+    },
+    {
+      "run_id": "810f2071-e1e4-416d-b6b7-191851b23146",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "story_id": "story-pass-1",
+      "evidence_revision": "a0d445f2a4827ad5",
+      "revision": 1,
+      "cutoff_ms": 16883,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "state": "produced",
+      "scheduled_at": "2026-10-25T00:25:22.785078+00:00",
+      "started_at": "2026-10-25T00:25:30.179809+00:00",
+      "finished_at": "2026-10-25T00:25:35.315277+00:00",
+      "timing": {
+        "job_enqueued": "2026-10-25T00:25:22.785078+00:00",
+        "job_started": "2026-10-25T00:25:30.179809+00:00",
+        "candidate_ready": "2026-10-25T00:25:35.315277+00:00"
+      },
+      "model_usage": {
+        "calls": 2,
+        "input_tokens": 4958,
+        "output_tokens": 355,
+        "total_tokens": 5313,
+        "usage_complete": true
+      },
+      "trace": [
+        {
+          "role": "Story Director",
+          "action": "model_decision",
+          "status": "propose",
+          "call": 1,
+          "elapsed_ms": 2010.092,
+          "input_tokens": 2082,
+          "output_tokens": 88,
+          "total_tokens": 2170,
+          "usage_reported": true,
+          "duration_ms": 2005.434,
+          "output": {
+            "action": "propose",
+            "plan": {
+              "angle": "progression",
+              "simple_claim_ids": [
+                "c-retain",
+                "c-forward"
+              ],
+              "detail_claim_ids": [
+                "c-forward",
+                "c-bypass",
+                "c-retain",
+                "c-progress",
+                "c-zone",
+                "c-pressure"
+              ]
+            },
+            "reason": "The forward pass displacement of 18 meters indicates significant progression in the play, while team retention of possession for 3 seconds shows control during this movement.",
+            "evidence_requests": []
+          }
+        },
+        {
+          "role": "Story Director",
+          "action": "select_claims",
+          "status": "proposed",
+          "plan": {
+            "angle": "progression",
+            "simple_claim_ids": [
+              "c-forward",
+              "c-retain"
+            ],
+            "detail_claim_ids": [
+              "c-forward",
+              "c-bypass",
+              "c-retain",
+              "c-progress",
+              "c-zone",
+              "c-pressure"
+            ]
+          },
+          "reason": "The forward pass displacement of 18 meters indicates significant progression in the play, while team retention of possession for 3 seconds shows control during this movement.",
+          "elapsed_ms": 2098.481
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "model_decision",
+          "status": "supported",
+          "call": 2,
+          "elapsed_ms": 5101.926,
+          "input_tokens": 2876,
+          "output_tokens": 267,
+          "total_tokens": 3143,
+          "usage_reported": true,
+          "duration_ms": 3002.967,
+          "output": {
+            "action": "supported",
+            "verdicts": [
+              {
+                "claim_id": "c-pressure",
+                "verdict": "supported",
+                "reason": "The claim is supported as there were 2 opponents nearby within the specified time window."
+              },
+              {
+                "claim_id": "c-bypass",
+                "verdict": "supported",
+                "reason": "The claim is supported as Harbor City passed beyond 3 opponents in the attacking direction, despite the qualification regarding defensive line."
+              },
+              {
+                "claim_id": "c-retain",
+                "verdict": "supported",
+                "reason": "The claim is supported as Harbor City retained possession for 3 seconds after reception."
+              },
+              {
+                "claim_id": "c-progress",
+                "verdict": "supported",
+                "reason": "The claim is supported as the team progressed 7.0 m after reception."
+              },
+              {
+                "claim_id": "c-forward",
+                "verdict": "supported",
+                "reason": "The claim is supported as the pass moved the ball 18.0 m forward."
+              },
+              {
+                "claim_id": "c-zone",
+                "verdict": "supported",
+                "reason": "The claim is supported as Beni Vidal received the ball in the middle third."
+              },
+              {
+                "claim_id": "c-reception",
+                "verdict": "supported",
+                "reason": "The claim is supported as Beni Vidal's reception is confirmed."
+              },
+              {
+                "claim_id": "c-release",
+                "verdict": "supported",
+                "reason": "The claim is supported as Dani Luna's pass release is recorded."
+              }
+            ],
+            "reason": "",
+            "evidence_requests": []
+          }
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "claim_verdicts",
+          "status": "supported",
+          "verdicts": [
+            {
+              "claim_id": "c-pressure",
+              "verdict": "supported",
+              "reason": "The claim is supported as there were 2 opponents nearby within the specified time window."
+            },
+            {
+              "claim_id": "c-bypass",
+              "verdict": "supported",
+              "reason": "The claim is supported as Harbor City passed beyond 3 opponents in the attacking direction, despite the qualification regarding defensive line."
+            },
+            {
+              "claim_id": "c-retain",
+              "verdict": "supported",
+              "reason": "The claim is supported as Harbor City retained possession for 3 seconds after reception."
+            },
+            {
+              "claim_id": "c-progress",
+              "verdict": "supported",
+              "reason": "The claim is supported as the team progressed 7.0 m after reception."
+            },
+            {
+              "claim_id": "c-forward",
+              "verdict": "supported",
+              "reason": "The claim is supported as the pass moved the ball 18.0 m forward."
+            },
+            {
+              "claim_id": "c-zone",
+              "verdict": "supported",
+              "reason": "The claim is supported as Beni Vidal received the ball in the middle third."
+            },
+            {
+              "claim_id": "c-reception",
+              "verdict": "supported",
+              "reason": "The claim is supported as Beni Vidal's reception is confirmed."
+            },
+            {
+              "claim_id": "c-release",
+              "verdict": "supported",
+              "reason": "The claim is supported as Dani Luna's pass release is recorded."
+            }
+          ],
+          "reason": "",
+          "elapsed_ms": 5105.66
+        }
+      ],
+      "reason": null,
+      "package_ref": {
+        "id": "story-pass-1",
+        "revision": 1,
+        "package_hash": "edcc0c10ff7f9355800415d10c5af0397678c7b2454354fb716eaa42f7988f43"
+      },
+      "evidence_observed_at": "2026-10-25T00:25:22.785078+00:00",
+      "implementation": {
+        "schema_version": "4.0.0",
+        "prompt_version": "director-critic-v4.1",
+        "renderer_version": "editorial-claims-v4",
+        "metric_version": "pressure-escape-v1",
+        "tool_version": "evidence-tools-v3",
+        "context_version": "recent-completed-three-v1",
+        "model_deployment": "story-model",
+        "model_version": "2024-07-18",
+        "release_commit": "unknown"
+      }
+    },
+    {
+      "run_id": "64840745-b3da-4c20-b015-b884662c5bb9",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "story_id": "story-recovery-loose-1",
+      "evidence_revision": "2ab49941ea767d99",
+      "revision": 1,
+      "cutoff_ms": 33020,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "state": "produced",
+      "scheduled_at": "2026-10-25T00:25:38.925831+00:00",
+      "started_at": "2026-10-25T00:25:38.926455+00:00",
+      "finished_at": "2026-10-25T00:25:41.815710+00:00",
+      "timing": {
+        "job_enqueued": "2026-10-25T00:25:38.925831+00:00",
+        "job_started": "2026-10-25T00:25:38.926455+00:00",
+        "candidate_ready": "2026-10-25T00:25:41.815710+00:00"
+      },
+      "model_usage": {
+        "calls": 2,
+        "input_tokens": 840,
+        "output_tokens": 73,
+        "total_tokens": 913,
+        "usage_complete": true
+      },
+      "trace": [
+        {
+          "role": "Story Director",
+          "action": "model_decision",
+          "status": "propose",
+          "call": 1,
+          "elapsed_ms": 1815.222,
+          "input_tokens": 419,
+          "output_tokens": 37,
+          "total_tokens": 456,
+          "usage_reported": true,
+          "duration_ms": 1811.949,
+          "output": {
+            "action": "propose",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence supports the claim of a recovery event by the player blue-08, with sustained possession observed."
+          }
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "model_decision",
+          "status": "supported",
+          "call": 2,
+          "elapsed_ms": 2847.622,
+          "input_tokens": 421,
+          "output_tokens": 36,
+          "total_tokens": 457,
+          "usage_reported": true,
+          "duration_ms": 973.152,
+          "output": {
+            "action": "supported",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence confirms that Ari Vela recovered the loose ball and retained possession for the next 3 seconds."
+          }
+        }
+      ],
+      "reason": null,
+      "package_ref": {
+        "id": "story-recovery-loose-1",
+        "revision": 1,
+        "package_hash": "6c3fbf10d44133edc56e788ce2675c30f81c2eca85fd9ac59ca0a3bf3a1879b2"
+      }
+    },
+    {
+      "run_id": "f074ff08-1b09-4ea7-9df3-4d627eaee4fa",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "story_id": "story-pressure-pass-2",
+      "evidence_revision": "b89b015672afdc8e",
+      "revision": 1,
+      "cutoff_ms": 42083,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "state": "produced",
+      "scheduled_at": "2026-10-25T00:25:48.011020+00:00",
+      "started_at": "2026-10-25T00:25:52.416816+00:00",
+      "finished_at": "2026-10-25T00:25:56.644026+00:00",
+      "timing": {
+        "job_enqueued": "2026-10-25T00:25:48.011020+00:00",
+        "job_started": "2026-10-25T00:25:52.416816+00:00",
+        "candidate_ready": "2026-10-25T00:25:56.644026+00:00"
+      },
+      "model_usage": {
+        "calls": 2,
+        "input_tokens": 1306,
+        "output_tokens": 87,
+        "total_tokens": 1393,
+        "usage_complete": true
+      },
+      "trace": [
+        {
+          "role": "Story Director",
+          "action": "model_decision",
+          "status": "propose",
+          "call": 1,
+          "elapsed_ms": 3137.52,
+          "input_tokens": 652,
+          "output_tokens": 48,
+          "total_tokens": 700,
+          "usage_reported": true,
+          "duration_ms": 3132.742,
+          "output": {
+            "action": "propose",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence supports the claim of a football sequence involving a pass from blue-11 to blue-09, with specific metrics on pressure, distance, and possession."
+          }
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "model_decision",
+          "status": "supported",
+          "call": 2,
+          "elapsed_ms": 4203.479,
+          "input_tokens": 654,
+          "output_tokens": 39,
+          "total_tokens": 693,
+          "usage_reported": true,
+          "duration_ms": 1044.156,
+          "output": {
+            "action": "supported",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence supports the claim with details on the pass, including the radius, opponent pressure, drop, and forward movement."
+          }
+        }
+      ],
+      "reason": null,
+      "package_ref": {
+        "id": "story-pressure-pass-2",
+        "revision": 1,
+        "package_hash": "77f56a512fa226caf74cc19ea05b0946f5e967687356c46c8b60e47f3335ca07"
+      }
+    },
+    {
+      "run_id": "0a14597d-98c6-487b-88d8-c87d3e1581fd",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "story_id": "story-pass-2",
+      "evidence_revision": "94eced94ae74442a",
+      "revision": 1,
+      "cutoff_ms": 42083,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "state": "produced",
+      "scheduled_at": "2026-10-25T00:25:48.012410+00:00",
+      "started_at": "2026-10-25T00:25:54.113317+00:00",
+      "finished_at": "2026-10-25T00:26:00.495625+00:00",
+      "timing": {
+        "job_enqueued": "2026-10-25T00:25:48.012410+00:00",
+        "job_started": "2026-10-25T00:25:54.113317+00:00",
+        "candidate_ready": "2026-10-25T00:26:00.495625+00:00"
+      },
+      "model_usage": {
+        "calls": 2,
+        "input_tokens": 5325,
+        "output_tokens": 404,
+        "total_tokens": 5729,
+        "usage_complete": true
+      },
+      "trace": [
+        {
+          "role": "Story Director",
+          "action": "model_decision",
+          "status": "propose",
+          "call": 1,
+          "elapsed_ms": 3576.447,
+          "input_tokens": 2304,
+          "output_tokens": 147,
+          "total_tokens": 2451,
+          "usage_reported": true,
+          "duration_ms": 3571.49,
+          "output": {
+            "action": "propose",
+            "plan": {
+              "angle": "progression",
+              "simple_claim_ids": [
+                "c-retain",
+                "c-forward"
+              ],
+              "detail_claim_ids": [
+                "c-bypass",
+                "c-retain",
+                "c-progress",
+                "c-pressure"
+              ]
+            },
+            "reason": "The sequence shows a clear forward ball movement of 25 meters after the pass release by Dani Luna, indicating effective progression. Additionally, the team retained possession for 3 seconds, which highlights their control during this phase.",
+            "evidence_requests": [
+              {
+                "tool": "compute_pass_metrics",
+                "start_ms": 37000,
+                "end_ms": 38200,
+                "player_id": "blue-11"
+              },
+              {
+                "tool": "get_recent_pass_context",
+                "start_ms": 37000,
+                "end_ms": 38200,
+                "player_id": "blue-09"
+              }
+            ]
+          }
+        },
+        {
+          "role": "Story Director",
+          "action": "select_claims",
+          "status": "proposed",
+          "plan": {
+            "angle": "progression",
+            "simple_claim_ids": [
+              "c-forward",
+              "c-retain"
+            ],
+            "detail_claim_ids": [
+              "c-forward",
+              "c-bypass",
+              "c-retain",
+              "c-progress",
+              "c-pressure"
+            ]
+          },
+          "reason": "The sequence shows a clear forward ball movement of 25 meters after the pass release by Dani Luna, indicating effective progression. Additionally, the team retained possession for 3 seconds, which highlights their control during this phase.",
+          "elapsed_ms": 3596.711
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "model_decision",
+          "status": "supported",
+          "call": 2,
+          "elapsed_ms": 6358.066,
+          "input_tokens": 3021,
+          "output_tokens": 257,
+          "total_tokens": 3278,
+          "usage_reported": true,
+          "duration_ms": 2760.253,
+          "output": {
+            "action": "supported",
+            "verdicts": [
+              {
+                "claim_id": "c-pressure",
+                "verdict": "supported",
+                "reason": "The evidence confirms that up to 2 opponents were within 6 m of the passer over a 2-second window."
+              },
+              {
+                "claim_id": "c-bypass",
+                "verdict": "supported",
+                "reason": "The evidence indicates that Harbor City passed beyond 5 opponents in the attacking direction, despite the qualification regarding defensive line."
+              },
+              {
+                "claim_id": "c-retain",
+                "verdict": "supported",
+                "reason": "The evidence shows that Harbor City retained possession for 3 seconds after reception."
+              },
+              {
+                "claim_id": "c-progress",
+                "verdict": "supported",
+                "reason": "The evidence confirms a forward ball movement of 7.0 m after reception."
+              },
+              {
+                "claim_id": "c-forward",
+                "verdict": "supported",
+                "reason": "The evidence indicates a forward pass displacement of 25.0 m."
+              },
+              {
+                "claim_id": "c-zone",
+                "verdict": "supported",
+                "reason": "The evidence confirms the reception zone as 'middle'."
+              },
+              {
+                "claim_id": "c-reception",
+                "verdict": "supported",
+                "reason": "The evidence confirms the reception by Beni Vidal."
+              },
+              {
+                "claim_id": "c-release",
+                "verdict": "supported",
+                "reason": "The evidence confirms the recorded pass release by Dani Luna."
+              }
+            ],
+            "reason": "",
+            "evidence_requests": []
+          }
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "claim_verdicts",
+          "status": "supported",
+          "verdicts": [
+            {
+              "claim_id": "c-pressure",
+              "verdict": "supported",
+              "reason": "The evidence confirms that up to 2 opponents were within 6 m of the passer over a 2-second window."
+            },
+            {
+              "claim_id": "c-bypass",
+              "verdict": "supported",
+              "reason": "The evidence indicates that Harbor City passed beyond 5 opponents in the attacking direction, despite the qualification regarding defensive line."
+            },
+            {
+              "claim_id": "c-retain",
+              "verdict": "supported",
+              "reason": "The evidence shows that Harbor City retained possession for 3 seconds after reception."
+            },
+            {
+              "claim_id": "c-progress",
+              "verdict": "supported",
+              "reason": "The evidence confirms a forward ball movement of 7.0 m after reception."
+            },
+            {
+              "claim_id": "c-forward",
+              "verdict": "supported",
+              "reason": "The evidence indicates a forward pass displacement of 25.0 m."
+            },
+            {
+              "claim_id": "c-zone",
+              "verdict": "supported",
+              "reason": "The evidence confirms the reception zone as 'middle'."
+            },
+            {
+              "claim_id": "c-reception",
+              "verdict": "supported",
+              "reason": "The evidence confirms the reception by Beni Vidal."
+            },
+            {
+              "claim_id": "c-release",
+              "verdict": "supported",
+              "reason": "The evidence confirms the recorded pass release by Dani Luna."
+            }
+          ],
+          "reason": "",
+          "elapsed_ms": 6359.5
+        }
+      ],
+      "reason": null,
+      "package_ref": {
+        "id": "story-pass-2",
+        "revision": 1,
+        "package_hash": "a31f8c9ac2c9ee722a0ee7b83d5bb12d47fbb896f94c9e33c003300225e701b9"
+      },
+      "evidence_observed_at": "2026-10-25T00:25:48.012410+00:00",
+      "implementation": {
+        "schema_version": "4.0.0",
+        "prompt_version": "director-critic-v4.1",
+        "renderer_version": "editorial-claims-v4",
+        "metric_version": "pressure-escape-v1",
+        "tool_version": "evidence-tools-v3",
+        "context_version": "recent-completed-three-v1",
+        "model_deployment": "story-model",
+        "model_version": "2024-07-18",
+        "release_commit": "unknown"
+      }
+    },
+    {
+      "run_id": "3c419fcc-7698-44e9-942c-1fa5a96a62be",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "story_id": "story-shot-attempt-1",
+      "evidence_revision": "11da9a8864856ed8",
+      "revision": 1,
+      "cutoff_ms": 49081,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "state": "produced",
+      "scheduled_at": "2026-10-25T00:25:55.029128+00:00",
+      "started_at": "2026-10-25T00:26:00.308149+00:00",
+      "finished_at": "2026-10-25T00:26:02.926975+00:00",
+      "timing": {
+        "job_enqueued": "2026-10-25T00:25:55.029128+00:00",
+        "job_started": "2026-10-25T00:26:00.308149+00:00",
+        "candidate_ready": "2026-10-25T00:26:02.926975+00:00"
+      },
+      "model_usage": {
+        "calls": 2,
+        "input_tokens": 802,
+        "output_tokens": 69,
+        "total_tokens": 871,
+        "usage_complete": true
+      },
+      "trace": [
+        {
+          "role": "Story Director",
+          "action": "model_decision",
+          "status": "propose",
+          "call": 1,
+          "elapsed_ms": 1492.249,
+          "input_tokens": 400,
+          "output_tokens": 34,
+          "total_tokens": 434,
+          "usage_reported": true,
+          "duration_ms": 1488.613,
+          "output": {
+            "action": "propose",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence supports the claim that a shot was taken by blue-09 and was saved."
+          }
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "model_decision",
+          "status": "supported",
+          "call": 2,
+          "elapsed_ms": 2525.172,
+          "input_tokens": 402,
+          "output_tokens": 35,
+          "total_tokens": 437,
+          "usage_reported": true,
+          "duration_ms": 949.149,
+          "output": {
+            "action": "supported",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence confirms that Beni Vidal's shot was saved, as reported in both English and Spanish."
+          }
+        }
+      ],
+      "reason": null,
+      "package_ref": {
+        "id": "story-shot-attempt-1",
+        "revision": 1,
+        "package_hash": "6283f73df49ef1c6af2e5e043506d582f747e5628c5922e47ba60047006e2f94"
+      }
+    },
+    {
+      "run_id": "647c03dc-7e77-4977-9f00-66c11d2b3018",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "story_id": "story-recovery-change-1",
+      "evidence_revision": "7ffd6fc820a8ab5a",
+      "revision": 1,
+      "cutoff_ms": 55140,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "state": "produced",
+      "scheduled_at": "2026-10-25T00:26:01.092370+00:00",
+      "started_at": "2026-10-25T00:26:02.295445+00:00",
+      "finished_at": "2026-10-25T00:26:05.822992+00:00",
+      "timing": {
+        "job_enqueued": "2026-10-25T00:26:01.092370+00:00",
+        "job_started": "2026-10-25T00:26:02.295445+00:00",
+        "candidate_ready": "2026-10-25T00:26:05.822992+00:00"
+      },
+      "model_usage": {
+        "calls": 2,
+        "input_tokens": 824,
+        "output_tokens": 75,
+        "total_tokens": 899,
+        "usage_complete": true
+      },
+      "trace": [
+        {
+          "role": "Story Director",
+          "action": "model_decision",
+          "status": "propose",
+          "call": 1,
+          "elapsed_ms": 2383.747,
+          "input_tokens": 411,
+          "output_tokens": 36,
+          "total_tokens": 447,
+          "usage_reported": true,
+          "duration_ms": 2380.044,
+          "output": {
+            "action": "propose",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence supports a control change from one team to another, with possession retained for a specified duration."
+          }
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "model_decision",
+          "status": "supported",
+          "call": 2,
+          "elapsed_ms": 3455.596,
+          "input_tokens": 413,
+          "output_tokens": 39,
+          "total_tokens": 452,
+          "usage_reported": true,
+          "duration_ms": 1000.334,
+          "output": {
+            "action": "supported",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The text confirms a control change from Harbor City to Alder Rovers, with possession retained for the next 3 seconds."
+          }
+        }
+      ],
+      "reason": null,
+      "package_ref": {
+        "id": "story-recovery-change-1",
+        "revision": 1,
+        "package_hash": "665d04a6157f35f196eb8f5dcd81509cfceada28a43c43a7bdd6d9fdb0676344"
+      }
+    },
+    {
+      "run_id": "56e09bdb-fc03-49c8-8b95-076256a68243",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "story_id": "story-possession-60000",
+      "evidence_revision": "d63ce141146b70cb",
+      "revision": 1,
+      "cutoff_ms": 61357,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "state": "produced",
+      "scheduled_at": "2026-10-25T00:26:07.371913+00:00",
+      "started_at": "2026-10-25T00:26:07.372606+00:00",
+      "finished_at": "2026-10-25T00:26:10.290169+00:00",
+      "timing": {
+        "job_enqueued": "2026-10-25T00:26:07.371913+00:00",
+        "job_started": "2026-10-25T00:26:07.372606+00:00",
+        "candidate_ready": "2026-10-25T00:26:10.290169+00:00"
+      },
+      "model_usage": {
+        "calls": 2,
+        "input_tokens": 1126,
+        "output_tokens": 70,
+        "total_tokens": 1196,
+        "usage_complete": true
+      },
+      "trace": [
+        {
+          "role": "Story Director",
+          "action": "model_decision",
+          "status": "propose",
+          "call": 1,
+          "elapsed_ms": 1767.774,
+          "input_tokens": 562,
+          "output_tokens": 38,
+          "total_tokens": 600,
+          "usage_reported": true,
+          "duration_ms": 1762.772,
+          "output": {
+            "action": "propose",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence indicates possession statistics for the specified time window, showing a clear distribution of possession between the two teams."
+          }
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "model_decision",
+          "status": "supported",
+          "call": 2,
+          "elapsed_ms": 2774.652,
+          "input_tokens": 564,
+          "output_tokens": 32,
+          "total_tokens": 596,
+          "usage_reported": true,
+          "duration_ms": 861.407,
+          "output": {
+            "action": "supported",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence supports the claim regarding possession percentages and related statistics for the specified time window."
+          }
+        }
+      ],
+      "reason": null,
+      "package_ref": {
+        "id": "story-possession-60000",
+        "revision": 1,
+        "package_hash": "44109daa97583216ffe57db872a5c8b03fb174f91b460088487a8ab31a564e11"
+      }
+    },
+    {
+      "run_id": "9e4d8e92-e76b-40bf-8715-4a075f30d7e6",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "story_id": "story-recovery-flagship-recovery-60000",
+      "evidence_revision": "66bf9448ecb06121",
+      "revision": 1,
+      "cutoff_ms": 64109,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "state": "produced",
+      "scheduled_at": "2026-10-25T00:26:10.106464+00:00",
+      "started_at": "2026-10-25T00:26:10.505510+00:00",
+      "finished_at": "2026-10-25T00:26:13.433995+00:00",
+      "timing": {
+        "job_enqueued": "2026-10-25T00:26:10.106464+00:00",
+        "job_started": "2026-10-25T00:26:10.505510+00:00",
+        "candidate_ready": "2026-10-25T00:26:13.433995+00:00"
+      },
+      "model_usage": {
+        "calls": 2,
+        "input_tokens": 818,
+        "output_tokens": 73,
+        "total_tokens": 891,
+        "usage_complete": true
+      },
+      "trace": [
+        {
+          "role": "Story Director",
+          "action": "model_decision",
+          "status": "propose",
+          "call": 1,
+          "elapsed_ms": 1457.414,
+          "input_tokens": 408,
+          "output_tokens": 37,
+          "total_tokens": 445,
+          "usage_reported": true,
+          "duration_ms": 1453.232,
+          "output": {
+            "action": "propose",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence supports that Dani Luna recovered the ball and the team retained possession for the next 3 seconds."
+          }
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "model_decision",
+          "status": "supported",
+          "call": 2,
+          "elapsed_ms": 2801.645,
+          "input_tokens": 410,
+          "output_tokens": 36,
+          "total_tokens": 446,
+          "usage_reported": true,
+          "duration_ms": 1199.396,
+          "output": {
+            "action": "supported",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence supports that Dani Luna recovered the ball and the team retained possession for the next 3 seconds."
+          }
+        }
+      ],
+      "reason": null,
+      "package_ref": {
+        "id": "story-recovery-flagship-recovery-60000",
+        "revision": 1,
+        "package_hash": "94ea2f984a8f5093cb41fda4f7aaf86737facb4ef54e3b82a0d2bb0275fba6ba"
+      }
+    },
+    {
+      "run_id": "31edee7e-01c2-4bf2-8377-68209b21783b",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "story_id": "story-pressure-pass-3",
+      "evidence_revision": "077442e678cb239e",
+      "revision": 1,
+      "cutoff_ms": 68065,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "state": "produced",
+      "scheduled_at": "2026-10-25T00:26:14.071223+00:00",
+      "started_at": "2026-10-25T00:26:16.138166+00:00",
+      "finished_at": "2026-10-25T00:26:19.383189+00:00",
+      "timing": {
+        "job_enqueued": "2026-10-25T00:26:14.071223+00:00",
+        "job_started": "2026-10-25T00:26:16.138166+00:00",
+        "candidate_ready": "2026-10-25T00:26:19.383189+00:00"
+      },
+      "model_usage": {
+        "calls": 2,
+        "input_tokens": 1342,
+        "output_tokens": 74,
+        "total_tokens": 1416,
+        "usage_complete": true
+      },
+      "trace": [
+        {
+          "role": "Story Director",
+          "action": "model_decision",
+          "status": "propose",
+          "call": 1,
+          "elapsed_ms": 1695.692,
+          "input_tokens": 670,
+          "output_tokens": 33,
+          "total_tokens": 703,
+          "usage_reported": true,
+          "duration_ms": 1692.046,
+          "output": {
+            "action": "propose",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence supports the claim regarding the pressure and metrics associated with the pass and reception."
+          }
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "model_decision",
+          "status": "supported",
+          "call": 2,
+          "elapsed_ms": 3224.729,
+          "input_tokens": 672,
+          "output_tokens": 41,
+          "total_tokens": 713,
+          "usage_reported": true,
+          "duration_ms": 1502.125,
+          "output": {
+            "action": "supported",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence confirms the details of the sequence, including the radius, time-weighted means of opponents, drop, and forward movement."
+          }
+        }
+      ],
+      "reason": null,
+      "package_ref": {
+        "id": "story-pressure-pass-3",
+        "revision": 1,
+        "package_hash": "ade93d8b6f2e08048f525219ec323f304d7323b805fb3155bbeaf33088435818"
+      }
+    },
+    {
+      "run_id": "cd059574-82ba-40c8-aca0-760f8ac3110a",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "story_id": "story-pass-3",
+      "evidence_revision": "e4ce345aa3da9ab1",
+      "revision": 1,
+      "cutoff_ms": 68065,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "state": "produced",
+      "scheduled_at": "2026-10-25T00:26:14.075290+00:00",
+      "started_at": "2026-10-25T00:26:18.241874+00:00",
+      "finished_at": "2026-10-25T00:26:24.892562+00:00",
+      "timing": {
+        "job_enqueued": "2026-10-25T00:26:14.075290+00:00",
+        "job_started": "2026-10-25T00:26:18.241874+00:00",
+        "candidate_ready": "2026-10-25T00:26:24.892562+00:00"
+      },
+      "model_usage": {
+        "calls": 2,
+        "input_tokens": 5835,
+        "output_tokens": 435,
+        "total_tokens": 6270,
+        "usage_complete": true
+      },
+      "trace": [
+        {
+          "role": "Story Director",
+          "action": "model_decision",
+          "status": "propose",
+          "call": 1,
+          "elapsed_ms": 3227.62,
+          "input_tokens": 2559,
+          "output_tokens": 149,
+          "total_tokens": 2708,
+          "usage_reported": true,
+          "duration_ms": 3223.449,
+          "output": {
+            "action": "propose",
+            "plan": {
+              "angle": "progression",
+              "simple_claim_ids": [
+                "c-retain",
+                "c-forward"
+              ],
+              "detail_claim_ids": [
+                "c-bypass",
+                "c-retain",
+                "c-progress",
+                "c-pressure"
+              ]
+            },
+            "reason": "The sequence shows a clear forward ball movement after reception, indicating effective progression by Harbor City. The team retained possession for 3 seconds, allowing for a 7-meter advancement, which is significant in the context of the play.",
+            "evidence_requests": [
+              {
+                "tool": "compute_pass_metrics",
+                "start_ms": 62000,
+                "end_ms": 63200,
+                "player_id": "blue-11"
+              },
+              {
+                "tool": "get_recent_pass_context",
+                "start_ms": 63200,
+                "end_ms": 66200,
+                "player_id": "blue-09"
+              }
+            ]
+          }
+        },
+        {
+          "role": "Story Director",
+          "action": "select_claims",
+          "status": "proposed",
+          "plan": {
+            "angle": "progression",
+            "simple_claim_ids": [
+              "c-forward",
+              "c-retain"
+            ],
+            "detail_claim_ids": [
+              "c-forward",
+              "c-bypass",
+              "c-retain",
+              "c-progress",
+              "c-pressure"
+            ]
+          },
+          "reason": "The sequence shows a clear forward ball movement after reception, indicating effective progression by Harbor City. The team retained possession for 3 seconds, allowing for a 7-meter advancement, which is significant in the context of the play.",
+          "elapsed_ms": 3240.835
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "model_decision",
+          "status": "supported",
+          "call": 2,
+          "elapsed_ms": 6404.101,
+          "input_tokens": 3276,
+          "output_tokens": 286,
+          "total_tokens": 3562,
+          "usage_reported": true,
+          "duration_ms": 3162.553,
+          "output": {
+            "action": "supported",
+            "verdicts": [
+              {
+                "claim_id": "c-pressure",
+                "verdict": "supported",
+                "reason": "The claim that up to 2 opponents were within 6 m of the passer over 2 s is supported by the evidence."
+              },
+              {
+                "claim_id": "c-bypass",
+                "verdict": "supported",
+                "reason": "The claim that Harbor City passed beyond 4 opponents in the attacking direction is supported, with the qualification noted."
+              },
+              {
+                "claim_id": "c-retain",
+                "verdict": "supported",
+                "reason": "The claim that Harbor City retained possession for 3 s after reception is supported by the evidence."
+              },
+              {
+                "claim_id": "c-progress",
+                "verdict": "supported",
+                "reason": "The claim that the team progressed 7.0 m after reception is supported by the evidence."
+              },
+              {
+                "claim_id": "c-forward",
+                "verdict": "supported",
+                "reason": "The claim that the pass moved the ball 22.0 m forward is supported by the evidence."
+              },
+              {
+                "claim_id": "c-zone",
+                "verdict": "supported",
+                "reason": "The claim that the reception zone was 'middle' is supported by the evidence."
+              },
+              {
+                "claim_id": "c-reception",
+                "verdict": "supported",
+                "reason": "The claim that Beni Vidal received the pass is supported by the evidence."
+              },
+              {
+                "claim_id": "c-release",
+                "verdict": "supported",
+                "reason": "The claim that Dani Luna released the pass is supported by the evidence."
+              }
+            ],
+            "reason": "",
+            "evidence_requests": []
+          }
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "claim_verdicts",
+          "status": "supported",
+          "verdicts": [
+            {
+              "claim_id": "c-pressure",
+              "verdict": "supported",
+              "reason": "The claim that up to 2 opponents were within 6 m of the passer over 2 s is supported by the evidence."
+            },
+            {
+              "claim_id": "c-bypass",
+              "verdict": "supported",
+              "reason": "The claim that Harbor City passed beyond 4 opponents in the attacking direction is supported, with the qualification noted."
+            },
+            {
+              "claim_id": "c-retain",
+              "verdict": "supported",
+              "reason": "The claim that Harbor City retained possession for 3 s after reception is supported by the evidence."
+            },
+            {
+              "claim_id": "c-progress",
+              "verdict": "supported",
+              "reason": "The claim that the team progressed 7.0 m after reception is supported by the evidence."
+            },
+            {
+              "claim_id": "c-forward",
+              "verdict": "supported",
+              "reason": "The claim that the pass moved the ball 22.0 m forward is supported by the evidence."
+            },
+            {
+              "claim_id": "c-zone",
+              "verdict": "supported",
+              "reason": "The claim that the reception zone was 'middle' is supported by the evidence."
+            },
+            {
+              "claim_id": "c-reception",
+              "verdict": "supported",
+              "reason": "The claim that Beni Vidal received the pass is supported by the evidence."
+            },
+            {
+              "claim_id": "c-release",
+              "verdict": "supported",
+              "reason": "The claim that Dani Luna released the pass is supported by the evidence."
+            }
+          ],
+          "reason": "",
+          "elapsed_ms": 6418.351
+        }
+      ],
+      "reason": null,
+      "package_ref": {
+        "id": "story-pass-3",
+        "revision": 1,
+        "package_hash": "75ad14a6e3160808b43b48c0c4a76296611243c62f2b13b207c3e1c00271a979"
+      },
+      "evidence_observed_at": "2026-10-25T00:26:14.075290+00:00",
+      "implementation": {
+        "schema_version": "4.0.0",
+        "prompt_version": "director-critic-v4.1",
+        "renderer_version": "editorial-claims-v4",
+        "metric_version": "pressure-escape-v1",
+        "tool_version": "evidence-tools-v3",
+        "context_version": "recent-completed-three-v1",
+        "model_deployment": "story-model",
+        "model_version": "2024-07-18",
+        "release_commit": "unknown"
+      }
+    },
+    {
+      "run_id": "d9b37f80-db20-43a4-8f87-c0d137925164",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "story_id": "story-recovery-change-2",
+      "evidence_revision": "ec05be900fdd8206",
+      "revision": 1,
+      "cutoff_ms": 73339,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "state": "produced",
+      "scheduled_at": "2026-10-25T00:26:19.356131+00:00",
+      "started_at": "2026-10-25T00:26:23.455964+00:00",
+      "finished_at": "2026-10-25T00:26:27.918051+00:00",
+      "timing": {
+        "job_enqueued": "2026-10-25T00:26:19.356131+00:00",
+        "job_started": "2026-10-25T00:26:23.455964+00:00",
+        "candidate_ready": "2026-10-25T00:26:27.918051+00:00"
+      },
+      "model_usage": {
+        "calls": 2,
+        "input_tokens": 840,
+        "output_tokens": 77,
+        "total_tokens": 917,
+        "usage_complete": true
+      },
+      "trace": [
+        {
+          "role": "Story Director",
+          "action": "model_decision",
+          "status": "propose",
+          "call": 1,
+          "elapsed_ms": 3090.779,
+          "input_tokens": 419,
+          "output_tokens": 39,
+          "total_tokens": 458,
+          "usage_reported": true,
+          "duration_ms": 3087.106,
+          "output": {
+            "action": "propose",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence supports the claim of a recovery event by blue-08, with sustained possession following the loose ball acquisition."
+          }
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "model_decision",
+          "status": "supported",
+          "call": 2,
+          "elapsed_ms": 4266.427,
+          "input_tokens": 421,
+          "output_tokens": 38,
+          "total_tokens": 459,
+          "usage_reported": true,
+          "duration_ms": 1031.682,
+          "output": {
+            "action": "supported",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence supports the claim of a loose ball recovery by Ari Vela, with possession retained for 3 seconds."
+          }
+        }
+      ],
+      "reason": null,
+      "package_ref": {
+        "id": "story-recovery-change-2",
+        "revision": 1,
+        "package_hash": "e54b0d1b4b604805f15601bb113533461bb6083e2d24e375a2cbc9df5ef132bd"
+      }
+    },
+    {
+      "run_id": "ae285fbb-b581-4edd-8da3-9eefe390909e",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "story_id": "story-recovery-demo-control-74000",
+      "evidence_revision": "08887de7e6b22ef1",
+      "revision": 1,
+      "cutoff_ms": 79225,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "state": "produced",
+      "scheduled_at": "2026-10-25T00:26:25.306330+00:00",
+      "started_at": "2026-10-25T00:26:27.919702+00:00",
+      "finished_at": "2026-10-25T00:26:31.449789+00:00",
+      "timing": {
+        "job_enqueued": "2026-10-25T00:26:25.306330+00:00",
+        "job_started": "2026-10-25T00:26:27.919702+00:00",
+        "candidate_ready": "2026-10-25T00:26:31.449789+00:00"
+      },
+      "model_usage": {
+        "calls": 2,
+        "input_tokens": 822,
+        "output_tokens": 73,
+        "total_tokens": 895,
+        "usage_complete": true
+      },
+      "trace": [
+        {
+          "role": "Story Director",
+          "action": "model_decision",
+          "status": "propose",
+          "call": 1,
+          "elapsed_ms": 2204.173,
+          "input_tokens": 410,
+          "output_tokens": 37,
+          "total_tokens": 447,
+          "usage_reported": true,
+          "duration_ms": 2200.143,
+          "output": {
+            "action": "propose",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence supports that Harbor City had control at the restart and retained possession for the next 3 seconds."
+          }
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "model_decision",
+          "status": "supported",
+          "call": 2,
+          "elapsed_ms": 3339.076,
+          "input_tokens": 412,
+          "output_tokens": 36,
+          "total_tokens": 448,
+          "usage_reported": true,
+          "duration_ms": 945.503,
+          "output": {
+            "action": "supported",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The text confirms that Harbor City has control at the restart and retained possession for the next 3 seconds."
+          }
+        }
+      ],
+      "reason": null,
+      "package_ref": {
+        "id": "story-recovery-demo-control-74000",
+        "revision": 1,
+        "package_hash": "63cadb915714f26a6ce405ed10d3adec9105a4a9209ea20483a7efbaa3d8c086"
+      }
+    },
+    {
+      "run_id": "1d6e97bc-64ea-4ecd-8f38-06c547d26aed",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "story_id": "story-pressure-pass-4",
+      "evidence_revision": "a26aa060c1526a59",
+      "revision": 1,
+      "cutoff_ms": 92636,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "state": "produced",
+      "scheduled_at": "2026-10-25T00:26:38.791783+00:00",
+      "started_at": "2026-10-25T00:26:41.679546+00:00",
+      "finished_at": "2026-10-25T00:26:45.076401+00:00",
+      "timing": {
+        "job_enqueued": "2026-10-25T00:26:38.791783+00:00",
+        "job_started": "2026-10-25T00:26:41.679546+00:00",
+        "candidate_ready": "2026-10-25T00:26:45.076401+00:00"
+      },
+      "model_usage": {
+        "calls": 2,
+        "input_tokens": 1378,
+        "output_tokens": 90,
+        "total_tokens": 1468,
+        "usage_complete": true
+      },
+      "trace": [
+        {
+          "role": "Story Director",
+          "action": "model_decision",
+          "status": "propose",
+          "call": 1,
+          "elapsed_ms": 2096.342,
+          "input_tokens": 688,
+          "output_tokens": 42,
+          "total_tokens": 730,
+          "usage_reported": true,
+          "duration_ms": 2092.674,
+          "output": {
+            "action": "propose",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence supports the claim regarding the pressure and context of the pass, including the metrics of radius, opponent proximity, and possession."
+          }
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "model_decision",
+          "status": "supported",
+          "call": 2,
+          "elapsed_ms": 3354.567,
+          "input_tokens": 690,
+          "output_tokens": 48,
+          "total_tokens": 738,
+          "usage_reported": true,
+          "duration_ms": 1218.946,
+          "output": {
+            "action": "supported",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence supports the claim regarding the pass made by blue-11 to blue-09, including the metrics of radius, opponent proximity, drop, and forward movement."
+          }
+        }
+      ],
+      "reason": null,
+      "package_ref": {
+        "id": "story-pressure-pass-4",
+        "revision": 1,
+        "package_hash": "0f7ba7108ccab98a53a595a232c553d368cc277de6f30c8ba5960cd29792a7dc"
+      }
+    },
+    {
+      "run_id": "72bbdf36-9c0c-4d34-9e5b-2ce92acd4d46",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "story_id": "story-pass-4",
+      "evidence_revision": "f9e79c9fbbd9e35e",
+      "revision": 1,
+      "cutoff_ms": 92636,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "state": "produced",
+      "scheduled_at": "2026-10-25T00:26:38.793923+00:00",
+      "started_at": "2026-10-25T00:26:43.901811+00:00",
+      "finished_at": "2026-10-25T00:26:49.473712+00:00",
+      "timing": {
+        "job_enqueued": "2026-10-25T00:26:38.793923+00:00",
+        "job_started": "2026-10-25T00:26:43.901811+00:00",
+        "candidate_ready": "2026-10-25T00:26:49.473712+00:00"
+      },
+      "model_usage": {
+        "calls": 2,
+        "input_tokens": 6349,
+        "output_tokens": 398,
+        "total_tokens": 6747,
+        "usage_complete": true
+      },
+      "trace": [
+        {
+          "role": "Story Director",
+          "action": "model_decision",
+          "status": "propose",
+          "call": 1,
+          "elapsed_ms": 2680.843,
+          "input_tokens": 2816,
+          "output_tokens": 134,
+          "total_tokens": 2950,
+          "usage_reported": true,
+          "duration_ms": 2676.822,
+          "output": {
+            "action": "propose",
+            "plan": {
+              "angle": "progression",
+              "simple_claim_ids": [
+                "c-retain",
+                "c-forward"
+              ],
+              "detail_claim_ids": [
+                "c-bypass",
+                "c-retain",
+                "c-progress",
+                "c-pressure"
+              ]
+            },
+            "reason": "The sequence shows Harbor City maintaining possession for 3 seconds and advancing the ball 7 meters after a 30-meter forward pass, indicating effective progression.",
+            "evidence_requests": [
+              {
+                "tool": "compute_pass_metrics",
+                "start_ms": 87000,
+                "end_ms": 88300,
+                "player_id": "blue-11"
+              },
+              {
+                "tool": "get_recent_pass_context",
+                "start_ms": 88300,
+                "end_ms": 91300,
+                "player_id": "blue-09"
+              }
+            ]
+          }
+        },
+        {
+          "role": "Story Director",
+          "action": "select_claims",
+          "status": "proposed",
+          "plan": {
+            "angle": "progression",
+            "simple_claim_ids": [
+              "c-forward",
+              "c-retain"
+            ],
+            "detail_claim_ids": [
+              "c-forward",
+              "c-bypass",
+              "c-retain",
+              "c-progress",
+              "c-pressure"
+            ]
+          },
+          "reason": "The sequence shows Harbor City maintaining possession for 3 seconds and advancing the ball 7 meters after a 30-meter forward pass, indicating effective progression.",
+          "elapsed_ms": 2708.728
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "model_decision",
+          "status": "supported",
+          "call": 2,
+          "elapsed_ms": 5479.477,
+          "input_tokens": 3533,
+          "output_tokens": 264,
+          "total_tokens": 3797,
+          "usage_reported": true,
+          "duration_ms": 2769.944,
+          "output": {
+            "action": "supported",
+            "verdicts": [
+              {
+                "claim_id": "c-pressure",
+                "verdict": "supported",
+                "reason": "The evidence indicates that up to 2 opponents were within 6 m of the passer over a 2-second window."
+              },
+              {
+                "claim_id": "c-bypass",
+                "verdict": "supported",
+                "reason": "The evidence shows that Harbor City passed beyond 5 opponents in the attacking direction, although longitudinal positions do not prove a defensive line was broken."
+              },
+              {
+                "claim_id": "c-retain",
+                "verdict": "supported",
+                "reason": "The evidence confirms that Harbor City retained possession for 3 seconds after reception."
+              },
+              {
+                "claim_id": "c-progress",
+                "verdict": "supported",
+                "reason": "The evidence indicates that the team progressed 7.0 m after reception."
+              },
+              {
+                "claim_id": "c-forward",
+                "verdict": "supported",
+                "reason": "The evidence confirms that the pass moved the ball 30.0 m forward."
+              },
+              {
+                "claim_id": "c-zone",
+                "verdict": "supported",
+                "reason": "The evidence indicates that the reception occurred in the middle zone."
+              },
+              {
+                "claim_id": "c-reception",
+                "verdict": "supported",
+                "reason": "The evidence confirms that Beni Vidal received the pass."
+              },
+              {
+                "claim_id": "c-release",
+                "verdict": "supported",
+                "reason": "The evidence indicates that Dani Luna released the pass."
+              }
+            ],
+            "reason": "",
+            "evidence_requests": []
+          }
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "claim_verdicts",
+          "status": "supported",
+          "verdicts": [
+            {
+              "claim_id": "c-pressure",
+              "verdict": "supported",
+              "reason": "The evidence indicates that up to 2 opponents were within 6 m of the passer over a 2-second window."
+            },
+            {
+              "claim_id": "c-bypass",
+              "verdict": "supported",
+              "reason": "The evidence shows that Harbor City passed beyond 5 opponents in the attacking direction, although longitudinal positions do not prove a defensive line was broken."
+            },
+            {
+              "claim_id": "c-retain",
+              "verdict": "supported",
+              "reason": "The evidence confirms that Harbor City retained possession for 3 seconds after reception."
+            },
+            {
+              "claim_id": "c-progress",
+              "verdict": "supported",
+              "reason": "The evidence indicates that the team progressed 7.0 m after reception."
+            },
+            {
+              "claim_id": "c-forward",
+              "verdict": "supported",
+              "reason": "The evidence confirms that the pass moved the ball 30.0 m forward."
+            },
+            {
+              "claim_id": "c-zone",
+              "verdict": "supported",
+              "reason": "The evidence indicates that the reception occurred in the middle zone."
+            },
+            {
+              "claim_id": "c-reception",
+              "verdict": "supported",
+              "reason": "The evidence confirms that Beni Vidal received the pass."
+            },
+            {
+              "claim_id": "c-release",
+              "verdict": "supported",
+              "reason": "The evidence indicates that Dani Luna released the pass."
+            }
+          ],
+          "reason": "",
+          "elapsed_ms": 5552.559
+        }
+      ],
+      "reason": null,
+      "package_ref": {
+        "id": "story-pass-4",
+        "revision": 1,
+        "package_hash": "54439c23dedbb18625f487f0a05c0e58c8e8d0ddfc346de6d421a1699c3f9313"
+      },
+      "evidence_observed_at": "2026-10-25T00:26:38.793923+00:00",
+      "implementation": {
+        "schema_version": "4.0.0",
+        "prompt_version": "director-critic-v4.1",
+        "renderer_version": "editorial-claims-v4",
+        "metric_version": "pressure-escape-v1",
+        "tool_version": "evidence-tools-v3",
+        "context_version": "recent-completed-three-v1",
+        "model_deployment": "story-model",
+        "model_version": "2024-07-18",
+        "release_commit": "unknown"
+      }
+    },
+    {
+      "run_id": "6b064c4a-b08f-436c-b39a-ab7f26478813",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "story_id": "story-goal-goal-1",
+      "evidence_revision": "c53d27565b5426e5",
+      "revision": 1,
+      "cutoff_ms": 105665,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "state": "produced",
+      "scheduled_at": "2026-10-25T00:26:51.821010+00:00",
+      "started_at": "2026-10-25T00:26:56.590467+00:00",
+      "finished_at": "2026-10-25T00:27:01.751399+00:00",
+      "timing": {
+        "job_enqueued": "2026-10-25T00:26:51.821010+00:00",
+        "job_started": "2026-10-25T00:26:56.590467+00:00",
+        "candidate_ready": "2026-10-25T00:27:01.751399+00:00"
+      },
+      "model_usage": {
+        "calls": 2,
+        "input_tokens": 816,
+        "output_tokens": 68,
+        "total_tokens": 884,
+        "usage_complete": true
+      },
+      "trace": [
+        {
+          "role": "Story Director",
+          "action": "model_decision",
+          "status": "propose",
+          "call": 1,
+          "elapsed_ms": 3068.021,
+          "input_tokens": 407,
+          "output_tokens": 33,
+          "total_tokens": 440,
+          "usage_reported": true,
+          "duration_ms": 3063.58,
+          "output": {
+            "action": "propose",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The event is a confirmed goal scored by blue-09, with no assist attribution."
+          }
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "model_decision",
+          "status": "supported",
+          "call": 2,
+          "elapsed_ms": 4826.093,
+          "input_tokens": 409,
+          "output_tokens": 35,
+          "total_tokens": 444,
+          "usage_reported": true,
+          "duration_ms": 1168.289,
+          "output": {
+            "action": "supported",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The provided facts confirm a goal scored by Beni Vidal for Harbor City, with no assist attribution."
+          }
+        }
+      ],
+      "reason": null,
+      "package_ref": {
+        "id": "story-goal-goal-1",
+        "revision": 1,
+        "package_hash": "f1bad0688dfec6bc772266e65db04f57254aedbed92a6b98bd824bbffc9df64f"
+      }
+    },
+    {
+      "run_id": "5990e5b6-fc5e-41f7-8889-dd3150a181df",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "story_id": "story-shot-attempt-2",
+      "evidence_revision": "afbc9e9ea9b50cb7",
+      "revision": 1,
+      "cutoff_ms": 105665,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "state": "produced",
+      "scheduled_at": "2026-10-25T00:26:51.822351+00:00",
+      "started_at": "2026-10-25T00:26:56.878435+00:00",
+      "finished_at": "2026-10-25T00:27:01.447710+00:00",
+      "timing": {
+        "job_enqueued": "2026-10-25T00:26:51.822351+00:00",
+        "job_started": "2026-10-25T00:26:56.878435+00:00",
+        "candidate_ready": "2026-10-25T00:27:01.447710+00:00"
+      },
+      "model_usage": {
+        "calls": 2,
+        "input_tokens": 802,
+        "output_tokens": 66,
+        "total_tokens": 868,
+        "usage_complete": true
+      },
+      "trace": [
+        {
+          "role": "Story Director",
+          "action": "model_decision",
+          "status": "propose",
+          "call": 1,
+          "elapsed_ms": 2797.535,
+          "input_tokens": 400,
+          "output_tokens": 30,
+          "total_tokens": 430,
+          "usage_reported": true,
+          "duration_ms": 2794.169,
+          "output": {
+            "action": "propose",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence confirms a shot by blue-09 resulting in a goal."
+          }
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "model_decision",
+          "status": "supported",
+          "call": 2,
+          "elapsed_ms": 4293.525,
+          "input_tokens": 402,
+          "output_tokens": 36,
+          "total_tokens": 438,
+          "usage_reported": true,
+          "duration_ms": 961.4,
+          "output": {
+            "action": "supported",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence confirms that Beni Vidal's shot resulted in a goal, as stated in the provided text."
+          }
+        }
+      ],
+      "reason": null,
+      "package_ref": {
+        "id": "story-shot-attempt-2",
+        "revision": 1,
+        "package_hash": "d2d23c3b410ec0ace12719911ab19a9a1edcd76d671973acdd7e3a6a7ed8366e"
+      }
+    },
+    {
+      "run_id": "3c92a006-2d37-4e34-8731-7453b4b304be",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "story_id": "story-recovery-restart-1",
+      "evidence_revision": "1da348f9f1ad77ff",
+      "revision": 1,
+      "cutoff_ms": 114671,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "state": "produced",
+      "scheduled_at": "2026-10-25T00:27:00.833312+00:00",
+      "started_at": "2026-10-25T00:27:01.752726+00:00",
+      "finished_at": "2026-10-25T00:27:06.346158+00:00",
+      "timing": {
+        "job_enqueued": "2026-10-25T00:27:00.833312+00:00",
+        "job_started": "2026-10-25T00:27:01.752726+00:00",
+        "candidate_ready": "2026-10-25T00:27:06.346158+00:00"
+      },
+      "model_usage": {
+        "calls": 2,
+        "input_tokens": 826,
+        "output_tokens": 83,
+        "total_tokens": 909,
+        "usage_complete": true
+      },
+      "trace": [
+        {
+          "role": "Story Director",
+          "action": "model_decision",
+          "status": "propose",
+          "call": 1,
+          "elapsed_ms": 3045.623,
+          "input_tokens": 412,
+          "output_tokens": 40,
+          "total_tokens": 452,
+          "usage_reported": true,
+          "duration_ms": 3042.165,
+          "output": {
+            "action": "propose",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence supports the claim of Alder Rovers having control at the restart and retaining possession for the next 3 seconds."
+          }
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "model_decision",
+          "status": "supported",
+          "call": 2,
+          "elapsed_ms": 4303.47,
+          "input_tokens": 414,
+          "output_tokens": 43,
+          "total_tokens": 457,
+          "usage_reported": true,
+          "duration_ms": 973.45,
+          "output": {
+            "action": "supported",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The text confirms that Alder Rovers has control at the restart and retained possession for the next 3 seconds, aligning with the provided facts."
+          }
+        }
+      ],
+      "reason": null,
+      "package_ref": {
+        "id": "story-recovery-restart-1",
+        "revision": 1,
+        "package_hash": "ca5cc730127eea7e6f5d332836736154fc537c24b1e598ea7eaf3dfcd58b48e5"
+      }
+    },
+    {
+      "run_id": "0d8b91a9-07ce-4361-8d7a-983194b0b1d5",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "story_id": "story-possession-120000",
+      "evidence_revision": "4bb06ba85aec25ef",
+      "revision": 1,
+      "cutoff_ms": 121846,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "state": "produced",
+      "scheduled_at": "2026-10-25T00:27:08.100918+00:00",
+      "started_at": "2026-10-25T00:27:08.101481+00:00",
+      "finished_at": "2026-10-25T00:27:11.410337+00:00",
+      "timing": {
+        "job_enqueued": "2026-10-25T00:27:08.100918+00:00",
+        "job_started": "2026-10-25T00:27:08.101481+00:00",
+        "candidate_ready": "2026-10-25T00:27:11.410337+00:00"
+      },
+      "model_usage": {
+        "calls": 2,
+        "input_tokens": 1120,
+        "output_tokens": 59,
+        "total_tokens": 1179,
+        "usage_complete": true
+      },
+      "trace": [
+        {
+          "role": "Story Director",
+          "action": "model_decision",
+          "status": "propose",
+          "call": 1,
+          "elapsed_ms": 1515.104,
+          "input_tokens": 559,
+          "output_tokens": 30,
+          "total_tokens": 589,
+          "usage_reported": true,
+          "duration_ms": 1510.635,
+          "output": {
+            "action": "propose",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The provided facts indicate a clear possession breakdown during the specified time window."
+          }
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "model_decision",
+          "status": "supported",
+          "call": 2,
+          "elapsed_ms": 2950.78,
+          "input_tokens": 561,
+          "output_tokens": 29,
+          "total_tokens": 590,
+          "usage_reported": true,
+          "duration_ms": 842.474,
+          "output": {
+            "action": "supported",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The provided text accurately reflects the possession statistics for the specified time window."
+          }
+        }
+      ],
+      "reason": null,
+      "package_ref": {
+        "id": "story-possession-120000",
+        "revision": 1,
+        "package_hash": "fa5514522bea0454e1773aa163b6734ebe69730c126d7b1a439dc49a619e66e9"
+      }
+    },
+    {
+      "run_id": "919028b6-8d72-42fa-a60c-7078a83dc3cf",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "story_id": "story-shot-attempt-2",
+      "evidence_revision": "e7f445e85b695329",
+      "revision": 2,
+      "cutoff_ms": 135111,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "state": "abstained",
+      "scheduled_at": "2026-10-25T00:27:21.370009+00:00",
+      "started_at": "2026-10-25T00:27:21.370516+00:00",
+      "finished_at": "2026-10-25T00:27:23.611909+00:00",
+      "timing": {
+        "job_enqueued": "2026-10-25T00:27:21.370009+00:00",
+        "job_started": "2026-10-25T00:27:21.370516+00:00",
+        "candidate_ready": null
+      },
+      "model_usage": {
+        "calls": 1,
+        "input_tokens": 414,
+        "output_tokens": 28,
+        "total_tokens": 442,
+        "usage_complete": true
+      },
+      "trace": [
+        {
+          "role": "Story Director",
+          "action": "model_decision",
+          "status": "abstain",
+          "call": 1,
+          "elapsed_ms": 1628.885,
+          "input_tokens": 414,
+          "output_tokens": 28,
+          "total_tokens": 442,
+          "usage_reported": true,
+          "duration_ms": 1625.426,
+          "output": {
+            "action": "abstain",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "Insufficient evidence to confirm the outcome of the shot."
+          }
+        }
+      ],
+      "reason": "Insufficient evidence to confirm the outcome of the shot.",
+      "package_ref": null
+    },
+    {
+      "run_id": "352b2301-d23c-4ae2-aa6f-d25cd0a14a37",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "story_id": "story-recovery-recovery-3",
+      "evidence_revision": "bb0ed1fd3b87091a",
+      "revision": 1,
+      "cutoff_ms": 148385,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "state": "produced",
+      "scheduled_at": "2026-10-25T00:27:34.686161+00:00",
+      "started_at": "2026-10-25T00:27:34.686779+00:00",
+      "finished_at": "2026-10-25T00:27:40.286753+00:00",
+      "timing": {
+        "job_enqueued": "2026-10-25T00:27:34.686161+00:00",
+        "job_started": "2026-10-25T00:27:34.686779+00:00",
+        "candidate_ready": "2026-10-25T00:27:40.286753+00:00"
+      },
+      "model_usage": {
+        "calls": 2,
+        "input_tokens": 818,
+        "output_tokens": 87,
+        "total_tokens": 905,
+        "usage_complete": true
+      },
+      "trace": [
+        {
+          "role": "Story Director",
+          "action": "model_decision",
+          "status": "propose",
+          "call": 1,
+          "elapsed_ms": 3411.31,
+          "input_tokens": 408,
+          "output_tokens": 43,
+          "total_tokens": 451,
+          "usage_reported": true,
+          "duration_ms": 3407.712,
+          "output": {
+            "action": "propose",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence supports the claim of a recovery event by the player blue-06 after a tackle, with sustained possession for 3 seconds."
+          }
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "model_decision",
+          "status": "supported",
+          "call": 2,
+          "elapsed_ms": 4944.252,
+          "input_tokens": 410,
+          "output_tokens": 44,
+          "total_tokens": 454,
+          "usage_reported": true,
+          "duration_ms": 1118.633,
+          "output": {
+            "action": "supported",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence confirms that Jori Marin recovered the ball and the team retained possession for the next 3 seconds, as stated in the provided text."
+          }
+        }
+      ],
+      "reason": null,
+      "package_ref": {
+        "id": "story-recovery-recovery-3",
+        "revision": 1,
+        "package_hash": "8c0550dc117d9c44c2c85e9f77858e32b73146ea75e4855cb8ce687d53378b37"
+      }
+    },
+    {
+      "run_id": "8ca1c451-86bb-4cbd-9e59-2b4f3ebe5214",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "story_id": "story-recovery-demo-control-154000",
+      "evidence_revision": "1ea82daf3d4bdb06",
+      "revision": 1,
+      "cutoff_ms": 158368,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "state": "produced",
+      "scheduled_at": "2026-10-25T00:27:44.684448+00:00",
+      "started_at": "2026-10-25T00:27:44.685055+00:00",
+      "finished_at": "2026-10-25T00:27:50.037504+00:00",
+      "timing": {
+        "job_enqueued": "2026-10-25T00:27:44.684448+00:00",
+        "job_started": "2026-10-25T00:27:44.685055+00:00",
+        "candidate_ready": "2026-10-25T00:27:50.037504+00:00"
+      },
+      "model_usage": {
+        "calls": 2,
+        "input_tokens": 822,
+        "output_tokens": 82,
+        "total_tokens": 904,
+        "usage_complete": true
+      },
+      "trace": [
+        {
+          "role": "Story Director",
+          "action": "model_decision",
+          "status": "propose",
+          "call": 1,
+          "elapsed_ms": 3496.667,
+          "input_tokens": 410,
+          "output_tokens": 39,
+          "total_tokens": 449,
+          "usage_reported": true,
+          "duration_ms": 3493.216,
+          "output": {
+            "action": "propose",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence supports the claim of Harbor City having control at the restart and retaining possession for the next 3 seconds."
+          }
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "model_decision",
+          "status": "supported",
+          "call": 2,
+          "elapsed_ms": 4887.146,
+          "input_tokens": 412,
+          "output_tokens": 43,
+          "total_tokens": 455,
+          "usage_reported": true,
+          "duration_ms": 906.633,
+          "output": {
+            "action": "supported",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The text confirms that Harbor City has control at the restart and retained possession for the next 3 seconds, which aligns with the provided facts."
+          }
+        }
+      ],
+      "reason": null,
+      "package_ref": {
+        "id": "story-recovery-demo-control-154000",
+        "revision": 1,
+        "package_hash": "95adb8541a8797bd4a35754422a1c23d60aa67fb6c5ff29f55e74583432eb502"
+      }
+    },
+    {
+      "run_id": "62488155-8a97-43b5-a368-8790a19ec697",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "story_id": "story-possession-180000",
+      "evidence_revision": "0bf7fc7f9773ab72",
+      "revision": 1,
+      "cutoff_ms": 182370,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "state": "produced",
+      "scheduled_at": "2026-10-25T00:28:08.793369+00:00",
+      "started_at": "2026-10-25T00:28:08.793879+00:00",
+      "finished_at": "2026-10-25T00:28:16.267623+00:00",
+      "timing": {
+        "job_enqueued": "2026-10-25T00:28:08.793369+00:00",
+        "job_started": "2026-10-25T00:28:08.793879+00:00",
+        "candidate_ready": "2026-10-25T00:28:16.267623+00:00"
+      },
+      "model_usage": {
+        "calls": 2,
+        "input_tokens": 1102,
+        "output_tokens": 62,
+        "total_tokens": 1164,
+        "usage_complete": true
+      },
+      "trace": [
+        {
+          "role": "Story Director",
+          "action": "model_decision",
+          "status": "propose",
+          "call": 1,
+          "elapsed_ms": 5414.631,
+          "input_tokens": 550,
+          "output_tokens": 28,
+          "total_tokens": 578,
+          "usage_reported": true,
+          "duration_ms": 5404.658,
+          "output": {
+            "action": "propose",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The provided facts indicate possession statistics for the specified time window."
+          }
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "model_decision",
+          "status": "supported",
+          "call": 2,
+          "elapsed_ms": 6893.527,
+          "input_tokens": 552,
+          "output_tokens": 34,
+          "total_tokens": 586,
+          "usage_reported": true,
+          "duration_ms": 892.598,
+          "output": {
+            "action": "supported",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The possession data for the specified time window is verified and accurately reflects the percentages and conditions stated."
+          }
+        }
+      ],
+      "reason": null,
+      "package_ref": {
+        "id": "story-possession-180000",
+        "revision": 1,
+        "package_hash": "2b8548eb53e60f7c4ed1bb3c75dd28fc45af9050e4c03bcb7baa59d44e01d8b8"
+      }
+    },
+    {
+      "run_id": "8097dfce-1564-4115-923d-7f833b3d2795",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "story_id": "story-recovery-demo-control-180000",
+      "evidence_revision": "d8c865c4af305c8c",
+      "revision": 1,
+      "cutoff_ms": 185140,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "state": "produced",
+      "scheduled_at": "2026-10-25T00:28:12.182829+00:00",
+      "started_at": "2026-10-25T00:28:16.269600+00:00",
+      "finished_at": "2026-10-25T00:28:23.179043+00:00",
+      "timing": {
+        "job_enqueued": "2026-10-25T00:28:12.182829+00:00",
+        "job_started": "2026-10-25T00:28:16.269600+00:00",
+        "candidate_ready": "2026-10-25T00:28:23.179043+00:00"
+      },
+      "model_usage": {
+        "calls": 2,
+        "input_tokens": 824,
+        "output_tokens": 74,
+        "total_tokens": 898,
+        "usage_complete": true
+      },
+      "trace": [
+        {
+          "role": "Story Director",
+          "action": "model_decision",
+          "status": "propose",
+          "call": 1,
+          "elapsed_ms": 3741.845,
+          "input_tokens": 411,
+          "output_tokens": 32,
+          "total_tokens": 443,
+          "usage_reported": true,
+          "duration_ms": 3738.022,
+          "output": {
+            "action": "propose",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence supports a control change from one team to another, with sustained possession."
+          }
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "model_decision",
+          "status": "supported",
+          "call": 2,
+          "elapsed_ms": 6005.788,
+          "input_tokens": 413,
+          "output_tokens": 42,
+          "total_tokens": 455,
+          "usage_reported": true,
+          "duration_ms": 1369.37,
+          "output": {
+            "action": "supported",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence supports the claim of a control change from Harbor City to Alder Rovers, with possession retained for the next 3 seconds."
+          }
+        }
+      ],
+      "reason": null,
+      "package_ref": {
+        "id": "story-recovery-demo-control-180000",
+        "revision": 1,
+        "package_hash": "0a0654acf98a4b47ae54902918fe86433570fb30f7bc10f2181294384bb294e4"
+      }
+    },
+    {
+      "run_id": "52c174ff-18d3-4496-9fe9-eaa973068905",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "story_id": "story-shot-attempt-3",
+      "evidence_revision": "446ea0322fd06a9b",
+      "revision": 1,
+      "cutoff_ms": 192178,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "state": "produced",
+      "scheduled_at": "2026-10-25T00:28:18.696712+00:00",
+      "started_at": "2026-10-25T00:28:23.180856+00:00",
+      "finished_at": "2026-10-25T00:28:28.009661+00:00",
+      "timing": {
+        "job_enqueued": "2026-10-25T00:28:18.696712+00:00",
+        "job_started": "2026-10-25T00:28:23.180856+00:00",
+        "candidate_ready": "2026-10-25T00:28:28.009661+00:00"
+      },
+      "model_usage": {
+        "calls": 2,
+        "input_tokens": 800,
+        "output_tokens": 77,
+        "total_tokens": 877,
+        "usage_complete": true
+      },
+      "trace": [
+        {
+          "role": "Story Director",
+          "action": "model_decision",
+          "status": "propose",
+          "call": 1,
+          "elapsed_ms": 2311.966,
+          "input_tokens": 399,
+          "output_tokens": 34,
+          "total_tokens": 433,
+          "usage_reported": true,
+          "duration_ms": 2308.295,
+          "output": {
+            "action": "propose",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence supports the claim of a shot off target by an unidentified Alder Rovers player."
+          }
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "model_decision",
+          "status": "supported",
+          "call": 2,
+          "elapsed_ms": 4253.071,
+          "input_tokens": 401,
+          "output_tokens": 43,
+          "total_tokens": 444,
+          "usage_reported": true,
+          "duration_ms": 1353.892,
+          "output": {
+            "action": "supported",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence confirms that an unidentified Alder Rovers player took a shot that was off target, as stated in both the English and Spanish texts."
+          }
+        }
+      ],
+      "reason": null,
+      "package_ref": {
+        "id": "story-shot-attempt-3",
+        "revision": 1,
+        "package_hash": "90830badbb78714f17f4e39cf15b7f3abc9f4a989eabc694cf1b103a5d7837c1"
+      }
+    },
+    {
+      "run_id": "e4ec5958-b796-4db6-8dd4-5e75804fdbf4",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "story_id": "story-recovery-demo-control-204000",
+      "evidence_revision": "4437addd3c8fc507",
+      "revision": 1,
+      "cutoff_ms": 208280,
+      "mode": "Microsoft Agent Framework + Azure OpenAI",
+      "state": "produced",
+      "scheduled_at": "2026-10-25T00:28:34.816032+00:00",
+      "started_at": "2026-10-25T00:28:34.816766+00:00",
+      "finished_at": "2026-10-25T00:28:39.652810+00:00",
+      "timing": {
+        "job_enqueued": "2026-10-25T00:28:34.816032+00:00",
+        "job_started": "2026-10-25T00:28:34.816766+00:00",
+        "candidate_ready": "2026-10-25T00:28:39.652810+00:00"
+      },
+      "model_usage": {
+        "calls": 2,
+        "input_tokens": 822,
+        "output_tokens": 67,
+        "total_tokens": 889,
+        "usage_complete": true
+      },
+      "trace": [
+        {
+          "role": "Story Director",
+          "action": "model_decision",
+          "status": "propose",
+          "call": 1,
+          "elapsed_ms": 1733.956,
+          "input_tokens": 410,
+          "output_tokens": 34,
+          "total_tokens": 444,
+          "usage_reported": true,
+          "duration_ms": 1729.135,
+          "output": {
+            "action": "propose",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence supports that Harbor City retained possession for the next 3 seconds after the restart."
+          }
+        },
+        {
+          "role": "Claim Reviewer",
+          "action": "model_decision",
+          "status": "supported",
+          "call": 2,
+          "elapsed_ms": 4194.005,
+          "input_tokens": 412,
+          "output_tokens": 33,
+          "total_tokens": 445,
+          "usage_reported": true,
+          "duration_ms": 1172.267,
+          "output": {
+            "action": "supported",
+            "claim_ids": [
+              "c-event"
+            ],
+            "reason": "The evidence confirms that Harbor City retained possession for the next 3 seconds after the restart."
+          }
+        }
+      ],
+      "reason": null,
+      "package_ref": {
+        "id": "story-recovery-demo-control-204000",
+        "revision": 1,
+        "package_hash": "dbfc16dae1fb983f5b1a2453897e8b1714e09ede6bd6d780a90bb8611643bbf4"
+      }
+    }
+  ],
+  "lifecycle_events": [
+    {
+      "id": "1e056e3b5ee9cbb8d980f2ecca7a8c3f5847d889f2a9a9a22271febd1bcadb73",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:25:21.680120+00:00",
+      "story_id": "story-possession-15000",
+      "state": "not_selected_live_possession_interval",
+      "replay_ms": 15798
+    },
+    {
+      "id": "bcd686da672ec9b9db3f4ba7839d8334ec6c59d0235b6ceecc2a2722645bee7d",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:25:22.766524+00:00",
+      "story_id": "story-pressure-pass-1",
+      "evidence_revision": "ee85de79bb31026a",
+      "state": "detected",
+      "replay_ms": 16883
+    },
+    {
+      "id": "6df430cb7919fb5bb127581c0f5f61ba407b49cebeae3fbf4f31eca37903a340",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:25:22.769447+00:00",
+      "story_id": "story-pass-1",
+      "evidence_revision": "a0d445f2a4827ad5",
+      "state": "detected",
+      "replay_ms": 16883
+    },
+    {
+      "id": "ecd5c1608555f6cab7bc6f993f6b02779b2e907cf174ed4d3fe5c66122f0ce8e",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:25:31.323096+00:00",
+      "run_id": "c819f094-9286-41b5-aba1-b5042c33a400",
+      "story_id": "story-pressure-pass-1",
+      "revision": 1,
+      "evidence_revision": "ee85de79bb31026a",
+      "state": "accepted",
+      "package_ref": {
+        "id": "story-pressure-pass-1",
+        "revision": 1,
+        "package_hash": "c5088d5df1dae3f29d7d3251c2e27218053843bb80f2e64d7f75f0de36b1e4f4"
+      },
+      "replay_ms": 25437
+    },
+    {
+      "id": "d773c7ffc19bef50a8564d4396f0bfab0f882a6d47d506852fc26258b627cbfe",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:25:31.325188+00:00",
+      "story_id": "story-pressure-pass-1",
+      "family": "pressure",
+      "state": "candidate_ready",
+      "replay_ms": 25437,
+      "evidence_ready_ms": 16200,
+      "expires_at_ms": 46200
+    },
+    {
+      "id": "1c4c096d29586d98d66b8d21132f405e25cc87117be4adfbd213b8d33ef6c740",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:25:35.584093+00:00",
+      "run_id": "810f2071-e1e4-416d-b6b7-191851b23146",
+      "story_id": "story-pass-1",
+      "revision": 1,
+      "evidence_revision": "a0d445f2a4827ad5",
+      "state": "accepted",
+      "package_ref": {
+        "id": "story-pass-1",
+        "revision": 1,
+        "package_hash": "edcc0c10ff7f9355800415d10c5af0397678c7b2454354fb716eaa42f7988f43"
+      },
+      "replay_ms": 29699
+    },
+    {
+      "id": "2e67bd1f08c7326cf28882b296eacb344084f43ec8b6eda0eb771dd207ea2fec",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:25:36.701862+00:00",
+      "story_id": "story-recovery-loose-1",
+      "state": "awaiting_source_followup",
+      "replay_ms": 30799
+    },
+    {
+      "id": "0ede33e0ab2f684c4c9dea8826ba60aa69c8d36f91992cf9b7ceb3969162d1f1",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:25:36.702697+00:00",
+      "story_id": "story-possession-30000",
+      "state": "not_selected_live_possession_interval",
+      "replay_ms": 30799
+    },
+    {
+      "id": "473c7631a5c63dc3c29e294e109f19ac92d0960e627b9181fe18331f3498a93b",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:25:38.924687+00:00",
+      "story_id": "story-recovery-loose-1",
+      "evidence_revision": "2ab49941ea767d99",
+      "state": "detected",
+      "replay_ms": 33020
+    },
+    {
+      "id": "e341da513ca9dba8dbdda9f2f251e8e0cdbe98af23521591002c7cb948d6f783",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:25:42.381836+00:00",
+      "run_id": "64840745-b3da-4c20-b015-b884662c5bb9",
+      "story_id": "story-recovery-loose-1",
+      "revision": 1,
+      "evidence_revision": "2ab49941ea767d99",
+      "state": "accepted",
+      "package_ref": {
+        "id": "story-recovery-loose-1",
+        "revision": 1,
+        "package_hash": "6c3fbf10d44133edc56e788ce2675c30f81c2eca85fd9ac59ca0a3bf3a1879b2"
+      },
+      "replay_ms": 36472
+    },
+    {
+      "id": "cea390942b05011bfb2c41046881558533ca9b41dd230e8fb60c9776ebbe6c36",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:25:42.383573+00:00",
+      "story_id": "story-recovery-loose-1",
+      "family": "recovery",
+      "state": "candidate_ready",
+      "replay_ms": 36472,
+      "evidence_ready_ms": 33000,
+      "expires_at_ms": 63000
+    },
+    {
+      "id": "fc4af1f0fa8ce7f412e00260a69215ae018329f4092c6a9a3d2a6cd4f7904e51",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:25:48.004307+00:00",
+      "story_id": "story-pressure-pass-2",
+      "evidence_revision": "b89b015672afdc8e",
+      "state": "detected",
+      "replay_ms": 42083
+    },
+    {
+      "id": "ccaba6bd0fc981c0dd880f913b07aa02a4574d5fafc35895c069662cff107781",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:25:48.011841+00:00",
+      "story_id": "story-pass-2",
+      "evidence_revision": "94eced94ae74442a",
+      "state": "detected",
+      "replay_ms": 42083
+    },
+    {
+      "id": "a9a1bec5acf409c559dd83eab831295290d6f027fbf6b0d574bce77c45d18bf3",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:25:51.450482+00:00",
+      "story_id": "story-possession-45000",
+      "state": "not_selected_live_possession_interval",
+      "replay_ms": 45509
+    },
+    {
+      "id": "4a0cbdc30586201bad1eebf4bae971ebe6092adf031a549150ba9e9ebbf0ffd7",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:25:55.027812+00:00",
+      "story_id": "story-shot-attempt-1",
+      "evidence_revision": "11da9a8864856ed8",
+      "state": "detected",
+      "replay_ms": 49081
+    },
+    {
+      "id": "6a8819da8b056ab1e4b2b5bcb41543befaca82c66690da4c8bed6f18cec248b7",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:25:56.242562+00:00",
+      "story_id": "story-recovery-change-1",
+      "state": "awaiting_source_followup",
+      "replay_ms": 50292
+    },
+    {
+      "id": "1e0bcd0e3a9551eefd9c3ec4a37f9d4780af1f6b5e0f082911e19a090bd13c55",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:25:57.437209+00:00",
+      "run_id": "f074ff08-1b09-4ea7-9df3-4d627eaee4fa",
+      "story_id": "story-pressure-pass-2",
+      "revision": 1,
+      "evidence_revision": "b89b015672afdc8e",
+      "state": "accepted",
+      "package_ref": {
+        "id": "story-pressure-pass-2",
+        "revision": 1,
+        "package_hash": "77f56a512fa226caf74cc19ea05b0946f5e967687356c46c8b60e47f3335ca07"
+      },
+      "replay_ms": 51491
+    },
+    {
+      "id": "f472682e6e66d64311b1f9f669be02b48ea199dc69ab99633b2aef7167ac920c",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:25:57.438919+00:00",
+      "story_id": "story-pressure-pass-2",
+      "family": "pressure",
+      "state": "candidate_ready",
+      "replay_ms": 51491,
+      "evidence_ready_ms": 41200,
+      "expires_at_ms": 71200
+    },
+    {
+      "id": "ab09084ca9707d94374bceb5d5c821425b882400ad0515d6d96226fa3b975d09",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:25:59.887761+00:00",
+      "story_id": "story-recovery-change-1",
+      "evidence_revision": "7ffd6fc820a8ab5a",
+      "state": "detected",
+      "replay_ms": 53943
+    },
+    {
+      "id": "375f30236c67a4917ad6a8c28037d90c6bd173d5e0184fb71b54a54da25f9f93",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:25:59.888957+00:00",
+      "story_id": "story-recovery-change-1",
+      "family": "recovery",
+      "state": "capacity_deferred",
+      "replay_ms": 53943
+    },
+    {
+      "id": "1933b64af4558d6b1d3bc21b265ca1b541993b9eac9751d39620652da40249d7",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:26:01.093991+00:00",
+      "run_id": "0a14597d-98c6-487b-88d8-c87d3e1581fd",
+      "story_id": "story-pass-2",
+      "revision": 1,
+      "evidence_revision": "94eced94ae74442a",
+      "state": "accepted",
+      "package_ref": {
+        "id": "story-pass-2",
+        "revision": 1,
+        "package_hash": "a31f8c9ac2c9ee722a0ee7b83d5bb12d47fbb896f94c9e33c003300225e701b9"
+      },
+      "replay_ms": 55140
+    },
+    {
+      "id": "b0be9d22b2cdf5880c65f13c2ceeef9e67bf21c0a8bf3979bc31153e0ba59020",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:26:03.488286+00:00",
+      "run_id": "3c419fcc-7698-44e9-942c-1fa5a96a62be",
+      "story_id": "story-shot-attempt-1",
+      "revision": 1,
+      "evidence_revision": "11da9a8864856ed8",
+      "state": "accepted",
+      "package_ref": {
+        "id": "story-shot-attempt-1",
+        "revision": 1,
+        "package_hash": "6283f73df49ef1c6af2e5e043506d582f747e5628c5922e47ba60047006e2f94"
+      },
+      "replay_ms": 57542
+    },
+    {
+      "id": "186586f9fd679937441e80da6569ce4ae57109fcb7f18eaf61c59b99de2ab792",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:03.491079+00:00",
+      "story_id": "story-shot-attempt-1",
+      "family": "shot",
+      "state": "candidate_ready",
+      "replay_ms": 57542,
+      "evidence_ready_ms": 48000,
+      "expires_at_ms": 78000
+    },
+    {
+      "id": "bc93dc7c41fecbf58a579c5b29298388d96361260598916113e205069c2919bb",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:26:05.911663+00:00",
+      "run_id": "647c03dc-7e77-4977-9f00-66c11d2b3018",
+      "story_id": "story-recovery-change-1",
+      "revision": 1,
+      "evidence_revision": "7ffd6fc820a8ab5a",
+      "state": "accepted",
+      "package_ref": {
+        "id": "story-recovery-change-1",
+        "revision": 1,
+        "package_hash": "665d04a6157f35f196eb8f5dcd81509cfceada28a43c43a7bdd6d9fdb0676344"
+      },
+      "replay_ms": 59963
+    },
+    {
+      "id": "5b46ae98651bec7b7ab172202df9af21a5f3b247ae5425e9fc8320305e55253b",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:05.914018+00:00",
+      "story_id": "story-recovery-change-1",
+      "family": "recovery",
+      "state": "candidate_ready",
+      "replay_ms": 59963,
+      "evidence_ready_ms": 53000,
+      "expires_at_ms": 83000
+    },
+    {
+      "id": "9b5655303c6510f13088881048cb974f98d047f42adbfe31622db6186b8bfc6d",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:07.363243+00:00",
+      "story_id": "story-recovery-flagship-recovery-60000",
+      "state": "awaiting_source_followup",
+      "replay_ms": 61357
+    },
+    {
+      "id": "141f6c26f314729204667567fb2dbaa4a0572a082194207d7848fb39cb054584",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:07.366873+00:00",
+      "story_id": "story-possession-60000",
+      "evidence_revision": "d63ce141146b70cb",
+      "state": "detected",
+      "replay_ms": 61357
+    },
+    {
+      "id": "58ac3490cd7b793eb3ccb671393a8eebaa44628af829205f3709871f5d0d65e7",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:10.105366+00:00",
+      "story_id": "story-recovery-flagship-recovery-60000",
+      "evidence_revision": "66bf9448ecb06121",
+      "state": "detected",
+      "replay_ms": 64109
+    },
+    {
+      "id": "17d65a3192a3e12d311e998741f485e4bc40ecd6aaff3b6250d942e9d35ad648",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:26:11.422298+00:00",
+      "run_id": "56e09bdb-fc03-49c8-8b95-076256a68243",
+      "story_id": "story-possession-60000",
+      "revision": 1,
+      "evidence_revision": "d63ce141146b70cb",
+      "state": "accepted",
+      "package_ref": {
+        "id": "story-possession-60000",
+        "revision": 1,
+        "package_hash": "44109daa97583216ffe57db872a5c8b03fb174f91b460088487a8ab31a564e11"
+      },
+      "replay_ms": 65428
+    },
+    {
+      "id": "dcc098f112c2e53dbe5064380cb6b029215ca6b459c1d33ecc7077c4a8c41165",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:11.425814+00:00",
+      "story_id": "story-possession-60000",
+      "family": "possession",
+      "state": "candidate_ready",
+      "replay_ms": 65428,
+      "evidence_ready_ms": 60000,
+      "expires_at_ms": 75000
+    },
+    {
+      "id": "7ec08bde1b8cf970626abeadda72f85d070f6cd14550092cef3c7ffa2d90a53b",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:12.717215+00:00",
+      "story_id": "story-pressure-pass-3",
+      "evidence_revision": "077442e678cb239e",
+      "state": "detected",
+      "replay_ms": 66716
+    },
+    {
+      "id": "7157db66e5338f025146584392ae9a98fce207669fe8a46bce69d95ea8d4a6cd",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:12.718674+00:00",
+      "story_id": "story-pressure-pass-3",
+      "family": "pressure",
+      "state": "capacity_deferred",
+      "replay_ms": 66716
+    },
+    {
+      "id": "610e5b356fc0afddd041b776038c894b166987cf92e8ea0362619faa3140adb0",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:12.719773+00:00",
+      "story_id": "story-pass-3",
+      "evidence_revision": "e4ce345aa3da9ab1",
+      "state": "detected",
+      "replay_ms": 66716
+    },
+    {
+      "id": "b0755a87dd115425be26d4212aecd763246032b22fd5e353ebe1a7338b2d88ec",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:12.720407+00:00",
+      "story_id": "story-pass-3",
+      "evidence_revision": "e4ce345aa3da9ab1",
+      "state": "capacity_deferred",
+      "replay_ms": 66716
+    },
+    {
+      "id": "6613d05662c73f5bbcf132bc16a71c9fe7e3e1d550b0c07a8764057e2614339c",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:26:14.072389+00:00",
+      "run_id": "9e4d8e92-e76b-40bf-8715-4a075f30d7e6",
+      "story_id": "story-recovery-flagship-recovery-60000",
+      "revision": 1,
+      "evidence_revision": "66bf9448ecb06121",
+      "state": "accepted",
+      "package_ref": {
+        "id": "story-recovery-flagship-recovery-60000",
+        "revision": 1,
+        "package_hash": "94ea2f984a8f5093cb41fda4f7aaf86737facb4ef54e3b82a0d2bb0275fba6ba"
+      },
+      "replay_ms": 68065
+    },
+    {
+      "id": "85a358886dac5cc7e0d8fc289c3e6fedcdf56145990c9938d611171e41e7451d",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:14.073852+00:00",
+      "story_id": "story-recovery-flagship-recovery-60000",
+      "family": "recovery",
+      "state": "candidate_ready",
+      "replay_ms": 68065,
+      "evidence_ready_ms": 63000,
+      "expires_at_ms": 93000
+    },
+    {
+      "id": "f09bbf4a326cc6ce705a45b3caef73f3e41056e0d0d0d5b4d796d26477babe32",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:16.712805+00:00",
+      "story_id": "story-recovery-change-2",
+      "state": "awaiting_source_followup",
+      "replay_ms": 70709
+    },
+    {
+      "id": "eb617bf48b525747489e7e0a77ce45059e3fc334f6bfbcae4e0c1f97d04b9c8f",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:19.354001+00:00",
+      "story_id": "story-recovery-change-2",
+      "evidence_revision": "ec05be900fdd8206",
+      "state": "detected",
+      "replay_ms": 73339
+    },
+    {
+      "id": "147687ac45e2e59e9ea6d34b67cd35bc07256db12469b3e93faac80185a4d7d8",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:26:20.668864+00:00",
+      "run_id": "31edee7e-01c2-4bf2-8377-68209b21783b",
+      "story_id": "story-pressure-pass-3",
+      "revision": 1,
+      "evidence_revision": "077442e678cb239e",
+      "state": "accepted",
+      "package_ref": {
+        "id": "story-pressure-pass-3",
+        "revision": 1,
+        "package_hash": "ade93d8b6f2e08048f525219ec323f304d7323b805fb3155bbeaf33088435818"
+      },
+      "replay_ms": 74648
+    },
+    {
+      "id": "7990e7d833a6e90ee2c2d8d5fab2e8f24e67923091d319fef04810c61dcfd728",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:20.670841+00:00",
+      "story_id": "story-pressure-pass-3",
+      "family": "pressure",
+      "state": "candidate_ready",
+      "replay_ms": 74648,
+      "evidence_ready_ms": 66200,
+      "expires_at_ms": 96200
+    },
+    {
+      "id": "76494840cae6cacaa9c6e4d7cfb9eddd95d9624515d07b1ce21eafb560660ed8",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:20.671390+00:00",
+      "story_id": "story-recovery-demo-control-74000",
+      "state": "awaiting_source_followup",
+      "replay_ms": 74648
+    },
+    {
+      "id": "2a9bcf134c24eeaa71e02b235426a0fc54d6a9090074bf53514e9d6a049e02d2",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:22.054991+00:00",
+      "story_id": "story-possession-75000",
+      "state": "not_selected_live_possession_interval",
+      "replay_ms": 76003
+    },
+    {
+      "id": "350ff29db3863b6d5d8860a4f626620ef4cd5535860287bcb761022202205f82",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:23.452721+00:00",
+      "story_id": "story-recovery-demo-control-74000",
+      "evidence_revision": "08887de7e6b22ef1",
+      "state": "detected",
+      "replay_ms": 77392
+    },
+    {
+      "id": "2d203977c74ea3ab71e52ea4739886c1adecdd75aa7b42f22070a5e8ecd130fb",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:23.455745+00:00",
+      "story_id": "story-recovery-demo-control-74000",
+      "family": "recovery",
+      "state": "capacity_deferred",
+      "replay_ms": 77392
+    },
+    {
+      "id": "fbefa1b9ecf42cef41c7048ffd6cd1e34da9cb3e11f8bdb5c9a0e4e8528d2fe8",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:26:25.308508+00:00",
+      "run_id": "cd059574-82ba-40c8-aca0-760f8ac3110a",
+      "story_id": "story-pass-3",
+      "revision": 1,
+      "evidence_revision": "e4ce345aa3da9ab1",
+      "state": "accepted",
+      "package_ref": {
+        "id": "story-pass-3",
+        "revision": 1,
+        "package_hash": "75ad14a6e3160808b43b48c0c4a76296611243c62f2b13b207c3e1c00271a979"
+      },
+      "replay_ms": 79225
+    },
+    {
+      "id": "06c16a227f8476f73393454d77efb97a55fe9ec21912901e57ba90a3eccf161d",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:26:28.531922+00:00",
+      "run_id": "d9b37f80-db20-43a4-8f87-c0d137925164",
+      "story_id": "story-recovery-change-2",
+      "revision": 1,
+      "evidence_revision": "ec05be900fdd8206",
+      "state": "accepted",
+      "package_ref": {
+        "id": "story-recovery-change-2",
+        "revision": 1,
+        "package_hash": "e54b0d1b4b604805f15601bb113533461bb6083e2d24e375a2cbc9df5ef132bd"
+      },
+      "replay_ms": 82472
+    },
+    {
+      "id": "e192947df57a21d3e478411e50682431926311e40d4613c5bf03bcb5cc179ea4",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:28.533586+00:00",
+      "story_id": "story-recovery-change-2",
+      "family": "recovery",
+      "state": "candidate_ready",
+      "replay_ms": 82472,
+      "evidence_ready_ms": 73000,
+      "expires_at_ms": 103000
+    },
+    {
+      "id": "708863899f0be297a1a0c9f138e11374fefb9332c9cd492c0e774bde38af98ae",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:26:32.791399+00:00",
+      "run_id": "ae285fbb-b581-4edd-8da3-9eefe390909e",
+      "story_id": "story-recovery-demo-control-74000",
+      "revision": 1,
+      "evidence_revision": "08887de7e6b22ef1",
+      "state": "accepted",
+      "package_ref": {
+        "id": "story-recovery-demo-control-74000",
+        "revision": 1,
+        "package_hash": "63cadb915714f26a6ce405ed10d3adec9105a4a9209ea20483a7efbaa3d8c086"
+      },
+      "replay_ms": 86738
+    },
+    {
+      "id": "094690210ffded073b71fad2178d9954103fcd4c4f226e36e80213af1b0701d8",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:32.793406+00:00",
+      "story_id": "story-recovery-demo-control-74000",
+      "family": "recovery",
+      "state": "candidate_ready",
+      "replay_ms": 86738,
+      "evidence_ready_ms": 77000,
+      "expires_at_ms": 107000
+    },
+    {
+      "id": "a37816e53a137ba59966d94e43a8499a4a11117add14b0b3983c4b5ad434f15c",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:37.187313+00:00",
+      "story_id": "story-possession-90000",
+      "state": "not_selected_live_possession_interval",
+      "replay_ms": 91089
+    },
+    {
+      "id": "47b366f33bfb3623b5cf28b0832225cdb1982c9e545b95e5727a95264227a675",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:38.784974+00:00",
+      "story_id": "story-pressure-pass-4",
+      "evidence_revision": "a26aa060c1526a59",
+      "state": "detected",
+      "replay_ms": 92636
+    },
+    {
+      "id": "cdd5e60897d402bb8aab7c318fb4efc4c5af8a879b714c609660ab51f35a46b9",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:38.793278+00:00",
+      "story_id": "story-pass-4",
+      "evidence_revision": "f9e79c9fbbd9e35e",
+      "state": "detected",
+      "replay_ms": 92636
+    },
+    {
+      "id": "2d32c413bc1cae3a8d3a9df2fad68486863f4bc18de5e0012680ccc627a5db65",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:26:46.626238+00:00",
+      "run_id": "1d6e97bc-64ea-4ecd-8f38-06c547d26aed",
+      "story_id": "story-pressure-pass-4",
+      "revision": 1,
+      "evidence_revision": "a26aa060c1526a59",
+      "state": "accepted",
+      "package_ref": {
+        "id": "story-pressure-pass-4",
+        "revision": 1,
+        "package_hash": "0f7ba7108ccab98a53a595a232c553d368cc277de6f30c8ba5960cd29792a7dc"
+      },
+      "replay_ms": 100499
+    },
+    {
+      "id": "2416715360969f8c62b47a322eba6ba82aa046fb63d0bd6647594055b18240f9",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:46.627908+00:00",
+      "story_id": "story-pressure-pass-4",
+      "family": "pressure",
+      "state": "candidate_ready",
+      "replay_ms": 100499,
+      "evidence_ready_ms": 91300,
+      "expires_at_ms": 121300
+    },
+    {
+      "id": "627a0a0d41e83367ccb8f1d16396f5e8f7e2d8f1bec587059640b5ae7dab4055",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:48.159375+00:00",
+      "story_id": "story-shot-attempt-2",
+      "state": "awaiting_source_followup",
+      "replay_ms": 102053
+    },
+    {
+      "id": "ffe83497933938f05bf741f9d1147d71fc220ead39a4e70097a475f896608f35",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:26:49.725163+00:00",
+      "run_id": "72bbdf36-9c0c-4d34-9e5b-2ce92acd4d46",
+      "story_id": "story-pass-4",
+      "revision": 1,
+      "evidence_revision": "f9e79c9fbbd9e35e",
+      "state": "accepted",
+      "package_ref": {
+        "id": "story-pass-4",
+        "revision": 1,
+        "package_hash": "54439c23dedbb18625f487f0a05c0e58c8e8d0ddfc346de6d421a1699c3f9313"
+      },
+      "replay_ms": 103614
+    },
+    {
+      "id": "6ba59758c22017f7c524567197fed4fa1c58ab798f472309b1d0728f2c7ad241",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:51.819813+00:00",
+      "story_id": "story-goal-goal-1",
+      "evidence_revision": "c53d27565b5426e5",
+      "state": "detected",
+      "replay_ms": 105665
+    },
+    {
+      "id": "522aac36d6309b4147ea12908b11cdf98e979858911dd4115505e72013050d33",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:51.821507+00:00",
+      "story_id": "story-shot-attempt-2",
+      "evidence_revision": "afbc9e9ea9b50cb7",
+      "state": "detected",
+      "replay_ms": 105665
+    },
+    {
+      "id": "e459a5f2a6edecec7fedb6a49ee05df8a2ae8c4619837c92614ef14172d1ddb7",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:51.822935+00:00",
+      "story_id": "story-possession-105000",
+      "state": "not_selected_live_possession_interval",
+      "replay_ms": 105665
+    },
+    {
+      "id": "8569d209a98e3a8274e6035451817e63ef8f0a03bbaaf0f5ed9391c38def8f24",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:26:56.588034+00:00",
+      "story_id": "story-recovery-restart-1",
+      "state": "awaiting_source_followup",
+      "replay_ms": 110372
+    },
+    {
+      "id": "682910d397d1edd42440fca23a977df7e1342c38439c7077dd892b313f4029bd",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:27:00.832121+00:00",
+      "story_id": "story-recovery-restart-1",
+      "evidence_revision": "1da348f9f1ad77ff",
+      "state": "detected",
+      "replay_ms": 114671
+    },
+    {
+      "id": "532d63e8412e85fc1687f7620566c8e055971353cf1de57a59320f90de6d38b6",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:27:02.690220+00:00",
+      "run_id": "6b064c4a-b08f-436c-b39a-ab7f26478813",
+      "story_id": "story-goal-goal-1",
+      "revision": 1,
+      "evidence_revision": "c53d27565b5426e5",
+      "state": "accepted",
+      "package_ref": {
+        "id": "story-goal-goal-1",
+        "revision": 1,
+        "package_hash": "f1bad0688dfec6bc772266e65db04f57254aedbed92a6b98bd824bbffc9df64f"
+      },
+      "replay_ms": 116527
+    },
+    {
+      "id": "8b32adb4b65d37bd623ef6f6df3b252e0204f0dc65283e66889184a2ba9293a5",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:27:02.691977+00:00",
+      "story_id": "story-goal-goal-1",
+      "family": "goal",
+      "state": "candidate_ready",
+      "replay_ms": 116527,
+      "evidence_ready_ms": 104000,
+      "expires_at_ms": 134000
+    },
+    {
+      "id": "882a5c0571295a4cda1fe32e58dbfaa58856e5c59b1acce65302ccee6388bebc",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:27:02.692980+00:00",
+      "run_id": "5990e5b6-fc5e-41f7-8889-dd3150a181df",
+      "story_id": "story-shot-attempt-2",
+      "revision": 1,
+      "evidence_revision": "afbc9e9ea9b50cb7",
+      "state": "accepted",
+      "package_ref": {
+        "id": "story-shot-attempt-2",
+        "revision": 1,
+        "package_hash": "d2d23c3b410ec0ace12719911ab19a9a1edcd76d671973acdd7e3a6a7ed8366e"
+      },
+      "replay_ms": 116527
+    },
+    {
+      "id": "d8f664664948c68772bcb1cdfc39b11c20c7bb34e5c88da13338a920d933beea",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:27:02.694194+00:00",
+      "story_id": "story-shot-attempt-2",
+      "family": "shot",
+      "state": "candidate_ready",
+      "replay_ms": 116527,
+      "evidence_ready_ms": 104000,
+      "expires_at_ms": 134000
+    },
+    {
+      "id": "2b0764f4f82f9aaab5183866bd7c5782dcc4bd04a03d6e2fb4c3bd2309f17027",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:27:08.096394+00:00",
+      "run_id": "3c92a006-2d37-4e34-8731-7453b4b304be",
+      "story_id": "story-recovery-restart-1",
+      "revision": 1,
+      "evidence_revision": "1da348f9f1ad77ff",
+      "state": "accepted",
+      "package_ref": {
+        "id": "story-recovery-restart-1",
+        "revision": 1,
+        "package_hash": "ca5cc730127eea7e6f5d332836736154fc537c24b1e598ea7eaf3dfcd58b48e5"
+      },
+      "replay_ms": 121846
+    },
+    {
+      "id": "c4dbb24e5cb966081bc138a8964f5298ef005afa498f5c0c868a05697576721a",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:27:08.097963+00:00",
+      "story_id": "story-recovery-restart-1",
+      "family": "recovery",
+      "state": "candidate_ready",
+      "replay_ms": 121846,
+      "evidence_ready_ms": 113000,
+      "expires_at_ms": 143000
+    },
+    {
+      "id": "cc6190fc4d82d15955a1d7fcfaba25a82d956fcfae00536408e087a8d374e7fd",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:27:08.098495+00:00",
+      "story_id": "story-possession-120000",
+      "evidence_revision": "4bb06ba85aec25ef",
+      "state": "detected",
+      "replay_ms": 121846
+    },
+    {
+      "id": "0de51d10272bee407af7fa2bec8d94d1179bc1d59932de1b4700631f8c3ed3d9",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:27:08.099919+00:00",
+      "run_id": "56e09bdb-fc03-49c8-8b95-076256a68243",
+      "story_id": "story-possession-60000",
+      "revision": 1,
+      "evidence_revision": "d63ce141146b70cb",
+      "state": "replaced_unreviewed",
+      "package_ref": {
+        "id": "story-possession-60000",
+        "revision": 1,
+        "package_hash": "44109daa97583216ffe57db872a5c8b03fb174f91b460088487a8ab31a564e11"
+      },
+      "replay_ms": 121846
+    },
+    {
+      "id": "f5c7873699f1d0847287c0408256b760deace841996d08aa9f780507a4e5a618",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:27:12.630324+00:00",
+      "run_id": "0d8b91a9-07ce-4361-8d7a-983194b0b1d5",
+      "story_id": "story-possession-120000",
+      "revision": 1,
+      "evidence_revision": "4bb06ba85aec25ef",
+      "state": "accepted",
+      "package_ref": {
+        "id": "story-possession-120000",
+        "revision": 1,
+        "package_hash": "fa5514522bea0454e1773aa163b6734ebe69730c126d7b1a439dc49a619e66e9"
+      },
+      "replay_ms": 126416
+    },
+    {
+      "id": "c3d39bb81c5be819ef344898ae2e6441d334548ce918043fea569b77555222b1",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:27:12.633910+00:00",
+      "story_id": "story-possession-120000",
+      "family": "possession",
+      "state": "candidate_ready",
+      "replay_ms": 126416,
+      "evidence_ready_ms": 120000,
+      "expires_at_ms": 135000
+    },
+    {
+      "id": "4fc7aef77cb2fed28c5dac6636a242aa0d4a8a2206da4c1de1a3688af371ff66",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:27:21.368681+00:00",
+      "story_id": "story-shot-attempt-2",
+      "evidence_revision": "e7f445e85b695329",
+      "state": "detected",
+      "replay_ms": 135111
+    },
+    {
+      "id": "9b2a7b6b064b5804d20f70dfeb854f66756b411d55c90a5a85b3df1bc3b68104",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:27:21.370483+00:00",
+      "story_id": "story-possession-135000",
+      "state": "not_selected_live_possession_interval",
+      "replay_ms": 135111
+    },
+    {
+      "id": "f8d2580ae95e94ed1b7bd4c87db6c2df045c48417a18d62bb8a0b92ec4248814",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:27:21.762754+00:00",
+      "run_id": "6b064c4a-b08f-436c-b39a-ab7f26478813",
+      "story_id": "story-goal-goal-1",
+      "revision": 1,
+      "evidence_revision": "c53d27565b5426e5",
+      "state": "discarded_stale",
+      "package_ref": {
+        "id": "story-goal-goal-1",
+        "revision": 1,
+        "package_hash": "f1bad0688dfec6bc772266e65db04f57254aedbed92a6b98bd824bbffc9df64f"
+      },
+      "replay_ms": 135111
+    },
+    {
+      "id": "d0fcf27fdaf8324f06957a435fc8f57d44514efe2921dd8f00d1dd5157454aee",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:27:21.763919+00:00",
+      "run_id": "5990e5b6-fc5e-41f7-8889-dd3150a181df",
+      "story_id": "story-shot-attempt-2",
+      "revision": 1,
+      "evidence_revision": "afbc9e9ea9b50cb7",
+      "state": "discarded_stale",
+      "package_ref": {
+        "id": "story-shot-attempt-2",
+        "revision": 1,
+        "package_hash": "d2d23c3b410ec0ace12719911ab19a9a1edcd76d671973acdd7e3a6a7ed8366e"
+      },
+      "replay_ms": 135111
+    },
+    {
+      "id": "d8b6c883da90ba91c05bfdbe1021ec1540a5bb1a777e3c7d052978747a641fdd",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:27:32.812592+00:00",
+      "story_id": "story-recovery-recovery-3",
+      "state": "awaiting_source_followup",
+      "replay_ms": 146551
+    },
+    {
+      "id": "350ad1f5ea0bd1d52158e53a2b793c086bef4cee12384a8325ba96584ccc8275",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:27:34.684885+00:00",
+      "story_id": "story-recovery-recovery-3",
+      "evidence_revision": "bb0ed1fd3b87091a",
+      "state": "detected",
+      "replay_ms": 148385
+    },
+    {
+      "id": "bfc0ce8d47dcab19d7d9136b69aa15437b22757ed23ecc251f395437bcd0061d",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:27:37.529741+00:00",
+      "story_id": "story-possession-150000",
+      "state": "not_selected_live_possession_interval",
+      "replay_ms": 151196
+    },
+    {
+      "id": "bf2dc46a12f0cb6e3256a73e3b20e01467206f244e26a6dc8becd407e7c74b39",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:27:42.225238+00:00",
+      "story_id": "story-recovery-demo-control-154000",
+      "state": "awaiting_source_followup",
+      "replay_ms": 155918
+    },
+    {
+      "id": "de8e29220bfd71871f61b21d3ae7a40252a2456654863bdf8fe0c423e81d9c83",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:27:42.226590+00:00",
+      "run_id": "352b2301-d23c-4ae2-aa6f-d25cd0a14a37",
+      "story_id": "story-recovery-recovery-3",
+      "revision": 1,
+      "evidence_revision": "bb0ed1fd3b87091a",
+      "state": "accepted",
+      "package_ref": {
+        "id": "story-recovery-recovery-3",
+        "revision": 1,
+        "package_hash": "8c0550dc117d9c44c2c85e9f77858e32b73146ea75e4855cb8ce687d53378b37"
+      },
+      "replay_ms": 155918
+    },
+    {
+      "id": "a7cfbd898852febc5eaf1728d61050a6101d752aa6436e46d5ec83247d59de33",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:27:42.228115+00:00",
+      "story_id": "story-recovery-recovery-3",
+      "family": "recovery",
+      "state": "candidate_ready",
+      "replay_ms": 155918,
+      "evidence_ready_ms": 148000,
+      "expires_at_ms": 178000
+    },
+    {
+      "id": "3324c5e94f849a128e521bb32c4c640dfa36d985e6b86a739558c904df7b54ea",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:27:44.683103+00:00",
+      "story_id": "story-recovery-demo-control-154000",
+      "evidence_revision": "1ea82daf3d4bdb06",
+      "state": "detected",
+      "replay_ms": 158368
+    },
+    {
+      "id": "36b69e3ee7a08c6b7a377da0aae15609641d6e373b626ee97d1cbaa1d69241df",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:27:51.633898+00:00",
+      "run_id": "8ca1c451-86bb-4cbd-9e59-2b4f3ebe5214",
+      "story_id": "story-recovery-demo-control-154000",
+      "revision": 1,
+      "evidence_revision": "1ea82daf3d4bdb06",
+      "state": "accepted",
+      "package_ref": {
+        "id": "story-recovery-demo-control-154000",
+        "revision": 1,
+        "package_hash": "95adb8541a8797bd4a35754422a1c23d60aa67fb6c5ff29f55e74583432eb502"
+      },
+      "replay_ms": 165216
+    },
+    {
+      "id": "69208546cc5b4610f3b17f6ab178ad3aa45191c2841ce04706aaa6220f81e4bb",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:27:51.635777+00:00",
+      "story_id": "story-recovery-demo-control-154000",
+      "family": "recovery",
+      "state": "candidate_ready",
+      "replay_ms": 165216,
+      "evidence_ready_ms": 157000,
+      "expires_at_ms": 187000
+    },
+    {
+      "id": "458104457808b3d1fa45cad66af4f8040242531ca45813b300c14b57ed5c5850",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:27:51.636347+00:00",
+      "story_id": "story-possession-165000",
+      "state": "not_selected_live_possession_interval",
+      "replay_ms": 165216
+    },
+    {
+      "id": "0f34f728b406526ff96263bc94bded6bed99c5c3d2fa2b1c1daa4bcef9b8cee7",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:28:08.789647+00:00",
+      "story_id": "story-recovery-demo-control-180000",
+      "state": "awaiting_source_followup",
+      "replay_ms": 182370
+    },
+    {
+      "id": "21fb4d6c8b9763865338b65ac36fed0e6d215d7a16657e2ac9a38c25ed4c1dda",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:28:08.790564+00:00",
+      "story_id": "story-possession-180000",
+      "evidence_revision": "0bf7fc7f9773ab72",
+      "state": "detected",
+      "replay_ms": 182370
+    },
+    {
+      "id": "2c73cd041af64314c183277749e674ae89c00a98871a559523c031095786a152",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:28:08.792559+00:00",
+      "run_id": "0d8b91a9-07ce-4361-8d7a-983194b0b1d5",
+      "story_id": "story-possession-120000",
+      "revision": 1,
+      "evidence_revision": "4bb06ba85aec25ef",
+      "state": "replaced_unreviewed",
+      "package_ref": {
+        "id": "story-possession-120000",
+        "revision": 1,
+        "package_hash": "fa5514522bea0454e1773aa163b6734ebe69730c126d7b1a439dc49a619e66e9"
+      },
+      "replay_ms": 182370
+    },
+    {
+      "id": "4f285e1397a4d6739e44f176d638031f3c1f15b60dfd34c714ea8f776084cb33",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:28:12.181761+00:00",
+      "story_id": "story-recovery-demo-control-180000",
+      "evidence_revision": "d8c865c4af305c8c",
+      "state": "detected",
+      "replay_ms": 185140
+    },
+    {
+      "id": "283f460b88d202b65f1451706954c27d2c9a0f73d093a625837b0c4fa9785788",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:28:15.363609+00:00",
+      "story_id": "story-shot-attempt-3",
+      "evidence_revision": "446ea0322fd06a9b",
+      "state": "detected",
+      "replay_ms": 188378
+    },
+    {
+      "id": "7253d6c134f25cc800643d3126e144a0d88efe9627a6f89c8d609dcd0a249a69",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:28:15.365228+00:00",
+      "story_id": "story-shot-attempt-3",
+      "family": "shot",
+      "state": "capacity_deferred",
+      "replay_ms": 188378
+    },
+    {
+      "id": "23646ad38b0f115b919061d91d36df0abd6fae50a26f8a9e0193b9c6455abb66",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:28:18.700176+00:00",
+      "run_id": "62488155-8a97-43b5-a368-8790a19ec697",
+      "story_id": "story-possession-180000",
+      "revision": 1,
+      "evidence_revision": "0bf7fc7f9773ab72",
+      "state": "accepted",
+      "package_ref": {
+        "id": "story-possession-180000",
+        "revision": 1,
+        "package_hash": "2b8548eb53e60f7c4ed1bb3c75dd28fc45af9050e4c03bcb7baa59d44e01d8b8"
+      },
+      "replay_ms": 192178
+    },
+    {
+      "id": "65db1effc16be49d8403aff3577661f4737c3c53b0c46d4382ed32d915db0051",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:28:18.703075+00:00",
+      "story_id": "story-possession-180000",
+      "family": "possession",
+      "state": "candidate_ready",
+      "replay_ms": 192178,
+      "evidence_ready_ms": 180000,
+      "expires_at_ms": 195000
+    },
+    {
+      "id": "6d2c737e67e9deb5ad935458e04bc7ce4640ce053b0936092d4569612c911441",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:28:24.418928+00:00",
+      "run_id": "8097dfce-1564-4115-923d-7f833b3d2795",
+      "story_id": "story-recovery-demo-control-180000",
+      "revision": 1,
+      "evidence_revision": "d8c865c4af305c8c",
+      "state": "accepted",
+      "package_ref": {
+        "id": "story-recovery-demo-control-180000",
+        "revision": 1,
+        "package_hash": "0a0654acf98a4b47ae54902918fe86433570fb30f7bc10f2181294384bb294e4"
+      },
+      "replay_ms": 197893
+    },
+    {
+      "id": "cf65c92f15564e044cfe9fbd3b3ee3b1edb9d0828cc33b7c604298e862ceeeb9",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:28:24.420788+00:00",
+      "story_id": "story-recovery-demo-control-180000",
+      "family": "recovery",
+      "state": "candidate_ready",
+      "replay_ms": 197893,
+      "evidence_ready_ms": 183000,
+      "expires_at_ms": 213000
+    },
+    {
+      "id": "b342f6c76d8cf01f59ade064d036be46964feda7b4092feab549c30ff2fccb74",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:28:24.421413+00:00",
+      "story_id": "story-possession-195000",
+      "state": "not_selected_live_possession_interval",
+      "replay_ms": 197893
+    },
+    {
+      "id": "f23c1fe7c7093d99d535f4b3e6be8d3d48563a2f669ede9b6f0d1cfc3a0f5f93",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:28:29.585006+00:00",
+      "run_id": "52c174ff-18d3-4496-9fe9-eaa973068905",
+      "story_id": "story-shot-attempt-3",
+      "revision": 1,
+      "evidence_revision": "446ea0322fd06a9b",
+      "state": "accepted",
+      "package_ref": {
+        "id": "story-shot-attempt-3",
+        "revision": 1,
+        "package_hash": "90830badbb78714f17f4e39cf15b7f3abc9f4a989eabc694cf1b103a5d7837c1"
+      },
+      "replay_ms": 203110
+    },
+    {
+      "id": "0ad9e4819ca600c0da0cb7202decad08da4d72a86ac4400059d18b6d71945065",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:28:29.586884+00:00",
+      "story_id": "story-shot-attempt-3",
+      "family": "shot",
+      "state": "candidate_ready",
+      "replay_ms": 203110,
+      "evidence_ready_ms": 186000,
+      "expires_at_ms": 216000
+    },
+    {
+      "id": "67edec04bb031bd5ac8bb0d8a1d08929142e4d88e894d7e5fe0926d8b45a15b9",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:28:31.856219+00:00",
+      "story_id": "story-recovery-demo-control-204000",
+      "state": "awaiting_source_followup",
+      "replay_ms": 205367
+    },
+    {
+      "id": "caf18cd6e60c2e6b07cb0f4128ee85c7f5b7c23aabb9040b299accc19dbcd78d",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:28:34.814681+00:00",
+      "story_id": "story-recovery-demo-control-204000",
+      "evidence_revision": "4437addd3c8fc507",
+      "state": "detected",
+      "replay_ms": 208280
+    },
+    {
+      "id": "5b60bd387c8dc5e6a2813c9250a7e983c4f42de48d03bf6c1e6d6fd313ca9680",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:28:39.204036+00:00",
+      "story_id": "story-possession-210000",
+      "state": "not_selected_live_possession_interval",
+      "replay_ms": 212616
+    },
+    {
+      "id": "25a3bf038bace6920315c3382fc8d2d80a8f97927b51e6867d9a8ec64c445ec7",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:28:41.558965+00:00",
+      "run_id": "e4ec5958-b796-4db6-8dd4-5e75804fdbf4",
+      "story_id": "story-recovery-demo-control-204000",
+      "revision": 1,
+      "evidence_revision": "4437addd3c8fc507",
+      "state": "accepted",
+      "package_ref": {
+        "id": "story-recovery-demo-control-204000",
+        "revision": 1,
+        "package_hash": "dbfc16dae1fb983f5b1a2453897e8b1714e09ede6bd6d780a90bb8611643bbf4"
+      },
+      "replay_ms": 215039
+    },
+    {
+      "id": "6d39b2888876345013ce07ab6bad537e90c117bbee792edc1e61a1cd4ffc90e7",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:28:41.560718+00:00",
+      "story_id": "story-recovery-demo-control-204000",
+      "family": "recovery",
+      "state": "candidate_ready",
+      "replay_ms": 215039,
+      "evidence_ready_ms": 207000,
+      "expires_at_ms": 237000
+    },
+    {
+      "id": "b5fc2b479b5357a56a65132aed2cbab42b85cce6edafaf4bc85e9a7ff7d63e36",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:28:53.616561+00:00",
+      "story_id": "story-possession-225000",
+      "state": "not_selected_live_possession_interval",
+      "replay_ms": 227029
+    },
+    {
+      "id": "8f868eb21b70598b4480d03f8b202ac0e381770c4bbac9076c741807a234458e",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:29:08.663680+00:00",
+      "story_id": "story-possession-240000",
+      "evidence_revision": "4682d623a67b5d1a",
+      "state": "detected",
+      "replay_ms": 240000
+    },
+    {
+      "id": "1a1c6e8e77e980b915a1f9582c19ed4085bacf9416e84fe24a0917d00bdb42e8",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "disposition",
+      "recorded_at": "2026-10-25T00:29:08.667226+00:00",
+      "run_id": "62488155-8a97-43b5-a368-8790a19ec697",
+      "story_id": "story-possession-180000",
+      "revision": 1,
+      "evidence_revision": "0bf7fc7f9773ab72",
+      "state": "replaced_unreviewed",
+      "package_ref": {
+        "id": "story-possession-180000",
+        "revision": 1,
+        "package_hash": "2b8548eb53e60f7c4ed1bb3c75dd28fc45af9050e4c03bcb7baa59d44e01d8b8"
+      },
+      "replay_ms": 240000
+    },
+    {
+      "id": "817c7ed13aba19669f9903deb7ffef93150994b813a8086029a444e814346a57",
+      "session_id": "b083233f-cf22-42e5-abe6-573a505f7aff",
+      "kind": "opportunity",
+      "recorded_at": "2026-10-25T00:29:08.668118+00:00",
+      "story_id": "story-possession-240000",
+      "family": "possession",
+      "state": "expired_unscheduled",
+      "replay_ms": 240000
+    }
+  ],
+  "samples": [
+    {
+      "wall_elapsed_s": 0.0,
+      "processed_ms": null,
+      "packages": 0
+    },
+    {
+      "wall_elapsed_s": 1.006,
+      "processed_ms": 470,
+      "packages": 0
+    },
+    {
+      "wall_elapsed_s": 2.012,
+      "processed_ms": 1540,
+      "packages": 0
+    },
+    {
+      "wall_elapsed_s": 3.018,
+      "processed_ms": 2545,
+      "packages": 0
+    },
+    {
+      "wall_elapsed_s": 4.026,
+      "processed_ms": 3556,
+      "packages": 0
+    },
+    {
+      "wall_elapsed_s": 5.03,
+      "processed_ms": 4574,
+      "packages": 0
+    },
+    {
+      "wall_elapsed_s": 6.037,
+      "processed_ms": 5594,
+      "packages": 0
+    },
+    {
+      "wall_elapsed_s": 7.044,
+      "processed_ms": 6614,
+      "packages": 0
+    },
+    {
+      "wall_elapsed_s": 8.048,
+      "processed_ms": 7632,
+      "packages": 0
+    },
+    {
+      "wall_elapsed_s": 9.056,
+      "processed_ms": 8652,
+      "packages": 0
+    },
+    {
+      "wall_elapsed_s": 10.061,
+      "processed_ms": 9674,
+      "packages": 0
+    },
+    {
+      "wall_elapsed_s": 11.064,
+      "processed_ms": 10682,
+      "packages": 0
+    },
+    {
+      "wall_elapsed_s": 12.069,
+      "processed_ms": 11690,
+      "packages": 0
+    },
+    {
+      "wall_elapsed_s": 13.077,
+      "processed_ms": 12708,
+      "packages": 0
+    },
+    {
+      "wall_elapsed_s": 14.081,
+      "processed_ms": 13727,
+      "packages": 0
+    },
+    {
+      "wall_elapsed_s": 15.089,
+      "processed_ms": 14753,
+      "packages": 0
+    },
+    {
+      "wall_elapsed_s": 16.094,
+      "processed_ms": 15798,
+      "packages": 0
+    },
+    {
+      "wall_elapsed_s": 17.101,
+      "processed_ms": 16883,
+      "packages": 0
+    },
+    {
+      "wall_elapsed_s": 18.105,
+      "processed_ms": 17971,
+      "packages": 0
+    },
+    {
+      "wall_elapsed_s": 19.111,
+      "processed_ms": 19031,
+      "packages": 0
+    },
+    {
+      "wall_elapsed_s": 20.118,
+      "processed_ms": 19031,
+      "packages": 0
+    },
+    {
+      "wall_elapsed_s": 21.125,
+      "processed_ms": 20097,
+      "packages": 0
+    },
+    {
+      "wall_elapsed_s": 22.134,
+      "processed_ms": 21165,
+      "packages": 0
+    },
+    {
+      "wall_elapsed_s": 23.136,
+      "processed_ms": 22236,
+      "packages": 0
+    },
+    {
+      "wall_elapsed_s": 24.14,
+      "processed_ms": 23303,
+      "packages": 0
+    },
+    {
+      "wall_elapsed_s": 25.148,
+      "processed_ms": 24367,
+      "packages": 0
+    },
+    {
+      "wall_elapsed_s": 26.155,
+      "processed_ms": 25437,
+      "packages": 1
+    },
+    {
+      "wall_elapsed_s": 27.163,
+      "processed_ms": 26492,
+      "packages": 1
+    },
+    {
+      "wall_elapsed_s": 28.166,
+      "processed_ms": 27555,
+      "packages": 1
+    },
+    {
+      "wall_elapsed_s": 29.177,
+      "processed_ms": 28626,
+      "packages": 1
+    },
+    {
+      "wall_elapsed_s": 30.187,
+      "processed_ms": 29699,
+      "packages": 2
+    },
+    {
+      "wall_elapsed_s": 31.198,
+      "processed_ms": 30799,
+      "packages": 2
+    },
+    {
+      "wall_elapsed_s": 32.203,
+      "processed_ms": 31910,
+      "packages": 2
+    },
+    {
+      "wall_elapsed_s": 33.206,
+      "processed_ms": 33020,
+      "packages": 2
+    },
+    {
+      "wall_elapsed_s": 34.212,
+      "processed_ms": 33020,
+      "packages": 2
+    },
+    {
+      "wall_elapsed_s": 35.215,
+      "processed_ms": 34229,
+      "packages": 2
+    },
+    {
+      "wall_elapsed_s": 36.223,
+      "processed_ms": 35351,
+      "packages": 2
+    },
+    {
+      "wall_elapsed_s": 37.23,
+      "processed_ms": 36472,
+      "packages": 3
+    },
+    {
+      "wall_elapsed_s": 38.237,
+      "processed_ms": 37601,
+      "packages": 3
+    },
+    {
+      "wall_elapsed_s": 39.249,
+      "processed_ms": 38697,
+      "packages": 3
+    },
+    {
+      "wall_elapsed_s": 40.261,
+      "processed_ms": 39820,
+      "packages": 3
+    },
+    {
+      "wall_elapsed_s": 41.272,
+      "processed_ms": 40931,
+      "packages": 3
+    },
+    {
+      "wall_elapsed_s": 42.281,
+      "processed_ms": 42083,
+      "packages": 3
+    },
+    {
+      "wall_elapsed_s": 43.284,
+      "processed_ms": 43215,
+      "packages": 3
+    },
+    {
+      "wall_elapsed_s": 44.292,
+      "processed_ms": 43215,
+      "packages": 3
+    },
+    {
+      "wall_elapsed_s": 45.304,
+      "processed_ms": 44354,
+      "packages": 3
+    },
+    {
+      "wall_elapsed_s": 46.315,
+      "processed_ms": 45509,
+      "packages": 3
+    },
+    {
+      "wall_elapsed_s": 47.327,
+      "processed_ms": 46693,
+      "packages": 3
+    },
+    {
+      "wall_elapsed_s": 48.336,
+      "processed_ms": 47876,
+      "packages": 3
+    },
+    {
+      "wall_elapsed_s": 49.344,
+      "processed_ms": 49081,
+      "packages": 3
+    },
+    {
+      "wall_elapsed_s": 50.354,
+      "processed_ms": 49081,
+      "packages": 3
+    },
+    {
+      "wall_elapsed_s": 51.362,
+      "processed_ms": 50292,
+      "packages": 3
+    },
+    {
+      "wall_elapsed_s": 52.375,
+      "processed_ms": 51491,
+      "packages": 4
+    },
+    {
+      "wall_elapsed_s": 53.384,
+      "processed_ms": 52678,
+      "packages": 4
+    },
+    {
+      "wall_elapsed_s": 54.4,
+      "processed_ms": 53943,
+      "packages": 4
+    },
+    {
+      "wall_elapsed_s": 55.409,
+      "processed_ms": 55140,
+      "packages": 5
+    },
+    {
+      "wall_elapsed_s": 56.417,
+      "processed_ms": 55140,
+      "packages": 5
+    },
+    {
+      "wall_elapsed_s": 57.431,
+      "processed_ms": 56341,
+      "packages": 5
+    },
+    {
+      "wall_elapsed_s": 58.451,
+      "processed_ms": 57542,
+      "packages": 6
+    },
+    {
+      "wall_elapsed_s": 59.472,
+      "processed_ms": 58748,
+      "packages": 6
+    },
+    {
+      "wall_elapsed_s": 60.494,
+      "processed_ms": 59963,
+      "packages": 7
+    },
+    {
+      "wall_elapsed_s": 61.506,
+      "processed_ms": 59963,
+      "packages": 7
+    },
+    {
+      "wall_elapsed_s": 62.526,
+      "processed_ms": 61357,
+      "packages": 7
+    },
+    {
+      "wall_elapsed_s": 63.532,
+      "processed_ms": 62813,
+      "packages": 7
+    },
+    {
+      "wall_elapsed_s": 64.539,
+      "processed_ms": 64109,
+      "packages": 7
+    },
+    {
+      "wall_elapsed_s": 65.546,
+      "processed_ms": 64109,
+      "packages": 7
+    },
+    {
+      "wall_elapsed_s": 66.557,
+      "processed_ms": 65428,
+      "packages": 8
+    },
+    {
+      "wall_elapsed_s": 67.565,
+      "processed_ms": 66716,
+      "packages": 8
+    },
+    {
+      "wall_elapsed_s": 68.575,
+      "processed_ms": 68065,
+      "packages": 9
+    },
+    {
+      "wall_elapsed_s": 69.582,
+      "processed_ms": 69393,
+      "packages": 9
+    },
+    {
+      "wall_elapsed_s": 70.591,
+      "processed_ms": 69393,
+      "packages": 9
+    },
+    {
+      "wall_elapsed_s": 71.604,
+      "processed_ms": 70709,
+      "packages": 9
+    },
+    {
+      "wall_elapsed_s": 72.616,
+      "processed_ms": 72018,
+      "packages": 9
+    },
+    {
+      "wall_elapsed_s": 73.631,
+      "processed_ms": 73339,
+      "packages": 9
+    },
+    {
+      "wall_elapsed_s": 74.642,
+      "processed_ms": 73339,
+      "packages": 9
+    },
+    {
+      "wall_elapsed_s": 75.655,
+      "processed_ms": 74648,
+      "packages": 10
+    },
+    {
+      "wall_elapsed_s": 76.667,
+      "processed_ms": 76003,
+      "packages": 10
+    },
+    {
+      "wall_elapsed_s": 77.678,
+      "processed_ms": 76003,
+      "packages": 10
+    },
+    {
+      "wall_elapsed_s": 78.683,
+      "processed_ms": 77392,
+      "packages": 10
+    },
+    {
+      "wall_elapsed_s": 79.696,
+      "processed_ms": 79225,
+      "packages": 11
+    },
+    {
+      "wall_elapsed_s": 80.705,
+      "processed_ms": 79225,
+      "packages": 11
+    },
+    {
+      "wall_elapsed_s": 81.718,
+      "processed_ms": 80675,
+      "packages": 11
+    },
+    {
+      "wall_elapsed_s": 82.731,
+      "processed_ms": 82472,
+      "packages": 12
+    },
+    {
+      "wall_elapsed_s": 83.745,
+      "processed_ms": 82472,
+      "packages": 12
+    },
+    {
+      "wall_elapsed_s": 84.762,
+      "processed_ms": 83902,
+      "packages": 12
+    },
+    {
+      "wall_elapsed_s": 85.789,
+      "processed_ms": 85329,
+      "packages": 12
+    },
+    {
+      "wall_elapsed_s": 86.808,
+      "processed_ms": 85329,
+      "packages": 12
+    },
+    {
+      "wall_elapsed_s": 87.841,
+      "processed_ms": 86738,
+      "packages": 13
+    },
+    {
+      "wall_elapsed_s": 88.867,
+      "processed_ms": 88159,
+      "packages": 13
+    },
+    {
+      "wall_elapsed_s": 89.884,
+      "processed_ms": 89623,
+      "packages": 13
+    },
+    {
+      "wall_elapsed_s": 90.899,
+      "processed_ms": 89623,
+      "packages": 13
+    },
+    {
+      "wall_elapsed_s": 91.926,
+      "processed_ms": 91089,
+      "packages": 13
+    },
+    {
+      "wall_elapsed_s": 92.944,
+      "processed_ms": 92636,
+      "packages": 13
+    },
+    {
+      "wall_elapsed_s": 93.962,
+      "processed_ms": 92636,
+      "packages": 13
+    },
+    {
+      "wall_elapsed_s": 94.986,
+      "processed_ms": 94220,
+      "packages": 13
+    },
+    {
+      "wall_elapsed_s": 96.002,
+      "processed_ms": 94220,
+      "packages": 13
+    },
+    {
+      "wall_elapsed_s": 97.028,
+      "processed_ms": 95841,
+      "packages": 13
+    },
+    {
+      "wall_elapsed_s": 98.048,
+      "processed_ms": 97413,
+      "packages": 13
+    },
+    {
+      "wall_elapsed_s": 99.063,
+      "processed_ms": 97413,
+      "packages": 13
+    },
+    {
+      "wall_elapsed_s": 100.09,
+      "processed_ms": 98954,
+      "packages": 13
+    },
+    {
+      "wall_elapsed_s": 101.124,
+      "processed_ms": 100499,
+      "packages": 14
+    },
+    {
+      "wall_elapsed_s": 102.147,
+      "processed_ms": 100499,
+      "packages": 14
+    },
+    {
+      "wall_elapsed_s": 103.174,
+      "processed_ms": 102053,
+      "packages": 14
+    },
+    {
+      "wall_elapsed_s": 104.207,
+      "processed_ms": 103614,
+      "packages": 15
+    },
+    {
+      "wall_elapsed_s": 105.228,
+      "processed_ms": 103614,
+      "packages": 15
+    },
+    {
+      "wall_elapsed_s": 106.261,
+      "processed_ms": 105665,
+      "packages": 15
+    },
+    {
+      "wall_elapsed_s": 107.272,
+      "processed_ms": 105665,
+      "packages": 15
+    },
+    {
+      "wall_elapsed_s": 108.298,
+      "processed_ms": 107332,
+      "packages": 15
+    },
+    {
+      "wall_elapsed_s": 109.333,
+      "processed_ms": 107332,
+      "packages": 15
+    },
+    {
+      "wall_elapsed_s": 110.349,
+      "processed_ms": 107332,
+      "packages": 15
+    },
+    {
+      "wall_elapsed_s": 111.372,
+      "processed_ms": 110372,
+      "packages": 15
+    },
+    {
+      "wall_elapsed_s": 112.384,
+      "processed_ms": 110372,
+      "packages": 15
+    },
+    {
+      "wall_elapsed_s": 113.404,
+      "processed_ms": 112437,
+      "packages": 15
+    },
+    {
+      "wall_elapsed_s": 114.434,
+      "processed_ms": 112437,
+      "packages": 15
+    },
+    {
+      "wall_elapsed_s": 115.456,
+      "processed_ms": 114671,
+      "packages": 15
+    },
+    {
+      "wall_elapsed_s": 116.475,
+      "processed_ms": 114671,
+      "packages": 15
+    },
+    {
+      "wall_elapsed_s": 117.487,
+      "processed_ms": 116527,
+      "packages": 17
+    },
+    {
+      "wall_elapsed_s": 118.498,
+      "processed_ms": 116527,
+      "packages": 17
+    },
+    {
+      "wall_elapsed_s": 119.504,
+      "processed_ms": 118193,
+      "packages": 17
+    },
+    {
+      "wall_elapsed_s": 120.521,
+      "processed_ms": 119816,
+      "packages": 17
+    },
+    {
+      "wall_elapsed_s": 121.537,
+      "processed_ms": 119816,
+      "packages": 17
+    },
+    {
+      "wall_elapsed_s": 122.549,
+      "processed_ms": 119816,
+      "packages": 18
+    },
+    {
+      "wall_elapsed_s": 123.573,
+      "processed_ms": 121846,
+      "packages": 18
+    },
+    {
+      "wall_elapsed_s": 124.59,
+      "processed_ms": 121846,
+      "packages": 18
+    },
+    {
+      "wall_elapsed_s": 125.611,
+      "processed_ms": 124697,
+      "packages": 18
+    },
+    {
+      "wall_elapsed_s": 126.633,
+      "processed_ms": 124697,
+      "packages": 18
+    },
+    {
+      "wall_elapsed_s": 127.644,
+      "processed_ms": 126416,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 128.661,
+      "processed_ms": 128135,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 129.681,
+      "processed_ms": 128135,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 130.705,
+      "processed_ms": 129868,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 131.725,
+      "processed_ms": 129868,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 132.738,
+      "processed_ms": 131603,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 133.748,
+      "processed_ms": 133379,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 134.76,
+      "processed_ms": 133379,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 135.772,
+      "processed_ms": 133379,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 136.796,
+      "processed_ms": 135111,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 137.815,
+      "processed_ms": 137328,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 138.828,
+      "processed_ms": 137328,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 139.86,
+      "processed_ms": 139180,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 140.885,
+      "processed_ms": 139180,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 141.917,
+      "processed_ms": 141057,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 142.941,
+      "processed_ms": 141057,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 143.973,
+      "processed_ms": 142896,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 144.997,
+      "processed_ms": 142896,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 146.032,
+      "processed_ms": 144727,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 147.058,
+      "processed_ms": 146551,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 148.071,
+      "processed_ms": 146551,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 149.083,
+      "processed_ms": 146551,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 150.111,
+      "processed_ms": 148385,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 151.126,
+      "processed_ms": 148385,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 152.155,
+      "processed_ms": 151196,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 153.171,
+      "processed_ms": 151196,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 154.181,
+      "processed_ms": 151196,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 155.205,
+      "processed_ms": 153513,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 156.219,
+      "processed_ms": 153513,
+      "packages": 19
+    },
+    {
+      "wall_elapsed_s": 157.244,
+      "processed_ms": 155918,
+      "packages": 20
+    },
+    {
+      "wall_elapsed_s": 158.265,
+      "processed_ms": 155918,
+      "packages": 20
+    },
+    {
+      "wall_elapsed_s": 159.277,
+      "processed_ms": 155918,
+      "packages": 20
+    },
+    {
+      "wall_elapsed_s": 160.308,
+      "processed_ms": 158368,
+      "packages": 20
+    },
+    {
+      "wall_elapsed_s": 161.323,
+      "processed_ms": 160799,
+      "packages": 20
+    },
+    {
+      "wall_elapsed_s": 162.341,
+      "processed_ms": 160799,
+      "packages": 20
+    },
+    {
+      "wall_elapsed_s": 163.355,
+      "processed_ms": 160799,
+      "packages": 20
+    },
+    {
+      "wall_elapsed_s": 164.381,
+      "processed_ms": 163267,
+      "packages": 20
+    },
+    {
+      "wall_elapsed_s": 165.395,
+      "processed_ms": 163267,
+      "packages": 20
+    },
+    {
+      "wall_elapsed_s": 166.429,
+      "processed_ms": 165216,
+      "packages": 21
+    },
+    {
+      "wall_elapsed_s": 167.444,
+      "processed_ms": 165216,
+      "packages": 21
+    },
+    {
+      "wall_elapsed_s": 168.474,
+      "processed_ms": 167321,
+      "packages": 21
+    },
+    {
+      "wall_elapsed_s": 169.488,
+      "processed_ms": 167321,
+      "packages": 21
+    },
+    {
+      "wall_elapsed_s": 170.519,
+      "processed_ms": 169372,
+      "packages": 21
+    },
+    {
+      "wall_elapsed_s": 171.534,
+      "processed_ms": 169372,
+      "packages": 21
+    },
+    {
+      "wall_elapsed_s": 172.561,
+      "processed_ms": 171410,
+      "packages": 21
+    },
+    {
+      "wall_elapsed_s": 173.576,
+      "processed_ms": 171410,
+      "packages": 21
+    },
+    {
+      "wall_elapsed_s": 174.604,
+      "processed_ms": 173442,
+      "packages": 21
+    },
+    {
+      "wall_elapsed_s": 175.623,
+      "processed_ms": 173442,
+      "packages": 21
+    },
+    {
+      "wall_elapsed_s": 176.652,
+      "processed_ms": 175523,
+      "packages": 21
+    },
+    {
+      "wall_elapsed_s": 177.669,
+      "processed_ms": 175523,
+      "packages": 21
+    },
+    {
+      "wall_elapsed_s": 178.7,
+      "processed_ms": 177579,
+      "packages": 21
+    },
+    {
+      "wall_elapsed_s": 179.716,
+      "processed_ms": 177579,
+      "packages": 21
+    },
+    {
+      "wall_elapsed_s": 180.739,
+      "processed_ms": 179636,
+      "packages": 21
+    },
+    {
+      "wall_elapsed_s": 181.756,
+      "processed_ms": 179636,
+      "packages": 21
+    },
+    {
+      "wall_elapsed_s": 182.769,
+      "processed_ms": 179636,
+      "packages": 21
+    },
+    {
+      "wall_elapsed_s": 183.782,
+      "processed_ms": 182370,
+      "packages": 21
+    },
+    {
+      "wall_elapsed_s": 184.795,
+      "processed_ms": 182370,
+      "packages": 21
+    },
+    {
+      "wall_elapsed_s": 185.806,
+      "processed_ms": 182370,
+      "packages": 21
+    },
+    {
+      "wall_elapsed_s": 186.831,
+      "processed_ms": 185140,
+      "packages": 21
+    },
+    {
+      "wall_elapsed_s": 187.845,
+      "processed_ms": 185140,
+      "packages": 21
+    },
+    {
+      "wall_elapsed_s": 188.859,
+      "processed_ms": 185140,
+      "packages": 21
+    },
+    {
+      "wall_elapsed_s": 189.888,
+      "processed_ms": 188378,
+      "packages": 21
+    },
+    {
+      "wall_elapsed_s": 190.902,
+      "processed_ms": 188378,
+      "packages": 21
+    },
+    {
+      "wall_elapsed_s": 191.918,
+      "processed_ms": 188378,
+      "packages": 21
+    },
+    {
+      "wall_elapsed_s": 192.929,
+      "processed_ms": 192178,
+      "packages": 22
+    },
+    {
+      "wall_elapsed_s": 193.942,
+      "processed_ms": 192178,
+      "packages": 22
+    },
+    {
+      "wall_elapsed_s": 194.956,
+      "processed_ms": 192178,
+      "packages": 22
+    },
+    {
+      "wall_elapsed_s": 195.969,
+      "processed_ms": 194453,
+      "packages": 22
+    },
+    {
+      "wall_elapsed_s": 196.984,
+      "processed_ms": 194453,
+      "packages": 22
+    },
+    {
+      "wall_elapsed_s": 197.998,
+      "processed_ms": 194453,
+      "packages": 22
+    },
+    {
+      "wall_elapsed_s": 199.026,
+      "processed_ms": 197893,
+      "packages": 23
+    },
+    {
+      "wall_elapsed_s": 200.041,
+      "processed_ms": 197893,
+      "packages": 23
+    },
+    {
+      "wall_elapsed_s": 201.054,
+      "processed_ms": 197893,
+      "packages": 23
+    },
+    {
+      "wall_elapsed_s": 202.086,
+      "processed_ms": 200795,
+      "packages": 23
+    },
+    {
+      "wall_elapsed_s": 203.099,
+      "processed_ms": 200795,
+      "packages": 23
+    },
+    {
+      "wall_elapsed_s": 204.131,
+      "processed_ms": 203110,
+      "packages": 24
+    },
+    {
+      "wall_elapsed_s": 205.147,
+      "processed_ms": 203110,
+      "packages": 24
+    },
+    {
+      "wall_elapsed_s": 206.161,
+      "processed_ms": 205367,
+      "packages": 24
+    },
+    {
+      "wall_elapsed_s": 207.174,
+      "processed_ms": 205367,
+      "packages": 24
+    },
+    {
+      "wall_elapsed_s": 208.192,
+      "processed_ms": 205367,
+      "packages": 24
+    },
+    {
+      "wall_elapsed_s": 209.206,
+      "processed_ms": 205367,
+      "packages": 24
+    },
+    {
+      "wall_elapsed_s": 210.234,
+      "processed_ms": 208280,
+      "packages": 24
+    },
+    {
+      "wall_elapsed_s": 211.249,
+      "processed_ms": 208280,
+      "packages": 24
+    },
+    {
+      "wall_elapsed_s": 212.262,
+      "processed_ms": 208280,
+      "packages": 24
+    },
+    {
+      "wall_elapsed_s": 213.275,
+      "processed_ms": 208280,
+      "packages": 24
+    },
+    {
+      "wall_elapsed_s": 214.307,
+      "processed_ms": 212616,
+      "packages": 24
+    },
+    {
+      "wall_elapsed_s": 215.326,
+      "processed_ms": 212616,
+      "packages": 24
+    },
+    {
+      "wall_elapsed_s": 216.359,
+      "processed_ms": 215039,
+      "packages": 25
+    },
+    {
+      "wall_elapsed_s": 217.379,
+      "processed_ms": 215039,
+      "packages": 25
+    },
+    {
+      "wall_elapsed_s": 218.407,
+      "processed_ms": 217407,
+      "packages": 25
+    },
+    {
+      "wall_elapsed_s": 219.426,
+      "processed_ms": 217407,
+      "packages": 25
+    },
+    {
+      "wall_elapsed_s": 220.439,
+      "processed_ms": 217407,
+      "packages": 25
+    },
+    {
+      "wall_elapsed_s": 221.462,
+      "processed_ms": 219778,
+      "packages": 25
+    },
+    {
+      "wall_elapsed_s": 222.479,
+      "processed_ms": 219778,
+      "packages": 25
+    },
+    {
+      "wall_elapsed_s": 223.511,
+      "processed_ms": 222191,
+      "packages": 25
+    },
+    {
+      "wall_elapsed_s": 224.527,
+      "processed_ms": 222191,
+      "packages": 25
+    },
+    {
+      "wall_elapsed_s": 225.561,
+      "processed_ms": 224583,
+      "packages": 25
+    },
+    {
+      "wall_elapsed_s": 226.58,
+      "processed_ms": 224583,
+      "packages": 25
+    },
+    {
+      "wall_elapsed_s": 227.598,
+      "processed_ms": 224583,
+      "packages": 25
+    },
+    {
+      "wall_elapsed_s": 228.627,
+      "processed_ms": 227029,
+      "packages": 25
+    },
+    {
+      "wall_elapsed_s": 229.646,
+      "processed_ms": 227029,
+      "packages": 25
+    },
+    {
+      "wall_elapsed_s": 230.673,
+      "processed_ms": 229516,
+      "packages": 25
+    },
+    {
+      "wall_elapsed_s": 231.689,
+      "processed_ms": 229516,
+      "packages": 25
+    },
+    {
+      "wall_elapsed_s": 232.706,
+      "processed_ms": 229516,
+      "packages": 25
+    },
+    {
+      "wall_elapsed_s": 233.736,
+      "processed_ms": 232060,
+      "packages": 25
+    },
+    {
+      "wall_elapsed_s": 234.751,
+      "processed_ms": 232060,
+      "packages": 25
+    },
+    {
+      "wall_elapsed_s": 235.784,
+      "processed_ms": 234527,
+      "packages": 25
+    },
+    {
+      "wall_elapsed_s": 236.802,
+      "processed_ms": 234527,
+      "packages": 25
+    },
+    {
+      "wall_elapsed_s": 237.819,
+      "processed_ms": 236995,
+      "packages": 25
+    },
+    {
+      "wall_elapsed_s": 238.833,
+      "processed_ms": 236995,
+      "packages": 25
+    },
+    {
+      "wall_elapsed_s": 239.846,
+      "processed_ms": 236995,
+      "packages": 25
+    },
+    {
+      "wall_elapsed_s": 240.877,
+      "processed_ms": 239514,
+      "packages": 25
+    },
+    {
+      "wall_elapsed_s": 241.896,
+      "processed_ms": 239514,
+      "packages": 25
+    },
+    {
+      "wall_elapsed_s": 242.911,
+      "processed_ms": 240000,
+      "packages": 25
+    }
+  ],
+  "final_public_score": {
+    "blue": 0,
+    "amber": 0
+  },
+  "final_public_overlay": null,
+  "finished": true
+}

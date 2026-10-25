@@ -1,0 +1,1216 @@
+{
+  "sid": "eac149f2-2569-401f-aabc-1eed397ffd08",
+  "execution": "template",
+  "model_calls": 0,
+  "scope": "Four-minute UI continuity with no approvals or controls; not a model-timing or user-usefulness study.",
+  "elapsed_ms": 243939.576375,
+  "sawGoal": true,
+  "sawCorrection": true,
+  "samples": [
+    {
+      "elapsed_ms": 173.494959,
+      "clock_ms": 133,
+      "score": "Harbor City\nHBC\n0 : 0\n00:00 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 1180.087417,
+      "clock_ms": 1159,
+      "score": "Harbor City\nHBC\n0 : 0\n00:01 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 2188.582375,
+      "clock_ms": 2179,
+      "score": "Harbor City\nHBC\n0 : 0\n00:02 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 3193.904042,
+      "clock_ms": 3191,
+      "score": "Harbor City\nHBC\n0 : 0\n00:03 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 4201.763334,
+      "clock_ms": 4062,
+      "score": "Harbor City\nHBC\n0 : 0\n00:04 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 5208.365000000001,
+      "clock_ms": 4985,
+      "score": "Harbor City\nHBC\n0 : 0\n00:04 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 6213.596542,
+      "clock_ms": 6061,
+      "score": "Harbor City\nHBC\n0 : 0\n00:06 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 7220.145084000001,
+      "clock_ms": 7012,
+      "score": "Harbor City\nHBC\n0 : 0\n00:07 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 8228.009292,
+      "clock_ms": 8061,
+      "score": "Harbor City\nHBC\n0 : 0\n00:08 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 9236.808125,
+      "clock_ms": 9056,
+      "score": "Harbor City\nHBC\n0 : 0\n00:09 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 10250.270584,
+      "clock_ms": 10082,
+      "score": "Harbor City\nHBC\n0 : 0\n00:10 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 11262.435834,
+      "clock_ms": 11111,
+      "score": "Harbor City\nHBC\n0 : 0\n00:11 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 12275.57925,
+      "clock_ms": 12145,
+      "score": "Harbor City\nHBC\n0 : 0\n00:12 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 13291.333959,
+      "clock_ms": 13181,
+      "score": "Harbor City\nHBC\n0 : 0\n00:13 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 14303.757042000001,
+      "clock_ms": 14217,
+      "score": "Harbor City\nHBC\n0 : 0\n00:14 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 15315.07125,
+      "clock_ms": 15258,
+      "score": "Harbor City\nHBC\n0 : 0\n00:15 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 16324.681375000002,
+      "clock_ms": 16297,
+      "score": "Harbor City\nHBC\n0 : 0\n00:16 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 17335.370791999998,
+      "clock_ms": 17072,
+      "score": "Harbor City\nHBC\n0 : 0\n00:17 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 18343.715249999997,
+      "clock_ms": 18108,
+      "score": "Harbor City\nHBC\n0 : 0\n00:18 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 19358.409792,
+      "clock_ms": 19144,
+      "score": "Harbor City\nHBC\n0 : 0\n00:19 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 20370.007959,
+      "clock_ms": 20176,
+      "score": "Harbor City\nHBC\n0 : 0\n00:20 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 21385.351959,
+      "clock_ms": 21205,
+      "score": "Harbor City\nHBC\n0 : 0\n00:21 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 22396.691042,
+      "clock_ms": 22238,
+      "score": "Harbor City\nHBC\n0 : 0\n00:22 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 23403.42975,
+      "clock_ms": 23262,
+      "score": "Harbor City\nHBC\n0 : 0\n00:23 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 24408.082709,
+      "clock_ms": 24290,
+      "score": "Harbor City\nHBC\n0 : 0\n00:24 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 25414.531917,
+      "clock_ms": 25340,
+      "score": "Harbor City\nHBC\n0 : 0\n00:25 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 26425.466583999998,
+      "clock_ms": 26394,
+      "score": "Harbor City\nHBC\n0 : 0\n00:26 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 27431.547959,
+      "clock_ms": 27207,
+      "score": "Harbor City\nHBC\n0 : 0\n00:27 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 28444.394834,
+      "clock_ms": 28241,
+      "score": "Harbor City\nHBC\n0 : 0\n00:28 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 29458.020999999997,
+      "clock_ms": 29284,
+      "score": "Harbor City\nHBC\n0 : 0\n00:29 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 30472.745,
+      "clock_ms": 30337,
+      "score": "Harbor City\nHBC\n0 : 0\n00:30 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 31482.653083999998,
+      "clock_ms": 31416,
+      "score": "Harbor City\nHBC\n0 : 0\n00:31 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 32494.672833999997,
+      "clock_ms": 32233,
+      "score": "Harbor City\nHBC\n0 : 0\n00:32 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 33505.072374999996,
+      "clock_ms": 33318,
+      "score": "Harbor City\nHBC\n0 : 0\n00:33 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 34511.941792,
+      "clock_ms": 34403,
+      "score": "Harbor City\nHBC\n0 : 0\n00:34 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 35518.0835,
+      "clock_ms": 35483,
+      "score": "Harbor City\nHBC\n0 : 0\n00:35 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 36524.3565,
+      "clock_ms": 36274,
+      "score": "Harbor City\nHBC\n0 : 0\n00:36 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 37537.316417,
+      "clock_ms": 37356,
+      "score": "Harbor City\nHBC\n0 : 0\n00:37 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 38545.21325,
+      "clock_ms": 38405,
+      "score": "Harbor City\nHBC\n0 : 0\n00:38 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 39552.079667,
+      "clock_ms": 39467,
+      "score": "Harbor City\nHBC\n0 : 0\n00:39 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 40557.826,
+      "clock_ms": 40540,
+      "score": "Harbor City\nHBC\n0 : 0\n00:40 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 41575.501459,
+      "clock_ms": 41362,
+      "score": "Harbor City\nHBC\n0 : 0\n00:41 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 42585.667167,
+      "clock_ms": 42452,
+      "score": "Harbor City\nHBC\n0 : 0\n00:42 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 43593.056709,
+      "clock_ms": 43568,
+      "score": "Harbor City\nHBC\n0 : 0\n00:43 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 44598.664334,
+      "clock_ms": 44463,
+      "score": "Harbor City\nHBC\n0 : 0\n00:44 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 45603.046125,
+      "clock_ms": 45376,
+      "score": "Harbor City\nHBC\n0 : 0\n00:45 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 46608.119584,
+      "clock_ms": 46574,
+      "score": "Harbor City\nHBC\n0 : 0\n00:46 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 47613.828917,
+      "clock_ms": 47171,
+      "score": "Harbor City\nHBC\n0 : 0\n00:47 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 48619.837917,
+      "clock_ms": 48327,
+      "score": "Harbor City\nHBC\n0 : 0\n00:48 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 49624.697374999996,
+      "clock_ms": 49092,
+      "score": "Harbor City\nHBC\n0 : 0\n00:49 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 50634.369999999995,
+      "clock_ms": 49727,
+      "score": "Harbor City\nHBC\n0 : 0\n00:49 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 51637.99325,
+      "clock_ms": 51626,
+      "score": "Harbor City\nHBC\n0 : 0\n00:51 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 52643.487167,
+      "clock_ms": 51626,
+      "score": "Harbor City\nHBC\n0 : 0\n00:51 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 53647.850375,
+      "clock_ms": 53461,
+      "score": "Harbor City\nHBC\n0 : 0\n00:53 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 54652.264167,
+      "clock_ms": 54622,
+      "score": "Harbor City\nHBC\n0 : 0\n00:54 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 55657.775499999996,
+      "clock_ms": 55565,
+      "score": "Harbor City\nHBC\n0 : 0\n00:55 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 56662.217917,
+      "clock_ms": 55565,
+      "score": "Harbor City\nHBC\n0 : 0\n00:55 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 57667.451709,
+      "clock_ms": 57089,
+      "score": "Harbor City\nHBC\n0 : 0\n00:57 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 58672.43825,
+      "clock_ms": 57951,
+      "score": "Harbor City\nHBC\n0 : 0\n00:57 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 59677.38775,
+      "clock_ms": 59483,
+      "score": "Harbor City\nHBC\n0 : 0\n00:59 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 60682.626959,
+      "clock_ms": 59483,
+      "score": "Harbor City\nHBC\n0 : 0\n00:59 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 61687.820542,
+      "clock_ms": 61113,
+      "score": "Harbor City\nHBC\n0 : 0\n01:01 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 62692.632584,
+      "clock_ms": 61113,
+      "score": "Harbor City\nHBC\n0 : 0\n01:01 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 63696.447625,
+      "clock_ms": 63077,
+      "score": "Harbor City\nHBC\n0 : 0\n01:03 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 64700.951167,
+      "clock_ms": 64090,
+      "score": "Harbor City\nHBC\n0 : 0\n01:04 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 65708.19241700001,
+      "clock_ms": 64090,
+      "score": "Harbor City\nHBC\n0 : 0\n01:04 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 66713.13904200001,
+      "clock_ms": 65821,
+      "score": "Harbor City\nHBC\n0 : 0\n01:05 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 67718.075417,
+      "clock_ms": 67405,
+      "score": "Harbor City\nHBC\n0 : 0\n01:07 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 68723.500459,
+      "clock_ms": 68207,
+      "score": "Harbor City\nHBC\n0 : 0\n01:08 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 69728.430959,
+      "clock_ms": 68207,
+      "score": "Harbor City\nHBC\n0 : 0\n01:08 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 70732.67029200001,
+      "clock_ms": 70334,
+      "score": "Harbor City\nHBC\n0 : 0\n01:10 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 71737.16845900001,
+      "clock_ms": 71488,
+      "score": "Harbor City\nHBC\n0 : 0\n01:11 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 72741.872709,
+      "clock_ms": 71488,
+      "score": "Harbor City\nHBC\n0 : 0\n01:11 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 73745.94425,
+      "clock_ms": 73233,
+      "score": "Harbor City\nHBC\n0 : 0\n01:13 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 74755.6395,
+      "clock_ms": 73807,
+      "score": "Harbor City\nHBC\n0 : 0\n01:13 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 75760.444709,
+      "clock_ms": 74881,
+      "score": "Harbor City\nHBC\n0 : 0\n01:14 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 76765.425959,
+      "clock_ms": 74881,
+      "score": "Harbor City\nHBC\n0 : 0\n01:14 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 77770.633042,
+      "clock_ms": 77367,
+      "score": "Harbor City\nHBC\n0 : 0\n01:17 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 78777.736625,
+      "clock_ms": 77367,
+      "score": "Harbor City\nHBC\n0 : 0\n01:17 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 79783.83237500001,
+      "clock_ms": 79605,
+      "score": "Harbor City\nHBC\n0 : 0\n01:19 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 80788.85320900001,
+      "clock_ms": 79605,
+      "score": "Harbor City\nHBC\n0 : 0\n01:19 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 81792.02600000001,
+      "clock_ms": 79605,
+      "score": "Harbor City\nHBC\n0 : 0\n01:19 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 82796.211209,
+      "clock_ms": 82517,
+      "score": "Harbor City\nHBC\n0 : 0\n01:22 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 83801.63675,
+      "clock_ms": 82517,
+      "score": "Harbor City\nHBC\n0 : 0\n01:22 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 84805.78600000001,
+      "clock_ms": 84597,
+      "score": "Harbor City\nHBC\n0 : 0\n01:24 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 85809.936917,
+      "clock_ms": 85509,
+      "score": "Harbor City\nHBC\n0 : 0\n01:25 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 86815.62704200001,
+      "clock_ms": 86738,
+      "score": "Harbor City\nHBC\n0 : 0\n01:26 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 87819.78666700001,
+      "clock_ms": 87760,
+      "score": "Harbor City\nHBC\n0 : 0\n01:27 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 88824.398417,
+      "clock_ms": 88417,
+      "score": "Harbor City\nHBC\n0 : 0\n01:28 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 89830.56829200001,
+      "clock_ms": 89510,
+      "score": "Harbor City\nHBC\n0 : 0\n01:29 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 90834.496792,
+      "clock_ms": 90820,
+      "score": "Harbor City\nHBC\n0 : 0\n01:30 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 91839.293542,
+      "clock_ms": 91464,
+      "score": "Harbor City\nHBC\n0 : 0\n01:31 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 92843.88475000001,
+      "clock_ms": 92701,
+      "score": "Harbor City\nHBC\n0 : 0\n01:32 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 93848.64395900001,
+      "clock_ms": 92701,
+      "score": "Harbor City\nHBC\n0 : 0\n01:32 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 94853.108584,
+      "clock_ms": 94144,
+      "score": "Harbor City\nHBC\n0 : 0\n01:34 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 95857.175709,
+      "clock_ms": 94972,
+      "score": "Harbor City\nHBC\n0 : 0\n01:34 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 96861.6125,
+      "clock_ms": 94972,
+      "score": "Harbor City\nHBC\n0 : 0\n01:34 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 97866.771959,
+      "clock_ms": 97269,
+      "score": "Harbor City\nHBC\n0 : 0\n01:37 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 98871.64125,
+      "clock_ms": 98846,
+      "score": "Harbor City\nHBC\n0 : 0\n01:38 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 99876.49687500001,
+      "clock_ms": 98846,
+      "score": "Harbor City\nHBC\n0 : 0\n01:38 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 100882.629834,
+      "clock_ms": 100726,
+      "score": "Harbor City\nHBC\n0 : 0\n01:40 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 101887.595375,
+      "clock_ms": 101763,
+      "score": "Harbor City\nHBC\n0 : 0\n01:41 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 102893.05600000001,
+      "clock_ms": 102561,
+      "score": "Harbor City\nHBC\n0 : 0\n01:42 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 103898.366125,
+      "clock_ms": 103721,
+      "score": "Harbor City\nHBC\n0 : 0\n01:43 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 104903.96425,
+      "clock_ms": 104247,
+      "score": "Harbor City\nHBC\n1 : 0\n01:44 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 105908.91816700001,
+      "clock_ms": 105391,
+      "score": "Harbor City\nHBC\n1 : 0\n01:45 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 106913.42787500001,
+      "clock_ms": 106285,
+      "score": "Harbor City\nHBC\n1 : 0\n01:46 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 107917.784167,
+      "clock_ms": 107819,
+      "score": "Harbor City\nHBC\n1 : 0\n01:47 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 108922.634875,
+      "clock_ms": 108701,
+      "score": "Harbor City\nHBC\n1 : 0\n01:48 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 109929.771875,
+      "clock_ms": 109756,
+      "score": "Harbor City\nHBC\n1 : 0\n01:49 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 110936.659125,
+      "clock_ms": 110835,
+      "score": "Harbor City\nHBC\n1 : 0\n01:50 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 111941.33395900001,
+      "clock_ms": 111640,
+      "score": "Harbor City\nHBC\n1 : 0\n01:51 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 112947.568459,
+      "clock_ms": 112708,
+      "score": "Harbor City\nHBC\n1 : 0\n01:52 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 113952.23808400001,
+      "clock_ms": 113772,
+      "score": "Harbor City\nHBC\n1 : 0\n01:53 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 114958.16970900001,
+      "clock_ms": 114844,
+      "score": "Harbor City\nHBC\n1 : 0\n01:54 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 115963.39525,
+      "clock_ms": 115652,
+      "score": "Harbor City\nHBC\n1 : 0\n01:55 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 116967.38691700001,
+      "clock_ms": 116700,
+      "score": "Harbor City\nHBC\n1 : 0\n01:56 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 117975.64425000001,
+      "clock_ms": 117827,
+      "score": "Harbor City\nHBC\n1 : 0\n01:57 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 118982.10475,
+      "clock_ms": 118920,
+      "score": "Harbor City\nHBC\n1 : 0\n01:58 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 119987.303042,
+      "clock_ms": 119729,
+      "score": "Harbor City\nHBC\n1 : 0\n01:59 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 120993.68229200001,
+      "clock_ms": 120802,
+      "score": "Harbor City\nHBC\n1 : 0\n02:00 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 122001.47225,
+      "clock_ms": 121938,
+      "score": "Harbor City\nHBC\n1 : 0\n02:01 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 123007.45808400001,
+      "clock_ms": 122514,
+      "score": "Harbor City\nHBC\n1 : 0\n02:02 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 124012.403542,
+      "clock_ms": 123864,
+      "score": "Harbor City\nHBC\n1 : 0\n02:03 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 125019.59400000001,
+      "clock_ms": 124781,
+      "score": "Harbor City\nHBC\n1 : 0\n02:04 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 126025.369709,
+      "clock_ms": 125948,
+      "score": "Harbor City\nHBC\n1 : 0\n02:05 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 127030.24987500001,
+      "clock_ms": 126782,
+      "score": "Harbor City\nHBC\n1 : 0\n02:06 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 128035.066709,
+      "clock_ms": 127827,
+      "score": "Harbor City\nHBC\n1 : 0\n02:07 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 129040.00058400001,
+      "clock_ms": 128172,
+      "score": "Harbor City\nHBC\n1 : 0\n02:08 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 130045.36520900001,
+      "clock_ms": 129920,
+      "score": "Harbor City\nHBC\n1 : 0\n02:09 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 131050.98025,
+      "clock_ms": 130502,
+      "score": "Harbor City\nHBC\n1 : 0\n02:10 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 132056.100792,
+      "clock_ms": 130502,
+      "score": "Harbor City\nHBC\n1 : 0\n02:10 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 133062.529667,
+      "clock_ms": 130502,
+      "score": "Harbor City\nHBC\n1 : 0\n02:10 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 134067.38958400002,
+      "clock_ms": 133370,
+      "score": "Harbor City\nHBC\n1 : 0\n02:13 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 135072.392209,
+      "clock_ms": 133370,
+      "score": "Harbor City\nHBC\n1 : 0\n02:13 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 136077.51475,
+      "clock_ms": 133370,
+      "score": "Harbor City\nHBC\n1 : 0\n02:13 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 137081.517459,
+      "clock_ms": 136493,
+      "score": "Harbor City\nHBC\n0 : 0\n02:16 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 138086.294,
+      "clock_ms": 137340,
+      "score": "Harbor City\nHBC\n0 : 0\n02:17 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 139089.736125,
+      "clock_ms": 138572,
+      "score": "Harbor City\nHBC\n0 : 0\n02:18 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 140094.483709,
+      "clock_ms": 139701,
+      "score": "Harbor City\nHBC\n0 : 0\n02:19 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 141099.39712500002,
+      "clock_ms": 139701,
+      "score": "Harbor City\nHBC\n0 : 0\n02:19 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 142103.95758400002,
+      "clock_ms": 141725,
+      "score": "Harbor City\nHBC\n0 : 0\n02:21 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 143108.80558400002,
+      "clock_ms": 141725,
+      "score": "Harbor City\nHBC\n0 : 0\n02:21 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 144113.540834,
+      "clock_ms": 143556,
+      "score": "Harbor City\nHBC\n0 : 0\n02:23 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 145118.56441700002,
+      "clock_ms": 144908,
+      "score": "Harbor City\nHBC\n0 : 0\n02:24 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 146123.387125,
+      "clock_ms": 145942,
+      "score": "Harbor City\nHBC\n0 : 0\n02:25 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 147128.898834,
+      "clock_ms": 146783,
+      "score": "Harbor City\nHBC\n0 : 0\n02:26 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 148133.131459,
+      "clock_ms": 147782,
+      "score": "Harbor City\nHBC\n0 : 0\n02:27 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 149138.35154200002,
+      "clock_ms": 148681,
+      "score": "Harbor City\nHBC\n0 : 0\n02:28 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 150143.0995,
+      "clock_ms": 149683,
+      "score": "Harbor City\nHBC\n0 : 0\n02:29 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 151148.377125,
+      "clock_ms": 151019,
+      "score": "Harbor City\nHBC\n0 : 0\n02:31 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 152153.537,
+      "clock_ms": 151601,
+      "score": "Harbor City\nHBC\n0 : 0\n02:31 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 153158.518417,
+      "clock_ms": 152965,
+      "score": "Harbor City\nHBC\n0 : 0\n02:32 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 154163.098084,
+      "clock_ms": 153541,
+      "score": "Harbor City\nHBC\n0 : 0\n02:33 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 155168.306125,
+      "clock_ms": 154894,
+      "score": "Harbor City\nHBC\n0 : 0\n02:34 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 156173.24825,
+      "clock_ms": 156038,
+      "score": "Harbor City\nHBC\n0 : 0\n02:36 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 157178.454542,
+      "clock_ms": 157049,
+      "score": "Harbor City\nHBC\n0 : 0\n02:37 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 158183.144792,
+      "clock_ms": 157922,
+      "score": "Harbor City\nHBC\n0 : 0\n02:37 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 159188.683292,
+      "clock_ms": 158978,
+      "score": "Harbor City\nHBC\n0 : 0\n02:38 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 160194.022,
+      "clock_ms": 159817,
+      "score": "Harbor City\nHBC\n0 : 0\n02:39 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 161199.011084,
+      "clock_ms": 160909,
+      "score": "Harbor City\nHBC\n0 : 0\n02:40 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 162204.548875,
+      "clock_ms": 161193,
+      "score": "Harbor City\nHBC\n0 : 0\n02:41 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 163209.769542,
+      "clock_ms": 163080,
+      "score": "Harbor City\nHBC\n0 : 0\n02:43 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 164213.841334,
+      "clock_ms": 164161,
+      "score": "Harbor City\nHBC\n0 : 0\n02:44 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 165217.97783400002,
+      "clock_ms": 165003,
+      "score": "Harbor City\nHBC\n0 : 0\n02:45 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 166223.26754200002,
+      "clock_ms": 165813,
+      "score": "Harbor City\nHBC\n0 : 0\n02:45 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 167228.15608400002,
+      "clock_ms": 166644,
+      "score": "Harbor City\nHBC\n0 : 0\n02:46 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 168233.130209,
+      "clock_ms": 167783,
+      "score": "Harbor City\nHBC\n0 : 0\n02:47 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 169238.580292,
+      "clock_ms": 168616,
+      "score": "Harbor City\nHBC\n0 : 0\n02:48 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 170243.99850000002,
+      "clock_ms": 169694,
+      "score": "Harbor City\nHBC\n0 : 0\n02:49 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 171249.01458400002,
+      "clock_ms": 171152,
+      "score": "Harbor City\nHBC\n0 : 0\n02:51 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 172254.554834,
+      "clock_ms": 171991,
+      "score": "Harbor City\nHBC\n0 : 0\n02:51 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 173259.15625,
+      "clock_ms": 172842,
+      "score": "Harbor City\nHBC\n0 : 0\n02:52 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 174264.743709,
+      "clock_ms": 173985,
+      "score": "Harbor City\nHBC\n0 : 0\n02:53 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 175269.712709,
+      "clock_ms": 174834,
+      "score": "Harbor City\nHBC\n0 : 0\n02:54 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 176273.791667,
+      "clock_ms": 175943,
+      "score": "Harbor City\nHBC\n0 : 0\n02:55 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 177279.31012500002,
+      "clock_ms": 176821,
+      "score": "Harbor City\nHBC\n0 : 0\n02:56 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 178285.07579200002,
+      "clock_ms": 177934,
+      "score": "Harbor City\nHBC\n0 : 0\n02:57 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 179291.004792,
+      "clock_ms": 178784,
+      "score": "Harbor City\nHBC\n0 : 0\n02:58 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 180297.44658400002,
+      "clock_ms": 179929,
+      "score": "Harbor City\nHBC\n0 : 0\n02:59 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 181303.615417,
+      "clock_ms": 180774,
+      "score": "Harbor City\nHBC\n0 : 0\n03:00 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 182308.89125000002,
+      "clock_ms": 181936,
+      "score": "Harbor City\nHBC\n0 : 0\n03:01 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 183314.144875,
+      "clock_ms": 182822,
+      "score": "Harbor City\nHBC\n0 : 0\n03:02 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 184319.834125,
+      "clock_ms": 184000,
+      "score": "Harbor City\nHBC\n0 : 0\n03:04 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 185325.653417,
+      "clock_ms": 184842,
+      "score": "Harbor City\nHBC\n0 : 0\n03:04 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 186331.856959,
+      "clock_ms": 185998,
+      "score": "Harbor City\nHBC\n0 : 0\n03:05 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 187336.41075,
+      "clock_ms": 186929,
+      "score": "Harbor City\nHBC\n0 : 0\n03:06 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 188340.944667,
+      "clock_ms": 188109,
+      "score": "Harbor City\nHBC\n0 : 0\n03:08 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 189345.523334,
+      "clock_ms": 188957,
+      "score": "Harbor City\nHBC\n0 : 0\n03:08 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 190351.451375,
+      "clock_ms": 190165,
+      "score": "Harbor City\nHBC\n0 : 0\n03:10 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 191356.66704200002,
+      "clock_ms": 191020,
+      "score": "Harbor City\nHBC\n0 : 0\n03:11 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 192363.910084,
+      "clock_ms": 192193,
+      "score": "Harbor City\nHBC\n0 : 0\n03:12 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 193369.637542,
+      "clock_ms": 192845,
+      "score": "Harbor City\nHBC\n0 : 0\n03:12 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 194376.25904200002,
+      "clock_ms": 194001,
+      "score": "Harbor City\nHBC\n0 : 0\n03:14 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 195383.347292,
+      "clock_ms": 194856,
+      "score": "Harbor City\nHBC\n0 : 0\n03:14 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 196388.48325000002,
+      "clock_ms": 196103,
+      "score": "Harbor City\nHBC\n0 : 0\n03:16 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 197392.674584,
+      "clock_ms": 196942,
+      "score": "Harbor City\nHBC\n0 : 0\n03:16 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 198398.801709,
+      "clock_ms": 198141,
+      "score": "Harbor City\nHBC\n0 : 0\n03:18 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 199404.38070900002,
+      "clock_ms": 199021,
+      "score": "Harbor City\nHBC\n0 : 0\n03:19 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 200409.421417,
+      "clock_ms": 200229,
+      "score": "Harbor City\nHBC\n0 : 0\n03:20 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 201414.903584,
+      "clock_ms": 201064,
+      "score": "Harbor City\nHBC\n0 : 0\n03:21 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 202420.969584,
+      "clock_ms": 202317,
+      "score": "Harbor City\nHBC\n0 : 0\n03:22 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 203428.78475,
+      "clock_ms": 203149,
+      "score": "Harbor City\nHBC\n0 : 0\n03:23 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 204435.2735,
+      "clock_ms": 204365,
+      "score": "Harbor City\nHBC\n0 : 0\n03:24 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 205441.80575,
+      "clock_ms": 205227,
+      "score": "Harbor City\nHBC\n0 : 0\n03:25 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 206446.88025000002,
+      "clock_ms": 205227,
+      "score": "Harbor City\nHBC\n0 : 0\n03:25 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 207454.111834,
+      "clock_ms": 207374,
+      "score": "Harbor City\nHBC\n0 : 0\n03:27 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 208458.951792,
+      "clock_ms": 208325,
+      "score": "Harbor City\nHBC\n0 : 0\n03:28 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 209464.342917,
+      "clock_ms": 208946,
+      "score": "Harbor City\nHBC\n0 : 0\n03:28 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 210468.930042,
+      "clock_ms": 210152,
+      "score": "Harbor City\nHBC\n0 : 0\n03:30 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 211474.358834,
+      "clock_ms": 210977,
+      "score": "Harbor City\nHBC\n0 : 0\n03:30 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 212479.696334,
+      "clock_ms": 212292,
+      "score": "Harbor City\nHBC\n0 : 0\n03:32 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 213485.23025,
+      "clock_ms": 213129,
+      "score": "Harbor City\nHBC\n0 : 0\n03:33 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 214490.159542,
+      "clock_ms": 214411,
+      "score": "Harbor City\nHBC\n0 : 0\n03:34 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 215497.444667,
+      "clock_ms": 215277,
+      "score": "Harbor City\nHBC\n0 : 0\n03:35 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 216502.826459,
+      "clock_ms": 215277,
+      "score": "Harbor City\nHBC\n0 : 0\n03:35 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 217507.94529200002,
+      "clock_ms": 217404,
+      "score": "Harbor City\nHBC\n0 : 0\n03:37 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 218513.20025,
+      "clock_ms": 217404,
+      "score": "Harbor City\nHBC\n0 : 0\n03:37 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 219518.674959,
+      "clock_ms": 219026,
+      "score": "Harbor City\nHBC\n0 : 0\n03:39 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 220524.487709,
+      "clock_ms": 219572,
+      "score": "Harbor City\nHBC\n0 : 0\n03:39 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 221530.84275,
+      "clock_ms": 221406,
+      "score": "Harbor City\nHBC\n0 : 0\n03:41 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 222536.75904200002,
+      "clock_ms": 221406,
+      "score": "Harbor City\nHBC\n0 : 0\n03:41 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 223542.88491700002,
+      "clock_ms": 223002,
+      "score": "Harbor City\nHBC\n0 : 0\n03:43 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 224548.852667,
+      "clock_ms": 223563,
+      "score": "Harbor City\nHBC\n0 : 0\n03:43 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 225554.386917,
+      "clock_ms": 225171,
+      "score": "Harbor City\nHBC\n0 : 0\n03:45 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 226559.260084,
+      "clock_ms": 226500,
+      "score": "Harbor City\nHBC\n0 : 0\n03:46 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 227567.46183400002,
+      "clock_ms": 227339,
+      "score": "Harbor City\nHBC\n0 : 0\n03:47 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 228572.049834,
+      "clock_ms": 227339,
+      "score": "Harbor City\nHBC\n0 : 0\n03:47 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 229577.68054200002,
+      "clock_ms": 229533,
+      "score": "Harbor City\nHBC\n0 : 0\n03:49 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 230582.332792,
+      "clock_ms": 229533,
+      "score": "Harbor City\nHBC\n0 : 0\n03:49 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 231587.729292,
+      "clock_ms": 231124,
+      "score": "Harbor City\nHBC\n0 : 0\n03:51 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 232592.995875,
+      "clock_ms": 232487,
+      "score": "Harbor City\nHBC\n0 : 0\n03:52 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 233597.357209,
+      "clock_ms": 233324,
+      "score": "Harbor City\nHBC\n0 : 0\n03:53 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 234603.217459,
+      "clock_ms": 234367,
+      "score": "Harbor City\nHBC\n0 : 0\n03:54 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 235607.921125,
+      "clock_ms": 235230,
+      "score": "Harbor City\nHBC\n0 : 0\n03:55 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 236613.833917,
+      "clock_ms": 236567,
+      "score": "Harbor City\nHBC\n0 : 0\n03:56 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 237618.461292,
+      "clock_ms": 237420,
+      "score": "Harbor City\nHBC\n0 : 0\n03:57 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 238624.406292,
+      "clock_ms": 238523,
+      "score": "Harbor City\nHBC\n0 : 0\n03:58 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 239629.603209,
+      "clock_ms": 239361,
+      "score": "Harbor City\nHBC\n0 : 0\n03:59 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 240635.19491700002,
+      "clock_ms": 239361,
+      "score": "Harbor City\nHBC\n0 : 0\n03:59 · P1\nAlder Rovers\nALD"
+    },
+    {
+      "elapsed_ms": 241640.62387500002,
+      "clock_ms": 240000,
+      "score": "Harbor City\nHBC\n0 : 0\n04:00 · P1\nAlder Rovers\nALD"
+    }
+  ]
+}

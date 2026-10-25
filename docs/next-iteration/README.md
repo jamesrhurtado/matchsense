@@ -1,5 +1,7 @@
 # WHY/NOW — Grand Prize improvement plan
 
+> **Latest synthetic-data slice (25 October 2026):** SD01–SD04 are implemented; see [dataset and preview guide](../synthetic-dataset-v1.md), [verification](../../evals/synthetic-vnext/verification.md), [research](../synthetic-data-research.md) and [SD01–SD08 plan/status](synthetic-data-plan.md). SD05 onward remains planned. Current product behavior is recorded in the [delivery record](decision-log.md) and [live demo guide](../live-match-demo.md). Dated plans below retain their historical status.
+
 > **Next implementation handoff (23 October 2026):** [Broader match coverage implementation plan](match-coverage-implementation-plan.md). Goals, shots, possession summaries and recovery/control-change stories are now required next-iteration backlog, with shared evidence, approval, timeline and recap. The [90+ improvement plan](grand-prize-90-plus-plan.md) and the version 0.3 plan below remain historical specifications; their unresolved correctness/research gates still apply. New coverage is planned, not implemented. Delivery is tracked in [the implementation record](decision-log.md).
 
 **Prepared:** 21 October 2026, America/Lima. **Baseline:** `e62c043` / API 0.3.0, cloud-v13 / web cloud-v7. **Status:** researched engineering handoff; product changes below are not implemented. **Owner:** James. Target the first-place Grand Prize through a more useful, convincing end-to-end product.

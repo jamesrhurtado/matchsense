@@ -2,6 +2,36 @@
 
 ## Purpose and distribution
 
+### Live editorial iteration addendum — 25 October 2026
+
+Use this instrument for the quieter live viewer, audience preview and interval
+catch-up. Findings remain pending. Keep original R1 results separate; record the
+build, execution mode and features enabled. Ask what participants think the product
+does before explaining it.
+
+Assign producers one task: choose a supported explanation worth sharing while
+play continues, preview its audience versions, and approve or decline. Record
+review time remaining, edits, expiry and reasons for declining. Declining a weak
+story is not automatically failure. Ask whether their current tool does this better.
+
+Ask viewers to watch normally, choose whether to open an explanation, and describe
+what changed and what cannot be concluded. Record match action missed while
+reading. After an absence, ask them to find approved explanations since their last
+visit. Include a correction; check their understanding of current score and
+withdrawn copy.
+
+For paired comparisons, prepare equivalent synthetic intervals and a source-checked
+factual timeline without suggested prose. Counterbalance baseline/candidate order;
+avoid immediately repeating the same answer. An independent football reviewer must
+check answer keys before grading. Those materials/key review and participant
+assignments remain pending. The pitch alone is not a matched statistical baseline.
+
+Add condition/order, assistance, paraphrase, unsupported interpretation, missed
+match action and preference/reason to the existing task record. Report person-level
+paired observations and counts. Repeated confusion in two sessions triggers a
+revision; a critical score/publication misunderstanding blocks readiness claims.
+Small samples do not establish market demand, retention or editorial savings.
+
 Use this guide to run consistent individual sessions and turn observations into product changes. It contains expected behavior and study controls. Keep it with the facilitator; do not distribute it with participant handouts or anonymous output packets.
 
 Instrument R1, 22 October 2026. These are blank instruments. No completed sessions, ratings or consent are implied. James coordinates recruitment and scheduling. This is a formative pilot, not a representative market study or a claim of multi-agent superiority.

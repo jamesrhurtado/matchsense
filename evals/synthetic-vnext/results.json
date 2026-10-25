@@ -1,0 +1,1913 @@
+{
+  "source_profile": "constrained-episodes-v1",
+  "model_calls": 0,
+  "reference_sha256": "7d7e8c6fb643e55ac7bd518dce4ace57f6096a6f30f2dcbe9fd01fd63a75742b",
+  "structural_parents": 6,
+  "specification_cases": 12,
+  "source_views": 24,
+  "held_out_parents": 0,
+  "human_review": "pending",
+  "reference_checkpoints": 32,
+  "reference_passed": 32,
+  "source_views_passed": 24,
+  "family_cases": {
+    "pass": [
+      "d01-a",
+      "d06-a",
+      "d06-b"
+    ],
+    "pressure": [
+      "d01-a",
+      "d06-a",
+      "d06-b"
+    ],
+    "shot": [
+      "d03-a",
+      "d03-b",
+      "d04-a",
+      "d04-b",
+      "d06-a",
+      "d06-b"
+    ],
+    "goal": [
+      "d04-a"
+    ],
+    "recovery": [
+      "d02-a",
+      "d02-b",
+      "d03-a",
+      "d03-b",
+      "d04-a",
+      "d04-b",
+      "d06-a",
+      "d06-b"
+    ],
+    "possession": [
+      "d01-a",
+      "d01-b",
+      "d02-a",
+      "d02-b",
+      "d03-a",
+      "d03-b",
+      "d04-a",
+      "d04-b",
+      "d05-a",
+      "d05-b",
+      "d06-a",
+      "d06-b"
+    ]
+  },
+  "family_coverage_cutoff_ms": 90000,
+  "references": [
+    {
+      "case": "d01-a",
+      "at": 24999,
+      "kind": "eligible_passes",
+      "expected": [],
+      "actual": [],
+      "passed": true
+    },
+    {
+      "case": "d01-a",
+      "at": 25000,
+      "kind": "eligible_passes",
+      "expected": [
+        "p02"
+      ],
+      "actual": [
+        "p02"
+      ],
+      "passed": true
+    },
+    {
+      "case": "d01-a",
+      "at": 25000,
+      "kind": "pass_fact",
+      "subject": "p02",
+      "expected": {
+        "forward_m": 24,
+        "progression_m": 7,
+        "receiver_id": "blue-11"
+      },
+      "actual": {
+        "forward_m": 24.0,
+        "progression_m": 7.0,
+        "receiver_id": "blue-11"
+      },
+      "passed": true
+    },
+    {
+      "case": "d01-a",
+      "at": 25000,
+      "kind": "pressure_ids",
+      "expected": [
+        "p02"
+      ],
+      "actual": [
+        "p02"
+      ],
+      "passed": true
+    },
+    {
+      "case": "d01-b",
+      "at": 25000,
+      "kind": "eligible_passes",
+      "expected": [],
+      "actual": [],
+      "passed": true
+    },
+    {
+      "case": "d01-b",
+      "at": 25000,
+      "kind": "pressure_ids",
+      "expected": [],
+      "actual": [],
+      "passed": true
+    },
+    {
+      "case": "d02-a",
+      "at": 20000,
+      "kind": "recovery",
+      "subject": "i01",
+      "expected": {
+        "previous_team_id": "amber",
+        "new_team_id": "blue",
+        "cause": "interception",
+        "recovering_player": "blue-06",
+        "sustained": true
+      },
+      "actual": {
+        "previous_team_id": "amber",
+        "new_team_id": "blue",
+        "cause": "interception",
+        "recovering_player": "blue-06",
+        "sustained": true
+      },
+      "passed": true
+    },
+    {
+      "case": "d02-b",
+      "at": 20000,
+      "kind": "recovery",
+      "subject": "i01",
+      "expected": {
+        "previous_team_id": null,
+        "new_team_id": "blue",
+        "cause": "loose_ball",
+        "recovering_player": null,
+        "sustained": true
+      },
+      "actual": {
+        "previous_team_id": null,
+        "new_team_id": "blue",
+        "cause": "loose_ball",
+        "recovering_player": null,
+        "sustained": true
+      },
+      "passed": true
+    },
+    {
+      "case": "d02-b",
+      "at": 17000,
+      "kind": "pass_absent",
+      "subject": "p01",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "case": "d03-a",
+      "at": 23199,
+      "kind": "shot_absent",
+      "subject": "s01",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "case": "d03-a",
+      "at": 23200,
+      "kind": "shot",
+      "subject": "s01",
+      "expected": {
+        "outcome": "saved",
+        "shooter": "blue-09"
+      },
+      "actual": {
+        "outcome": "saved",
+        "shooter": "blue-09"
+      },
+      "passed": true
+    },
+    {
+      "case": "d03-b",
+      "at": 23200,
+      "kind": "shot",
+      "subject": "s01",
+      "expected": {
+        "outcome": "blocked",
+        "shooter": "blue-09"
+      },
+      "actual": {
+        "outcome": "blocked",
+        "shooter": "blue-09"
+      },
+      "passed": true
+    },
+    {
+      "case": "d03-b",
+      "at": 29000,
+      "kind": "recovery",
+      "subject": "i01",
+      "expected": {
+        "cause": "loose_ball",
+        "recovering_player": "blue-10",
+        "sustained": true
+      },
+      "actual": {
+        "cause": "loose_ball",
+        "recovering_player": "blue-10",
+        "sustained": true
+      },
+      "passed": true
+    },
+    {
+      "case": "d04-a",
+      "at": 35999,
+      "kind": "score",
+      "expected": {
+        "blue": 1,
+        "amber": 1
+      },
+      "actual": {
+        "blue": 1,
+        "amber": 1
+      },
+      "passed": true
+    },
+    {
+      "case": "d04-a",
+      "at": 36000,
+      "kind": "score",
+      "expected": {
+        "blue": 2,
+        "amber": 1
+      },
+      "actual": {
+        "blue": 2,
+        "amber": 1
+      },
+      "passed": true
+    },
+    {
+      "case": "d04-a",
+      "at": 36000,
+      "kind": "goal",
+      "subject": "g01",
+      "expected": {
+        "scorer": "blue-09"
+      },
+      "actual": {
+        "scorer": "blue-09"
+      },
+      "passed": true
+    },
+    {
+      "case": "d04-b",
+      "at": 51999,
+      "kind": "score",
+      "expected": {
+        "blue": 2,
+        "amber": 1
+      },
+      "actual": {
+        "blue": 2,
+        "amber": 1
+      },
+      "passed": true
+    },
+    {
+      "case": "d04-b",
+      "at": 52000,
+      "kind": "score",
+      "expected": {
+        "blue": 1,
+        "amber": 1
+      },
+      "actual": {
+        "blue": 1,
+        "amber": 1
+      },
+      "passed": true
+    },
+    {
+      "case": "d04-b",
+      "at": 52000,
+      "kind": "goal_absent",
+      "subject": "g01",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "case": "d04-b",
+      "at": 52000,
+      "kind": "shot",
+      "subject": "s01",
+      "expected": {
+        "outcome": "unknown",
+        "shooter": "blue-09"
+      },
+      "actual": {
+        "outcome": "unknown",
+        "shooter": "blue-09"
+      },
+      "passed": true
+    },
+    {
+      "case": "d05-a",
+      "at": 90000,
+      "kind": "eligible_passes",
+      "expected": [],
+      "actual": [],
+      "passed": true
+    },
+    {
+      "case": "d05-a",
+      "at": 60000,
+      "kind": "possession",
+      "expected": {
+        "assigned_ms": 60000,
+        "unknown_ms": 0,
+        "dead_ms": 0,
+        "loose_ms": 0,
+        "blue_ms": 60000,
+        "has_percentages": true
+      },
+      "actual": {
+        "assigned_ms": 60000,
+        "unknown_ms": 0,
+        "dead_ms": 0,
+        "loose_ms": 0,
+        "blue_ms": 60000,
+        "has_percentages": true
+      },
+      "passed": true
+    },
+    {
+      "case": "d05-b",
+      "at": 60000,
+      "kind": "possession",
+      "expected": {
+        "assigned_ms": 55900,
+        "unknown_ms": 4100,
+        "dead_ms": 0,
+        "loose_ms": 0,
+        "blue_ms": 55900,
+        "has_percentages": false
+      },
+      "actual": {
+        "assigned_ms": 55900,
+        "unknown_ms": 4100,
+        "dead_ms": 0,
+        "loose_ms": 0,
+        "blue_ms": 55900,
+        "has_percentages": false
+      },
+      "passed": true
+    },
+    {
+      "case": "d05-b",
+      "at": 90000,
+      "kind": "possession",
+      "expected": {
+        "assigned_ms": 52900,
+        "unknown_ms": 7100,
+        "has_percentages": false
+      },
+      "actual": {
+        "assigned_ms": 52900,
+        "unknown_ms": 7100,
+        "has_percentages": false
+      },
+      "passed": true
+    },
+    {
+      "case": "d06-a",
+      "at": 19000,
+      "kind": "eligible_passes",
+      "expected": [
+        "p01"
+      ],
+      "actual": [
+        "p01"
+      ],
+      "passed": true
+    },
+    {
+      "case": "d06-a",
+      "at": 19000,
+      "kind": "pressure_ids",
+      "expected": [
+        "p01"
+      ],
+      "actual": [
+        "p01"
+      ],
+      "passed": true
+    },
+    {
+      "case": "d06-a",
+      "at": 19000,
+      "kind": "controller",
+      "expected": "blue-10",
+      "actual": "blue-10",
+      "passed": true
+    },
+    {
+      "case": "d06-a",
+      "at": 34200,
+      "kind": "shot",
+      "subject": "s01",
+      "expected": {
+        "outcome": "off_target",
+        "shooter": "blue-10"
+      },
+      "actual": {
+        "outcome": "off_target",
+        "shooter": "blue-10"
+      },
+      "passed": true
+    },
+    {
+      "case": "d06-b",
+      "at": 25999,
+      "kind": "eligible_passes",
+      "expected": [],
+      "actual": [],
+      "passed": true
+    },
+    {
+      "case": "d06-b",
+      "at": 26000,
+      "kind": "eligible_passes",
+      "expected": [
+        "p01"
+      ],
+      "actual": [
+        "p01"
+      ],
+      "passed": true
+    },
+    {
+      "case": "d06-b",
+      "at": 39999,
+      "kind": "shot_absent",
+      "subject": "s01",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "case": "d06-b",
+      "at": 40000,
+      "kind": "shot",
+      "subject": "s01",
+      "expected": {
+        "outcome": "unknown",
+        "shooter": null
+      },
+      "actual": {
+        "outcome": "unknown",
+        "shooter": null
+      },
+      "passed": true
+    }
+  ],
+  "source_validation": [
+    {
+      "case": "d01-a",
+      "delivery_faults": false,
+      "passed": true,
+      "profile_version": "constrained-episodes-v1",
+      "failures": [],
+      "incomplete_observation_checks": [],
+      "diagnostics": {
+        "maximum_player_speed_mps": 4.362,
+        "maximum_player_acceleration_mps2": 4.48,
+        "maximum_player_turn_radians_per_s": 0.01442,
+        "overlap_frames": 0,
+        "frame_count": 901,
+        "frame_intervals_ms": {
+          "100": 900
+        },
+        "keeper_ranges": {
+          "blue-01": {
+            "x_m": [
+              5.26,
+              8.69
+            ],
+            "y_m": [
+              30.48,
+              36.42
+            ]
+          },
+          "amber-01": {
+            "x_m": [
+              94.91,
+              98.34
+            ],
+            "y_m": [
+              30.48,
+              36.42
+            ]
+          }
+        }
+      },
+      "latest_corrected_profile": null,
+      "legacy_feed": {
+        "frames": 901,
+        "messages": 908,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 908,
+        "unique_observations": 908,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      },
+      "football_review": "pending"
+    },
+    {
+      "case": "d01-a",
+      "delivery_faults": true,
+      "passed": true,
+      "profile_version": "constrained-episodes-v1",
+      "failures": [],
+      "incomplete_observation_checks": [],
+      "diagnostics": {
+        "maximum_player_speed_mps": 4.362,
+        "maximum_player_acceleration_mps2": 4.48,
+        "maximum_player_turn_radians_per_s": 0.01442,
+        "overlap_frames": 0,
+        "frame_count": 899,
+        "frame_intervals_ms": {
+          "100": 897,
+          "300": 1
+        },
+        "keeper_ranges": {
+          "blue-01": {
+            "x_m": [
+              5.26,
+              8.69
+            ],
+            "y_m": [
+              30.48,
+              36.42
+            ]
+          },
+          "amber-01": {
+            "x_m": [
+              94.91,
+              98.34
+            ],
+            "y_m": [
+              30.48,
+              36.42
+            ]
+          }
+        }
+      },
+      "latest_corrected_profile": null,
+      "legacy_feed": {
+        "frames": 899,
+        "messages": 906,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 907,
+        "unique_observations": 906,
+        "exact_retransmissions": 1,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 800
+      },
+      "football_review": "pending"
+    },
+    {
+      "case": "d01-b",
+      "delivery_faults": false,
+      "passed": true,
+      "profile_version": "constrained-episodes-v1",
+      "failures": [],
+      "incomplete_observation_checks": [],
+      "diagnostics": {
+        "maximum_player_speed_mps": 4.362,
+        "maximum_player_acceleration_mps2": 4.48,
+        "maximum_player_turn_radians_per_s": 0.01442,
+        "overlap_frames": 0,
+        "frame_count": 901,
+        "frame_intervals_ms": {
+          "100": 900
+        },
+        "keeper_ranges": {
+          "blue-01": {
+            "x_m": [
+              5.26,
+              8.69
+            ],
+            "y_m": [
+              30.48,
+              36.42
+            ]
+          },
+          "amber-01": {
+            "x_m": [
+              94.91,
+              98.34
+            ],
+            "y_m": [
+              30.48,
+              36.42
+            ]
+          }
+        }
+      },
+      "latest_corrected_profile": null,
+      "legacy_feed": {
+        "frames": 901,
+        "messages": 908,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 908,
+        "unique_observations": 908,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      },
+      "football_review": "pending"
+    },
+    {
+      "case": "d01-b",
+      "delivery_faults": true,
+      "passed": true,
+      "profile_version": "constrained-episodes-v1",
+      "failures": [],
+      "incomplete_observation_checks": [],
+      "diagnostics": {
+        "maximum_player_speed_mps": 4.362,
+        "maximum_player_acceleration_mps2": 4.48,
+        "maximum_player_turn_radians_per_s": 0.01442,
+        "overlap_frames": 0,
+        "frame_count": 899,
+        "frame_intervals_ms": {
+          "100": 897,
+          "300": 1
+        },
+        "keeper_ranges": {
+          "blue-01": {
+            "x_m": [
+              5.26,
+              8.69
+            ],
+            "y_m": [
+              30.48,
+              36.42
+            ]
+          },
+          "amber-01": {
+            "x_m": [
+              94.91,
+              98.34
+            ],
+            "y_m": [
+              30.48,
+              36.42
+            ]
+          }
+        }
+      },
+      "latest_corrected_profile": null,
+      "legacy_feed": {
+        "frames": 899,
+        "messages": 906,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 907,
+        "unique_observations": 906,
+        "exact_retransmissions": 1,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 800
+      },
+      "football_review": "pending"
+    },
+    {
+      "case": "d02-a",
+      "delivery_faults": false,
+      "passed": true,
+      "profile_version": "constrained-episodes-v1",
+      "failures": [],
+      "incomplete_observation_checks": [],
+      "diagnostics": {
+        "maximum_player_speed_mps": 4.40627,
+        "maximum_player_acceleration_mps2": 4.52548,
+        "maximum_player_turn_radians_per_s": 0.00297,
+        "overlap_frames": 0,
+        "frame_count": 901,
+        "frame_intervals_ms": {
+          "100": 900
+        },
+        "keeper_ranges": {
+          "blue-01": {
+            "x_m": [
+              7.5,
+              9.015
+            ],
+            "y_m": [
+              30.92,
+              37.08
+            ]
+          },
+          "amber-01": {
+            "x_m": [
+              97.15,
+              98.665
+            ],
+            "y_m": [
+              30.92,
+              37.08
+            ]
+          }
+        }
+      },
+      "latest_corrected_profile": null,
+      "legacy_feed": {
+        "frames": 901,
+        "messages": 908,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 908,
+        "unique_observations": 908,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      },
+      "football_review": "pending"
+    },
+    {
+      "case": "d02-a",
+      "delivery_faults": true,
+      "passed": true,
+      "profile_version": "constrained-episodes-v1",
+      "failures": [],
+      "incomplete_observation_checks": [],
+      "diagnostics": {
+        "maximum_player_speed_mps": 4.40627,
+        "maximum_player_acceleration_mps2": 4.52548,
+        "maximum_player_turn_radians_per_s": 0.00297,
+        "overlap_frames": 0,
+        "frame_count": 899,
+        "frame_intervals_ms": {
+          "100": 897,
+          "300": 1
+        },
+        "keeper_ranges": {
+          "blue-01": {
+            "x_m": [
+              7.5,
+              9.015
+            ],
+            "y_m": [
+              30.92,
+              37.08
+            ]
+          },
+          "amber-01": {
+            "x_m": [
+              97.15,
+              98.665
+            ],
+            "y_m": [
+              30.92,
+              37.08
+            ]
+          }
+        }
+      },
+      "latest_corrected_profile": null,
+      "legacy_feed": {
+        "frames": 899,
+        "messages": 906,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 907,
+        "unique_observations": 906,
+        "exact_retransmissions": 1,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 800
+      },
+      "football_review": "pending"
+    },
+    {
+      "case": "d02-b",
+      "delivery_faults": false,
+      "passed": true,
+      "profile_version": "constrained-episodes-v1",
+      "failures": [],
+      "incomplete_observation_checks": [],
+      "diagnostics": {
+        "maximum_player_speed_mps": 4.40627,
+        "maximum_player_acceleration_mps2": 4.52548,
+        "maximum_player_turn_radians_per_s": 0.00297,
+        "overlap_frames": 0,
+        "frame_count": 901,
+        "frame_intervals_ms": {
+          "100": 900
+        },
+        "keeper_ranges": {
+          "blue-01": {
+            "x_m": [
+              7.5,
+              9.015
+            ],
+            "y_m": [
+              30.92,
+              37.08
+            ]
+          },
+          "amber-01": {
+            "x_m": [
+              97.15,
+              98.665
+            ],
+            "y_m": [
+              30.92,
+              37.08
+            ]
+          }
+        }
+      },
+      "latest_corrected_profile": null,
+      "legacy_feed": {
+        "frames": 901,
+        "messages": 906,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 906,
+        "unique_observations": 906,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      },
+      "football_review": "pending"
+    },
+    {
+      "case": "d02-b",
+      "delivery_faults": true,
+      "passed": true,
+      "profile_version": "constrained-episodes-v1",
+      "failures": [],
+      "incomplete_observation_checks": [],
+      "diagnostics": {
+        "maximum_player_speed_mps": 4.40627,
+        "maximum_player_acceleration_mps2": 4.52548,
+        "maximum_player_turn_radians_per_s": 0.00297,
+        "overlap_frames": 0,
+        "frame_count": 899,
+        "frame_intervals_ms": {
+          "100": 897,
+          "300": 1
+        },
+        "keeper_ranges": {
+          "blue-01": {
+            "x_m": [
+              7.5,
+              9.015
+            ],
+            "y_m": [
+              30.92,
+              37.08
+            ]
+          },
+          "amber-01": {
+            "x_m": [
+              97.15,
+              98.665
+            ],
+            "y_m": [
+              30.92,
+              37.08
+            ]
+          }
+        }
+      },
+      "latest_corrected_profile": null,
+      "legacy_feed": {
+        "frames": 899,
+        "messages": 904,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 905,
+        "unique_observations": 904,
+        "exact_retransmissions": 1,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 800
+      },
+      "football_review": "pending"
+    },
+    {
+      "case": "d03-a",
+      "delivery_faults": false,
+      "passed": true,
+      "profile_version": "constrained-episodes-v1",
+      "failures": [],
+      "incomplete_observation_checks": [],
+      "diagnostics": {
+        "maximum_player_speed_mps": 3.24234,
+        "maximum_player_acceleration_mps2": 0.92445,
+        "maximum_player_turn_radians_per_s": 0.0118,
+        "overlap_frames": 15,
+        "frame_count": 901,
+        "frame_intervals_ms": {
+          "100": 900
+        },
+        "keeper_ranges": {
+          "blue-01": {
+            "x_m": [
+              9.18,
+              10.02
+            ],
+            "y_m": [
+              32.02,
+              37.08
+            ]
+          },
+          "amber-01": {
+            "x_m": [
+              96.0,
+              99
+            ],
+            "y_m": [
+              32.0,
+              34
+            ]
+          }
+        }
+      },
+      "latest_corrected_profile": null,
+      "legacy_feed": {
+        "frames": 901,
+        "messages": 907,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 907,
+        "unique_observations": 907,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      },
+      "football_review": "pending"
+    },
+    {
+      "case": "d03-a",
+      "delivery_faults": true,
+      "passed": true,
+      "profile_version": "constrained-episodes-v1",
+      "failures": [],
+      "incomplete_observation_checks": [],
+      "diagnostics": {
+        "maximum_player_speed_mps": 3.24234,
+        "maximum_player_acceleration_mps2": 0.92445,
+        "maximum_player_turn_radians_per_s": 0.0118,
+        "overlap_frames": 15,
+        "frame_count": 899,
+        "frame_intervals_ms": {
+          "100": 897,
+          "300": 1
+        },
+        "keeper_ranges": {
+          "blue-01": {
+            "x_m": [
+              9.18,
+              10.02
+            ],
+            "y_m": [
+              32.02,
+              37.08
+            ]
+          },
+          "amber-01": {
+            "x_m": [
+              96.0,
+              99
+            ],
+            "y_m": [
+              32.0,
+              34
+            ]
+          }
+        }
+      },
+      "latest_corrected_profile": null,
+      "legacy_feed": {
+        "frames": 899,
+        "messages": 905,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 906,
+        "unique_observations": 905,
+        "exact_retransmissions": 1,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 800
+      },
+      "football_review": "pending"
+    },
+    {
+      "case": "d03-b",
+      "delivery_faults": false,
+      "passed": true,
+      "profile_version": "constrained-episodes-v1",
+      "failures": [],
+      "incomplete_observation_checks": [],
+      "diagnostics": {
+        "maximum_player_speed_mps": 3.24234,
+        "maximum_player_acceleration_mps2": 0.92445,
+        "maximum_player_turn_radians_per_s": 0.0118,
+        "overlap_frames": 15,
+        "frame_count": 901,
+        "frame_intervals_ms": {
+          "100": 900
+        },
+        "keeper_ranges": {
+          "blue-01": {
+            "x_m": [
+              9.04,
+              10.095
+            ],
+            "y_m": [
+              32.02,
+              36.42
+            ]
+          },
+          "amber-01": {
+            "x_m": [
+              98.69,
+              99.745
+            ],
+            "y_m": [
+              32.02,
+              36.42
+            ]
+          }
+        }
+      },
+      "latest_corrected_profile": null,
+      "legacy_feed": {
+        "frames": 901,
+        "messages": 906,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 906,
+        "unique_observations": 906,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      },
+      "football_review": "pending"
+    },
+    {
+      "case": "d03-b",
+      "delivery_faults": true,
+      "passed": true,
+      "profile_version": "constrained-episodes-v1",
+      "failures": [],
+      "incomplete_observation_checks": [],
+      "diagnostics": {
+        "maximum_player_speed_mps": 3.24234,
+        "maximum_player_acceleration_mps2": 0.92445,
+        "maximum_player_turn_radians_per_s": 0.0118,
+        "overlap_frames": 15,
+        "frame_count": 899,
+        "frame_intervals_ms": {
+          "100": 897,
+          "300": 1
+        },
+        "keeper_ranges": {
+          "blue-01": {
+            "x_m": [
+              9.04,
+              10.095
+            ],
+            "y_m": [
+              32.02,
+              36.42
+            ]
+          },
+          "amber-01": {
+            "x_m": [
+              98.69,
+              99.745
+            ],
+            "y_m": [
+              32.02,
+              36.42
+            ]
+          }
+        }
+      },
+      "latest_corrected_profile": null,
+      "legacy_feed": {
+        "frames": 899,
+        "messages": 904,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 905,
+        "unique_observations": 904,
+        "exact_retransmissions": 1,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 800
+      },
+      "football_review": "pending"
+    },
+    {
+      "case": "d04-a",
+      "delivery_faults": false,
+      "passed": true,
+      "profile_version": "constrained-episodes-v1",
+      "failures": [],
+      "incomplete_observation_checks": [],
+      "diagnostics": {
+        "maximum_player_speed_mps": 1.991,
+        "maximum_player_acceleration_mps2": 0.77,
+        "maximum_player_turn_radians_per_s": 0.01393,
+        "overlap_frames": 0,
+        "frame_count": 901,
+        "frame_intervals_ms": {
+          "100": 900
+        },
+        "keeper_ranges": {
+          "blue-01": {
+            "x_m": [
+              6.24,
+              11.35
+            ],
+            "y_m": [
+              34.0,
+              37.069
+            ]
+          },
+          "amber-01": {
+            "x_m": [
+              95.89,
+              101.0
+            ],
+            "y_m": [
+              34.0,
+              37.069
+            ]
+          }
+        }
+      },
+      "latest_corrected_profile": {
+        "passed": true,
+        "diagnostics": {
+          "maximum_player_speed_mps": 1.991,
+          "maximum_player_acceleration_mps2": 0.77,
+          "maximum_player_turn_radians_per_s": 0.01393,
+          "overlap_frames": 0,
+          "frame_count": 901,
+          "frame_intervals_ms": {
+            "100": 900
+          },
+          "keeper_ranges": {
+            "blue-01": {
+              "x_m": [
+                6.24,
+                11.35
+              ],
+              "y_m": [
+                34.0,
+                37.069
+              ]
+            },
+            "amber-01": {
+              "x_m": [
+                95.89,
+                101.0
+              ],
+              "y_m": [
+                34.0,
+                37.069
+              ]
+            }
+          }
+        }
+      },
+      "legacy_feed": {
+        "frames": 901,
+        "messages": 910,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 911,
+        "unique_observations": 911,
+        "exact_retransmissions": 0,
+        "corrections": 1,
+        "maximum_delivery_delay_ms": 3000
+      },
+      "football_review": "pending"
+    },
+    {
+      "case": "d04-a",
+      "delivery_faults": true,
+      "passed": true,
+      "profile_version": "constrained-episodes-v1",
+      "failures": [],
+      "incomplete_observation_checks": [],
+      "diagnostics": {
+        "maximum_player_speed_mps": 1.991,
+        "maximum_player_acceleration_mps2": 0.77,
+        "maximum_player_turn_radians_per_s": 0.01393,
+        "overlap_frames": 0,
+        "frame_count": 899,
+        "frame_intervals_ms": {
+          "100": 897,
+          "300": 1
+        },
+        "keeper_ranges": {
+          "blue-01": {
+            "x_m": [
+              6.24,
+              11.35
+            ],
+            "y_m": [
+              34.0,
+              37.069
+            ]
+          },
+          "amber-01": {
+            "x_m": [
+              95.89,
+              101.0
+            ],
+            "y_m": [
+              34.0,
+              37.069
+            ]
+          }
+        }
+      },
+      "latest_corrected_profile": {
+        "passed": true,
+        "diagnostics": {
+          "maximum_player_speed_mps": 1.991,
+          "maximum_player_acceleration_mps2": 0.77,
+          "maximum_player_turn_radians_per_s": 0.01393,
+          "overlap_frames": 0,
+          "frame_count": 899,
+          "frame_intervals_ms": {
+            "100": 897,
+            "300": 1
+          },
+          "keeper_ranges": {
+            "blue-01": {
+              "x_m": [
+                6.24,
+                11.35
+              ],
+              "y_m": [
+                34.0,
+                37.069
+              ]
+            },
+            "amber-01": {
+              "x_m": [
+                95.89,
+                101.0
+              ],
+              "y_m": [
+                34.0,
+                37.069
+              ]
+            }
+          }
+        }
+      },
+      "legacy_feed": {
+        "frames": 899,
+        "messages": 908,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 910,
+        "unique_observations": 909,
+        "exact_retransmissions": 1,
+        "corrections": 1,
+        "maximum_delivery_delay_ms": 3000
+      },
+      "football_review": "pending"
+    },
+    {
+      "case": "d04-b",
+      "delivery_faults": false,
+      "passed": true,
+      "profile_version": "constrained-episodes-v1",
+      "failures": [],
+      "incomplete_observation_checks": [],
+      "diagnostics": {
+        "maximum_player_speed_mps": 1.991,
+        "maximum_player_acceleration_mps2": 0.77,
+        "maximum_player_turn_radians_per_s": 0.01393,
+        "overlap_frames": 0,
+        "frame_count": 901,
+        "frame_intervals_ms": {
+          "100": 900
+        },
+        "keeper_ranges": {
+          "blue-01": {
+            "x_m": [
+              6.24,
+              11.35
+            ],
+            "y_m": [
+              34.0,
+              37.069
+            ]
+          },
+          "amber-01": {
+            "x_m": [
+              95.89,
+              101.0
+            ],
+            "y_m": [
+              34.0,
+              37.069
+            ]
+          }
+        }
+      },
+      "latest_corrected_profile": {
+        "passed": true,
+        "diagnostics": {
+          "maximum_player_speed_mps": 1.991,
+          "maximum_player_acceleration_mps2": 0.77,
+          "maximum_player_turn_radians_per_s": 0.01393,
+          "overlap_frames": 0,
+          "frame_count": 901,
+          "frame_intervals_ms": {
+            "100": 900
+          },
+          "keeper_ranges": {
+            "blue-01": {
+              "x_m": [
+                6.24,
+                11.35
+              ],
+              "y_m": [
+                34.0,
+                37.069
+              ]
+            },
+            "amber-01": {
+              "x_m": [
+                95.89,
+                101.0
+              ],
+              "y_m": [
+                34.0,
+                37.069
+              ]
+            }
+          }
+        }
+      },
+      "legacy_feed": {
+        "frames": 901,
+        "messages": 910,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 912,
+        "unique_observations": 912,
+        "exact_retransmissions": 0,
+        "corrections": 2,
+        "maximum_delivery_delay_ms": 19000
+      },
+      "football_review": "pending"
+    },
+    {
+      "case": "d04-b",
+      "delivery_faults": true,
+      "passed": true,
+      "profile_version": "constrained-episodes-v1",
+      "failures": [],
+      "incomplete_observation_checks": [],
+      "diagnostics": {
+        "maximum_player_speed_mps": 1.991,
+        "maximum_player_acceleration_mps2": 0.77,
+        "maximum_player_turn_radians_per_s": 0.01393,
+        "overlap_frames": 0,
+        "frame_count": 899,
+        "frame_intervals_ms": {
+          "100": 897,
+          "300": 1
+        },
+        "keeper_ranges": {
+          "blue-01": {
+            "x_m": [
+              6.24,
+              11.35
+            ],
+            "y_m": [
+              34.0,
+              37.069
+            ]
+          },
+          "amber-01": {
+            "x_m": [
+              95.89,
+              101.0
+            ],
+            "y_m": [
+              34.0,
+              37.069
+            ]
+          }
+        }
+      },
+      "latest_corrected_profile": {
+        "passed": true,
+        "diagnostics": {
+          "maximum_player_speed_mps": 1.991,
+          "maximum_player_acceleration_mps2": 0.77,
+          "maximum_player_turn_radians_per_s": 0.01393,
+          "overlap_frames": 0,
+          "frame_count": 899,
+          "frame_intervals_ms": {
+            "100": 897,
+            "300": 1
+          },
+          "keeper_ranges": {
+            "blue-01": {
+              "x_m": [
+                6.24,
+                11.35
+              ],
+              "y_m": [
+                34.0,
+                37.069
+              ]
+            },
+            "amber-01": {
+              "x_m": [
+                95.89,
+                101.0
+              ],
+              "y_m": [
+                34.0,
+                37.069
+              ]
+            }
+          }
+        }
+      },
+      "legacy_feed": {
+        "frames": 899,
+        "messages": 908,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 911,
+        "unique_observations": 910,
+        "exact_retransmissions": 1,
+        "corrections": 2,
+        "maximum_delivery_delay_ms": 19000
+      },
+      "football_review": "pending"
+    },
+    {
+      "case": "d05-a",
+      "delivery_faults": false,
+      "passed": true,
+      "profile_version": "constrained-episodes-v1",
+      "failures": [],
+      "incomplete_observation_checks": [],
+      "diagnostics": {
+        "maximum_player_speed_mps": 0.66471,
+        "maximum_player_acceleration_mps2": 0.08,
+        "maximum_player_turn_radians_per_s": 0,
+        "overlap_frames": 0,
+        "frame_count": 901,
+        "frame_intervals_ms": {
+          "100": 900
+        },
+        "keeper_ranges": {
+          "blue-01": {
+            "x_m": [
+              8,
+              14.0
+            ],
+            "y_m": [
+              34,
+              34
+            ]
+          },
+          "amber-01": {
+            "x_m": [
+              94.63,
+              95.89
+            ],
+            "y_m": [
+              34.0,
+              37.08
+            ]
+          }
+        }
+      },
+      "latest_corrected_profile": null,
+      "legacy_feed": {
+        "frames": 901,
+        "messages": 908,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 908,
+        "unique_observations": 908,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      },
+      "football_review": "pending"
+    },
+    {
+      "case": "d05-a",
+      "delivery_faults": true,
+      "passed": true,
+      "profile_version": "constrained-episodes-v1",
+      "failures": [],
+      "incomplete_observation_checks": [],
+      "diagnostics": {
+        "maximum_player_speed_mps": 0.66471,
+        "maximum_player_acceleration_mps2": 0.08,
+        "maximum_player_turn_radians_per_s": 0,
+        "overlap_frames": 0,
+        "frame_count": 899,
+        "frame_intervals_ms": {
+          "100": 897,
+          "300": 1
+        },
+        "keeper_ranges": {
+          "blue-01": {
+            "x_m": [
+              8,
+              14.0
+            ],
+            "y_m": [
+              34,
+              34
+            ]
+          },
+          "amber-01": {
+            "x_m": [
+              94.63,
+              95.89
+            ],
+            "y_m": [
+              34.0,
+              37.08
+            ]
+          }
+        }
+      },
+      "latest_corrected_profile": null,
+      "legacy_feed": {
+        "frames": 899,
+        "messages": 906,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 907,
+        "unique_observations": 906,
+        "exact_retransmissions": 1,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 800
+      },
+      "football_review": "pending"
+    },
+    {
+      "case": "d05-b",
+      "delivery_faults": false,
+      "passed": true,
+      "profile_version": "constrained-episodes-v1",
+      "failures": [],
+      "incomplete_observation_checks": [],
+      "diagnostics": {
+        "maximum_player_speed_mps": 0.66471,
+        "maximum_player_acceleration_mps2": 0.08,
+        "maximum_player_turn_radians_per_s": 0,
+        "overlap_frames": 0,
+        "frame_count": 861,
+        "frame_intervals_ms": {
+          "100": 859,
+          "4100": 1
+        },
+        "keeper_ranges": {
+          "blue-01": {
+            "x_m": [
+              8,
+              14.0
+            ],
+            "y_m": [
+              34,
+              34
+            ]
+          },
+          "amber-01": {
+            "x_m": [
+              94.63,
+              95.89
+            ],
+            "y_m": [
+              34.0,
+              37.08
+            ]
+          }
+        }
+      },
+      "latest_corrected_profile": null,
+      "legacy_feed": {
+        "frames": 861,
+        "messages": 868,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 868,
+        "unique_observations": 868,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      },
+      "football_review": "pending"
+    },
+    {
+      "case": "d05-b",
+      "delivery_faults": true,
+      "passed": true,
+      "profile_version": "constrained-episodes-v1",
+      "failures": [],
+      "incomplete_observation_checks": [],
+      "diagnostics": {
+        "maximum_player_speed_mps": 0.66471,
+        "maximum_player_acceleration_mps2": 0.08,
+        "maximum_player_turn_radians_per_s": 0,
+        "overlap_frames": 0,
+        "frame_count": 859,
+        "frame_intervals_ms": {
+          "100": 856,
+          "300": 1,
+          "4100": 1
+        },
+        "keeper_ranges": {
+          "blue-01": {
+            "x_m": [
+              8,
+              14.0
+            ],
+            "y_m": [
+              34,
+              34
+            ]
+          },
+          "amber-01": {
+            "x_m": [
+              94.63,
+              95.89
+            ],
+            "y_m": [
+              34.0,
+              37.08
+            ]
+          }
+        }
+      },
+      "latest_corrected_profile": null,
+      "legacy_feed": {
+        "frames": 859,
+        "messages": 866,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 867,
+        "unique_observations": 866,
+        "exact_retransmissions": 1,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 800
+      },
+      "football_review": "pending"
+    },
+    {
+      "case": "d06-a",
+      "delivery_faults": false,
+      "passed": true,
+      "profile_version": "constrained-episodes-v1",
+      "failures": [],
+      "incomplete_observation_checks": [],
+      "diagnostics": {
+        "maximum_player_speed_mps": 7.39973,
+        "maximum_player_acceleration_mps2": 5.67819,
+        "maximum_player_turn_radians_per_s": 0.01804,
+        "overlap_frames": 31,
+        "frame_count": 901,
+        "frame_intervals_ms": {
+          "100": 900
+        },
+        "keeper_ranges": {
+          "blue-01": {
+            "x_m": [
+              6.17,
+              11.035
+            ],
+            "y_m": [
+              30.282,
+              36.53
+            ]
+          },
+          "amber-01": {
+            "x_m": [
+              97.0,
+              100.0
+            ],
+            "y_m": [
+              34,
+              38.0
+            ]
+          }
+        }
+      },
+      "latest_corrected_profile": null,
+      "legacy_feed": {
+        "frames": 901,
+        "messages": 911,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 911,
+        "unique_observations": 911,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 0
+      },
+      "football_review": "pending"
+    },
+    {
+      "case": "d06-a",
+      "delivery_faults": true,
+      "passed": true,
+      "profile_version": "constrained-episodes-v1",
+      "failures": [],
+      "incomplete_observation_checks": [],
+      "diagnostics": {
+        "maximum_player_speed_mps": 7.39973,
+        "maximum_player_acceleration_mps2": 5.67819,
+        "maximum_player_turn_radians_per_s": 0.01804,
+        "overlap_frames": 31,
+        "frame_count": 899,
+        "frame_intervals_ms": {
+          "100": 897,
+          "300": 1
+        },
+        "keeper_ranges": {
+          "blue-01": {
+            "x_m": [
+              6.17,
+              11.035
+            ],
+            "y_m": [
+              30.282,
+              36.53
+            ]
+          },
+          "amber-01": {
+            "x_m": [
+              97.0,
+              100.0
+            ],
+            "y_m": [
+              34,
+              38.0
+            ]
+          }
+        }
+      },
+      "latest_corrected_profile": null,
+      "legacy_feed": {
+        "frames": 899,
+        "messages": 909,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 910,
+        "unique_observations": 909,
+        "exact_retransmissions": 1,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 800
+      },
+      "football_review": "pending"
+    },
+    {
+      "case": "d06-b",
+      "delivery_faults": false,
+      "passed": true,
+      "profile_version": "constrained-episodes-v1",
+      "failures": [],
+      "incomplete_observation_checks": [],
+      "diagnostics": {
+        "maximum_player_speed_mps": 7.39973,
+        "maximum_player_acceleration_mps2": 5.67819,
+        "maximum_player_turn_radians_per_s": 0.01804,
+        "overlap_frames": 31,
+        "frame_count": 901,
+        "frame_intervals_ms": {
+          "100": 900
+        },
+        "keeper_ranges": {
+          "blue-01": {
+            "x_m": [
+              6.17,
+              11.035
+            ],
+            "y_m": [
+              30.282,
+              36.53
+            ]
+          },
+          "amber-01": {
+            "x_m": [
+              97.0,
+              100.0
+            ],
+            "y_m": [
+              34,
+              38.0
+            ]
+          }
+        }
+      },
+      "latest_corrected_profile": null,
+      "legacy_feed": {
+        "frames": 901,
+        "messages": 911,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 911,
+        "unique_observations": 911,
+        "exact_retransmissions": 0,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 10000
+      },
+      "football_review": "pending"
+    },
+    {
+      "case": "d06-b",
+      "delivery_faults": true,
+      "passed": true,
+      "profile_version": "constrained-episodes-v1",
+      "failures": [],
+      "incomplete_observation_checks": [],
+      "diagnostics": {
+        "maximum_player_speed_mps": 7.39973,
+        "maximum_player_acceleration_mps2": 5.67819,
+        "maximum_player_turn_radians_per_s": 0.01804,
+        "overlap_frames": 31,
+        "frame_count": 899,
+        "frame_intervals_ms": {
+          "100": 897,
+          "300": 1
+        },
+        "keeper_ranges": {
+          "blue-01": {
+            "x_m": [
+              6.17,
+              11.035
+            ],
+            "y_m": [
+              30.282,
+              36.53
+            ]
+          },
+          "amber-01": {
+            "x_m": [
+              97.0,
+              100.0
+            ],
+            "y_m": [
+              34,
+              38.0
+            ]
+          }
+        }
+      },
+      "latest_corrected_profile": null,
+      "legacy_feed": {
+        "frames": 899,
+        "messages": 909,
+        "duration_ms": 90000,
+        "active_players": 22,
+        "delivery_rows": 910,
+        "unique_observations": 909,
+        "exact_retransmissions": 1,
+        "corrections": 0,
+        "maximum_delivery_delay_ms": 10800
+      },
+      "football_review": "pending"
+    }
+  ]
+}

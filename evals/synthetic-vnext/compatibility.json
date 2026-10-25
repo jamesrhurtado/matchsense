@@ -1,0 +1,77 @@
+{
+  "legacy_files": 385,
+  "changed_legacy_files": [],
+  "stored_packages": [
+    {
+      "store": "why_now.db",
+      "unchanged": true,
+      "packages": 12
+    },
+    {
+      "store": ".run/editorial-tests.db",
+      "unchanged": true,
+      "packages": 440
+    },
+    {
+      "store": ".run/iteration-final-qa.db",
+      "unchanged": true,
+      "packages": 19
+    },
+    {
+      "store": ".run/iteration-local.db",
+      "unchanged": true,
+      "packages": 11
+    },
+    {
+      "store": ".run/iteration-qa.db",
+      "unchanged": true,
+      "packages": 15
+    },
+    {
+      "store": ".run/iteration-v4.db",
+      "unchanged": true,
+      "packages": 9
+    },
+    {
+      "store": ".run/live-continuous.db",
+      "unchanged": true,
+      "packages": 104
+    },
+    {
+      "store": ".run/live-desk.db",
+      "unchanged": true,
+      "packages": 3
+    },
+    {
+      "store": ".run/live-match-final.db",
+      "unchanged": true,
+      "packages": 4
+    },
+    {
+      "store": ".run/live-match.db",
+      "unchanged": true,
+      "packages": 99
+    },
+    {
+      "store": ".run/live-scheduling-v2.db",
+      "unchanged": true,
+      "packages": 49
+    },
+    {
+      "store": ".run/live-template.db",
+      "unchanged": true,
+      "packages": 240
+    },
+    {
+      "store": ".run/match-coverage-verification.db",
+      "unchanged": true,
+      "packages": 2220
+    },
+    {
+      "store": ".run/multiple-story-local.db",
+      "unchanged": true,
+      "packages": 8
+    }
+  ],
+  "all_original_packages_unchanged": true
+}

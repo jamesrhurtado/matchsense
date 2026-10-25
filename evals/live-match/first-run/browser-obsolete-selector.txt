@@ -1,0 +1,32 @@
+
+Running 1 test using 1 worker
+
+(node:9213) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:9213) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/live.spec.ts:3:5 › live simulation is explicit, keeps playing during review and reconnects to the shared clock (1.3m)
+
+
+  1) tests/live.spec.ts:3:5 › live simulation is explicit, keeps playing during review and reconnects to the shared clock
+
+    [31mTest timeout of 75000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 75000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Show why', exact: true })[22m
+
+
+      15 |  await expect(page.getByRole('button',{name:'Approve',exact:true})).toBeVisible({timeout:35000});
+      16 |  const before=(await(await request.get(`/api/replay-sessions/${sid}/snapshot`)).json()).clock_ms;
+    > 17 |  await page.getByRole('button',{name:'Show why',exact:true}).click();
+         |                                                              ^
+      18 |  await expect(page.getByTestId('event-evidence').first()).toBeVisible();
+      19 |  await page.getByRole('button',{name:'Approve',exact:true}).click();
+      20 |  const after=await(await request.get(`/api/replay-sessions/${sid}/snapshot`)).json();
+        at /Users/james/dev/why now/apps/web/tests/live.spec.ts:17:62
+
+    Error Context: test-results/live-live-simulation-is-ex-1c14b-onnects-to-the-shared-clock/error-context.md
+
+  1 failed
+    tests/live.spec.ts:3:5 › live simulation is explicit, keeps playing during review and reconnects to the shared clock

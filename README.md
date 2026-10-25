@@ -1,12 +1,75 @@
 # WHY/NOW
 
-**Azure engineering build:** [Open WHY/NOW](https://whynow-web.graycoast-41e399d8.eastus.azurecontainerapps.io). See [QA access and testing](docs/qa.md) and [deployed Azure resources](docs/azure/README.md).
+**Current experience: the local live-match explanation desk below.** The [earlier Azure engineering build](https://whynow-web.graycoast-41e399d8.eastus.azurecontainerapps.io) is separate and does not contain this iteration. See [QA access and testing](docs/qa.md) and [deployed Azure resources](docs/azure/README.md).
 
 **Source:** [jamesrhurtado/why-now](https://github.com/jamesrhurtado/why-now), currently private at the owner's request. Original project source is licensed under [MIT](LICENSE).
 
-**See the play. Understand the moment.** An evidence-first story desk for a fictional football broadcast, with a producer console and a responsive viewer companion.
+**Explain the match. Let fans enjoy it.** A live football explanation desk: AI suggests supported stories, a producer approves them, and fans choose when to explore an explanation or catch up. Demonstrated with fictional teams and a synthetic feed.
+
+## Live-match explanation desk — local candidate
+
+The main experience now delivers a synthetic match continuously at 1× while AI
+suggests explanations and the producer reviews them. The viewer receives only
+approved insights. Source-confirmed score and clock update separately. Background
+processing continues with no browser open; inspecting history never rewinds the
+shared match. The feed stops at the end, with approved history and catch-up recap.
+
+Live viewers now start in **Match first**, with the pitch, score and clock. Open
+**Explore explanations** for approved insights, evidence, Spanish and player/team
+focus. **Catch me up** covers the whole segment, last minute or a private
+browser-local visit interval. Corrections remove affected copy and show a concise
+withdrawal notice; an open recap refreshes without closing. These controls are
+intended to reduce interruption; real-user evidence is still pending.
+
+Producers get an optional **Preview for viewers** for casual/analyst and Spanish
+variants of the exact selected revision, plus a compact selection/review disclosure.
+Previews never publish or add model calls. The queue starts with three suggestions
+and the selected item; **Show all**, family filters and archives preserve access
+to every family. Evidence inspection keeps a small match clock visible.
+
+```sh
+npm --prefix apps/web run build
+make live-dev
+```
+
+Open **http://127.0.0.1:3100**, choose **Live simulation** and **AI · Director and
+Reviewer**, then **Start live simulation**. This reuses the existing Azure model
+and requires Azure CLI authentication; it provisions no resources. The launcher
+verifies model identity/rates and credentials before serving. AI attempts, failures
+and factual template fallback remain identified. Current local configuration is
+not a deployment of this iteration to Azure. The local pilot has real-model and
+continuous-play evidence, but the proposed review-time target is not met; see
+[verification and limitations](evals/live-match/verification.md). See [startup, walkthrough and short
+reviewer tasks](docs/live-match-demo.md), [the implementation plan](docs/next-iteration/live-match-plan.md)
+and [delivery record](docs/next-iteration/decision-log.md).
+
+Without Azure credentials, use `make coverage-dev` and explicitly choose
+**Template preview · no AI calls** at the entrance. That tests the interface and
+rule-based output, not model quality. **Guided walkthrough** separately retains
+pausing and navigation for onboarding. Existing stored packages remain unchanged.
 
 ## Broader match coverage — local engineering candidate
+
+**New synthetic-data slice (SD01–SD04):** six distinct development parents,
+twelve paired 90-second passages and base/delivery-check views. Movement uses
+smooth bounded paths; support/keeper targets use the episode ball; events and
+control share the same state. Independent checks cover motion, source alignment,
+missing evidence, delayed outcomes, corrections and explicit possession coverage.
+The original default replay and stored packages remain unchanged.
+
+To try these additional passages offline:
+
+```sh
+WHY_NOW_SYNTHETIC_DEVELOPMENT=1 make coverage-dev
+```
+
+At **http://127.0.0.1:3000**, choose **Guided walkthrough**, **Template preview**,
+then **More demo scenarios → Development passage 01**. The optional catalogue
+contains passages 01–12 and their delivery-check versions. See the
+[dataset card and short walkthrough](docs/synthetic-dataset-v1.md) and
+[separate verification](evals/synthetic-vnext/verification.md). Reproduce with
+`make episodes-data` / `make episodes-evaluate`. These are development scenes;
+held-out/real-model comparisons and football/user validation remain pending.
 
 The opt-in mixed replay adds source-confirmed clock/period/score, corrected goals,
 resolved shots, explicit recovery/control changes, and fixed possession windows.
@@ -24,11 +87,11 @@ make coverage-dev
 ```
 
 Open [http://127.0.0.1:3000](http://127.0.0.1:3000), select **Pressure Swing flagship · guided mixed-event pitch**,
-and use the prefilled local producer key. The command enables
+choose **Guided walkthrough** and **Template preview · no AI calls** for the offline walkthrough, and use the prefilled local producer key. The command enables
 `WHY_NOW_MATCH_COVERAGE=1` and isolates SQLite in `.run/match-coverage.db`.
-Coverage is off in ordinary `make dev`; the six additional fixtures have a separate
+Coverage is off in ordinary `make dev`; the eight additional fixtures have a separate
 catalogue. The guided demo uses continuous authored player/ball movement and keeper lanes,
-and pauses at the first example of each event type so you can inspect and approve
+and, in Guided walkthrough, pauses at the first example of each event type so you can inspect and approve
 it. Pressure Swing pauses at the comparative 30 m pass, around 91.3 s. Turn off **Pause at new event types** for continuous playback. **Check the evidence**
 opens the supporting facts and brings them into view. Observation counts are
 position samples/source records, not football incident counts. The original mixed
@@ -36,7 +99,7 @@ fixtures and stored approvals remain unchanged. No Azure credentials or paid cal
 are needed. See the
 [mixed-event walkthrough](docs/match-coverage-demo.md),
 [event definitions/rollback matrix](docs/match-events.md),
-[verification record](docs/next-iteration/match-coverage-handoff.md) and
+[verification record](evals/match-coverage/pressure-flagship/verification.md) and
 [pilot materials](docs/match-coverage-pilot.md).
 
 The new **Pressure Swing** insight compares time-weighted nearby-opponent averages
@@ -48,13 +111,17 @@ facts. This is a proximity proxy, not tactical intent, pass difficulty or a caus
 of the later goal. See [the flagship walkthrough and rubric rationale](docs/pressure-flagship.md).
 
 This is a local engineering candidate. Recruitment, external football/Spanish
-ratings, real-user findings and deployment remain pending. A bounded real
+ratings, real-user findings and deployment of this iteration remain pending. A bounded real
 **gpt-4o-mini 2024-07-18** smoke now verifies pressure, shot, goal, recovery and
 possession through Director/Reviewer (10 calls, exact source-rendered bilingual
 text). It does not establish broad model quality or user usefulness. The hosted
 0.5 build remains separate and has not been updated.
 
 ## Working local MVP
+
+This section records the earlier guided/pass-focused engineering workflow. Its
+template-mode and pausable startup instructions are historical alternatives;
+use **Live-match explanation desk** above for the current main experience.
 
 The local version 0.5 candidate adds v4 editorial rendering, concise role-focused text, consistent measurement precision, comparison bars, explicit earlier-moment navigation, and atomic acceptance accounting. See [the latest quality handoff](docs/next-iteration/quality-v4-handoff.md), [multi-agent evidence](docs/next-iteration/multi-agent-evidence.md), and [reviewer guide](docs/next-iteration/reviewer-guide-v4.md). This local update has not replaced the previously documented Azure build.
 
@@ -136,7 +203,7 @@ See [current delivery status](docs/next-iteration/decision-log.md), [runtime mea
 | `services/api` | FastAPI, producer authorization, SSE, approval and recap APIs |
 | `engine` | Contracts, time-scoped metrics, bounded template/Foundry workflows, SQLite/Cosmos repositories and Event Hubs transport |
 | `simulator` | Seeded generator and independent structural/physical checks |
-| `data/runtime` | 173 observation-only runtime fixtures: metadata and JSON Lines/gzip observations |
+| `data/runtime` | Original 173 observation-only replays plus eight opt-in mixed-event fixtures; metadata and JSON Lines/gzip observations |
 | `data/schemas` | Versioned JSON Schemas exported from Pydantic contracts |
 | `data/evaluation-only`, `evals` | Offline labels, split configurations and results; never exposed through runtime tools |
 | `docs` | Architecture, metric definitions, demo guide, implementation status, Azure specifications |
@@ -147,8 +214,45 @@ The local and Azure implementations are available; see the QA guide for complete
 
 The [PM update handoff](docs/next-iteration/pm-update-handoff.md) summarizes the contextual update, verification, ordered implementation commits and remaining release gates.
 
-The [broader match implementation plan](docs/next-iteration/match-coverage-implementation-plan.md) governs this iteration. The [90+ product improvement plan](docs/next-iteration/grand-prize-90-plus-plan.md) is historical context, based on version 0.4. It specifies changes by judging category, agent/context contracts, priorities, dependencies, acceptance tests and evaluation gates, excluding submission logistics. The [implementation record](docs/next-iteration/decision-log.md) identifies delivered changes and outstanding evidence; the [earlier plan](docs/next-iteration/README.md) remains available as historical context.
+The [broader match implementation plan](docs/next-iteration/match-coverage-implementation-plan.md) governs this iteration. The [implementation record](docs/next-iteration/decision-log.md) identifies delivered changes and outstanding evidence. The [Pressure Swing walkthrough](docs/pressure-flagship.md) describes the current flagship demo and its measurement limits.
 
 Local mode uses SQLite. Cloud mode uses Cosmos and Event Hubs, with one API worker/replica enforced for this engineering environment. It supports independent pass investigations across each segment, two fictional teams, 22 active players and 10 Hz observations. Runtime evidence is limited to the delivered clock. The underlying dataset is synthetic, with six authored parent configurations. Local tests do not establish real-match tactical accuracy, general semantic verification, production scale, or measured editorial savings.
 
 No real match records, footage, team logos, viewer accounts or third-party TV synchronization are included. Cloud producer access uses a private key and request limits; enterprise multi-tenant authorization is future work. The repository and submission video have not been published.
+
+## Recommended next priorities
+
+The [25 October problem evidence and competitor review](docs/problem-evidence.md)
+and [evidence-led product plan](docs/next-iteration/evidence-led-product-plan.md)
+recommend validating the live editorial task, clarifying evidence and audience
+previews, and testing catch-up over an explicit interval. These are researched
+recommendations, not additional delivered features or proven user benefits.
+
+The [synthetic-data research and source audit](docs/synthetic-data-research.md)
+led to [SD01–SD08](docs/next-iteration/synthetic-data-plan.md). SD01–SD04 now add
+the opt-in [development dataset](docs/synthetic-dataset-v1.md); held-out cases,
+comparative AI evidence and composed four-minute demos remain later work.
+
+Priorities reflect the five equally weighted judging categories; they are product
+judgments, not predicted judging scores.
+
+1. Validate the current flagship with football/Spanish reviewers and first-time
+   viewers. Measure comprehension, producer approval/edit effort and time to a
+   usable story; report observed results and failures. Pilot materials are
+   prepared, but participant ratings and findings remain pending.
+2. Demonstrate meaningful Director/Reviewer behavior with traceable evidence,
+   bounded repair or rejection, and comparison against the existing single-agent
+   and deterministic alternatives. Current discovery results do not establish
+   multi-agent superiority.
+3. Continue the SD plan with held-out inputs and fair current-workflow comparison;
+   review the delivered development scenes with football participants. Preserve
+   original sources and report failures. Ball/shot speed remains conditional on
+   source coverage and independent validation.
+4. Rehearse and record the under-two-minute functioning demo. Deploying the new
+   mixed-event candidate and changing repository visibility remain separate
+   owner-authorized release steps.
+
+Chaos Index, calibrated Pass Escape Difficulty and tactical turning-point claims
+remain deferred until their definitions and validation justify them. Additional
+agent roles, Fabric services and speech are optional; they need a demonstrated
+product benefit before adding cost or complexity.

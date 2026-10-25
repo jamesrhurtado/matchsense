@@ -183,11 +183,11 @@ Recap selects up to three distinct currently approved moments, with chronology, 
 
 ## S01 — Make judging straightforward
 
-**Work:** prepare the public repository under the owner-selected account, confirm license choice, inspect tracked files for credentials/private data, and run actual GitHub CI. Replace stale README statements (for example the repository map still calls runtime data three fixtures). Add a concise problem, audience, actual architecture, measured results, limitations, setup and judging instructions. Provide judge access through a dedicated documented mechanism without publishing the owner's producer key in source or video.
+**Work:** prepare the public repository under the owner-selected account, confirm license choice, inspect tracked files for credentials/private data, and run actual GitHub CI. Replace stale README statements (for example the repository map still calls runtime data three fixtures). Add a concise problem, audience, actual architecture, measured results, limitations, setup and judging instructions. Update the Innovation Studio entry to match the verified current build; link the public repository, current live demo and a working demo video under two minutes. Check every link from a logged-out browser and remove old claims such as three Python agents or template-only execution unless they still describe the submitted build. Provide judge access through a dedicated documented mechanism without publishing the owner's producer key in source or video.
 
 Record approximately 115 s of functioning product: problem and moving play → concrete explanation/evidence → real review decision → producer approval → distinct audience/player view → approved recap → compact measured proof. Label synthetic data and any replay jump. Keep architecture/trace detail brief. State exact measured limits and use a representative run rather than hiding failures.
 
-**Acceptance:** public source/video links work logged out; CI corresponds to the released commit; visible text is legible at ordinary playback size; export is strictly below 120 s; test access works for judges; release remains available through judging. Do not announce or submit a result before the owner has completed required registration/submission steps. Final description names only implemented technologies and features.
+**Acceptance:** public project-page, source, live-demo and video links work logged out; CI corresponds to the released commit; visible text is legible at ordinary playback size; export is strictly below 120 s; test access works for judges; release remains available through judging. Do not announce or submit a result before the owner has completed required registration/submission steps. Final description names only implemented technologies and features.
 
 ## Suggested commit boundaries
 
@@ -214,3 +214,114 @@ are implemented separately from MC01–MC10's original scene. See
 No tactical-turning-point, difficulty probability, chaos calibration, human
 rating, external publication or deployment is claimed. Do not merge these new
 pressure references into the original pass/mixed evaluation denominators.
+
+
+### Producer walkthrough follow-up (25 October)
+
+Captured during one first-time producer walkthrough. This is a list of observed
+questions, not a participant study or evidence that the proposed changes improve
+comprehension. Prioritize as a concise terminology, identity and information-
+hierarchy pass after the currently committed synthetic-data tickets; retain the
+explicit source audit and publication safeguards.
+
+- Show a player's shirt number with their name wherever an insight names them
+  (for this replay, Beni Vidal is Harbor City #9; Dani Luna is #11).
+- [Implemented locally, 25 October] Rename “Pressure Swing” to “Nearby pressure
+  change”; label the before-pass and after-reception windows, forward distance,
+  and observed coverage as seconds out of the two-second window. Hide the
+  repeated “Why this moment?” pressure summary when it restates “What changed?”;
+  retain it when it adds the supported previous-three-pass comparison. The
+  measurement still does not establish tactical pressure or cause.
+- Rewrite the analyst version as a short, connected reading of the play: name
+  passer/receiver with shirt numbers, give the comparison and window in plain
+  language, explain what the measurement can help an analyst inspect, then state
+  its boundary. Avoid a label-led list of radius, means, drop and coverage; keep
+  full audit values in the evidence details. The current analyst text is a dense
+  metric list while the “Why this moment?” sentence merely repeats its figures.
+  Preserve the same supported facts and qualifications in both languages.
+- [Implemented locally, 25 October] Candidates say “Ready for review”; internal
+  revision numbers stay on approved status where they identify the published
+  wording.
+- Keep raw observation IDs and evidence hashes out of the default explanation;
+  retain them inside an optional technical audit view. Clearly distinguish
+  producer-only evidence from the approved explanation and variants viewers get.
+- Make simple/analyst and English/Spanish previews easy to open before approval,
+  then show where each appears in the companion. Label the audience package as a
+  summary of viewer options if it remains read-only.
+- Explain “Select shared overlay” as choosing which approved story is on the
+  match broadcast while the other approved stories remain available in the
+  companion/history; consider renaming the action to say that plainly.
+- [Implemented locally, 25 October] Opening “Processing & review trace” shows
+  an opening state and moves keyboard focus and the viewport to the panel after
+  it loads. The existing concise role summary leads; timing, token counts and
+  call details remain secondary.
+- Use concise evidence labels: “Before the pass”, “Forward distance”, and “After
+  reception”; keep each number and unit together on narrow screens.
+- On the viewer companion, make clear that the pitch/replay is the live view and
+  approved explanations appear when available; “Catch me up” opens the recap.
+  Explain the player/team focus selector and distinguish “no approved story
+  involving this focus in this interval” from “nothing happened” or “no stories
+  exist”. In the observed screen, Alder Rovers is the selected filter, so the
+  empty state means no approved Alder Rovers involvement in that interval; the
+  whole-play control clears that filter. Let viewers find approved moments for
+  other teams/foci without losing the live match.
+- [Implemented locally, 25 October] Make the pitch easier to read: enlarge the
+  control, ball and goalkeeper legend, and show a player's name, shirt number,
+  team and goalkeeper role on hover and keyboard focus. Provide tap/select on
+  touch screens; the browser tooltip alone is too subtle and unavailable to
+  touch users. Restrained movement between valid observed positions remains
+  separate work below.
+- Add restrained movement between consecutive observed player/ball positions so
+  the pitch feels continuous. Interpolate only across valid observed intervals;
+  preserve missing-data gaps and source positions, avoid invented runs or
+  tactical animation, and honor reduced-motion preferences. Movement should
+  clarify the play without distracting from its explanation.
+
+Do not add these changes to the SD01–SD04 delivery claim. The continuing human
+review remains necessary to determine which explanations and controls people
+actually understand.
+
+### Hackathon brief reconciliation (25 October)
+
+This is a scope check against the official challenge description, not a reason
+to add every optional example to the current submission. The five-stage pipeline,
+continuous synthetic feed, mixed-event coverage, producer-reviewed overlay,
+recaps, analyst/casual views, player/team focus, English/Spanish output and
+synthetic-data work are already implemented or explicitly tracked in LM01–LM07,
+MC01–MC10, SD01–SD08 and the producer walkthrough follow-up above. Demonstrate
+those together on one incident; do not create duplicate tickets for them.
+
+The following items are candidates only after the current submission/release
+gates. Do not add them to the current delivery claim or displace correctness,
+user review, and submission work.
+
+| Candidate | Decision | Reason and gate |
+|---|---|---|
+| Pass-completion rate | **PQ01 — P2 discovery** | Forward pass distance is already supported. A completion rate is useful analyst context only if the source represents all attempted passes, including incomplete ones, with an explicit team/player and time-window denominator. The 25 October catalog audit found a denominator but weak outcome diversity: most authored fixtures resolve every pass as received, while only two development parents include an intercepted pass. Define the metric and broaden independent cases before adding it; then require football review. Never call one completed pass “accuracy.” |
+| “What if?” alternative for a key moment | **CF01 — P2 discovery/prototype** | This is a distinctive optional extension and fits the brief’s request to explain why moments matter, but is not required. Prototype one producer-selected moment only after user research confirms the question is useful. Show observed facts separately from the hypothetical branch, expose assumptions and uncertainty, and prohibit claims that the alternative would have caused a goal or changed the result. Do not show xG deltas or outcome probabilities without a validated model and independent outcome evaluation. |
+| Player speed/distance indicators | **Defer** | These are optional and can clutter the live explanation. Revisit only for a player-focused analyst view, with stable sampling, missing-data handling, declared units and reviewed thresholds. No always-on speed overlay. |
+| Pass-difficulty rating | **Defer** | No agreed operational definition, calibration set or independent football validation exists. Nearby-opponent counts and distance must not be renamed “difficulty.” |
+| Automatic eventing from video | **Out of current scope** | WHY/NOW consumes the hackathon’s synthetic event stream; video detection would require a separate labeled video/vision pipeline and is not needed to demonstrate the five stages. Do not imply that the current product analyzes match video. |
+| More languages | **Defer** | English and Spanish are already supported. Additional languages need reviewed football terminology and complete UI/story consistency; language count alone does not improve the product. |
+
+Keep producer approval and the audit trail: they support trust and the broadcast
+workflow. Keep their technical detail backstage, and keep the viewer experience
+focused on the match and the approved explanation.
+
+### Competitor-inspired discovery (25 October)
+
+PitchPulse's most useful inspiration is the direct path from live match state to
+an audience-facing answer. Add **EQ01 — Ask about an approved moment (P2,
+discovery first)**: explore a small set of viewer questions answered only from
+the exact approved moment and its evidence, with a clear link back to that
+moment. Start with questions such as “What changed here?” and “Why is this
+shown?”; when the evidence cannot answer, say so. This is not an open-ended
+match chatbot, a new source of tactical claims, or a per-viewer model call.
+Prototype only after the producer/viewer study; assess whether it helps viewers
+understand the match without pulling their attention away from it. Keep the
+answer concise, optional, and consistent with the selected language and focus.
+
+Do not copy PitchPulse's always-on metrics panel, extra agent count, voice,
+speed thresholds, or breadth of indicators as a checklist. The useful principle
+is making the connection between a match moment and its explanation easy to
+follow; preserve WHY/NOW's evidence bounds and low-distraction presentation.

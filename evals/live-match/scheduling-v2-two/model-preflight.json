@@ -1,0 +1,33 @@
+{
+  "checked_at": "2026-10-25T00:23:56.681390+00:00",
+  "model": {
+    "callRateLimit": null,
+    "format": "OpenAI",
+    "name": "gpt-4o-mini",
+    "publisher": null,
+    "source": null,
+    "sourceAccount": null,
+    "version": "2024-07-18"
+  },
+  "sku": "GlobalStandard",
+  "rates_per_million": {
+    "gpt-4o-mini-0718-Outp-glbl": 0.6,
+    "gpt-4o-mini-0718-Inp-glbl": 0.15
+  },
+  "source": {
+    "git_head": "aac1da8a9520b0e9d7a036ef089e2902468c62f5",
+    "dirty": true,
+    "sha256": {
+      "services/api/main.py": "0ed92bbd7656ca92b0f06ce8c9f8a01a11338f6d738147a160ce618b2eb39666",
+      "engine/structured_workflow.py": "c30d9c06bc0c81985bf09b7aa3411de1a475cad273a61b59a2990e56d3e86ac8",
+      "engine/event_workflow.py": "d0d06dc4e9bfcc1960534ece571b34603d3df129654753550cc86217d622d413",
+      "engine/event_metrics.py": "81c2527fcad283e92df4a4a0ef1b2dfa79ceaf4a90900cef3932553d08042ca1",
+      "engine/pressure.py": "d0139544010bb402146c2794669e56ebd48a03ac61c187f465393fbc5190347d",
+      "apps/web/app/page.tsx": "f4c7ba83723c05f586342a3d1cd575aff3a6edfb234d94acb9f6d764b127ae94",
+      "apps/web/components/match-desk.tsx": "094c9b4bb8457f005a50dc810d7932c1a91e16de149a8c2b7eab89ff6c91142a"
+    }
+  },
+  "session_reservation_usd": 0.42048,
+  "max_calls_per_live_session": 96,
+  "note": "Conservative reservation, not invoice. Producer-triggered edits are separate existing workflows."
+}

@@ -1,0 +1,1 @@
+Mixed-event independent references: 21/21; 2 physical/feed checks; zero model calls.

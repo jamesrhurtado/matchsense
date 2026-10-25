@@ -1,0 +1,14 @@
+
+> why-now-web@0.1.0 test:e2e
+> playwright test editorial-continuous.spec.ts
+
+
+Running 1 test using 1 worker
+
+(node:23165) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:23165) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/editorial-continuous.spec.ts:4:5 › four-minute match-first viewer stays continuous through goal, cancellation and explicit end (4.1m)
+
+  1 passed (4.1m)

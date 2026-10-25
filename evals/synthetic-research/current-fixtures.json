@@ -1,0 +1,172 @@
+{
+  "purpose": "Research audit only; no new realism threshold or certification.",
+  "acceleration_method": "Vector velocity over consecutive observed intervals, then vector change divided by interval-midpoint spacing. Piecewise-linear knots and rounding can produce spikes. Missing-player gaps reset velocity history.",
+  "lineage": "All four exports derive from simulator.flagship; mirrors and delivery-fault variants are not independent football trajectories.",
+  "cases": [
+    {
+      "match_id": "match-0c0a000000000005",
+      "stream_sha256": "8a559b513d0e435cc6181886613e226711702f5954755b8bdbd23b960f7dcc9d",
+      "existing_validator": {
+        "passed": true,
+        "result": {
+          "frames": 2401,
+          "messages": 2427,
+          "duration_ms": 240000,
+          "active_players": 22,
+          "delivery_rows": 2428,
+          "unique_observations": 2428,
+          "exact_retransmissions": 0,
+          "corrections": 1,
+          "maximum_delivery_delay_ms": 3000
+        }
+      },
+      "frame_intervals_ms": {
+        "100": 2400
+      },
+      "source_event_types": {
+        "period_state_changed": 1,
+        "pass_started": 4,
+        "pass_resolved": 4,
+        "ball_recovered": 4,
+        "shot_started": 3,
+        "shot_resolved": 3,
+        "possession_changed": 6,
+        "goal_status_changed": 1
+      },
+      "maximum_sampled_player_speed": {
+        "mps": 8.162505,
+        "player_id": "blue-09",
+        "timeline_ms": 43300
+      },
+      "maximum_finite_difference_player_acceleration": {
+        "mps2": 103.539585,
+        "player_id": "amber-08",
+        "timeline_ms": 20100
+      }
+    },
+    {
+      "match_id": "match-0c0a000000000006",
+      "stream_sha256": "ad962bd2475dc19f375b36cd00f9f3aa354e81d05c170bd42e4cba4e86de09e5",
+      "existing_validator": {
+        "passed": true,
+        "result": {
+          "frames": 2401,
+          "messages": 2427,
+          "duration_ms": 240000,
+          "active_players": 22,
+          "delivery_rows": 2429,
+          "unique_observations": 2429,
+          "exact_retransmissions": 0,
+          "corrections": 2,
+          "maximum_delivery_delay_ms": 34000
+        }
+      },
+      "frame_intervals_ms": {
+        "100": 2400
+      },
+      "source_event_types": {
+        "period_state_changed": 1,
+        "pass_started": 4,
+        "pass_resolved": 4,
+        "ball_recovered": 4,
+        "shot_started": 3,
+        "shot_resolved": 3,
+        "possession_changed": 6,
+        "goal_status_changed": 1
+      },
+      "maximum_sampled_player_speed": {
+        "mps": 8.162505,
+        "player_id": "blue-09",
+        "timeline_ms": 43300
+      },
+      "maximum_finite_difference_player_acceleration": {
+        "mps2": 103.539585,
+        "player_id": "amber-08",
+        "timeline_ms": 20100
+      }
+    },
+    {
+      "match_id": "match-0c0a000000000007",
+      "stream_sha256": "f955934ec31c355467990e4dec5c04cbf3a9e266f441fa1c4e97be2f25e9159f",
+      "existing_validator": {
+        "passed": true,
+        "result": {
+          "frames": 2401,
+          "messages": 2427,
+          "duration_ms": 240000,
+          "active_players": 22,
+          "delivery_rows": 2428,
+          "unique_observations": 2428,
+          "exact_retransmissions": 0,
+          "corrections": 1,
+          "maximum_delivery_delay_ms": 3000
+        }
+      },
+      "frame_intervals_ms": {
+        "100": 2400
+      },
+      "source_event_types": {
+        "period_state_changed": 1,
+        "pass_started": 4,
+        "pass_resolved": 4,
+        "ball_recovered": 4,
+        "shot_started": 3,
+        "shot_resolved": 3,
+        "possession_changed": 6,
+        "goal_status_changed": 1
+      },
+      "maximum_sampled_player_speed": {
+        "mps": 8.162505,
+        "player_id": "blue-09",
+        "timeline_ms": 43300
+      },
+      "maximum_finite_difference_player_acceleration": {
+        "mps2": 103.539585,
+        "player_id": "amber-08",
+        "timeline_ms": 20100
+      }
+    },
+    {
+      "match_id": "match-0c0a000000000008",
+      "stream_sha256": "6bf7efcbcd78132d471a505a25263de1f3f90c7bbd6de282910e3ba021ae377f",
+      "existing_validator": {
+        "passed": true,
+        "result": {
+          "frames": 2399,
+          "messages": 2425,
+          "duration_ms": 240000,
+          "active_players": 22,
+          "delivery_rows": 2428,
+          "unique_observations": 2427,
+          "exact_retransmissions": 1,
+          "corrections": 2,
+          "maximum_delivery_delay_ms": 34000
+        }
+      },
+      "frame_intervals_ms": {
+        "100": 2397,
+        "300": 1
+      },
+      "source_event_types": {
+        "period_state_changed": 1,
+        "pass_started": 4,
+        "pass_resolved": 4,
+        "ball_recovered": 4,
+        "shot_started": 3,
+        "shot_resolved": 3,
+        "possession_changed": 6,
+        "goal_status_changed": 1
+      },
+      "maximum_sampled_player_speed": {
+        "mps": 8.162505,
+        "player_id": "blue-09",
+        "timeline_ms": 43300
+      },
+      "maximum_finite_difference_player_acceleration": {
+        "mps2": 86.104124,
+        "player_id": "amber-08",
+        "timeline_ms": 168100
+      }
+    }
+  ]
+}

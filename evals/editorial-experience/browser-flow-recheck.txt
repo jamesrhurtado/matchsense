@@ -1,0 +1,14 @@
+
+> why-now-web@0.1.0 test:e2e
+> playwright test flow.spec.ts --grep producer evidence
+
+
+Running 1 test using 1 worker
+
+(node:23325) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:23325) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/flow.spec.ts:3:5 › producer evidence → wording review → approval → viewer preferences → retraction (6.9s)
+
+  1 passed (7.9s)

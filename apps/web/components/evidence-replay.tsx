@@ -66,7 +66,7 @@ function PassEvidenceReplay({
       : m.retention_confirmed_at_ms - m.retention_window_ms;
   const stages = [
     {
-      label: es ? "Antes del pase" : "Before release",
+      label: es ? "Antes del pase" : "Before the pass",
       at: release == null ? undefined : release - 100,
     },
     { label: es ? "Pase" : "Pass", at: release },

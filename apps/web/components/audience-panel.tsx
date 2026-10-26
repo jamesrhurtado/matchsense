@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { ArrowLeft, Clock3, ScanLine } from "lucide-react";
-import { cn, Evidence, Story, Variant, timecode } from "@/lib/api";
+import { cn, Evidence, Player, Story, Variant, timecode } from "@/lib/api";
 import { Button, Card, Tag } from "./ui";
 import { InlineEvidence } from "./inline-evidence";
+import { StoryPlayers } from "./story-players";
 
 /** Focus uses verified roles only. Legacy packages cannot establish missing roles. */
 export function relevantStories(stories: Story[], focus: string) {
@@ -107,7 +108,11 @@ export function StoryPicker({
             {[
               ["goal", "Goals", "Goles"],
               ["shot", "Shots", "Remates"],
-              ["pressure", "Nearby pressure change", "Cambio de presión cercana"],
+              [
+                "pressure",
+                "Nearby pressure change",
+                "Cambio de presión cercana",
+              ],
               ["recovery", "Control changes", "Cambios de control"],
               ["possession", "Possession", "Posesión"],
               ["pass", "Passes", "Pases"],
@@ -185,9 +190,7 @@ export function StoryPicker({
                         {
                           goal: es ? "Gol" : "Goal",
                           shot: es ? "Remate" : "Shot",
-                          pressure: es
-                            ? "Presión cercana"
-                            : "Nearby pressure",
+                          pressure: es ? "Presión cercana" : "Nearby pressure",
                           recovery: es ? "Control" : "Control",
                           possession: es ? "Posesión" : "Possession",
                           pass: es ? "Pase" : "Pass",
@@ -243,6 +246,8 @@ export function AudiencePanel({
   language,
   detail,
   focus,
+  players,
+  teamNames,
   workflowPending,
   overlayId,
   onSelect,
@@ -261,6 +266,8 @@ export function AudiencePanel({
   language: string;
   detail: string;
   focus: string;
+  players: Player[];
+  teamNames: Record<string, string>;
   workflowPending: boolean;
   overlayId?: string | null;
   onSelect: (id: string) => void;
@@ -338,17 +345,17 @@ export function AudiencePanel({
         <div className="mt-4">
           <p className="text-pretty text-base leading-relaxed">
             {es
-              ? "No hay participación aprobada en este intervalo."
-              : "No approved involvement in this interval."}
+              ? "No hay historias aprobadas que involucren esta selección en este intervalo."
+              : "No approved stories involving this selection in this interval."}
           </p>
           <p className="mt-2 text-pretty text-xs leading-relaxed text-stone-600">
             {es
-              ? "Solo se muestra participación verificada en el evento o equipo."
-              : "Only verified event roles and team involvement appear here. Older stories may lack that information."}
+              ? "Este filtro solo cambia las historias mostradas; el partido continúa y pueden haber ocurrido otras acciones."
+              : "This filter only changes which approved stories appear. The match continues, and other events may have happened."}
           </p>
           <Button className="mt-3" onClick={onWholePlay}>
             <ArrowLeft size={14} />
-            {es ? "Jugada completa" : "Whole play"}
+            {es ? "Ver todas las historias" : "Show all stories"}
           </Button>
         </div>
       ) : (
@@ -367,9 +374,18 @@ export function AudiencePanel({
                 .join(" ")
             : variant?.text) ||
             (es
-              ? "Las explicaciones aparecerán después de la aprobación del productor."
-              : "Explanations appear once the producer approves a supported story.")}
+              ? "La cancha muestra el partido en curso. Aquí aparecen las explicaciones aprobadas; «Ponerme al día» abre el resumen."
+              : "The pitch shows the match in progress. Approved explanations appear here; “Catch me up” opens the recap.")}
         </p>
+      )}
+
+      {story && (
+        <StoryPlayers
+          story={story}
+          players={players}
+          teamNames={teamNames}
+          language={language}
+        />
       )}
 
       {flagship &&
@@ -378,35 +394,35 @@ export function AudiencePanel({
           /previous three|tres pases anteriores/i.test(
             story.why_now[language] || "",
           )) && (
-        <section
-          className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 p-4"
-          aria-label={es ? "Por qué este momento" : "Why this moment"}
-        >
-          <h3 className="text-sm font-semibold text-emerald-950">
-            {es ? "¿Por qué este momento?" : "Why this moment?"}
-          </h3>
-          <p
-            lang={language}
-            className="mt-2 text-pretty text-sm leading-relaxed text-emerald-950"
+          <section
+            className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 p-4"
+            aria-label={es ? "Por qué este momento" : "Why this moment"}
           >
-            {story.why_now[language]}
-          </p>
-          <p className="mt-3 text-xs text-emerald-900">
-            {es ? "Estado de evidencia" : "Evidence status"}:{" "}
-            {story.evidence_state === "complete"
-              ? es
-                ? "Observaciones requeridas disponibles"
-                : "Required observations available"
-              : story.evidence_state === "awaiting_outcome"
+            <h3 className="text-sm font-semibold text-emerald-950">
+              {es ? "¿Por qué este momento?" : "Why this moment?"}
+            </h3>
+            <p
+              lang={language}
+              className="mt-2 text-pretty text-sm leading-relaxed text-emerald-950"
+            >
+              {story.why_now[language]}
+            </p>
+            <p className="mt-3 text-xs text-emerald-900">
+              {es ? "Estado de evidencia" : "Evidence status"}:{" "}
+              {story.evidence_state === "complete"
                 ? es
-                  ? "Resultado sin confirmar"
-                  : "Outcome unconfirmed"
-                : es
-                  ? "Observaciones limitadas"
-                  : "Limited observations"}
-          </p>
-        </section>
-      )}
+                  ? "Observaciones requeridas disponibles"
+                  : "Required observations available"
+                : story.evidence_state === "awaiting_outcome"
+                  ? es
+                    ? "Resultado sin confirmar"
+                    : "Outcome unconfirmed"
+                  : es
+                    ? "Observaciones limitadas"
+                    : "Limited observations"}
+            </p>
+          </section>
+        )}
       <div className="mt-4 flex flex-wrap gap-2">
         <Button disabled={!story} onClick={onEvidence}>
           <ScanLine size={15} />
@@ -417,6 +433,11 @@ export function AudiencePanel({
           {es ? "Ponerme al día" : "Catch me up"}
         </Button>
       </div>
+      <p className="mt-2 text-xs text-stone-500">
+        {es
+          ? "El resumen reúne historias aprobadas de este segmento."
+          : "The recap collects approved stories from this segment."}
+      </p>
       {story && evidence && (
         <InlineEvidence
           key={`${story.id}:${story.revision}`}

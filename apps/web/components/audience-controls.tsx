@@ -57,10 +57,10 @@ export function AudienceControls({
           <option value="es">Español</option>
         </select>
       </div>
-      <label htmlFor="focus" className="sr-only">
+      <label htmlFor="focus" className="text-sm font-medium text-stone-700">
         {language === "es"
-          ? "Seguir a un jugador o equipo"
-          : "Follow a player or team"}
+          ? "Seguir equipo o jugador"
+          : "Follow a team or player"}
       </label>
       <select
         id="focus"
@@ -69,7 +69,7 @@ export function AudienceControls({
         className="min-h-12 max-w-full rounded-lg border border-stone-200 bg-white px-3 text-sm"
       >
         <option value="">
-          {language === "es" ? "Jugada completa" : "Whole play"}
+          {language === "es" ? "Todas las historias" : "All stories"}
         </option>
         <optgroup label={language === "es" ? "Equipos" : "Teams"}>
           <option value="blue">Harbor City</option>

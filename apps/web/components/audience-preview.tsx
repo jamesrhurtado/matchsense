@@ -1,14 +1,19 @@
 import { useState } from "react";
-import { Story } from "@/lib/api";
+import { Player, Story } from "@/lib/api";
 import { useStoryVariant } from "@/hooks/use-story-variant";
+import { StoryPlayers } from "./story-players";
 
 function Preview({
   path,
   story,
+  players,
+  teamNames,
   language,
 }: {
   path: string;
   story: Story;
+  players: Player[];
+  teamNames?: Record<string, string>;
   language: string;
 }) {
   const simple = useStoryVariant(
@@ -34,9 +39,13 @@ function Preview({
   return (
     <>
       <p className="mt-3 text-xs text-stone-600">
-        {es
-          ? "Mismos hechos y revisión. Esta vista previa no publica nada."
-          : "Same facts and revision. Previewing does not publish anything."}
+        {story.approved
+          ? es
+            ? "Esta es la redacción aprobada que ven los espectadores junto al partido. La vista previa no cambia la aprobación."
+            : "This is the approved wording viewers see beside the match. Previewing does not change approval."
+          : es
+            ? "Al aprobarla, esta redacción aparecerá junto al partido. La vista previa no la comparte."
+            : "After approval, viewers see this wording beside the match. Previewing does not share it."}
       </p>
       <label className="mt-3 block text-sm sm:hidden">
         {es ? "Perspectiva de vista previa" : "Preview audience"}
@@ -55,6 +64,14 @@ function Preview({
         className="mt-4 grid gap-4 sm:grid-cols-2"
         data-testid="audience-preview"
       >
+        <div className="sm:col-span-2">
+          <StoryPlayers
+            story={story}
+            players={players}
+            teamNames={teamNames}
+            language={language}
+          />
+        </div>
         {[
           ["simple", simple],
           ["detail", detail],
@@ -93,10 +110,14 @@ function Preview({
 export function AudiencePreview({
   path,
   story,
+  players,
+  teamNames,
   onInspect,
 }: {
   path: string;
   story: Story;
+  players: Player[];
+  teamNames?: Record<string, string>;
   onInspect?: () => void;
 }) {
   const [open, setOpen] = useState(false);
@@ -110,10 +131,16 @@ export function AudiencePreview({
       }}
     >
       <summary className="min-h-11 cursor-pointer py-3 text-sm font-medium">
-        Preview for viewers · {story.approved ? "approved" : "draft"}
+        {language === "es"
+          ? story.approved
+            ? "Vista de espectadores · texto aprobado"
+            : "Vista de espectadores · borrador"
+          : story.approved
+            ? "Viewer preview · approved wording"
+            : "Viewer preview · draft wording"}
       </summary>
       <label className="block text-sm">
-        Preview language
+        {language === "es" ? "Idioma de vista previa" : "Preview language"}
         <select
           aria-label="Preview language"
           value={language}
@@ -129,6 +156,8 @@ export function AudiencePreview({
           key={`${story.id}:${story.revision}`}
           path={path}
           story={story}
+          players={players}
+          teamNames={teamNames}
           language={language}
         />
       )}

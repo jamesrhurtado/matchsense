@@ -10,7 +10,6 @@ import {
   ChevronRight,
   Clock3,
   Eye,
-  FileCheck2,
   Globe2,
   Layers3,
   Pause,
@@ -31,6 +30,7 @@ import { useMatch } from "@/hooks/use-match";
 import { useRenderAck } from "@/hooks/use-render-ack";
 import { EvidenceReplay } from "./evidence-replay";
 import { AudiencePreview } from "./audience-preview";
+import { StoryPlayers } from "./story-players";
 import { CatchUpPanel } from "./catch-up-panel";
 import { useViewerVisit } from "@/hooks/use-viewer-visit";
 import { ReviewCard } from "./review-card";
@@ -175,11 +175,9 @@ export default function MatchDesk({
       setSelectedStoryId(match.story.id);
   }, [isProducer, selectedStoryId, match?.story?.id]);
   const workflowPending = match?.workflow_pending === true;
-  const currentWorkflowNotice = (match?.workflow_notices || [])
-    .find(
-      (notice) =>
-        !story?.id || !notice.story_id || notice.story_id === story.id,
-    );
+  const currentWorkflowNotice = (match?.workflow_notices || []).find(
+    (notice) => !story?.id || !notice.story_id || notice.story_id === story.id,
+  );
   const aiUnavailable =
     match?.live_status === "ai_unavailable" ||
     currentWorkflowNotice?.state === "ai_unavailable";
@@ -781,12 +779,12 @@ export default function MatchDesk({
                       ? "IA no disponible"
                       : "AI assistance unavailable"
                     : match.execution === "ai"
-                    ? language === "es"
-                      ? "Explicaciones asistidas por IA"
-                      : "AI-assisted explanations"
-                    : language === "es"
-                      ? "Vista previa con plantillas · sin explicaciones generadas por IA"
-                      : "Template preview · no AI-generated explanations"}
+                      ? language === "es"
+                        ? "Explicaciones asistidas por IA"
+                        : "AI-assisted explanations"
+                      : language === "es"
+                        ? "Vista previa con plantillas · sin explicaciones generadas por IA"
+                        : "Template preview · no AI-generated explanations"}
                 </p>
                 <p className="mt-1 text-xs">
                   {isProducer
@@ -1037,6 +1035,10 @@ export default function MatchDesk({
                 language={language}
                 detail={detail}
                 focus={focus}
+                players={match?.players || []}
+                teamNames={Object.fromEntries(
+                  (match?.teams || []).map((team) => [team.id, team.name]),
+                )}
                 workflowPending={workflowPending}
                 overlayId={match?.overlay_story_id || liveApproved?.id}
                 onSelect={setSelectedStoryId}
@@ -1097,6 +1099,10 @@ export default function MatchDesk({
                   Suggested explanations of observed incidents and possession
                   windows. Review the evidence before approving for viewers;
                   these are not necessarily match highlights.
+                </p>
+                <p className="px-5 pt-2 text-xs text-stone-400">
+                  New suggestions join this list; your selected insight stays in
+                  view.
                 </p>
                 {reviewFeedback && (
                   <div
@@ -1183,49 +1189,68 @@ export default function MatchDesk({
                       {visibleVariant?.text ||
                         "Loading the supported explanation…"}
                     </p>
+                    <StoryPlayers
+                      story={story}
+                      players={match?.players || []}
+                      language={language}
+                    />
                     {match?.flagship_demo &&
                       story.why_now &&
                       (story.family !== "pressure" ||
                         /previous three|tres pases anteriores/i.test(
                           story.why_now[language] || "",
                         )) && (
-                      <section
-                        aria-label="Why this moment"
-                        className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 p-4"
-                      >
-                        <h4 className="text-sm font-semibold text-emerald-950">
-                          {language === "es"
-                            ? "¿Por qué este momento?"
-                            : "Why this moment?"}
-                        </h4>
-                        <p className="mt-2 text-pretty text-sm leading-relaxed text-emerald-950">
-                          {story.why_now[language]}
-                        </p>
-                      </section>
-                    )}
+                        <section
+                          aria-label="Why this moment"
+                          className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 p-4"
+                        >
+                          <h4 className="text-sm font-semibold text-emerald-950">
+                            {language === "es"
+                              ? "¿Por qué este momento?"
+                              : "Why this moment?"}
+                          </h4>
+                          <p className="mt-2 text-pretty text-sm leading-relaxed text-emerald-950">
+                            {story.why_now[language]}
+                          </p>
+                        </section>
+                      )}
                     <AudiencePreview
                       key={`${story.id}:${story.revision}`}
                       path={path}
                       story={story}
+                      players={match?.players || []}
+                      teamNames={Object.fromEntries(
+                        (match?.teams || []).map((team) => [
+                          team.id,
+                          team.name,
+                        ]),
+                      )}
                       onInspect={() => setSelectedStoryId(story.id)}
                     />
                     {story.editorial_decision && (
                       <details className="mt-2 text-sm">
                         <summary className="min-h-11 cursor-pointer py-3 font-medium">
-                          Selection and review
+                          {language === "es"
+                            ? "Cómo se revisó"
+                            : "How this was reviewed"}
                         </summary>
                         <p className="mt-2 text-stone-600">
-                          {story.editorial_decision.claim_ids.length} supported
-                          fact
-                          {story.editorial_decision.claim_ids.length === 1
-                            ? " block"
-                            : " blocks"}
-                          . Producer approval controls whether it is shared.
+                          {language === "es"
+                            ? `La IA seleccionó ${story.editorial_decision.claim_ids.length} dato${story.editorial_decision.claim_ids.length === 1 ? "" : "s"} respaldado${story.editorial_decision.claim_ids.length === 1 ? "" : "s"} y comprobó la redacción. Al aprobarla, compartes esta versión en la vista de espectadores.`
+                            : `The AI selected ${story.editorial_decision.claim_ids.length} supported fact${story.editorial_decision.claim_ids.length === 1 ? "" : "s"} and checked the wording. Approving shares this exact version with viewers.`}
                         </p>
+                        {match?.session_mode === "live" && (
+                          <p className="mt-2 text-stone-600">
+                            {language === "es"
+                              ? "Mientras siga vigente, también puede aparecer sobre el partido."
+                              : "While its display window is open, it can also appear over the match."}
+                          </p>
+                        )}
                         {story.editorial_decision.fallback && (
                           <p className="mt-2 text-amber-900">
-                            AI did not complete this explanation. A factual
-                            fallback still needs producer approval.
+                            {language === "es"
+                              ? "La IA no terminó esta explicación. Esta versión basada en datos aún necesita tu aprobación."
+                              : "AI did not finish this explanation. This fact-based version still needs your approval."}
                           </p>
                         )}
                       </details>
@@ -1239,22 +1264,11 @@ export default function MatchDesk({
                       <ArrowRight size={15} />
                     </Button>
                     <p className="mt-2 text-xs leading-relaxed text-stone-500">
-                      Opens the recorded facts supporting this explanation. It
-                      does not infer a tactical cause.
+                      {language === "es"
+                        ? "Revisa los hechos registrados antes de compartirla."
+                        : "Check the recorded facts before sharing this explanation."}
                     </p>
                     <div className="my-5 border-t border-stone-100" />
-                    <div className="flex items-start gap-2 text-xs leading-relaxed text-stone-500">
-                      <FileCheck2
-                        size={15}
-                        className="mt-0.5 shrink-0 text-emerald-700"
-                      />
-                      {match?.mode?.includes("local")
-                        ? "Local factual template reviewed."
-                        : match?.mode?.includes("fallback")
-                          ? "AI attempt used a factual template fallback."
-                          : "Evidence review completed."}{" "}
-                      Inspect the evidence before approving.
-                    </div>
                     {match?.session_mode === "live" && (
                       <p className="mt-3 text-sm font-medium">
                         {story.status === "ready"
@@ -1264,77 +1278,118 @@ export default function MatchDesk({
                             : `Review status: ${story.status}`}
                       </p>
                     )}
-                    <div className="mt-5 flex gap-2">
-                      <Button
-                        tone="primary"
-                        className="flex-1"
-                        disabled={
-                          busy ||
-                          ["expired", "approved"].includes(
-                            match?.story_status || "",
-                          )
-                        }
-                        onClick={() => void review("approve")}
-                      >
-                        <Check size={15} />
-                        Approve
-                      </Button>
-                      <Button
-                        disabled={
-                          busy ||
-                          (match?.story_status === "expired" && !storyApproved)
-                        }
-                        onClick={() =>
-                          void review(storyApproved ? "retract" : "suppress")
-                        }
-                      >
-                        {storyApproved ? "Retract" : "Suppress"}
-                      </Button>
-                    </div>
-                    {match?.story_status === "expired" && !storyApproved && (
-                      <Button
-                        className="mt-3 w-full"
-                        disabled={busy}
-                        onClick={() => void review("approve_archive")}
-                      >
-                        Approve for history only
-                      </Button>
+                    {storyApproved ? (
+                      <div className="mt-5">
+                        <Button
+                          disabled={busy}
+                          title="Remove this approved story from the viewer and recap"
+                          onClick={() => void review("retract")}
+                        >
+                          {language === "es"
+                            ? "Retirar aprobación"
+                            : "Retract approval"}
+                        </Button>
+                        <p className="mt-2 text-xs leading-relaxed text-stone-500">
+                          {language === "es"
+                            ? "La historia aprobada se quitará de la vista de espectadores y del resumen."
+                            : "Removes this approved story from the viewer and recap."}
+                        </p>
+                      </div>
+                    ) : match?.story_status === "expired" ? (
+                      <div className="mt-5">
+                        <Button
+                          className="w-full"
+                          disabled={busy}
+                          onClick={() => void review("approve_archive")}
+                        >
+                          {language === "es"
+                            ? "Aprobar para el historial"
+                            : "Approve for history only"}
+                        </Button>
+                        <p className="mt-2 text-xs leading-relaxed text-stone-500">
+                          {language === "es"
+                            ? "La historia aprobada aparecerá en el acompañante y el resumen, pero ya no en la transmisión."
+                            : "Adds this approved story to viewer history and the recap, but not to the live match screen."}
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="mt-5 flex gap-2">
+                        <Button
+                          tone="primary"
+                          className="flex-1"
+                          disabled={busy}
+                          onClick={() => void review("approve")}
+                        >
+                          <Check size={15} />
+                          {language === "es"
+                            ? "Aprobar para espectadores"
+                            : "Approve for viewers"}
+                        </Button>
+                        <Button
+                          disabled={busy}
+                          title="Keep this suggestion out of viewer stories and recaps"
+                          onClick={() => void review("suppress")}
+                        >
+                          {language === "es"
+                            ? "No compartir"
+                            : "Keep out of viewer"}
+                        </Button>
+                      </div>
                     )}
                     {storyApproved && match?.story_status === "approved" && (
-                      <Button
-                        className="mt-3 w-full"
-                        onClick={async () => {
-                          try {
-                            await api(
-                              `${path}/selection`,
-                              {
-                                method: "POST",
-                                body: JSON.stringify({
-                                  story_id: story.id,
-                                  expected_revision: story.revision,
-                                  package_hash: story.package_hash,
-                                }),
-                              },
-                              true,
-                            );
-                            await refresh();
-                          } catch (e) {
-                            setActionError((e as Error).message);
-                          }
-                        }}
-                      >
-                        Select shared overlay
-                      </Button>
+                      <div className="mt-4 rounded-lg border border-stone-200 bg-white/70 p-3">
+                        <p className="text-xs leading-relaxed text-stone-600">
+                          {language === "es"
+                            ? "Elige qué historia aparece sobre el partido. Las demás historias aprobadas siguen disponibles en el acompañante."
+                            : "Choose which story appears over the match. Other approved stories stay in the viewer companion."}
+                        </p>
+                        <Button
+                          className="mt-3 w-full"
+                          onClick={async () => {
+                            try {
+                              await api(
+                                `${path}/selection`,
+                                {
+                                  method: "POST",
+                                  body: JSON.stringify({
+                                    story_id: story.id,
+                                    expected_revision: story.revision,
+                                    package_hash: story.package_hash,
+                                  }),
+                                },
+                                true,
+                              );
+                              await refresh();
+                            } catch (e) {
+                              setActionError((e as Error).message);
+                            }
+                          }}
+                        >
+                          {language === "es"
+                            ? "Mostrar sobre el partido"
+                            : "Show on match"}
+                        </Button>
+                      </div>
                     )}
-                    {story.selection_reason && (
-                      <p className="mt-3 text-xs text-stone-500">
-                        {story.selection_reason}
+                    <details className="mt-4 text-xs text-stone-500">
+                      <summary className="min-h-10 cursor-pointer py-2">
+                        {language === "es"
+                          ? "Tiempo y prioridad de esta historia"
+                          : "Timing and queue priority"}
+                      </summary>
+                      {story.selection_reason && (
+                        <p className="mt-2">{story.selection_reason}</p>
+                      )}
+                      <p className="mt-2 tabular-nums">
+                        {language === "es"
+                          ? "Se muestra hasta"
+                          : "Display ends at"}{" "}
+                        {timecode(story.expires_at_ms)} ·{" "}
+                        {language === "es"
+                          ? "reloj de repetición"
+                          : "replay time"}
                       </p>
-                    )}
-                    <p className="mt-3 text-xs tabular-nums text-stone-400">
-                      Display ends at {timecode(story.expires_at_ms)} · replay
-                      time
-                    </p>
+                    </details>
                   </div>
                 ) : (
                   <div className="p-6">
@@ -1388,23 +1443,23 @@ export default function MatchDesk({
               <Card className="p-5">
                 <div className="mb-3 flex items-center gap-2 text-sm font-semibold">
                   <Eye size={16} />
-                  Audience package
+                  {language === "es"
+                    ? "Vista de espectadores"
+                    : "Viewer companion"}
                 </div>
                 <p className="text-pretty text-sm leading-relaxed text-stone-500">
-                  Approved match insights. Choose how you follow the game.
+                  {language === "es"
+                    ? "Comprueba cómo se ven el partido y las historias aprobadas para los espectadores."
+                    : "See the match and approved stories as viewers receive them."}
                 </p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  <Tag>Simple</Tag>
-                  <Tag>Detailed</Tag>
-                  <Tag>English / Español</Tag>
-                  <Tag>Player focus</Tag>
-                </div>
                 <Link
                   href={`/watch/${id}`}
                   target="_blank"
-                  className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-emerald-800"
+                  className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-lg bg-emerald-800 px-4 text-sm font-semibold text-white hover:bg-emerald-900"
                 >
-                  Open companion
+                  {language === "es"
+                    ? "Abrir vista de espectadores"
+                    : "Open viewer companion"}
                   <ArrowUpRight size={14} />
                 </Link>
               </Card>

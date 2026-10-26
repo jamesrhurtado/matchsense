@@ -58,7 +58,7 @@ export function EventEvidence({
           </div>
           <div>
             <p className="text-xs text-stone-600">
-              {es ? "Hacia delante" : "Forward pass"}
+              {es ? "Distancia hacia delante" : "Forward distance"}
             </p>
             <p className="mt-1 text-xl font-semibold">
               {f.forward_m?.toFixed(1)} m

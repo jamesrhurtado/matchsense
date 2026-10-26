@@ -13,7 +13,7 @@ RECAP_VERSION = 'distinct-approved-v1'
 
 
 def project_recap(packages, language, cutoff, focus=None):
-    if any(p.get('schema_version') in {'5.0.0','6.0.0'} for p in packages):
+    if any(p.get('schema_version') in {'5.0.0','6.0.0','7.0.0'} for p in packages):
         return mixed_recap(packages,language,cutoff,focus)
     relevant = [p for p in packages if not focus or focus in
                 {p['metrics']['team_id'], p['metrics']['passer_id'], p['metrics']['receiver_id']}]
@@ -51,7 +51,7 @@ def project_recap(packages, language, cutoff, focus=None):
 
 def mixed_recap(packages,language,cutoff,focus=None):
     from engine.event_metrics import FAMILY_PRIORITY
-    from engine.event_narrative import LABELS
+    from engine.event_narrative import display_title
     def relevant(p):
         m=p['metrics']
         return not focus or focus in ({m.get('team_id'),m.get('passer_id'),m.get('receiver_id')}|set(m.get('participants',{}).values())| (set(m['facts']['team_ms']) if m.get('family')=='possession' else set()))
@@ -71,7 +71,7 @@ def mixed_recap(packages,language,cutoff,focus=None):
     moments=[]
     for p in sorted(chosen,key=lambda p:(p['metrics'].get('occurrence_ms',p['eligible_from_ms']),p['id'])):
         v=next(v for v in p['variants'] if v['language']==language and v['detail']=='simple' and v['focus']==focus)
-        if p.get('family'):title=LABELS[p['family']][language=='es']
+        if p.get('family'):title=display_title(p['family'],language,p.get('renderer_version'))
         else:title=(editorial_title if p['schema_version']=='4.0.0' else title_for)(p['narrative_plan'],p['metrics'],language) if p['schema_version'] in {'3.0.0','4.0.0'} else p['title']
         moments.append({'story_id':p['id'],'revision':p['revision'],'title':title,'text':v['text'],'family':p.get('family','pass'),'claim_ids':v['claim_ids'],
                         'at_ms':p['metrics'].get('occurrence_ms',p['eligible_from_ms']),'archived':cutoff>=p['expires_at_ms'],

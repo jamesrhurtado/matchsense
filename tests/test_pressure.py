@@ -72,7 +72,7 @@ def test_new_sources_reproducible_physical_and_all_existing_families(correction)
     assert f['stands_out'] and sorted(c['forward_m'] for c in f['comparators'])==[18,22,25]
     assert not any(m['subject_id']=='pass-4' for m in pressure_metrics(meta,rows,91299))
     p=build_event_package(value,meta)
-    assert p['schema_version']=='6.0.0'
+    assert p['schema_version']=='7.0.0'
     assert 'pasó 30.0 m' in next(v['text'] for v in p['variants'] if v['language']=='es' and v['detail']=='simple')
     assert 'Passer:' in next(v['text'] for v in p['variants'] if v['language']=='en' and v['focus']=='blue-11')
     assert 'Receiver:' in next(v['text'] for v in p['variants'] if v['language']=='en' and v['focus']=='blue-09')
@@ -161,14 +161,14 @@ def test_pressure_real_api_approval_bilingual_focus_recap_restart_and_invalidati
     assert main.repo.stored_package(sid,p['id'],1)==p
 
 @pytest.mark.parametrize('bad',[False,True])
-def test_v6_existing_director_reviewer_supported_and_invalid_selection_fallback(bad):
+def test_v7_existing_director_reviewer_supported_and_invalid_selection_fallback(bad):
     from engine.structured_workflow import run_event_workflow
     from engine.workflow import EvidenceTools
     class Provider:
         async def complete(self,role,instructions,payload,schema,max_tokens):
             return {'action':'propose' if role=='Story Director' else 'supported','claim_ids':['invented'] if bad else ['c-event'],'reason':'supplied observations only'},{'input_token_count':20,'output_token_count':20,'total_token_count':40}
     meta,rows=fixture();p=run_event_workflow(EvidenceTools(meta,rows,92000),'pressure','pass-4',provider=Provider())
-    assert p['schema_version']=='6.0.0'
+    assert p['schema_version']=='7.0.0'
     assert p['mode']==('template fallback' if bad else 'Microsoft Agent Framework + Azure OpenAI')
     EventPackage.model_validate(p)
 

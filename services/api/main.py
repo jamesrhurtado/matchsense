@@ -26,7 +26,7 @@ from engine.recap import project_recap
 from engine.public_updates import record_source_withdrawal, public_updates
 from engine.editorial import decision_summary
 from engine.event_metrics import event_metrics, FAMILY_PRIORITY
-from engine.event_narrative import build_event_package, story_id as event_story_id, LABELS
+from engine.event_narrative import build_event_package, story_id as event_story_id, display_title
 from engine.match_state import match_state
 from engine.event_workflow import generate_event
 COVERAGE=os.getenv('WHY_NOW_MATCH_COVERAGE','0')=='1'
@@ -472,13 +472,13 @@ def safe_story(package,status):
         else:
             from engine.contextual_narrative import title_for
         titles={lang:title_for(package['narrative_plan'],package['metrics'],lang) for lang in ['en','es']}
-    if package['schema_version'] in {'5.0.0','6.0.0'}:titles={lang:LABELS[package['family']][i] for i,lang in enumerate(['en','es'])}
+    if package['schema_version'] in {'5.0.0','6.0.0','7.0.0'}:titles={lang:display_title(package['family'],lang,package.get('renderer_version')) for lang in ['en','es']}
     m=package['metrics']
     from engine.explainability import why_now, evidence_state
     return {k:package[k] for k in ['id','revision','title','evidence_revision','eligible_from_ms','expires_at_ms']}|{'why_now':{lang:why_now(package,lang) for lang in ['en','es']},'evidence_state':evidence_state(package),'notable':bool(m.get('facts',{}).get('stands_out')),'titles':titles,'status':status,
             'family':m.get('family','pass'),'incident_id':m.get('incident_id',package['id']),
             'participants':m.get('participants',{}),'occurrence_ms':m.get('occurrence_ms',package['eligible_from_ms']),
-            'selection_reason':'Priority: confirmed goals, shots, Pressure Swing, control changes, possession, passes; newest occurrence then stable ID.'}|{k:m.get(k) for k in ['passer_id','receiver_id','team_id']}
+            'selection_reason':'Priority: confirmed goals, shots, nearby pressure changes, control changes, possession, passes; newest occurrence then stable ID.'}|{k:m.get(k) for k in ['passer_id','receiver_id','team_id']}
 
 def snapshot_data(sid,is_producer=False,story_id=None):
     with LOCK:
@@ -645,7 +645,7 @@ def select_overlay(sid:str,body:OverlaySelection,x_producer_token:str|None=Heade
 def evidence(sid:str,story_id:str,x_producer_token:str|None=Header(None)):
     with LOCK:
         s,at,p,status=authorized_package(sid,story_id,x_producer_token);meta,messages=inputs(s,at)
-        if p['schema_version'] in {'5.0.0','6.0.0'}:
+        if p['schema_version'] in {'5.0.0','6.0.0','7.0.0'}:
             related=[]
             for other in materialize_all(s,at):
                 if other['id']==p['id'] or other.get('incident_id')!=p['incident_id']:continue
@@ -692,7 +692,7 @@ def review(sid:str,story_id:str,body:Review,x_producer_token:str|None=Header(Non
             if not decision or decision['status']!='approved' or decision['revision']!=p['revision'] or decision['package_hash']!=p['package_hash']:
                 fail(409,'not_published')
         if body.action=='edit':
-            if p['schema_version'] in {'5.0.0','6.0.0'}:fail(422,'event_text_is_source_rendered')
+            if p['schema_version'] in {'5.0.0','6.0.0','7.0.0'}:fail(422,'event_text_is_source_rendered')
             if not body.angle and (not body.text or not body.text.strip()):fail(422,'edit_text_required')
             if body.angle and not STRUCTURED:fail(422,'emphasis_requires_structured_package')
             if body.angle=='historical_contrast' and 'c-context' not in {c['id'] for c in p['claims']}:

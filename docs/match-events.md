@@ -82,3 +82,12 @@ appears only in the new flagship fixtures, behind the existing coverage flag;
 existing sessions retain their persisted coverage capability on flag rollback.
 A source correction invalidates the exact approval; re-rendering is a new revision.
 Pressure and ordinary pass stories share an incident in viewer history/recap.
+
+## Additive v7 pressure wording
+
+New pressure packages use schema 7 and the `pressure-swing-v7` renderer. The
+analyst view reads as a short explanation of the pass, names players with their
+shirt numbers, states the before/after windows and observed coverage, and gives
+the measurement boundary. Older v6 pressure packages keep their original text,
+hash and reader; the v7 reader accepts both versions without rewriting stored
+approvals.

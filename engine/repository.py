@@ -152,7 +152,7 @@ class Repository:
     def store_package(self,sid,package,at_ms,expected_revision=None,acceptance_events=()):
         from engine.cloud_repository import RepositoryConflict
         from engine.dispositions import validate_acceptance_events
-        if package.get('schema_version') in {'5.0.0','6.0.0'}:
+        if package.get('schema_version') in {'5.0.0','6.0.0','7.0.0'}:
             from engine.event_narrative import EventPackage
             EventPackage.model_validate(package)
         validate_acceptance_events(sid,package,acceptance_events)

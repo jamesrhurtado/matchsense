@@ -1013,6 +1013,9 @@ export default function MatchDesk({
                   context={`${recapContext}:${correctionContext}:${match?.score?.blue}:${match?.score?.amber}`}
                   clock={match?.clock_ms || 0}
                   visit={visit}
+                  teamNames={Object.fromEntries(
+                    (match?.teams || []).map((team) => [team.id, team.name]),
+                  )}
                   stories={stories}
                   onClose={() => setRecapOpen(false)}
                   onSelect={(storyId) => {

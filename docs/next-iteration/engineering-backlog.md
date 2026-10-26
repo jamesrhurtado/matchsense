@@ -311,6 +311,16 @@ explicit source audit and publication safeguards.
   observations, infer tactical movement or create trails. Respect reduced-motion
   preferences. This improves continuity, but cannot make a stationary authored
   source sequence look active.
+- [Implemented locally, 25 October] Add an opt-in spoken companion for viewers:
+  read the exact approved explanation, choose a separate evidence-and-limits
+  narration, and listen to the approved-moment recap. Pass descriptions include
+  source-backed start/end channels and thirds when the observed endpoints and
+  forward displacement establish orientation; gaps are stated instead of
+  inventing a ball path. Provide pause/resume, repeat, stop, a transcript, and
+  browser-voice availability feedback in English and Spanish. Never autoplay.
+  This is a first accessible slice, not continuous play-by-play. Co-design and
+  test it with blind and low-vision football viewers before claiming improved
+  understanding or accessibility outcomes.
 
 Do not add these changes to the SD01–SD04 delivery claim. The continuing human
 review remains necessary to determine which explanations and controls people

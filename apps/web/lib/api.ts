@@ -111,6 +111,7 @@ export type Match = {
 };
 export type Metrics = {
   family?: string;
+  team_id?: string;
   participants?: Record<string, string | null>;
   window_start_ms?: number;
   window_end_ms?: number;

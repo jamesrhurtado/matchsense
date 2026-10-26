@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { api, Recap, Story, timecode } from "@/lib/api";
 import { Button, Card } from "./ui";
+import { ListenButton } from "./listen-button";
 
 export function CatchUpPanel({
   path,
@@ -9,6 +10,7 @@ export function CatchUpPanel({
   context,
   clock,
   visit,
+  teamNames,
   stories,
   onSelect,
   onClose,
@@ -19,6 +21,7 @@ export function CatchUpPanel({
   context: string;
   clock: number;
   visit: { from: number; returning: boolean } | null;
+  teamNames: Record<string, string>;
   stories: Story[];
   onSelect: (id: string) => void;
   onClose: () => void;
@@ -69,6 +72,45 @@ export function CatchUpPanel({
   const moments =
     data?.moments.filter((m) => approved.has(`${m.story_id}:${m.revision}`)) ||
     [];
+  const spokenSummary = data
+    ? [
+        data.title,
+        es
+          ? `Intervalo del resumen: ${timecode(data.from_ms ?? 0)} a ${timecode(data.through_ms)}.`
+          : `Summary interval: ${timecode(data.from_ms ?? 0)} to ${timecode(data.through_ms)}.`,
+        data.match_state
+          ? es
+            ? `Marcador confirmado actual: ${teamNames.blue || "equipo azul"}, ${data.match_state.score.blue}; ${teamNames.amber || "equipo ámbar"}, ${data.match_state.score.amber}.`
+            : `Current confirmed score: ${teamNames.blue || "Blue team"}, ${data.match_state.score.blue}; ${teamNames.amber || "Amber team"}, ${data.match_state.score.amber}.`
+          : "",
+        moments.length
+          ? es
+            ? `${moments.length} explicaciones aprobadas.`
+            : `${moments.length} approved explanations.`
+          : es
+            ? "No hay explicaciones aprobadas en este intervalo para este enfoque."
+            : "There are no approved explanations for this focus in this interval.",
+        ...moments.map(
+          (moment) =>
+            `${timecode(moment.at_ms)}. ${moment.title}. ${moment.text}`,
+        ),
+        ...(data.corrections || []).map((notice) =>
+          es
+            ? `${timecode(notice.at_ms)}. Actualización sobre el momento de ${timecode(notice.story_at_ms)}: ${notice.kind === "source_changed" ? "cambió la fuente y se retiró la explicación" : "el productor retiró la explicación"}.`
+            : `${timecode(notice.at_ms)}. Update to the moment at ${timecode(notice.story_at_ms)}: ${notice.kind === "source_changed" ? "the source changed and the explanation was withdrawn" : "the producer withdrew the explanation"}.`,
+        ),
+        (data.correction_count || 0) > (data.corrections?.length || 0)
+          ? es
+            ? "Hay más actualizaciones de las que se muestran aquí."
+            : "There are more updates than the ones shown here."
+          : "",
+        es
+          ? "Este resumen incluye explicaciones aprobadas; no es una lista de todos los eventos."
+          : "This recap includes approved explanations; it is not a list of every event.",
+      ]
+        .filter(Boolean)
+        .join(" ")
+    : "";
   return (
     <Card className="mt-5 p-4 md:p-6" data-testid="catch-up-panel">
       <div className="flex items-start justify-between gap-3">
@@ -123,6 +165,14 @@ export function CatchUpPanel({
           <p className="mt-4 text-sm tabular-nums">
             {timecode(data.from_ms ?? 0)}–{timecode(data.through_ms)}
           </p>
+          <div className="mt-3">
+            <ListenButton
+              key={`${key}:audio`}
+              heading={es ? "Escuchar resumen" : "Listen to the recap"}
+              text={spokenSummary}
+              language={language}
+            />
+          </div>
           <p className="mt-1 text-xs leading-relaxed text-stone-600">
             {es
               ? "Hechos ocurridos en este intervalo; validez y marcador comprobados ahora. Los intervalos de posesión se incluyen por su hora de cierre."

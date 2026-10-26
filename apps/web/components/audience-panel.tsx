@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { ArrowLeft, Clock3, ScanLine } from "lucide-react";
-import { cn, Evidence, Player, Story, Variant, timecode } from "@/lib/api";
+import { cn, Evidence, Metrics, Player, Story, Variant, timecode } from "@/lib/api";
 import { Button, Card, Tag } from "./ui";
 import { InlineEvidence } from "./inline-evidence";
+import { ListenButton } from "./listen-button";
 import { StoryPlayers } from "./story-players";
 
 /** Focus uses verified roles only. Legacy packages cannot establish missing roles. */
@@ -29,6 +30,39 @@ export function relevantStories(stories: Story[], focus: string) {
             ) === index,
         );
 }
+
+function describePassLocation(metrics: Metrics, teamName: string, language: string) {
+  const start = metrics.pass_start;
+  const end = metrics.pass_end;
+  const forward = metrics.forward_pass_m ?? metrics.facts?.forward_m;
+  if (!start || !end || forward == null) return "";
+  const deltaX = end.x_m - start.x_m;
+  if (Math.abs(deltaX) < 0.1 || Math.abs(forward) < 0.1) return "";
+
+  // Signed progression identifies which end this team attacks for this pass.
+  const attacksRight = Math.sign(deltaX) === Math.sign(forward);
+  const attackingX = (x: number) => (attacksRight ? x : 105 - x);
+  const attackingY = (y: number) => (attacksRight ? y : 68 - y);
+  const third = (x: number) => {
+    const progress = attackingX(x);
+    if (progress < 35) return language === "es" ? "defensivo" : "defensive";
+    if (progress < 70) return language === "es" ? "medio" : "middle";
+    return language === "es" ? "ofensivo" : "attacking";
+  };
+  const channel = (y: number) => {
+    const across = attackingY(y);
+    if (across < 68 / 3) return language === "es" ? "carril izquierdo" : "left channel";
+    if (across >= (2 * 68) / 3)
+      return language === "es" ? "carril derecho" : "right channel";
+    return language === "es" ? "carril central" : "central channel";
+  };
+  const origin = `${channel(start.y_m)} del tercio ${third(start.x_m)}`;
+  const destination = `${channel(end.y_m)} del tercio ${third(end.x_m)}`;
+  return language === "es"
+    ? `Ubicación observada: para ${teamName}, el pase comenzó por el ${origin} y terminó por el ${destination}. La fuente registra el inicio y la recepción, no la trayectoria intermedia del balón.`
+    : `Observed locations: for ${teamName}, the pass began in the ${origin} and ended in the ${destination}. The source records the start and reception, not the ball's intermediate path.`;
+}
+
 export function StoryPicker({
   stories,
   selected,
@@ -280,6 +314,33 @@ export function AudiencePanel({
   flagship?: boolean;
 }) {
   const es = language === "es";
+  const matchingEvidence =
+    story && evidence?.story.id === story.id && evidence.story.revision === story.revision
+      ? evidence
+      : null;
+  const evidenceVariant = matchingEvidence?.story.variants.find(
+    (item) =>
+      item.language === language &&
+      item.detail === "detail" &&
+      item.focus === (focus || null),
+  ) ?? matchingEvidence?.story.variants.find(
+    (item) =>
+      item.language === language && item.detail === "detail" && !item.focus,
+  );
+  const locationText =
+    matchingEvidence?.story.metrics.family === "pass" ||
+    matchingEvidence?.story.metrics.family === "pressure"
+      ? describePassLocation(
+          matchingEvidence.story.metrics,
+          teamNames[matchingEvidence.story.metrics.team_id || ""] ||
+            matchingEvidence.story.metrics.team_id ||
+            "",
+          language,
+        )
+      : "";
+  const evidenceText = [evidenceVariant?.text, locationText]
+    .filter(Boolean)
+    .join(" ");
   return (
     <Card className="p-4 md:p-6">
       {viewingEarlier && (
@@ -377,6 +438,17 @@ export function AudiencePanel({
               ? "La cancha muestra el partido en curso. Aquí aparecen las explicaciones aprobadas; «Ponerme al día» abre el resumen."
               : "The pitch shows the match in progress. Approved explanations appear here; “Catch me up” opens the recap.")}
         </p>
+      )}
+
+      {story && variant?.text && (
+        <div className="mt-2">
+          <ListenButton
+            text={variant.text}
+            evidenceText={evidenceText}
+            heading={es ? "Escuchar este momento" : "Listen to this moment"}
+            language={language}
+          />
+        </div>
       )}
 
       {story && (

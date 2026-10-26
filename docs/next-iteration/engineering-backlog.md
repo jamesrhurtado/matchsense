@@ -252,6 +252,10 @@ explicit source audit and publication safeguards.
   adds the approved moment to companion/history without putting it on air. Tell
   producers why live actions are disabled after the window ends, and describe
   Retract as removing an already approved moment.
+- Reduce the selected-insight decision panel's stacked copy and controls. Keep
+  the current review state and applicable action prominent; hide disabled live
+  actions after expiry, and move audit explanation, selection-priority text,
+  and display-time metadata into concise, optional details.
 - Make simple/analyst and English/Spanish previews easy to open before approval,
   then show where each appears in the companion. Replace the read-only Audience
   package card with either real preview/customization controls or a concise

@@ -80,9 +80,7 @@ for (const width of [1440, 390]) {
       ),
     ).toBeTruthy();
     incoming = false;
-    await expect(page.getByTestId("review-status")).toContainText(
-      "Producer review desk",
-    );
+    await expect(page.getByTestId("review-status")).toHaveCount(0);
     expect(
       Math.abs((await evidence.boundingBox())!.y - before!.y),
     ).toBeLessThanOrEqual(1);

@@ -55,7 +55,7 @@ test('pending AI review remains visible while replay continues',async({page})=>{
  }}));
  await page.goto('/studio/pending-demo');
  await expect(page.getByRole('status').filter({hasText:'AI review in progress'})).toContainText('AI review in progress');
- await expect(page.getByRole('status').filter({hasText:'AI review in progress'})).toContainText('Azure model workflow');
+ await expect(page.getByRole('status').filter({hasText:'AI review in progress'})).not.toContainText('Azure model workflow');
  await expect(page.getByRole('button',{name:'Pause',exact:true})).toBeEnabled();
  await expect(page.getByRole('button',{name:'Approve',exact:true})).toHaveCount(0);
 });

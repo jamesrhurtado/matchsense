@@ -174,6 +174,69 @@ export default function MatchDesk({
       setSelectedStoryId(match.story.id);
   }, [isProducer, selectedStoryId, match?.story?.id]);
   const workflowPending = match?.workflow_pending === true;
+  const currentWorkflowNotice = (match?.workflow_notices || [])
+    .find(
+      (notice) =>
+        !story?.id || !notice.story_id || notice.story_id === story.id,
+    );
+  const aiUnavailable =
+    match?.live_status === "ai_unavailable" ||
+    currentWorkflowNotice?.state === "ai_unavailable";
+  const reviewFeedback = aiUnavailable
+    ? {
+        tone: "warning" as const,
+        title: language === "es" ? "IA no disponible" : "AI unavailable",
+        message:
+          language === "es"
+            ? "No se preparó una explicación con IA para este momento. Puedes revisar la evidencia y las historias disponibles."
+            : "No AI-written explanation is available for this moment. You can still review the evidence and other insights.",
+      }
+    : workflowPending
+      ? {
+          tone: "active" as const,
+          title:
+            language === "es"
+              ? "Revisión de IA en curso"
+              : "AI review in progress",
+          message:
+            language === "es"
+              ? "Se está revisando un nuevo momento. Puedes seguir comprobando la evidencia mientras continúa el partido."
+              : "A new moment is being reviewed. You can keep checking the evidence while the match continues.",
+        }
+      : currentWorkflowNotice?.state === "capacity_deferred"
+        ? {
+            tone: "warning" as const,
+            title: language === "es" ? "Revisión en espera" : "Review waiting",
+            message:
+              language === "es"
+                ? "La revisión está ocupada; este momento sigue en la cola."
+                : "AI is busy; this moment is still waiting in the queue.",
+          }
+        : currentWorkflowNotice?.state === "attempt_or_session_budget_limit"
+          ? {
+              tone: "warning" as const,
+              title:
+                language === "es"
+                  ? "Límite de revisión alcanzado"
+                  : "Review limit reached",
+              message:
+                language === "es"
+                  ? "No se harán más intentos de revisión para este momento."
+                  : "No further review attempts will run for this moment.",
+            }
+          : currentWorkflowNotice?.state === "expired_unscheduled"
+            ? {
+                tone: "warning" as const,
+                title:
+                  language === "es"
+                    ? "Ventana de revisión cerrada"
+                    : "Review window ended",
+                message:
+                  language === "es"
+                    ? "El momento salió de la ventana en directo antes de estar listo para revisión."
+                    : "This moment left the live window before it was ready for review.",
+              }
+            : null;
   const modelUsage = diagnostics?.model_usage as
     | {
         calls?: number;
@@ -534,33 +597,6 @@ export default function MatchDesk({
             {actionError}
           </p>
         )}
-        {isProducer && (
-          <div
-            role="status"
-            aria-live="polite"
-            data-testid="review-status"
-            className={cn(
-              "mb-5 flex min-h-16 items-center gap-3 rounded-2xl border px-4 py-3 text-sm shadow-sm",
-              workflowPending
-                ? "border-sky-200 bg-sky-50 text-sky-950"
-                : "border-emerald-200 bg-emerald-50 text-emerald-950",
-            )}
-          >
-            <ShieldCheck size={18} className="shrink-0" />
-            <p>
-              <strong className="block">
-                {workflowPending
-                  ? "AI review in progress"
-                  : "Producer review desk"}
-              </strong>
-              <span className="text-xs">
-                {workflowPending
-                  ? "Checking a new explanation. Keep reviewing your selected insight."
-                  : "New insights arrive in the queue. Your selected insight stays in view."}
-              </span>
-            </p>
-          </div>
-        )}
         <div
           className={cn(
             "grid items-start gap-6",
@@ -693,31 +729,36 @@ export default function MatchDesk({
                     ? language === "es"
                       ? "Simulación finalizada"
                       : "Simulation ended"
+                    : language === "es"
+                      ? "Simulación en curso · 1×"
+                      : "Live simulation · 1×"}
+                </p>
+                <p className="mt-2 font-medium">
+                  {match.execution === "ai" &&
+                  match.live_status === "ai_unavailable"
+                    ? language === "es"
+                      ? "IA no disponible"
+                      : "AI assistance unavailable"
+                    : match.execution === "ai"
+                    ? language === "es"
+                      ? "Explicaciones asistidas por IA"
+                      : "AI-assisted explanations"
+                    : language === "es"
+                      ? "Vista previa con plantillas · sin explicaciones generadas por IA"
+                      : "Template preview · no AI-generated explanations"}
+                </p>
+                <p className="mt-1 text-xs">
+                  {isProducer
+                    ? language === "es"
+                      ? "Solo las explicaciones aprobadas llegan a los espectadores. La revisión no detiene el partido."
+                      : "Only approved explanations reach viewers. Review does not stop the match."
                     : match.live_status === "ai_unavailable"
                       ? language === "es"
-                        ? "Conexión de IA no disponible"
-                        : "AI connection unavailable"
+                        ? "Las explicaciones con IA no están disponibles por ahora. Las historias aprobadas anteriormente siguen visibles."
+                        : "AI explanations are temporarily unavailable. Previously approved stories remain available."
                       : language === "es"
-                        ? "Partido simulado en directo · continuo a 1×"
-                        : "Simulated live match · continuous 1×"}
-                </p>
-                <p className={isProducer ? "mt-2" : "mt-1 text-xs"}>
-                  {match.execution === "ai"
-                    ? match.mode.includes("fallback")
-                      ? language === "es"
-                        ? "Alternativa factual tras fallar la IA"
-                        : "AI unavailable · factual fallback"
-                      : language === "es"
-                        ? "Explicaciones asistidas por IA"
-                        : "AI-assisted explanations"
-                    : language === "es"
-                      ? "Vista previa con plantillas · sin llamadas de IA"
-                      : "Template preview · no AI calls"}
-                  .{" "}
-                  {isProducer &&
-                    (["complete", "stopped"].includes(match.live_status || "")
-                      ? "Review approved insights and catch up on this segment."
-                      : "The match continues during evidence review. Only producer-approved explanations reach fans.")}
+                        ? "Solo las explicaciones aprobadas por el productor se comparten con los espectadores."
+                        : "Only producer-approved explanations are shared with viewers."}
                 </p>
                 {isProducer && (
                   <div className="mt-3 flex flex-wrap gap-2">
@@ -1016,58 +1057,23 @@ export default function MatchDesk({
                   windows. Review the evidence before approving for viewers;
                   these are not necessarily match highlights.
                 </p>
-                {match?.session_mode === "live" && (
-                  <details className="mx-5 my-3 max-h-48 overflow-y-auto overscroll-contain text-sm">
-                    <summary className="cursor-pointer">
-                      AI review and delivery history
-                    </summary>
-                    <p className="my-2 text-xs text-stone-500">
-                      Technology: {match.mode}
-                    </p>
-                    {(match.workflow_notices || []).map((notice, i) => (
-                      <p
-                        key={i}
-                        className="my-2 rounded-lg bg-amber-50 p-3 text-xs text-amber-950"
-                      >
-                        {(
-                          {
-                            capacity_deferred:
-                              "Model capacity was busy; the insight waited in the queue.",
-                            attempt_or_session_budget_limit:
-                              "An insight reached its attempt or session call limit.",
-                            ai_unavailable:
-                              "The AI connection was unavailable; no AI explanation was substituted.",
-                            expired_unscheduled:
-                              "An insight's live window ended before it could be reviewed.",
-                          } as Record<string, string>
-                        )[notice.state] || notice.state}{" "}
-                        {notice.at_ms !== undefined
-                          ? `At ${timecode(notice.at_ms)}.`
-                          : ""}
-                      </p>
-                    ))}
-                    {(match.workflow_attempts || []).length ? (
-                      (match.workflow_attempts || []).map((attempt, i) => (
-                        <div
-                          key={i}
-                          className="my-2 rounded-lg bg-stone-50 p-3"
-                        >
-                          <p>
-                            {attempt.story_id} · {attempt.state}
-                          </p>
-                          <p className="text-xs text-stone-500">
-                            {attempt.mode} · {attempt.usage.calls ?? "unknown"}{" "}
-                            calls{attempt.reason ? ` · ${attempt.reason}` : ""}
-                          </p>
-                        </div>
-                      ))
-                    ) : (
-                      <p className="mt-2 text-stone-500">
-                        Watching for supported events. No explanation attempt
-                        yet.
-                      </p>
+                {reviewFeedback && (
+                  <div
+                    role="status"
+                    aria-live="polite"
+                    data-testid="review-status"
+                    className={cn(
+                      "mx-4 mt-4 rounded-xl border px-3 py-3 text-sm",
+                      reviewFeedback.tone === "active"
+                        ? "border-sky-200 bg-sky-50 text-sky-950"
+                        : "border-amber-200 bg-amber-50 text-amber-950",
                     )}
-                  </details>
+                  >
+                    <p className="font-semibold">{reviewFeedback.title}</p>
+                    <p className="mt-1 text-xs leading-relaxed">
+                      {reviewFeedback.message}
+                    </p>
+                  </div>
                 )}
                 <div
                   data-testid="producer-insight-list"
@@ -1498,6 +1504,48 @@ export default function MatchDesk({
                   ? " Token totals are incomplete because the provider did not return usage for every attempt."
                   : ""}
               </p>
+              {match?.session_mode === "live" && (
+                <details className="mt-5 border-t border-stone-200 pt-3 text-sm">
+                  <summary className="min-h-11 font-medium">
+                    Session attempt log · technical
+                  </summary>
+                  <p className="mt-2 text-xs text-stone-500">
+                    Technology: {match.mode}
+                  </p>
+                  {(match.workflow_notices || []).map((notice, i) => (
+                    <p
+                      key={`notice-${i}`}
+                      className="my-2 rounded-lg bg-amber-50 p-3 text-xs text-amber-950"
+                    >
+                      {notice.state.replaceAll("_", " ")}
+                      {notice.at_ms !== undefined
+                        ? ` · ${timecode(notice.at_ms)}`
+                        : ""}
+                    </p>
+                  ))}
+                  {(match.workflow_attempts || []).map((attempt, i) => (
+                    <div
+                      key={`${attempt.story_id}-${i}`}
+                      className="my-2 rounded-lg bg-stone-50 p-3 text-xs"
+                    >
+                      <p className="font-medium">
+                        {attempt.story_id} · {attempt.state}
+                      </p>
+                      <p className="mt-1 text-stone-500">
+                        {attempt.mode} · {attempt.usage.calls ?? "unknown"}{" "}
+                        calls
+                        {attempt.reason ? ` · ${attempt.reason}` : ""}
+                      </p>
+                    </div>
+                  ))}
+                  {!match.workflow_attempts?.length &&
+                    !match.workflow_notices?.length && (
+                      <p className="mt-2 text-xs text-stone-500">
+                        No explanation attempts recorded yet.
+                      </p>
+                    )}
+                </details>
+              )}
             </details>
           </Card>
         )}

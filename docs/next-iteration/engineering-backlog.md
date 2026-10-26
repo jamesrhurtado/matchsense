@@ -245,9 +245,18 @@ explicit source audit and publication safeguards.
 - Keep raw observation IDs and evidence hashes out of the default explanation;
   retain them inside an optional technical audit view. Clearly distinguish
   producer-only evidence from the approved explanation and variants viewers get.
+- Clarify the review actions in plain language: Approve publishes the exact
+  revision to the companion and makes it eligible for the live overlay during
+  its display window; Suppress keeps an unapproved candidate out of viewer
+  stories and recaps; Approve for history only is available after expiry and
+  adds the approved moment to companion/history without putting it on air. Tell
+  producers why live actions are disabled after the window ends, and describe
+  Retract as removing an already approved moment.
 - Make simple/analyst and English/Spanish previews easy to open before approval,
-  then show where each appears in the companion. Label the audience package as a
-  summary of viewer options if it remains read-only.
+  then show where each appears in the companion. Replace the read-only Audience
+  package card with either real preview/customization controls or a concise
+  Open viewer companion handoff. Do not present viewer capabilities as choices
+  the producer can edit in this card.
 - Explain “Select shared overlay” as choosing which approved story is on the
   match broadcast while the other approved stories remain available in the
   companion/history; consider renaming the action to say that plainly.

@@ -372,32 +372,32 @@ export default function MatchDesk({
   return (
     <div className="min-h-dvh lg:flex">
       {isProducer && (
-        <aside className="hidden w-20 shrink-0 flex-col items-center gap-8 border-r border-stone-200 bg-white py-7 lg:flex">
+        <aside className="hidden w-20 shrink-0 flex-col items-center gap-8 border-r border-[#203b36] bg-[#142923] py-7 text-white lg:flex">
           <Link
             href="/"
             aria-label="WHY/NOW home"
-            className="flex size-10 items-center justify-center rounded-xl bg-stone-900 text-xl font-black text-white"
+            className="flex size-10 items-center justify-center rounded-xl bg-white/10 text-xl font-black text-white ring-1 ring-white/15"
           >
             W<span className="text-emerald-400">/</span>
           </Link>
           <a
             href="#live"
             aria-label="Live match"
-            className="rounded-xl bg-emerald-50 p-3 text-emerald-800"
+            className="rounded-xl bg-emerald-300/15 p-3 text-emerald-200 ring-1 ring-emerald-200/20"
           >
             <Radio size={20} />
           </a>
           <button
             onClick={() => void loadEvidence()}
             aria-label="Inspect evidence"
-            className="p-3 text-stone-400 hover:text-stone-800"
+            className="rounded-xl p-3 text-white/55 hover:bg-white/10 hover:text-white"
           >
             <ScanLine size={20} />
           </button>
           <button
             onClick={inspectDiagnostics}
             aria-label="Open diagnostics"
-            className="p-3 text-stone-400 hover:text-stone-800"
+            className="rounded-xl p-3 text-white/55 hover:bg-white/10 hover:text-white"
           >
             <Activity size={20} />
           </button>
@@ -405,7 +405,7 @@ export default function MatchDesk({
             href={`/watch/${id}`}
             target="_blank"
             aria-label="Open viewer companion"
-            className="mt-auto p-3 text-stone-400 hover:text-stone-800"
+            className="mt-auto rounded-xl p-3 text-white/55 hover:bg-white/10 hover:text-white"
           >
             <Eye size={20} />
           </Link>
@@ -417,7 +417,7 @@ export default function MatchDesk({
           isProducer ? "max-w-screen-2xl" : "max-w-7xl",
         )}
       >
-        <header className="flex min-h-24 flex-wrap items-center justify-between gap-4 border-b border-stone-200 py-5">
+        <header className="flex min-h-24 flex-wrap items-center justify-between gap-4 border-b border-[#d9e3dd] py-5">
           <div className="flex items-center gap-4">
             {!isProducer && (
               <Link href="/" className="text-xl font-black">
@@ -427,14 +427,14 @@ export default function MatchDesk({
             <div
               className={cn(!isProducer && "border-l border-stone-300 pl-4")}
             >
-              <p className="text-sm font-semibold">
+              <p className="text-[15px] font-bold tracking-[-0.02em] text-[#172721]">
                 {isProducer
                   ? "Producer console"
                   : language === "es"
                     ? "Vista del espectador"
                     : "Viewer companion"}
               </p>
-              <p className="mt-1 text-xs text-stone-400">
+              <p className="mt-1 text-xs text-stone-500">
                 {isProducer
                   ? "Live stories. Evidence in view."
                   : language === "es"
@@ -521,7 +521,7 @@ export default function MatchDesk({
               Alder Rovers
             </h1>
           </div>
-          <Tag className="bg-stone-200/70">
+          <Tag className="border-sky-200 bg-sky-50 text-sky-900">
             <Layers3 size={12} />
             {language === "es" ? "Datos sintéticos" : "Synthetic data"}
           </Tag>
@@ -539,7 +539,12 @@ export default function MatchDesk({
             role="status"
             aria-live="polite"
             data-testid="review-status"
-            className="mb-5 flex h-16 items-center gap-3 rounded-xl border border-emerald-200 bg-emerald-50 px-4 text-sm text-emerald-900"
+            className={cn(
+              "mb-5 flex min-h-16 items-center gap-3 rounded-2xl border px-4 py-3 text-sm shadow-sm",
+              workflowPending
+                ? "border-sky-200 bg-sky-50 text-sky-950"
+                : "border-emerald-200 bg-emerald-50 text-emerald-950",
+            )}
           >
             <ShieldCheck size={18} className="shrink-0" />
             <p>
@@ -682,7 +687,7 @@ export default function MatchDesk({
             )}
 
             {match?.session_mode === "live" && (
-              <div className="mb-3 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-950">
+              <div className="mb-3 rounded-2xl border border-sky-200 bg-sky-50 p-4 text-sm text-sky-950 shadow-sm">
                 <p className="font-semibold">
                   {["complete", "stopped"].includes(match.live_status || "")
                     ? language === "es"
@@ -995,7 +1000,7 @@ export default function MatchDesk({
               className="order-last min-w-0 space-y-5"
             >
               <Card className="overflow-hidden">
-                <div className="flex items-center justify-between border-b border-stone-100 p-5">
+                <div className="flex items-center justify-between border-b border-stone-200 bg-stone-50/80 p-5">
                   <h2 className="flex items-center gap-2 font-semibold">
                     <Layers3 size={16} />
                     Suggested insights
@@ -1084,12 +1089,21 @@ export default function MatchDesk({
                   )}
                 </div>
                 {story ? (
-                  <div className="p-5">
+                  <div
+                    className={cn(
+                      "border-t p-5",
+                      storyApproved
+                        ? "border-emerald-200 bg-emerald-50/35"
+                        : "border-amber-200 bg-amber-50/25",
+                    )}
+                  >
                     <Tag
                       className={
                         match?.story_status === "approved"
                           ? "bg-emerald-50 text-emerald-800"
-                          : ""
+                          : story.status === "ready"
+                            ? "border-amber-200 bg-amber-50 text-amber-900"
+                            : ""
                       }
                     >
                       <ShieldCheck size={12} />

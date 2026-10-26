@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowRight, ShieldCheck, ScanLine } from "lucide-react";
+import { ArrowRight, Eye, ShieldCheck, ScanLine } from "lucide-react";
 import { api, MatchOption } from "@/lib/api";
 import { Button, Tag } from "@/components/ui";
 export default function Home() {
@@ -98,11 +98,12 @@ export default function Home() {
       </header>
       <div className="grid flex-1 items-center gap-10 py-12 lg:grid-cols-2 lg:py-16">
         <section>
-          <p className="mb-5 text-sm font-semibold text-emerald-800">
+          <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-bold tracking-[0.12em] text-emerald-900">
+            <span className="size-2 rounded-full bg-emerald-600" aria-hidden="true" />
             FOOTBALL, EXPLAINED
           </p>
-          <h1 className="max-w-xl text-balance text-4xl font-semibold leading-tight md:text-5xl">
-            Explain the match. Let fans enjoy it.
+          <h1 className="max-w-xl text-balance text-4xl font-bold leading-[1.08] tracking-[-0.04em] md:text-6xl">
+            Explain the match. <span className="text-emerald-800">Let fans enjoy it.</span>
           </h1>
           <p className="mt-6 max-w-lg text-pretty text-lg leading-relaxed text-stone-600">
             WHY/NOW is a live football explanation desk. AI suggests stories
@@ -110,16 +111,22 @@ export default function Home() {
             enjoy the match, explore an explanation, or catch up when they
             choose.
           </p>
-          <div className="mt-8 space-y-5">
-            <div>
-              <h2 className="font-semibold">For producers</h2>
+          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+            <div className="rounded-2xl border border-emerald-200 bg-white p-4 shadow-sm">
+              <div className="mb-3 flex size-9 items-center justify-center rounded-xl bg-emerald-100 text-emerald-900">
+                <ScanLine size={18} aria-hidden="true" />
+              </div>
+              <h2 className="font-bold tracking-tight">For producers</h2>
               <p className="mt-1 text-sm leading-relaxed text-stone-600">
                 Review suggested insights, check the evidence, and approve what
                 viewers see.
               </p>
             </div>
-            <div>
-              <h2 className="font-semibold">For fans</h2>
+            <div className="rounded-2xl border border-sky-200 bg-white p-4 shadow-sm">
+              <div className="mb-3 flex size-9 items-center justify-center rounded-xl bg-sky-100 text-sky-900">
+                <Eye size={18} aria-hidden="true" />
+              </div>
+              <h2 className="font-bold tracking-tight">For fans</h2>
               <p className="mt-1 text-sm leading-relaxed text-stone-600">
                 Follow the match, choose your level of detail or player focus,
                 and read the recap.
@@ -137,7 +144,7 @@ export default function Home() {
             </span>
           </div>
         </section>
-        <section className="min-w-0 rounded-3xl border border-stone-200 bg-white p-6 shadow-sm md:p-9">
+        <section className="min-w-0 rounded-3xl border border-stone-200 bg-white p-6 shadow-[0_24px_70px_-36px_rgba(21,58,44,0.32)] md:p-9">
           <Tag className="bg-emerald-50 text-emerald-800">
             Try the producer workflow
           </Tag>

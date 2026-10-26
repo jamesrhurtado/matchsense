@@ -18,16 +18,25 @@ function withMotion(previous: Match | null, next: Match): Match {
   }
   const delta = next.frame_time_ms - previous.frame_time_ms;
   if (delta > 0) {
+    const maxGapMs = 2000 / Math.max(1, next.tracking_hz ?? 10);
+    const canAnimate = delta <= maxGapMs && previous.frame !== null;
     return {
       ...next,
-      motion_from_frame: delta <= 500 && previous.frame ? previous.frame : null,
+      motion_from_frame: canAnimate ? previous.frame : null,
+      motion_duration_ms: canAnimate
+        ? Math.round(delta / Math.max(0.25, next.speed || 1))
+        : null,
     };
   }
   if (
     delta === 0 &&
     frameSignature(previous.frame) === frameSignature(next.frame)
   ) {
-    return { ...next, motion_from_frame: previous.motion_from_frame ?? null };
+    return {
+      ...next,
+      motion_from_frame: previous.motion_from_frame ?? null,
+      motion_duration_ms: previous.motion_duration_ms ?? null,
+    };
   }
   return { ...next, motion_from_frame: null };
 }
@@ -44,6 +53,13 @@ export function useMatch(
   const currentContext = useRef(context);
   currentContext.current = context;
   const refreshing = useRef<string | null>(null);
+  const pollInterval = isProducer && match?.running
+    ? Math.max(
+        25,
+        1000 /
+          (Math.max(1, match.tracking_hz ?? 10) * Math.max(0.25, match.speed || 1)),
+      )
+    : 350;
   const refresh = useCallback(async () => {
     if (refreshing.current === context) return;
     refreshing.current = context;
@@ -83,7 +99,7 @@ export function useMatch(
   useEffect(() => {
     void refresh();
     if (isProducer) {
-      const timer = setInterval(refresh, 350);
+      const timer = setInterval(refresh, pollInterval);
       return () => clearInterval(timer);
     }
     const source = new EventSource(`/api/replay-sessions/${id}/stream`);
@@ -119,6 +135,6 @@ export function useMatch(
       source.close();
       clearInterval(recovery);
     };
-  }, [id, isProducer, refresh, selectedStoryId, context]);
+  }, [id, isProducer, refresh, selectedStoryId, context, pollInterval]);
   return { match, error, connected, refresh };
 }

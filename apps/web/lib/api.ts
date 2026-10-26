@@ -88,6 +88,7 @@ export type Match = {
   flagship_demo?: boolean;
   clock_ms: number;
   duration_ms: number;
+  tracking_hz?: number;
   running: boolean;
   speed: number;
   mode: string;
@@ -103,6 +104,7 @@ export type Match = {
   frame: Frame | null;
   frame_time_ms?: number | null;
   motion_from_frame?: Frame | null;
+  motion_duration_ms?: number | null;
   teams: { id: string; name: string; color: string }[];
   players: Player[];
   cursor: number;

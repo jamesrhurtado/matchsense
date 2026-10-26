@@ -18,5 +18,8 @@ Implementation documentation checked during the build:
 - [FastAPI version pinning](https://fastapi.tiangolo.com/deployment/versions/)
 - [Microsoft Agent Framework workflow reference](https://learn.microsoft.com/en-us/agent-framework/concepts/workflows/advanced/agent-executor)
 - [Microsoft workflow Python samples](https://github.com/microsoft/agent-framework/blob/main/python/samples/03-workflows/agents/custom_agent_executors.py)
+- [MDN: CSS performance optimization](https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Performance/CSS) — prefer restrained motion and honor `prefers-reduced-motion`; use compositing-friendly properties where they preserve behavior.
+- [MDN: SVG attribute reference](https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute) — SVG geometry attributes such as `cx`, `cy`, `x` and `y` can be animated as CSS properties in current browsers.
+- [Continuous football player tracking from discrete broadcast data](https://pmc.ncbi.nlm.nih.gov/articles/PMC12551677/) — continuous paths can be reconstructed from discrete observations, but reconstruction depends on modeling assumptions and identity/context can be ambiguous. MatchSense therefore interpolates only between adjacent observed coordinates for display and does not treat the rendered path as new evidence.
 
 Cloud service references and unverified choices are listed with each resource specification. No claim about a contest deadline or eligibility is made from the research attachment; check the current [official rules](https://github.com/microsoft/insidethegamehackathon/blob/main/OFFICIAL%20RULES.md) before submission.

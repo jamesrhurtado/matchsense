@@ -302,12 +302,15 @@ explicit source audit and publication safeguards.
   touch screens; the browser tooltip alone is too subtle and unavailable to
   touch users. Restrained movement between valid observed positions remains
   separate work below.
-- [Implemented locally, 25 October] Add restrained movement between consecutive
-  observed player/ball positions. The UI uses the source frame timestamp and
-  transitions only across intervals up to 500 ms when the same player/ball is
-  present in both frames. Larger jumps, corrections at the same timestamp, and
-  missing samples snap to source positions. Reduced-motion preferences disable
-  transitions. No trail or tactical movement is inferred.
+- [Implemented and refined, 25 October] Animate the pitch only between
+  consecutive observed player/ball positions. Align update polling and CSS
+  transition duration to the feed's declared tracking frequency and playback
+  speed; animate across at most two source intervals. Larger gaps, corrections
+  at the same timestamp and missing samples snap to source positions. Browser
+  rendering interpolates the transition between paints; it does not add source
+  observations, infer tactical movement or create trails. Respect reduced-motion
+  preferences. This improves continuity, but cannot make a stationary authored
+  source sequence look active.
 
 Do not add these changes to the SD01–SD04 delivery claim. The continuing human
 review remains necessary to determine which explanations and controls people

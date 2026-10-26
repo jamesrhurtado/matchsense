@@ -1,6 +1,7 @@
 "use client";
 
-import { KeyboardEvent, useId, useState } from "react";
+import { useId, useState } from "react";
+import type { CSSProperties, KeyboardEvent } from "react";
 import { Frame, Metrics, Player } from "@/lib/api";
 import styles from "./pitch.module.css";
 export function ballOverlapsPlayer(frame: Frame | null) {
@@ -24,6 +25,7 @@ export function observedBallCarrier(frame: Frame | null) {
 export default function Pitch({
   frame,
   motionFromFrame,
+  motionDurationMs,
   metrics,
   focus,
   compact = false,
@@ -39,6 +41,7 @@ export default function Pitch({
   broadcast?: boolean;
   frame: Frame | null;
   motionFromFrame?: Frame | null;
+  motionDurationMs?: number | null;
   metrics?: Metrics;
   focus?: string | null;
   compact?: boolean;
@@ -53,6 +56,11 @@ export default function Pitch({
   const previousPlayerIds = new Set(
     motionFromFrame?.players.map((player) => player.player_id) ?? [],
   );
+  const motionStyle = motionDurationMs
+    ? ({
+        "--frame-motion-duration": `${motionDurationMs}ms`,
+      } as CSSProperties)
+    : undefined;
   const carrier = broadcast ? observedBallCarrier(frame) : undefined;
   const ballLinked = broadcast && !carrier && ballOverlapsPlayer(frame);
   const ball = frame?.ball;
@@ -138,6 +146,7 @@ export default function Pitch({
       <g
         data-testid="broadcast-ball"
         className={motionFromFrame?.ball ? styles.movingMarker : undefined}
+        style={motionStyle}
         data-carrier-id={carrier?.player_id}
         data-source-x={ball.x_m}
         data-source-y={ball.y_m}
@@ -438,6 +447,7 @@ export default function Pitch({
                 ? `${styles.playerMarker}${previousPlayerIds.has(p.player_id) ? ` ${styles.movingMarker}` : ""}`
                 : undefined
             }
+            style={previousPlayerIds.has(p.player_id) ? motionStyle : undefined}
             role={interactive ? "button" : undefined}
             tabIndex={interactive ? 0 : undefined}
             aria-label={interactive ? playerLabel : undefined}

@@ -19,22 +19,22 @@
 .movingMarker > rect,
 .movingMarker > text {
   transition:
-    cx 280ms linear,
-    cy 280ms linear,
-    x 280ms linear,
-    y 280ms linear;
+    cx var(--frame-motion-duration, 100ms) linear,
+    cy var(--frame-motion-duration, 100ms) linear,
+    x var(--frame-motion-duration, 100ms) linear,
+    y var(--frame-motion-duration, 100ms) linear;
 }
 
 .movingBallIcon {
-  transition: transform 280ms linear;
+  transition: transform var(--frame-motion-duration, 100ms) linear;
 }
 
 .movingLink {
   transition:
-    x1 280ms linear,
-    y1 280ms linear,
-    x2 280ms linear,
-    y2 280ms linear;
+    x1 var(--frame-motion-duration, 100ms) linear,
+    y1 var(--frame-motion-duration, 100ms) linear,
+    x2 var(--frame-motion-duration, 100ms) linear,
+    y2 var(--frame-motion-duration, 100ms) linear;
 }
 
 @media (prefers-reduced-motion: reduce) {

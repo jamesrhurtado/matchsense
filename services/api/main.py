@@ -528,7 +528,7 @@ def snapshot_data(sid,is_producer=False,story_id=None):
         view=visual_snapshot(messages,at)
         audit=repo.audit(sid)
         duration=s.get('duration_ms',60000)
-        return {'session_id':sid,'match_id':s['match_id'],'clock_ms':at,'duration_ms':duration,
+        return {'session_id':sid,'match_id':s['match_id'],'clock_ms':at,'duration_ms':duration,'tracking_hz':meta['tracking_hz'],
                 'running':s['running'] and at<duration,'speed':s['speed'],'synthetic':True,'guided_demo':s.get('session_mode')!='live' and s['match_id'] in PRESENTATION_IDS,'flagship_demo':s['match_id'] in FLAGSHIP_IDS,
                 'session_mode':s.get('session_mode','guided'),'execution':s.get('execution','ai' if FOUNDRY else 'template'),'model_identity':s.get('model_identity'),'live_status':('stopped' if s.get('ended_early') else 'complete' if at>=duration else 'ai_unavailable' if s.get('execution')=='ai' and not live_ai_configured() else 'running' if s['running'] else 'ready'),'last_processed_ms':s.get('last_processed_ms'),
                 'workflow_attempts':live_attempt_summary(sid,at) if is_producer and s.get('session_mode')=='live' else [],
@@ -621,7 +621,10 @@ async def stream(sid:str,request:Request,last_event_id:str|None=Header(None)):
                 previous=signature
             elif ticks%40==0:yield ': heartbeat\n\n'
             ticks+=1
-            await asyncio.sleep(.25)
+            speed=max(.25,float(data.get('speed') or 1))
+            tracking_hz=max(1,float(data.get('tracking_hz') or 10))
+            interval=1/(tracking_hz*speed) if data.get('running') else .25
+            await asyncio.sleep(max(.025,min(.25,interval)))
     return StreamingResponse(events(),media_type='text/event-stream',headers={'Cache-Control':'no-cache','X-Accel-Buffering':'no'})
 
 class OverlaySelection(Body):

@@ -19,3 +19,6 @@ playwright-report/
 .run/
 
 .azure/
+
+# Generated browser stability test results
+apps/web/test-results-stability/

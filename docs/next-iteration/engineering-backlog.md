@@ -255,6 +255,12 @@ explicit source audit and publication safeguards.
   an opening state and moves keyboard focus and the viewport to the panel after
   it loads. The existing concise role summary leads; timing, token counts and
   call details remain secondary.
+- [New, P2] Remove or reduce the large green “Producer review desk” banner.
+  The persistent header already identifies the producer console and says live
+  stories/evidence are in view. Keep its distinct guidance—that new insights
+  join the queue while the selected insight stays in view—as a quiet one-line
+  note near the queue or in help. Check that producers still understand this
+  behavior without a second prominent status panel.
 - Use concise evidence labels: “Before the pass”, “Forward distance”, and “After
   reception”; keep each number and unit together on narrow screens.
 - On the viewer companion, make clear that the pitch/replay is the live view and

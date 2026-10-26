@@ -60,6 +60,7 @@ export default function MatchDesk({
   const guidedFamilies = useRef(new Set<string>());
   const [evidence, setEvidence] = useState<Evidence | null>(null);
   const [showEvidence, setShowEvidence] = useState(false);
+  const [evidenceLoading, setEvidenceLoading] = useState(false);
   const evidencePanel = useRef<HTMLDivElement>(null);
   const [diagnostics, setDiagnostics] = useState<Record<
     string,
@@ -267,9 +268,10 @@ export default function MatchDesk({
     !isProducer && !quietViewer && mode === "watch" && !!storyApproved,
   );
   const loadEvidence = useCallback(async () => {
-    if (!story) return;
+    if (!story || evidenceLoading) return;
     setActionError("");
     setSelectedStoryId(story.id);
+    setEvidenceLoading(true);
     try {
       const requestStory = `${story.id}:${story.revision}`;
       const data = await api<Evidence>(
@@ -282,8 +284,10 @@ export default function MatchDesk({
       setShowEvidence(true);
     } catch (e) {
       setActionError((e as Error).message);
+    } finally {
+      setEvidenceLoading(false);
     }
-  }, [story?.id, story?.revision, path, isProducer]);
+  }, [story?.id, story?.revision, path, isProducer, evidenceLoading]);
   useEffect(() => {
     if (isProducer || quietViewer || !audienceStory) return;
     let ignore = false;
@@ -435,42 +439,79 @@ export default function MatchDesk({
   return (
     <div className="min-h-dvh lg:flex">
       {isProducer && (
-        <aside className="hidden w-20 shrink-0 flex-col items-center gap-8 border-r border-[#203b36] bg-[#142923] py-7 text-white lg:flex">
+        <aside className="hidden w-20 shrink-0 flex-col items-center gap-6 border-r border-[#203b36] bg-[#142923] py-7 text-white lg:flex">
           <Link
             href="/"
             aria-label="WHY/NOW home"
+            title="Back to demo setup"
             className="flex size-10 items-center justify-center rounded-xl bg-white/10 text-xl font-black text-white ring-1 ring-white/15"
           >
             W<span className="text-emerald-400">/</span>
           </Link>
-          <a
-            href="#live"
-            aria-label="Live match"
-            className="rounded-xl bg-emerald-300/15 p-3 text-emerald-200 ring-1 ring-emerald-200/20"
-          >
-            <Radio size={20} />
-          </a>
-          <button
-            onClick={() => void loadEvidence()}
-            aria-label="Inspect evidence"
-            className="rounded-xl p-3 text-white/55 hover:bg-white/10 hover:text-white"
-          >
-            <ScanLine size={20} />
-          </button>
-          <button
-            onClick={inspectDiagnostics}
-            aria-label="Open diagnostics"
-            className="rounded-xl p-3 text-white/55 hover:bg-white/10 hover:text-white"
-          >
-            <Activity size={20} />
-          </button>
+          <div className="flex w-full flex-col items-center gap-1">
+            <a
+              href="#live"
+              aria-label="Go to live match"
+              title="Go to the match pitch"
+              className="flex min-h-11 w-16 flex-col items-center justify-center gap-1 rounded-xl bg-emerald-300/15 px-1 py-2 text-emerald-100 ring-1 ring-emerald-200/20"
+            >
+              <Radio size={18} aria-hidden="true" />
+              <span className="text-center text-[9px] font-medium leading-tight">
+                Live match
+              </span>
+            </a>
+          </div>
+          <div className="flex w-full flex-col items-center gap-1">
+            <button
+              onClick={() => void loadEvidence()}
+              disabled={!story || evidenceLoading}
+              aria-label={
+                evidenceLoading ? "Loading evidence" : "Inspect evidence"
+              }
+              aria-busy={evidenceLoading}
+              title={
+                story
+                  ? "Inspect the selected insight's evidence"
+                  : "Select an insight from Suggested insights first"
+              }
+              className="flex min-h-11 w-16 flex-col items-center justify-center gap-1 rounded-xl px-1 py-2 text-white/70 hover:bg-white/10 hover:text-white disabled:cursor-not-allowed disabled:text-white/30"
+            >
+              <ScanLine size={18} aria-hidden="true" />
+              <span className="text-center text-[9px] font-medium leading-tight">
+                {evidenceLoading
+                  ? "Loading…"
+                  : story
+                    ? "Evidence"
+                    : "Select insight"}
+              </span>
+            </button>
+          </div>
+          <div className="flex w-full flex-col items-center gap-1">
+            <button
+              onClick={inspectDiagnostics}
+              aria-label="Open processing and review trace"
+              aria-busy={diagnosticsLoading}
+              disabled={diagnosticsLoading}
+              title="Open processing and review trace"
+              className="flex min-h-11 w-16 flex-col items-center justify-center gap-1 rounded-xl px-1 py-2 text-white/70 hover:bg-white/10 hover:text-white disabled:cursor-wait disabled:text-white/40"
+            >
+              <Activity size={18} aria-hidden="true" />
+              <span className="text-center text-[9px] font-medium leading-tight">
+                {diagnosticsLoading ? "Opening…" : "Review trace"}
+              </span>
+            </button>
+          </div>
           <Link
             href={`/watch/${id}`}
             target="_blank"
             aria-label="Open viewer companion"
-            className="mt-auto rounded-xl p-3 text-white/55 hover:bg-white/10 hover:text-white"
+            title="Open viewer companion"
+            className="mt-auto flex min-h-11 w-16 flex-col items-center justify-center gap-1 rounded-xl px-1 py-2 text-white/70 hover:bg-white/10 hover:text-white"
           >
-            <Eye size={20} />
+            <Eye size={18} aria-hidden="true" />
+            <span className="text-center text-[9px] font-medium leading-tight">
+              Viewer
+            </span>
           </Link>
         </aside>
       )}

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 218 44" role="img" aria-labelledby="title">
+  <title id="title">MatchSense</title>
+  <g fill="none" stroke="#0B191F" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5">
+    <path d="M5 32V9L21 25 37 9V32"/>
+  </g>
+  <circle cx="5" cy="9" r="2.5" fill="#0B191F"/>
+  <circle cx="21" cy="25" r="2.5" fill="#0B191F"/>
+  <circle cx="37" cy="9" r="2.5" fill="#A7F3D0"/>
+  <text x="51" y="31" fill="#0B191F" font-family="Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="28" font-weight="650" letter-spacing="-1.2">MatchSense</text>
+</svg>

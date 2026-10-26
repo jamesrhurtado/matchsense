@@ -10,7 +10,7 @@ commands=[[sys.executable,'-m','uvicorn','services.api.main:app','--host','127.0
 processes=[]
 try:
     for command in commands:processes.append(subprocess.Popen(command,cwd=ROOT,start_new_session=True))
-    print('WHY/NOW: http://127.0.0.1:3000 · Ctrl-C to stop',flush=True)
+    print('MatchSense: http://127.0.0.1:3000 · Ctrl-C to stop',flush=True)
     while all(p.poll() is None for p in processes):time.sleep(.5)
 except KeyboardInterrupt:pass
 finally:

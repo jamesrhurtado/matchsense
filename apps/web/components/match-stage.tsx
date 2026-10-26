@@ -2,6 +2,7 @@ import { Check, ChevronDown, Pause, Radio, ShieldCheck } from "lucide-react";
 import { Match, timecode } from "@/lib/api";
 import Pitch, { ballOverlapsPlayer, observedBallCarrier } from "./pitch";
 import styles from "./match-stage.module.css";
+import { MatchSenseBrand } from "./match-sense-brand";
 
 function ClubBadge({ away = false }: { away?: boolean }) {
   return (
@@ -49,7 +50,7 @@ export function MatchStage({
     >
       <div className={styles.masthead}>
         <span className={styles.wordmark}>
-          WHY<span>/</span>NOW{" "}
+          <MatchSenseBrand dark />{" "}
           <span className={styles.channel}>{es ? "Partido" : "Matchday"}</span>
         </span>
       </div>

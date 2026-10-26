@@ -54,7 +54,7 @@ if os.getenv('WHY_NOW_EVENTHUB_NAMESPACE'):
 WORKERS=ThreadPoolExecutor(max_workers=2,thread_name_prefix='story')
 JOBS={}
 LIVE_MEASURED={}
-logger=logging.getLogger('whynow')
+logger=logging.getLogger('matchsense')
 logger.setLevel(logging.INFO)
 
 def workflow(tools,**kwargs):
@@ -92,7 +92,7 @@ def workflow(tools,**kwargs):
             from engine.foundry_workflow import run_foundry_workflow
             from engine.structured_workflow import run_structured_workflow
             from opentelemetry import trace
-            with trace.get_tracer('whynow').start_as_current_span('story.workflow',attributes={'source.cutoff_ms':tools.cutoff_ms,'workflow.revision':kwargs.get('revision',1),'replay.session_id':session_id,'match.id':tools.metadata['match_id']}):
+            with trace.get_tracer('matchsense').start_as_current_span('story.workflow',attributes={'source.cutoff_ms':tools.cutoff_ms,'workflow.revision':kwargs.get('revision',1),'replay.session_id':session_id,'match.id':tools.metadata['match_id']}):
                 runner=run_structured_workflow if STRUCTURED else run_foundry_workflow
                 package=runner(tools,outcome_callback=observe,**kwargs)
         else:
@@ -132,11 +132,11 @@ async def lifespan(app):
 
 TOKEN=os.getenv('WHY_NOW_PRODUCER_TOKEN','local-demo-producer')
 LOCK=threading.RLock()
-app=FastAPI(title='WHY/NOW',version='0.5.0',lifespan=lifespan)
+app=FastAPI(title='MatchSense',version='0.5.0',lifespan=lifespan)
 if os.getenv('APPLICATIONINSIGHTS_CONNECTION_STRING'):
     from azure.monitor.opentelemetry import configure_azure_monitor
     from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
-    configure_azure_monitor(logger_name='whynow',enable_live_metrics=False,sampling_ratio=0.1)
+    configure_azure_monitor(logger_name='matchsense',enable_live_metrics=False,sampling_ratio=0.1)
     FastAPIInstrumentor.instrument_app(app)
 
 app.add_middleware(CORSMiddleware,allow_origins=os.getenv('WHY_NOW_ORIGINS','http://localhost:3000,http://127.0.0.1:3000').split(','),allow_methods=['GET','POST'],allow_headers=['Content-Type','X-Producer-Token','Last-Event-ID'])

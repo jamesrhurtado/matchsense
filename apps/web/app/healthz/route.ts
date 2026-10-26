@@ -1,2 +1,2 @@
 export const dynamic = 'force-dynamic';
-export function GET() { return Response.json({ ok: true, service: 'whynow-web' }); }
+export function GET() { return Response.json({ ok: true, service: 'matchsense-web' }); }

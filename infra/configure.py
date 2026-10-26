@@ -36,7 +36,7 @@ def events():
 
 def model():
     path=resource('Microsoft.CognitiveServices/accounts',S['foundry']);wait_ready(path,'2025-06-01')
-    put(path+'/projects/'+S['project'],{'location':S['location'],'identity':{'type':'SystemAssigned'},'properties':{'displayName':'WHY/NOW engineering test','description':'Evidence-grounded football storytelling'}},'2025-06-01')
+    put(path+'/projects/'+S['project'],{'location':S['location'],'identity':{'type':'SystemAssigned'},'properties':{'displayName':'MatchSense engineering test','description':'Evidence-grounded football storytelling'}},'2025-06-01')
     az('cognitiveservices','account','deployment','create','-g',RG,'-n',S['foundry'],'--deployment-name',S['model'],'--model-name','gpt-4o-mini','--model-version','2024-07-18','--model-format','OpenAI','--sku-name','GlobalStandard','--sku-capacity','50')
     az('role','assignment','create','--assignee-object-id',S['identity_principal_id'],'--assignee-principal-type','ServicePrincipal','--role','Cognitive Services OpenAI User','--scope',path)
     az('role','assignment','create','--assignee-object-id',OPERATOR,'--assignee-principal-type','User','--role','Cognitive Services OpenAI User','--scope',path)

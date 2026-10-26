@@ -25,7 +25,7 @@ def deploy(only_web=False):
       'WHY_NOW_EVENTHUB_NAMESPACE':S['events']+'.servicebus.windows.net','WHY_NOW_EVENTHUB_NAME':'match-observations',
       'WHY_NOW_EVENTHUB_CONSUMER_GROUP':'whynow-state','WHY_NOW_CHECKPOINT_ACCOUNT_URL':'https://'+S['storage']+'.blob.core.windows.net',
       'WHY_NOW_CHECKPOINT_CONTAINER':'eventhub-checkpoints','APPLICATIONINSIGHTS_CONNECTION_STRING':insights['properties']['ConnectionString'],
-      'OTEL_SERVICE_NAME':'whynow-api','OTEL_TRACES_SAMPLER_ARG':'0.1',
+      'OTEL_SERVICE_NAME':'matchsense-api','OTEL_TRACES_SAMPLER_ARG':'0.1',
     }
     domain=env['properties']['defaultDomain'];api_url='https://'+S['api']+'.internal.'+domain
     api_env['WHY_NOW_ORIGINS']='https://'+S['web']+'.'+domain

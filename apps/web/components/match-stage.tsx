@@ -52,15 +52,6 @@ export function MatchStage({
           WHY<span>/</span>NOW{" "}
           <span className={styles.channel}>{es ? "Partido" : "Matchday"}</span>
         </span>
-        <span className={styles.synthetic}>
-          {match?.session_mode === "live"
-            ? es
-              ? "Señal simulada en directo"
-              : "Simulated live feed"
-            : es
-              ? "Repetición sintética"
-              : "Synthetic replay"}
-        </span>
       </div>
       <div
         className={styles.scoreboard}
@@ -100,16 +91,6 @@ export function MatchStage({
         </div>
       </div>
       <div className={styles.matchMeta}>
-        <span>
-          <ShieldCheck size={13} />
-          {match?.score
-            ? es
-              ? "Marcador confirmado por la fuente"
-              : "Source-confirmed score"
-            : es
-              ? "Esperando el marcador de la fuente"
-              : "Awaiting source score"}
-        </span>
         <span className={styles.playState}>
           {match?.running ? <Radio size={12} /> : <Pause size={12} />}
           {complete
@@ -131,13 +112,6 @@ export function MatchStage({
         </span>
       </div>
       <div className={styles.field}>
-        <div className={styles.fieldHeading}>
-          <span>{es ? "Vista del campo" : "Pitch view"}</span>
-          <span>
-            2D <span aria-hidden="true">/</span>{" "}
-            {es ? "Posiciones observadas" : "Observed positions"}
-          </span>
-        </div>
         <Pitch
           frame={match?.frame ?? null}
           players={match?.players ?? []}

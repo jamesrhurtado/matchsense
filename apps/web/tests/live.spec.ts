@@ -7,7 +7,7 @@ test('live simulation is explicit, keeps playing during review and reconnects to
  await page.getByLabel('Explanations',{exact:true}).selectOption('template');
  await page.getByRole('button',{name:'Start live simulation',exact:true}).click();
  await expect(page).toHaveURL(/\/studio\//);const url=page.url();const sid=url.split('/').pop();
- await expect(page.getByText('4-minute live simulation',{exact:true})).toBeVisible();await expect(page.getByText('Simulated live feed',{exact:true})).toBeVisible();
+ await expect(page.getByText('4-minute live simulation',{exact:true})).toBeVisible();await expect(page.getByText('Simulated live feed',{exact:true})).toHaveCount(0);
  await expect(page.getByText('Simulated live match · continuous 1×',{exact:true})).toBeVisible();
  await expect(page.getByRole('button',{name:'Pause',exact:true})).toHaveCount(0);
  await expect(page.getByText('Replay navigation',{exact:true})).toHaveCount(0);

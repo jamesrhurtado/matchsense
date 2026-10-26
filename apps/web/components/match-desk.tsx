@@ -662,6 +662,14 @@ export default function MatchDesk({
                   </summary>
                   <p className="max-w-sm pb-2 leading-relaxed">
                     Session reference: {id}.<br />
+                    {match?.score && (
+                      <>
+                        {language === "es"
+                          ? "El marcador refleja eventos confirmados del partido."
+                          : "The score reflects confirmed match events."}
+                        <br />
+                      </>
+                    )}
                     <span className="tabular-nums">
                       {match?.delivered_count || 0} observations delivered.
                     </span>{" "}

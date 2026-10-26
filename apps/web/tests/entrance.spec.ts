@@ -35,6 +35,7 @@ test('producer navigation explains duration and stops at the end without replaci
  await expect(page.getByLabel('Skip to time (seconds)')).not.toBeVisible();
  await page.getByText('Replay data details',{exact:true}).click();
  await expect(page.getByText('Session reference:',{exact:false})).toBeVisible();
+ await expect(page.getByText('The score reflects confirmed match events.',{exact:true})).toBeVisible();
  await page.getByText('Replay navigation',{exact:true}).click();
  await page.getByLabel('Skip to time (seconds)').fill('90');
  await page.getByRole('button',{name:'Skip forward',exact:true}).click();

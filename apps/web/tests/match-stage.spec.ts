@@ -22,7 +22,9 @@ for (const width of [390, 1440]) {
     await page.goto('/watch/stage-demo');
     const stage = page.getByRole('region', { name: 'Match centre' });
     await expect(stage.getByText('1 : 0', { exact: true })).toBeVisible();
-    await expect(stage.getByText('Source-confirmed score', { exact: true })).toBeVisible();
+    await expect(stage.getByText('Source-confirmed score', { exact: true })).toHaveCount(0);
+    await expect(stage.getByText('Pitch view', { exact: true })).toHaveCount(0);
+    await expect(stage.getByText('Observed positions', { exact: true })).toHaveCount(0);
     await expect(stage.getByText('Producer approved', { exact: true })).toHaveCount(0);
     await expect(stage.getByText('No observed team control')).toBeVisible();
     await expect(stage.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '105000');
@@ -34,7 +36,7 @@ for (const width of [390, 1440]) {
     corrected = true;
     await expect(stage.getByText('0 : 0', { exact: true })).toBeVisible({ timeout: 6000 });
     await page.getByLabel('Language', { exact: true }).selectOption('es');
-    await expect(page.getByRole('region', { name: 'Centro del partido' }).getByText('Marcador confirmado por la fuente', { exact: true })).toBeVisible();
+    await expect(page.getByRole('region', { name: 'Centro del partido' }).getByText('Marcador confirmado por la fuente', { exact: true })).toHaveCount(0);
     await expect(page.getByText('Sin control de equipo observado')).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
   });

@@ -2,7 +2,7 @@
 
 ## Product decision
 
-WHY/NOW helps a producer explain a match as it unfolds. A synthetic observation
+MatchSense helps a producer explain a match as it unfolds. A synthetic observation
 stream stands in for a live football provider. Past insights and catch-up recaps
 support the live experience. Implemented as a local pilot candidate on 24 October 2026. The proposed review-time gate remains unmet; human validation and deployment remain separate. See [verification](../../evals/live-match/verification.md) for measured results and retained failures.
 

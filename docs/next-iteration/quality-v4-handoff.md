@@ -1,4 +1,4 @@
-# WHY/NOW quality iteration: implementation and evidence handoff
+# MatchSense quality iteration: implementation and evidence handoff
 
 22 October 2026 (America/Lima). Local candidate: application 0.5.0, package schema 4.0.0, renderer `editorial-claims-v4`, latest prompt `director-critic-v4.1`. Scope is MVP quality and agent effectiveness. No new Azure resources or application rollout were performed.
 

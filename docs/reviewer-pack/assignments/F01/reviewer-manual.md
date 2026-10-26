@@ -1,8 +1,8 @@
-# WHY NOW football expert review manual
+# MatchSense football expert review manual
 
 ## Your assignment
 
-Help us determine whether WHY/NOW gives a useful, supported explanation of a football moment. Review the supplied observations and anonymous explanations independently. We need your judgment, including reasons to withhold or reject a story.
+Help us determine whether MatchSense gives a useful, supported explanation of a football moment. Review the supplied observations and anonymous explanations independently. We need your judgment, including reasons to withhold or reject a story.
 
 Session length: 40 to 45 minutes. Instrument: R1, 22 October 2026.
 
@@ -12,7 +12,7 @@ You should have practical knowledge of football analysis through coaching, scout
 
 ## What you need to know
 
-WHY/NOW presents explanations of football passages, supporting evidence and different viewing preferences. This session uses synthetic observations and fictional players. Treat the supplied evidence as the material being assessed; identify when it cannot support a conclusion. We are testing the product, not your football knowledge.
+MatchSense presents explanations of football passages, supporting evidence and different viewing preferences. This session uses synthetic observations and fictional players. Treat the supplied evidence as the material being assessed; identify when it cannot support a conclusion. We are testing the product, not your football knowledge.
 
 Explanations may use different generation methods. Their identities stay hidden during your review. Some outputs may look similar, contain mistakes or show no explanation. Evaluate each on its own merits before comparing them. Do not look up the project, watch its demonstration, or discuss answers with another reviewer before submitting.
 

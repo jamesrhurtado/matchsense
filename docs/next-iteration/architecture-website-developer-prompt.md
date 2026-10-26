@@ -1,4 +1,4 @@
-# WHY/NOW — architecture website developer handoff
+# MatchSense — architecture website developer handoff
 
 Prepared 22 October 2026. This document is a self-contained prompt to give a website developer or an AI website builder. Its subject is the current local v0.5 MVP, with a separately identified Azure engineering topology and future work. Build the architecture website described below; this is not a request to change or deploy the product backend.
 
@@ -6,7 +6,7 @@ Prepared 22 October 2026. This document is a self-contained prompt to give a web
 
 ## Your assignment
 
-Act as a senior product designer, information architect, and frontend engineer. Build a professional, interactive **software architecture explainer for WHY/NOW**, a football storytelling product developed for Microsoft's Inside the Game hackathon.
+Act as a senior product designer, information architect, and frontend engineer. Build a professional, interactive **software architecture explainer for MatchSense**, a football storytelling product developed for Microsoft's Inside the Game hackathon.
 
 The central deliverable is a readable, technically accurate architecture diagram presented as a polished website. The diagram must be the main experience, visible immediately below a compact introduction. A judge should understand the product in 30 seconds, trace one story in two minutes, and inspect engineering decisions in five minutes.
 
@@ -18,11 +18,11 @@ Deliver a working responsive website, its editable diagram data, an exportable a
 
 ## Product story and language
 
-**Name:** WHY/NOW
+**Name:** MatchSense
 
 **Headline:** “From match evidence to a story worth showing.”
 
-**Supporting copy:** “WHY/NOW turns time-scoped football observations into evidence-backed explanations. Agents propose and review supported stories. A producer approves the exact version viewers see.”
+**Supporting copy:** “MatchSense turns time-scoped football observations into evidence-backed explanations. Agents propose and review supported stories. A producer approves the exact version viewers see.”
 
 The product helps producers surface understandable moments and lets viewers inspect why a statement was made. It uses synthetic football observations today. It is not a video-analysis model, a match prediction service, or an integrated commercial live-data feed.
 
@@ -61,7 +61,7 @@ Use official service icons where licensing permits and a consistent icon family 
 
 ## Information structure and controls
 
-Use a compact header with WHY/NOW, “Architecture,” a snapshot date, and a presentation-mode control. Immediately below, display the headline, one supporting sentence, and the diagram.
+Use a compact header with MatchSense, “Architecture,” a snapshot date, and a presentation-mode control. Immediately below, display the headline, one supporting sentence, and the diagram.
 
 Provide five views using the same underlying architecture data:
 

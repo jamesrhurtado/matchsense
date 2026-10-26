@@ -1,4 +1,4 @@
-# WHY NOW reviewer session facilitator guide
+# MatchSense reviewer session facilitator guide
 
 ## Purpose and distribution
 

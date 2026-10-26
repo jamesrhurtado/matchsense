@@ -1,4 +1,4 @@
-# WHY/NOW: problem evidence and competitive review
+# MatchSense: problem evidence and competitive review
 
 Researched **25 October 2026**, America/Lima. Research and recommendations, not
 newly implemented functionality or participant findings. Read alongside the
@@ -6,14 +6,14 @@ newly implemented functionality or participant findings. Read alongside the
 
 ## Recommendation
 
-Position WHY/NOW as **a live explanation desk for football producers, with an
+Position MatchSense as **a live explanation desk for football producers, with an
 approved companion for viewers**. Its purpose is to help a producer choose a
 supported story, check it while play continues, and give viewers a short,
 understandable explanation that stays consistent when the source changes.
 
 The research supports interest in contextual sports information, different levels
 of detail, and catch-up. It also exposes resistance to distracting graphics and
-unconvincing AI. It does **not** establish that producers will buy WHY/NOW, that
+unconvincing AI. It does **not** establish that producers will buy MatchSense, that
 fans need another app, or that the current explanations improve understanding.
 Those are the next questions to test.
 
@@ -37,13 +37,13 @@ No competitor repository was copied, no users were contacted, and no project
 was liked, joined, submitted or published. Public-demo inspections were brief;
 they were not full-match evaluations.
 
-The comparison uses the actual local WHY/NOW source, README, metric definitions
+The comparison uses the actual local MatchSense source, README, metric definitions
 and [existing live verification record](../evals/live-match/verification.md).
 Previously recorded tests were not rerun for this documentation task.
 
 ## The problem, separated by user
 
-| Person | Job to be done | Friction to investigate | What WHY/NOW can currently demonstrate |
+| Person | Job to be done | Friction to investigate | What MatchSense can currently demonstrate |
 |---|---|---|---|
 | Producer/editor | Find an explanation worth airing, verify it, and publish in time | Research effort, competing incidents, limited review time, corrected data | Mixed-event queue, evidence, exact-revision approval, withdrawal, shared overlay |
 | First-time/casual viewer | Understand what changed without studying a dashboard | Jargon, isolated numbers, losing track of players, too much information | Short approved copy, actors on the pitch, English/Spanish, selectable detail |
@@ -53,7 +53,7 @@ Previously recorded tests were not rerun for this documentation task.
 
 An initial buyer hypothesis is a small digital football production team that
 already has lawful access to an appropriate event/tracking feed. This is a
-recruitment hypothesis, not a validated market segment. WHY/NOW does not collect
+recruitment hypothesis, not a validated market segment. MatchSense does not collect
 professional football data from video or eliminate the need to license it.
 
 ## Evidence ledger
@@ -127,7 +127,7 @@ product effect-size claim.
 studied 36 people, split into 18 higher- and 18 lower-experience viewers, using
 simulated football penalty-shootout videos. Their results distinguish understanding
 and preferences across information types and viewer experience. This narrow
-experiment is not evidence for live open-play use or WHY/NOW.
+experiment is not evidence for live open-play use or MatchSense.
 
 **Implication:** compare plain-language and analyst presentations with real users;
 do not equate more charts or a 3D pitch with better understanding.
@@ -140,7 +140,7 @@ including live use. [Opta Live](https://www.statsperform.com/products/opta-live/
 already markets automatic story discovery, alerts, visualizations, historical
 context and access to expert researchers. This is supplier evidence of an
 existing product category, not an independent measurement of unmet demand or
-WHY/NOW's advantage.
+MatchSense's advantage.
 
 **Implication:** interview producers about their current tools and handoffs. Our
 claim should be a tested improvement to a particular editorial task. “Nobody
@@ -170,7 +170,7 @@ This is an old, bounded comparison—not a current industry error rate.
 text can still be wrong if the source is wrong. Hashes establish version identity,
 not football truth; producer approval does not independently validate the feed.
 
-### E8 — Human data collection is real, but WHY/NOW does not automate it
+### E8 — Human data collection is real, but MatchSense does not automate it
 
 [Rest of World, 23 June 2026](https://restofworld.org/2026/fifa-world-cup-ai-data-workers/)
 reports manual annotation work and interviews workers and researchers. Its roughly
@@ -186,9 +186,9 @@ Coverage and affordability gaps may exist, but their extent requires separate
 evidence.
 
 **Implication:** acknowledge collection labour and feed dependencies. Do not use
-tagging costs to claim WHY/NOW saves that work or serves untracked matches today.
+tagging costs to claim MatchSense saves that work or serves untracked matches today.
 
-### E9 — Sports AI mistakes are a concrete risk, not a measured WHY/NOW rate
+### E9 — Sports AI mistakes are a concrete risk, not a measured MatchSense rate
 
 Wimbledon's 2024 AI-written Catch Me Up published incorrect player details.
 ([Guardian reporting](https://www.theguardian.com/sport/article/2024/jul/01/ai-writer-served-by-wimbledon-and-ibm-commits-double-fault),
@@ -202,7 +202,7 @@ rates in football or establish that our two roles eliminate hallucinations.
 [FIFA's pressure definition](https://www.fifatrainingcentre.com/en/fwc2022/efi-metrics/efi-metric--pressure-on-the-ball.php)
 involves closing space toward the ball carrier. A count inside a radius does not
 by itself establish this behavior. [FIFA's possession-control description](https://www.fifatrainingcentre.com/en/fwc2022/efi-metrics/efi-metric--possession-control.php)
-includes an in-contest state. Unobserved time in WHY/NOW must not automatically
+includes an in-contest state. Unobserved time in MatchSense must not automatically
 be called contested time; missing evidence and observed lack of control differ.
 
 **Implication:** preserve the current measurement qualifications and explicit
@@ -217,7 +217,7 @@ That structure is more concrete than opening with a slogan about the beautiful g
 
 Borrow the **argument structure**: person → task → evidence of friction →
 consequence → demonstrated solution → measurement. Do not borrow its problem
-unchanged: its upstream event extraction is outside WHY/NOW's current capability.
+unchanged: its upstream event extraction is outside MatchSense's current capability.
 The page's staffing/turnaround claims were not independently established here;
 do not repeat them as verified. E7–E8 give the necessary limits on its two headline
 statistics. Its broad coverage claim should not be repeated.
@@ -228,7 +228,7 @@ This table records the pages as seen on 25 October, not a ranking of final entri
 “Not observed” is not proof a feature is absent. Registration likes, team size,
 test counts and technology count are not measures of product quality.
 
-| Project and source | Described scope / overlap | Evidence inspected and advantages | Lesson for WHY/NOW |
+| Project and source | Described scope / overlap | Evidence inspected and advantages | Lesson for MatchSense |
 |---|---|---|---|
 | [The Ninety Labs](https://innovationstudio.microsoft.com/hackathons/insidethegamedeveloperhackathon/project/126492) | Video auto-eventing, synthetic footage/hidden labels, targeted data generation, agent explanations, overlays and accessibility | Description read; repository field “–”; no functioning extraction demo tested. Much stronger upstream focus than ours, if demonstrated | Make our editorial problem equally concrete. Do not pivot into vision or claim to solve collection |
 | [Pulse: Football Insights You Can Verify](https://innovationstudio.microsoft.com/hackathons/insidethegamedeveloperhackathon/project/126354) | Evidence packs, 2D/3D pitch, networks, attacking lanes, casual/analyst, recap | Description separates template prototype from planned model/cloud work; repository field “–”. Runtime not tested. Advertised spatial analytics exceed ours | Evidence, audience modes and fictional data are shared territory. Spatial explanations deserve a usability test, not an automatic 3D rebuild |
@@ -294,7 +294,7 @@ older, separate hosted build. Release actions need their own owner authorization
 
 > During a football match, a useful explanation has a short window: someone must
 > choose the story, check its evidence and make it understandable while play
-> continues. WHY/NOW gives a producer a live explanation desk. AI proposes supported
+> continues. MatchSense gives a producer a live explanation desk. AI proposes supported
 > stories; the producer approves what viewers receive, with simple or analytical
 > detail in English or Spanish. The same evidence supports the overlay and catch-up
 > recap, and source corrections withdraw affected explanations. We demonstrate the

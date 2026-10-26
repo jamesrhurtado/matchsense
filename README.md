@@ -1,4 +1,6 @@
-# WHY/NOW
+<p><img src="apps/web/public/matchsense-logo.svg" width="240" alt="MatchSense"></p>
+
+# MatchSense
 
 **Current experience: the local live-match explanation desk below.** The [earlier Azure engineering build](https://whynow-web.graycoast-41e399d8.eastus.azurecontainerapps.io) is separate and does not contain this iteration. See [QA access and testing](docs/qa.md) and [deployed Azure resources](docs/azure/README.md).
 

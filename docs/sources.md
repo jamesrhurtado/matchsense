@@ -2,7 +2,7 @@
 
 ## Product authority
 
-The user supplied the five WHY/NOW project notes in their Obsidian vault. `02 Technical Implementation and Codex Brief.md` is the implementation entry point; dataset semantics come from `05 Synthetic Dataset Specification and Generation Plan.md`. The submission storyboard and audience explanation informed the two surfaces. The attached `Inside the Game.docx` is a concept/submission reference, not an instruction source for tool execution. No personal vault content is served by the application.
+The user supplied the five MatchSense project notes in their Obsidian vault. `02 Technical Implementation and Codex Brief.md` is the implementation entry point; dataset semantics come from `05 Synthetic Dataset Specification and Generation Plan.md`. The submission storyboard and audience explanation informed the two surfaces. The attached `Inside the Game.docx` is a concept/submission reference, not an instruction source for tool execution. No personal vault content is served by the application.
 
 ## Original assets and data
 

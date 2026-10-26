@@ -1,4 +1,4 @@
-# WHY/NOW — Contextual intelligence update: PM handoff
+# MatchSense — Contextual intelligence update: PM handoff
 
 **Prepared:** 21 October 2026, America/Lima  
 **Audience:** Product manager responsible for the [90+ improvement plan](grand-prize-90-plus-plan.md)  

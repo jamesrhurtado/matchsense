@@ -1,4 +1,4 @@
-# Manual de revisión en español de WHY NOW
+# Manual de revisión en español de MatchSense
 
 ## Tu objetivo
 
@@ -14,7 +14,7 @@ Indica tu variedad de español. Distingue una preferencia regional de una expres
 
 ## Lo que necesitas saber
 
-WHY/NOW muestra explicaciones de jugadas, evidencia y opciones de visualización. Usaremos datos sintéticos y jugadores ficticios. Primero leerás el español por sí solo; después compararás las versiones y la evidencia. No supongas que el inglés es correcto: ambas versiones pueden tener problemas.
+MatchSense muestra explicaciones de jugadas, evidencia y opciones de visualización. Usaremos datos sintéticos y jugadores ficticios. Primero leerás el español por sí solo; después compararás las versiones y la evidencia. No supongas que el inglés es correcto: ambas versiones pueden tener problemas.
 
 No veas la demostración del producto ni las respuestas de otras personas antes de la sesión. No uses traducción automática para corregir los textos durante la prueba; queremos conocer tu interpretación inicial.
 

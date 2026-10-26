@@ -1,4 +1,4 @@
-# WHY NOW viewer testing manual
+# MatchSense viewer testing manual
 
 ## Your assignment
 
@@ -12,7 +12,7 @@ You do not need to be an expert. Occasional football viewers and regular fans ar
 
 ## What you need to know
 
-WHY/NOW presents football explanations, evidence and ways to explore approved moments. The session uses a synthetic replay with fictional teams and players. We are testing the product, not your football knowledge or ability to use a computer.
+MatchSense presents football explanations, evidence and ways to explore approved moments. The session uses a synthetic replay with fictional teams and players. We are testing the product, not your football knowledge or ability to use a computer.
 
 You do not have to like it. Confusion, disagreement and uncertainty are valuable findings. Please do not watch a product tutorial, read other reviewers' responses or discuss your answers before your session.
 

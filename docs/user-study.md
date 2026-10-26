@@ -1,4 +1,4 @@
-# WHY/NOW formative user study
+# MatchSense formative user study
 
 Status: ready-to-pilot instrument; no participants recruited, no observations collected. James owns recruitment. This file provides no broadcaster validation or productivity claim.
 

@@ -65,14 +65,14 @@ later goal. All movement is authored synthetic source data, not match footage.
 ## Run and present
 
 From the repository: `make coverage-dev`, then open
-[WHY/NOW locally](http://127.0.0.1:3000). The coverage-enabled homepage defaults to
+[MatchSense locally](http://127.0.0.1:3000). The coverage-enabled homepage defaults to
 **Pressure Swing flagship · guided mixed-event pitch**. The verification instance
 runs separately at [port 3100](http://127.0.0.1:3100), using API port 8100.
 No Azure credentials or model calls are required for deterministic local mode.
 
 Suggested pitch (replay time is different from time spent explaining):
 
-1. Start a fresh flagship session at 0. Say: “Fans see what happened; WHY/NOW
+1. Start a fresh flagship session at 0. Say: “Fans see what happened; MatchSense
    makes a supported change understandable, with a producer in control.” Play.
 2. At the pass/recovery/shot pauses, inspect one example and approve it. Show
    the saved attempt and make clear it is not a goal. Resume after each review.

@@ -1,4 +1,4 @@
-# Demonstrating WHY/NOW
+# Demonstrating MatchSense
 
 > **24 October local mixed-event candidate:** start `make coverage-dev` and use
 > [the mixed-event walkthrough](match-coverage-demo.md) for the broader pitch.

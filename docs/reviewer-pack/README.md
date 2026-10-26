@@ -1,6 +1,6 @@
 # Reviewer handout pack
 
-Version R1, 22 October 2026. Editable Word manuals and matching Markdown sources for the first formative WHY/NOW review round. No completed research is represented.
+Version R1, 22 October 2026. Editable Word manuals and matching Markdown sources for the first formative MatchSense review round. No completed research is represented.
 
 ## Which file to give each person
 

@@ -68,7 +68,7 @@ cancelled-shot replacement. The unrelated saved shot stays approved. Old package
 bytes/hashes remain stored. Reset creates a new session; backward seeking is not
 supported.
 
-Suggested spoken pitch: “WHY/NOW helps you follow a varied football segment.
+Suggested spoken pitch: “MatchSense helps you follow a varied football segment.
 The score comes from confirmed observations. A producer approves explanations of
 shots, control changes, possession and passes. Viewers can inspect the evidence,
 change language and catch up on approved incidents. This local demonstration

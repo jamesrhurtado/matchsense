@@ -6,7 +6,7 @@ Prepared 22 October 2026 (America/Lima). Scope: local MVP quality and agent beha
 
 The [official rules](https://github.com/microsoft/insidethegamehackathon/blob/main/OFFICIAL%20RULES.md) emphasize distinct responsibilities, coordinated handoffs, recovery, and effectiveness relative to a single agent. A larger role count or more tool calls is not evidence of effectiveness.
 
-[Microsoft's orchestration guidance](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns) recommends choosing the least complexity that reliably meets the task because coordination introduces cost, latency and failure modes. [Anthropic's research-system account](https://www.anthropic.com/engineering/multi-agent-research-system) describes benefits on tasks with independent investigative directions and emphasizes outcome evaluation and human checks. Its reported research-task gains cannot be transferred to WHY/NOW.
+[Microsoft's orchestration guidance](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns) recommends choosing the least complexity that reliably meets the task because coordination introduces cost, latency and failure modes. [Anthropic's research-system account](https://www.anthropic.com/engineering/multi-agent-research-system) describes benefits on tasks with independent investigative directions and emphasizes outcome evaluation and human checks. Its reported research-task gains cannot be transferred to MatchSense.
 
 ## Applied design
 

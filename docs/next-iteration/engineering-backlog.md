@@ -346,7 +346,7 @@ user review, and submission work.
 | “What if?” alternative for a key moment | **CF01 — P2 discovery/prototype** | This is a distinctive optional extension and fits the brief’s request to explain why moments matter, but is not required. Prototype one producer-selected moment only after user research confirms the question is useful. Show observed facts separately from the hypothetical branch, expose assumptions and uncertainty, and prohibit claims that the alternative would have caused a goal or changed the result. Do not show xG deltas or outcome probabilities without a validated model and independent outcome evaluation. |
 | Player speed/distance indicators | **Defer** | These are optional and can clutter the live explanation. Revisit only for a player-focused analyst view, with stable sampling, missing-data handling, declared units and reviewed thresholds. No always-on speed overlay. |
 | Pass-difficulty rating | **Defer** | No agreed operational definition, calibration set or independent football validation exists. Nearby-opponent counts and distance must not be renamed “difficulty.” |
-| Automatic eventing from video | **Out of current scope** | WHY/NOW consumes the hackathon’s synthetic event stream; video detection would require a separate labeled video/vision pipeline and is not needed to demonstrate the five stages. Do not imply that the current product analyzes match video. |
+| Automatic eventing from video | **Out of current scope** | MatchSense consumes the hackathon’s synthetic event stream; video detection would require a separate labeled video/vision pipeline and is not needed to demonstrate the five stages. Do not imply that the current product analyzes match video. |
 | More languages | **Defer** | English and Spanish are already supported. Additional languages need reviewed football terminology and complete UI/story consistency; language count alone does not improve the product. |
 
 Keep producer approval and the audit trail: they support trust and the broadcast
@@ -369,4 +369,4 @@ answer concise, optional, and consistent with the selected language and focus.
 Do not copy PitchPulse's always-on metrics panel, extra agent count, voice,
 speed thresholds, or breadth of indicators as a checklist. The useful principle
 is making the connection between a match moment and its explanation easy to
-follow; preserve WHY/NOW's evidence bounds and low-distraction presentation.
+follow; preserve MatchSense's evidence bounds and low-distraction presentation.

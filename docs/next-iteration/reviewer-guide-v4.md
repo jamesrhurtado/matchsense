@@ -1,4 +1,4 @@
-# Reviewer guide: WHY/NOW v4 discovery
+# Reviewer guide: MatchSense v4 discovery
 
 Prepared 22 October 2026 (America/Lima). James will arrange participants. No reviewer observations have been collected yet.
 

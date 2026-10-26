@@ -1,4 +1,4 @@
-# WHY/NOW — Grand Prize improvement plan
+# MatchSense — Grand Prize improvement plan
 
 > **Latest synthetic-data slice (25 October 2026):** SD01–SD04 are implemented; see [dataset and preview guide](../synthetic-dataset-v1.md), [verification](../../evals/synthetic-vnext/verification.md), [research](../synthetic-data-research.md) and [SD01–SD08 plan/status](synthetic-data-plan.md). SD05 onward remains planned. Current product behavior is recorded in the [delivery record](decision-log.md) and [live demo guide](../live-match-demo.md). Dated plans below retain their historical status.
 
@@ -8,7 +8,7 @@
 
 ## Read this first
 
-WHY/NOW already has a functioning Azure pipeline and unusually careful publication controls. The next iteration must make the football explanation more useful, demonstrate why its agents are helpful, and prove that people can use it while play continues. Additional cloud services or more agents are not success criteria.
+MatchSense already has a functioning Azure pipeline and unusually careful publication controls. The next iteration must make the football explanation more useful, demonstrate why its agents are helpful, and prove that people can use it while play continues. Additional cloud services or more agents are not success criteria.
 
 The intended experience is: **a producer notices a meaningful forward passage, understands what changed from visible evidence, approves a concise explanation, and delivers different useful views to a casual fan and an analyst.** A selected player changes which approved moments and evidence the viewer sees. The system can remain quiet, qualify a claim, and withdraw a corrected story.
 

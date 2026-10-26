@@ -1,4 +1,4 @@
-# Stronger synthetic football data for WHY/NOW
+# Stronger synthetic football data for MatchSense
 
 > SD01–SD04 follow-on: the [development dataset card](synthetic-dataset-v1.md)
 > records the implemented first slice. The research below retains its original
@@ -32,7 +32,7 @@ can supply a fair test of that benefit; they cannot guarantee it. These are
 direct requirements and opportunities in the
 [official rules](https://github.com/microsoft/insidethegamehackathon/blob/main/OFFICIAL%20RULES.md).
 
-For WHY/NOW the potential demonstration is concrete: a quiet period stays quiet;
+For MatchSense the potential demonstration is concrete: a quiet period stays quiet;
 an observed change supports a concise explanation; incomplete evidence produces
 a qualified result or abstention; a correction withdraws old text. The viewer
 continues watching while the producer decides what deserves attention.
@@ -80,10 +80,10 @@ single-agent baseline or encode the desired winner.
 
 ## Primary research and its practical implications
 
-These sources support design choices, not a claim that WHY/NOW is validated.
+These sources support design choices, not a claim that MatchSense is validated.
 Technical conclusions rely on governing bodies, maintainers or original research.
 
-| Source, date and scope | What it supports | Decision for WHY/NOW; limit |
+| Source, date and scope | What it supports | Decision for MatchSense; limit |
 | --- | --- | --- |
 | [IFAB Law 3, current 2026/27 page](https://www.theifab.com/laws/latest/the-players/) | The ordinary game has at most eleven players per side, including a goalkeeper. | Validate our declared 11v11 scenario roster and keeper roles. This slice excludes substitutions/dismissals; 22 is a scenario assumption, not an invariant for every real match. |
 | [IFAB Law 10](https://www.theifab.com/laws/latest/determining-the-outcome-of-a-match/) | A goal requires the whole ball to cross the line in the goal opening, subject to offences. | Script physically consistent outcomes, but retain explicit source goal confirmation. A point at the goal-line centre does not independently prove a goal. Full refereeing is outside scope. |
@@ -91,7 +91,7 @@ Technical conclusions rely on governing bodies, maintainers or original research
 | [FIFA: EPTS standard, June 2019](https://inside.fifa.com/en/innovation/news/new-global-standard-for-epts) | Tracking quality includes distance/velocity accuracy, test conditions, format and delivery delay. | Report separate structural, kinematic and delivery checks, with units and versions. These principles do not give our generator FIFA certification or authorize copying certification thresholds. |
 | [FIFA: broadcast tracking validation, January 2021](https://ipt.fifa.com/innovation/news/assessing-the-quality-of-player-tracking-data-generated-using-broadcast-footage) | Visibility, video conditions and missing players affect validity; comparative validation differs from a gold standard. | Add explicit missing-player/ball intervals and distinct observed versus unknown possession. Do not convert an inferred hidden position into an observed position. We are not building a video tracker. |
 | [FIFA Football Language: in possession, November 2021](https://www.fifatrainingcentre.com/en/resources-tools/football-language/in-possession/index.php) | Controlled possession can follow a reception, loose-ball collection, interception or restart. | Represent these distinct transitions in authored scenes. Preserve our existing family definitions and denominator rules; spatial closeness alone is insufficient evidence of recovery. |
-| [Opta event definitions, current page](https://www.statsperform.com/opta-event-definitions/) | Shot, blocked attempt, recovery, possession and correction definitions have important distinctions. | Add saved/blocked/off-target/unresolved outcomes and recovery/control-change consistency checks within our contract. Provider conventions differ; do not silently redefine WHY/NOW to match Opta, or copy every field as authoritative. The page is not a substitute for current laws. |
+| [Opta event definitions, current page](https://www.statsperform.com/opta-event-definitions/) | Shot, blocked attempt, recovery, possession and correction definitions have important distinctions. | Add saved/blocked/off-target/unresolved outcomes and recovery/control-change consistency checks within our contract. Provider conventions differ; do not silently redefine MatchSense to match Opta, or copy every field as authoritative. The page is not a substitute for current laws. |
 | [Metrica Sports sample-data README](https://raw.githubusercontent.com/metrica-sports/sample-data/master/README.md) | Published examples synchronize tracking/events and document normalized coordinates and pitch dimensions. The samples are anonymized match data. | Adopt synchronization and explicit-unit discipline. Anonymized real data is not synthetic. No samples or trajectories were imported; redistribution/calibration would need separate terms review and declared provenance. |
 | [Kloppy coordinate transformations, documentation v3.19.1](https://kloppy.pysport.org/user-guide/transformations/coordinates/) | Origin, axis orientation, dimensions and attack orientation must be explicit. | Keep metric coordinates and period direction separate. Mirror/direction tests are invariance checks and remain in the same dataset ancestry group. No new dependency is needed just to apply this principle. |
 | [Google Research Football, June 2019](https://research.google/blog/introducing-google-research-football-a-novel-reinforcement-learning-environment/) | A physics-based environment and small scenario curriculum support reproducible football experiments. | Borrow scenario composition, state transitions and repeatable difficulty controls. RL playing agents solve a different problem from our explanation agents. This research does not validate our trajectories. |
@@ -100,7 +100,7 @@ Technical conclusions rely on governing bodies, maintainers or original research
 | [CheckList, ACL 2020](https://aclanthology.org/2020.acl-main.442/) | Behavioral capability matrices and controlled transformations find failures aggregate accuracy can hide. | Test invariance, evidence sensitivity and minimum supported behavior separately. This is a testing method, not a football realism score. |
 | [Scikit-learn: grouped and time-aware evaluation](https://scikit-learn.org/stable/modules/cross_validation.html) | Correlated groups and ordered observations need appropriate separation to avoid misleading generalization estimates. | Split by authored trajectory ancestry before generating mirrors/noise/fault variants. Never count frames or transformed siblings as independent matches. This applies the principle; we are not training a classifier here. |
 | [Datasheets for Datasets, Microsoft Research / CACM, December 2021](https://www.microsoft.com/en-us/research/publication/datasheets-for-datasets/) | Document purpose, composition, creation and recommended uses. | Publish a concise dataset card, hashes, profile settings, ancestry, limitations and split membership. Public release remains a separate action. |
-| [Anthropic: agent evaluations, January 2026](https://www.anthropic.com/research/demystifying-evals-for-ai-agents) | Agent evaluations need outcomes and traces, repeated trials and complementary grading methods. | Reuse existing outcome accounting; measure useful output, reviewer interventions, false rejections, time and cost. Human judgment remains necessary for editorial usefulness. This vendor guidance supplies no score or numerical target for WHY/NOW. |
+| [Anthropic: agent evaluations, January 2026](https://www.anthropic.com/research/demystifying-evals-for-ai-agents) | Agent evaluations need outcomes and traces, repeated trials and complementary grading methods. | Reuse existing outcome accounting; measure useful output, reviewer interventions, false rejections, time and cost. Human judgment remains necessary for editorial usefulness. This vendor guidance supplies no score or numerical target for MatchSense. |
 
 ## What the other hackathon projects add
 

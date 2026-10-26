@@ -1,6 +1,6 @@
 # Live-match explanation desk
 
-WHY/NOW explains a match as it unfolds. The source here is a prerecorded synthetic
+MatchSense explains a match as it unfolds. The source here is a prerecorded synthetic
 segment delivered over time, not a real match broadcast or a prediction. AI and
 producer review run while play continues. Recaps and history support that live use.
 
@@ -36,7 +36,7 @@ Template preview choice. The earlier Azure engineering deployment is separate.
 
 ## Present the workflow
 
-- Introduce selective help: “Fans want to enjoy the match. WHY/NOW gives producers
+- Introduce selective help: “Fans want to enjoy the match. MatchSense gives producers
   supported explanations and lets viewers choose when to go deeper.”
 - Start a new simulation and explain: “This synthetic feed represents a match
   happening now. The producer reviews explanations while the match continues.”
@@ -77,13 +77,13 @@ explanations in that interval, not that nothing happened.
 
 “More information is not always a better match experience. In Capgemini's 2025
 multi-sport survey, 53% said overuse of technology had diminished live-viewing
-enjoyment. WHY/NOW lets producers choose supported stories and fans choose when
+enjoyment. MatchSense lets producers choose supported stories and fans choose when
 to explore them.”
 
 Credit: [Capgemini, printed page 35](https://www.capgemini.com/wp-content/uploads/2025/07/Final-Web-Version-Report-Tech-In-Sports_V3.pdf#page=35),
 March–April 2025, 12,017 sports fans in 11 countries/regions. This is an attitude
 survey sponsored by a technology-services company, not a football-only trial or
-proof that WHY/NOW reduces distraction. Put the source on screen. Participant
+proof that MatchSense reduces distraction. Put the source on screen. Participant
 testing must establish our actual effect; do not claim it is proven.
 
 ## Five-minute reviewer task

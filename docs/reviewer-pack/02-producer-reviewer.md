@@ -1,4 +1,4 @@
-# WHY NOW producer review manual
+# MatchSense producer review manual
 
 ## Your assignment
 
@@ -12,7 +12,7 @@ You should have experience choosing or editing sports content for an audience: b
 
 ## What you need to know
 
-WHY/NOW proposes explanations and supporting evidence for a producer to review. Viewers receive approved stories and can explore different viewing preferences. This test uses synthetic football observations and fictional players in a disposable session. It is not an actual broadcast.
+MatchSense proposes explanations and supporting evidence for a producer to review. Viewers receive approved stories and can explore different viewing preferences. This test uses synthetic football observations and fictional players in a disposable session. It is not an actual broadcast.
 
 You will first judge anonymous text outputs, then use the producer interface. Finish the anonymous section before opening diagnostic information or asking how outputs were generated. Please do not watch the product demo or read other reviewers' responses beforehand.
 

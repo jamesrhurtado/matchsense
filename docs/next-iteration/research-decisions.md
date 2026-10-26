@@ -1,6 +1,6 @@
 # Research record and decisions
 
-Reviewed 21 October 2026. Source claims below are deliberately narrow. The proposed architecture, thresholds and effort estimates are WHY/NOW design judgments, not conclusions validated by those sources.
+Reviewed 21 October 2026. Source claims below are deliberately narrow. The proposed architecture, thresholds and effort estimates are MatchSense design judgments, not conclusions validated by those sources.
 
 ## Primary-source findings
 
@@ -64,4 +64,4 @@ Timeboxes are not additional to every backlog estimate: R01 includes a subset of
 
 ## Sources intentionally not used as validation
 
-The original concept brief's near-perfect concept scores, vendor engagement statistics, unrelated hackathon winners, and original synthetic labels do not establish WHY/NOW's impact or winning probability. Real football data is unnecessary for this iteration and would introduce licensing and data-semantic work. The research above informs bounded design decisions; product evaluation supplies the evidence for claims about this product.
+The original concept brief's near-perfect concept scores, vendor engagement statistics, unrelated hackathon winners, and original synthetic labels do not establish MatchSense's impact or winning probability. Real football data is unnecessary for this iteration and would introduce licensing and data-semantic work. The research above informs bounded design decisions; product evaluation supplies the evidence for claims about this product.

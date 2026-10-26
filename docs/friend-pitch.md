@@ -1,4 +1,4 @@
-# WHY/NOW — friend pitch and local demo
+# MatchSense — friend pitch and local demo
 
 > **24 October local mixed-event candidate:** start `make coverage-dev` and use
 > [the mixed-event walkthrough](match-coverage-demo.md) for the broader pitch.
@@ -36,9 +36,9 @@ If port 3000 or 8000 is already occupied by this project, use the running instan
 
 ## What the project does
 
-**WHY/NOW helps football viewers understand why a moment matters, with evidence they can inspect and explanations a producer controls.**
+**MatchSense helps football viewers understand why a moment matters, with evidence they can inspect and explanations a producer controls.**
 
-A broadcast can show a pass and its numbers, but viewers still need context: what changed in this passage of play, and why highlight it? WHY/NOW turns match observations into a candidate story, shows the supporting evidence, and lets a producer approve the exact explanation before viewers receive it.
+A broadcast can show a pass and its numbers, but viewers still need context: what changed in this passage of play, and why highlight it? MatchSense turns match observations into a candidate story, shows the supporting evidence, and lets a producer approve the exact explanation before viewers receive it.
 
 The working prototype has two connected experiences:
 
@@ -63,7 +63,7 @@ The implemented Azure path adds a Story Director and Claim Reviewer using Micros
 
 ## Your 30-second pitch
 
-> “WHY/NOW helps explain the story behind a football play. It takes match observations, identifies a moment worth explaining, and shows the evidence behind the explanation. A producer reviews and approves the exact story before viewers see it. Viewers can then inspect the facts, switch language, or catch up on approved moments. I’m demonstrating it with a synthetic replay in local template mode; the project also has an implemented Azure AI workflow.”
+> “MatchSense helps explain the story behind a football play. It takes match observations, identifies a moment worth explaining, and shows the evidence behind the explanation. A producer reviews and approves the exact story before viewers see it. Viewers can then inspect the facts, switch language, or catch up on approved moments. I’m demonstrating it with a synthetic replay in local template mode; the project also has an implemented Azure AI workflow.”
 
 ## Prepare the two-minute demo
 
@@ -84,7 +84,7 @@ Do this preparation before starting the pitch. Keep the replay paused at 95 seco
 
 | Time | Screen action | What to say |
 |---|---|---|
-| 0:00–0:20 | Show the producer console with Moment 4 selected. | “You can see a pass, but why should it get attention? WHY/NOW helps a producer explain what changed. This is a synthetic football replay, paused so we can inspect it.” |
+| 0:00–0:20 | Show the producer console with Moment 4 selected. | “You can see a pass, but why should it get attention? MatchSense helps a producer explain what changed. This is a synthetic football replay, paused so we can inspect it.” |
 | 0:20–0:50 | Open **Show why** and inspect the evidence. | “This pass moved the ball 30 metres forward. The previous three completed passes moved it 8, 12, and 16 metres. The comparison is specific, and we can inspect its support. This doesn't mean it was the best pass of the match.” |
 | 0:50–1:10 | Close the evidence panel, briefly show **Processing & review trace**, then click **Approve**. | “This local demo uses templates without AI calls. The Azure AI path adds a Story Director and Claim Reviewer around the same evidence checks. Either way, the producer approves the exact revision before publication.” |
 | 1:10–1:40 | Switch to the companion. Open **Inspect the facts**, select the comparison clause, then show **Original values and sources**. Change to Spanish and add detail. | “The viewer gets an explanation they can check. They can see the comparison, inspect the source values, and switch language or detail while staying within the approved facts.” |

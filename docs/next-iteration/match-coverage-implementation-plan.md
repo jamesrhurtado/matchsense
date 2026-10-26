@@ -1,4 +1,4 @@
-# WHY/NOW — next iteration: broader match coverage
+# MatchSense — next iteration: broader match coverage
 
 Prepared 23 October 2026, America/Lima. **Status: implementation backlog authorized for planning; no features implemented by this document.** Product owner: James. Engineering, QA and reviewer assignments remain open.
 

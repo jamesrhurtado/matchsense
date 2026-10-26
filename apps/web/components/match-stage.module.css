@@ -159,7 +159,8 @@
 }
 .fieldLegend {
   margin-top: 0;
-  font-size: 12px;
+  font-size: 13px;
+  color: #d5e2e4;
 }
 .fieldLegend > span {
   display: flex;
@@ -328,8 +329,8 @@
   flex-wrap: wrap;
   gap: 14px;
   padding: 11px 7px 0;
-  color: #c3cfd6;
-  font-size: 12px;
+  color: #d5e2e4;
+  font-size: 13px;
 }
 .keeperLegend > span {
   display: inline-flex;
@@ -350,13 +351,17 @@
 .fieldNote {
   min-height: 30px;
   margin: 9px 7px 0;
-  font-size: 12px;
-  color: #c3d4d4;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #d5e2e4;
 }
 
 @media (max-width: 600px) {
   .keeperLegend,
   .fieldNote {
-    font-size: 11px;
+    font-size: 12px;
+  }
+  .fieldLegend {
+    font-size: 12px;
   }
 }

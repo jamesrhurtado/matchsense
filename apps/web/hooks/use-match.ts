@@ -2,6 +2,36 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { api, Match } from "@/lib/api";
 
+function frameSignature(frame: Match["frame"]) {
+  if (!frame) return "missing";
+  return `${frame.players
+    .map((player) => `${player.player_id}:${player.x_m}:${player.y_m}`)
+    .join("|")}:${frame.ball?.x_m ?? "-"}:${frame.ball?.y_m ?? "-"}`;
+}
+
+function withMotion(previous: Match | null, next: Match): Match {
+  if (!previous || !next.frame || next.frame_time_ms == null) {
+    return { ...next, motion_from_frame: null };
+  }
+  if (previous.frame_time_ms == null) {
+    return { ...next, motion_from_frame: null };
+  }
+  const delta = next.frame_time_ms - previous.frame_time_ms;
+  if (delta > 0) {
+    return {
+      ...next,
+      motion_from_frame: delta <= 500 && previous.frame ? previous.frame : null,
+    };
+  }
+  if (
+    delta === 0 &&
+    frameSignature(previous.frame) === frameSignature(next.frame)
+  ) {
+    return { ...next, motion_from_frame: previous.motion_from_frame ?? null };
+  }
+  return { ...next, motion_from_frame: null };
+}
+
 export function useMatch(
   id: string,
   isProducer: boolean,
@@ -27,13 +57,18 @@ export function useMatch(
         return api<Match>(`/replay-sessions/${id}/snapshot`, {}, isProducer);
       });
       if (currentContext.current !== context) return;
-      setMatch((previous) =>
-        previous &&
-        previous.session_id === data.session_id &&
-        previous.cursor > data.cursor
-          ? previous
-          : data,
-      );
+      setMatch((previous) => {
+        if (
+          previous &&
+          previous.session_id === data.session_id &&
+          previous.cursor > data.cursor
+        )
+          return previous;
+        return withMotion(
+          previous?.session_id === data.session_id ? previous : null,
+          data,
+        );
+      });
       setConnected(true);
       setError("");
     } catch (e) {
@@ -59,13 +94,18 @@ export function useMatch(
         return;
       }
       const data: Match = JSON.parse(event.data);
-      setMatch((previous) =>
-        previous &&
-        previous.session_id === data.session_id &&
-        previous.cursor > data.cursor
-          ? previous
-          : data,
-      );
+      setMatch((previous) => {
+        if (
+          previous &&
+          previous.session_id === data.session_id &&
+          previous.cursor > data.cursor
+        )
+          return previous;
+        return withMotion(
+          previous?.session_id === data.session_id ? previous : null,
+          data,
+        );
+      });
       setConnected(true);
       setError("");
     };

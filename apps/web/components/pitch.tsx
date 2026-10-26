@@ -23,6 +23,7 @@ export function observedBallCarrier(frame: Frame | null) {
 
 export default function Pitch({
   frame,
+  motionFromFrame,
   metrics,
   focus,
   compact = false,
@@ -37,6 +38,7 @@ export default function Pitch({
   teamNames?: Record<string, string>;
   broadcast?: boolean;
   frame: Frame | null;
+  motionFromFrame?: Frame | null;
   metrics?: Metrics;
   focus?: string | null;
   compact?: boolean;
@@ -48,6 +50,9 @@ export default function Pitch({
   const uid = useId().replace(/:/g, "");
   const [hoveredPlayerId, setHoveredPlayerId] = useState<string | null>(null);
   const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
+  const previousPlayerIds = new Set(
+    motionFromFrame?.players.map((player) => player.player_id) ?? [],
+  );
   const carrier = broadcast ? observedBallCarrier(frame) : undefined;
   const ballLinked = broadcast && !carrier && ballOverlapsPlayer(frame);
   const ball = frame?.ball;
@@ -132,6 +137,7 @@ export default function Pitch({
     ball && broadcast ? (
       <g
         data-testid="broadcast-ball"
+        className={motionFromFrame?.ball ? styles.movingMarker : undefined}
         data-carrier-id={carrier?.player_id}
         data-source-x={ball.x_m}
         data-source-y={ball.y_m}
@@ -153,6 +159,9 @@ export default function Pitch({
           <>
             <line
               data-testid="ball-position-link"
+              className={
+                motionFromFrame?.ball ? styles.movingLink : undefined
+              }
               x1={ball.x_m + 5}
               y1={ball.y_m + 5}
               x2={ballX}
@@ -189,7 +198,11 @@ export default function Pitch({
           strokeWidth=".2"
         />
         <path
-          d={`M${ballX} ${ballY - ballRadius * 0.48}l${ballRadius * 0.45} ${ballRadius * 0.33}-${ballRadius * 0.17} ${ballRadius * 0.53}h-${ballRadius * 0.56}l-${ballRadius * 0.17}-${ballRadius * 0.53}Z`}
+          className={
+            motionFromFrame?.ball ? styles.movingBallIcon : undefined
+          }
+          transform={`translate(${ballX} ${ballY})`}
+          d={`M0 ${-ballRadius * 0.48}l${ballRadius * 0.45} ${ballRadius * 0.33}-${ballRadius * 0.17} ${ballRadius * 0.53}h-${ballRadius * 0.56}l-${ballRadius * 0.17}-${ballRadius * 0.53}Z`}
           fill="#23333e"
         />
       </g>
@@ -420,7 +433,11 @@ export default function Pitch({
             key={p.player_id}
             data-player-id={p.player_id}
             data-role={player?.role}
-            className={interactive ? styles.playerMarker : undefined}
+            className={
+              interactive
+                ? `${styles.playerMarker}${previousPlayerIds.has(p.player_id) ? ` ${styles.movingMarker}` : ""}`
+                : undefined
+            }
             role={interactive ? "button" : undefined}
             tabIndex={interactive ? 0 : undefined}
             aria-label={interactive ? playerLabel : undefined}

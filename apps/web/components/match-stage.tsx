@@ -114,6 +114,7 @@ export function MatchStage({
       <div className={styles.field}>
         <Pitch
           frame={match?.frame ?? null}
+          motionFromFrame={match?.motion_from_frame}
           players={match?.players ?? []}
           teamNames={Object.fromEntries(
             (match?.teams ?? []).map((team) => [team.id, team.name]),

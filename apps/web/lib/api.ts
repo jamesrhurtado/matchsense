@@ -101,6 +101,8 @@ export type Match = {
   overlay_selection_reason?: Record<string, string> | null;
   delivered_count: number;
   frame: Frame | null;
+  frame_time_ms?: number | null;
+  motion_from_frame?: Frame | null;
   teams: { id: string; name: string; color: string }[];
   players: Player[];
   cursor: number;

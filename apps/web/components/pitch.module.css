@@ -15,6 +15,38 @@
   opacity: 1;
 }
 
+.movingMarker > circle,
+.movingMarker > rect,
+.movingMarker > text {
+  transition:
+    cx 280ms linear,
+    cy 280ms linear,
+    x 280ms linear,
+    y 280ms linear;
+}
+
+.movingBallIcon {
+  transition: transform 280ms linear;
+}
+
+.movingLink {
+  transition:
+    x1 280ms linear,
+    y1 280ms linear,
+    x2 280ms linear,
+    y2 280ms linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .movingMarker > circle,
+  .movingMarker > rect,
+  .movingMarker > text,
+  .movingBallIcon,
+  .movingLink {
+    transition: none;
+  }
+}
+
 .playerIdentity {
   min-height: 2.75rem;
   display: flex;

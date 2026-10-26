@@ -224,60 +224,72 @@ comprehension. Prioritize as a concise terminology, identity and information-
 hierarchy pass after the currently committed synthetic-data tickets; retain the
 explicit source audit and publication safeguards.
 
-- Show a player's shirt number with their name wherever an insight names them
-  (for this replay, Beni Vidal is Harbor City #9; Dani Luna is #11).
+- [Implemented locally, 25 October] Show verified player names, shirt numbers,
+  and their observed roles beside the explanation for known participants
+  (including Harbor City #11 Dani Luna → #9 Beni Vidal). New v7 pressure analyst
+  wording includes those shirt numbers; older approved text remains unchanged.
 - [Implemented locally, 25 October] Rename “Pressure Swing” to “Nearby pressure
   change”; label the before-pass and after-reception windows, forward distance,
   and observed coverage as seconds out of the two-second window. Hide the
   repeated “Why this moment?” pressure summary when it restates “What changed?”;
   retain it when it adds the supported previous-three-pass comparison. The
-  measurement still does not establish tactical pressure or cause.
-- Rewrite the analyst version as a short, connected reading of the play: name
-  passer/receiver with shirt numbers, give the comparison and window in plain
+  measurement still does not establish tactical pressure or cause. New v7
+  stories and recaps use the clearer display title; older v6 wording is retained.
+- [Implemented locally, 25 October] Rewrite the analyst version as a short,
+  connected reading of the play: name passer/receiver with shirt numbers, give
+  the comparison and window in plain
   language, explain what the measurement can help an analyst inspect, then state
   its boundary. Avoid a label-led list of radius, means, drop and coverage; keep
   full audit values in the evidence details. The current analyst text is a dense
   metric list while the “Why this moment?” sentence merely repeats its figures.
-  Preserve the same supported facts and qualifications in both languages.
+  Preserve the same supported facts and qualifications in both languages. New
+  pressure packages use the additive v7 renderer; v6 package text and hashes
+  remain readable and unchanged.
 - [Implemented locally, 25 October] Candidates say “Ready for review”; internal
   revision numbers stay on approved status where they identify the published
   wording.
-- Keep raw observation IDs and evidence hashes out of the default explanation;
-  retain them inside an optional technical audit view. Clearly distinguish
+- [Implemented locally, 25 October] Keep raw observation IDs and evidence
+  hashes out of the default explanation; retain them inside an optional
+  technical audit view. Clearly distinguish
   producer-only evidence from the approved explanation and variants viewers get.
-- Clarify the review actions in plain language: Approve publishes the exact
-  revision to the companion and makes it eligible for the live overlay during
+- [Implemented locally, 25 October] Clarify the review actions in plain
+  language: “Approve for viewers” publishes the exact revision to the
+  companion and makes it eligible for the live overlay during
   its display window; Suppress keeps an unapproved candidate out of viewer
   stories and recaps; Approve for history only is available after expiry and
   adds the approved moment to companion/history without putting it on air. Tell
   producers why live actions are disabled after the window ends, and describe
   Retract as removing an already approved moment.
-- Reduce the selected-insight decision panel's stacked copy and controls. Keep
-  the current review state and applicable action prominent; hide disabled live
+- [Implemented locally, 25 October] Reduce the selected-insight decision
+  panel's stacked copy and controls. Keep the current review state and
+  applicable action prominent; hide disabled live
   actions after expiry, and move audit explanation, selection-priority text,
   and display-time metadata into concise, optional details.
-- Make simple/analyst and English/Spanish previews easy to open before approval,
-  then show where each appears in the companion. Replace the read-only Audience
+- [Implemented locally, 25 October] Make simple/analyst and English/Spanish
+  previews easy to open before approval, then show where each appears in the
+  companion. Replace the read-only Audience
   package card with either real preview/customization controls or a concise
   Open viewer companion handoff. Do not present viewer capabilities as choices
   the producer can edit in this card.
-- Explain “Select shared overlay” as choosing which approved story is on the
-  match broadcast while the other approved stories remain available in the
+- [Implemented locally, 25 October] Explain “Show on match” as choosing which
+  approved story is on the match broadcast while the other approved stories remain available in the
   companion/history; consider renaming the action to say that plainly.
 - [Implemented locally, 25 October] Opening “Processing & review trace” shows
   an opening state and moves keyboard focus and the viewport to the panel after
   it loads. The existing concise role summary leads; timing, token counts and
   call details remain secondary.
-- [New, P2] Remove or reduce the large green “Producer review desk” banner.
+- [Implemented locally, 25 October] Remove or reduce the large green “Producer review desk” banner.
   The persistent header already identifies the producer console and says live
   stories/evidence are in view. Keep its distinct guidance—that new insights
   join the queue while the selected insight stays in view—as a quiet one-line
   note near the queue or in help. Check that producers still understand this
   behavior without a second prominent status panel.
-- Use concise evidence labels: “Before the pass”, “Forward distance”, and “After
-  reception”; keep each number and unit together on narrow screens.
-- On the viewer companion, make clear that the pitch/replay is the live view and
-  approved explanations appear when available; “Catch me up” opens the recap.
+- [Implemented locally, 25 October] Use concise evidence labels: “Before the
+  pass”, “Forward distance”, and “After reception”; keep each number and unit
+  together on narrow screens.
+- [Implemented locally, 25 October] On the viewer companion, make clear that
+  the pitch/replay is the live view and approved explanations appear when
+  available; “Catch me up” opens the recap.
   Explain the player/team focus selector and distinguish “no approved story
   involving this focus in this interval” from “nothing happened” or “no stories
   exist”. In the observed screen, Alder Rovers is the selected filter, so the
@@ -290,11 +302,12 @@ explicit source audit and publication safeguards.
   touch screens; the browser tooltip alone is too subtle and unavailable to
   touch users. Restrained movement between valid observed positions remains
   separate work below.
-- Add restrained movement between consecutive observed player/ball positions so
-  the pitch feels continuous. Interpolate only across valid observed intervals;
-  preserve missing-data gaps and source positions, avoid invented runs or
-  tactical animation, and honor reduced-motion preferences. Movement should
-  clarify the play without distracting from its explanation.
+- [Implemented locally, 25 October] Add restrained movement between consecutive
+  observed player/ball positions. The UI uses the source frame timestamp and
+  transitions only across intervals up to 500 ms when the same player/ball is
+  present in both frames. Larger jumps, corrections at the same timestamp, and
+  missing samples snap to source positions. Reduced-motion preferences disable
+  transitions. No trail or tactical movement is inferred.
 
 Do not add these changes to the SD01–SD04 delivery claim. The continuing human
 review remains necessary to determine which explanations and controls people

@@ -1,5 +1,36 @@
 # Iteration implementation record
 
+## 25 October 2026 — producer decisions and viewer clarity
+
+Applied the remaining implementation-ready items from the first-time producer
+walkthrough. Producer and viewer explanations now show verified player number,
+name, team and role; new pressure packages use additive schema/renderer v7 for a
+connected bilingual analyst explanation with its actual windows, observed
+coverage and evidence boundary. New stories and recaps say “Nearby pressure
+change”; the v6 reader and stored wording remain unchanged. Technical source
+IDs stay in the collapsed audit section.
+
+Reduced the selected-insight panel: review method and timing/priority are
+optional details; ended live windows show only the history action; approval,
+suppression and retraction use clearer actions and outcomes. The overlay action
+now says “Show on match” and explains that other approved stories remain in the
+companion. Preview wording explains where viewers see it, and the read-only
+Audience package card is now a direct viewer-companion handoff. The producer
+queue keeps its short “selected insight stays in view” guidance. Viewer focus is
+visibly labeled, its empty state says it filters approved stories only, and the
+catch-up control explains that it opens the segment recap.
+
+Pitch movement uses the source `frame_time_ms` returned by the snapshot: only
+player/ball markers present in both frames glide across intervals up to 500 ms.
+Larger jumps, corrections at the same timestamp and missing samples snap to
+source positions; CSS respects reduced-motion settings. This is a visual
+transition between observations, not an inferred run or tactical path.
+
+Verification for this slice: TypeScript check, Python compilation and v7 schema
+export completed. The browser and test suites were not run; participant
+comprehension and football review remain open. No model call, deployment or
+publication was performed.
+
 ## 25 October 2026 — accessible pitch player identity
 
 Implemented producer walkthrough follow-ups. On the live match pitch, player

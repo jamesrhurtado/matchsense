@@ -29,11 +29,13 @@ export function MatchStage({
   language,
   expired,
   showExplanation = true,
+  broadcastOutput = false,
 }: {
   match: Match | null;
   language: string;
   expired: boolean;
   showExplanation?: boolean;
+  broadcastOutput?: boolean;
 }) {
   const es = language === "es";
   const elapsed = match?.clock_ms ?? 0;
@@ -45,7 +47,7 @@ export function MatchStage({
   );
   return (
     <section
-      className={styles.stage}
+      className={`${styles.stage} ${broadcastOutput ? styles.broadcastOutput : ""}`}
       aria-label={es ? "Centro del partido" : "Match centre"}
     >
       <div className={styles.masthead}>

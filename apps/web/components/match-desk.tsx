@@ -598,14 +598,32 @@ export default function MatchDesk({
                   : "Reconnecting"}
             </Tag>
             {isProducer && (
-              <Link
-                href={`/watch/${id}`}
-                target="_blank"
-                className="inline-flex items-center gap-2 rounded-lg border border-stone-200 bg-white px-3 py-2 text-sm"
-              >
-                Viewer companion
-                <ArrowUpRight size={15} />
-              </Link>
+              <div className="flex flex-wrap items-center gap-2">
+                <Link
+                  href={`/broadcast/${id}`}
+                  target="_blank"
+                  className="inline-flex items-center gap-2 rounded-lg border border-stone-200 bg-white px-3 py-2 text-sm"
+                >
+                  Broadcast stage
+                  <ArrowUpRight size={15} />
+                </Link>
+                <Link
+                  href={`/overlay/${id}`}
+                  target="_blank"
+                  className="inline-flex items-center gap-2 rounded-lg border border-stone-200 bg-white px-3 py-2 text-sm"
+                >
+                  OBS overlay
+                  <ArrowUpRight size={15} />
+                </Link>
+                <Link
+                  href={`/watch/${id}`}
+                  target="_blank"
+                  className="inline-flex items-center gap-2 rounded-lg border border-stone-200 bg-white px-3 py-2 text-sm"
+                >
+                  Viewer companion
+                  <ArrowUpRight size={15} />
+                </Link>
+              </div>
             )}
           </div>
         </header>

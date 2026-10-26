@@ -49,6 +49,7 @@ export function useMatch(
   const [match, setMatch] = useState<Match | null>(null);
   const [error, setError] = useState("");
   const [connected, setConnected] = useState(false);
+  const [lastUpdatedAt, setLastUpdatedAt] = useState(0);
   const context = `${id}:${isProducer}:${selectedStoryId}`;
   const currentContext = useRef(context);
   currentContext.current = context;
@@ -88,6 +89,7 @@ export function useMatch(
         );
       });
       setConnected(true);
+      setLastUpdatedAt(Date.now());
       setError("");
     } catch (e) {
       if (currentContext.current === context) {
@@ -125,6 +127,7 @@ export function useMatch(
         );
       });
       setConnected(true);
+      setLastUpdatedAt(Date.now());
       setError("");
     };
     source.addEventListener("resync", update as EventListener);
@@ -138,5 +141,5 @@ export function useMatch(
       clearInterval(recovery);
     };
   }, [id, isProducer, refresh, selectedStoryId, context, pollInterval]);
-  return { match, error, connected, refresh };
+  return { match, error, connected, lastUpdatedAt, refresh };
 }

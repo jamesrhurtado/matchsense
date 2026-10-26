@@ -1,2 +1,16 @@
-import MatchDesk from '@/components/match-desk';
-export default async function Page({params}:{params:Promise<{sessionId:string}>}){const {sessionId}=await params;return <MatchDesk id={sessionId} mode="studio"/>;}
+export const dynamic = "force-dynamic";
+import MatchDesk from "@/components/match-desk";
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ sessionId: string }>;
+}) {
+  const { sessionId } = await params;
+  return (
+    <MatchDesk
+      id={sessionId}
+      mode="studio"
+      publicBase={process.env.MATCHSENSE_PUBLIC_URL || ""}
+    />
+  );
+}

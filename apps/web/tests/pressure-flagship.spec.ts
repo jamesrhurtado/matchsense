@@ -16,7 +16,7 @@ test('pressure flagship: review, source evidence, approval, audience lenses, Spa
  await queue.getByLabel('Event family').selectOption('pressure');
  await queue.getByRole('button',{name:/01:31.*Nearby pressure change/}).click();
  await expect(page.getByRole('region',{name:'Why this moment'})).toContainText('previous three');
- await page.getByRole('button',{name:'Check the evidence',exact:true}).click();
+ await page.getByRole('button',{name:'Review evidence',exact:true}).click();
  const evidence=page.getByTestId('pressure-evidence').first();
  await expect(evidence).toContainText('2.0');await expect(evidence).toContainText('0.4');await expect(evidence).toContainText('30.0 m');
  await expect(evidence.getByRole('table')).toContainText('25.0 m');

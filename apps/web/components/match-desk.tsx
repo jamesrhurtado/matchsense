@@ -25,6 +25,7 @@ import {
 import { api, cn, Evidence, Match, timecode, token, Variant } from "@/lib/api";
 import { Button, Card, Tag } from "./ui";
 import { MatchStage } from "./match-stage";
+import { BroadcastSetup } from "./broadcast-setup";
 import { MatchSenseBrand } from "./match-sense-brand";
 import { AudiencePanel, StoryPicker, relevantStories } from "./audience-panel";
 import { useMatch } from "@/hooks/use-match";
@@ -43,9 +44,11 @@ import { useStoryVariant } from "@/hooks/use-story-variant";
 export default function MatchDesk({
   id,
   mode,
+  publicBase = "",
 }: {
   id: string;
   mode: "studio" | "watch" | "overlay";
+  publicBase?: string;
 }) {
   const isProducer = mode === "studio";
   const [selectedStoryId, setSelectedStoryId] = useState("");
@@ -56,6 +59,7 @@ export default function MatchDesk({
   );
   const [actionError, setActionError] = useState("");
   const [busy, setBusy] = useState(false);
+  const [broadcastSetupOpen, setBroadcastSetupOpen] = useState(false);
   const [guidedPauses, setGuidedPauses] = useState(true);
   const [guidedNotice, setGuidedNotice] = useState("");
   const guidedFamilies = useRef(new Set<string>());
@@ -599,22 +603,13 @@ export default function MatchDesk({
             </Tag>
             {isProducer && (
               <div className="flex flex-wrap items-center gap-2">
-                <Link
-                  href={`/broadcast/${id}`}
-                  target="_blank"
-                  className="inline-flex items-center gap-2 rounded-lg border border-stone-200 bg-white px-3 py-2 text-sm"
+                <Button
+                  aria-expanded={broadcastSetupOpen}
+                  aria-controls="broadcast-setup"
+                  onClick={() => setBroadcastSetupOpen((value) => !value)}
                 >
-                  Broadcast stage
-                  <ArrowUpRight size={15} />
-                </Link>
-                <Link
-                  href={`/overlay/${id}`}
-                  target="_blank"
-                  className="inline-flex items-center gap-2 rounded-lg border border-stone-200 bg-white px-3 py-2 text-sm"
-                >
-                  OBS overlay
-                  <ArrowUpRight size={15} />
-                </Link>
+                  Prepare broadcast
+                </Button>
                 <Link
                   href={`/watch/${id}`}
                   target="_blank"
@@ -627,6 +622,15 @@ export default function MatchDesk({
             )}
           </div>
         </header>
+        {isProducer && broadcastSetupOpen && (
+          <BroadcastSetup
+            key={id}
+            id={id}
+            match={match}
+            connected={connected}
+            publicBase={publicBase}
+          />
+        )}
         {error && (
           <Card className="my-5 p-5">
             <p role="alert" className="text-sm text-red-700">

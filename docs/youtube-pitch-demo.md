@@ -42,3 +42,33 @@ Edit the recording to stay below two minutes. If scenes are cut or elapsed time 
 - The companion is available for the same session, but it follows the app clock. The player may be delayed by YouTube buffering. Treat it as linked exploration unless manually aligned and separately verified.
 - Producer approval, current eligibility, correction and withdrawal behavior are controlled by WHY/NOW. Already transmitted video frames cannot be recalled from viewers' buffers.
 - The template rehearsal has no model calls. Identify whether a recording used template fallback or the actual AI Director and Reviewer.
+
+## Prepare broadcast panel and companion QR
+
+In the main producer session, choose **Prepare broadcast**. The panel provides
+full URLs and copy/open actions for the stage, overlay and companion, all tied
+to that session. Add the two OBS sources at 1920 × 1080. Its connection indicator
+confirms the app feed only; it does not inspect OBS or confirm delivery to YouTube.
+The execution note distinguishes a template rehearsal from an AI session, whose
+actual calls/fallback must still be checked in the review trace.
+
+A companion QR appears in the panel and on the broadcast stage when the app is
+opened at a public HTTPS origin. During a local rehearsal it remains hidden;
+localhost, private IP literals, local hostnames and insecure addresses are not
+encoded. QR images are generated in the browser, without a third-party QR API.
+The full companion link is also readable/clickable as an alternative to scanning.
+
+If OBS runs locally while the same app/backend is publicly reachable, set the
+server environment variable `MATCHSENSE_PUBLIC_URL` to that public origin, for
+example `https://your-current-deployment.example.com`, and restart the frontend.
+Supply only the origin, without credentials, a path, query or fragment. This is
+an address configuration, not a deployment or connectivity check. Do not point
+it at the older Azure build or a different backend: the exact session must be
+available at that address. Open the generated link on the iPhone before recording.
+
+For the main pitch: prepare sources → start the synthetic match → inspect one
+real AI attempt → review evidence → approve → verify in the YouTube player →
+explore the same session in Spanish/casual and English/analyst views. A phone can
+verify YouTube delivery even while the companion is still local; public hosting
+is needed before the phone can open the companion. No automatic video-position
+synchronization or completed YouTube delivery is implied by these controls.

@@ -97,3 +97,12 @@
 @media (prefers-reduced-motion: reduce) {
   .lowerThird { animation: none; }
 }
+
+/* Keep the companion invitation clear of the lower third at broadcast sizes. */
+.companionPrompt {
+  width: min(30%, 540px);
+}
+.companionPrompt svg {
+  width: clamp(100px, 9.2vw, 176px);
+  height: auto;
+}

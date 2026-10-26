@@ -1132,8 +1132,7 @@ export default function MatchDesk({
                   </Tag>
                 </div>
                 <p className="px-5 pt-4 text-sm leading-relaxed text-stone-500">
-                  Choose a moment, check its evidence, then approve the story
-                  for viewers.
+                  Review a supported moment and its evidence before sharing.
                 </p>
 
                 {reviewFeedback && (
@@ -1184,11 +1183,13 @@ export default function MatchDesk({
                   >
                     <Tag
                       className={
-                        match?.story_status === "approved"
-                          ? "bg-emerald-50 text-emerald-800"
+                        storyApproved
+                          ? "border-emerald-200 bg-emerald-50 text-emerald-800"
                           : story.status === "ready"
                             ? "border-amber-200 bg-amber-50 text-amber-900"
-                            : ""
+                            : story.status === "expired"
+                              ? "border-stone-300 bg-stone-100 text-stone-700"
+                              : ""
                       }
                     >
                       <ShieldCheck size={12} />
@@ -1204,20 +1205,25 @@ export default function MatchDesk({
                           ? language === "es"
                             ? "Lista para revisión"
                             : "Ready for review"
-                          : match?.story_status}
+                          : story.status === "expired"
+                            ? language === "es"
+                              ? "Ventana en vivo cerrada"
+                              : "Live window closed"
+                            : match?.story_status}
                       {storyApproved && ` · revision ${story.revision}`}
                     </Tag>
-                    <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-emerald-800">
-                      {language === "es" ? "Qué cambió" : "What changed"}
-                    </p>
-                    <h3 className="mt-2 text-balance text-2xl font-semibold leading-tight">
+                    <h3 className="mt-4 text-balance text-xl font-semibold leading-tight text-stone-950 sm:text-2xl">
                       {story.family === "pressure"
                         ? language === "es"
                           ? "Cambio de presión cercana"
                           : "Nearby pressure change"
-                        : story.title}
+                        : story.family === "pass"
+                          ? language === "es"
+                            ? "Pase"
+                            : "Pass"
+                          : story.titles?.[language] || story.title}
                     </h3>
-                    <p className="mt-3 text-pretty text-sm leading-relaxed text-stone-500">
+                    <p className="mt-2 text-pretty text-sm leading-relaxed text-stone-600">
                       {visibleVariant?.text ||
                         "Loading the supported explanation…"}
                     </p>
@@ -1295,87 +1301,96 @@ export default function MatchDesk({
                         )}
                       </details>
                     )}
+                    <div className="my-4 border-t border-stone-200/80" />
                     <Button
                       onClick={() => void loadEvidence()}
-                      className="mt-5 w-full"
+                      className="w-full"
                     >
                       <ScanLine size={15} />
-                      {match?.flagship_demo ? "Check the evidence" : "Show why"}
+                      {language === "es"
+                        ? "Revisar evidencia"
+                        : "Review evidence"}
                       <ArrowRight size={15} />
                     </Button>
-                    <p className="mt-2 text-xs leading-relaxed text-stone-500">
-                      {language === "es"
-                        ? "Revisa los hechos registrados antes de compartirla."
-                        : "Check the recorded facts before sharing this explanation."}
-                    </p>
-                    <div className="my-5 border-t border-stone-100" />
-                    {match?.session_mode === "live" && (
-                      <p className="mt-3 text-sm font-medium">
-                        {story.status === "ready"
-                          ? `${Math.max(0, Math.ceil((story.expires_at_ms - match.clock_ms) / 1000))} s left for live approval`
-                          : story.status === "expired"
-                            ? "Live window ended · history review only"
-                            : `Review status: ${story.status}`}
-                      </p>
-                    )}
-                    {storyApproved ? (
-                      <div className="mt-5">
-                        <Button
-                          disabled={busy}
-                          title="Remove this approved story from the viewer and recap"
-                          onClick={() => void review("retract")}
-                        >
-                          {language === "es"
-                            ? "Retirar aprobación"
-                            : "Retract approval"}
-                        </Button>
-                        <p className="mt-2 text-xs leading-relaxed text-stone-500">
-                          {language === "es"
-                            ? "La historia aprobada se quitará de la vista de espectadores y del resumen."
-                            : "Removes this approved story from the viewer and recap."}
-                        </p>
+                    <section
+                      aria-label={
+                        language === "es" ? "Decisión" : "Review decision"
+                      }
+                      className="mt-4 rounded-xl border border-stone-200 bg-stone-50 p-4"
+                    >
+                      <div className="flex flex-wrap items-center justify-between gap-2">
+                        <h4 className="text-sm font-semibold text-stone-900">
+                          {language === "es" ? "Decisión" : "Decision"}
+                        </h4>
+                        {match?.session_mode === "live" &&
+                          story.status === "ready" && (
+                            <span className="text-xs font-medium tabular-nums text-stone-600">
+                              {language === "es"
+                                ? `${Math.max(0, Math.ceil((story.expires_at_ms - match.clock_ms) / 1000))} s para aprobar en vivo`
+                                : `${Math.max(0, Math.ceil((story.expires_at_ms - match.clock_ms) / 1000))} s left for live approval`}
+                            </span>
+                          )}
                       </div>
-                    ) : match?.story_status === "expired" ? (
-                      <div className="mt-5">
-                        <Button
-                          className="w-full"
-                          disabled={busy}
-                          onClick={() => void review("approve_archive")}
-                        >
-                          {language === "es"
-                            ? "Aprobar para el historial"
-                            : "Approve for history only"}
-                        </Button>
-                        <p className="mt-2 text-xs leading-relaxed text-stone-500">
-                          {language === "es"
-                            ? "La historia aprobada aparecerá en el acompañante y el resumen, pero ya no en la transmisión."
-                            : "Adds this approved story to viewer history and the recap, but not to the live match screen."}
-                        </p>
-                      </div>
-                    ) : (
-                      <div className="mt-5 flex gap-2">
-                        <Button
-                          tone="primary"
-                          className="flex-1"
-                          disabled={busy}
-                          onClick={() => void review("approve")}
-                        >
-                          <Check size={15} />
-                          {language === "es"
-                            ? "Aprobar para espectadores"
-                            : "Approve for viewers"}
-                        </Button>
-                        <Button
-                          disabled={busy}
-                          title="Keep this suggestion out of viewer stories and recaps"
-                          onClick={() => void review("suppress")}
-                        >
-                          {language === "es"
-                            ? "No compartir"
-                            : "Keep out of viewer"}
-                        </Button>
-                      </div>
-                    )}
+                      {storyApproved ? (
+                        <div className="mt-3">
+                          <Button
+                            disabled={busy}
+                            title="Remove this approved story from the viewer and recap"
+                            onClick={() => void review("retract")}
+                          >
+                            {language === "es"
+                              ? "Retirar aprobación"
+                              : "Retract approval"}
+                          </Button>
+                          <p className="mt-2 text-xs leading-relaxed text-stone-600">
+                            {language === "es"
+                              ? "La historia aprobada se quitará de la vista de espectadores y del resumen."
+                              : "Removes this approved story from the viewer and recap."}
+                          </p>
+                        </div>
+                      ) : story.status === "expired" ||
+                        match?.story_status === "expired" ? (
+                        <div className="mt-3">
+                          <p className="mb-3 text-sm leading-relaxed text-stone-600">
+                            {language === "es"
+                              ? "Ya no aparecerá sobre el partido. Si la apruebas, quedará en el acompañante y el resumen."
+                              : "This will no longer appear over the live match. Approval adds it to viewer history and the recap."}
+                          </p>
+                          <Button
+                            tone="primary"
+                            className="w-full"
+                            disabled={busy}
+                            onClick={() => void review("approve_archive")}
+                          >
+                            <Check size={15} />
+                            {language === "es"
+                              ? "Aprobar para el historial"
+                              : "Approve for history"}
+                          </Button>
+                        </div>
+                      ) : (
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          <Button
+                            tone="primary"
+                            className="flex-1"
+                            disabled={busy}
+                            onClick={() => void review("approve")}
+                          >
+                            <Check size={15} />
+                            {language === "es"
+                              ? "Aprobar para espectadores"
+                              : "Approve for viewers"}
+                          </Button>
+                          <Button
+                            disabled={busy}
+                            title="Keep this suggestion out of viewer stories and recaps"
+                            onClick={() => void review("suppress")}
+                          >
+                            {language === "es" ? "No compartir" : "Don't share"}
+                          </Button>
+                        </div>
+                      )}
+                    </section>
                     {storyApproved && match?.story_status === "approved" && (
                       <div className="mt-4 rounded-lg border border-stone-200 bg-white/70 p-3">
                         <p className="text-xs leading-relaxed text-stone-600">
@@ -1411,7 +1426,7 @@ export default function MatchDesk({
                         </Button>
                       </div>
                     )}
-                    <details className="mt-4 text-xs text-stone-500">
+                    <details className="mt-3 border-t border-stone-100 pt-1 text-xs text-stone-500">
                       <summary className="min-h-10 cursor-pointer py-2">
                         {language === "es"
                           ? "Tiempo y prioridad de esta historia"

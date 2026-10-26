@@ -2,7 +2,7 @@ import {test,expect} from '@playwright/test';
 
 test('live simulation is explicit, keeps playing during review and reconnects to the shared clock',async({page,context,request})=>{
  test.setTimeout(75000);const catalog=await(await request.get('/api/matches')).json();test.skip(!catalog.matches.some((m:{match_id:string})=>m.match_id==='match-0c0a000000000005'),'Requires opt-in mixed-event fixtures.');
- await page.goto('/');
+ await page.goto('/');await page.getByText('Demo options',{exact:true}).click();
  await expect(page.getByLabel('Experience',{exact:true})).toHaveValue('live');
  await page.getByLabel('Explanations',{exact:true}).selectOption('template');
  await page.getByRole('button',{name:'Start live simulation',exact:true}).click();
@@ -12,11 +12,11 @@ test('live simulation is explicit, keeps playing during review and reconnects to
  await expect(page.getByRole('button',{name:'Pause',exact:true})).toHaveCount(0);
  await expect(page.getByText('Replay navigation',{exact:true})).toHaveCount(0);
  await expect(page.getByLabel('Pause at new event types')).toHaveCount(0);
- await expect(page.getByRole('button',{name:'Approve',exact:true})).toBeVisible({timeout:35000});
+ await expect(page.getByRole('button',{name:'Approve for viewers',exact:true})).toBeVisible({timeout:35000});
  const before=(await(await request.get(`/api/replay-sessions/${sid}/snapshot`)).json()).clock_ms;
  await page.getByRole('button',{name:'Check the evidence',exact:true}).click();
  await expect(page.getByTestId('event-evidence').first()).toBeVisible();
- await page.getByRole('button',{name:'Approve',exact:true}).click();
+ await page.getByRole('button',{name:'Approve for viewers',exact:true}).click();
  const after=await(await request.get(`/api/replay-sessions/${sid}/snapshot`)).json();
  expect(after.running).toBeTruthy();expect(after.clock_ms).toBeGreaterThan(before);expect(after.overlay).toBeTruthy();
  const viewer=await context.newPage();await viewer.goto(`/watch/${sid}`);
@@ -34,16 +34,16 @@ test('live simulation is explicit, keeps playing during review and reconnects to
 
 test('real AI live simulation: actual attempts, exact approval and bilingual viewer',async({page,context,request})=>{
  test.skip(process.env.WHY_NOW_LIVE_AI_E2E!=='1','Opt in to existing-deployment model calls.');test.setTimeout(90000);
- await page.goto('/');await expect(page.getByLabel('Explanations',{exact:true})).toHaveValue('ai');
+ await page.goto('/');await page.getByText('Demo options',{exact:true}).click();await page.getByLabel('Explanations',{exact:true}).selectOption('ai');
  await page.getByRole('button',{name:'Start live simulation',exact:true}).click();await expect(page).toHaveURL(/\/studio\//);
  const sid=page.url().split('/').pop();const base=`/api/replay-sessions/${sid}`;
- await expect(page.getByRole('button',{name:'Approve',exact:true})).toBeVisible({timeout:45000});
+ await expect(page.getByRole('button',{name:'Approve for viewers',exact:true})).toBeVisible({timeout:45000});
  const snap=await(await request.get(base+'/snapshot',{headers:{'X-Producer-Token':'local-demo-producer'}})).json();
  expect(snap.execution).toBe('ai');expect(snap.running).toBeTruthy();
  expect(snap.mode).toBe('Microsoft Agent Framework + Azure OpenAI');
  expect(snap.workflow_attempts.some((o:{state:string;usage:{calls:number}})=>o.state==='produced'&&o.usage.calls>=2)).toBeTruthy();
  await page.getByRole('button',{name:'Check the evidence',exact:true}).click();
- await page.getByRole('button',{name:'Approve',exact:true}).click();
+ await page.getByRole('button',{name:'Approve for viewers',exact:true}).click();
  const viewer=await context.newPage();await viewer.goto(`/watch/${sid}`);
  await viewer.getByRole('button',{name:'Explore explanations',exact:true}).click();
  await expect(viewer.getByTestId('audience-explanation')).not.toBeEmpty();

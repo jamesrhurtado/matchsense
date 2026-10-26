@@ -25,6 +25,7 @@ import {
 import { api, cn, Evidence, Match, timecode, token, Variant } from "@/lib/api";
 import { Button, Card, Tag } from "./ui";
 import { MatchStage } from "./match-stage";
+import { MatchSenseBrand } from "./match-sense-brand";
 import { AudiencePanel, StoryPicker, relevantStories } from "./audience-panel";
 import { useMatch } from "@/hooks/use-match";
 import { useRenderAck } from "@/hooks/use-render-ack";
@@ -417,12 +418,41 @@ export default function MatchDesk({
       setDiagnosticsLoading(false);
     }
   }
+  if (error && /unknown.session|session.not.found/i.test(error)) {
+    return (
+      <main className="mx-auto flex min-h-dvh max-w-xl flex-col justify-center px-6 py-12">
+        <Link href="/" aria-label="MatchSense home" className="mb-10 text-xl">
+          <MatchSenseBrand />
+        </Link>
+        <p className="text-sm font-semibold text-emerald-800">
+          {language === "es" ? "Sesión no disponible" : "Session unavailable"}
+        </p>
+        <h1 className="mt-3 text-balance text-3xl font-semibold">
+          {language === "es"
+            ? "Esta repetición ya no está disponible."
+            : "This replay is no longer available."}
+        </h1>
+        <p className="mt-4 text-pretty leading-relaxed text-stone-600">
+          {language === "es"
+            ? "La sesión pudo terminar o el servidor se reinició. Vuelve a la entrada para abrir otra repetición o explorar el ejemplo preparado."
+            : "The session may have ended or the server restarted. Return to the demo to open a new replay or explore the prepared example."}
+        </p>
+        <Link
+          href="/"
+          className="mt-7 inline-flex min-h-12 w-fit items-center gap-2 rounded-xl bg-emerald-800 px-5 font-semibold text-white"
+        >
+          {language === "es" ? "Volver al demo" : "Return to demo"}
+          <ArrowRight size={17} aria-hidden="true" />
+        </Link>
+      </main>
+    );
+  }
   if (mode === "overlay")
     return (
       <main className="flex min-h-dvh items-end bg-stone-950 p-8">
         <div className="max-w-3xl rounded-xl border-l-4 border-emerald-500 bg-white p-6">
-          <p className="mb-2 text-xs font-semibold text-emerald-800">
-            WHY/NOW · SYNTHETIC REPLAY ·{" "}
+          <p className="mb-2 flex items-center gap-2 text-xs font-semibold text-emerald-800">
+            <MatchSenseBrand /> · SYNTHETIC REPLAY ·{" "}
             {match ? timecode(match.clock_ms) : "CONNECTING"}
           </p>
           <p className="text-pretty text-2xl font-medium">
@@ -440,11 +470,11 @@ export default function MatchDesk({
         <aside className="hidden w-20 shrink-0 flex-col items-center gap-6 border-r border-[#203b36] bg-[#142923] py-7 text-white lg:flex">
           <Link
             href="/"
-            aria-label="WHY/NOW home"
+            aria-label="MatchSense home"
             title="Back to demo setup"
             className="flex size-10 items-center justify-center rounded-xl bg-white/10 text-xl font-black text-white ring-1 ring-white/15"
           >
-            W<span className="text-emerald-400">/</span>
+            <MatchSenseBrand markOnly dark />
           </Link>
           <div className="flex w-full flex-col items-center gap-1">
             <a
@@ -519,11 +549,11 @@ export default function MatchDesk({
           isProducer ? "max-w-screen-2xl" : "max-w-7xl",
         )}
       >
-        <header className="flex min-h-24 flex-wrap items-center justify-between gap-4 border-b border-[#d9e3dd] py-5">
+        <header className="flex min-h-20 flex-wrap items-center justify-between gap-4 border-b border-[#d9e3dd] py-5">
           <div className="flex items-center gap-4">
             {!isProducer && (
-              <Link href="/" className="text-xl font-black">
-                WHY<span className="text-emerald-700">/</span>NOW
+              <Link href="/" aria-label="MatchSense home" className="text-xl">
+                <MatchSenseBrand />
               </Link>
             )}
             <div
@@ -762,7 +792,7 @@ export default function MatchDesk({
             )}
 
             {match?.session_mode === "live" && (
-              <div className="mb-3 rounded-2xl border border-sky-200 bg-sky-50 p-4 text-sm text-sky-950 shadow-sm">
+              <div className="mb-3 flex flex-wrap items-center gap-x-5 gap-y-2 rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-700">
                 <p className="font-semibold">
                   {["complete", "stopped"].includes(match.live_status || "")
                     ? language === "es"
@@ -786,19 +816,26 @@ export default function MatchDesk({
                         ? "Vista previa con plantillas · sin explicaciones generadas por IA"
                         : "Template preview · no AI-generated explanations"}
                 </p>
-                <p className="mt-1 text-xs">
-                  {isProducer
-                    ? language === "es"
-                      ? "Solo las explicaciones aprobadas llegan a los espectadores. La revisión no detiene el partido."
-                      : "Only approved explanations reach viewers. Review does not stop the match."
-                    : match.live_status === "ai_unavailable"
+                <details className="w-full text-xs">
+                  <summary className="min-h-9 py-2">
+                    {language === "es"
+                      ? "Cómo funciona la publicación"
+                      : "How publication works"}
+                  </summary>
+                  <p className="pb-2 leading-relaxed">
+                    {isProducer
                       ? language === "es"
-                        ? "Las explicaciones con IA no están disponibles por ahora. Las historias aprobadas anteriormente siguen visibles."
-                        : "AI explanations are temporarily unavailable. Previously approved stories remain available."
-                      : language === "es"
-                        ? "Solo las explicaciones aprobadas por el productor se comparten con los espectadores."
-                        : "Only producer-approved explanations are shared with viewers."}
-                </p>
+                        ? "Solo las explicaciones aprobadas llegan a los espectadores. La revisión no detiene el partido."
+                        : "Only approved explanations reach viewers. Review does not stop the match."
+                      : match.live_status === "ai_unavailable"
+                        ? language === "es"
+                          ? "Las explicaciones con IA no están disponibles por ahora. Las historias aprobadas anteriormente siguen visibles."
+                          : "AI explanations are temporarily unavailable. Previously approved stories remain available."
+                        : language === "es"
+                          ? "Solo las explicaciones aprobadas por el productor se comparten con los espectadores."
+                          : "Only producer-approved explanations are shared with viewers."}
+                  </p>
+                </details>
                 {isProducer && (
                   <div className="mt-3 flex flex-wrap gap-2">
                     <Button onClick={() => void control("reset")}>
@@ -855,11 +892,7 @@ export default function MatchDesk({
                   />
                   Pause at new event types
                 </label>
-                <p className="mt-1 text-xs leading-relaxed">
-                  Play the segment → inspect a moment’s evidence → approve it
-                  for viewers. Guided pauses stop at the first example of each
-                  event type; turn them off for continuous playback.
-                </p>
+
                 {guidedNotice && (
                   <div className="mt-3">
                     <p role="status" className="font-medium">
@@ -1099,14 +1132,10 @@ export default function MatchDesk({
                   </Tag>
                 </div>
                 <p className="px-5 pt-4 text-sm leading-relaxed text-stone-500">
-                  Suggested explanations of observed incidents and possession
-                  windows. Review the evidence before approving for viewers;
-                  these are not necessarily match highlights.
+                  Choose a moment, check its evidence, then approve the story
+                  for viewers.
                 </p>
-                <p className="px-5 pt-2 text-xs text-stone-400">
-                  New suggestions join this list; your selected insight stays in
-                  view.
-                </p>
+
                 {reviewFeedback && (
                   <div
                     role="status"
@@ -1127,7 +1156,7 @@ export default function MatchDesk({
                 )}
                 <div
                   data-testid="producer-insight-list"
-                  className="h-80 overflow-y-auto overscroll-contain [scrollbar-gutter:stable]"
+                  className="max-h-64 overflow-y-auto overscroll-contain [scrollbar-gutter:stable]"
                   tabIndex={0}
                   aria-label="Incoming insights"
                 >
@@ -1209,8 +1238,16 @@ export default function MatchDesk({
                         >
                           <h4 className="text-sm font-semibold text-emerald-950">
                             {language === "es"
-                              ? "¿Por qué este momento?"
-                              : "Why this moment?"}
+                              ? ["pressure", "goal", "pass"].includes(
+                                  story.family || "pass",
+                                )
+                                ? "¿Por qué este momento?"
+                                : "Contexto y límites"
+                              : ["pressure", "goal", "pass"].includes(
+                                    story.family || "pass",
+                                  )
+                                ? "Why this moment?"
+                                : "Context and limits"}
                           </h4>
                           <p className="mt-2 text-pretty text-sm leading-relaxed text-emerald-950">
                             {story.why_now[language]}
@@ -1651,8 +1688,8 @@ export default function MatchDesk({
         <footer className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-stone-200 pt-5 text-xs text-stone-400">
           <span>
             {language === "es"
-              ? "WHY/NOW · Mira la jugada. Entiende el momento."
-              : "WHY/NOW · See the play. Understand the moment."}
+              ? "MatchSense · Mira la jugada. Entiende el momento."
+              : "MatchSense · See the play. Understand the moment."}
           </span>
           <span>
             {language === "es"

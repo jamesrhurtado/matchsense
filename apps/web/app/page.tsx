@@ -1,9 +1,19 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowRight, Eye, ShieldCheck, ScanLine } from "lucide-react";
+import {
+  ArrowRight,
+  Eye,
+  ShieldCheck,
+  ScanLine,
+  SlidersHorizontal,
+  Radio,
+  Check,
+} from "lucide-react";
 import { api, MatchOption } from "@/lib/api";
 import { Button, Tag } from "@/components/ui";
+import { MomentPreview } from "@/components/moment-preview";
+import { MatchSenseBrand } from "@/components/match-sense-brand";
 export default function Home() {
   const router = useRouter();
   const [matches, setMatches] = useState<MatchOption[]>([]);
@@ -16,7 +26,7 @@ export default function Home() {
     model_identity?: { deployment?: string; version?: string };
   } | null>(null);
   const [experience, setExperience] = useState("live");
-  const [execution, setExecution] = useState("ai");
+  const [execution, setExecution] = useState("template");
   const [fixture, setFixture] = useState("match-001");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -30,7 +40,9 @@ export default function Home() {
         (isLocal ? "local-demo-producer" : ""),
     );
     api<{ mode: string; live_ai_configured?: boolean }>("/health")
-      .then(setRuntime)
+      .then((data) => {
+        setRuntime(data);
+      })
       .catch(() => {});
     api<{ matches: MatchOption[] }>("/matches")
       .then((data) => {
@@ -77,11 +89,14 @@ export default function Home() {
       router.push(`/studio/${data.session_id}`);
     } catch (e) {
       const message = (e as Error).message;
-      setAccessNeeded(true);
+      setAccessNeeded(message.includes("auth"));
+      document.getElementById("demo-setup")?.scrollIntoView({ block: "start" });
       setError(
         message.includes("auth")
           ? "Enter your producer access key to open the demo."
-          : message,
+          : message.includes("422") || message.includes("unknown_match")
+            ? "This recording could not be opened. Choose another replay segment below and try again."
+            : "The demo could not connect. Try again, or explore the prepared match example above.",
       );
     } finally {
       setBusy(false);
@@ -89,161 +104,204 @@ export default function Home() {
   }
   const duration = matches.find((m) => m.match_id === fixture)?.duration_ms;
   return (
-    <main className="mx-auto flex min-h-dvh max-w-6xl flex-col px-6 py-8 md:px-12">
-      <header className="flex items-center justify-between gap-4">
-        <a href="/" className="text-xl font-black">
-          WHY<span className="text-emerald-700">/</span>NOW
+    <main className="mx-auto min-h-dvh max-w-7xl px-5 pb-6 sm:px-8 lg:px-12">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:block focus:py-3"
+      >
+        Skip to content
+      </a>
+      <header className="flex min-h-24 items-center justify-between gap-4 border-b border-emerald-950/10">
+        <a href="/" aria-label="MatchSense home" className="text-xl">
+          <MatchSenseBrand />
         </a>
-        <Tag>Interactive product demo</Tag>
+        <nav
+          aria-label="Main navigation"
+          className="flex items-center gap-3 text-sm"
+        >
+          <a
+            href="#moment-preview"
+            className="hidden min-h-11 items-center px-3 text-stone-600 hover:text-emerald-900 sm:inline-flex"
+          >
+            Explore a moment
+          </a>
+          <a
+            href="#demo-setup"
+            className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 font-semibold"
+          >
+            Open producer desk <ArrowRight size={15} aria-hidden="true" />
+          </a>
+        </nav>
       </header>
-      <div className="grid flex-1 items-center gap-10 py-12 lg:grid-cols-2 lg:py-16">
+      <div
+        id="main-content"
+        className="grid items-center gap-10 py-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14 lg:py-14"
+      >
         <section>
-          <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-bold tracking-[0.12em] text-emerald-900">
-            <span className="size-2 rounded-full bg-emerald-600" aria-hidden="true" />
-            FOOTBALL, EXPLAINED
+          <p className="mb-6 flex items-center gap-2 text-xs font-semibold text-emerald-800">
+            <Radio size={15} aria-hidden="true" /> FOOTBALL, EXPLAINED
           </p>
-          <h1 className="max-w-xl text-balance text-4xl font-bold leading-[1.08] tracking-[-0.04em] md:text-6xl">
-            Explain the match. <span className="text-emerald-800">Let fans enjoy it.</span>
+          <h1 className="max-w-lg text-balance text-4xl font-bold leading-[1.06] sm:text-6xl">
+            Explain the match.{" "}
+            <span className="text-emerald-800">Let fans enjoy it.</span>
           </h1>
-          <p className="mt-6 max-w-lg text-pretty text-lg leading-relaxed text-stone-600">
-            WHY/NOW is a live football explanation desk. AI suggests stories
-            from observed play; a producer checks and approves them. Fans can
-            enjoy the match, explore an explanation, or catch up when they
-            choose.
+          <p className="mt-5 max-w-md text-pretty text-base leading-relaxed sm:text-lg text-stone-600">
+            Turn a moment of play into a story fans can understand and check.
+            Review the evidence, choose what goes on air, and let each fan
+            explore it their way.
           </p>
-          <div className="mt-8 grid gap-3 sm:grid-cols-2">
-            <div className="rounded-2xl border border-emerald-200 bg-white p-4 shadow-sm">
-              <div className="mb-3 flex size-9 items-center justify-center rounded-xl bg-emerald-100 text-emerald-900">
-                <ScanLine size={18} aria-hidden="true" />
-              </div>
-              <h2 className="font-bold tracking-tight">For producers</h2>
-              <p className="mt-1 text-sm leading-relaxed text-stone-600">
-                Review suggested insights, check the evidence, and approve what
-                viewers see.
-              </p>
-            </div>
-            <div className="rounded-2xl border border-sky-200 bg-white p-4 shadow-sm">
-              <div className="mb-3 flex size-9 items-center justify-center rounded-xl bg-sky-100 text-sky-900">
-                <Eye size={18} aria-hidden="true" />
-              </div>
-              <h2 className="font-bold tracking-tight">For fans</h2>
-              <p className="mt-1 text-sm leading-relaxed text-stone-600">
-                Follow the match, choose your level of detail or player focus,
-                and read the recap.
-              </p>
-            </div>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <a
+              href="#demo-setup"
+              className="inline-flex min-h-12 items-center gap-3 rounded-xl bg-emerald-800 px-5 text-sm font-semibold text-white shadow-sm hover:bg-emerald-900"
+            >
+              Try the producer demo <ArrowRight size={17} aria-hidden="true" />
+            </a>
+            <a
+              href="#moment-preview"
+              className="inline-flex min-h-12 items-center gap-2 rounded-xl border border-stone-300 bg-white px-5 text-sm font-semibold hover:bg-emerald-50"
+            >
+              <Eye size={17} aria-hidden="true" /> Explore the fan example
+            </a>
           </div>
-          <div className="mt-8 flex flex-wrap gap-5 text-sm text-stone-600">
-            <span className="flex items-center gap-2">
-              <ScanLine size={17} />
-              Inspectable evidence
-            </span>
-            <span className="flex items-center gap-2">
-              <ShieldCheck size={17} />
-              Producer approved
-            </span>
+          <p className="mt-3 text-xs leading-relaxed text-stone-500">
+            Explore the example now. No sign-in or AI connection needed.
+          </p>
+          <div className="mt-9 hidden border-t border-emerald-950/10 pt-6 lg:block">
+            <p className="text-sm font-semibold">
+              One story. Different ways to follow it.
+            </p>
+            <p className="mt-2 max-w-md text-sm leading-relaxed text-stone-600">
+              Try English or Spanish and simple or detailed explanations in the
+              example. The underlying facts stay the same.
+            </p>
+            <div className="mt-5 flex flex-wrap gap-x-5 gap-y-3 text-xs font-medium text-emerald-950">
+              <span className="flex items-center gap-2">
+                <ScanLine size={15} aria-hidden="true" /> Inspectable evidence
+              </span>
+              <span className="flex items-center gap-2">
+                <ShieldCheck size={15} aria-hidden="true" /> Producer controls
+                publication
+              </span>
+            </div>
           </div>
         </section>
-        <section className="min-w-0 rounded-3xl border border-stone-200 bg-white p-6 shadow-[0_24px_70px_-36px_rgba(21,58,44,0.32)] md:p-9">
-          <Tag className="bg-emerald-50 text-emerald-800">
-            Try the producer workflow
-          </Tag>
-          <h2 className="mt-4 text-2xl font-semibold">
-            Your live match explanation desk.
-          </h2>
-          <p className="mt-4 text-sm leading-relaxed text-stone-600">
-            A simulated live feed keeps playing while you review a suggested
-            explanation. Check its evidence, approve it, then open the viewer
-            companion.
-          </p>
-          <div className="mt-5 space-y-4">
+        <MomentPreview />
+      </div>
+      <section
+        className="grid gap-0 border-y border-emerald-950/15 py-7 md:grid-cols-3"
+        aria-label="From the play to the fan"
+      >
+        {[
+          [
+            "01",
+            "Find the story",
+            "Suggested moments connect the play to measured facts.",
+          ],
+          [
+            "02",
+            "Make the call",
+            "A producer checks the evidence and approves the exact story.",
+          ],
+          [
+            "03",
+            "Follow it your way",
+            "Fans choose language, detail and player or team focus.",
+          ],
+        ].map(([n, title, copy]) => (
+          <div key={n} className="flex gap-4 px-0 py-4 md:px-5 first:md:pl-0">
+            <span className="pt-1 font-mono text-xs tabular-nums text-emerald-700">
+              {n}
+            </span>
             <div>
-              <label
-                htmlFor="experience"
-                className="mb-2 block text-sm font-medium"
-              >
-                Experience
-              </label>
-              <select
-                id="experience"
-                value={experience}
-                onChange={(e) => setExperience(e.target.value)}
-                className="min-h-12 w-full rounded-lg border border-stone-200 px-3 text-sm"
-              >
-                <option value="live">Live simulation · continuous match</option>
-                <option value="guided">
-                  Guided walkthrough · pause and learn
-                </option>
-              </select>
+              <h2 className="text-sm font-semibold">{title}</h2>
+              <p className="mt-2 max-w-xs text-pretty text-sm leading-relaxed text-stone-600">
+                {copy}
+              </p>
             </div>
-            <div>
-              <label
-                htmlFor="execution"
-                className="mb-2 block text-sm font-medium"
-              >
-                Explanations
-              </label>
-              <select
-                id="execution"
-                value={execution}
-                onChange={(e) => setExecution(e.target.value)}
-                className="min-h-12 w-full rounded-lg border border-stone-200 px-3 text-sm"
-              >
-                <option value="ai">AI · Director and Reviewer</option>
-                <option value="template">Template preview · no AI calls</option>
-              </select>
-            </div>
-            <p role="status" className="text-sm leading-relaxed text-stone-600">
-              {execution === "template"
-                ? "Template preview uses prepared rules and wording. It does not test AI quality or response time."
-                : runtime?.live_ai_configured
-                  ? "AI workflow configured. Each attempt and any fallback are identified in the producer desk."
-                  : "AI is unavailable on this server. Configure the model connection or explicitly choose Template preview."}
-            </p>
           </div>
-          <ol className="my-6 space-y-3 text-sm text-stone-700">
-            <li>1. Review suggested insights</li>
-            <li>2. Check the supporting evidence</li>
-            <li>3. Approve and share with fans</li>
-          </ol>
-          <p className="mb-4 text-sm text-stone-600">
-            {duration
-              ? `${Math.round(duration / 60000)}-minute replay`
-              : "Loading demo…"}{" "}
-            ·{" "}
-            {experience === "live"
-              ? "Continuous 1× playback. Stops at the end."
-              : "You control playback."}
+        ))}
+      </section>
+      <section
+        id="demo-setup"
+        className="grid scroll-mt-6 gap-8 py-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14"
+      >
+        <div>
+          <p className="flex items-center gap-2 text-xs font-semibold text-emerald-800">
+            <SlidersHorizontal size={15} aria-hidden="true" /> YOUR NEXT STEP
           </p>
-          <details className="mb-5 rounded-xl border border-stone-200 p-4">
-            <summary className="cursor-pointer text-sm font-medium">
-              More demo scenarios
-            </summary>
-            <p className="my-3 text-sm text-stone-600">
-              Each scenario is a match excerpt, not a single highlight.
-              Additional recordings include engineering test cases.
-            </p>
-            <label htmlFor="fixture" className="mb-2 block text-sm font-medium">
-              Replay segment
-            </label>
-            <select
-              id="fixture"
-              value={fixture}
-              onChange={(e) => setFixture(e.target.value)}
-              className="min-h-12 w-full min-w-0 rounded-lg border border-stone-200 bg-stone-50 px-3 text-sm"
-            >
-              {matches.map((item, index) => (
-                <option key={item.match_id} value={item.match_id}>
-                  {index === 0 && item.match_id === "match-0c0a000000000005"
-                    ? "Mixed-event match · recommended"
-                    : item.label}{" "}
-                  · {Math.round(item.duration_ms / 6000) / 10} min
-                </option>
-              ))}
-            </select>
-          </details>
+          <h2 className="mt-4 text-balance text-3xl font-semibold">
+            Go behind the explanation.
+          </h2>
+          <div className="mt-6 space-y-6">
+            <div>
+              <h3 className="flex items-center gap-2 font-semibold">
+                <ScanLine size={17} aria-hidden="true" /> For producers
+              </h3>
+              <p className="mt-2 max-w-sm text-sm leading-relaxed text-stone-600">
+                Open a replay, inspect a suggestion, and approve the exact
+                explanation for viewers.
+              </p>
+            </div>
+            <div>
+              <h3 className="flex items-center gap-2 font-semibold">
+                <Eye size={17} aria-hidden="true" /> For fans
+              </h3>
+              <p className="mt-2 max-w-sm text-sm leading-relaxed text-stone-600">
+                Explore the example above, or open the viewer companion from a
+                producer session to follow approved stories and catch up.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="min-w-0 rounded-2xl border border-stone-200 bg-white p-5 shadow-sm sm:p-7">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <h3 className="text-xl font-semibold">Your producer demo</h3>
+            <Tag>
+              {execution === "template"
+                ? "Prepared wording · no AI calls"
+                : "AI · Director + Reviewer"}
+            </Tag>
+          </div>
+          <p className="mt-3 text-pretty text-sm leading-relaxed text-stone-600">
+            {execution === "template"
+              ? "Start with a replay and rule-based explanations. You review and approve what fans receive."
+              : "The Director proposes a supported story and the Reviewer checks it. You decide whether to publish."}
+          </p>
+          <div
+            role="status"
+            className="mt-4 rounded-lg bg-stone-50 p-3 text-sm leading-relaxed text-stone-600"
+          >
+            {runtime ? (
+              runtime.live_ai_configured ? (
+                <>
+                  <Check
+                    size={14}
+                    className="mr-2 inline text-emerald-800"
+                    aria-hidden="true"
+                  />
+                  AI is available. Choose AI in Demo options to try it.
+                </>
+              ) : (
+                <>
+                  AI is offline here. The prepared example and template demo
+                  remain available.
+                </>
+              )
+            ) : (
+              "Checking the demo connection…"
+            )}
+            {execution === "ai" && runtime && !runtime.live_ai_configured && (
+              <button
+                onClick={() => setExecution("template")}
+                className="mt-2 block min-h-11 font-semibold text-emerald-800 underline underline-offset-4"
+              >
+                Use template preview instead
+              </button>
+            )}
+          </div>
           {(!local || accessNeeded) && (
-            <div className="mb-5">
+            <div className="mt-4">
               <label
                 htmlFor="access"
                 className="mb-2 block text-sm font-medium"
@@ -256,15 +314,18 @@ export default function Home() {
                 onChange={(e) => setKey(e.target.value)}
                 type="password"
                 autoComplete="off"
-                className="min-h-12 w-full rounded-lg border border-stone-200 px-3"
+                className="min-h-12 w-full rounded-lg border border-stone-300 px-3"
               />
               <p className="mt-2 text-xs text-stone-500">
-                Ask your host for access. Viewers do not need a key.
+                Ask your host for access. The example above is open to everyone.
               </p>
             </div>
           )}
           {error && (
-            <p role="alert" className="mb-4 text-sm text-red-700">
+            <p
+              role="alert"
+              className="mt-4 rounded-lg border border-red-200 bg-red-50 p-3 text-sm leading-relaxed text-red-800"
+            >
               {error}
             </p>
           )}
@@ -277,40 +338,118 @@ export default function Home() {
               (execution === "ai" && !runtime?.live_ai_configured)
             }
             onClick={create}
-            className="w-full py-3"
+            className="mt-5 w-full py-3"
           >
             {busy
               ? "Opening your desk…"
               : experience === "live"
                 ? "Start live simulation"
                 : "Start the guided demo"}
-            <ArrowRight size={17} />
+            <ArrowRight size={17} aria-hidden="true" />
           </Button>
-          <p className="mt-4 text-sm leading-relaxed text-stone-500">
-            Here to watch? Open the viewer link shared by your producer.
+          <p className="mt-3 text-center text-xs text-stone-500">
+            {duration
+              ? `${Math.round(duration / 6000) / 10}-minute replay`
+              : "Connecting to recordings…"}{" "}
+            ·{" "}
+            {experience === "live"
+              ? "Continuous 1× playback"
+              : "You control playback"}
           </p>
-          <p className="mt-6 border-t border-stone-100 pt-5 text-xs leading-relaxed text-stone-500">
-            Demo with fictional teams and simulated match data.
-          </p>
-          <details className="mt-3 text-xs text-stone-500">
-            <summary className="cursor-pointer py-2">
+          <details className="mt-5 border-t border-stone-200 pt-2">
+            <summary className="flex min-h-11 items-center text-sm font-medium">
+              Demo options
+            </summary>
+            <div className="grid gap-4 py-3 sm:grid-cols-2">
+              <div>
+                <label
+                  htmlFor="experience"
+                  className="mb-2 block text-sm font-medium"
+                >
+                  Experience
+                </label>
+                <select
+                  id="experience"
+                  value={experience}
+                  onChange={(e) => setExperience(e.target.value)}
+                  className="min-h-12 w-full rounded-lg border border-stone-300 bg-white px-3 text-sm"
+                >
+                  <option value="live">
+                    Live simulation · continuous match
+                  </option>
+                  <option value="guided">
+                    Guided walkthrough · pause and learn
+                  </option>
+                </select>
+              </div>
+              <div>
+                <label
+                  htmlFor="execution"
+                  className="mb-2 block text-sm font-medium"
+                >
+                  Explanations
+                </label>
+                <select
+                  id="execution"
+                  value={execution}
+                  onChange={(e) => setExecution(e.target.value)}
+                  className="min-h-12 w-full rounded-lg border border-stone-300 bg-white px-3 text-sm"
+                >
+                  <option value="ai">AI · Director and Reviewer</option>
+                  <option value="template">
+                    Template preview · no AI calls
+                  </option>
+                </select>
+              </div>
+            </div>
+            <details className="pb-3">
+              <summary className="min-h-11 py-3 text-sm">
+                More demo scenarios
+              </summary>
+              <label
+                htmlFor="fixture"
+                className="mb-2 block text-sm font-medium"
+              >
+                Replay segment
+              </label>
+              <select
+                id="fixture"
+                value={fixture}
+                onChange={(e) => setFixture(e.target.value)}
+                className="min-h-12 w-full min-w-0 rounded-lg border border-stone-300 bg-white px-3 text-sm"
+              >
+                {matches.map((item) => (
+                  <option key={item.match_id} value={item.match_id}>
+                    {item.label} · {Math.round(item.duration_ms / 6000) / 10}{" "}
+                    min
+                  </option>
+                ))}
+              </select>
+              <p className="mt-2 text-xs leading-relaxed text-stone-500">
+                Recordings are match excerpts. The catalogue also includes
+                engineering test cases.
+              </p>
+            </details>
+          </details>
+          <details className="border-t border-stone-200 pt-2 text-xs text-stone-500">
+            <summary className="min-h-11 py-3">
               Demo details &amp; access help
             </summary>
-            <p className="mt-2 leading-relaxed">
-              Execution:{" "}
-              {runtime?.mode || "Connecting to the processing service…"}. Local
-              template mode uses prepared rules and templates without AI model
-              calls. AI mode uses the configured model, with explicitly labeled
-              fallback when necessary. Each replay has its own clock and
-              approvals. For local demos, access is filled in automatically; if
-              prompted, ask your host for the key.
+            <p className="pb-3 leading-relaxed">
+              Execution: {runtime?.mode || "Service not connected"}. Templates
+              use prepared rules and wording without AI calls. AI execution and
+              any fallback are identified in the desk. Each replay has its own
+              clock and approvals. The homepage example is a separate prepared
+              illustration, not a live publication.
             </p>
           </details>
-        </section>
-      </div>
-      <footer className="flex flex-wrap justify-between gap-3 border-t border-stone-200 pt-5 text-xs text-stone-500">
-        <span>WHY/NOW · Football explanations for broadcasters and fans</span>
-        <span>Review insights → Check evidence → Share with fans</span>
+        </div>
+      </section>
+      <footer className="flex flex-wrap items-center justify-between gap-3 border-t border-emerald-950/10 py-5 text-xs leading-relaxed text-stone-500">
+        <span>
+          MatchSense · Football explanations for broadcasters and fans
+        </span>
+        <span>Demo with fictional teams and simulated match data.</span>
       </footer>
     </main>
   );

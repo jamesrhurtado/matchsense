@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { ArrowLeft, Clock3, ScanLine } from "lucide-react";
-import { cn, Evidence, Metrics, Player, Story, Variant, timecode } from "@/lib/api";
+import {
+  cn,
+  Evidence,
+  Metrics,
+  Player,
+  Story,
+  Variant,
+  timecode,
+} from "@/lib/api";
 import { Button, Card, Tag } from "./ui";
 import { InlineEvidence } from "./inline-evidence";
 import { ListenButton } from "./listen-button";
@@ -31,7 +39,11 @@ export function relevantStories(stories: Story[], focus: string) {
         );
 }
 
-function describePassLocation(metrics: Metrics, teamName: string, language: string) {
+function describePassLocation(
+  metrics: Metrics,
+  teamName: string,
+  language: string,
+) {
   const start = metrics.pass_start;
   const end = metrics.pass_end;
   const forward = metrics.forward_pass_m ?? metrics.facts?.forward_m;
@@ -51,7 +63,8 @@ function describePassLocation(metrics: Metrics, teamName: string, language: stri
   };
   const channel = (y: number) => {
     const across = attackingY(y);
-    if (across < 68 / 3) return language === "es" ? "carril izquierdo" : "left channel";
+    if (across < 68 / 3)
+      return language === "es" ? "carril izquierdo" : "left channel";
     if (across >= (2 * 68) / 3)
       return language === "es" ? "carril derecho" : "right channel";
     return language === "es" ? "carril central" : "central channel";
@@ -315,18 +328,22 @@ export function AudiencePanel({
 }) {
   const es = language === "es";
   const matchingEvidence =
-    story && evidence?.story.id === story.id && evidence.story.revision === story.revision
+    story &&
+    evidence?.story.id === story.id &&
+    evidence.story.revision === story.revision
       ? evidence
       : null;
-  const evidenceVariant = matchingEvidence?.story.variants.find(
-    (item) =>
-      item.language === language &&
-      item.detail === "detail" &&
-      item.focus === (focus || null),
-  ) ?? matchingEvidence?.story.variants.find(
-    (item) =>
-      item.language === language && item.detail === "detail" && !item.focus,
-  );
+  const evidenceVariant =
+    matchingEvidence?.story.variants.find(
+      (item) =>
+        item.language === language &&
+        item.detail === "detail" &&
+        item.focus === (focus || null),
+    ) ??
+    matchingEvidence?.story.variants.find(
+      (item) =>
+        item.language === language && item.detail === "detail" && !item.focus,
+    );
   const locationText =
     matchingEvidence?.story.metrics.family === "pass" ||
     matchingEvidence?.story.metrics.family === "pressure"

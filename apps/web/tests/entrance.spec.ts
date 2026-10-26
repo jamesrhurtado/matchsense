@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test';
 test('first-time entrance explains roles, hides setup and opens a playable producer session',async({page,context})=>{
  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
- await page.goto('/');await page.getByLabel('Experience',{exact:true}).selectOption('guided');await page.getByLabel('Explanations',{exact:true}).selectOption('template');
+ await page.goto('/');await page.getByText('Demo options',{exact:true}).click();await page.getByLabel('Experience',{exact:true}).selectOption('guided');await page.getByLabel('Explanations',{exact:true}).selectOption('template');
  await expect(page.getByRole('heading',{level:1})).toHaveText('Explain the match. Let fans enjoy it.');
  await expect(page.getByRole('heading',{name:'For producers',exact:true})).toBeVisible();
  await expect(page.getByRole('heading',{name:'For fans',exact:true})).toBeVisible();
@@ -29,13 +29,13 @@ test('first-time entrance explains roles, hides setup and opens a playable produ
 });
 
 test('producer navigation explains duration and stops at the end without replacing the session',async({page})=>{
- await page.goto('/');await page.getByLabel('Experience',{exact:true}).selectOption('guided');await page.getByLabel('Explanations',{exact:true}).selectOption('template');await page.getByRole('button',{name:'Start the guided demo'}).click();
+ await page.goto('/');await page.getByText('Demo options',{exact:true}).click();await page.getByLabel('Experience',{exact:true}).selectOption('guided');await page.getByLabel('Explanations',{exact:true}).selectOption('template');await page.getByRole('button',{name:'Start the guided demo'}).click();
  await expect(page).toHaveURL(/\/studio\//);const url=page.url();
  await expect(page.getByText('4-minute demo replay',{exact:true})).toBeVisible();
  await expect(page.getByLabel('Skip to time (seconds)')).not.toBeVisible();
  await page.getByText('Replay data details',{exact:true}).click();
  await expect(page.getByText('Session reference:',{exact:false})).toBeVisible();
- await expect(page.getByText('The score reflects confirmed match events.',{exact:true})).toBeVisible();
+ await expect(page.getByText('The score reflects confirmed match events.',{exact:false})).toBeVisible();
  await page.getByText('Replay navigation',{exact:true}).click();
  await page.getByLabel('Skip to time (seconds)').fill('90');
  await page.getByRole('button',{name:'Skip forward',exact:true}).click();

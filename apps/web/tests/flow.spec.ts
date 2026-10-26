@@ -2,7 +2,7 @@ import {test,expect} from '@playwright/test';
 
 test('producer evidence → wording review → approval → viewer preferences → retraction',async({page,context})=>{
  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
- await page.goto('/');await page.getByLabel('Experience',{exact:true}).selectOption('guided');await page.getByLabel('Explanations',{exact:true}).selectOption('template');await page.getByText('More demo scenarios',{exact:true}).click();await page.getByLabel('Replay segment').selectOption('match-001');await page.getByRole('button',{name:'Start the guided demo'}).click();await expect(page).toHaveURL(/\/studio\//);
+ await page.goto('/');await page.getByText('Demo options',{exact:true}).click();await page.getByLabel('Experience',{exact:true}).selectOption('guided');await page.getByLabel('Explanations',{exact:true}).selectOption('template');await page.getByText('More demo scenarios',{exact:true}).click();await page.getByLabel('Replay segment').selectOption('match-001');await page.getByRole('button',{name:'Start the guided demo'}).click();await expect(page).toHaveURL(/\/studio\//);
  const sid=page.url().split('/').pop()!;
  await page.getByLabel('Replay speed').selectOption('8');await page.getByRole('button',{name:'Play',exact:true}).click();
  await expect(page.getByRole('button',{name:'Show why',exact:true})).toBeVisible({timeout:10000});await page.getByRole('button',{name:'Pause',exact:true}).click();
@@ -10,11 +10,11 @@ test('producer evidence → wording review → approval → viewer preferences �
  await page.getByRole('button',{name:'Play evidence replay',exact:true}).click();await page.waitForTimeout(300);await page.getByRole('button',{name:'Pause evidence replay',exact:true}).click();
  await page.getByRole('button',{name:'Suggest an emphasis'}).click();await page.getByLabel('Suggest an emphasis or wording for evidence review').fill('Harbor City now controls the match.');await page.getByRole('button',{name:'Submit for review'}).click();
  await expect(page.getByText('Proposed wording reviewed')).toBeVisible();
- await page.getByRole('button',{name:'Approve',exact:true}).click();await expect(page.getByText('On air · revision 2')).toBeVisible();
+ await page.getByRole('button',{name:'Approve for viewers',exact:true}).click();await expect(page.getByText('On air · revision 2')).toBeVisible();
  const before=await page.locator('#live').innerText();
  const viewer=await context.newPage();await viewer.goto(`/watch/${sid}`);await expect(viewer.getByRole('heading',{name:/Theo Vega.*Sami Rios/})).toBeVisible();
  await viewer.getByRole('button',{name:'Show the detail',exact:true}).click();await viewer.getByText('Inspect the facts',{exact:true}).click();await expect(viewer.getByRole('button',{name:/up to 2 opponents were within 6 m/})).toBeVisible();
- await viewer.getByLabel('Language',{exact:true}).selectOption('es');await viewer.getByLabel('Seguir a un jugador o equipo').selectOption('blue-08');await expect(viewer.getByTestId('audience-explanation')).toContainText('Theo Vega dio el pase');
+ await viewer.getByLabel('Language',{exact:true}).selectOption('es');await viewer.getByLabel('Seguir equipo o jugador').selectOption('blue-08');await expect(viewer.getByTestId('audience-explanation')).toContainText('Theo Vega dio el pase');
  await viewer.getByRole('button',{name:'Ponerme al día'}).click();await expect(viewer.getByRole('heading',{name:'El partido hasta ahora'})).toBeVisible();
  expect(await page.locator('#live').innerText()).toEqual(before);
  await page.screenshot({path:'../../.run/studio-desktop.png',fullPage:true});
@@ -57,5 +57,5 @@ test('pending AI review remains visible while replay continues',async({page})=>{
  await expect(page.getByRole('status').filter({hasText:'AI review in progress'})).toContainText('AI review in progress');
  await expect(page.getByRole('status').filter({hasText:'AI review in progress'})).not.toContainText('Azure model workflow');
  await expect(page.getByRole('button',{name:'Pause',exact:true})).toBeEnabled();
- await expect(page.getByRole('button',{name:'Approve',exact:true})).toHaveCount(0);
+ await expect(page.getByRole('button',{name:'Approve for viewers',exact:true})).toHaveCount(0);
 });

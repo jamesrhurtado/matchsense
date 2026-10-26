@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test';
 const headers={'X-Producer-Token':'local-demo-producer'};
 test('pressure flagship: review, source evidence, approval, audience lenses, Spanish focus, mobile and recap',async({page,request,context},info)=>{
- test.setTimeout(120000);
+ test.setTimeout(45000);
  const catalogue=await(await request.get('/api/matches')).json();
  const enabled=catalogue.matches.some((m:{match_id:string})=>m.match_id==='match-0c0a000000000005');
  if(process.env.WHY_NOW_MATCH_COVERAGE_E2E==='1')expect(enabled).toBeTruthy();
@@ -21,7 +21,7 @@ test('pressure flagship: review, source evidence, approval, audience lenses, Spa
  await expect(evidence).toContainText('2.0');await expect(evidence).toContainText('0.4');await expect(evidence).toContainText('30.0 m');
  await expect(evidence.getByRole('table')).toContainText('25.0 m');
  await expect(evidence).toContainText('before 100% (2.0 of 2.0 s); after 100% (2.0 of 2.0 s)');
- await page.getByRole('button',{name:'Approve',exact:true}).click();
+ await page.getByRole('button',{name:'Approve for viewers',exact:true}).click();
  const viewer=await context.newPage();await viewer.setViewportSize({width:390,height:844});
  await viewer.goto(`/watch/${created.session_id}`);
  await expect(viewer.getByTestId('audience-explanation')).toContainText('30.0 m forward');
@@ -35,11 +35,11 @@ test('pressure flagship: review, source evidence, approval, audience lenses, Spa
  await viewer.screenshot({path:info.outputPath('pressure-mobile.png'),fullPage:true});
  await viewer.getByLabel('Language',{exact:true}).selectOption('es');
  await expect(viewer.getByTestId('audience-explanation')).toContainText('pasó 30.0 m');
- await viewer.getByLabel('Seguir a un jugador o equipo').selectOption('blue-09');
- await expect(viewer.getByTestId('audience-explanation')).toContainText('Recepción de');
- await viewer.getByLabel('Seguir a un jugador o equipo').selectOption('blue-01');
- await expect(viewer.getByText('No hay participación aprobada en este intervalo.')).toBeVisible();
- await viewer.getByLabel('Seguir a un jugador o equipo').selectOption('');
+ await viewer.getByLabel('Seguir equipo o jugador').selectOption('blue-09');
+ await expect(viewer.getByTestId('audience-explanation')).toContainText('Beni Vidal');
+ await viewer.getByLabel('Seguir equipo o jugador').selectOption('blue-01');
+ await expect(viewer.getByText('No hay historias aprobadas que involucren esta selección en este intervalo.')).toBeVisible();
+ await viewer.getByLabel('Seguir equipo o jugador').selectOption('');
  await expect(viewer.getByTestId('audience-explanation')).toContainText('pasó 30.0 m');
  await viewer.getByRole('button',{name:'Ponerme al día'}).click();
  await expect(viewer.getByRole('heading',{name:'Resumen del segmento'})).toBeVisible();

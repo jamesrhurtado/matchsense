@@ -4,7 +4,8 @@ import { useEffect, useId, useRef, useState } from "react";
 import { Pause, Play, RotateCcw, Square, Volume2 } from "lucide-react";
 import { cn } from "@/lib/api";
 
-type PlaybackState = "idle" | "speaking" | "paused" | "finished" | "stopped" | "error";
+type PlaybackState =
+  "idle" | "speaking" | "paused" | "finished" | "stopped" | "error";
 
 /** Opt-in, transcript-backed reading of approved text; never generates new match claims. */
 export function ListenButton({
@@ -30,10 +31,16 @@ export function ListenButton({
   const [state, setState] = useState<PlaybackState>("idle");
   const [error, setError] = useState(false);
   const sequence = useRef(0);
-  const activeText = evidenceSelected && evidenceAvailable ? evidenceText! : text;
-  const activeLabel = evidenceSelected && evidenceAvailable
-    ? es ? "evidencia y límites" : "evidence and limitations"
-    : es ? "explicación aprobada" : "approved explanation";
+  const activeText =
+    evidenceSelected && evidenceAvailable ? evidenceText! : text;
+  const activeLabel =
+    evidenceSelected && evidenceAvailable
+      ? es
+        ? "evidencia y límites"
+        : "evidence and limitations"
+      : es
+        ? "explicación aprobada"
+        : "approved explanation";
   const buttonClass = dark
     ? "border border-white/20 text-emerald-50 hover:bg-white/10 focus-visible:outline-emerald-200"
     : "border border-emerald-200 text-emerald-950 hover:bg-emerald-50 focus-visible:outline-emerald-700";
@@ -114,11 +121,17 @@ export function ListenButton({
           ? `Reproduciendo ${activeLabel}.`
           : `Playing ${activeLabel}.`
         : state === "paused"
-          ? es ? "Audio en pausa." : "Audio paused."
+          ? es
+            ? "Audio en pausa."
+            : "Audio paused."
           : state === "finished"
-            ? es ? "Audio terminado." : "Audio finished."
+            ? es
+              ? "Audio terminado."
+              : "Audio finished."
             : state === "stopped"
-              ? es ? "Audio detenido." : "Audio stopped."
+              ? es
+                ? "Audio detenido."
+                : "Audio stopped."
               : es
                 ? "El audio solo comienza cuando lo pides."
                 : "Audio starts only when you ask for it.";
@@ -127,13 +140,20 @@ export function ListenButton({
     <section
       className={cn(
         "rounded-xl border p-3",
-        dark ? "border-white/15 bg-white/5" : "border-emerald-200 bg-emerald-50/70",
+        dark
+          ? "border-white/15 bg-white/5"
+          : "border-emerald-200 bg-emerald-50/70",
       )}
       aria-label={heading || (es ? "Narración de audio" : "Audio narration")}
       data-testid="audio-narration"
     >
       {heading && (
-        <h3 className={cn("text-sm font-semibold", dark ? "text-white" : "text-emerald-950")}>
+        <h3
+          className={cn(
+            "text-sm font-semibold",
+            dark ? "text-white" : "text-emerald-950",
+          )}
+        >
           {heading}
         </h3>
       )}
@@ -176,10 +196,16 @@ export function ListenButton({
           disabled={!available || !activeText.trim()}
           aria-label={
             state === "speaking"
-              ? es ? "Pausar audio" : "Pause audio"
+              ? es
+                ? "Pausar audio"
+                : "Pause audio"
               : state === "paused"
-                ? es ? "Reanudar audio" : "Resume audio"
-                : es ? `Escuchar ${activeLabel}` : `Listen to ${activeLabel}`
+                ? es
+                  ? "Reanudar audio"
+                  : "Resume audio"
+                : es
+                  ? `Escuchar ${activeLabel}`
+                  : `Listen to ${activeLabel}`
           }
           className={cn(
             "inline-flex min-h-11 items-center gap-2 rounded-lg px-3 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
@@ -189,22 +215,33 @@ export function ListenButton({
         >
           {state === "speaking" ? (
             <Pause size={16} aria-hidden="true" />
-          ) : state === "idle" || state === "finished" || state === "stopped" || state === "error" ? (
+          ) : state === "idle" ||
+            state === "finished" ||
+            state === "stopped" ||
+            state === "error" ? (
             <Volume2 size={17} aria-hidden="true" />
           ) : (
             <Play size={16} aria-hidden="true" />
           )}
           {state === "speaking"
-            ? es ? "Pausar" : "Pause"
+            ? es
+              ? "Pausar"
+              : "Pause"
             : state === "paused"
-              ? es ? "Reanudar" : "Resume"
-              : es ? "Escuchar" : "Listen"}
+              ? es
+                ? "Reanudar"
+                : "Resume"
+              : es
+                ? "Escuchar"
+                : "Listen"}
         </button>
         <button
           type="button"
           onClick={start}
           disabled={!available || !activeText.trim()}
-          aria-label={es ? "Repetir desde el principio" : "Repeat from the beginning"}
+          aria-label={
+            es ? "Repetir desde el principio" : "Repeat from the beginning"
+          }
           className={cn(
             "inline-flex min-h-11 items-center gap-2 rounded-lg px-3 text-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
             buttonClass,
@@ -230,7 +267,10 @@ export function ListenButton({
       <p
         role="status"
         aria-live="polite"
-        className={cn("mt-2 text-xs leading-relaxed", dark ? "text-white/75" : "text-stone-700")}
+        className={cn(
+          "mt-2 text-xs leading-relaxed",
+          dark ? "text-white/75" : "text-stone-700",
+        )}
       >
         {status}
       </p>
@@ -243,7 +283,13 @@ export function ListenButton({
         >
           {es ? "Leer transcripción" : "Read transcript"}
         </summary>
-        <p lang={language} className={cn("pb-2 text-sm leading-relaxed", dark ? "text-white/80" : "text-stone-700")}>
+        <p
+          lang={language}
+          className={cn(
+            "pb-2 text-sm leading-relaxed",
+            dark ? "text-white/80" : "text-stone-700",
+          )}
+        >
           {activeText}
         </p>
       </details>

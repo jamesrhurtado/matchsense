@@ -53,13 +53,15 @@ export function useMatch(
   const currentContext = useRef(context);
   currentContext.current = context;
   const refreshing = useRef<string | null>(null);
-  const pollInterval = isProducer && match?.running
-    ? Math.max(
-        25,
-        1000 /
-          (Math.max(1, match.tracking_hz ?? 10) * Math.max(0.25, match.speed || 1)),
-      )
-    : 350;
+  const pollInterval =
+    isProducer && match?.running
+      ? Math.max(
+          25,
+          1000 /
+            (Math.max(1, match.tracking_hz ?? 10) *
+              Math.max(0.25, match.speed || 1)),
+        )
+      : 350;
   const refresh = useCallback(async () => {
     if (refreshing.current === context) return;
     refreshing.current = context;

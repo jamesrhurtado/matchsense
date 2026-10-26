@@ -218,7 +218,7 @@ Keep private endpoints, subscription identifiers, tokens, keys, private reviewer
 
 ## Source-of-truth checklist
 
-Repository owner/name: `jamesrhurtado/why-now` (private; MIT). Working directory if available: `/Users/james/dev/why now`.
+Repository owner/name: `jamesrhurtado/matchsense` (private; MIT). Working directory if available: `/Users/james/dev/MatchSense`.
 
 Read these before implementation, in this order:
 

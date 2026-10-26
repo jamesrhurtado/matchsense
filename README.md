@@ -4,7 +4,7 @@
 
 **Current experience: the local live-match explanation desk below.** The [earlier Azure engineering build](https://whynow-web.graycoast-41e399d8.eastus.azurecontainerapps.io) is separate and does not contain this iteration. See [QA access and testing](docs/qa.md) and [deployed Azure resources](docs/azure/README.md).
 
-**Source:** [jamesrhurtado/why-now](https://github.com/jamesrhurtado/why-now), currently private at the owner's request. Original project source is licensed under [MIT](LICENSE).
+**Source:** [jamesrhurtado/matchsense](https://github.com/jamesrhurtado/matchsense), currently private at the owner's request. Original project source is licensed under [MIT](LICENSE).
 
 **Explain the match. Let fans enjoy it.** A live football explanation desk: AI suggests supported stories, a producer approves them, and fans choose when to explore an explanation or catch up. Demonstrated with fictional teams and a synthetic feed.
 
@@ -172,7 +172,7 @@ npm --prefix apps/web exec -- playwright install chromium
 npm --prefix apps/web run test:e2e
 ```
 
-The browser tests cover the actual producer/viewer flow, Spanish and focus variants, review changes, retraction, phone layout, and streamed updates through the web proxy. See [evaluation results](evals/REPORT.md) for measured local processing and the exact scope of the synthetic evaluation. The backend and web checks have passed on [GitHub Actions](https://github.com/jamesrhurtado/why-now/actions/runs/39615382555). CI configuration is in `.github/workflows/ci.yml`.
+The browser tests cover the actual producer/viewer flow, Spanish and focus variants, review changes, retraction, phone layout, and streamed updates through the web proxy. See [evaluation results](evals/REPORT.md) for measured local processing and the exact scope of the synthetic evaluation. The backend and web checks have passed on [GitHub Actions](https://github.com/jamesrhurtado/matchsense/actions/runs/39615382555). CI configuration is in `.github/workflows/ci.yml`.
 
 ## Expanded synthetic data
 

@@ -11,7 +11,7 @@
 From this project folder, start both the backend and website:
 
 ```bash
-cd "/Users/james/dev/why now"
+cd "/Users/james/dev/MatchSense"
 make dev
 ```
 
@@ -22,7 +22,7 @@ This checkout already has its Python environment and web dependencies. Startup w
 For a fresh installation, use Node.js 22+, npm, Python 3.13, and `uv`, then run:
 
 ```bash
-cd "/Users/james/dev/why now"
+cd "/Users/james/dev/MatchSense"
 uv python install 3.13
 uv venv --python 3.13 .venv313
 uv pip install --python .venv313/bin/python -r requirements.txt

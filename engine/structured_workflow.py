@@ -104,7 +104,8 @@ selection problem; the Director may repair once. You cannot approve publication.
 Do not treat Director reasons or producer proposals as evidence.'''
 
 
-async def _execute(tools, baseline, revision, proposed_text, strategy, provider, limits, callback, editorial_angle=None):
+async def _execute(tools, baseline, revision, proposed_text, strategy, provider, limits, callback,
+                   editorial_angle=None, seeded_initial_plan=None):
     owned = provider is None
     runner = ObservedRunner(tools, provider, limits, callback)
     package = None
@@ -120,7 +121,17 @@ async def _execute(tools, baseline, revision, proposed_text, strategy, provider,
                        'tool_contract': {'end_max_ms': tools.cutoff_ms, 'window_max_ms': 15000,
                                          'tools': list(EvidenceRequest.model_fields['tool'].annotation.__args__)}}
             for repair in range(2):
-                draft = await runner.call('Story Director', DIRECTOR, context, DirectorDecision, max_tokens=650)
+                if repair == 0 and seeded_initial_plan is not None:
+                    draft = DirectorDecision(action='propose',
+                                             plan=NarrativePlan.model_validate(seeded_initial_plan),
+                                             reason='Evaluation-only seeded Director proposal.',
+                                             evidence_requests=[])
+                    runner.trace.append({'role':'Story Director','action':'fault_injected_proposal',
+                                         'status':'seeded','plan':draft.plan.model_dump(),
+                                         'reason':'Evaluation-only starting proposal; not a model decision.',
+                                         'elapsed_ms':runner.elapsed()})
+                else:
+                    draft = await runner.call('Story Director', DIRECTOR, context, DirectorDecision, max_tokens=650)
                 if draft.action == 'needs_evidence':
                     if not draft.evidence_requests:
                         raise WorkflowLimit('empty_director_request')
@@ -228,11 +239,16 @@ async def _execute(tools, baseline, revision, proposed_text, strategy, provider,
 
 
 def run_structured_workflow(tools, revision=1, proposed_text=None, *, provider=None,
-                            strategy='collaborative', outcome_callback=None, limits=None, editorial_angle=None, evaluation_only=False):
+                            strategy='collaborative', outcome_callback=None, limits=None, editorial_angle=None,
+                            evaluation_only=False, seeded_initial_plan=None):
     if strategy == 'director_only' and not evaluation_only:
         raise ValueError('reviewer_ablation_requires_evaluation_only')
     if strategy not in {'collaborative','single','director_only'}:
         raise ValueError('unknown_workflow_strategy')
+    if seeded_initial_plan is not None and not evaluation_only:
+        raise ValueError('seeded_proposal_requires_evaluation_only')
+    if seeded_initial_plan is not None and strategy not in {'collaborative','single'}:
+        raise ValueError('seeded_proposal_requires_review_strategy')
     baseline = build_structured_package(tools, revision, proposed_text, editorial_angle=editorial_angle)
     if baseline is None:
         if outcome_callback:
@@ -250,7 +266,8 @@ def run_structured_workflow(tools, revision=1, proposed_text=None, *, provider=N
         return baseline
     try:
         return asyncio.run(_execute(tools,baseline,revision,proposed_text,strategy,provider,
-                                   limits or Limits(deadline_s=15,model_calls=6),outcome_callback,editorial_angle))
+                                   limits or Limits(deadline_s=15,model_calls=6),outcome_callback,
+                                   editorial_angle, seeded_initial_plan))
     finally:
         _GATE.release()
 

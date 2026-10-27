@@ -1,8 +1,8 @@
 # Stronger synthetic football data for MatchSense
 
 > SD01–SD04 follow-on: the [development dataset card](synthetic-dataset-v1.md)
-> records the implemented first slice. The research below retains its original
-> pre-implementation audit and recommendations.
+> records the implemented first slice. The audit below retains historical findings;
+> the hackathon recommendations at the end reflect the current submission scope.
 
 25 October 2026, America/Lima. Research and read-only source audit; no new product
 dataset or generator behavior is delivered by this document. Implementation is
@@ -10,11 +10,11 @@ specified in [the prioritized plan](next-iteration/synthetic-data-plan.md).
 
 ## Recommendation
 
-Build a small, reproducible library of coherent football passages, with explicit
-observation limits and a separate evaluation key. Improve the existing generator
-and observation contract. Keep the current producer/viewer pipeline and two AI
-roles. A complete game engine, video generation and trained trajectory model are
-larger projects than this iteration needs.
+For this hackathon, use a small, reproducible set of coherent football passages,
+with explicit observation limits and separately stored expected answers. Keep the
+judge-facing presentation fixture distinct from development/regression material.
+A complete game engine, video generation and trained trajectory model are larger
+projects than this submission needs.
 
 The useful distinction is between **a plausible simulated world**, **what the
 source has observed by a given time**, and **what an explanation may claim**.
@@ -50,7 +50,7 @@ dataset and retained actual-model comparison.
 | Pressure flagship | `flagship.py` patches player paths and event times to create comparison opportunities. The same protagonists and repeated pass structure limit diversity. |
 | Delivery stress | `live_match.py` reflects the flagship and adds delayed shots, missing frames and retransmission. Useful robustness variants share the original trajectory ancestry. |
 | Validation | Existing checks cover schema, clock, identities, control proximity, sampled speed, pass endpoints and correction lineage. They do not certify smooth acceleration, collision avoidance, keeper response, every shot/recovery alignment or a realistic event distribution. |
-| Evaluation separation | Runtime exports exclude reference answers; developer cases identify shared ancestry. The final independent scenario/football review work remains open. |
+| Evaluation separation | Runtime exports exclude reference answers; developer cases identify shared ancestry. Automated checks do not establish broad real-match representativeness. |
 
 The reproducible [audit](../evals/synthetic-research/current-fixtures.json) checks
 the existing four exports ending `005`–`008`. All pass the existing validator.
@@ -100,7 +100,7 @@ Technical conclusions rely on governing bodies, maintainers or original research
 | [CheckList, ACL 2020](https://aclanthology.org/2020.acl-main.442/) | Behavioral capability matrices and controlled transformations find failures aggregate accuracy can hide. | Test invariance, evidence sensitivity and minimum supported behavior separately. This is a testing method, not a football realism score. |
 | [Scikit-learn: grouped and time-aware evaluation](https://scikit-learn.org/stable/modules/cross_validation.html) | Correlated groups and ordered observations need appropriate separation to avoid misleading generalization estimates. | Split by authored trajectory ancestry before generating mirrors/noise/fault variants. Never count frames or transformed siblings as independent matches. This applies the principle; we are not training a classifier here. |
 | [Datasheets for Datasets, Microsoft Research / CACM, December 2021](https://www.microsoft.com/en-us/research/publication/datasheets-for-datasets/) | Document purpose, composition, creation and recommended uses. | Publish a concise dataset card, hashes, profile settings, ancestry, limitations and split membership. Public release remains a separate action. |
-| [Anthropic: agent evaluations, January 2026](https://www.anthropic.com/research/demystifying-evals-for-ai-agents) | Agent evaluations need outcomes and traces, repeated trials and complementary grading methods. | Reuse existing outcome accounting; measure useful output, reviewer interventions, false rejections, time and cost. Human judgment remains necessary for editorial usefulness. This vendor guidance supplies no score or numerical target for MatchSense. |
+| [Anthropic: agent evaluations, January 2026](https://www.anthropic.com/research/demystifying-evals-for-ai-agents) | Agent evaluations need outcomes and traces, repeated trials and complementary grading methods. | Useful context for later agent comparisons; beyond the synthetic-data claim for this hackathon submission. This vendor guidance supplies no score or numerical target for MatchSense. |
 
 ## What the other hackathon projects add
 
@@ -127,33 +127,99 @@ the same observed situation can justify explaining, qualifying, remaining quiet
 or withdrawing, with the result visible through producer and viewer workflows.
 That is a proposed product emphasis, not an exclusive market claim.
 
-## Synthesis: what to build, retain and defer
+## Synthesis: hackathon scope
 
-1. **Build:** smooth, role-aware movement and a shared episode state driving ball,
-   actors and event outcomes. Allow support play, failed attacks and uneventful time.
-2. **Build:** independently structured scene parents and paired context/availability
-   cases. Every supported family must remain testable end to end.
-3. **Build:** explicit world/observation/reference boundaries and stronger independent
-   validation, including source-event/trajectory consistency.
-4. **Retain:** delivery fault injection, immutable original exports, evidence and
-   approval infrastructure, exact revisions and correction handling.
-5. **Measure:** all comparison arms under fair constraints. Separate data realism,
-   deterministic guard effectiveness, agent contribution, live timing and human value.
-6. **Defer:** full-match physics, RL training, diffusion training, synthetic video,
-   provider integration, xG and tactical-causation labels. None is needed to fix
-   the identified data weaknesses.
+The repo already implements the high-value data practices for this submission:
+authored movement and event state, shared ball/control logic, declared coordinate
+and sampling conventions, paired evidence/correction examples, deterministic
+generation, runtime/reference separation and hashed provenance. The one-minute
+presentation fixture is separate from the larger opt-in development slice.
 
-A stronger dataset may reveal that both agent approaches already perform well,
-that the Reviewer catches useful issues, or that it rejects useful stories too
-often. All are valid findings. Data alone cannot add a missing agent capability.
-If the agents only make a trivial yes/no choice on a family, difficult scenes may
-require a separately justified workflow improvement before the role adds value.
+The remaining practical improvements are to make the demo's realism limits easy to
+understand, surface a compact quality report by layer, and showcase a couple of
+existing controlled pairs. These actions are documented in
+[`synthetic-submission.md`](synthetic-submission.md). Do not add another test-data
+catalogue or claim full-match realism for the hackathon. Keep the existing broader
+regression infrastructure for later engineering use.
+
+Defer full-match physics, RL training, diffusion training, synthetic video,
+provider integration, xG and tactical-causation labels. None is needed to show how
+evidence-supported stories, uncertainty and corrections work in this product.
 
 ## Evidence still missing
 
 No real trajectories were imported, no new model calls were made, no full simulator
-was installed and no product fixtures were regenerated. The audit is local and
-read-only with respect to product data. Football reviewer agreement, Spanish
-semantics, real-match representativeness, producer workload and viewer benefit
-remain unestablished. The research does not raise a product score automatically.
-The linked plan defines the next engineering work and separates participant work.
+was installed and no product fixtures were regenerated during this research review.
+The audit is local and read-only with respect to product data. Synthetic scene
+checks establish correspondence to authored construction rules; they do not
+establish real-match representativeness, producer workload or viewer benefit. The
+linked plan defines broader later engineering work and is not the hackathon data
+deliverable.
+
+## 27 October 2026 — standards crosswalk and submission review
+
+This addendum reconciles the earlier source audit with the current repository and
+the hackathon's published requirements. The official rules require synthetic,
+football-realistic data, identify synthetic-data creation as a technology-judging
+question, and describe a five-stage path from event ingestion through personalized
+presentation. They do not require ISO certification, a statistical population
+simulator, differential privacy, or real match data. The Microsoft Reactor
+challenge description independently emphasizes explainable match intelligence
+from synthetic events. The Innovation Studio About/rubric page redirected to
+Microsoft sign-in in this review; the locally recorded page review and exact
+20%-each rubric are in [problem evidence](problem-evidence.md#contest-fit-and-delivery-constraints).
+
+### Standards and research mapped to this project
+
+| Guidance | Useful practice | MatchSense application and boundary |
+| --- | --- | --- |
+| [ISO/IEC 5259-1:2024](https://www.iso.org/cms/%20render/live/en/sites/isoorg/contents/data/standard/08/10/81088.html?browse=tc), [5259-2:2024](https://www.iso.org/cms/%20render/live/en/sites/isoorg/contents/data/standard/08/18/81860.html?browse=tc), and [5259-3:2024](https://www.iso.org/standard/81092.html) | Define fit-for-purpose data-quality objectives, measures and lifecycle ownership rather than treating a schema pass as overall quality. | Report separate, relevant layers: provenance, movement/geometry, source/event coherence and demonstrated behavior. This is a voluntary design crosswalk, not a claim of ISO conformance. |
+| [NASA-STD-7009B](https://standards.nasa.gov/standard/NASA/NASA-STD-7009?trk=article-ssr-frontend-pulse_little-text-block) | Distinguishes model verification (matches specification) from validation for an intended real-world use, and asks that unverified aspects be recorded. | Our checks verify authored construction choices. State plainly that they do not establish real-match representativeness. NASA guidance is an analogy, not a required or claimed certification for a football hackathon demo. |
+| [NIST AI RMF 1.0](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-ai-rmf-10) and [AI RMF Core](https://airc.nist.gov/airmf-resources/airmf/5-sec-core/) | Document data selection, suitability and representativeness in relation to intended use. | State that these original scripted scenes are for demonstrating evidence-sensitive storytelling, not learning or measuring general football behavior. |
+| [NIST SP 800-226](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-226.pdf) | Synthetic records can retain utility problems and can leak source records unless privacy is evaluated; synthetic does not mean private by default. | Current coordinates and identities are authored fiction, so differential privacy is not the relevant improvement. If real tracking is later used to estimate or tune a generator, review rights and privacy before release and quantify privacy where needed. |
+| [Datasheets for Datasets](https://doi.org/10.48550/ARXIV.1803.09010) | Document purpose, composition, creation, recommended uses, limitations and maintenance for each version. | The v1 dataset card and v2 guide already do much of this. Make the submission's demo/evaluation/legacy profiles explicit and state their counts, ancestry and non-claims together. |
+| [W3C PROV overview](https://www.w3.org/TR/prov-overview/) | Represent source entities, generation activities, derivations, versions and responsibility so results can be traced and reproduced. | Existing generator IDs, manifests, ancestry hashes and stream hashes are a strong start. Add a compact machine-readable manifest that ties each runtime fixture to generator version/configuration, parent, transformation, profile and validator report. |
+| [NIST SDNist](https://www.nist.gov/services-resources/software/sdnist-synthetic-data-report-tool) | Report utility and privacy separately; one aggregate “quality” score can conceal trade-offs. | Use task-specific football checks and scenario coverage, not tabular distribution scores as a stand-in for football realism. Its privacy measures do not directly fit fully authored fictional trajectories. |
+
+### Current state: strengths and limits
+
+The repository has substantial engineering work behind the hackathon demo: the
+168-case suite has explicit families, deterministic generation, six ancestry
+parents, grouped variants, observation-only runtime exports, separate expected
+answers, hashes and per-checkpoint reports. Its fixed regression now reports
+168/168 cases and 594/594 checkpoints. The separate vNext slice uses six authored
+development scenes, twelve paired specifications and 24 source views; it adds
+shared ball/control/event state, 10 Hz metric coordinates, smooth bounded paths,
+missing/unknown evidence, corrections, shot/goal/recovery cases, source-only
+validation and a dataset card. The new short presentation replay is versioned and
+preserves the original fixtures.
+
+These counts answer whether the implementation satisfies its authored checks,
+not whether it represents real football. The 168 cases share six parent
+configurations; adjacent frames, delivery variants, mirrors and repeated checkpoints
+are not independent matches. The six-scene constrained slice is development
+material. `simulator.validate` acceptance is not an endorsement of tactics. The
+older four-minute exports pass legacy sampled-speed checks while the independent
+audit finds path-join acceleration spikes up to about 103.54 m/s²; the newer
+constrained profile has much smoother measured derivatives, but its bounds are
+design choices rather than calibrated human or FIFA limits. Some legacy/grid
+fixtures give keeper roles without plausible keeper paths; label those as
+regression material and use the separate versioned replay for presentation.
+
+### Hackathon recommendations
+
+1. Keep the one-minute presentation fixture separate from development/regression
+   data; label it synthetic and describe it as an authored excerpt.
+2. Put the shared-state recipe, coordinates, sampling, movement profile, provenance
+   and limitations in the submission. Do not imply a full-match simulator.
+3. Show two existing paired examples: the missing-opponent support passage and the
+   confirmed-then-cancelled goal. Explain the one meaningful change in each pair.
+4. Report the small, relevant checks by layer: provenance, movement/geometry,
+   source/event coherence and authored task behavior. Name profile thresholds as
+   design choices; do not collapse them into a realism score.
+5. Leave further test catalogs, large-scale evaluation programs and model comparison
+   studies for later. The current submission's claim is that these authored scenes
+   reproducibly demonstrate the product's evidence and correction workflow.
+
+The copy-ready account and current measurements are in
+[`synthetic-submission.md`](synthetic-submission.md).

@@ -1,7 +1,13 @@
 # Constrained synthetic episodes v1 — dataset card and preview
 
 25 October 2026. SD01–SD04 engineering slice. Original fictional coordinates and
-actors; development material, not held-out evaluation or expert-validated matches.
+actors; development material, not an independent evaluation set or externally
+validated football trajectories.
+
+The judge-facing, one-minute presentation fixture is a separate versioned replay;
+these 24 views remain opt-in development material. See the
+[hackathon submission data note](synthetic-submission.md) for the curated examples,
+quality snapshot and copy-ready explanation.
 
 ## What is delivered
 
@@ -114,17 +120,21 @@ catalogue has neutral passage numbers; it contains no seeds, parent labels or
 expected answers. The application never imports the generator or reference key.
 Existing delivered-clock source access still excludes future/unavailable rows.
 
+The judge-facing one-minute replay has its own versioned identity and default demo
+entry. It is not sourced from this 24-view slice. The development catalogue is
+opt-in, and its reference file is evaluation-only; neither is presented as the
+submission's primary demo.
+
 The separate key at `data/evaluation-only/episodes-v1.json` states 32 checkpoints,
 expected roles, outcomes, timing, denominators and prohibited implications. Its
 expectations were authored without production metrics as their oracle. They are
-engineering specifications, not independent football reviewer judgments.
+engineering specifications, not ground truth about football tactics.
 
 All a/b specifications, clean/fault views and future mirrors of one parent belong
 to the same development group. Six separately constructed episode/route scripts
 share interpolation and serialization code. They are not six validated football
-distributions. There are **zero held-out parents** in this slice. A later held-out
-set must be authored and frozen before tuning against it; no claim of blindness
-is made for these inspected development cases.
+distributions. This slice contains no separate set of previously unseen scenes;
+all 24 views belong to the development material described above.
 
 The manifest records profile and authoring-file SHA-256, parent-structure hashes,
 case/view membership and export hashes. Generation has no RNG or model calls.
@@ -150,8 +160,8 @@ Original runtime/schema/reference files and stored packages were snapshotted
 before implementation and compared afterward. New data checks, original numerical
 regression, API/browser integration and human/AI evaluations are reported separately.
 
-Held-out cases, current mixed-family agent comparisons, football/Spanish ratings,
-user benefit and the two four-minute composed demos remain SD05–SD07 work. The
+Broader claims about real-match representativeness, Spanish semantics and user
+benefit, plus the two four-minute composed demos, remain outside this slice. The
 existing failed live-AI review-time target remains open. This slice adds no Azure
 resources, deployment, public repository change or external publication.
 

@@ -15,7 +15,7 @@ LAST_NAMES = ['Vale','Reed','Silva','Mora','Blake','Cruz','Dale','Vega','Solis',
 def generate(number=1, seed=101, family='escape', reverse=False, parameters=None):
     rng = random.Random(seed)
     match_id = f'match-{number:03d}'
-    teams = [{'id':'blue','name':'Harbor City','color':'#3b82f6'}, {'id':'amber','name':'Alder Rovers','color':'#f59e0b'}]
+    teams = [{'id':'blue','name':'Club del Faro','color':'#3b82f6'}, {'id':'amber','name':'Puerto Lumbre FC','color':'#f59e0b'}]
     players = [{'id':f'{team}-{i:02d}', 'team_id':team, 'name':f'{FIRST_NAMES[i-1]} {LAST_NAMES[(i-1+offset)%11]}', 'number':i, 'role':'keeper' if i==1 else 'outfield'} for team,offset in [('blue',0),('amber',3)] for i in range(1,12)]
     metadata = {'schema_version':'1.0.0','match_id':match_id,'synthetic':True,'scope':'segment','pitch':{'length_m':105,'width_m':68,'convention':'x right, y down'},'teams':teams,'players':players,'periods':[{'period':1,'timeline_offset_ms':0,'attack_direction':{'blue':'left' if reverse else 'right','amber':'right' if reverse else 'left'}}],'initial_state':{'period':1,'period_elapsed_ms':0,'score':{'blue':0,'amber':0},'active_player_ids':[p['id'] for p in players],'ball_status':'controlled','possession_team_id':'blue'},'tracking_hz':10,'provenance_id':f'provenance-{number:03d}'}
     messages = []

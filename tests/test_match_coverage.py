@@ -367,7 +367,7 @@ def test_new_family_bounded_workflow_terminal_accounting(action):
     assert (p is None)==(action in {'abstain','reject'})
     if p:
         assert p['mode']=='template fallback'
-        assert p['variants'][0]['text']=='Confirmed goal for Harbor City. Scorer unidentified.'
+        assert p['variants'][0]['text']=='Confirmed goal for Club del Faro. Scorer unidentified.'
 
 
 def test_linked_incident_preserves_different_approved_shooter_and_scorer_roles(client,monkeypatch):

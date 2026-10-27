@@ -71,7 +71,7 @@ def test_late_approval_is_rejected(client):
 
 def test_edit_invalidates_approval_and_stale_requests(client):
     sid=create(client);at(sid,25000);old=evidence(client,sid);assert decision(client,sid,package=old).status_code==200
-    edited=decision(client,sid,'edit',package=old,text='Harbor City now controls the match.')
+    edited=decision(client,sid,'edit',package=old,text='Club del Faro now controls the match.')
     assert edited.status_code==200 and edited.json()['review']['status']=='revised'
     assert client.get(f'/api/replay-sessions/{sid}/snapshot').json()['story'] is None
     stale=decision(client,sid,package=old)

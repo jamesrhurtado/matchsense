@@ -100,7 +100,7 @@ def test_frozen_packages_do_not_change_expiry_as_clock_moves():
 
 
 def test_reviewer_changes_unsupported_edit_in_one_cycle():
-    meta,messages=generate();p=run_workflow(EvidenceTools(meta,messages,25000),proposed_text='Harbor City now controls the match.')
+    meta,messages=generate();p=run_workflow(EvidenceTools(meta,messages,25000),proposed_text='Club del Faro now controls the match.')
     assert p['review']['status']=='revised'
     assert p['review']['cycles']==1
     assert 'controls the match' not in p['review']['revised_text']

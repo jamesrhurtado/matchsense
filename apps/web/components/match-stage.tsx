@@ -64,10 +64,10 @@ export function MatchStage({
           <ClubBadge />
           <div>
             <span className={styles.clubName}>
-              {match?.teams.find((t) => t.id === "blue")?.name ?? "Harbor City"}
+              {match?.teams.find((t) => t.id === "blue")?.name ?? "Club del Faro"}
             </span>
             <span className={styles.clubCode}>
-              HBC <i className={styles.homeDot} />
+              FAR <i className={styles.homeDot} />
             </span>
           </div>
         </div>
@@ -85,10 +85,10 @@ export function MatchStage({
           <div>
             <span className={styles.clubName}>
               {match?.teams.find((t) => t.id === "amber")?.name ??
-                "Alder Rovers"}
+                "Puerto Lumbre FC"}
             </span>
             <span className={styles.clubCode}>
-              <i className={styles.awayDot} /> ALD
+              <i className={styles.awayDot} /> LUM
             </span>
           </div>
         </div>
@@ -151,11 +151,11 @@ export function MatchStage({
         <div className={styles.keeperLegend}>
           <span>
             <i className={styles.homeKeeper} />
-            {es ? "Portero HBC" : "HBC goalkeeper"}
+            {es ? "Portero FAR" : "FAR goalkeeper"}
           </span>
           <span>
             <i className={styles.awayKeeper} />
-            {es ? "Portero ALD" : "ALD goalkeeper"}
+            {es ? "Portero LUM" : "LUM goalkeeper"}
           </span>
         </div>
         <p className={styles.fieldNote}>

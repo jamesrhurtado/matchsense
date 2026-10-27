@@ -429,7 +429,7 @@ export default function Pitch({
             player?.number ?? parseInt(p.player_id.split("-")[1]);
           const teamName =
             teamNames[p.team_id] ??
-            (p.team_id === "blue" ? "Harbor City" : "Alder Rovers");
+            (p.team_id === "blue" ? "Club del Faro" : "Puerto Lumbre FC");
           const playerLabel = `${es ? "Jugador" : "Player"} #${shirtNumber}, ${player?.name ?? (es ? "nombre no disponible" : "name unavailable")}, ${teamName}${keeper ? (es ? ", portero" : ", goalkeeper") : ""}`;
           const activate = () =>
             setSelectedPlayerId((current) =>

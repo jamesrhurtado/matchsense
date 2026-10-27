@@ -8,7 +8,7 @@ test('producer evidence → wording review → approval → viewer preferences �
  await expect(page.getByRole('button',{name:'Show why',exact:true})).toBeVisible({timeout:10000});await page.getByRole('button',{name:'Pause',exact:true}).click();
  await page.getByRole('button',{name:'Show why',exact:true}).click();await expect(page.getByRole('heading',{name:'Replay the sequence.'})).toBeVisible();
  await page.getByRole('button',{name:'Play evidence replay',exact:true}).click();await page.waitForTimeout(300);await page.getByRole('button',{name:'Pause evidence replay',exact:true}).click();
- await page.getByRole('button',{name:'Suggest an emphasis'}).click();await page.getByLabel('Suggest an emphasis or wording for evidence review').fill('Harbor City now controls the match.');await page.getByRole('button',{name:'Submit for review'}).click();
+ await page.getByRole('button',{name:'Suggest an emphasis'}).click();await page.getByLabel('Suggest an emphasis or wording for evidence review').fill('Club del Faro now controls the match.');await page.getByRole('button',{name:'Submit for review'}).click();
  await expect(page.getByText('Proposed wording reviewed')).toBeVisible();
  await page.getByRole('button',{name:'Approve for viewers',exact:true}).click();await expect(page.getByText('On air · revision 2')).toBeVisible();
  const before=await page.locator('#live').innerText();

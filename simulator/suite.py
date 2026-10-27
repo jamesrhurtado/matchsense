@@ -53,8 +53,8 @@ def generate_case(case: Case, *, passage_schedule=None) -> Dataset:
     metadata = {
         'schema_version': '1.0.0', 'match_id': case.match_id, 'synthetic': True, 'scope': 'segment',
         'pitch': {'length_m': 105, 'width_m': 68, 'convention': 'x right, y down'},
-        'teams': [{'id': 'blue', 'name': 'Harbor City', 'color': '#3b82f6'},
-                  {'id': 'amber', 'name': 'Alder Rovers', 'color': '#f59e0b'}],
+        'teams': [{'id': 'blue', 'name': 'Club del Faro', 'color': '#3b82f6'},
+                  {'id': 'amber', 'name': 'Puerto Lumbre FC', 'color': '#f59e0b'}],
         'players': players,
         'periods': [{'period': 1, 'timeline_offset_ms': 0,
                      'attack_direction': {team: 'left' if parent.reverse else 'right',

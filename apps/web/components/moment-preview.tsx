@@ -35,8 +35,8 @@ export function MomentPreview() {
       </div>
       <div className="flex items-center justify-between gap-3 px-5 pt-5 text-sm font-semibold sm:px-6">
         <span>
-          Harbor City <span className="mx-1 font-normal text-white/50">vs</span>{" "}
-          Alder Rovers
+          Club del Faro <span className="mx-1 font-normal text-white/50">vs</span>{" "}
+          Puerto Lumbre FC
         </span>
         <span className="shrink-0 rounded-md bg-white/10 px-2 py-1 font-mono text-xs tabular-nums">
           01:31

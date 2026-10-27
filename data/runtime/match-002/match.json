@@ -11,12 +11,12 @@
   "teams": [
     {
       "id": "blue",
-      "name": "Harbor City",
+      "name": "Club del Faro",
       "color": "#3b82f6"
     },
     {
       "id": "amber",
-      "name": "Alder Rovers",
+      "name": "Puerto Lumbre FC",
       "color": "#f59e0b"
     }
   ],

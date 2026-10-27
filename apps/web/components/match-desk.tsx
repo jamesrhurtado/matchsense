@@ -694,8 +694,9 @@ export default function MatchDesk({
               </span>
             </div>
             <h1 className="text-balance text-2xl font-semibold md:text-3xl">
-              Harbor City <span className="font-normal text-stone-400">vs</span>{" "}
-              Alder Rovers
+              {match?.teams.find((team) => team.id === "blue")?.name ?? "Club del Faro"}{" "}
+              <span className="font-normal text-stone-400">vs</span>{" "}
+              {match?.teams.find((team) => team.id === "amber")?.name ?? "Puerto Lumbre FC"}
             </h1>
           </div>
           <Tag className="border-sky-200 bg-sky-50 text-sky-900">

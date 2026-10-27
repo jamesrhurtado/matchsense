@@ -11,8 +11,8 @@ export function EventEvidence({
   compact?: boolean;
 }) {
   const teams: Record<string, string> = {
-    blue: "Harbor City",
-    amber: "Alder Rovers",
+    blue: "Club del Faro",
+    amber: "Puerto Lumbre FC",
   };
   const m = data.story.metrics;
   const f = m.facts!;

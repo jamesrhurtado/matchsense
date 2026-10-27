@@ -72,13 +72,13 @@ export function AudienceControls({
           {language === "es" ? "Todas las historias" : "All stories"}
         </option>
         <optgroup label={language === "es" ? "Equipos" : "Teams"}>
-          <option value="blue">Harbor City</option>
-          <option value="amber">Alder Rovers</option>
+          <option value="blue">Club del Faro</option>
+          <option value="amber">Puerto Lumbre FC</option>
         </optgroup>
         <optgroup label={language === "es" ? "Jugadores" : "Players"}>
           {players.map((p) => (
             <option key={p.id} value={p.id}>
-              {p.name} · {p.id.startsWith("blue") ? "HBC" : "ALD"} {p.number}
+              {p.name} · {p.id.startsWith("blue") ? "FAR" : "LUM"} {p.number}
             </option>
           ))}
         </optgroup>

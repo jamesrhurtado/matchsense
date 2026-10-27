@@ -17,8 +17,8 @@ def test_receiver_is_not_credited_with_team_retention_after_passing_onward():
     receiver = package['metrics']['receiver_id']
     texts = {v['language']: v['text'] for v in package['variants']
              if v['focus'] == receiver and v['detail'] == 'simple'}
-    assert 'received the pass; Harbor City retained possession' in texts['en']
-    assert 'recibió el pase; Harbor City conservó la posesión' in texts['es']
+    assert 'received the pass; Club del Faro retained possession' in texts['en']
+    assert 'recibió el pase; Club del Faro conservó la posesión' in texts['es']
     assert 'received the pass and kept possession' not in texts['en']
 
 

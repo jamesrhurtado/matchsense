@@ -1,5 +1,11 @@
 [
   {
+    "match_id": "match-0c0a000000000009",
+    "label": "One-minute moving demo \u00b7 role-aware keepers",
+    "duration_ms": 60000,
+    "synthetic": true
+  },
+  {
     "match_id": "match-0c0a000000000001",
     "label": "Mixed-event discovery \u00b7 goals, shots, possession, recoveries",
     "duration_ms": 240000,

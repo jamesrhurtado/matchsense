@@ -1,0 +1,10 @@
+{
+  "generator": "simulator.short_demo",
+  "version": "1",
+  "source_match_id": "match-0c0a000000000003",
+  "status": "Versioned one-minute presentation excerpt; authored movement; football review pending; source demo unchanged",
+  "duration_ms": 60000,
+  "observations": 608,
+  "sha256_gzip_stream": "f707484efbf34ee03ec3801edaed9cffa3f564613e5d7afa0ba8dd655037b8cc",
+  "keeper_motion": "Inherited from matchday-demo-v2; scripted near-own-goal lanes, not tactical ground truth."
+}

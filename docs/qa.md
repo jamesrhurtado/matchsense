@@ -4,17 +4,60 @@ Application: https://whynow-web.graycoast-41e399d8.eastus.azurecontainerapps.io
 
 This is the hosted Azure MVP for engineering testing. It supports 171 fictional replay segments, including 90 s and 180 s sequences, with an independent investigation, approval and recap entry per delivered pass. It does not claim full-match analysis, real broadcast synchronization, or validated professional-football accuracy.
 
+## Current hosted release — 27 October 2026
+
+The public application is running API `cloud-v20` (`whynow-api--cloud-v20`) and
+web `cloud-v10` (`whynow-web--cloud-v10`), built from base commit `5eb555e` plus
+the working-tree changes recorded in this handoff. The repository remains private.
+The API and web readiness endpoints returned HTTP 200. `/api/health` reports
+`workflow_ai_configured: true` and `live_ai_configured: false`: guided AI replay,
+the Audience Agent and the Broadcaster Director can use the configured model;
+continuous live-mode AI still needs its separate event-model configuration.
+The hosted homepage now selects the guided AI walkthrough and labels the Director
+and Reviewer, after its health check succeeds. Starting it still requires the
+private producer access key.
+
+The post-deployment cloud smoke passed on session
+`3acdff1b-d7b4-44f7-845e-1eff731cabcd`: Director proposed, the shared-evidence
+handoff ran, and Claim Reviewer supported the story; the producer approved it.
+The same run verified Event Hubs ingestion, Cosmos persistence, Spanish/player
+variants, recap and SSE reconnect. It used two model calls and 5,294 reported
+tokens, with complete usage. The follow-up retraction check passed and removed
+the QA story from the viewer and recap.
+
+Bounded agent checks on that QA session also confirmed an AI Audience Agent
+response to fictional rehearsal questions and an AI Broadcaster Director
+response. The audience questions remained producer-only, with no story attached
+automatically or answer posted. The Director chose `hold` for that one candidate;
+this confirms the role executed, but does not show that its decision is better
+than a simpler policy. This sample is not a fair single-agent comparison or a
+multi-agent superiority result.
+
+The registered Google OAuth redirect is the public web callback, and the API
+references `youtube-oauth-secret` through a Container Apps secret. A successful
+read from an active YouTube Live chat was not verified in this deployment pass.
+API restarts clear in-memory OAuth tokens, so reconnect YouTube before the next
+live-chat rehearsal. Azure's API also cannot reach OBS running on a producer's
+computer; the cloud UI may report OBS monitoring unavailable even while the OBS
+browser sources can display the broadcast stage and overlay.
+
 ## Access and first run
 
 The owner retrieves the producer access key from the local, private `.azure/qa-access.json` file and shares it with authorized testers through their chosen secure channel. Do not paste it into issues, screenshots or this guide. The homepage accepts the key; producer actions require it. Viewer URLs are read-only and need no key. This shared prototype key is not enterprise user identity or a per-user audit trail.
 
-1. Open the application, enter the producer key, choose segment 01, and open the producer console.
-2. Use 1× replay. The pass starts at 18 s; supporting retention evidence completes at 22.2 s.
-3. For deliberate inspection, pause near 25 s and wait for the AI-reviewed candidate. This preserves the replay clock while model calls finish. Accelerated replay can legitimately finish before the model; its expired overlay must not be revived.
-4. Inspect **Show why**, the independent evidence replay, definitions and source references.
-5. Inspect **Processing & review trace**. A successful model run must show actual agent decisions, tool requests where chosen, model call counts and provider-reported tokens. `template fallback` is a degraded result, not successful model execution.
-6. Approve the reviewed revision. Open the viewer companion, switch simple/detail, select Spanish and Theo Vega, then open the recap.
-7. Retract in the producer console. The viewer explanation and open recap must disappear. An expired approved story remains available in recap, but its timed overlay disappears.
+1. Open the application and enter the producer key from `.azure/qa-access.json`.
+   On the hosted deployment, the health check selects **Guided walkthrough · AI**.
+2. Start the guided demo and let the synthetic match reach an eligible moment.
+   The guided controls let you pause while the model finishes.
+3. Inspect **Show why**, the independent evidence replay, definitions and source
+   references.
+4. Open **See agents working now**. The trace should show the Director's
+   proposal, its evidence handoff, the Reviewer decision and the human approval
+   boundary. Confirm model usage and that any fallback is explicitly labeled.
+5. Approve the exact reviewed revision. Open the viewer companion, compare
+   simple/detail and English/Spanish, focus a player, then inspect the recap.
+6. Retract in the producer console. The viewer explanation and open recap must
+   disappear. Nothing is published before producer approval.
 
 The model has a 25-second workflow deadline, two concurrent executions, at most eight model calls and twelve tool calls, and a token reservation budget. Overload/provider/validation failure yields an explicit supported template fallback or abstention. Nothing publishes automatically.
 

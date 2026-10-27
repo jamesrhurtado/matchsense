@@ -6,7 +6,7 @@
 > passes. It uses local templates; new-family live AI and human usefulness remain
 > unverified. The pass-focused script below is preserved as the baseline demo.
 
-For the current v0.5 candidate, use the [presenter script and rehearsal run sheet](demo-script-v4.md): a four-minute product walkthrough, two-minute cut, exact contextual replay setup, and narration for actual AI or local template mode. The hosted instructions below describe the earlier engineering build.
+For the current MatchSense demo, use the [presenter script and rehearsal run sheet](demo-script-v4.md): a complete feature inventory, about 3½ minutes of rehearsal flow, an under-two-minute submission cut, evaluation findings, and narration that distinguishes actual AI from local template mode. The hosted instructions below describe the earlier engineering build.
 
 ## Hosted rehearsal
 
@@ -33,7 +33,11 @@ Each original overlay ends 30 s after its own confirmation, at 46.2 s, 106.2 s a
 | 70–100 s | Second independently reviewed moment, queue history and two-moment recap |
 | 100–115 s | Brief Azure pipeline and measured engineering evidence: 168 constructed scenarios, 594 checkpoints; no real-match accuracy claim |
 
-Rehearse actual workflow latency before recording. Use the stable original segment 1 if a simpler single-moment narrative better fits the time limit; its confirmation is 22.2 s and expiry 52.2 s, with Theo Vega as passer. Never stage an unsupported producer edit as a spontaneous AI mistake. A final video has not yet been recorded or published.
+Rehearse actual workflow latency before recording. Use the landing page's
+one-minute moving demo for a short pitch; the original segment 1 remains
+available for regression and its positions are not a tactical model. Never stage
+an unsupported producer edit as a spontaneous AI mistake. A final video has not
+yet been recorded or published.
 
 ## Local mode and limits
 

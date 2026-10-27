@@ -287,8 +287,10 @@ their own evidence; role count does not establish effective collaboration.
 Submission closes **27 October 2026 at 23:59 Pacific**, according to the rules;
 the wider date banner is not the submission deadline. Requirements include a
 functioning demo video **under two minutes**, public GitHub source and judge access
-through the judging period. Our README still identifies private source and an
-older, separate hosted build. Release actions need their own owner authorization.
+through the judging period. At the 25 October research snapshot, the README still
+identified private source and an older, separate hosted build. The hosted build
+was updated on 27 October (see [current QA](qa.md)); repository publication and
+the submission video remain pending.
 
 ## Pitch language we can use
 

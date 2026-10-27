@@ -38,8 +38,9 @@ Open **http://127.0.0.1:3100**, choose **Live simulation** and **AI · Director 
 Reviewer**, then **Start live simulation**. This reuses the existing Azure model
 and requires Azure CLI authentication; it provisions no resources. The launcher
 verifies model identity/rates and credentials before serving. AI attempts, failures
-and factual template fallback remain identified. Current local configuration is
-not a deployment of this iteration to Azure. The local pilot has real-model and
+and factual template fallback remain identified. The hosted application now has
+its own guided AI workflow, which is the recommended judging demo; see the
+[current Azure release](docs/qa.md). The local pilot has real-model and
 continuous-play evidence, but the proposed review-time target is not met; see
 [verification and limitations](evals/live-match/verification.md). See [startup, walkthrough and short
 reviewer tasks](docs/live-match-demo.md), [the implementation plan](docs/next-iteration/live-match-plan.md)
@@ -112,12 +113,15 @@ from factual evidence; casual/analyst and relevant player views share approved
 facts. This is a proximity proxy, not tactical intent, pass difficulty or a cause
 of the later goal. See [the flagship walkthrough and rubric rationale](docs/pressure-flagship.md).
 
-This is a local engineering candidate. Recruitment, external football/Spanish
-ratings, real-user findings and deployment of this iteration remain pending. A bounded real
-**gpt-4o-mini 2024-07-18** smoke now verifies pressure, shot, goal, recovery and
-possession through Director/Reviewer (10 calls, exact source-rendered bilingual
-text). It does not establish broad model quality or user usefulness. The hosted
-0.5 build remains separate and has not been updated.
+This iteration is deployed to Azure: the producer demo defaults to a guided
+AI replay when the model workflow is configured, and its review panel exposes
+the Story Director → Claim Reviewer handoff and producer approval boundary.
+The YouTube audience and broadcaster agents are available in the producer desk;
+OBS status remains read-only. Current revisions and the bounded hosted smoke
+result are in the [QA record](docs/qa.md) and [Azure guide](docs/azure/README.md).
+The smoke verifies one synthetic workflow, not broad model quality, multi-agent
+superiority, real-user usefulness or live YouTube delivery. Recruitment, external
+football/Spanish ratings and real-user findings remain pending.
 
 ## Working local MVP
 
@@ -125,7 +129,7 @@ This section records the earlier guided/pass-focused engineering workflow. Its
 template-mode and pausable startup instructions are historical alternatives;
 use **Live-match explanation desk** above for the current main experience.
 
-The local version 0.5 candidate adds v4 editorial rendering, concise role-focused text, consistent measurement precision, comparison bars, explicit earlier-moment navigation, and atomic acceptance accounting. See [the latest quality handoff](docs/next-iteration/quality-v4-handoff.md), [multi-agent evidence](docs/next-iteration/multi-agent-evidence.md), and [reviewer guide](docs/next-iteration/reviewer-guide-v4.md). This local update has not replaced the previously documented Azure build.
+The version 0.5 workflow adds v4 editorial rendering, concise role-focused text, consistent measurement precision, comparison bars, explicit earlier-moment navigation, and atomic acceptance accounting. It is included in the current Azure release. See [the latest quality handoff](docs/next-iteration/quality-v4-handoff.md), [multi-agent evidence](docs/next-iteration/multi-agent-evidence.md), and [reviewer guide](docs/next-iteration/reviewer-guide-v4.md).
 
 The local application implements synthetic replay → deterministic metrics → evidence replay → constrained wording review → exact-revision producer approval → timed shared overlay → English/Spanish companion variants and approved-moment recap.
 
@@ -178,6 +182,11 @@ The browser tests cover the actual producer/viewer flow, Spanish and focus varia
 
 The v2 generator provides **168 reproducible cases across 28 scenario families and six parent configurations**, including near misses, missing observations, late arrivals, duplicates, corrections, different actual receivers and longer sequences. See the [generation and testing guide](docs/synthetic-data.md) and [expanded evaluation](evals/synthetic-v2/REPORT.md), which reports current failures explicitly.
 
+The landing page starts with a one-minute moving presentation demo whose keeper
+positions follow the authored matchday scene. The original three one-minute
+fixtures remain available for regression compatibility; their keeper markers
+use general formation coordinates and should not be read as tactical positions.
+
 ```sh
 make synthetic-list
 # Export one case using the existing data contract:
@@ -212,7 +221,7 @@ See [current delivery status](docs/next-iteration/decision-log.md), [runtime mea
 
 ## Delivery status and limits
 
-The local and Azure implementations are available; see the QA guide for completed live checks and remaining test boundaries. Competition submission packaging remains pending. [Implementation status](docs/implementation-status.md) maps the handoff's acceptance phases to evidence and outstanding work. [Demo guide](docs/demo.md) describes what can honestly be shown now.
+The local and Azure implementations are available; see the QA guide for completed live checks and remaining test boundaries. Competition submission packaging remains pending. [Implementation status](docs/implementation-status.md) maps the handoff's acceptance phases to evidence and outstanding work. [Demo guide](docs/demo.md) describes what can honestly be shown now; the [presenter script and run sheet](docs/demo-script-v4.md) includes the under-two-minute cut, feature checklist, and measured evaluation evidence.
 
 The [PM update handoff](docs/next-iteration/pm-update-handoff.md) summarizes the contextual update, verification, ordered implementation commits and remaining release gates.
 
@@ -250,9 +259,10 @@ judgments, not predicted judging scores.
    review the delivered development scenes with football participants. Preserve
    original sources and report failures. Ball/shot speed remains conditional on
    source coverage and independent validation.
-4. Rehearse and record the under-two-minute functioning demo. Deploying the new
-   mixed-event candidate and changing repository visibility remain separate
-   owner-authorized release steps.
+4. Rehearse and record the functioning demo under two minutes. The repository
+   remains private during development; make it public before submitting, as the
+   official rules require, and verify the links and judge access from a logged-out
+   browser. The owner will choose the publication timing.
 
 Chaos Index, calibrated Pass Escape Difficulty and tactical turning-point claims
 remain deferred until their definitions and validation justify them. Additional

@@ -62,7 +62,7 @@ Create one OBS scene: broadcast stage underneath the transparent overlay. Ensure
 
 Configure one YouTube test broadcast manually. Use an unlisted stream where available and choose an appropriate latency setting. Verify account streaming readiness early. An unlisted link is shareable and must not be treated as access control.
 
-No YouTube OAuth application, automatic stream creation, chat bot or stream-management dashboard is required. YouTube API integration is not necessary to send a composed video from OBS.
+For video delivery, no YouTube API integration or automatic broadcast creation is needed: OBS sends the composed video through its normal streaming output, with the stream destination/key entered locally. Separately, the producer console now includes a read-only Audience Agent connection to YouTube Live chat using Google OAuth and YouTube Data API. It groups recent questions and can associate them with an existing story after producer confirmation; it does not post replies or start/control the broadcast. That chat integration has its own setup and limits in [Audience Agent documentation](../next-iteration/audience-agent.md).
 
 Deliverable: a verified livestream viewed through the actual YouTube player on a second device or browser. OBS preview alone does not complete this phase.
 

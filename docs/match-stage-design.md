@@ -54,11 +54,15 @@ fixture limitations, not tactical behavior or inferred match events.
 The live stage now reads explicit player `role` metadata to draw home/away
 keepers with lavender/coral square kits and a bilingual legend. Shirt number
 alone does not determine role. Missing role metadata does not invent a keeper.
+The catalogue now includes a versioned one-minute excerpt of the moving matchday
+demo as the default short replay. It retains the authored near-goal keeper lanes
+and animated outfield paths; this improves presentation coherence without
+claiming tactical realism or changing the frozen source fixtures.
 Overlapping ball symbols use a neutral white football callout and a dashed
 leader to the exact observed coordinate; all player coordinates stay unchanged.
 The ball callout chooses a nearby corner with more space and stays within the
 pitch. Evidence diagrams and existing replay files/packages are unchanged.
-A future realism revision must be separately versioned rather than silently
+A broader realism revision must be separately versioned rather than silently
 rewriting source observations used by stored explanations.
 
 ## Controlled-ball badge follow-up

@@ -38,7 +38,8 @@ Edit the recording to stay below two minutes. If scenes are cut or elapsed time 
 ## What is and is not integrated
 
 - The app has stage and overlay URLs for a single session; OBS composes them.
-- YouTube delivery uses OBS's normal streaming output. No YouTube API client, automatic broadcast creation or automated stream-key handling is included.
+- YouTube video delivery uses OBS's normal streaming output. MatchSense does not create or start a broadcast or handle the stream key.
+- Separately, the producer console has a read-only YouTube Live chat connection for the Audience Agent. It uses Google OAuth and YouTube Data API to group recent questions and associate them with an existing story. The producer confirms the exact story/revision and decides whether to show the question with an already-approved insight. It does not post replies or control the broadcast. See [Audience Agent setup and limits](next-iteration/audience-agent.md).
 - The companion is available for the same session, but it follows the app clock. The player may be delayed by YouTube buffering. Treat it as linked exploration unless manually aligned and separately verified.
 - Producer approval, current eligibility, correction and withdrawal behavior are controlled by WHY/NOW. Already transmitted video frames cannot be recalled from viewers' buffers.
 - The template rehearsal has no model calls. Identify whether a recording used template fallback or the actual AI Director and Reviewer.
@@ -68,6 +69,7 @@ available at that address. Open the generated link on the iPhone before recordin
 
 For the main pitch: prepare sources → start the synthetic match → inspect one
 real AI attempt → review evidence → approve → verify in the YouTube player →
+optionally show one Audience Agent question group and producer-confirmed story →
 explore the same session in Spanish/casual and English/analyst views. A phone can
 verify YouTube delivery even while the companion is still local; public hosting
 is needed before the phone can open the companion. No automatic video-position

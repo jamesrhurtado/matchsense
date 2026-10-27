@@ -45,7 +45,17 @@ p=request('GET',path+'/stories/story-pass-1/evidence',producer=True)['story']
 assert p['mode']=='Microsoft Agent Framework + Azure OpenAI',{'mode':p['mode'],'reason':p['review']['reason'],'last_trace':p['trace'][-1] if p['trace'] else None}
 from engine.core import digest
 assert digest({k:v for k,v in p.items() if k!='package_hash'})==p['package_hash'],'Package hash changed through persistence or HTTP'
-assert p['model_usage']['calls']>=3
+trace=p.get('trace',[])
+director=next((i for i,e in enumerate(trace) if e.get('role')=='Story Director' and
+               e.get('action')=='model_decision' and e.get('status')=='propose'),None)
+handoff=next((i for i,e in enumerate(trace) if e.get('role')=='Story Director' and
+              e.get('action')=='select_claims'),None)
+reviewer=next((i for i,e in enumerate(trace) if e.get('role')=='Claim Reviewer' and
+               e.get('action')=='model_decision' and e.get('status')=='supported'),None)
+assert director is not None and handoff is not None and reviewer is not None and director<handoff<reviewer, {
+    'director':director,'shared_state_handoff':handoff,'independent_reviewer':reviewer,
+    'trace_roles':[e.get('role') for e in trace if e.get('action')=='model_decision']}
+assert p['model_usage']['calls']>=2
 assert snap(sid,False)['story'] is None
 assert client.get(access['url']+path+'/diagnostics').status_code==401
 r=decide(sid,'approve',s['story']);assert r['status']=='approved'
@@ -65,4 +75,4 @@ assert diag['transport']['mode']=='azure-event-hubs'
 assert diag['transport']['publisher_alive'] and diag['transport']['consumer_alive']
 assert not diag['transport']['last_error'],diag['transport']
 Path('.azure/smoke-session.json').write_text(json.dumps({'session_id':sid,'diagnostics':diag},indent=2))
-print(json.dumps({'result':'PASS','session_id':sid,'mode':p['mode'],'workflow_ms':p['workflow_ms'],'usage':p['model_usage'],'transport':diag['transport'],'verified':['authorization','Event Hubs ingestion','Cosmos persistence','actual model workflow','producer approval','Spanish player variant','recap','SSE reconnect']},indent=2))
+print(json.dumps({'result':'PASS','session_id':sid,'mode':p['mode'],'workflow_ms':p['workflow_ms'],'usage':p['model_usage'],'agent_handoff':[{'role':e.get('role'),'status':e.get('status')} for e in trace if e.get('action')=='model_decision'],'transport':diag['transport'],'verified':['authorization','Event Hubs ingestion','Cosmos persistence','Story Director → Claim Reviewer handoff','producer approval','Spanish player variant','recap','SSE reconnect']},indent=2))

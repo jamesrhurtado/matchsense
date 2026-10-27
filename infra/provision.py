@@ -4,7 +4,9 @@ No application credentials are printed or written to version control.
 from __future__ import annotations
 import concurrent.futures
 import json
+import os
 import subprocess
+import tempfile
 from pathlib import Path
 
 GROUP='rg-whynow-demo'
@@ -18,7 +20,18 @@ def az(*args,quiet=False):
     return json.loads(result.stdout) if result.stdout.strip() else None
 
 def put(path,body,version):
-    return az('rest','--method','put','--url','https://management.azure.com'+path+'?api-version='+version,'--body',json.dumps(body))
+    run_dir=Path('.run');run_dir.mkdir(exist_ok=True)
+    file_path=None
+    try:
+        with tempfile.NamedTemporaryFile('w',encoding='utf-8',dir=run_dir,prefix='arm-request-',suffix='.json',delete=False) as request:
+            file_path=Path(request.name)
+            os.chmod(file_path,0o600)
+            json.dump(body,request)
+        return az('rest','--method','put','--url','https://management.azure.com'+path+'?api-version='+version,
+                  '--headers','Content-Type=application/json','--body','@'+str(file_path))
+    finally:
+        if file_path:
+            file_path.unlink(missing_ok=True)
 
 def main():
     subscription=az('account','show')['id']

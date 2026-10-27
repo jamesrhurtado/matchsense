@@ -57,6 +57,18 @@ LIVE_MEASURED={}
 logger=logging.getLogger('matchsense')
 logger.setLevel(logging.INFO)
 
+class OAuthAccessLogFilter(logging.Filter):
+    """Keep OAuth callback codes and state out of local/server access logs."""
+    def filter(self, record):
+        args=record.args
+        if record.name=='uvicorn.access' and isinstance(args,tuple) and len(args)>=3:
+            request_target=str(args[2])
+            if '/api/youtube/oauth/callback' in request_target and '?' in request_target:
+                safe=list(args);safe[2]=request_target.split('?',1)[0]+'?[redacted]';record.args=tuple(safe)
+        return True
+
+logging.getLogger('uvicorn.access').addFilter(OAuthAccessLogFilter())
+
 def workflow(tools,**kwargs):
     force_template=kwargs.pop('force_template',False)
     use_model=FOUNDRY and not force_template
@@ -137,7 +149,9 @@ if os.getenv('APPLICATIONINSIGHTS_CONNECTION_STRING'):
     from azure.monitor.opentelemetry import configure_azure_monitor
     from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
     configure_azure_monitor(logger_name='matchsense',enable_live_metrics=False,sampling_ratio=0.1)
-    FastAPIInstrumentor.instrument_app(app)
+    # OAuth authorization codes and state arrive as callback query parameters.
+    # Keep that one route out of request telemetry while preserving workflow traces.
+    FastAPIInstrumentor.instrument_app(app, excluded_urls=r"/api/youtube/oauth/callback")
 
 app.add_middleware(CORSMiddleware,allow_origins=os.getenv('WHY_NOW_ORIGINS','http://localhost:3000,http://127.0.0.1:3000').split(','),allow_methods=['GET','POST'],allow_headers=['Content-Type','X-Producer-Token','Last-Event-ID'])
 
@@ -167,6 +181,10 @@ class RecapRequest(Body):
 def fail(status,code): raise HTTPException(status,detail={'code':code})
 def require(token):
     if not token or not secrets.compare_digest(token,TOKEN):fail(401,'producer_auth_required')
+
+from services.api.obs_status import create_obs_router
+app.include_router(create_obs_router(require))
+
 def producer(token):
     if token is None:return False
     require(token);return True
@@ -203,8 +221,14 @@ def accept_package(sid,package,at,expected_revision):
         raise
 
 
+def model_workflow_configured():
+    """Whether replay workflows can call the configured Agent Framework model."""
+    return bool(FOUNDRY and os.getenv('AZURE_OPENAI_ENDPOINT') and os.getenv('FOUNDRY_MODEL_DEPLOYMENT'))
+
+
 def live_ai_configured():
-    return bool(FOUNDRY and EVENT_MODEL and os.getenv('AZURE_OPENAI_ENDPOINT') and os.getenv('FOUNDRY_MODEL_DEPLOYMENT'))
+    """Whether continuous live mode also has its event-model integration enabled."""
+    return bool(EVENT_MODEL and model_workflow_configured())
 
 
 def live_attempt_blocked(s,story_id,evidence_revision,at):
@@ -530,7 +554,7 @@ def snapshot_data(sid,is_producer=False,story_id=None):
         duration=s.get('duration_ms',60000)
         return {'session_id':sid,'match_id':s['match_id'],'clock_ms':at,'duration_ms':duration,'tracking_hz':meta['tracking_hz'],
                 'running':s['running'] and at<duration,'speed':s['speed'],'synthetic':True,'guided_demo':s.get('session_mode')!='live' and s['match_id'] in PRESENTATION_IDS,'flagship_demo':s['match_id'] in FLAGSHIP_IDS,
-                'session_mode':s.get('session_mode','guided'),'execution':s.get('execution','ai' if FOUNDRY else 'template'),'model_identity':s.get('model_identity'),'live_status':('stopped' if s.get('ended_early') else 'complete' if at>=duration else 'ai_unavailable' if s.get('execution')=='ai' and not live_ai_configured() else 'running' if s['running'] else 'ready'),'last_processed_ms':s.get('last_processed_ms'),
+                'session_mode':s.get('session_mode','guided'),'execution':s.get('execution','ai' if FOUNDRY else 'template'),'model_identity':s.get('model_identity'),'live_status':('stopped' if s.get('ended_early') else 'complete' if at>=duration else 'ai_unavailable' if s.get('session_mode')=='live' and s.get('execution')=='ai' and not live_ai_configured() else 'running' if s['running'] else 'ready'),'last_processed_ms':s.get('last_processed_ms'),
                 'workflow_attempts':live_attempt_summary(sid,at) if is_producer and s.get('session_mode')=='live' else [],
                 'workflow_notices':[{'story_id':e.get('story_id'),'state':e['state'],'at_ms':e.get('replay_ms')} for e in reversed(repo.lifecycle_events(sid)) if e.get('kind')=='opportunity' and e.get('state') in {'capacity_deferred','attempt_or_session_budget_limit','ai_unavailable','expired_unscheduled'}][:8] if is_producer and s.get('session_mode')=='live' else [],
                 'match_state':match_state(meta,messages,at),'score':match_state(meta,messages,at)['score'],'coverage_enabled':s.get('match_coverage',COVERAGE and s['match_id'] in MIXED_IDS),'teams':meta['teams'],'players':meta['players'],**view,
@@ -539,6 +563,7 @@ def snapshot_data(sid,is_producer=False,story_id=None):
                 'approved_possession':next(({'interval':[p['metrics']['facts']['window_start_ms'],p['metrics']['facts']['window_end_ms']], 'text':p['variants'][0]['text'],'story_id':p['id']} for p,state,published in sorted(entries,key=lambda e:-e[0]['metrics'].get('occurrence_ms',0)) if published and p.get('family')=='possession'),None),
                 'corrections':public_updates(repo,sid,at)[:5],
                 'story_status':status,'overlay_story_id':overlay_package['id'] if overlay_package else None,
+                'overlay_question':preference.get('audience_question') if override and overlay_package else None,
                 'overlay_selection_reason':({'en':'Producer override of the eligible approved revision.','es':'Selección del productor entre revisiones aprobadas vigentes.'} if override else {'en':'Eligible approved stories by event priority; newest within each family. Flagship sessions hold a story for 8 s unless a goal, manual override or correction takes precedence.','es':'Historias aprobadas elegibles por prioridad; la más reciente de cada categoría. La demo principal mantiene el texto 8 s salvo gol, selección manual o corrección.'}) if overlay_package else None,
                 'overlay':next(v['text'] for v in overlay_package['variants'] if v['id']=='en_simple_general') if overlay_package else None,
                 'mode':current['mode'] if current else ('AI unavailable' if s.get('session_mode')=='live' and s.get('execution')=='ai' and not live_ai_configured() else 'local deterministic template' if s.get('execution')=='template' else runtime_mode()),
@@ -546,6 +571,10 @@ def snapshot_data(sid,is_producer=False,story_id=None):
                 'cursor':len(audit)*10000000+s['control_revision']*10000000+at,
                 'generation':s['generation']}
 
+
+from services.api.audience import create_audience_router
+app.include_router(create_audience_router(lambda: repo, require, get_session, LOCK, snapshot_data,
+                                         lambda s: s.get('execution')=='ai' and model_workflow_configured()))
 
 def authorized_package(sid,story_id,token=None):
     s=get_session(sid);at=clock(s);p=materialize(s,at,story_id)
@@ -555,7 +584,7 @@ def authorized_package(sid,story_id,token=None):
     return s,at,p,status
 
 @app.get('/api/health')
-def health():return {'live_ai_configured':live_ai_configured(),'model_identity':{'deployment':os.getenv('FOUNDRY_MODEL_DEPLOYMENT'),'version':os.getenv('FOUNDRY_MODEL_VERSION')},'ok':True,'mode':runtime_mode(),'azure_deployed':CLOUD,'version':'0.5.0','narrative_version':'4' if STRUCTURED else '1'}
+def health():return {'workflow_ai_configured':model_workflow_configured(),'live_ai_configured':live_ai_configured(),'model_identity':{'deployment':os.getenv('FOUNDRY_MODEL_DEPLOYMENT'),'version':os.getenv('FOUNDRY_MODEL_VERSION')},'ok':True,'mode':runtime_mode(),'azure_deployed':CLOUD,'version':'0.5.0','narrative_version':'4' if STRUCTURED else '1'}
 
 @app.get('/api/ready')
 def ready():
@@ -573,7 +602,8 @@ def matches():return {'matches':[m for m in list_matches(COVERAGE,DEVELOPMENT) i
 def create(body:Create,x_producer_token:str|None=Header(None)):
     require(x_producer_token)
     if body.match_id not in {m['match_id'] for m in matches()['matches']}:fail(422,'unknown_match')
-    if (body.execution=='ai' or (body.mode=='live' and body.execution=='configured')) and not live_ai_configured():fail(503,'live_ai_not_configured_choose_template_or_configure_model')
+    if body.execution=='ai' and not model_workflow_configured():fail(503,'model_workflow_not_configured_choose_template_or_configure_model')
+    if body.mode=='live' and body.execution in {'ai','configured'} and not live_ai_configured():fail(503,'live_ai_not_configured_choose_guided_or_template')
     with LOCK:s=new_session(body.match_id,body.mode,body.execution)
     return {'session_id':s['id'],'match_id':s['match_id']}
 
@@ -631,6 +661,46 @@ class OverlaySelection(Body):
     story_id:str
     expected_revision:int=Field(ge=1)
     package_hash:str=Field(min_length=64,max_length=64)
+    audience_group_id:str|None=Field(default=None,max_length=100)
+
+@app.post('/api/replay-sessions/{sid}/broadcast/director')
+def broadcast_director(sid:str,x_producer_token:str|None=Header(None)):
+    require(x_producer_token)
+    from engine.broadcast_director import recommend, eligible_stories
+    before=snapshot_data(sid,True)
+    before['recent_manual_selections']=[e.get('story_id') for e in repo.lifecycle_events(sid)
+        if e.get('kind')=='approval_received' and e.get('action')=='select_overlay' and e.get('story_id')][-8:]
+    with LOCK:
+        session=get_session(sid)
+        groups=session.get('audience',{}).get('groups',[])
+        wants_ai=session.get('execution')=='ai'
+        has_candidates=bool(eligible_stories(before))
+        attempts=session.get('broadcast_director_model_attempts',0)
+        use_ai=wants_ai and model_workflow_configured() and has_candidates and attempts<12
+        if use_ai:
+            # Reserve before the call so retries and concurrent requests count.
+            session['broadcast_director_model_attempts']=attempts+1
+            repo.save_session(session)
+    result=recommend(before,groups,use_ai=use_ai)
+    if wants_ai and not use_ai and has_candidates:
+        result['mode']='fallback'
+        result['reason']=('AI recommendation limit reached. ' if attempts>=12 else 'AI is unavailable. ')+result['reason']
+    # The match and its evidence can change while the model is thinking.
+    # Never return a recommendation to a revision that is no longer live.
+    after=snapshot_data(sid,True)
+    if result['story_id'] and not any(
+        s['id']==result['story_id'] and s['revision']==result['revision']
+        and s.get('package_hash')==result['package_hash']
+        and s.get('status') in ('ready','approved')
+        and s['eligible_from_ms']<=after['clock_ms']<s['expires_at_ms']
+        for s in after.get('stories',[])):
+        result=recommend(after,groups,use_ai=False)
+        result['mode']='fallback'
+        result['reason']='The original suggestion changed while it was being evaluated. '+result['reason']
+    record(repo,sid,'opportunity',[str(uuid.uuid4()),'broadcast_director'],
+           state='broadcast_recommendation',story_id=result['story_id'],
+           action=result['action'],mode=result['mode'],replay_ms=after['clock_ms'])
+    return result
 
 @app.post('/api/replay-sessions/{sid}/selection')
 def select_overlay(sid:str,body:OverlaySelection,x_producer_token:str|None=Header(None)):
@@ -640,6 +710,15 @@ def select_overlay(sid:str,body:OverlaySelection,x_producer_token:str|None=Heade
         if p['revision']!=body.expected_revision or p['package_hash']!=body.package_hash:fail(409,'stale_revision')
         if status!='approved':fail(409,'approved_live_story_required')
         s['overlay_preference']={k:p[k] for k in ['id','revision','package_hash']}
+        if body.audience_group_id:
+            group=next((g for g in s.get('audience',{}).get('groups',[])
+                        if g.get('id')==body.audience_group_id and g.get('state')!='dismissed'),None)
+            if not group or not group.get('association_confirmed') or group.get('story_id')!=p['id'] or group.get('story_revision')!=p['revision'] or group.get('story_hash')!=p['package_hash']:
+                fail(409,'audience_story_changed')
+            question=group.get('question','').strip()
+            if not question or len(question)>200:fail(409,'audience_question_unavailable')
+            s['overlay_preference']['audience_question']=question
+            s['overlay_preference']['audience_group_id']=body.audience_group_id
         repo.save_session(s)
         record(repo,sid,'approval_received',['overlay_selection',p['id'],p['revision'],at],story_id=p['id'],action='select_overlay',replay_ms=at)
         return {'overlay_story_id':p['id'],'selection_reason':'Producer override of deterministic selection; exact approved live revision.'}
@@ -759,7 +838,10 @@ def diagnostics(sid:str,x_producer_token:str|None=Header(None),story_id:str|None
         usage=p.get('model_usage',{}) if p else {}
         outcomes=repo.workflow_outcomes(sid)
         if story_id:outcomes=[o for o in outcomes if o['story_id']==story_id]
-        return {'session_id':sid,'clock_ms':at,'mode':p['mode'] if p else runtime_mode(),'observations_delivered':len(available(messages,at)),'ingestion_lag_ms':max(0,at-max((m['available_at_ms'] for m in available(messages,at)),default=0)),'metric_version':'pressure-escape-v1','workflow_ms':p['workflow_ms'] if p else None,'trace':p['trace'] if p else [],'audit':repo.audit(sid),'azure_deployed':CLOUD,'model_calls':p.get('model_calls',usage.get('calls',0)) if p else 0,'model_tokens':p.get('model_tokens',usage.get('total_tokens',0)) if p else 0,'model_usage':usage,'workflow_outcomes':outcomes,'lifecycle_events':repo.lifecycle_events(sid),'decision_summary':decision_summary(p,outcomes),'transport':transport.diagnostics() if transport else {'mode':'local'},'workflow_pending':any(k[0]==sid and not f.done() for k,f in JOBS.items())}
+        latest=outcomes[-1] if outcomes else {}
+        usage=usage or latest.get('model_usage',{})
+        trace=(p.get('trace') if p and p.get('trace') else latest.get('trace',[]))
+        return {'session_id':sid,'clock_ms':at,'mode':p['mode'] if p else runtime_mode(),'observations_delivered':len(available(messages,at)),'ingestion_lag_ms':max(0,at-max((m['available_at_ms'] for m in available(messages,at)),default=0)),'metric_version':'pressure-escape-v1','workflow_ms':p['workflow_ms'] if p else latest.get('workflow_ms'),'trace':trace,'audit':repo.audit(sid),'azure_deployed':CLOUD,'model_calls':p.get('model_calls',usage.get('calls',0)) if p else usage.get('calls',0),'model_tokens':p.get('model_tokens',usage.get('total_tokens',0)) if p else usage.get('total_tokens',0),'model_usage':usage,'workflow_outcomes':outcomes,'lifecycle_events':repo.lifecycle_events(sid),'decision_summary':decision_summary(p,outcomes),'transport':transport.diagnostics() if transport else {'mode':'local'},'workflow_pending':any(k[0]==sid and not f.done() for k,f in JOBS.items())}
 
 _RATE=defaultdict(deque)
 _RATE_LOCK=threading.Lock()

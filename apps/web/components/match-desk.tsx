@@ -26,6 +26,7 @@ import { api, cn, Evidence, Match, timecode, token, Variant } from "@/lib/api";
 import { Button, Card, Tag } from "./ui";
 import { MatchStage } from "./match-stage";
 import { BroadcastSetup } from "./broadcast-setup";
+import { BroadcastAgents } from "./broadcast-agents";
 import { MatchSenseBrand } from "./match-sense-brand";
 import { AudiencePanel, StoryPicker, relevantStories } from "./audience-panel";
 import { useMatch } from "@/hooks/use-match";
@@ -37,6 +38,7 @@ import { CatchUpPanel } from "./catch-up-panel";
 import { useViewerVisit } from "@/hooks/use-viewer-visit";
 import { ReviewCard } from "./review-card";
 import { DecisionSummary } from "./decision-summary";
+import { AgentHandoffTrace } from "./agent-handoff-trace";
 import { AudienceControls } from "./audience-controls";
 import { useAudiencePreferences } from "@/hooks/use-audience-preferences";
 import { useStoryVariant } from "@/hooks/use-story-variant";
@@ -422,6 +424,27 @@ export default function MatchDesk({
       setDiagnosticsLoading(false);
     }
   }
+  useEffect(() => {
+    if (!diagnostics || !workflowPending || !isProducer) return;
+    let cancelled = false;
+    const storyId = story?.id;
+    const timer = window.setInterval(async () => {
+      try {
+        const data = await api<Record<string, unknown>>(
+          `${path}/diagnostics${storyId ? `?story_id=${encodeURIComponent(storyId)}` : ""}`,
+          {},
+          true,
+        );
+        if (!cancelled) setDiagnostics(data);
+      } catch {
+        // The match stream remains authoritative; a missed trace refresh is non-blocking.
+      }
+    }, 1200);
+    return () => {
+      cancelled = true;
+      window.clearInterval(timer);
+    };
+  }, [Boolean(diagnostics), workflowPending, isProducer, path, story?.id]);
   if (error && /unknown.session|session.not.found/i.test(error)) {
     return (
       <main className="mx-auto flex min-h-dvh max-w-xl flex-col justify-center px-6 py-12">
@@ -982,7 +1005,7 @@ export default function MatchDesk({
             <MatchStage
               showExplanation={!quietViewer}
               match={match}
-              language={language}
+              language={language === "es" ? "es" : "en"}
               expired={Boolean(story && match?.story_status === "expired")}
             />
             {!!match?.corrections?.length && (
@@ -1141,6 +1164,24 @@ export default function MatchDesk({
               aria-label="Producer story queue"
               className="order-last min-w-0 space-y-5"
             >
+              <BroadcastAgents
+                id={id}
+                match={match}
+                stories={stories}
+                language={language}
+                onRefresh={refresh}
+                onSelect={(storyId) => {
+                  setSelectedStoryId(storyId);
+                  window.setTimeout(() => {
+                    document
+                      .getElementById("selected-insight")
+                      ?.scrollIntoView({ block: "start", behavior: "smooth" });
+                    document
+                      .getElementById("selected-insight")
+                      ?.focus({ preventScroll: true });
+                  }, 0);
+                }}
+              />
               <Card className="overflow-hidden">
                 <div className="flex items-center justify-between border-b border-stone-200 bg-stone-50/80 p-5">
                   <h2 className="flex items-center gap-2 font-semibold">
@@ -1196,6 +1237,8 @@ export default function MatchDesk({
                 </div>
                 {story ? (
                   <div
+                    id="selected-insight"
+                    tabIndex={-1}
                     className={cn(
                       "border-t p-5",
                       storyApproved
@@ -1545,13 +1588,22 @@ export default function MatchDesk({
                 aria-expanded={Boolean(diagnostics)}
                 aria-busy={diagnosticsLoading}
                 disabled={diagnosticsLoading}
-                className="flex w-full items-center justify-between px-2 py-2 text-xs text-stone-500"
+                className="mt-2 flex w-full items-center justify-between rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-left text-emerald-950 transition hover:bg-emerald-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 disabled:opacity-60"
               >
-                <span className="flex items-center gap-2">
-                  <Activity size={14} />
-                  {diagnosticsLoading
-                    ? "Opening review trace…"
-                    : "Processing & review trace"}
+                <span className="flex items-center gap-3">
+                  <Activity size={17} aria-hidden="true" />
+                  <span>
+                    <span className="block text-sm font-semibold">
+                      {diagnosticsLoading
+                        ? language === "es" ? "Abriendo flujo de agentes…" : "Opening agent workflow…"
+                        : workflowPending
+                          ? language === "es" ? "Ver agentes trabajando ahora" : "See agents working now"
+                          : language === "es" ? "Ver el traspaso entre agentes" : "See the agent handoff"}
+                    </span>
+                    <span className="mt-0.5 block text-xs font-normal text-emerald-900/75">
+                      Story Director → Claim Reviewer → {language === "es" ? "tú decides" : "your decision"}
+                    </span>
+                  </span>
                 </span>
                 <ChevronRight size={14} />
               </button>
@@ -1566,7 +1618,7 @@ export default function MatchDesk({
                 tabIndex={-1}
                 className="text-lg font-semibold outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
               >
-                Processing & review trace
+                {language === "es" ? "Traspaso y revisión de agentes" : "Agent handoff & review trace"}
               </h2>
               <button
                 aria-label="Close diagnostics"
@@ -1585,55 +1637,12 @@ export default function MatchDesk({
                 }
               />
             )}
-            {story?.family && story.family !== "pass" && (
-              <section
-                className="mt-4 rounded-xl border border-stone-200 p-4"
-                aria-label="AI role decisions"
-              >
-                <h3 className="text-sm font-semibold">AI review steps</h3>
-                <p className="mt-1 text-sm text-stone-600">
-                  The Director selects a supported moment; the Reviewer checks
-                  its facts and wording. Neither role approves publication.
-                </p>
-                <div className="mt-3 space-y-2">
-                  {(
-                    (diagnostics.trace ?? []) as {
-                      role: string;
-                      action: string;
-                      status: string;
-                      duration_ms?: number;
-                    }[]
-                  )
-                    .filter((entry) => entry.action === "model_decision")
-                    .map((entry, i) => {
-                      const result =
-                        entry.status === "propose"
-                          ? "Selected this explanation"
-                          : entry.status === "supported"
-                            ? "Supported the facts and wording"
-                            : entry.status === "abstain"
-                              ? "Suggested no explanation"
-                              : entry.status === "reject"
-                                ? "Could not support the explanation"
-                                : entry.status === "revise"
-                                  ? "Requested a wording change"
-                                  : entry.status.replaceAll("_", " ");
-                      return (
-                        <div
-                          key={`${entry.role}-${i}`}
-                          className="flex flex-wrap items-center justify-between gap-2 border-t border-stone-100 pt-2 text-sm"
-                        >
-                          <span className="font-medium">{entry.role}</span>
-                          <span className="text-stone-600">{result}</span>
-                          {entry.duration_ms != null && (
-                            <Tag>{(entry.duration_ms / 1000).toFixed(1)} s</Tag>
-                          )}
-                        </div>
-                      );
-                    })}
-                </div>
-              </section>
-            )}
+            <AgentHandoffTrace
+              trace={diagnostics.trace}
+              summary={diagnostics.decision_summary as Parameters<typeof DecisionSummary>[0]["summary"]}
+              pending={diagnostics.workflow_pending === true}
+              language={language === "es" ? "es" : "en"}
+            />
             <details className="mt-5">
               <summary className="text-sm font-medium">
                 Technical calls, timing and usage

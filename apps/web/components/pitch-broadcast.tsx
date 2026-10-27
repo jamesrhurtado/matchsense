@@ -84,7 +84,8 @@ export function BroadcastOverlay({ sessionId }: { sessionId: string }) {
           className={styles.lowerThird}
           aria-label="Producer-approved insight"
         >
-          <span className={styles.label}>MATCHSENSE · APPROVED INSIGHT</span>
+          <span className={styles.label}>{match?.overlay_question ? "MATCHSENSE · AUDIENCE QUESTION" : "MATCHSENSE · APPROVED INSIGHT"}</span>
+          {match?.overlay_question && <p className={styles.question}>{match.overlay_question}</p>}
           <p>{match?.overlay}</p>
         </section>
       )}

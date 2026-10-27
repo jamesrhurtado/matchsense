@@ -22,6 +22,7 @@ export default function Home() {
   const [accessNeeded, setAccessNeeded] = useState(false);
   const [runtime, setRuntime] = useState<{
     mode: string;
+    workflow_ai_configured?: boolean;
     live_ai_configured?: boolean;
     model_identity?: { deployment?: string; version?: string };
   } | null>(null);
@@ -39,9 +40,17 @@ export default function Home() {
       sessionStorage.getItem("why-now-token") ||
         (isLocal ? "local-demo-producer" : ""),
     );
-    api<{ mode: string; live_ai_configured?: boolean }>("/health")
+    api<{
+      mode: string;
+      workflow_ai_configured?: boolean;
+      live_ai_configured?: boolean;
+    }>("/health")
       .then((data) => {
         setRuntime(data);
+        if (data.workflow_ai_configured) {
+          setExperience("guided");
+          setExecution("ai");
+        }
       })
       .catch(() => {});
     api<{ matches: MatchOption[] }>("/matches")
@@ -103,6 +112,9 @@ export default function Home() {
     }
   }
   const duration = matches.find((m) => m.match_id === fixture)?.duration_ms;
+  const aiAvailableForSelection =
+    runtime?.workflow_ai_configured &&
+    (experience !== "live" || runtime.live_ai_configured);
   return (
     <main className="mx-auto min-h-dvh max-w-7xl px-5 pb-6 sm:px-8 lg:px-12">
       <a
@@ -273,25 +285,29 @@ export default function Home() {
             className="mt-4 rounded-lg bg-stone-50 p-3 text-sm leading-relaxed text-stone-600"
           >
             {runtime ? (
-              runtime.live_ai_configured ? (
+              runtime.workflow_ai_configured ? (
                 <>
                   <Check
                     size={14}
                     className="mr-2 inline text-emerald-800"
                     aria-hidden="true"
                   />
-                  AI is available. Choose AI in Demo options to try it.
+                  {execution === "ai" && experience === "live" && !runtime.live_ai_configured
+                    ? "AI is ready for the guided replay. Continuous live-mode AI needs additional event-model configuration."
+                    : execution === "ai"
+                      ? "AI is ready. The Director proposes, the Reviewer checks, and you decide what viewers receive."
+                      : "AI is configured for this replay. Choose AI in Demo options to see the Director and Reviewer handoff."}
                 </>
               ) : (
                 <>
-                  AI is offline here. The prepared example and template demo
-                  remain available.
+                  AI is not configured for this demo. The prepared example and
+                  template preview remain available.
                 </>
               )
             ) : (
               "Checking the demo connection…"
             )}
-            {execution === "ai" && runtime && !runtime.live_ai_configured && (
+            {execution === "ai" && runtime && !runtime.workflow_ai_configured && (
               <button
                 onClick={() => setExecution("template")}
                 className="mt-2 block min-h-11 font-semibold text-emerald-800 underline underline-offset-4"
@@ -299,6 +315,17 @@ export default function Home() {
                 Use template preview instead
               </button>
             )}
+            {execution === "ai" &&
+              runtime?.workflow_ai_configured &&
+              experience === "live" &&
+              !runtime.live_ai_configured && (
+                <button
+                  onClick={() => setExperience("guided")}
+                  className="mt-2 block min-h-11 font-semibold text-emerald-800 underline underline-offset-4"
+                >
+                  Use the guided AI walkthrough
+                </button>
+              )}
           </div>
           {(!local || accessNeeded) && (
             <div className="mt-4">
@@ -335,7 +362,7 @@ export default function Home() {
               busy ||
               !matches.length ||
               !key ||
-              (execution === "ai" && !runtime?.live_ai_configured)
+              (execution === "ai" && !aiAvailableForSelection)
             }
             onClick={create}
             className="mt-5 w-full py-3"

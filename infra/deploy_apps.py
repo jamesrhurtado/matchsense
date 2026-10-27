@@ -28,14 +28,31 @@ def deploy(only_web=False):
       'OTEL_SERVICE_NAME':'matchsense-api','OTEL_TRACES_SAMPLER_ARG':'0.1',
     }
     domain=env['properties']['defaultDomain'];api_url='https://'+S['api']+'.internal.'+domain
-    api_env['WHY_NOW_ORIGINS']='https://'+S['web']+'.'+domain
+    web_origin='https://'+S['web']+'.'+domain
+    api_env['WHY_NOW_ORIGINS']=web_origin
+    youtube_client_id=os.getenv('YOUTUBE_CLIENT_ID')
+    youtube_client_secret=os.getenv('YOUTUBE_CLIENT_SECRET')
+    if bool(youtube_client_id) != bool(youtube_client_secret):
+        raise RuntimeError('Both YOUTUBE_CLIENT_ID and YOUTUBE_CLIENT_SECRET are required for YouTube OAuth deployment.')
+    if youtube_client_id:
+        api_env.update({
+          'YOUTUBE_CLIENT_ID':youtube_client_id,
+          'YOUTUBE_OAUTH_REDIRECT_URI':web_origin+'/api/youtube/oauth/callback',
+          'MATCHSENSE_WEB_ORIGIN':web_origin,
+        })
     def app(name,image,port,external,environ,secret=None):
         app_identity=S.get('web_identity_id',S['identity_id']) if external else S['identity_id']
         configuration={'activeRevisionsMode':'Single','ingress':{'external':external,'targetPort':port,'transport':'auto','allowInsecure':False},'registries':[{'server':registry,'identity':app_identity}]}
         variables=[{'name':k,'value':v} for k,v in environ.items()]
+        secrets=[]
         if secret:
-            configuration['secrets']=[{'name':'producer-key','value':secret}]
+            secrets.append({'name':'producer-key','value':secret})
             variables.append({'name':'WHY_NOW_PRODUCER_TOKEN','secretRef':'producer-key'})
+        if not external and youtube_client_secret:
+            secrets.append({'name':'youtube-oauth-secret','value':youtube_client_secret})
+            variables.append({'name':'YOUTUBE_CLIENT_SECRET','secretRef':'youtube-oauth-secret'})
+        if secrets:
+            configuration['secrets']=secrets
         body={'location':S['location'],'tags':{'project':'why-now','environment':'demo','expiry':'2026-11-20'},'identity':{'type':'UserAssigned','userAssignedIdentities':{app_identity:{}}},'properties':{'managedEnvironmentId':env['id'],'workloadProfileName':'Consumption','configuration':configuration,'template':{'revisionSuffix':os.getenv('WHY_NOW_WEB_IMAGE_TAG',tag) if external else tag,'containers':[{'name':name,'image':registry+'/'+image+':'+(os.getenv('WHY_NOW_WEB_IMAGE_TAG',tag) if external else tag),'env':variables,'resources':{'cpu':.5 if external else 1,'memory':'1Gi' if external else '2Gi'},'probes':[{'type':'Liveness','httpGet':{'path':'/healthz' if external else '/api/health','port':port},'initialDelaySeconds':30,'periodSeconds':30,'timeoutSeconds':5},{'type':'Readiness','httpGet':{'path':'/healthz' if external else '/api/ready','port':port},'initialDelaySeconds':15,'periodSeconds':15,'timeoutSeconds':5,'failureThreshold':10}]}],'scale':{'minReplicas':1,'maxReplicas':1}}}}
         put(resource('Microsoft.App/containerApps',name),body,'2024-03-01')
         print('Deployment requested:',name,flush=True)

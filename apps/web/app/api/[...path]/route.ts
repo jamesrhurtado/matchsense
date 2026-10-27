@@ -48,7 +48,7 @@ async function proxy(request: Request, context: { params: Promise<{ path: string
   try {
     const upstream = await fetch(target, { method: request.method, headers, body, signal, cache: 'no-store', redirect: 'manual' });
     const responseHeaders = new Headers({ 'Cache-Control': 'no-store' });
-    for (const name of ['content-type', 'retry-after', 'www-authenticate']) {
+    for (const name of ['content-type', 'retry-after', 'www-authenticate', 'location']) {
       const value = upstream.headers.get(name);
       if (value) responseHeaders.set(name, value);
     }

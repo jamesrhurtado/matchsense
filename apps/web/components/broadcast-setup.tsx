@@ -5,6 +5,7 @@ import { ArrowUpRight, Check, Copy, Radio } from "lucide-react";
 import { Match } from "@/lib/api";
 import { companionUrl } from "@/lib/broadcast-links";
 import { CompanionQR } from "./companion-qr";
+import { ObsStatusPanel } from "./obs-status";
 import { Button, Tag } from "./ui";
 
 export function BroadcastSetup({
@@ -171,6 +172,7 @@ export function BroadcastSetup({
             YouTube may be delayed. The companion follows the app clock, not the
             video playback position.
           </p>
+          <ObsStatusPanel />
           <div className="mt-5 border-t border-stone-200 pt-4">
             {publicUrl ? (
               <>

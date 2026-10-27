@@ -98,6 +98,7 @@ export type Match = {
   stories?: Story[];
   story_status: string;
   overlay: string | null;
+  overlay_question?: string | null;
   overlay_story_id?: string | null;
   overlay_selection_reason?: Record<string, string> | null;
   delivered_count: number;

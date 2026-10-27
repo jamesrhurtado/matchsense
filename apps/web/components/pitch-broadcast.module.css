@@ -90,6 +90,11 @@
   font: 600 clamp(21px, 2.1vw, 38px)/1.2 ui-sans-serif, system-ui, sans-serif;
   text-wrap: pretty;
 }
+.lowerThird .question {
+  margin-bottom: 10px;
+  color: #12684b;
+  font-size: clamp(16px, 1.45vw, 27px);
+}
 @keyframes enter {
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }

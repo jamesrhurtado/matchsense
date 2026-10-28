@@ -17,6 +17,12 @@ scorer, assist, save, recovery, cause or goal from coordinates. Shots use goal,
 saved, blocked, off_target, unknown. A shot outcome requires its resolution;
 goal wording and score additionally require a confirmed goal observation.
 
+Match observation schema 1.1.0 adds optional `body_part` and `play_type` fields
+to shot-start details. The flagship synthetic fixture supplies authored values
+for its first two located shots; these are synthetic source details, not facts
+inferred from video or tracking. The live illustrative xG estimate abstains
+when location, body part, play type or complete nearby tracking is missing.
+
 Possession: fixed trailing 60 s windows ending at 15 s replay boundaries. Clip to
 segment/period, including an explicitly observed period end. Integrate left frame state over [frame, next frame), only if next
 frame is at most 200 ms away in the same period. No extrapolation after last
@@ -66,12 +72,13 @@ latest possession snapshot; chronological display, count/link to complete histor
 | v5 | event schema/renderer plus shared repositories | append revision, never rewrite |
 | Unknown version | reject | no reinterpretation |
 
-Observation envelope remains 1.0.0 with additive discriminated event variants.
-Old binaries cannot ingest new event variants or v5. Flag WHY_NOW_MATCH_COVERAGE
-is off by default; enable disposable local pilot sessions explicitly. Rollback
-must keep this compatible reader or isolate new sessions from old builds. SQLite
-and Cosmos use their existing immutable package/atomic decision adapters; no new
-infrastructure. Live Cosmos and model-specific validation remain separate gates.
+Observation envelopes and match metadata accept 1.0.0 and 1.1.0. Old binaries
+cannot ingest the 1.1.0 shot details, new event variants or v5. Flag
+WHY_NOW_MATCH_COVERAGE is off by default; enable disposable local pilot sessions
+explicitly. Rollback must keep this compatible reader or isolate new sessions
+from old builds. SQLite and Cosmos use their existing immutable package/atomic
+decision adapters; no new infrastructure. Live Cosmos and model-specific
+validation remain separate gates.
 
 ## Additive v6 Pressure Swing
 

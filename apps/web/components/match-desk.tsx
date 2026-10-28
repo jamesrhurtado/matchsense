@@ -7,6 +7,7 @@ import {
   ArrowRight,
   ArrowUpRight,
   Check,
+  ChartNoAxesCombined,
   ChevronRight,
   Clock3,
   Eye,
@@ -42,6 +43,7 @@ import { AgentHandoffTrace } from "./agent-handoff-trace";
 import { AudienceControls } from "./audience-controls";
 import { useAudiencePreferences } from "@/hooks/use-audience-preferences";
 import { useStoryVariant } from "@/hooks/use-story-variant";
+import { LiveMatchInsights } from "./live-match-insights";
 
 export default function MatchDesk({
   id,
@@ -78,6 +80,7 @@ export default function MatchDesk({
   const { language, setLanguage, detail, setDetail, focus, setFocus } =
     useAudiencePreferences();
   const [recapOpen, setRecapOpen] = useState(false);
+  const [matchInsightsOpen, setMatchInsightsOpen] = useState(false);
   const [viewerDisplay, setViewerDisplay] = useState("match");
   const recapPanel = useRef<HTMLDivElement>(null);
   const visit = useViewerVisit(id, match?.clock_ms, !isProducer);
@@ -182,6 +185,7 @@ export default function MatchDesk({
       setSelectedStoryId(match.story.id);
   }, [isProducer, selectedStoryId, match?.story?.id]);
   const workflowPending = match?.workflow_pending === true;
+  const modelReviewPending = workflowPending && match?.execution === "ai";
   const currentWorkflowNotice = (match?.workflow_notices || []).find(
     (notice) => !story?.id || !notice.story_id || notice.story_id === story.id,
   );
@@ -201,13 +205,21 @@ export default function MatchDesk({
       ? {
           tone: "active" as const,
           title:
-            language === "es"
-              ? "Revisión de IA en curso"
-              : "AI review in progress",
+            modelReviewPending
+              ? language === "es"
+                ? "Preparando revisión con IA"
+                : "Preparing AI review"
+              : language === "es"
+                ? "Preparando explicación"
+                : "Preparing explanation",
           message:
-            language === "es"
-              ? "Se está revisando un nuevo momento. Puedes seguir comprobando la evidencia mientras continúa el partido."
-              : "A new moment is being reviewed. You can keep checking the evidence while the match continues.",
+            modelReviewPending
+              ? language === "es"
+                ? "MatchSense está comprobando el momento y preparando la evidencia para revisarlo."
+                : "MatchSense is checking this moment and preparing its supporting evidence."
+              : language === "es"
+                ? "MatchSense está reuniendo la evidencia disponible para explicar este momento."
+                : "MatchSense is assembling the available evidence for this moment.",
         }
       : currentWorkflowNotice?.state === "capacity_deferred"
         ? {
@@ -625,23 +637,30 @@ export default function MatchDesk({
                   : "Reconnecting"}
             </Tag>
             {isProducer && (
-              <div className="flex flex-wrap items-center gap-2">
+              <nav
+                aria-label="Producer tools"
+                className="flex flex-wrap items-center gap-2"
+              >
                 <Button
+                  tone="primary"
                   aria-expanded={broadcastSetupOpen}
                   aria-controls="broadcast-setup"
                   onClick={() => setBroadcastSetupOpen((value) => !value)}
+                  className="h-11 min-h-11 gap-2 px-4 py-0"
                 >
+                  <Radio size={16} aria-hidden="true" />
                   Prepare broadcast
                 </Button>
                 <Link
                   href={`/watch/${id}`}
                   target="_blank"
-                  className="inline-flex items-center gap-2 rounded-lg border border-stone-200 bg-white px-3 py-2 text-sm"
+                  className="inline-flex h-11 min-h-11 items-center gap-2 rounded-xl border border-stone-300 bg-white px-4 text-sm font-semibold text-stone-700 transition hover:border-stone-400 hover:bg-stone-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
                 >
+                  <Eye size={16} aria-hidden="true" />
                   Viewer companion
                   <ArrowUpRight size={15} />
                 </Link>
-              </div>
+              </nav>
             )}
           </div>
         </header>
@@ -716,7 +735,7 @@ export default function MatchDesk({
           className={cn(
             "grid items-start gap-6",
             isProducer
-              ? "lg:grid-cols-3"
+              ? "lg:grid-cols-[minmax(0,1.4fr)_minmax(18rem,0.9fr)]"
               : quietViewer
                 ? "grid-cols-1"
                 : "lg:grid-cols-2",
@@ -728,7 +747,7 @@ export default function MatchDesk({
             aria-label={
               language === "es" ? "Repetición en directo" : "Live replay"
             }
-            className={cn("min-w-0", isProducer && "lg:col-span-2")}
+            className="min-w-0"
           >
             {isProducer && match?.session_mode !== "live" && (
               <div className="mb-3 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-stone-200 bg-white p-3">
@@ -812,28 +831,6 @@ export default function MatchDesk({
                     pauses the replay at that time.
                   </p>
                 </details>
-                <details className="text-xs text-stone-500">
-                  <summary className="flex min-h-11 items-center">
-                    Replay data details
-                  </summary>
-                  <p className="max-w-sm pb-2 leading-relaxed">
-                    Session reference: {id}.<br />
-                    {match?.score && (
-                      <>
-                        {language === "es"
-                          ? "El marcador refleja eventos confirmados del partido."
-                          : "The score reflects confirmed match events."}
-                        <br />
-                      </>
-                    )}
-                    <span className="tabular-nums">
-                      {match?.delivered_count || 0} observations delivered.
-                    </span>{" "}
-                    These are position samples and source records, not a count
-                    of football incidents. Suggested insights appear in the
-                    review queue.
-                  </p>
-                </details>
               </div>
             )}
 
@@ -862,26 +859,6 @@ export default function MatchDesk({
                         ? "Vista previa con plantillas · sin explicaciones generadas por IA"
                         : "Template preview · no AI-generated explanations"}
                 </p>
-                <details className="w-full text-xs">
-                  <summary className="min-h-9 py-2">
-                    {language === "es"
-                      ? "Cómo funciona la publicación"
-                      : "How publication works"}
-                  </summary>
-                  <p className="pb-2 leading-relaxed">
-                    {isProducer
-                      ? language === "es"
-                        ? "Solo las explicaciones aprobadas llegan a los espectadores. La revisión no detiene el partido."
-                        : "Only approved explanations reach viewers. Review does not stop the match."
-                      : match.live_status === "ai_unavailable"
-                        ? language === "es"
-                          ? "Las explicaciones con IA no están disponibles por ahora. Las historias aprobadas anteriormente siguen visibles."
-                          : "AI explanations are temporarily unavailable. Previously approved stories remain available."
-                        : language === "es"
-                          ? "Solo las explicaciones aprobadas por el productor se comparten con los espectadores."
-                          : "Only producer-approved explanations are shared with viewers."}
-                  </p>
-                </details>
                 {isProducer && (
                   <div className="mt-3 flex flex-wrap gap-2">
                     <Button onClick={() => void control("reset")}>
@@ -901,31 +878,7 @@ export default function MatchDesk({
                     )}
                   </div>
                 )}
-                {isProducer && (
-                  <details className="mt-3">
-                    <summary className="cursor-pointer">
-                      Session details
-                    </summary>
-                    <p className="mt-2 break-all">
-                      Session reference: {id}. Model:{" "}
-                      {match.model_identity?.deployment || "none"}
-                      {match.model_identity?.version
-                        ? ` · ${match.model_identity.version}`
-                        : ""}
-                      .
-                    </p>
-                  </details>
-                )}
               </div>
-            )}
-            {isProducer && match?.session_mode !== "live" && (
-              <p role="status" className="mb-3 text-sm text-stone-600">
-                {(match?.clock_ms || 0) >= duration
-                  ? "Replay complete. Review the remaining insights, open the recap, or choose New replay to start again."
-                  : "This replay ends at " +
-                    timecode(duration) +
-                    ". With guided pauses off, playback continues while suggested insights arrive. It will stop at the end."}
-              </p>
             )}
             {isProducer && match?.guided_demo && (
               <div className="mb-3 rounded-xl border border-sky-200 bg-sky-50 p-4 text-sm text-sky-950">
@@ -936,8 +889,13 @@ export default function MatchDesk({
                     onChange={(e) => setGuidedPauses(e.target.checked)}
                     className="size-4"
                   />
-                  Pause at new event types
+                  Pause when a new event type is ready
                 </label>
+                <p className="text-xs leading-relaxed text-sky-900/80">
+                  Several insights can share a timestamp. The guided replay
+                  pauses once for each event type when its reviewable insight is
+                  ready; the clock may move ahead while AI review finishes.
+                </p>
 
                 {guidedNotice && (
                   <div className="mt-3">
@@ -959,6 +917,19 @@ export default function MatchDesk({
                     </Button>
                   </div>
                 )}
+              </div>
+            )}
+            {!isProducer && (
+              <div className="mb-3 flex justify-end">
+                <Button
+                  aria-expanded={matchInsightsOpen}
+                  aria-controls={matchInsightsOpen ? "live-match-insights" : undefined}
+                  disabled={!match}
+                  onClick={() => setMatchInsightsOpen((open) => !open)}
+                >
+                  <ChartNoAxesCombined size={16} aria-hidden="true" />
+                  {language === "es" ? "Datos del partido" : "Match insights"}
+                </Button>
               </div>
             )}
             {!isProducer && match?.session_mode === "live" && (
@@ -994,21 +965,22 @@ export default function MatchDesk({
                     {language === "es" ? "Ponerme al día" : "Catch me up"}
                   </Button>
                 )}
-                {quietViewer && (
-                  <p className="w-full text-sm text-stone-600">
-                    {language === "es"
-                      ? "Sigue el juego. Abre las explicaciones o el resumen cuando quieras."
-                      : "Enjoy the play. Open explanations or catch up whenever you choose."}
-                  </p>
-                )}
               </div>
             )}
             <MatchStage
-              showExplanation={!quietViewer}
+              showExplanation={isProducer}
               match={match}
               language={language === "es" ? "es" : "en"}
               expired={Boolean(story && match?.story_status === "expired")}
             />
+            {!isProducer && matchInsightsOpen && match && (
+              <LiveMatchInsights
+                key={id}
+                sessionId={id}
+                clockMs={match.clock_ms}
+                language={language}
+              />
+            )}
             {!!match?.corrections?.length && (
               <details
                 className="mt-3 rounded-lg border border-amber-200 bg-amber-50 px-4 text-sm"
@@ -1184,7 +1156,7 @@ export default function MatchDesk({
                 }}
               />
               <Card className="overflow-hidden">
-                <div className="flex items-center justify-between border-b border-stone-200 bg-stone-50/80 p-5">
+                <div className="flex items-center justify-between border-b border-stone-200 bg-stone-50/70 px-4 py-3">
                   <h2 className="flex items-center gap-2 font-semibold">
                     <Layers3 size={16} />
                     Suggested insights
@@ -1195,23 +1167,24 @@ export default function MatchDesk({
                       : "Watching"}
                   </Tag>
                 </div>
-                <p className="px-5 pt-4 text-sm leading-relaxed text-stone-500">
-                  Review a supported moment and its evidence before sharing.
+                <p className="px-4 pt-3 text-xs leading-relaxed text-stone-500">
+                  {language === "es"
+                    ? "Selecciona un momento para revisar su evidencia y aprobarlo debajo."
+                    : "Select an insight to review its evidence and approval below."}
                 </p>
-
                 {reviewFeedback && (
                   <div
                     role="status"
                     aria-live="polite"
                     data-testid="review-status"
                     className={cn(
-                      "mx-4 mt-4 rounded-xl border px-3 py-3 text-sm",
+                      "mx-4 mt-4 rounded-lg border px-3 py-2.5 text-sm",
                       reviewFeedback.tone === "active"
-                        ? "border-sky-200 bg-sky-50 text-sky-950"
+                        ? "border-emerald-200 bg-emerald-50 text-emerald-950"
                         : "border-amber-200 bg-amber-50 text-amber-950",
                     )}
                   >
-                    <p className="font-semibold">{reviewFeedback.title}</p>
+                    <p className="text-xs font-semibold">{reviewFeedback.title}</p>
                     <p className="mt-1 text-xs leading-relaxed">
                       {reviewFeedback.message}
                     </p>
@@ -1219,8 +1192,8 @@ export default function MatchDesk({
                 )}
                 <div
                   data-testid="producer-insight-list"
-                  className="max-h-64 overflow-y-auto overscroll-contain [scrollbar-gutter:stable]"
-                  tabIndex={0}
+                  className="min-w-0"
+                  role="region"
                   aria-label="Incoming insights"
                 >
                   {stories.length ? (
@@ -1229,11 +1202,10 @@ export default function MatchDesk({
                       selected={story?.id || ""}
                       onSelect={setSelectedStoryId}
                       producer
+                      language={language}
                     />
                   ) : (
-                    <p className="p-5 text-sm text-stone-500">
-                      Watching for supported moments.
-                    </p>
+                    <p className="sr-only">No suggested insights yet.</p>
                   )}
                 </div>
                 {story ? (
@@ -1276,7 +1248,6 @@ export default function MatchDesk({
                               ? "Ventana en vivo cerrada"
                               : "Live window closed"
                             : match?.story_status}
-                      {storyApproved && ` · revision ${story.revision}`}
                     </Tag>
                     <h3 className="mt-4 text-balance text-xl font-semibold leading-tight text-stone-950 sm:text-2xl">
                       {story.family === "pressure"
@@ -1347,9 +1318,14 @@ export default function MatchDesk({
                             : "How this was reviewed"}
                         </summary>
                         <p className="mt-2 text-stone-600">
-                          {language === "es"
-                            ? `La IA seleccionó ${story.editorial_decision.claim_ids.length} dato${story.editorial_decision.claim_ids.length === 1 ? "" : "s"} respaldado${story.editorial_decision.claim_ids.length === 1 ? "" : "s"} y comprobó la redacción. Al aprobarla, compartes esta versión en la vista de espectadores.`
-                            : `The AI selected ${story.editorial_decision.claim_ids.length} supported fact${story.editorial_decision.claim_ids.length === 1 ? "" : "s"} and checked the wording. Approving shares this exact version with viewers.`}
+                          {story.editorial_decision.director === "selected" &&
+                          story.editorial_decision.reviewer === "supported"
+                            ? language === "es"
+                              ? "La IA seleccionó una afirmación respaldada por varias mediciones del partido y el revisor comprobó la redacción. Tú decides si compartir esta versión."
+                              : "The AI selected one claim supported by several match measurements, and the reviewer checked its wording. You decide whether to share this version."
+                            : language === "es"
+                              ? "Esta versión reúne varias mediciones del partido en una afirmación respaldada. Revisa la evidencia antes de decidir si compartirla."
+                              : "This version combines several match measurements into one supported claim. Review the evidence before deciding whether to share it."}
                         </p>
                         {match?.session_mode === "live" && (
                           <p className="mt-2 text-stone-600">
@@ -1513,41 +1489,42 @@ export default function MatchDesk({
                     </details>
                   </div>
                 ) : (
-                  <div className="p-6">
-                    <div className="my-6 flex size-12 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-800">
-                      <ScanLine size={24} />
+                  <div className="flex items-start gap-3 border-t border-stone-100 px-4 py-4">
+                    <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-800">
+                      <ScanLine size={19} aria-hidden="true" />
+                    </span>
+                    <div className="min-w-0 pt-0.5">
+                      <p className="text-sm font-semibold text-stone-800">
+                        {workflowPending
+                          ? language === "es"
+                            ? "Revisión en curso"
+                            : "Review in progress"
+                          : match?.running
+                            ? language === "es"
+                              ? "Buscando momentos con evidencia"
+                              : "Watching for supported moments"
+                            : language === "es"
+                              ? "Listo para iniciar la repetición"
+                              : "Ready to start the replay"}
+                      </p>
+                      <p className="mt-1 text-pretty text-sm leading-relaxed text-stone-600">
+                        {workflowPending
+                          ? language === "es"
+                            ? "Director y Reviewer están preparando una historia para tu revisión."
+                            : "Director and Reviewer are preparing a story for your review."
+                          : match?.running
+                            ? language === "es"
+                              ? "Los nuevos insights aparecerán aquí cuando estén listos."
+                              : "New insights will appear here when they are ready."
+                            : match && match.clock_ms >= duration
+                              ? language === "es"
+                                ? "La repetición terminó. Inicia una nueva para revisar otros momentos."
+                                : "The replay has ended. Start a new one to review more moments."
+                              : language === "es"
+                                ? "Pulsa Reproducir en los controles del partido para comenzar."
+                                : "Press Play in the match controls to begin."}
+                      </p>
                     </div>
-                    <h3 className="text-balance text-xl font-semibold">
-                      {workflowPending
-                        ? "AI review in progress"
-                        : "Let the play tell its story."}
-                    </h3>
-                    <p className="mt-3 text-pretty text-sm leading-relaxed text-stone-500">
-                      Candidates use observed goals, resolved shots, possession
-                      windows, control changes and supported passes. Review
-                      source facts before approval.
-                    </p>
-                    <div className="mt-6 space-y-4 text-xs text-stone-500">
-                      {[
-                        "Count nearby opponents before release",
-                        "Inspect the pass and longitudinal positions",
-                        "Confirm possession and progression",
-                      ].map((text, i) => (
-                        <div className="flex items-center gap-3" key={text}>
-                          <span className="flex size-5 items-center justify-center rounded-full bg-stone-100 tabular-nums">
-                            {i + 1}
-                          </span>
-                          {text}
-                        </div>
-                      ))}
-                    </div>
-                    <p className="mt-6 border-t border-stone-100 pt-4 text-xs text-stone-400">
-                      {workflowPending
-                        ? "Evidence is ready. The AI workflow is checking the explanation; approval becomes available after review."
-                        : match?.running
-                          ? "Processing the replay. Some sequences correctly stay quiet."
-                          : "Press Play to begin the synthetic segment."}
-                    </p>
                   </div>
                 )}
               </Card>
@@ -1568,11 +1545,6 @@ export default function MatchDesk({
                     ? "Vista de espectadores"
                     : "Viewer companion"}
                 </div>
-                <p className="text-pretty text-sm leading-relaxed text-stone-500">
-                  {language === "es"
-                    ? "Comprueba cómo se ven el partido y las historias aprobadas para los espectadores."
-                    : "See the match and approved stories as viewers receive them."}
-                </p>
                 <Link
                   href={`/watch/${id}`}
                   target="_blank"
@@ -1732,18 +1704,6 @@ export default function MatchDesk({
             </details>
           </Card>
         )}
-        <footer className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-stone-200 pt-5 text-xs text-stone-400">
-          <span>
-            {language === "es"
-              ? "MatchSense · Mira la jugada. Entiende el momento."
-              : "MatchSense · See the play. Understand the moment."}
-          </span>
-          <span>
-            {language === "es"
-              ? "Identidades ficticias · Datos sintéticos originales"
-              : "Fictional identities · Original synthetic data"}
-          </span>
-        </footer>
       </div>
     </div>
   );

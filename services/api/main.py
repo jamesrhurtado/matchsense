@@ -29,6 +29,8 @@ from engine.event_metrics import event_metrics, FAMILY_PRIORITY
 from engine.event_narrative import build_event_package, story_id as event_story_id, display_title
 from engine.match_state import match_state
 from engine.event_workflow import generate_event
+from engine.fan_insights import build_demo_insights
+from engine.live_insights import build_live_insights
 COVERAGE=os.getenv('WHY_NOW_MATCH_COVERAGE','0')=='1'
 DEVELOPMENT=COVERAGE and os.getenv('WHY_NOW_SYNTHETIC_DEVELOPMENT','0')=='1'
 DEVELOPMENT_IDS={r['match_id'] for r in development_matches()}
@@ -585,6 +587,18 @@ def authorized_package(sid,story_id,token=None):
 
 @app.get('/api/health')
 def health():return {'workflow_ai_configured':model_workflow_configured(),'live_ai_configured':live_ai_configured(),'model_identity':{'deployment':os.getenv('FOUNDRY_MODEL_DEPLOYMENT'),'version':os.getenv('FOUNDRY_MODEL_VERSION')},'ok':True,'mode':runtime_mode(),'azure_deployed':CLOUD,'version':'0.5.0','narrative_version':'4' if STRUCTURED else '1'}
+
+@app.get('/api/insights/demo')
+def fan_insights_demo():
+    return build_demo_insights()
+
+@app.get('/api/replay-sessions/{sid}/insights')
+def replay_insights(sid:str):
+    with LOCK:
+        session=get_session(sid)
+        at=clock(session)
+        meta,messages=inputs(session,at)
+        return build_live_insights(meta,messages,at)
 
 @app.get('/api/ready')
 def ready():

@@ -70,6 +70,8 @@ class PlayStateChanged(EventBase):
 class ShotStartDetails(Strict):
     shot_id:str=Field(min_length=1,max_length=80,pattern=r'^[A-Za-z0-9_-]+$')
     location:Point|None=None
+    body_part:Literal['foot','head']|None=None
+    play_type:Literal['open_play','counter','set_piece','penalty']|None=None
 class ShotEndDetails(ShotStartDetails):
     outcome:Literal['goal','saved','blocked','off_target','unknown']
 class GoalDetails(Strict):
@@ -106,7 +108,7 @@ class PeriodStateChanged(EventBase):
     details:PeriodDetails
 EventPayload=Annotated[PassStarted|PassResolved|PossessionChanged|PlayStateChanged|ShotStarted|ShotResolved|GoalStatusChanged|BallRecovered|PeriodStateChanged,Field(discriminator='type')]
 class Envelope(Strict):
-    schema_version:Literal['1.0.0']
+    schema_version:Literal['1.0.0','1.1.0']
     match_id:str
     message_id:str
     sequence_no:NonNegative
@@ -155,7 +157,7 @@ class InitialState(Strict):
     ball_status:str
     possession_team_id:str|None
 class MatchMetadata(Strict):
-    schema_version:Literal['1.0.0']
+    schema_version:Literal['1.0.0','1.1.0']
     match_id:str
     synthetic:Literal[True]
     scope:Literal['segment','full_match']

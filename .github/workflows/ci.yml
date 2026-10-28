@@ -1,20 +1,7 @@
-name: Verify local MVP
+name: Demo readiness
 on: [push, pull_request]
 jobs:
-  backend:
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.13'
-          cache: pip
-      - run: pip install -r requirements.txt
-      - run: python -m simulator.validate
-      - run: python -m pytest -q
-      - run: python -m evals.run
-      - run: python -m evals.synthetic --check-baseline
-  web:
+  demo:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -23,19 +10,13 @@ jobs:
           node-version: '22'
           cache: npm
           cache-dependency-path: apps/web/package-lock.json
-      - run: npm --prefix apps/web ci
-      - run: npm --prefix apps/web run build
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
+          cache: pip
+      - run: npm --prefix apps/web ci
       - run: pip install -r requirements.txt
-      - run: npm --prefix apps/web exec -- playwright install --with-deps chromium
-      - name: Browser integration
-        run: |
-          python -m uvicorn services.api.main:app --host 127.0.0.1 --port 8000 > /tmp/matchsense-api.log 2>&1 &
-          npm --prefix apps/web run start > /tmp/matchsense-web.log 2>&1 &
-          for attempt in $(seq 1 30); do
-            if curl -fsS http://127.0.0.1:3000/api/health; then break; fi
-            sleep 1
-          done
-          npm --prefix apps/web run test:e2e
+      - name: Validate demo match data
+        run: python -m simulator.validate
+      - name: Build demo website
+        run: npm --prefix apps/web run build

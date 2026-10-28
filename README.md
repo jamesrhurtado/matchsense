@@ -8,6 +8,13 @@
 
 **Explain the match. Let fans enjoy it.** A live football explanation desk: AI suggests supported stories, a producer approves them, and fans choose when to explore an explanation or catch up. Demonstrated with fictional teams and a synthetic feed.
 
+![MatchSense homepage preview: a synthetic fan question, match explanation and supporting metrics](apps/web/public/images/matchsense-homepage-preview.png)
+
+The homepage now pairs an interactive synthetic pass example with the pipeline
+of five stages, fan research, core features and the producer demo entry point. The
+[fan metrics lab](apps/web/app/insights/page.tsx) shows the available match
+measures and example contributions.
+
 ## Live-match explanation desk — local candidate
 
 The main experience now delivers a synthetic match continuously at 1× while AI
@@ -110,8 +117,13 @@ before a pass and after reception, with explicit intervals and coverage. The new
 flagship demonstrates **2.0 → 0.4** around a **30 m forward pass**, plus a scoped
 comparison against three previous team passes. “Why this moment?” is separate
 from factual evidence; casual/analyst and relevant player views share approved
-facts. This is a proximity proxy, not tactical intent, pass difficulty or a cause
-of the later goal. See [the flagship walkthrough and rubric rationale](docs/pressure-flagship.md).
+facts. New Pressure Swing stories give casual viewers a short English or Spanish
+sentence (for example, “Dani Luna passed 30 metres forward to Beni Vidal, who
+received the ball with fewer opponents nearby”), while analyst/evidence views
+retain averages, time windows, coverage and the previous-pass comparison.
+Existing saved packages keep their original wording. This is a proximity proxy,
+not tactical intent, pass difficulty or a cause of the later goal. See [the
+flagship walkthrough and rubric rationale](docs/pressure-flagship.md).
 
 This iteration is deployed to Azure: the producer demo defaults to a guided
 AI replay when the model workflow is configured, and its review panel exposes

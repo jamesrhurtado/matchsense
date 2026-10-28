@@ -1,7 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight, Check, ScanLine, ShieldCheck } from "lucide-react";
+import {
+  Check,
+  MessageCircle,
+  ScanLine,
+  ShieldCheck,
+} from "lucide-react";
 import { ListenButton } from "./listen-button";
 import { cn } from "@/lib/api";
 
@@ -19,21 +24,56 @@ export function MomentPreview() {
       aria-label="Interactive match example"
       className="min-w-0 scroll-mt-6 overflow-hidden rounded-2xl border border-[#29463b] bg-[#132c24] text-white shadow-xl"
     >
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/15 px-5 py-4">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/15 px-5 py-2.5">
         <span className="flex items-center gap-2 text-xs font-medium text-emerald-100">
           <span
             className="size-2 rounded-full bg-emerald-300"
             aria-hidden="true"
           />
-          {es ? "EJEMPLO PREPARADO" : "PREPARED EXAMPLE"}
+          {es ? "EJEMPLO SINTÉTICO" : "SYNTHETIC EXAMPLE"}
         </span>
-        <span className="text-xs text-white/65">
-          {es
-            ? "Datos sintéticos · sin llamadas de IA"
-            : "Synthetic data · no AI calls"}
-        </span>
+        <div className="flex items-center gap-2">
+          <button
+            aria-expanded={evidence}
+            aria-controls="example-evidence"
+            onClick={() => setEvidence(!evidence)}
+            className="inline-flex min-h-9 items-center gap-1.5 rounded-lg border border-white/25 px-2.5 text-xs font-semibold text-white hover:bg-white/10 sm:px-3 sm:text-sm"
+          >
+            <ScanLine size={15} aria-hidden="true" />
+            <span className="hidden sm:inline">
+              {es ? "Ver evidencia" : "Check evidence"}
+            </span>
+            <span className="sm:hidden">{es ? "Evidencia" : "Evidence"}</span>
+          </button>
+          <div
+            className="flex items-center gap-1 rounded-lg border border-white/20 p-1"
+            aria-label="Example language"
+          >
+            {[
+              ["en", "EN"],
+              ["es", "ES"],
+            ].map(([value, label]) => (
+              <button
+                key={value}
+                aria-label={
+                  value === "en" ? "Example in English" : "Ejemplo en español"
+                }
+                aria-pressed={language === value}
+                onClick={() => setLanguage(value)}
+                className={cn(
+                  "min-h-8 min-w-9 rounded-md px-2 text-xs font-semibold",
+                  language === value
+                    ? "bg-emerald-100 text-emerald-950"
+                    : "text-white/75 hover:bg-white/10",
+                )}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
-      <div className="flex items-center justify-between gap-3 px-5 pt-5 text-sm font-semibold sm:px-6">
+      <div className="flex items-center justify-between gap-3 px-5 pt-4 text-sm font-semibold sm:px-6">
         <span>
           Club del Faro <span className="mx-1 font-normal text-white/50">vs</span>{" "}
           Puerto Lumbre FC
@@ -42,7 +82,7 @@ export function MomentPreview() {
           01:31
         </span>
       </div>
-      <div className="px-4 pt-4 sm:px-6">
+      <div className="px-4 pt-3 sm:px-6">
         <svg
           viewBox="0 0 600 265"
           role="img"
@@ -139,52 +179,31 @@ export function MomentPreview() {
             </text>
           </g>
         </svg>
-        <p className="mt-2 text-xs text-white/60">
-          {es
-            ? "Esquema ilustrativo de la jugada; no son posiciones exactas."
-            : "Illustrative play diagram; not exact player positions."}
-        </p>
       </div>
-      <div className="px-5 pb-5 pt-5 sm:px-6 sm:pb-6">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <span className="text-xs font-semibold text-emerald-200">
-            {es ? "QUÉ CAMBIÓ" : "WHAT CHANGED"}
+      <div className="px-5 pb-4 pt-4 sm:px-6 sm:pb-4">
+        <div className="mb-3 flex flex-wrap items-center gap-x-2 gap-y-1 rounded-lg bg-white/5 px-3 py-2">
+          <MessageCircle
+            size={15}
+            className="shrink-0 text-emerald-200"
+            aria-hidden="true"
+          />
+          <span className="text-[10px] font-semibold uppercase tracking-wide text-emerald-200">
+            {es ? "PREGUNTA DE EJEMPLO" : "EXAMPLE FAN QUESTION"}
           </span>
-          <div
-            className="flex items-center gap-1 rounded-lg border border-white/20 p-1"
-            aria-label="Example language"
-          >
-            {[
-              ["en", "EN"],
-              ["es", "ES"],
-            ].map(([value, label]) => (
-              <button
-                key={value}
-                aria-label={
-                  value === "en" ? "Example in English" : "Ejemplo en español"
-                }
-                aria-pressed={language === value}
-                onClick={() => setLanguage(value)}
-                className={cn(
-                  "min-h-9 min-w-10 rounded-md px-2 text-xs font-semibold",
-                  language === value
-                    ? "bg-emerald-100 text-emerald-950"
-                    : "text-white/75 hover:bg-white/10",
-                )}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
+          <span className="text-sm font-medium text-white">
+            {es
+              ? "¿Qué cambió después de este pase?"
+              : "What changed after this pass?"}
+          </span>
         </div>
-        <h2 className="mt-3 text-balance text-2xl font-semibold leading-tight sm:text-3xl">
+        <h2 className="mt-0 text-balance text-2xl font-semibold leading-tight sm:text-3xl">
           {es
             ? "Un pase hacia menos rivales cercanos."
             : "One pass. Fewer opponents nearby."}
         </h2>
         <div
           aria-live="polite"
-          className="mt-3 min-h-24 text-pretty text-sm leading-relaxed text-white/80"
+          className="mt-2 text-pretty text-sm leading-relaxed text-white/80"
         >
           <p>
             {detailed
@@ -196,7 +215,7 @@ export function MomentPreview() {
                 : "The ball moved 30 metres forward. After reception, the receiver had fewer opponents nearby on average than the passer had before the pass."}
           </p>
         </div>
-        <div className="mt-3 grid grid-cols-3 divide-x divide-white/15 rounded-xl border border-white/15 py-4 text-center">
+        <div className="mt-2 grid grid-cols-3 divide-x divide-white/15 rounded-xl border border-white/15 py-3 text-center">
           {[
             ["2.0", es ? "Antes" : "Before"],
             ["30 m", es ? "Avance" : "Forward"],
@@ -209,42 +228,6 @@ export function MomentPreview() {
               <p className="mt-1 text-xs text-white/65">{label}</p>
             </div>
           ))}
-        </div>
-        <div className="mt-2">
-          <ListenButton
-            dark
-            language={language}
-            text={
-              es
-                ? "Ejemplo sintético de Pressure Swing. El pase avanzó treinta metros. El promedio de rivales a seis metros bajó de dos alrededor del pasador a cero coma cuatro alrededor del receptor. Se comparan dos segundos antes del pase con dos segundos desde la recepción, con cobertura completa. Esto mide proximidad, no intención táctica ni la causa de un gol."
-                : "Synthetic Pressure Swing example. The pass advanced thirty metres. Average opponents within six metres fell from two around the passer to zero point four around the receiver. This compares two seconds before release with two seconds from reception, with complete coverage. This measures proximity, not tactical intent or the cause of a goal."
-            }
-          />
-        </div>
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
-          <button
-            aria-pressed={detailed}
-            onClick={() => setDetailed(!detailed)}
-            className="min-h-11 rounded-lg px-2 text-sm text-emerald-100 underline decoration-white/30 underline-offset-4 hover:bg-white/10"
-          >
-            {detailed
-              ? es
-                ? "Explicar fácil"
-                : "Explain simply"
-              : es
-                ? "Ver detalle"
-                : "Show the detail"}
-          </button>
-          <button
-            aria-expanded={evidence}
-            aria-controls="example-evidence"
-            onClick={() => setEvidence(!evidence)}
-            className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-white/25 px-3 text-sm font-semibold hover:bg-white/10"
-          >
-            <ScanLine size={16} aria-hidden="true" />
-            {es ? "Ver la evidencia" : "Check the evidence"}
-            <ArrowRight size={14} aria-hidden="true" />
-          </button>
         </div>
         {evidence && (
           <div
@@ -279,6 +262,29 @@ export function MomentPreview() {
                   : "Observed coverage: 100% in both windows."}
               </li>
             </ul>
+            <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-stone-200 pt-3">
+              <ListenButton
+                language={language}
+                text={
+                  es
+                    ? "Ejemplo sintético de Pressure Swing. El pase avanzó treinta metros. El promedio de rivales a seis metros bajó de dos alrededor del pasador a cero coma cuatro alrededor del receptor. Se comparan dos segundos antes del pase con dos segundos desde la recepción, con cobertura completa. Esto mide proximidad, no intención táctica ni la causa de un gol."
+                    : "Synthetic Pressure Swing example. The pass advanced thirty metres. Average opponents within six metres fell from two around the passer to zero point four around the receiver. This compares two seconds before release with two seconds from reception, with complete coverage. This measures proximity, not tactical intent or the cause of a goal."
+                }
+              />
+              <button
+                aria-pressed={detailed}
+                onClick={() => setDetailed(!detailed)}
+                className="min-h-10 rounded-lg px-2 text-sm font-medium text-stone-700 underline decoration-stone-300 underline-offset-4 hover:bg-stone-100"
+              >
+                {detailed
+                  ? es
+                    ? "Explicar fácil"
+                    : "Explain simply"
+                  : es
+                    ? "Ver detalle"
+                    : "Show the detail"}
+              </button>
+            </div>
             <p className="mt-3 border-t border-stone-200 pt-3 text-xs leading-relaxed text-stone-600">
               {es
                 ? "Mide proximidad, no intención táctica ni la causa de un gol. Ejemplo preparado del escenario sintético Pressure Swing, disponible para revisar en la consola cuando esté habilitado."

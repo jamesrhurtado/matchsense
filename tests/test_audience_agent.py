@@ -161,7 +161,9 @@ def test_ai_role_is_real_and_fallback_is_labeled(context, monkeypatch):
     class Provider:
         async def complete(self, role, instruction, payload, schema, max_tokens):
             roles.append(role)
-            return {'groups': [{'indices': [0, 1], 'story_id': 'story-pass-1', 'reason': 'Similar questions.'}]}, {}
+            return {'groups': [{'indices': [0, 1], 'story_id': 'story-pass-1',
+                                'interpretation': 'Viewers want to understand what changed after the pass.',
+                                'reason': 'Similar questions.'}]}, {}
         async def close(self): pass
     monkeypatch.setattr(audience, 'AgentFrameworkProvider', Provider)
     body = {'messages': [{'text': '¿Qué pasó en el pase?', 'author_id': 'one'},
@@ -169,6 +171,7 @@ def test_ai_role_is_real_and_fallback_is_labeled(context, monkeypatch):
     data = client.post(path('/rehearsal'), headers=headers(), json=body).json()
     assert roles == ['Audience Agent'] and data['groups'][0]['mode'] == 'ai'
     assert data['groups'][0]['participant_count'] == 2
+    assert data['groups'][0]['interpretation'] == 'Viewers want to understand what changed after the pass.'
     class FailedProvider(Provider):
         async def complete(self, *args): raise RuntimeError('secret provider error')
     monkeypatch.setattr(audience, 'AgentFrameworkProvider', FailedProvider)

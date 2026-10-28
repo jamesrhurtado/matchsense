@@ -46,6 +46,7 @@ class Association(Body):
 class ModelGroup(Body):
     indices: list[int] = Field(min_length=1, max_length=50)
     story_id: str | None = Field(default=None, max_length=100)
+    interpretation: str = Field(default='', max_length=240)
     reason: str = Field(default='', max_length=240)
 
 
@@ -122,7 +123,7 @@ def _safe_message(text, author, message_id, at):
     return {'id': message_id, 'text': clean(text), 'author': hashlib.sha256(author.encode()).hexdigest(), 'at': at}
 
 
-def _render_group(members, story, mode, reason, previous):
+def _render_group(members, story, mode, reason, previous, interpretation=''):
     first = members[0]
     group_id = hashlib.sha256(first['id'].encode()).hexdigest()[:20]
     old = previous.get(group_id, {})
@@ -137,6 +138,7 @@ def _render_group(members, story, mode, reason, previous):
             'story_revision': story.get('revision') if story else None,
             'story_hash': story.get('package_hash') if story else None,
             'story_status': story.get('status') if story else None,
+            'interpretation': clean(interpretation, 240) if interpretation else None,
             'reason': clean(reason, 240), 'mode': mode, 'state': old.get('state', 'pending'),
             'association_confirmed': confirmed}
 
@@ -180,11 +182,16 @@ async def analyze(messages, stories, previous, ai_requested, ai_available):
                        'Group messages only when they ask the same question about the same moment. '
                        'Return each input index exactly once. Choose a supplied story ID only if its title '
                        'and topic unambiguously identify the moment; otherwise use null. Never infer the answer. '
-                       'The reason describes only why the group was formed; do not invent football facts. '
+                       'For each group, provide a concise interpretation in plain language that restates what '
+                       'the viewers want to understand, in the same language as their messages. Do not answer '
+                       'the question or add football facts. The reason describes only why the group was formed '
+                       'or why a moment could not be matched; do not invent football facts. '
                        'Do not create or publish a story. Return structured output only.')
         async with asyncio.timeout(12):
             raw, usage = await provider.complete('Audience Agent', instruction, payload, ModelGroups, 1200)
         parsed = ModelGroups.model_validate_json(raw) if isinstance(raw, str) else ModelGroups.model_validate(raw)
+        if any(not group.interpretation.strip() for group in parsed.groups):
+            raise ValueError('missing_group_interpretation')
         sample = messages[-50:]
         indices = [i for group in parsed.groups for i in group.indices]
         if sorted(indices) != list(range(len(sample))):
@@ -198,7 +205,10 @@ async def analyze(messages, stories, previous, ai_requested, ai_available):
             candidate = _candidate(next(iter(families)), stories) if len(families) == 1 else None
             chosen = (_confirmed_story(members, previous, stories) or
                       (candidate if candidate and group.story_id == candidate['id'] else None))
-            groups.append(_render_group(members, chosen, 'ai', group.reason or 'Related audience questions.', previous))
+            groups.append(_render_group(
+                members, chosen, 'ai', group.reason or 'Related audience questions.', previous,
+                group.interpretation,
+            ))
         return groups, 'completed', usage
     except Exception:
         return template_groups(messages, stories, previous, mode='fallback'), 'failed', None

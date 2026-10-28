@@ -1,12 +1,20 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import {
+  ArrowRight,
+  CheckCircle2,
+  ChevronDown,
+  MessageCircle,
+  Radio,
+} from "lucide-react";
 import { api, Match, Story, timecode, Variant } from "@/lib/api";
 import { Button, Card, Tag } from "./ui";
 
 type AudienceGroup = {
   id: string;
   question: string;
+  interpretation: string | null;
   message_count: number;
   participant_count: number;
   first_at: string;
@@ -45,6 +53,12 @@ function modeLabel(mode: AudienceGroup["mode"], es: boolean) {
   if (mode === "ai") return es ? "IA" : "AI";
   if (mode === "fallback") return es ? "Alternativa sin IA" : "Non-AI fallback";
   return es ? "Reglas sin IA" : "Non-AI rules";
+}
+
+function audienceModeLabel(mode: AudienceGroup["mode"], es: boolean) {
+  if (mode === "ai") return es ? "Analizado por IA" : "AI analyzed";
+  if (mode === "fallback") return es ? "Respaldo sin IA" : "Rule fallback";
+  return es ? "Agrupación por reglas" : "Rule grouping";
 }
 
 function youtubeVideoId(value: string) {
@@ -243,111 +257,254 @@ export function BroadcastAgents({
       aria-label={es ? "Equipo de emisión" : "Broadcast team"}
       className="space-y-4"
     >
-      <Card className="overflow-hidden">
-        <div className="border-b border-stone-200 bg-stone-50/80 p-5">
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <h2 className="font-semibold">
-              {es ? "Audiencia de YouTube" : "YouTube audience"}
+      <Card className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-3 border-emerald-100 p-3 max-[440px]:grid-cols-1">
+        <div className="flex min-w-0 items-center gap-3">
+          <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-emerald-800">
+            <Radio size={16} aria-hidden="true" />
+          </span>
+          <div className="min-w-0">
+            <h2 className="text-sm font-semibold text-stone-900">
+              {es ? "Productor de emisión" : "Broadcast producer"}
             </h2>
-            <Tag>
-              {audience?.source === "youtube" && audience.status === "connected"
-                ? es
-                  ? "Chat conectado"
-                  : "Chat connected"
-                : audience?.source === "rehearsal"
-                  ? es
-                    ? "Ensayo"
-                    : "Rehearsal"
-                  : es
-                    ? "Sin conectar"
-                    : "Not connected"}
-            </Tag>
+            <p className="mt-0.5 text-xs leading-snug text-stone-600">
+              {es ? "Tú decides qué sale al aire." : "You decide what goes on air."}
+            </p>
           </div>
-          <p className="mt-2 text-sm leading-relaxed text-stone-600">
-            {es
-              ? "Preguntas agrupadas para revisión. La audiencia no aprueba ni publica historias."
-              : "Grouped questions for review. Audience messages cannot approve or publish stories."}
-          </p>
         </div>
-        <div className="space-y-4 p-5">
-          <div className="flex flex-wrap items-center gap-3">
-            <Button
-              disabled={!!busy || !!audience?.youtube_authorized}
-              onClick={() =>
-                void operation("youtube-auth", async () => {
-                  const result = await api<{ authorization_url: string }>(
-                    `${audiencePath}/oauth/start`,
-                    { method: "POST" },
-                    true,
-                  );
-                  window.location.assign(result.authorization_url);
-                })
-              }
-            >
-              {busy === "youtube-auth"
-                ? es ? "Abriendo YouTube…" : "Opening YouTube…"
-                : audience?.youtube_authorized
-                  ? es ? "Cuenta de YouTube conectada" : "YouTube account connected"
-                  : es ? "Autorizar YouTube Live" : "Authorize YouTube Live"}
-            </Button>
-            <span className="text-xs text-stone-500">
-              {es
-                ? "La cuenta se autoriza en Google; las credenciales permanecen en el servidor."
-                : "Authorize through Google; credentials stay on the server."}
-            </span>
-          </div>
-          <form
-            onSubmit={(event) => {
-              event.preventDefault();
-              void operation("connect", async () => {
-                const result = await api<AudienceStatus>(
-                  `${audiencePath}/connect`,
-                  {
-                    method: "POST",
-                    body: JSON.stringify({ video_id: youtubeVideoId(videoId) }),
-                  },
-                  true,
-                );
-                setAudience(result);
-                setNotice(
-                  es ? "Conexión solicitada." : "Connection requested.",
-                );
-              });
-            }}
+        <Button
+          className="h-9 min-h-9 shrink-0 gap-2 rounded-lg border-emerald-200 bg-emerald-50 px-3 py-0 text-xs text-emerald-950 shadow-none hover:bg-emerald-100 max-[440px]:justify-self-start"
+          disabled={!!busy}
+          onClick={() =>
+            void operation("director", async () => {
+              const result = await api<DirectorDecision>(
+                `${path}/broadcast/director`,
+                { method: "POST" },
+                true,
+              );
+              setDecision(result);
+            })
+          }
+        >
+          <ArrowRight size={16} aria-hidden="true" />
+          {busy === "director"
+            ? es
+              ? "Evaluando…"
+              : "Evaluating…"
+            : es
+              ? "Recomendar siguiente acción"
+              : "Recommend next action"}
+        </Button>
+        {decision && (
+          <div
+            role="status"
+            className="col-span-2 rounded-lg border border-emerald-200 bg-emerald-50 p-3 max-[440px]:col-span-1"
           >
-            <label
-              htmlFor="audience-video-id"
-              className="block text-sm font-medium"
-            >
-              {es ? "Enlace o ID del video en vivo de YouTube" : "YouTube live video link or ID"}
-            </label>
-            <div className="mt-2 flex gap-2">
-              <input
-                id="audience-video-id"
-                value={videoId}
-                onChange={(e) => setVideoId(e.target.value)}
-                placeholder="https://youtu.be/…"
-                className="min-w-0 flex-1 rounded-lg border border-stone-300 px-3 py-2 text-sm"
-                autoComplete="off"
-              />
-              <Button type="submit" disabled={!!busy || !youtubeVideoId(videoId) || !audience?.youtube_authorized}>
-                {busy === "connect"
+            <div className="flex flex-wrap gap-2">
+              <Tag>{modeLabel(decision.mode, es)}</Tag>
+              <Tag>
+                {decision.action === "show"
                   ? es
-                    ? "Conectando…"
-                    : "Connecting…"
-                  : es
-                    ? "Conectar"
-                    : "Connect"}
-              </Button>
+                    ? "Mostrar"
+                    : "Show"
+                  : decision.action === "hold"
+                    ? es
+                      ? "Mantener"
+                      : "Hold"
+                    : es
+                      ? "Esperar"
+                      : "Wait"}
+              </Tag>
             </div>
-            {!audience?.youtube_authorized && <p className="mt-1 text-xs text-stone-500">
+            <p className="mt-2 text-sm text-emerald-950">{decision.reason}</p>
+            {decision.eligible_until_ms !== null && (
+              <p className="mt-2 text-xs text-emerald-800">
+                {es ? "Ventana hasta" : "Window until"}{" "}
+                {timecode(decision.eligible_until_ms)}
+              </p>
+            )}
+            {selectedDecision && (
+              <Button
+                className="mt-3"
+                onClick={() => onSelect(selectedDecision.id)}
+              >
+                {es ? "Revisar recomendación" : "Review recommendation"}
+              </Button>
+            )}
+            {decision.story_id && !selectedDecision && (
+              <p className="mt-2 text-xs text-amber-900">
+                {es
+                  ? "Esta recomendación ya no coincide con la versión actual. Solicita otra."
+                  : "This recommendation no longer matches the current revision. Request another."}
+              </p>
+            )}
+          </div>
+        )}
+      </Card>
+      <details
+        id="audience-agent-panel"
+        className="overflow-hidden rounded-2xl border border-stone-200 bg-white"
+      >
+        <summary className="grid cursor-pointer list-none grid-cols-[2.5rem_minmax(0,1fr)] items-center gap-3 bg-white p-4 marker:content-none [&::-webkit-details-marker]:hidden">
+          <span className="flex size-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-800">
+            <MessageCircle size={18} aria-hidden="true" />
+          </span>
+          <span className="min-w-0">
+            <span className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
+              <span className="whitespace-nowrap text-sm font-semibold text-stone-900">
+                Audience Agent
+              </span>
+              <span className="flex flex-wrap items-center justify-end gap-1.5">
+                {audience?.youtube_authorized && (
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-300 bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-950">
+                    <CheckCircle2 size={14} aria-hidden="true" />
+                    {es ? "YouTube autorizado" : "YouTube account connected"}
+                  </span>
+                )}
+                <Tag
+                  className={`px-2.5 py-1 text-xs ${
+                    audience?.source === "youtube" && audience.status === "connected"
+                      ? "border-emerald-200 bg-emerald-50 text-emerald-900"
+                      : "border-stone-200 bg-stone-50 text-stone-700"
+                  }`}
+                >
+                  {audience?.source === "youtube" && audience.status === "connected"
+                    ? es
+                      ? "Chat conectado"
+                      : "Chat connected"
+                    : audience?.source === "rehearsal"
+                      ? es
+                        ? "Ensayo"
+                        : "Rehearsal"
+                      : es
+                        ? "Sin conectar"
+                        : "Not connected"}
+                </Tag>
+                <ChevronDown size={15} className="text-stone-500" aria-hidden="true" />
+              </span>
+            </span>
+            <span className="mt-1 block text-xs leading-snug text-stone-600">
               {es
-                ? "Autoriza tu canal primero para leer el chat en vivo."
-                : "Authorize your channel first to read its live chat."}
-            </p>}
-            {audience?.source === "youtube" && <p className="mt-1 text-xs text-stone-500">{es ? "El chat se actualiza mientras esta consola esté abierta y visible. Puedes actualizarlo manualmente." : "Chat refreshes while this console is open and visible. You can also refresh it manually."}</p>}
-          </form>
-          <details className="rounded-lg border border-stone-200 p-3">
+                ? "Preguntas de YouTube Live o de ensayo."
+                : "YouTube Live or rehearsal questions."}
+            </span>
+          </span>
+        </summary>
+        <div className="space-y-4 border-t border-stone-100 bg-stone-50/60 p-4">
+          <details
+            className="rounded-lg border border-stone-200 p-3"
+          >
+            <summary className="min-h-11 cursor-pointer text-sm font-medium">
+              {es ? "Conectar el chat en vivo de YouTube" : "Connect YouTube Live chat"}
+            </summary>
+            <div className="mt-3 space-y-4">
+              {audience?.youtube_authorized ? (
+                <div
+                  role="status"
+                  className="flex items-start gap-3 rounded-xl border border-emerald-300 bg-emerald-50 p-4 text-emerald-950"
+                >
+                  <CheckCircle2
+                    size={20}
+                    className="mt-0.5 shrink-0 text-emerald-800"
+                    aria-hidden="true"
+                  />
+                  <div>
+                    <p className="text-sm font-semibold text-emerald-950">
+                      {es ? "Cuenta de YouTube conectada" : "YouTube account connected"}
+                    </p>
+                    <p className="mt-1 text-sm leading-relaxed text-emerald-900">
+                      {audience.source === "youtube" && audience.status === "connected"
+                        ? es
+                          ? "El chat en vivo está conectado a esta transmisión."
+                          : "Live chat is connected to this broadcast."
+                        : es
+                          ? "Ahora pega el enlace de una transmisión activa para conectar su chat."
+                          : "Now paste the link to an active broadcast to connect its chat."}
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex flex-wrap items-center gap-3">
+                  <Button
+                    disabled={!!busy}
+                    onClick={() =>
+                      void operation("youtube-auth", async () => {
+                        const result = await api<{ authorization_url: string }>(
+                          `${audiencePath}/oauth/start`,
+                          { method: "POST" },
+                          true,
+                        );
+                        window.location.assign(result.authorization_url);
+                      })
+                    }
+                  >
+                    {busy === "youtube-auth"
+                      ? es ? "Abriendo YouTube…" : "Opening YouTube…"
+                      : es ? "Autorizar YouTube Live" : "Authorize YouTube Live"}
+                  </Button>
+                  <span className="text-xs text-stone-600">
+                    {es
+                      ? "Autoriza tu cuenta para poder enlazar el chat de una transmisión."
+                      : "Authorize your account to link a broadcast chat."}
+                  </span>
+                </div>
+              )}
+              <form
+                onSubmit={(event) => {
+                  event.preventDefault();
+                  void operation("connect", async () => {
+                    const result = await api<AudienceStatus>(
+                      `${audiencePath}/connect`,
+                      {
+                        method: "POST",
+                        body: JSON.stringify({ video_id: youtubeVideoId(videoId) }),
+                      },
+                      true,
+                    );
+                    setAudience(result);
+                    setNotice(
+                      es ? "Conexión solicitada." : "Connection requested.",
+                    );
+                  });
+                }}
+              >
+                <label
+                  htmlFor="audience-video-id"
+                  className="block text-sm font-medium"
+                >
+                  {es ? "Enlace o ID del video en vivo de YouTube" : "YouTube live video link or ID"}
+                </label>
+                <div className="mt-2 flex gap-2">
+                  <input
+                    id="audience-video-id"
+                    value={videoId}
+                    onChange={(e) => setVideoId(e.target.value)}
+                    placeholder="https://youtu.be/…"
+                    className="min-w-0 flex-1 rounded-lg border border-stone-300 px-3 py-2 text-sm"
+                    autoComplete="off"
+                  />
+                  <Button type="submit" disabled={!!busy || !youtubeVideoId(videoId) || !audience?.youtube_authorized}>
+                    {busy === "connect"
+                      ? es
+                        ? "Conectando…"
+                        : "Connecting…"
+                      : es
+                        ? "Conectar"
+                        : "Connect"}
+                  </Button>
+                </div>
+                {!audience?.youtube_authorized && <p className="mt-1 text-xs text-stone-500">
+                  {es
+                    ? "Autoriza tu canal primero para leer el chat en vivo."
+                    : "Authorize your channel first to read its live chat."}
+                </p>}
+                {audience?.source === "youtube" && <p className="mt-1 text-xs text-stone-500">{es ? "El chat se actualiza mientras esta consola esté abierta y visible. Puedes actualizarlo manualmente." : "Chat refreshes while this console is open and visible. You can also refresh it manually."}</p>}
+              </form>
+            </div>
+          </details>
+          <details
+            id="audience-agent-rehearsal"
+            className="rounded-lg border border-stone-200 bg-white p-3"
+          >
             <summary className="cursor-pointer text-sm font-medium">
               {es
                 ? "Ensayar con preguntas simuladas"
@@ -454,7 +611,17 @@ export function BroadcastAgents({
             </p>
           )}
           <div aria-live="polite" className="space-y-3">
-            {!!pending.length && <p className="text-xs leading-relaxed text-stone-500">{es ? `Preguntas observadas en una ventana de ${audience?.window_seconds ?? 90} segundos; los conteos no representan a toda la audiencia.` : `Questions observed in a ${audience?.window_seconds ?? 90}-second window; counts do not represent the entire audience.`}{audience?.sample_limited && (es ? ` Análisis limitado a los 50 mensajes más recientes de ${audience.available_message_count} disponibles.` : ` Analysis limited to the latest 50 of ${audience.available_message_count} available messages.`)}</p>}
+            {!!pending.length && (
+              <p className="text-xs leading-relaxed text-stone-500">
+                {es
+                  ? `Muestra de chat: últimos ${audience?.window_seconds ?? 90} s; no representa a toda la audiencia.`
+                  : `Recent chat sample (${audience?.window_seconds ?? 90}s), not the full audience.`}
+                {audience?.sample_limited &&
+                  (es
+                    ? ` La IA analizó los últimos 50 de ${audience.available_message_count} mensajes.`
+                    : ` AI analyzed the latest 50 of ${audience.available_message_count} messages.`)}
+              </p>
+            )}
             {!pending.length && (
               <p className="text-sm text-stone-500">
                 {es
@@ -482,7 +649,7 @@ export function BroadcastAgents({
                   className="rounded-xl border border-stone-200 bg-white p-4"
                 >
                   <div className="flex flex-wrap items-center gap-2 text-xs text-stone-600">
-                    <Tag>{modeLabel(group.mode, es)}</Tag>
+                    <Tag>{audienceModeLabel(group.mode, es)}</Tag>
                     <span>
                       {group.message_count} {es ? "mensajes" : "messages"} ·{" "}
                       {group.participant_count}{" "}
@@ -496,12 +663,30 @@ export function BroadcastAgents({
                       })}
                     </span>
                   </div>
-                  <h3 className="mt-3 text-sm font-semibold leading-relaxed">
-                    {group.question}
-                  </h3>
-                  <p className="mt-2 text-xs leading-relaxed text-stone-600">
-                    {group.reason}
-                  </p>
+                  <div className="mt-3">
+                    <p className="text-[11px] font-semibold uppercase text-stone-500">
+                      {es ? "Mensaje original" : "Original chat message"}
+                    </p>
+                    <h3 className="mt-1 text-sm font-semibold leading-relaxed text-stone-900">
+                      {group.question}
+                    </h3>
+                  </div>
+                  <div className="mt-3 rounded-lg border border-emerald-100 bg-emerald-50/70 p-3">
+                    <p className="text-[11px] font-semibold uppercase text-emerald-900">
+                      {group.mode === "ai"
+                        ? es
+                          ? "Interpretación de la IA"
+                          : "AI interpretation"
+                        : es
+                          ? "Criterio de agrupación"
+                          : "Grouping note"}
+                    </p>
+                    <p className="mt-1 text-sm leading-relaxed text-stone-700">
+                      {group.mode === "ai"
+                        ? group.interpretation || group.reason
+                        : group.reason}
+                    </p>
+                  </div>
                   {story && (
                     <>
                       <p className="mt-3 text-xs font-medium text-stone-600">
@@ -684,84 +869,7 @@ export function BroadcastAgents({
             })}
           </div>
         </div>
-      </Card>
-      <Card className="p-5">
-        <h2 className="font-semibold">
-          {es ? "Productor de emisión" : "Broadcast producer"}
-        </h2>
-        <p className="mt-2 text-sm leading-relaxed text-stone-600">
-          {es
-            ? "Pide una recomendación para la emisión actual. Tú decides qué revisar o mostrar."
-            : "Request a recommendation for the current broadcast. You decide what to review or show."}
-        </p>
-        <Button
-          className="mt-3"
-          disabled={!!busy}
-          onClick={() =>
-            void operation("director", async () => {
-              const result = await api<DirectorDecision>(
-                `${path}/broadcast/director`,
-                { method: "POST" },
-                true,
-              );
-              setDecision(result);
-            })
-          }
-        >
-          {busy === "director"
-            ? es
-              ? "Evaluando…"
-              : "Evaluating…"
-            : es
-              ? "Recomendar siguiente acción"
-              : "Recommend next action"}
-        </Button>
-        {decision && (
-          <div
-            role="status"
-            className="mt-4 rounded-lg border border-emerald-200 bg-emerald-50 p-3"
-          >
-            <div className="flex flex-wrap gap-2">
-              <Tag>{modeLabel(decision.mode, es)}</Tag>
-              <Tag>
-                {decision.action === "show"
-                  ? es
-                    ? "Mostrar"
-                    : "Show"
-                  : decision.action === "hold"
-                    ? es
-                      ? "Mantener"
-                      : "Hold"
-                    : es
-                      ? "Esperar"
-                      : "Wait"}
-              </Tag>
-            </div>
-            <p className="mt-2 text-sm text-emerald-950">{decision.reason}</p>
-            {decision.eligible_until_ms !== null && (
-              <p className="mt-2 text-xs text-emerald-800">
-                {es ? "Ventana hasta" : "Window until"}{" "}
-                {timecode(decision.eligible_until_ms)}
-              </p>
-            )}
-            {selectedDecision && (
-              <Button
-                className="mt-3"
-                onClick={() => onSelect(selectedDecision.id)}
-              >
-                {es ? "Revisar recomendación" : "Review recommendation"}
-              </Button>
-            )}
-            {decision.story_id && !selectedDecision && (
-              <p className="mt-2 text-xs text-amber-900">
-                {es
-                  ? "Esta recomendación ya no coincide con la versión actual. Solicita otra."
-                  : "This recommendation no longer matches the current revision. Request another."}
-              </p>
-            )}
-          </div>
-        )}
-      </Card>
+      </details>
     </section>
   );
 }

@@ -36,6 +36,8 @@ test("audience question is confirmed, reviewed and published only with the appro
     .locator("article")
     .filter({ hasText: "What changed with that pass?" });
   await expect(question).toContainText("2 messages · 2 participants");
+  await expect(question).toContainText("Original chat message");
+  await expect(question).toContainText("Grouping note");
   await expect(question).not.toContainText(
     "Show question and approved insight",
   );

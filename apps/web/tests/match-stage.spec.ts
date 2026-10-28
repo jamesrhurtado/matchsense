@@ -108,7 +108,7 @@ for (const width of [390, 1440]) test(`carrier badge keeps two-digit numbers cle
   await expect(marker).toHaveAttribute('data-source-y','33');
   await expect(stage.getByTestId('ball-position-link')).toHaveCount(0);
   await expect(stage.getByTestId('ball-observed-position')).toHaveCount(0);
-  await expect(stage.getByText('The ball badge identifies the observed ball carrier.')).toBeVisible();
+  await expect(stage.getByText('The ball badge identifies the observed ball carrier.')).toBeHidden();
   const ballBox=(await stage.getByTestId('ball-symbol').boundingBox())!;
   for(const id of ['blue-11','blue-10']){
     const number=stage.locator(`[data-player-id="${id}"] text`);

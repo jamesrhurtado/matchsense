@@ -158,7 +158,7 @@ export function MatchStage({
             {es ? "Portero LUM" : "LUM goalkeeper"}
           </span>
         </div>
-        <p className={styles.fieldNote}>
+        <p className="sr-only">
           {observedBallCarrier(match?.frame ?? null)
             ? es
               ? "La insignia de balón identifica al jugador con control observado."

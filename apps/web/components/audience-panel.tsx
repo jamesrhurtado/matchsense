@@ -76,6 +76,32 @@ function describePassLocation(
     : `Observed locations: for ${teamName}, the pass began in the ${origin} and ended in the ${destination}. The source records the start and reception, not the ball's intermediate path.`;
 }
 
+function storyFamilyLabel(family: Story["family"], language: string) {
+  const labels: Record<string, string> =
+    language === "es"
+      ? {
+          goal: "Gol",
+          shot: "Remate",
+          pressure: "Presión cercana",
+          recovery: "Control",
+          possession: "Posesión",
+          pass: "Pase",
+        }
+      : {
+          goal: "Goal",
+          shot: "Shot",
+          pressure: "Nearby pressure",
+          recovery: "Control",
+          possession: "Possession",
+          pass: "Pass",
+        };
+  return family
+    ? labels[family] || family
+    : language === "es"
+      ? "Momento"
+      : "Moment";
+}
+
 export function StoryPicker({
   stories,
   selected,
@@ -201,7 +227,7 @@ export function StoryPicker({
             index < 3 ||
             s.id === selected,
         )
-        .map((item, index) => (
+        .map((item) => (
           <div key={item.id}>
             {producer &&
               mixed &&
@@ -227,30 +253,11 @@ export function StoryPicker({
             >
               <span className="min-w-0">
                 <span className="block font-medium">
-                  {es ? "Información" : "Insight"} {index + 1} ·{" "}
-                  {timecode(item.eligible_from_ms)}
+                  {timecode(item.occurrence_ms ?? item.eligible_from_ms)} ·{" "}
+                  {storyFamilyLabel(item.family, language)}
                 </span>
                 <span className="block text-xs">
-                  {item.family && (
-                    <span className="capitalize">
-                      {(
-                        {
-                          goal: es ? "Gol" : "Goal",
-                          shot: es ? "Remate" : "Shot",
-                          pressure: es ? "Presión cercana" : "Nearby pressure",
-                          recovery: es ? "Control" : "Control",
-                          possession: es ? "Posesión" : "Possession",
-                          pass: es ? "Pase" : "Pass",
-                        } as Record<string, string>
-                      )[item.family] || item.family}{" "}
-                      ·{" "}
-                    </span>
-                  )}
-                  {item.family === "pressure"
-                    ? es
-                      ? "Cambio de presión cercana"
-                      : "Nearby pressure change"
-                    : item.titles?.[language] || item.title}
+                  {item.titles?.[language] || item.title}
                 </span>
               </span>
               <span className="shrink-0 text-xs capitalize">
@@ -397,8 +404,8 @@ export function AudiencePanel({
                     ? "Revisión de IA en curso"
                     : "AI review in progress"
                   : es
-                    ? "Se está preparando el siguiente momento"
-                    : "The next story is taking shape"}
+                    ? "Aún no hay un momento aprobado"
+                    : "No approved moment yet"}
           </h2>
         </div>
         <Tag>
@@ -426,11 +433,6 @@ export function AudiencePanel({
               ? "No hay historias aprobadas que involucren esta selección en este intervalo."
               : "No approved stories involving this selection in this interval."}
           </p>
-          <p className="mt-2 text-pretty text-xs leading-relaxed text-stone-600">
-            {es
-              ? "Este filtro solo cambia las historias mostradas; el partido continúa y pueden haber ocurrido otras acciones."
-              : "This filter only changes which approved stories appear. The match continues, and other events may have happened."}
-          </p>
           <Button className="mt-3" onClick={onWholePlay}>
             <ArrowLeft size={14} />
             {es ? "Ver todas las historias" : "Show all stories"}
@@ -452,8 +454,12 @@ export function AudiencePanel({
                 .join(" ")
             : variant?.text) ||
             (es
-              ? "La cancha muestra el partido en curso. Aquí aparecen las explicaciones aprobadas; «Ponerme al día» abre el resumen."
-              : "The pitch shows the match in progress. Approved explanations appear here; “Catch me up” opens the recap.")}
+              ? workflowPending
+                ? "Comprobando una jugada."
+                : "Las explicaciones aprobadas aparecerán aquí."
+              : workflowPending
+                ? "Checking a moment now."
+                : "Approved explanations will appear here.")}
         </p>
       )}
 
@@ -496,20 +502,6 @@ export function AudiencePanel({
             >
               {story.why_now[language]}
             </p>
-            <p className="mt-3 text-xs text-emerald-900">
-              {es ? "Estado de evidencia" : "Evidence status"}:{" "}
-              {story.evidence_state === "complete"
-                ? es
-                  ? "Observaciones requeridas disponibles"
-                  : "Required observations available"
-                : story.evidence_state === "awaiting_outcome"
-                  ? es
-                    ? "Resultado sin confirmar"
-                    : "Outcome unconfirmed"
-                  : es
-                    ? "Observaciones limitadas"
-                    : "Limited observations"}
-            </p>
           </section>
         )}
       <div className="mt-4 flex flex-wrap gap-2">
@@ -522,11 +514,6 @@ export function AudiencePanel({
           {es ? "Ponerme al día" : "Catch me up"}
         </Button>
       </div>
-      <p className="mt-2 text-xs text-stone-500">
-        {es
-          ? "El resumen reúne historias aprobadas de este segmento."
-          : "The recap collects approved stories from this segment."}
-      </p>
       {story && evidence && (
         <InlineEvidence
           key={`${story.id}:${story.revision}`}

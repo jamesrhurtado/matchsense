@@ -160,17 +160,9 @@ export function BroadcastSetup({
               session’s companion on the iPhone.
             </li>
           </ol>
-          <p className="mt-4 border-t border-stone-200 pt-3 text-xs leading-relaxed text-stone-600">
-            {!match
-              ? "Waiting for the session’s execution details."
-              : match.execution === "ai"
-                ? "AI session: check the review trace for actual model execution and any fallback."
-                : "Template rehearsal: this session does not demonstrate live AI execution."}{" "}
-            App connection does not confirm OBS or YouTube delivery.
-          </p>
           <p className="mt-3 text-xs leading-relaxed text-stone-600">
-            YouTube may be delayed. The companion follows the app clock, not the
-            video playback position.
+            YouTube may lag; the companion follows the app clock, not video
+            playback.
           </p>
           <ObsStatusPanel />
           <div className="mt-5 border-t border-stone-200 pt-4">

@@ -138,7 +138,9 @@ export default function Pitch({
     ? `${es ? "Jugador" : "Player"} #${activePlayer.number} ${activePlayer.name} · ${activeTeamName}${
         activePlayer.role === "keeper"
           ? ` · ${es ? "Portero" : "Goalkeeper"}`
-          : ""
+          : activePlayer.role === "outfield"
+            ? ` · ${es ? "Jugador de campo" : "Outfield player"}`
+            : ""
       }`
     : null;
   const broadcastBall =
@@ -599,8 +601,8 @@ export default function Pitch({
         <p className={styles.playerIdentity}>
           {identityText ??
             (es
-              ? "Selecciona un jugador para ver su nombre, dorsal y posición."
-              : "Select a player to see their name, number and role.")}
+              ? "Selecciona un jugador para ver su nombre, dorsal, equipo y tipo de posición."
+              : "Select a player to see their name, number, team and position group.")}
         </p>
       )}
     </>

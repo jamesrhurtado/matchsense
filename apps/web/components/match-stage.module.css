@@ -41,8 +41,7 @@
   flex: 1;
 }
 .broadcastOutput .fieldLegend,
-.broadcastOutput .keeperLegend,
-.broadcastOutput .fieldNote {
+.broadcastOutput .keeperLegend {
   display: none;
 }
 .broadcastOutput .progress {
@@ -217,10 +216,7 @@
   background: #92caff;
 }
 .lowerThird {
-  height: 240px;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-gutter: stable;
+  min-height: 240px;
   display: flex;
   align-items: flex-start;
   gap: 15px;
@@ -388,19 +384,7 @@
 .awayKeeper {
   background: #ffa9a4;
 }
-.fieldNote {
-  min-height: 30px;
-  margin: 9px 7px 0;
-  font-size: 13px;
-  line-height: 1.5;
-  color: #d5e2e4;
-}
-
 @media (max-width: 600px) {
-  .keeperLegend,
-  .fieldNote {
-    font-size: 12px;
-  }
   .fieldLegend {
     font-size: 12px;
   }

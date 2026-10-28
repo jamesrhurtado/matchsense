@@ -91,22 +91,29 @@ export function ObsStatusPanel() {
                       : "Stream status unavailable."}
               </p>
               <p>Scene: {status.scene || "unavailable"}.</p>
-              {typeof status.skipped_frames === "number" &&
-                typeof status.total_frames === "number" && (
-                  <p>
-                    Skipped output frames: {status.skipped_frames} of{" "}
-                    {status.total_frames}.
-                  </p>
-                )}
-              {typeof status.render_fps === "number" && (
-                <p>Render: {status.render_fps.toFixed(1)} fps.</p>
+              {(typeof status.skipped_frames === "number" ||
+                typeof status.render_fps === "number") && (
+                <details className="mt-2 text-xs text-stone-600">
+                  <summary className="min-h-9 cursor-pointer py-2">
+                    Output performance
+                  </summary>
+                  {typeof status.skipped_frames === "number" &&
+                    typeof status.total_frames === "number" && (
+                      <p>
+                        Skipped output frames: {status.skipped_frames} of{" "}
+                        {status.total_frames}.
+                      </p>
+                    )}
+                  {typeof status.render_fps === "number" && (
+                    <p className="mt-1">
+                      Render: {status.render_fps.toFixed(1)} fps.
+                    </p>
+                  )}
+                </details>
               )}
             </>
           ))}
       </div>
-      <p className="mt-2 text-xs text-stone-600">
-        OBS status does not confirm what a viewer has received on YouTube.
-      </p>
     </section>
   );
 }

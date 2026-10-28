@@ -1,66 +1,70 @@
 # MatchSense — hackathon demo script
 
-**Core idea:** a fan’s question finds the right match moment; the producer
-checks the evidence; the approved story reaches the stream and each fan’s view.
+**Core idea:** a viewer question is tied to the right match moment; MatchSense
+checks an explanation against match evidence; the producer chooses what reaches
+the broadcast and companion.
 
-## Video script — 1:50
+## English video script — target 1:54
 
-Before recording, start the YouTube test broadcast from OBS and let the
-synthetic match begin playing. The video opens after delivery is confirmed,
-with the audience question already in chat. This keeps the 1:50 cut focused on
-the product experience; MatchSense does not start the broadcast automatically.
-Use the English narration for the submission video.
+Start from one guided AI session and one synthetic match. The YouTube test player
+should already show the OBS composition. Use Audience Agent rehearsal questions
+unless authorized YouTube Live chat is connected; keep the **Rehearsal** label
+visible for simulated questions. The match moment and all views must come from
+the same session. Do the setup and confirm the AI trace before recording.
 
 | Time | Show | Say |
 |---|---|---|
-| 0:00–0:10 | The YouTube test broadcast is already live in OBS. Show the synthetic match playing and the prepared live-chat question: “What changed after that pass?” | “The play is over; the question remains: what changed? MatchSense groups live chat and helps the producer find the play—with evidence they can check.” |
-| 0:10–0:22 | Audience Agent groups similar questions; producer confirms the suggested moment. | “I confirm which moment they mean, because live video and chat can be out of sync.” |
-| 0:22–0:37 | Open the story evidence: 30 m forward; nearby-opponent average 2.0 before, 0.4 after; reveal source windows. | “This pass moved 30 metres forward. The nearby-opponent average changed from 2.0 before to 0.4 after. I can inspect the observations behind both numbers.” |
-| 0:37–0:52 | Show Story Director → Claim Reviewer handoff. Add a brief, clearly labeled **Review recovery test** insert from the saved evaluation. | “The Story Director shapes a story from match evidence. The Claim Reviewer checks its claims. When one review was incomplete, MatchSense blocked it and used safe fallback wording.” |
-| 0:52–1:05 | Producer approves the exact revision; Broadcast Producer recommends `show`, `hold`, or `wait`. | “I approve the exact story. The Broadcast Producer weighs eligible moments and confirmed audience interest, then recommends what to show. I make the final call.” |
-| 1:05–1:20 | OBS composition and actual stream output: audience question paired with the approved insight. | “OBS puts the approved insight over the match. The question adds audience context; the on-air story stays tied to checked evidence.” |
-| 1:20–1:37 | Same session’s companion: switch language, detail, player focus; show **Catch me up**. | “Fans can explore the same approved facts in their language, at their level of detail, or through a player—and catch up on moments they missed.” |
-| 1:37–1:50 | Stream and companion side by side; MatchSense name and verified technology caption. | “A fan’s question finds its moment. A checked story reaches the stream, and every fan can explore it their way. That’s MatchSense.” |
+| 0:00–0:13 | Open on the YouTube player with the synthetic match from OBS. | “Football gives us the numbers. But what changed in that pass? MatchSense makes the match make sense, turning match events into a story a producer can verify and fans can explore.” |
+| 0:13–0:28 | Cut to the producer console. Show the Audience Agent group and its **Rehearsal** badge. Select **01:31 · Nearby pressure change**, then click **Confirm moment and review**. | “The Audience Agent groups similar viewer questions. I confirm they refer to the 01:31 pass, connecting the question to the right moment.” |
+| 0:28–0:46 | Show the evidence for that pass: 30 m forward, **2.0 → 0.4** nearby opponents, six-metre radius, two-second windows, and coverage. | “This synthetic pass moves the ball 30 metres forward. The average number of opponents within six metres changes from 2.0 around the passer to 0.4 around the receiver. Both two-second windows are fully covered.” |
+| 0:46–1:04 | Show the explanation’s review status and its evidence/source windows. | “MatchSense checks the explanation against the match evidence. I can inspect the source windows before making the final decision.” |
+| 1:04–1:16 | Approve the exact reviewed revision for viewers. | “I approve this exact revision for viewers. The producer makes the final call on what goes on air.” |
+| 1:16–1:29 | Cut from the OBS composition to the actual YouTube player showing the question and approved insight over the match. | “The confirmed question and approved explanation now appear together over the match in OBS and on YouTube.” |
+| 1:29–1:47 | Open the same session’s companion. Show the simple explanation, then its measurements/evidence; briefly show **Catch me up**, language, or player focus. | “The companion gives casual fans a clear explanation, lets analysts inspect the measurements, and helps returning viewers catch up or follow a player.” |
+| 1:47–1:54 | Finish with the stream and companion side by side, then the MatchSense name. | “One question, one checked story, one producer decision. MatchSense makes the match make sense.” |
 
-## Why this is MatchSense
+## Recording checks
 
-The differentiator is the connected workflow: **audience question → verified
-match moment → evidence-backed story → producer decision → OBS/YouTube graphic →
-personalized companion**. MatchSense does not generate an unverified chat reply:
-the Audience Agent groups questions, the producer confirms the moment, and the
-overlay pairs the question with an existing approved insight.
+- Rehearse the **Pressure Swing flagship** at 91.3 s. Confirm the pass reads 30 m
+  forward, the nearby-opponent average reads 2.0 → 0.4, and both windows show
+  100% coverage. Keep **SYNTHETIC MATCH DEMO** visible.
+- In a fresh AI guided session, confirm the Audience Agent group, Story Director
+  proposal, Claim Reviewer verdict, and producer approval are visible for the
+  moment. Do not claim the agents outperform a single agent; the bounded
+  comparison found no such advantage and has no human ratings.
+- Confirm the replay pauses on the intended reviewable moment and that earlier
+  insights do not interrupt the take. This behavior still needs a recording
+  rehearsal; do not assume it is fixed.
+- Confirm the exact approved revision is selected for the overlay, then verify
+  that the OBS composition reaches the YouTube player and that the same approved
+  moment appears in the companion. OBS status alone does not confirm delivery.
+- If using simulated questions, label them as rehearsal data. If using YouTube
+  Live chat, reconnect and verify that messages are actually being read before
+  recording. Never imply rehearsal prompts came from real viewers.
+- Use a small technology caption only for services confirmed in that recorded
+  run, such as Microsoft Agent Framework and Azure OpenAI.
 
-The agents have visibly different jobs: Audience Agent groups demand; Story
-Director selects the explanation; Claim Reviewer checks its claims; Broadcast
-Producer recommends what is ready. They share the same session and story state,
-while the human producer approves what goes on air.
+## Why this sequence
 
-This shows the hackathon’s synthetic-event-to-explainable-story-to-broadcast-
-and-personalization pipeline, and makes agent roles, handoffs, and recovery
-visible for the [Best Multi-Agent System category](https://github.com/microsoft/insidethegamehackathon/blob/main/OFFICIAL%20RULES.md). The [official challenge description](https://reactor.microsoft.com/en-us/reactor/series/s-1709/) also calls for real-time match intelligence, narratives/recaps, explainability, and personalized experiences. The final video must be under two minutes and in English or include an English translation.
+The Audience Agent groups questions; the producer links the group to a specific
+candidate. MatchSense creates and checks the story from the match event and
+evidence. The Audience Agent does not write a chat reply or automatically choose
+the story. The producer approves the exact version before it reaches the stream
+and the viewer companion.
 
-## Rehearsal essentials
+This puts the complete path on screen without pausing for a separate architecture
+walkthrough. It also demonstrates three viewing needs through product behavior:
+plain-language context, optional evidence and measurements, and personalized
+catch-up/player focus. These are product capabilities, not claims of a completed
+participant study. The synthetic pass and its evidence carry the technical story;
+keep the separate shot/xG panel out of this recording so the demo stays centered
+on one moment.
 
-- Use the **Pressure Swing flagship** at 91.3 s: 30 m forward, nearby-opponent
-  average 2.0 → 0.4, with 100% coverage in both windows. Keep **SYNTHETIC MATCH
-  DEMO** visible; these observations do not prove intent or causality.
-- Use one session for producer console, stage, overlay, and companion. Confirm
-  the exact story revision is approved before selecting it for broadcast.
-- For an AI run, verify the live session and agent trace. A local template
-  rehearsal makes no model calls. For real audience grouping, connect an
-  authorized live YouTube chat; label simulated questions as rehearsal data.
-- Verify the composed output in the actual stream. OBS status is read-only and
-  does not itself confirm YouTube delivery. The companion follows the app clock.
-- Use a small technology caption only for services present in the recorded run
-  (for example, Microsoft Agent Framework and Azure OpenAI). Use cleared audio
-  and permitted visual assets.
+For this demo, show the Audience Agent doing useful work but do not pitch an
+agent count or claim that multiple agents outperform a single agent. The current
+bounded evaluation does not establish that superiority. See [QA](qa.md) and the
+[multi-agent evaluation](next-iteration/multi-agent-evidence.md).
 
-Setup: [OBS/YouTube](youtube-pitch-demo.md) · [Audience Agent](next-iteration/audience-agent.md) · [OBS status](obs-monitoring.md).
-
-## Evaluation note for the project page or judge Q&A
-
-In the 15-case discovery comparison, S3 and M3 passed the same deterministic
-controls; the Reviewer made no revisions, and one incomplete review was safely
-contained. In the separate seeded policy challenge, both arms kept the angle in
-all six matched trials. Present these as measured workflow evidence, not fan
-ratings. Full results: [multi-agent evidence](next-iteration/multi-agent-evidence.md) · [discovery report](../evals/agentic/discovery-v4/README.md).
+Setup references: [OBS/YouTube](youtube-pitch-demo.md) ·
+[Audience Agent](next-iteration/audience-agent.md) ·
+[OBS status](obs-monitoring.md).

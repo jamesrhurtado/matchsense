@@ -8,9 +8,10 @@ from engine.core import digest
 
 LABELS={'shot':('Shot outcome','Resultado del remate'),'goal':('Confirmed goal','Gol confirmado'),
         'possession':('Possession · segment window','Posesión · intervalo del segmento'),'recovery':('Change of control','Cambio de control'),'pressure':('Pressure Swing','Cambio de presión cercana')}
+PRESSURE_RENDERER='pressure-swing-v8'
 
 def display_title(family,language='en',renderer_version=None):
-    if family=='pressure' and renderer_version=='pressure-swing-v7':
+    if family=='pressure' and renderer_version in {'pressure-swing-v7','pressure-swing-v8'}:
         return ('Nearby pressure change','Cambio de presión cercana')[language=='es']
     return LABELS[family][language=='es']
 
@@ -51,22 +52,28 @@ def render(m,meta,lang,detail='simple',focus=None,renderer_version=None):
         passer_label=f'{passer}{passer_number}'
         receiver_label=f'{receiver}{receiver_number}'
         if detail=='simple':
-            passer_simple=passer_label if renderer_version=='pressure-swing-v7' else passer
-            receiver_simple=receiver_label if renderer_version=='pressure-swing-v7' else receiver
-            text=(f'{passer_simple} pasó {f["forward_m"]:.1f} m hacia delante a {receiver_simple}. La media de rivales cercanos pasó de {b:.1f} antes del pase a {a:.1f} tras la recepción.' if es else f'{passer_simple} passed {f["forward_m"]:.1f} m forward to {receiver_simple}. Average nearby opponents fell from {b:.1f} before the pass to {a:.1f} after reception.')
-        elif renderer_version=='pressure-swing-v7':
+            if renderer_version=='pressure-swing-v8':
+                distance=f'{f["forward_m"]:g}'
+                text=(f'{passer} pasó el balón {distance} metros hacia delante a {receiver}, que lo recibió con menos rivales cerca.' if es else f'{passer} passed {distance} metres forward to {receiver}, who received the ball with fewer opponents nearby.')
+                if focus==roles['passer']:text=(f'Pasador: {passer}. ' if es else f'Passer: {passer}. ')+text
+                elif focus==roles['receiver']:text=(f'Receptor: {receiver}. ' if es else f'Receiver: {receiver}. ')+text
+            else:
+                passer_simple=passer_label if renderer_version=='pressure-swing-v7' else passer
+                receiver_simple=receiver_label if renderer_version=='pressure-swing-v7' else receiver
+                text=(f'{passer_simple} pasó {f["forward_m"]:.1f} m hacia delante a {receiver_simple}. La media de rivales cercanos pasó de {b:.1f} antes del pase a {a:.1f} tras la recepción.' if es else f'{passer_simple} passed {f["forward_m"]:.1f} m forward to {receiver_simple}. Average nearby opponents fell from {b:.1f} before the pass to {a:.1f} after reception.')
+        elif renderer_version in {'pressure-swing-v7','pressure-swing-v8'}:
             before=f['before']['known_ms']/1000;after=f['after']['known_ms']/1000
             before_window=(f'{before:g} de 2 s observados antes del pase' if es else f'{before:g} of 2 s observed before release')
             after_window=(f'{after:g} de 2 s observados tras la recepción' if es else f'{after:g} of 2 s observed after reception')
             text=(f'{passer_label} pasó {f["forward_m"]:.1f} m hacia delante a {receiver_label}. En promedio, había {b:.1f} rivales a 6 m de {passer} durante los {before_window}; tras la recepción, había {a:.1f} a 6 m de {receiver} durante los {after_window}. Esta comparación ayuda a revisar la presión cercana alrededor del pase, pero no demuestra intención ni causalidad táctica.' if es else f'{passer_label} passed {f["forward_m"]:.1f} m forward to {receiver_label}. On average, {b:.1f} opponents were within 6 m of {passer} during the {before_window}; after reception, {a:.1f} were within 6 m of {receiver} during the {after_window}. This comparison helps an analyst inspect nearby pressure around the pass, but it does not establish intent or tactical causation.')
         else:
             text=(f'Análisis: radio {f["radius_m"]} m; medias ponderadas por tiempo {b:.1f} → {a:.1f} rivales; descenso {f["drop"]:.1f}. Ventanas de 2 s antes del pase y 2 s desde la recepción; cobertura {min(f["before"]["coverage"],f["after"]["coverage"])*100:.1f}%. Pase {f["forward_m"]:.1f} m hacia delante; posesión del equipo confirmada durante 3 s.' if es else f'Analyst: {f["radius_m"]} m radius; time-weighted means {b:.1f} → {a:.1f} opponents; drop {f["drop"]:.1f}. Windows: 2 s before release and 2 s from reception; coverage {min(f["before"]["coverage"],f["after"]["coverage"])*100:.1f}%. Pass {f["forward_m"]:.1f} m forward; team possession confirmed for 3 s.')
-        if f['stands_out']:
+        if f['stands_out'] and (detail=='detail' or renderer_version!='pressure-swing-v8'):
             text+=(' Avanzó más que cada uno de los tres pases completados anteriores del equipo en esta repetición.' if es else ' It travelled farther forward than each of the team’s previous three completed passes in this replay.')
-        if renderer_version!='pressure-swing-v7':
+        if renderer_version not in {'pressure-swing-v7','pressure-swing-v8'}:
             if focus==roles['passer']:text=(f'Pase de {passer}. ' if es else f'Passer: {passer}. ')+text
             elif focus==roles['receiver']:text=(f'Recepción de {receiver}. ' if es else f'Receiver: {receiver}. ')+text
-        if renderer_version!='pressure-swing-v7':
+        if renderer_version not in {'pressure-swing-v7','pressure-swing-v8'}:
             text+=(' La proximidad no demuestra intención ni causalidad táctica.' if es else ' Proximity does not establish tactical intent or causation.')
     else:
         def clock(ms):return f'{ms//60000:02}:{ms//1000%60:02}'
@@ -228,14 +235,14 @@ class EventPackage(Strict):
     workflow_ms:float=Field(ge=0)
     mode:Literal['local deterministic template','template fallback','Microsoft Agent Framework + Azure OpenAI']
     model_usage:ModelUsage
-    renderer_version:Literal['match-events-v5','pressure-swing-v6','pressure-swing-v7']='match-events-v5'
+    renderer_version:Literal['match-events-v5','pressure-swing-v6','pressure-swing-v7','pressure-swing-v8']='match-events-v5'
     # Only names/roster used for deterministic realization; no evaluation labels.
     entities:dict
     package_hash:str
     @model_validator(mode='after')
     def realization(self):
         p=self.model_dump();m=p['metrics']
-        compatible={('shot','5.0.0','match-events-v5'),('goal','5.0.0','match-events-v5'),('recovery','5.0.0','match-events-v5'),('possession','5.0.0','match-events-v5'),('pressure','6.0.0','pressure-swing-v6'),('pressure','7.0.0','pressure-swing-v7')}
+        compatible={('shot','5.0.0','match-events-v5'),('goal','5.0.0','match-events-v5'),('recovery','5.0.0','match-events-v5'),('possession','5.0.0','match-events-v5'),('pressure','6.0.0','pressure-swing-v6'),('pressure','7.0.0','pressure-swing-v7'),('pressure','7.0.0','pressure-swing-v8')}
         if (self.family,self.schema_version,self.renderer_version) not in compatible:raise ValueError('event_schema_mismatch')
         if self.family!=m['family'] or self.incident_id!=m['incident_id']:raise ValueError('event_scope_mismatch')
         if self.id!=story_id(m) or self.evidence_revision!=m['evidence_revision']:raise ValueError('event_identity_mismatch')
@@ -252,7 +259,7 @@ def story_id(m):return f'story-{m["family"]}-{m["subject_id"]}'
 
 
 def variants(m,meta,renderer_version=None):
-    renderer_version=renderer_version or ('pressure-swing-v7' if m['family']=='pressure' else 'match-events-v5')
+    renderer_version=renderer_version or (PRESSURE_RENDERER if m['family']=='pressure' else 'match-events-v5')
     return [{'id':f'{lang}_{detail}_{focus or "general"}','language':lang,'detail':detail,'focus':focus,
              'text':render(m,meta,lang,detail,focus,renderer_version),'claim_ids':['c-event'],'factual_check_status':'valid'}
             for lang in ['en','es'] for detail in ['simple','detail'] for focus in [None]+[p['id'] for p in meta['players']+meta['teams']]]
@@ -261,13 +268,13 @@ def variants(m,meta,renderer_version=None):
 def build_event_package(m,meta,revision=1):
     start=perf_counter();entities={k:meta[k] for k in ['players','teams']}
     predicate={'shot':'shot_outcome','goal':'confirmed_goal','recovery':'control_transition','possession':'possession_interval','pressure':'pressure_swing'}[m['family']]
-    renderer='pressure-swing-v7' if m['family']=='pressure' else 'match-events-v5'
+    renderer=PRESSURE_RENDERER if m['family']=='pressure' else 'match-events-v5'
     schema_version='7.0.0' if m['family']=='pressure' else '5.0.0'
     vs=variants(m,entities,renderer)
     p={'schema_version':schema_version,'id':story_id(m),'revision':revision,'title':display_title(m['family'],'en',renderer),
        'family':m['family'],'incident_id':m['incident_id'],'metrics':deepcopy(m),
        'claims':[{'id':'c-event','predicate':predicate,'value':deepcopy(m['facts']),'unit':'observation','evidence_revision':m['evidence_revision'],'source_message_ids':m['source_message_ids']}],
-       'variants':vs,'review':{'status':'supported','mode':'deterministic_template','reason':('Source facts rendered in the bounded v7 pressure grammar; producer approval required.' if m['family']=='pressure' else 'Source facts rendered in the bounded v5 grammar; producer approval required.'), 'proposed_text':None,'revised_text':vs[0]['text'],'cycles':0},
+       'variants':vs,'review':{'status':'supported','mode':'deterministic_template','reason':('Source facts rendered in the bounded v8 pressure grammar; producer approval required.' if m['family']=='pressure' else 'Source facts rendered in the bounded v5 grammar; producer approval required.'), 'proposed_text':None,'revised_text':vs[0]['text'],'cycles':0},
        'evidence_revision':m['evidence_revision'],'eligible_from_ms':m['evidence_ready_ms'],'expires_at_ms':m['expires_at_ms'],
        'trace':[{'role':'Claim Reviewer','action':'validate_event_facts','status':'supported','elapsed_ms':0}],
        'workflow_ms':(perf_counter()-start)*1000,'mode':'local deterministic template',

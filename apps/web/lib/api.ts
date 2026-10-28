@@ -134,6 +134,8 @@ export type Metrics = {
     forward_m?: number;
     drop?: number;
     radius_m?: number;
+    retained_ms?: number;
+    retained_progression_m?: number;
     comparators?: {
       pass_id: string;
       forward_m: number;

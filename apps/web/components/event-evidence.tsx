@@ -17,6 +17,13 @@ export function EventEvidence({
   const m = data.story.metrics;
   const f = m.facts!;
   const es = language === "es";
+  const retentionText =
+    typeof f.retained_ms === "number" &&
+    typeof f.retained_progression_m === "number"
+      ? es
+        ? `El equipo conservó el balón ${Math.round(f.retained_ms / 1000)} s y avanzó ${f.retained_progression_m.toFixed(1)} m después de la recepción.`
+        : `The team kept possession for ${Math.round(f.retained_ms / 1000)} s and moved the ball ${f.retained_progression_m.toFixed(1)} m after reception.`
+      : null;
   const text = data.story.variants.find(
     (v) => v.language === language && v.detail === "detail" && !v.focus,
   )?.text;
@@ -71,6 +78,11 @@ export function EventEvidence({
             : "6 m radius · 2 s before / after · coverage"}{" "}
           {(Math.min(f.before.coverage, f.after.coverage) * 100).toFixed(1)}%
         </p>
+        {retentionText && (
+          <p className="mt-2 text-xs leading-relaxed text-emerald-950">
+            {retentionText}
+          </p>
+        )}
       </section>
     );
   return (
@@ -126,6 +138,14 @@ export function EventEvidence({
               </div>
             ))}
           </div>
+          {retentionText && (
+            <p className="rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs leading-relaxed text-emerald-950">
+              <span className="font-semibold">
+                {es ? "Qué pasó después: " : "What happened next: "}
+              </span>
+              {retentionText}
+            </p>
+          )}
           <p className="text-pretty text-xs leading-relaxed text-stone-600">
             {es
               ? "Rivales a 6 m: medias ponderadas por tiempo, alrededor del pasador antes y del receptor después. No es una probabilidad ni una medida de intención táctica."

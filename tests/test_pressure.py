@@ -73,9 +73,35 @@ def test_new_sources_reproducible_physical_and_all_existing_families(correction)
     assert not any(m['subject_id']=='pass-4' for m in pressure_metrics(meta,rows,91299))
     p=build_event_package(value,meta)
     assert p['schema_version']=='7.0.0'
-    assert 'pasó 30.0 m' in next(v['text'] for v in p['variants'] if v['language']=='es' and v['detail']=='simple')
+    assert 'pasó el balón 30 metros' in next(v['text'] for v in p['variants'] if v['language']=='es' and v['detail']=='simple')
     assert 'Passer:' in next(v['text'] for v in p['variants'] if v['language']=='en' and v['focus']=='blue-11')
     assert 'Receiver:' in next(v['text'] for v in p['variants'] if v['language']=='en' and v['focus']=='blue-09')
+
+
+def test_casual_pressure_copy_is_brief_and_old_reviewed_wording_stays_valid():
+    from engine.event_narrative import variants, render, read_package
+    meta,rows=fixture()
+    measured=next(m for m in pressure_metrics(meta,rows,92000) if m['subject_id']=='pass-4')
+    p=build_event_package(measured,meta)
+    assert p['renderer_version']=='pressure-swing-v8'
+    for language,distance,expected in [
+        ('en','30 metres','Dani Luna passed 30 metres forward to Beni Vidal, who received the ball with fewer opponents nearby.'),
+        ('es','30 metros','Dani Luna pasó el balón 30 metros hacia delante a Beni Vidal, que lo recibió con menos rivales cerca.'),
+    ]:
+        casual=next(v['text'] for v in p['variants'] if v['language']==language and v['detail']=='simple' and v['focus'] is None)
+        analyst=next(v['text'] for v in p['variants'] if v['language']==language and v['detail']=='detail' and v['focus'] is None)
+        assert casual==expected and distance in casual and len(casual.split())<=30
+        assert all(technical not in casual for technical in ['2.0','0.4','#','previous three','tres pases'])
+        assert '2.0' in analyst and '0.4' in analyst
+        assert analyst==render(measured,meta,language,'detail',renderer_version='pressure-swing-v7')
+    # Previously stored v7 copy keeps its exact wording and still validates.
+    legacy=deepcopy(p)
+    legacy['renderer_version']='pressure-swing-v7'
+    legacy['variants']=variants(measured,legacy['entities'],'pressure-swing-v7')
+    legacy['review']['revised_text']=legacy['variants'][0]['text']
+    legacy['package_hash']=digest({k:v for k,v in legacy.items() if k!='package_hash'})
+    assert 'Average nearby opponents fell from 2.0' in legacy['variants'][0]['text']
+    assert read_package(legacy).model_dump()==legacy
 
 @pytest.mark.parametrize('failure',['missing_after','unknown_control','no_drop','short_pass','retention_lost','unresolved'])
 def test_full_pipeline_abstains_without_required_evidence(failure):
